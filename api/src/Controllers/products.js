@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize')
-const { Product } = require('../db')
+const { Product, Brand } = require('../db')
 
 
 const postNewProduct = async function postNewProduct (req, res) {
@@ -37,6 +37,7 @@ const postNewProduct = async function postNewProduct (req, res) {
     res.status(200).send({message: "Product added succesfully"})
   
 };
+
 
 
 
