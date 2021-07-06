@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const user = require('../controllers.js/userController');
 const { check } = require('express-validator');
+const auth = require('../controllers.js/authController');
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.post('/',
 			min: 6,
 		}),
 	],
-	user.newUser
+	auth.authUser
 );
 
 module.exports = router;
