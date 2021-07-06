@@ -1,7 +1,8 @@
 const { Router } = require('express');
 // const { getAllProducts } = require('../Controllers/products')
 const { postNewProduct, 
-        getProductName } = require('../Controllers/products')
+        getProductName,
+        orderProducts } = require('../Controllers/products')
 const router = Router();
 
 
@@ -10,5 +11,6 @@ router.post('/addProduct', postNewProduct)
 
 router.get('/:name', getProductName)
 
+router.get('/orderedproducts/:type/:orderby', orderProducts)
 
 module.exports = router;

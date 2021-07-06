@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize')
 const { Product, Brand } = require('../db')
 
-// ----------------  RUTA PARA AGREGAR UN PRODUCTO -----------------
+// ----------------  ADD NEW PRODUCT -----------------
 
 const postNewProduct = async function postNewProduct (req, res) {
     const { name, 
@@ -40,7 +40,7 @@ const postNewProduct = async function postNewProduct (req, res) {
 };
 
 
-// ----------------  RUTA PARA BUSCAR UN PRODUCTO POR NOMBRE -----------------
+// ----------------  SEARCH PRODUCTS BY NAME -----------------
 
 const getProductName = async function getProductName (req, res) {
 
@@ -67,8 +67,32 @@ const getProductName = async function getProductName (req, res) {
 };
 
 
+// ----------------  ORDER PRODUCTS BY PRICE -----------------
+// This endpoint receives two params type:DESC/ASC (descendent or ascendant) and orderBy:price 
+// Since type is variable we could ad other option as Name, Brand, etc
+
+const orderProducts = async function orderProducts (req, res) {
+
+    try{
+        const type = req.params.type
+        const orderby = req.params.orderby.toUpperCase()
+        
+            orderedProducts = await Product.findAll({
+                    order: [[type, orderby]],
+                })   
+            return res.status(200).json(orderedProducts)
+        }
+        catch(error) {
+            next(error)
+        }     
+   
+};
+
+
+
 module.exports = {
     postNewProduct,
     getProductName,
+    orderProducts,
   
 };
