@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 		},
 		price: {
-			type: DataTypes.DOUBLE(10, 2),
+			type: DataTypes.DOUBLE,
 			allowNull: false,
 		},
 		description: {
