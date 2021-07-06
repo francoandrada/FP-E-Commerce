@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-const { INTEGER, DOUBLE, ENUM } = DataTypes;
+const { INTEGER, ENUM } = DataTypes;
 module.exports = (sequilize) => {
 	sequilize.define('order', {
 		orderId: {
@@ -9,7 +9,7 @@ module.exports = (sequilize) => {
 			autoIncrement: true,
 		},
 		ammount: {
-			type: DOUBLE,
+			type: INTEGER,
 			allowNull: false,
 		},
 		status: {
