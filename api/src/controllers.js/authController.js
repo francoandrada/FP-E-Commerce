@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require('dotenv').config({ path: 'variables.env' })
@@ -13,7 +13,7 @@ exports.authUser = async (req, res, next) => {
    if (!errors.isEmpty()) {
        return res.status(400).json({ errors: errors.array() });
    }
-   
+
    try {
        const { email, password } = req.body;
 
