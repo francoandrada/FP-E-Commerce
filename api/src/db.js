@@ -33,10 +33,13 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, Role, User } = sequelize.models;
+const { Product, Role, User, Order } = sequelize.models;
 
 User.hasMany(Role, { foreignKey: 'userId' });
 Role.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = {
 	...sequelize.models,
