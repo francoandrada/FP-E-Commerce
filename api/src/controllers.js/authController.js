@@ -8,32 +8,37 @@ const { validationResult } = require("express-validator");
 
 exports.authUser = async (req, res, next) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+   //valido que el pass y el email sean el mismo
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+       return res.status(400).json({ errors: errors.array() });
+   }
+   
+   try {
+       const { email, password } = req.body;
 
-    const { email, password } = req.body;
+       //verifico que exista ese email
+       let user = await User.findOne({ where: { email: email } })
+       if (!user) {
+           res.status(401).json('Invalid email');
+       }
 
-    const user = await User.findOne({ email })
+       //verifico que exista esa password
+       const validPassword = await bcrypt.compare(password, user.password);
+       if (!validPassword) return res.status(400).send('Invalid Password.')
 
-    if (!user) {
-        res.status(401).json('The user does not exist ');
-        return next();
-    }
-    if (bcrypt.compareSync(password, user.password)) {
-        const token = jwt.sign({
-            id: user._id,
-            name: user.name
-        }, process.env.SECRET, {
-            expiresIn: '8h'
-        });
-        res.json({ token })
 
-    } else {
-        res.status(401).json('The password is incorrect');
-        return next();
-    }
+       //genero un jwt
+       const token = jwt.sign({
+           id: user.id,
+           name: user.name
+       }, process.env.SECRET, {
+           expiresIn: '8h'
+       });
+       res.json({ token })
+   } catch (error) {
+       console.log(error)
+   }
 }
 
 
