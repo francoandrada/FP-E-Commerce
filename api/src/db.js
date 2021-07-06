@@ -39,7 +39,6 @@ const { Product, Role, User, Category, Brand, Order } = sequelize.models;
 User.hasMany(Role, { foreignKey: 'userId' });
 Role.belongsTo(User, { foreignKey: 'userId' });
 
-
 User.hasMany(Order, { foreignKey: 'userId' });
 Order.belongsTo(User, { foreignKey: 'userId' });
 
