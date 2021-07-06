@@ -2,6 +2,9 @@ const { User } = require('../db');
 const { validationResult } = require("express-validator");
 const bcrypt = require('bcrypt');
 
+
+//---------------- CREATES NEW USER ---------------------
+
 exports.newUser = async (req, res) => {
 
     const errors = validationResult(req);
@@ -38,9 +41,20 @@ exports.newUser = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-}
+};
 
 
+//---------- SEARCHS ALL USERS FOR ADMIN ONLY --------------
 
+exports.getUsers = async (req, res) => {
 
+    try{
+        const usersList = await User.findAll()    
+        return res.status(200).json(usersList)
+
+    } catch (error){
+        res.send(error)
+    };
+
+};
 
