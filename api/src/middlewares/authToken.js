@@ -1,22 +1,19 @@
-const jwt = require("jsonwebtoken");
-require('dotenv').config({ path: 'variables.env' })
+const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: '.env' });
 
 module.exports = (req, res, next) => {
+	const authHeader = req.get('Authorization');
 
-    const authHeader = req.get('Authorization');
-    
-    if (authHeader) {
+	if (authHeader) {
+		const token = authHeader.split(' ')[1];
+		try {
+			const user = jwt.verify(token, process.env.SECRET);
+			req.user = user;
+		} catch (error) {
+            console.log('JWT no valido');
+			console.log(error);
 
-        const token = authHeader.split(' ')[1];
-        if (token) {
-            try {
-                const user = jwt.verify(token, process.env.SECRET);
-                req.user = user;
-
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-    return next();
-}
+		}
+	}
+	return next();
+};
