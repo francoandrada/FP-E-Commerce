@@ -65,10 +65,10 @@ const getProductName = async function getProductName(req, res) {
 // This endpoint receives two params type:DESC/ASC (descendent or ascendant) and orderBy:price
 // Since type is variable we could ad other option as Name, Brand, etc
 
-const orderProducts = async function orderProducts(req, res) {
+const orderProducts = async function orderProducts(req, res, next) {
 	try {
 		const type = req.params.type;
-		const orderby = req.params.orderby.toUpperCase();
+		const orderby = req.params?.orderby.toUpperCase();
 
 		orderedProducts = await Product.findAll({
 			order: [[type, orderby]],
