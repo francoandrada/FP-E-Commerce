@@ -1,9 +1,28 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
 import style from './LogIn.module.css'
+import { logIn } from '../../Redux/actions';
+import { useHistory } from 'react-router-dom';
 
 const LogIn = () => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const authenticated = useSelector(state => state.authenticated);
+    const user = useSelector(state => state.user);
+
+
+
+    useEffect(() => {
+        if(authenticated) {
+           history.push('/')
+        }
+      }, [authenticated]);
+  
+  
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -14,8 +33,9 @@ const LogIn = () => {
             password: Yup.string().required('Required'),
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-            console.log(formik.values.email)
+            dispatch(logIn(values))
+            //alert(JSON.stringify(values, null, 2));
+            console.log(values)
         },
     });
 
@@ -56,3 +76,4 @@ const LogIn = () => {
 }
 
 export default LogIn;
+
