@@ -9,6 +9,9 @@ const sequelize = new Sequelize(
 	{
 		logging: false,
 		native: false,
+		define: {
+			timestamps: false,
+		},
 	}
 );
 const basename = path.basename(__filename);
