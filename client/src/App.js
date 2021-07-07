@@ -1,14 +1,19 @@
-// import logo from './logo.svg';
+import logo from './logo.svg';
+
 import LogIn from './components/LogIn/LogIn';
 import './App.css';
 import { Route } from 'react-router';
 import Register from './components/Register/Register';
 import { Link } from 'react-router-dom';
+import AuthUser from './components/AuthUser.js/AuthUser';
+
 import Searchbar from './components/Searchbar/Searchbar';
+
 
 function App() {
 	return (
 		<div className='App'>
+      <Route path='/' exact component={AuthUser} />
 			<Link to='/search'>
 				<button>SearchBar</button>
 			</Link>
