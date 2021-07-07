@@ -4,37 +4,35 @@ const { Product, Brand } = require('../db');
 // ----------------  ADD NEW PRODUCT -----------------
 
 const postNewProduct = async function postNewProduct(req, res) {
-	const {
-		name,
-		price,
-		description,
-		weight,
-		image,
-		stock,
-		type_product,
-		brand,
-	} = req.body;
+	try {
+		const { name, price, description, weight, Image, stock, brand } = req.body;
+		console.log(brand);
+		const brands = await Brand.findAll({
+			attributes: ['id', 'name', 'image'],
+		});
 
-	const newProduct = await Product.findOrCreate({
-		where: {
-			name,
-			price,
-			description,
-			weight,
-			image,
-			stock,
-			type_product,
-		},
-	});
+		var newProduct = await Product.findOrCreate({
+			where: {
+				name,
+				price,
+				description,
+				weight,
+				Image,
+				stock,
+			},
+		});
+		if (newProduct) {
+			for (let i = 0; i < brands.length; i++) {
+				if (brands[i].name.toLowerCase() === brand.toLowerCase()) {
+					await newProduct[0].setBrand(brands[i]);
+				}
+			}
+		}
 
-	let productBrand = await Brand.findAll({
-		where: {
-			name: brand,
-		},
-	});
-	await newProduct[0].addBrand(productBrand);
-
-	res.status(200).send({ message: 'Product added succesfully' });
+		return res.status(200).json({ message: 'product created succesfully' });
+	} catch (error) {
+		res.send(error);
+	}
 };
 
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
