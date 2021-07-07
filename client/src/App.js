@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 
-function App() {
-  return (
-        
-  
-
-  );
-=======
 import logo from './logo.svg';
 import LogIn from './components/LogIn/LogIn';
 import './App.css';
@@ -28,7 +20,6 @@ function App() {
 			<Route path='/register' exact component={Register} />
 		</div>
 	);
->>>>>>> afd4ecd20ef7325c428c51e46d708246d6dace1f
 }
 
 export default App;
