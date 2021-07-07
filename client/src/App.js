@@ -26,6 +26,7 @@ function App() {
 			<Route path='/LogIn' exact component={LogIn} />
 			<Route path='/register' exact component={Register} />
 			<Route path='/navbar' exact component={Navbar} />
+
 		</div>
 	);
 }
