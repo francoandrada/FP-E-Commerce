@@ -7,15 +7,14 @@ import Register from './components/Register/Register';
 import { Link } from 'react-router-dom';
 import AuthUser from './components/AuthUser.js/AuthUser';
 
-import Searchbar from './components/Searchbar/Searchbar';
-
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
 	return (
 		<div className='App'>
-      <Route path='/' exact component={AuthUser} />
-			<Link to='/search'>
-				<button>SearchBar</button>
+			<Route path='/' exact component={AuthUser} />
+			<Link to='/navbar'>
+				<button>Navbar</button>
 			</Link>
 			<Link to='/login'>
 				<button>LogIn</button>
@@ -26,7 +25,8 @@ function App() {
 			</Link>
 			<Route path='/LogIn' exact component={LogIn} />
 			<Route path='/register' exact component={Register} />
-			<Route path='/search' exact component={Searchbar} />
+			<Route path='/navbar' exact component={Navbar} />
+
 		</div>
 	);
 }

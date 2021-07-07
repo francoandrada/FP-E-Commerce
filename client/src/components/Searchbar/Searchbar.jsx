@@ -1,28 +1,42 @@
-import { useState } from 'react';
-import SearchBar from './SearchBar';
+import { useEffect, useRef } from 'react';
 
-const defaultOptions = [];
-for (let i = 0; i < 10; i++) {
-	defaultOptions.push(`option ${i}`);
-	defaultOptions.push(`suggestion ${i}`);
-	defaultOptions.push(`advice ${i}`);
-}
-
-function Searchbar() {
-	const [options, setOptions] = useState([]);
-	const onInputChange = (event) => {
-		const searchValue = event.target.value;
-		// console.log(searchValue);
-		setOptions(defaultOptions.filter((option) => option.includes(searchValue)));
-	};
+const SearchBar = ({ options, onInputChange }) => {
+	const ulRef = useRef();
+	const inputRef = useRef();
+	useEffect(() => {
+		inputRef.current.addEventListener('click', (event) => {
+			event.stopPropagation();
+			ulRef.current.style.display = 'flex';
+			onInputChange(event);
+		});
+		document.addEventListener('click', (event) => {
+			ulRef.current.style.display = 'none';
+		});
+	}, [onInputChange]);
 
 	return (
 		<div>
-			<h1>Search Bar</h1>
-			<button>Search</button>
-			<SearchBar options={options} onInputChange={onInputChange} />
+			<input
+				type='text'
+				placeholder='Search...'
+				ref={inputRef}
+				onChange={onInputChange}
+			/>
+			<ul ref={ulRef}>
+				{options.map((option, key) => (
+					<button
+						onClick={(event) => {
+							inputRef.current.value = option;
+						}}
+						key={key}
+						type='button'
+					>
+						{option}
+					</button>
+				))}
+			</ul>
 		</div>
 	);
-}
+};
 
-export default Searchbar;
+export default SearchBar;
