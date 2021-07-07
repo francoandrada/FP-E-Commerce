@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SearchBar from '../Searchbar/SearchBar.jsx';
+import SearchBar from '../Searchbar/SearchBar.js';
 
 const defaultOptions = [];
 for (let i = 0; i < 10; i++) {
