@@ -2,7 +2,8 @@ const { Router } = require('express');
 // const { getAllProducts } = require('../Controllers/products')
 const { postNewProduct, 
         getProductName,
-        orderProducts } = require('../Controllers/products')
+        orderProducts, getAllProducts,  getBrandProduct,
+        getIdProduct, getCategoryProduct } = require('../Controllers/products')
 const router = Router();
 
 
@@ -12,5 +13,14 @@ router.post('/addProduct', postNewProduct)
 router.get('/:name', getProductName)
 
 router.get('/orderedproducts/:type/:orderby', orderProducts)
+
+router.get('/allProducts', getAllProducts)
+
+router.get('/:id', getIdProduct)
+
+router.get('/:filterBrand', getBrandProduct)
+
+router.get('/:filterCategory', getCategoryProduct)
+
 
 module.exports = router;

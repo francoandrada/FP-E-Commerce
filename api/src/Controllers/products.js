@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize')
-const { Product, Brand } = require('../db')
+const { Product, Brand, Category } = require('../db')
 
 // ----------------  ADD NEW PRODUCT -----------------
 
@@ -10,8 +10,9 @@ const postNewProduct = async function postNewProduct (req, res) {
             weight, 
             image, 
             stock, 
-            type_product,
-            brand } = req.body;
+            // type_product,
+            // brand
+         } = req.body;
 
     const newProduct = await Product.findOrCreate({
         where: {
@@ -21,25 +22,82 @@ const postNewProduct = async function postNewProduct (req, res) {
             weight, 
             image, 
             stock, 
-            type_product
+            // type_product
 
         }
 
     });
-    
-    let productBrand = await Brand.findAll({
-                where:{ 
-                    name: brand 
-                }
-            })
-            await newProduct[0].addBrand(productBrand)
+    res.send(newProduct)
+    // let productBrand = await Brand.findAll({
+    //             where:{ 
+    //                 name: brand 
+    //             }
+    //         })
+    //         await newProduct[0].addBrand(productBrand)
     
 
-    res.status(200).send({message: "Product added succesfully"})
+    // res.status(200).send({message: "Product added succesfully"})
   
 };
 
-
+// ----------------  FIND ALL PRODUCTS -----------------
+const getAllProducts = async function getAllProducts (req, res, next) {
+    
+    try {
+        const allProduct = await Product.findAll();
+        res.status(200).json(allProduct)
+    
+    } catch (error) {
+        next(error)
+    }
+}
+// ----------------     GET ID PRODUCT -----------------
+const getIdProduct = async function getIdProduct (req, res, next) {
+    try {
+        const id= req.params.id
+        const IdProduct = await Product.findOne({
+            where: {
+                id: id 
+            }
+        });
+        res.status(200).json(IdProduct)
+    
+    } catch (error) {
+        next(error)
+    }
+}
+// ----------------     GET BY BRAND -----------------
+const getBrandProduct = async function getBrandProduct (req, res, next) {
+    try {
+        const brand= req.params.name
+        const getBrand = await Product.findAll({
+            include: Brand,
+            where:{
+                name: brand
+            }
+        });
+        res.status(200).json(getBrand)
+    
+    } catch (error) {
+        next(error)
+    }
+}
+// ----------------     GET BY CATEGORY -----------------
+const getCategoryProduct = async function getCategoryProduct (req, res, next) {
+    try {
+        const category= req.params.name
+        const getCategory = await Product.findAll({
+            include: Category,
+            where:{
+                name: category
+            }
+        });
+        res.status(200).json(getCategory)
+    
+    } catch (error) {
+        next(error)
+    }
+}
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
 
 const getProductName = async function getProductName (req, res) {
@@ -94,5 +152,8 @@ module.exports = {
     postNewProduct,
     getProductName,
     orderProducts,
-  
+    getAllProducts,
+    getBrandProduct,
+    getIdProduct,
+    getCategoryProduct,
 };
