@@ -28,7 +28,6 @@ const postNewProduct = async function postNewProduct(req, res) {
 				}
 			}
 		}
-		// res.send(pp)
 		return res.status(200).json({ message: 'product created succesfully' });
 	} catch (error) {
 		res.send(error);

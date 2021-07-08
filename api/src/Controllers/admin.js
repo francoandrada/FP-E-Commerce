@@ -110,15 +110,21 @@ async function getProductCategory (req, res, next) {
     try {
         const name = req.params.name
         console.log(name)
-        var array= []
-        const resAll = await Product.findAll({include: Category})
-        for(let i = 0; i<resAll.length; i++){
-            if(resAll[i].categories){
-                resAll[i].categories.map((c)=>c.name.toLowerCase() === name.toLowerCase())
-                array.push(resAll[i])
+        // var array= []
+        const resAll = await Product.dataValues.findAll({
+            include: Category,
+            where:{
+                categories: name
             }
-        }
-        console.log(array)
+        })
+
+        // for(let i = 0; i<resAll.length; i++){
+        //     if(resAll[i].categories){
+        //         resAll[i].categories.map((c)=>c.name.toLowerCase() === name.toLowerCase())
+        //         array.push(resAll[i])
+        //     }
+        // }
+        console.log(resAll)
     } catch (error) {
         next(error)
     }
