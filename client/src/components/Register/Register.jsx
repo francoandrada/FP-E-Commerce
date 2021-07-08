@@ -16,7 +16,6 @@ function Register() {
     const handleChange = (event) => {
         setUser({ ...User, [event.target.name]: event.target.value })
     }
-    console.log(User)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
