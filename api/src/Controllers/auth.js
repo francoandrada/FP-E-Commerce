@@ -48,7 +48,6 @@ exports.userAuth = async (req, res, next) => {
 	res.json({ user: req.user });
 };
 
-
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
 
@@ -75,7 +74,7 @@ exports.forgotPassword = async (req, res) => {
 	const token = jwt.sign(
 		{ id: user.userId, name: user.name },
 		process.env.RESET_PASSWORD_KEY,
-		{ expiresIn: '20m' }
+		{ expiresIn: '6h' }
 	);
 	console.log('imprimiendo token', token);
 	var mailOptions = {
@@ -88,17 +87,40 @@ exports.forgotPassword = async (req, res) => {
 		 `,
 	};
 
-	return user.update({ resetLink: token }, (err, success) => {
-		if (err) {
-			return res.status(400).json({ error: 'reset password link error' });
-		} else {
-			console.log('token actualizado', user.resetLink);
-			transporter.sendMail(mailOptions, function (error, info) {
-				if (error) {
-					console.log(error);
-				}
-				console.log('Email sent: ' + info.response);
-			});
+	user.update({ resetLink: token });
+
+	transporter.sendMail(mailOptions, function (error, info) {
+		if (error) {
+			console.log(error);
 		}
+		res.send('Email sent: ' + info.response);
 	});
+};
+
+exports.resetPassword = async (req, res) => {
+	const { resetLink, newPass } = req.body;
+
+	if (!resetLink || !newPass) {
+		return res.status(401).json({
+			error: 'Incorrect token or it is expired',
+		});
+	}
+	let jwtPayload;
+	let user;
+	try {
+		jwtPayload = jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY);
+		user = await User.findOne({ where: { resetLink } });
+		console.log(user);
+	} catch (error) {
+		console.log(error);
+		return res.status(401).json({ error: 'Something went wrong' });
+	}
+
+	const salt = await bcrypt.genSalt(10);
+	const pass = await bcrypt.hash(newPass, salt);
+
+	user.password = pass;
+	user.save();
+	console.log(user);
+	res.send('pasword change');
 };

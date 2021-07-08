@@ -116,6 +116,7 @@ exports.newUser = async (req, res) => {
 			name: name,
 			surname: surname,
 			email: email,
+			password: password, 
 			password: pass,
 			address: address,
 			addressNumber: addressNumber,
