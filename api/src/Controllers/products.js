@@ -1,12 +1,12 @@
-const { Sequelize } = require('sequelize')
-const { Product, Brand, Category } = require('../db')
+const { Sequelize } = require('sequelize');
+const { Product, Brand, Category } = require('../db');
 
 // ----------------  ADD NEW PRODUCT -----------------
 
 const postNewProduct = async function postNewProduct(req, res) {
 	try {
-		const { name, price, description, weight, Image, stock, brand } = req.body;
-		console.log(brand);
+		const { name, price, description, weight, image, stock, brand } = req.body;
+
 		const brands = await Brand.findAll({
 			attributes: ['id', 'name', 'image'],
 		});
@@ -17,7 +17,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 				price,
 				description,
 				weight,
-				Image,
+				image,
 				stock,
 			},
 		});
@@ -28,7 +28,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 				}
 			}
 		}
-		// res.send(pp)
+
 		return res.status(200).json({ message: 'product created succesfully' });
 	} catch (error) {
 		res.send(error);
@@ -36,63 +36,58 @@ const postNewProduct = async function postNewProduct(req, res) {
 };
 
 // ----------------  FIND ALL PRODUCTS -----------------
-const getAllProducts = async function getAllProducts (req, res, next) {
-    
-    try {
-        const allProduct = await Product.findAll();
-        res.status(200).json(allProduct)
-    
-    } catch (error) {
-        next(error)
-    }
-}
+const getAllProducts = async function getAllProducts(req, res, next) {
+	try {
+		const allProduct = await Product.findAll();
+		res.status(200).json(allProduct);
+	} catch (error) {
+		next(error);
+	}
+};
 // ----------------     GET ID PRODUCT -----------------
-const getIdProduct = async function getIdProduct (req, res, next) {
-    try {
-        const id= parseInt(req.params.id)
-        const IdProduct = await Product.findOne({
-            where: {
-                id: id 
-            }
-        });
-        res.status(200).json(IdProduct)
-    
-    } catch (error) {
-        next(error)
-    }
-}
+const getIdProduct = async function getIdProduct(req, res, next) {
+	try {
+		const id = parseInt(req.params.id);
+		const IdProduct = await Product.findOne({
+			where: {
+				id: id,
+			},
+		});
+		res.status(200).json(IdProduct);
+	} catch (error) {
+		next(error);
+	}
+};
 // ----------------     GET BY BRAND -----------------
-const getBrandProduct = async function getBrandProduct (req, res, next) {
-    try {
-        const brand= req.params.name
-        const getBrand = await Product.findAll({
-            include: Brand,
-            where:{
-                name: brand
-            }
-        });
-        res.status(200).json(getBrand)
-    
-    } catch (error) {
-        next(error)
-    }
-}
+const getBrandProduct = async function getBrandProduct(req, res, next) {
+	try {
+		const brand = req.params.name;
+		const getBrand = await Product.findAll({
+			include: Brand,
+			where: {
+				name: brand,
+			},
+		});
+		res.status(200).json(getBrand);
+	} catch (error) {
+		next(error);
+	}
+};
 // ----------------     GET BY CATEGORY -----------------
-const getCategoryProduct = async function getCategoryProduct (req, res, next) {
-    try {
-        const category= req.params.category
-        const getCategory = await Product.findAll({
-            include: Category,
-            where:{
-                name: category
-            }
-        });
-        res.status(200).json(getCategory)
-    
-    } catch (error) {
-        next(error)
-    }
-}
+const getCategoryProduct = async function getCategoryProduct(req, res, next) {
+	try {
+		const category = req.params.category;
+		const getCategory = await Product.findAll({
+			include: Category,
+			where: {
+				name: category,
+			},
+		});
+		res.status(200).json(getCategory);
+	} catch (error) {
+		next(error);
+	}
+};
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
 
 const getProductName = async function getProductName(req, res) {
@@ -136,11 +131,11 @@ const orderProducts = async function orderProducts(req, res, next) {
 };
 
 module.exports = {
-    postNewProduct,
-    getProductName,
-    orderProducts,
-    getAllProducts,
-    getBrandProduct,
-    getIdProduct,
-    getCategoryProduct,
+	postNewProduct,
+	getProductName,
+	orderProducts,
+	getAllProducts,
+	getBrandProduct,
+	getIdProduct,
+	getCategoryProduct,
 };
