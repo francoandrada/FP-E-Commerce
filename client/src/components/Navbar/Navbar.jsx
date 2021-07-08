@@ -10,7 +10,7 @@ for (let i = 0; i < 10; i++) {
 	defaultOptions.push(`RAM ${i}`);
 }
 
-function Navbar() {
+const Navbar = () => {
 	const [showLinks, setShowLinks] = useState(false);
 	const [options, setOptions] = useState([]);
 	const onInputChange = (event) => {
@@ -37,6 +37,23 @@ function Navbar() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Navbar;
+/*
+		<NavContainer>
+			<LeftSide>
+				<div className='links' id={showLinks ? 'hidden' : ''}>
+					<Link to='/'>AuthUser</Link>
+					<Link to='/LogIn'>Login</Link>
+					<Link to='/register'>Register</Link>
+				</div>
+				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
+			</LeftSide>
+
+			<RightSide>
+				<SearchBar options={options} onInputChange={onInputChange} />
+				<SearchButton>Search</SearchButton>
+			</RightSide>
+		</NavContainer>
+*/

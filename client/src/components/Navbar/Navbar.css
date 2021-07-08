@@ -3,12 +3,6 @@
 	--text: #686868;
 }
 
-.header {
-	box-sizing: border-box;
-	box-shadow: 0 0 25px 0 black;
-	border-color: transparent;
-}
-
 .navbar {
 	background-color: var(--gray);
 	width: 100%;
