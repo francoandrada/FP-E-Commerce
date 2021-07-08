@@ -41,5 +41,9 @@ module.exports = (sequelize) => {
 			type: INTEGER,
 			allowNull: true,
 		},
+		resetLink: {
+			type: STRING,
+			default: ''
+		}
 	});
 };

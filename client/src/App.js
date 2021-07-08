@@ -5,6 +5,8 @@ import Register from './components/Register/Register';
 import { Link } from 'react-router-dom';
 import AuthUser from './components/AuthUser.js/AuthUser';
 import Navbar from './components/Navbar/Navbar';
+import ForgotPassword from './components/LogIn/ForgotPassword';
+import ResetPassword from './components/LogIn/ResetPassword';
 import Catalog from './components/Catalog/Catalog';
 
 function App() {
@@ -17,8 +19,9 @@ function App() {
 			<Route path='/LogIn' exact component={LogIn} />
 			<Route path='/register' exact component={Register} />
 			<Route path='/navbar' exact component={Navbar} />
+			<Route path='/forgot-password' exact component={ForgotPassword} />
+			<Route path='/reset-password/:resetLink' exact component={ResetPassword} />
 			<Route path='/catalog' exact component={Catalog} />
-
 		</div>
 	);
 }
