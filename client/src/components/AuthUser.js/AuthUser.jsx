@@ -30,10 +30,10 @@ const AuthUser = () => {
 			) : (
 				<>
 					<Link to='/logIn'>
-						<a>LogIn</a>
+						<button>LogIn</button>
 					</Link>
 					<Link to='/register'>
-						<a>Register</a>
+						<button>Register</button>
 					</Link>
 				</>
 			)}
