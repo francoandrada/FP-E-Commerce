@@ -6,11 +6,15 @@ const SearchBar = ({ options, onInputChange }) => {
 	useEffect(() => {
 		inputRef.current.addEventListener('click', (event) => {
 			event.stopPropagation();
-			ulRef.current.style.display = 'flex';
+			if (ulRef.current !== null) {
+				ulRef.current.style.display = 'flex';
+			}
 			onInputChange(event);
 		});
 		document.addEventListener('click', (event) => {
-			ulRef.current.style.display = 'none';
+			if (ulRef.current !== null) {
+				ulRef.current.style.display = 'none';
+			}
 		});
 	}, [onInputChange]);
 

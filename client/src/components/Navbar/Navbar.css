@@ -60,7 +60,6 @@ i {
 	padding-right: 25px;
 }
 
-/* esto es para el search */
 .rightSide input {
 	width: 220px;
 	height: 30px;
@@ -71,7 +70,7 @@ i {
 	color: black;
 }
 
-.rightSide button {
+.rightSide .search-btn {
 	height: 32px;
 	width: 70px;
 	font-size: 16px;
@@ -109,7 +108,7 @@ i {
 		height: auto;
 		max-height: 230px;
 		width: 100%;
-		background-color: #021e39;
+		background-color: var(--gray);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
