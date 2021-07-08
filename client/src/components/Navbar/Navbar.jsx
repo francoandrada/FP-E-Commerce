@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import SearchBar from '../Searchbar/Searchbar.jsx';
 import { Link } from 'react-router-dom';
-import SearchBar from '../Searchbar/SearchBar.jsx';
 import './Navbar.css';
+
 
 const defaultOptions = [];
 for (let i = 0; i < 10; i++) {
