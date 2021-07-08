@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {check} = require('express-validator');
-const { authUser, userAuth } = require('../Controllers/auth');
+const { authUser, userAuth, forgotPassword, prueba } = require('../Controllers/auth');
 const authToken = require('../middlewares/authToken');
 
 
@@ -18,5 +18,8 @@ router.get('/',
     userAuth
 );
 
+
+router.put('/forgot-password', forgotPassword);
+router.put('/reset-password', prueba);
 
 module.exports = router;
