@@ -1,4 +1,6 @@
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS } from './actionsName';
+
+import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
+
 
 import axios from 'axios';
 
@@ -64,5 +66,41 @@ export function logOut(data) {
 		dispatch({
 			type: LOG_OUT,
 		});
+	};
+}
+
+
+export function forgotPassword(email) {
+	return async (dispatch) => {
+		try {
+			 await axios.put('http://localhost:3001/auth/forgot-password', {email});
+
+			dispatch({
+				type: FORGOT_PASSWORD,
+				payload: email
+			});
+
+		} catch (error) {
+			console.log(error)
+		}
+	};
+}
+
+
+export function resetPassword(resetLink, newPass) {
+	return async (dispatch) => {
+		try {
+			 await axios.put('http://localhost:3001/auth/reset-password', {resetLink, newPass});
+			dispatch({
+				type: RESET_PASSWORD,
+				payload: {
+					resetLink, 
+					newPass
+				}
+			});
+
+		} catch (error) {
+			console.log(error)
+		}
 	};
 }
