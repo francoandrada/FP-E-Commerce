@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const {check} = require('express-validator');
-const { newUser } = require('../Controllers/users');
+const { newUser,
+        getUsers } = require('../Controllers/users');
 const router = Router();
 
 
@@ -18,6 +19,9 @@ router.post('/',
     newUser
 
 );
+
+router.get('/userslist', getUsers )
+
 
 module.exports = router;
 
