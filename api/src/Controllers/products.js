@@ -1,5 +1,37 @@
 const { Sequelize } = require('sequelize');
 const { Product, Brand, Category } = require('../db');
+const { jsonProducts } = require('../../jsonProducts')
+
+
+// ----------------  Products to Db -----------------
+const productsDb = async function setProductsToDb() {
+	jsonProducts.forEach(
+		({ name, priceNormal, priceSpecial, img, description, weight }) => {
+			Product.create(
+				{
+					name: name,
+					price: priceNormal,
+					priceSpecial: priceSpecial,
+					image: img,
+					description: description,
+					weight: weight,
+					stock: 1,
+				},
+				{
+					fields: [
+						'name',
+						'price',
+						'priceSpecial',
+						'image',
+						'description',
+						'weight',
+						'stock',
+					],
+				}
+			);
+		}
+	);
+};
 
 // ----------------  ADD NEW PRODUCT -----------------
 
@@ -138,4 +170,5 @@ module.exports = {
 	getBrandProduct,
 	getIdProduct,
 	getCategoryProduct,
+	productsDb,
 };

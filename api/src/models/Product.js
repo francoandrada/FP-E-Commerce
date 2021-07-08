@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
 			type: DataTypes.DOUBLE,
 			allowNull: false,
 		},
+		priceSpecial: {
+			type: DataTypes.DOUBLE,
+			allowNull: false,
+		},
 		description: {
 			type: DataTypes.TEXT,
 			allowNull: false,
