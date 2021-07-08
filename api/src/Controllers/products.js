@@ -54,7 +54,7 @@ const getAllProducts = async function getAllProducts (req, res, next) {
 // ----------------     GET ID PRODUCT -----------------
 const getIdProduct = async function getIdProduct (req, res, next) {
     try {
-        const id= req.params.id
+        const id= parseInt(req.params.id)
         const IdProduct = await Product.findOne({
             where: {
                 id: id 

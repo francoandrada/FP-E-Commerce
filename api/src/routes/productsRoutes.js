@@ -14,13 +14,13 @@ router.get('/:name', getProductName)
 
 router.get('/orderedproducts/:type/:orderby', orderProducts)
 
-router.get('/allProducts', getAllProducts)
+router.get('/', getAllProducts)
 
-router.get('/:id', getIdProduct)
+router.get('/allproducts/:id', getIdProduct)
 
-router.get('/:filterBrand', getBrandProduct)
+router.get('/productsbrand/:brand', getBrandProduct)
 
-router.get('/:filterCategory', getCategoryProduct)
+router.get('/productscategory/:category', getCategoryProduct)
 
 
 module.exports = router;
