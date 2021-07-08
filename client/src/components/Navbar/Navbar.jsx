@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from '../Searchbar/SearchBar.jsx';
+import SearchBar from '../Searchbar/Searchbar';
 import './Navbar.css';
 
 const defaultOptions = [];
