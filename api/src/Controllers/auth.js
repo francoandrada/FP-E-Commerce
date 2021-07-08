@@ -48,6 +48,8 @@ exports.userAuth = async (req, res, next) => {
 	res.json({ user: req.user });
 };
 
+
+///FORGOT PASWORD
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
 console.log('imprimiendo req.body',email)
@@ -96,6 +98,9 @@ console.log('imprimiendo req.body',email)
 	});
 };
 
+
+
+///RESET PASWORD
 exports.resetPassword = async (req, res) => {
 	const { resetLink, newPass } = req.body;
 
@@ -109,7 +114,6 @@ exports.resetPassword = async (req, res) => {
 	try {
 		jwtPayload = jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY);
 		user = await User.findOne({ where: { resetLink } });
-		console.log(user);
 	} catch (error) {
 		console.log(error);
 		return res.status(401).json({ error: 'Something went wrong' });
@@ -120,6 +124,6 @@ exports.resetPassword = async (req, res) => {
 
 	user.password = pass;
 	user.save();
-	console.log(user);
+
 	res.send('pasword change');
 };

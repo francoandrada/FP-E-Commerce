@@ -9,7 +9,6 @@ const AuthUser = () => {
 	const history = useHistory();
 
 	const user = useSelector((state) => state.user);
-	console.log('imprimiento authenticated', user);
 
 	useEffect(() => {
 		dispatch(authUser());
