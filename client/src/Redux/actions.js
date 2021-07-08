@@ -1,6 +1,13 @@
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT } from './actionsName';
+import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS } from './actionsName';
 
 import axios from 'axios';
+
+export function getProducts(payload) {
+	return async (dispatch) => {
+		axios.get()
+		dispatch({ type: GET_PRODUCTS, payload, })
+	}
+}
 
 export function logIn(data) {
 	return async (dispatch) => {
