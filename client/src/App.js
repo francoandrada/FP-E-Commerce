@@ -16,13 +16,6 @@ function App() {
 			<Link to='/navbar'>
 				<button>Navbar</button>
 			</Link>
-			<Link to='/login'>
-				<button>LogIn</button>
-			</Link>
-			<br />
-			<Link to='register'>
-				<button>Register</button>
-			</Link>
 			<Route path='/LogIn' exact component={LogIn} />
 			<Route path='/register' exact component={Register} />
 			<Route path='/navbar' exact component={Navbar} />
