@@ -1,7 +1,16 @@
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
+
+import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
+
 
 import axios from 'axios';
 
+export function getProducts() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products/').then(response => {
+			dispatch({ type: GET_PRODUCTS, payload: response.data })
+		})
+	}
+}
 export function logIn(data) {
 	return async (dispatch) => {
 		try {

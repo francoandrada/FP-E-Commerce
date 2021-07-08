@@ -1,10 +1,11 @@
-import { AUTH_USER, ERROR_LOGIN, LOG_OUT, SUCCESS_LOGIN } from './actionsName';
+import { AUTH_USER, ERROR_LOGIN, GET_PRODUCTS, LOG_OUT, SUCCESS_LOGIN } from './actionsName';
 
 const initialState = {
 	token: localStorage.getItem('token'),
 	message: undefined,
 	authenticated: false,
 	user: undefined,
+	products: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -14,6 +15,11 @@ function rootReducer(state = initialState, action) {
 				...state,
 				message: action.payload,
 			};
+		case GET_PRODUCTS:
+			return {
+				...state,
+				products: action.payload
+			}
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
 			return {

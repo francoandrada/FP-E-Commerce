@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-
 import LogIn from './components/LogIn/LogIn';
 import './App.css';
 import { Route } from 'react-router';
@@ -9,6 +7,7 @@ import AuthUser from './components/AuthUser.js/AuthUser';
 import Navbar from './components/Navbar/Navbar';
 import ForgotPassword from './components/LogIn/ForgotPassword';
 import ResetPassword from './components/LogIn/ResetPassword';
+import Catalog from './components/Catalog/Catalog';
 
 function App() {
 	return (
@@ -22,6 +21,7 @@ function App() {
 			<Route path='/navbar' exact component={Navbar} />
 			<Route path='/forgot-password' exact component={ForgotPassword} />
 			<Route path='/reset-password/:resetLink' exact component={ResetPassword} />
+			<Route path='/catalog' exact component={Catalog} />
 		</div>
 	);
 }
