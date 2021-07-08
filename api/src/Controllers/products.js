@@ -5,7 +5,7 @@ const { Product, Brand, Category } = require('../db');
 
 const postNewProduct = async function postNewProduct(req, res) {
 	try {
-		const { name, price, description, weight, image, stock, brand } = req.body;
+		const { name, price, description, weight, Image, stock, brand, category } = req.body;
 
 		const brands = await Brand.findAll({
 			attributes: ['id', 'name', 'image'],
@@ -17,18 +17,20 @@ const postNewProduct = async function postNewProduct(req, res) {
 				price,
 				description,
 				weight,
-				image,
-				stock,
+				Image,
+				stock
 			},
 		});
 		if (newProduct) {
 			for (let i = 0; i < brands.length; i++) {
 				if (brands[i].name.toLowerCase() === brand.toLowerCase()) {
-					await newProduct[0].setBrand(brands[i]);
+					var response = await newProduct[0].setBrand(brands[i]);
 				}
 			}
+			const productComplete= await response.addCategories(category)
+			res.json(productComplete)
 		}
-		return res.status(200).json({ message: 'product created succesfully' });
+		// return res.status(200).json({ message: 'product created succesfully' });
 	} catch (error) {
 		res.send(error);
 	}
@@ -37,7 +39,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 // ----------------  FIND ALL PRODUCTS -----------------
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
-		const allProduct = await Product.findAll();
+		const allProduct = await Product.findAll({include: Brand});
 		res.status(200).json(allProduct);
 	} catch (error) {
 		next(error);
@@ -48,6 +50,7 @@ const getIdProduct = async function getIdProduct(req, res, next) {
 	try {
 		const id = parseInt(req.params.id);
 		const IdProduct = await Product.findOne({
+			include: {model: Brand },
 			where: {
 				id: id,
 			},
@@ -73,20 +76,20 @@ const getBrandProduct = async function getBrandProduct(req, res, next) {
 	}
 };
 // ----------------     GET BY CATEGORY -----------------
-const getCategoryProduct = async function getCategoryProduct(req, res, next) {
-	try {
-		const category = req.params.category;
-		const getCategory = await Product.findAll({
-			include: Category,
-			where: {
-				name: category,
-			},
-		});
-		res.status(200).json(getCategory);
-	} catch (error) {
-		next(error);
-	}
-};
+// const getCategoryProduct = async function getCategoryProduct(req, res, next) {
+// 	try {
+// 		const category = req.params.category;
+// 		const getCategory = await Product.findAll({
+// 			include: Category,
+// 			where: {
+// 				name: category,
+// 			},
+// 		});
+// 		res.status(200).json(getCategory);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// };
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
 
 const getProductName = async function getProductName(req, res) {
@@ -136,5 +139,5 @@ module.exports = {
 	getAllProducts,
 	getBrandProduct,
 	getIdProduct,
-	getCategoryProduct,
+	// getCategoryProduct,
 };
