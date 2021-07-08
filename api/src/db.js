@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
 		logging: false,
 		native: false,
 		define: {
-			timestamps: false,
+			// timestamps: false,
 		},
 	}
 );

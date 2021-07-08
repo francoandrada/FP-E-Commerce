@@ -28,7 +28,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 				}
 			}
 		}
-
+		// res.send(pp)
 		return res.status(200).json({ message: 'product created succesfully' });
 	} catch (error) {
 		res.send(error);
@@ -80,7 +80,7 @@ const getBrandProduct = async function getBrandProduct (req, res, next) {
 // ----------------     GET BY CATEGORY -----------------
 const getCategoryProduct = async function getCategoryProduct (req, res, next) {
     try {
-        const category= req.params.name
+        const category= req.params.category
         const getCategory = await Product.findAll({
             include: Category,
             where:{

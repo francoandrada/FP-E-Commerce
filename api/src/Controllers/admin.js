@@ -1,4 +1,22 @@
 const { Product, Brand, Category } = require('../db')
+async function postProduct (req, res, next) {
+    try {
+        const { name, price, description, weight, image, stock, brandId, category } = req.body;
+        const producto = await Product.create({
+            name,
+            price,
+            description,
+            weight,
+            image,
+            stock,
+            brandId
+        })
+        const newProductComplete = await producto.addCategories(category)
+        res.send(newProductComplete)
+    } catch (error) {
+        next(error)
+    }
+}
 
 async function putProduct(req, res, next) {
     try {
@@ -44,20 +62,74 @@ async function postBrand (req, res, next) {
         next(error)
     }
 }
-async function putBrand(req, res, next) {
+async function putBrand (req, res, next) {
     try {
-        const {name, image} = req.body;
-        Brand.update({
+        const {id, name, image} = req.body;
+        let variable= {}
+        if(name && name.length >0) variable.name = name
+        if(image && image.length >0) variable.image= image
+       const putBrandSelect= await Brand.update(variable, {
             where: {
                 id: id
             }
         })
+        res.json(putBrandSelect)
     } catch (error) {
-        
+        next(error)
+    }
+}
+async function postCategoryProduct (req, res, next) {
+try {
+    const { name } = req.body
+    const categoryCreated = await Category.findOrCreate({
+        where:{
+            name: name
+        }
+    })
+    res.send(categoryCreated)
+} catch (error) {
+    next(error)
+}
+}
+async function putCategoryProduct (req, res, next) {
+    try {
+        const {id, name } = req.body
+        let variable= {}
+        if(name && name.length >0) variable.name = name
+       const putCategorySelect= await Category.update(variable, {
+            where: {
+                id: id
+            }
+        })
+        res.json(putCategorySelect)
+    } catch (error) {
+        next(error)
+    }
+}
+async function getProductCategory (req, res, next) {
+    try {
+        const name = req.params.name
+        console.log(name)
+        var array= []
+        const resAll = await Product.findAll({include: Category})
+        for(let i = 0; i<resAll.length; i++){
+            if(resAll[i].categories){
+                resAll[i].categories.map((c)=>c.name.toLowerCase() === name.toLowerCase())
+                array.push(resAll[i])
+            }
+        }
+        console.log(array)
+    } catch (error) {
+        next(error)
     }
 }
 
 module.exports = {
     putProduct,
-    postBrand
+    postBrand,
+    postProduct,
+    putBrand,
+    postCategoryProduct,
+    putCategoryProduct,
+    getProductCategory
 }

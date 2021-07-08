@@ -12,13 +12,11 @@ router.get('/:name', getProductName);
 
 router.get('/orderedproducts/:type/:orderby', orderProducts);
 
-router.get('/orderedproducts/:type/:orderby', orderProducts)
-
 router.get('/', getAllProducts)
 
 router.get('/allproducts/:id', getIdProduct)
 
-router.get('/productsbrand/:brand', getBrandProduct)
+// router.get('/productsbrand/:brand', getBrandProduct)
 
 router.get('/productscategory/:category', getCategoryProduct)
 
