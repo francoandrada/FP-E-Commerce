@@ -50,7 +50,7 @@ exports.userAuth = async (req, res, next) => {
 
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
-
+console.log('imprimiendo req.body',email)
 	let user = await User.findOne({
 		where: {
 			email: email,
@@ -59,7 +59,6 @@ exports.forgotPassword = async (req, res) => {
 	if (!user) {
 		res.status(400).json('The user doesnt exist');
 	}
-	// console.log('imprimiendo usuaio', user.dataValues.name);
 	let transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
@@ -83,7 +82,7 @@ exports.forgotPassword = async (req, res) => {
 		subject: 'Reset your password',
 		html: `
 		 <h2>Please click on given link to reset your password </h2>
-		 <p>${process.env.CLIENT_URL}/resetpassword/${token}</p>
+		 <p>${process.env.CLIENT_URL}/reset-password/${token}</p>
 		 `,
 	};
 
