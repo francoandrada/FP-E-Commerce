@@ -9,9 +9,6 @@ const sequelize = new Sequelize(
 	{
 		logging: false,
 		native: false,
-		define: {
-			// timestamps: false,
-		},
 	}
 );
 const basename = path.basename(__filename);
@@ -56,7 +53,6 @@ Category.belongsToMany(Product, {
 Brand.hasMany(Product, { foreignKey: 'brandId' });
 Product.belongsTo(Brand, { foreignKey: 'brandId' });
 
-
 Product.belongsToMany(User, {
 	through: 'review',
 	foreignKey: 'productId',
@@ -68,7 +64,6 @@ User.belongsToMany(Product, {
 
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
-
 
 module.exports = {
 	...sequelize.models,
