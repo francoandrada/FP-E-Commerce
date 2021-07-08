@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -6,8 +6,62 @@ import style from './LogIn.module.css';
 import { logIn } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+/* global google */
+import jwt_decode from 'jwt-decode';
 
 const LogIn = () => {
+	///////// Login vía Google
+	const googleApiKey =
+		'850649775650-vbs3e60jk6hkjba2l896eotkb4a3d16h.apps.googleusercontent.com';
+	// Simulo con react; luego debería estar en el estado de redux esta data.
+	// Sirve para saber que mostrar en función a si está o no logueado.
+	// const [isSignedIn, setIsSignedIn] = useState(false);
+	const [userInfo, setUserInfo] = useState(null);
+
+	const onOneTapSignedIn = (response) => {
+		const decodedToken = jwt_decode(response.credential);
+		setUserInfo(decodedToken.email);
+	};
+
+	const gmailValidation = () => {
+		if (userInfo) {
+			dispatch({ type: 'AUTH_USER', payload: userInfo });
+		}
+	};
+
+	useEffect(() => gmailValidation(), [userInfo]);
+
+	const initializeGSI = () => {
+		google.accounts.id.initialize({
+			client_id: googleApiKey,
+			cancel_on_tap_outside: false,
+			callback: onOneTapSignedIn,
+		});
+		google.accounts.id.prompt((notification) => {
+			if (notification.isNotDisplayed()) {
+				console.log(notification.getNotDisplayedReason());
+			} else if (notification.isSkippedMoment()) {
+				console.log(notification.getSkippedReason());
+			} else if (notification.isDismissedMoment()) {
+				console.log(notification.getDismissedReason());
+			}
+		});
+	};
+
+	const signout = () => {
+		// refresh the page
+		window.location.reload();
+	};
+
+	useEffect(() => {
+		const el = document.createElement('script');
+		el.setAttribute('src', 'https://accounts.google.com/gsi/client');
+		el.onload = () => initializeGSI();
+		document.querySelector('body').appendChild(el);
+	}, []);
+
+	///////////////
+
 	const dispatch = useDispatch();
 	const history = useHistory();
 
