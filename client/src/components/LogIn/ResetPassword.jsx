@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { resetPassword } from '../../Redux/actions';
-const bcrypt = require('bcrypt');
+
 
 const ResetPassword = () => {
+
+
+	const history = useHistory()
 	const { resetLink } = useParams();
 	const dispatch = useDispatch();
 
@@ -30,6 +33,7 @@ const ResetPassword = () => {
 		}),
 		onSubmit: (values) => {
 			dispatch(resetPassword(resetLink, values.password));
+		    history.push('/');
 		},
 	});
 

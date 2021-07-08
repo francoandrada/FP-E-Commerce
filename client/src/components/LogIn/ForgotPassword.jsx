@@ -17,7 +17,6 @@ const ForgotPassword = () => {
 	};
 	const { email } = mail;
 
-	console.log(mail.email)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(forgotPassword(mail.email));

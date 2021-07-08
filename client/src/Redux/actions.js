@@ -74,7 +74,6 @@ export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
 			 await axios.put('http://localhost:3001/auth/forgot-password', {email});
-			console.log('desde el action', email);
 
 			dispatch({
 				type: FORGOT_PASSWORD,
@@ -92,7 +91,6 @@ export function resetPassword(resetLink, newPass) {
 	return async (dispatch) => {
 		try {
 			 await axios.put('http://localhost:3001/auth/reset-password', {resetLink, newPass});
-			console.log('desde el action', {resetLink, newPass});
 			dispatch({
 				type: RESET_PASSWORD,
 				payload: {
