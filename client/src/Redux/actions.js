@@ -2,13 +2,13 @@ import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS } from './
 
 import axios from 'axios';
 
-export function getProducts(payload) {
+export function getProducts() {
 	return async (dispatch) => {
-		axios.get()
-		dispatch({ type: GET_PRODUCTS, payload, })
+		axios.get('http://localhost:3001/products/').then(response => {
+			dispatch({ type: GET_PRODUCTS, payload: response.data })
+		})
 	}
 }
-
 export function logIn(data) {
 	return async (dispatch) => {
 		try {
