@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import SearchBar from '../Searchbar/SearchBar.jsx';
+import SearchBar from '../Searchbar/Searchbar.jsx';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+
 
 const defaultOptions = [];
 for (let i = 0; i < 10; i++) {
@@ -9,17 +12,27 @@ for (let i = 0; i < 10; i++) {
 }
 
 function Navbar() {
+	const [showLinks, setShowLinks] = useState(false);
 	const [options, setOptions] = useState([]);
 	const onInputChange = (event) => {
-		const searchValue = event.target.value;
-		setOptions(defaultOptions.filter((option) => option.includes(searchValue)));
+		setOptions(
+			defaultOptions.filter((option) => option.includes(event.target.value))
+		);
 	};
 
 	return (
-		<div>
-			<h1>Navbar</h1>
-			<button>Search</button>
-			<SearchBar options={options} onInputChange={onInputChange} />
+		<div className='navbar'>
+			<div className='leftSide'>
+				<div className='links' id={showLinks ? 'hidden' : ''}>
+					<Link to='/LogIn'>Login</Link>
+					<Link to='/register'>Register</Link>
+				</div>
+				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
+			</div>
+
+			<div className='rightSide'>
+				<SearchBar options={options} onInputChange={onInputChange} />
+			</div>
 		</div>
 	);
 }

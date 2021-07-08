@@ -4,11 +4,11 @@ module.exports = (sequelize) => {
 	sequelize.define('brand', {
 		name: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			// allowNull: false,
 		},
 		image: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			// allowNull: false,
 		},
 	});
 };
