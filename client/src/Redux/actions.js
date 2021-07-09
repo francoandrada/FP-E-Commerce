@@ -1,5 +1,5 @@
 
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
+import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD, PRODUCT_DETAIL } from './actionsName';
 
 
 import axios from 'axios';
@@ -8,6 +8,14 @@ export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then(response => {
 			dispatch({ type: GET_PRODUCTS, payload: response.data })
+		})
+	}
+}
+
+export function getProductById(id) {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products/allproducts/' + id).then(response => {
+			dispatch({ type: PRODUCT_DETAIL, payload: response.data })
 		})
 	}
 }
@@ -73,7 +81,7 @@ export function logOut(data) {
 export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/forgot-password', {email});
+			await axios.put('http://localhost:3001/auth/forgot-password', { email });
 
 			dispatch({
 				type: FORGOT_PASSWORD,
@@ -90,11 +98,11 @@ export function forgotPassword(email) {
 export function resetPassword(resetLink, newPass) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/reset-password', {resetLink, newPass});
+			await axios.put('http://localhost:3001/auth/reset-password', { resetLink, newPass });
 			dispatch({
 				type: RESET_PASSWORD,
 				payload: {
-					resetLink, 
+					resetLink,
 					newPass
 				}
 			});

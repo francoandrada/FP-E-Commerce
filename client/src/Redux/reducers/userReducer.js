@@ -1,11 +1,12 @@
-import { AUTH_USER, ERROR_LOGIN, GET_PRODUCTS, LOG_OUT, SUCCESS_LOGIN } from '../actionsName';
+import { AUTH_USER, ERROR_LOGIN, GET_PRODUCTS, LOG_OUT, PRODUCT_DETAIL, SUCCESS_LOGIN } from '../actionsName';
 
 const initialState = {
 	token: localStorage.getItem('token'),
 	message: undefined,
 	authenticated: false,
 	user: undefined,
-	products: []
+	products: [],
+	productDetail: {}
 };
 
 function userReducer(state = initialState, action) {
@@ -19,6 +20,11 @@ function userReducer(state = initialState, action) {
 			return {
 				...state,
 				products: action.payload
+			}
+		case PRODUCT_DETAIL:
+			return {
+				...state,
+				productDetail: action.payload
 			}
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
