@@ -148,4 +148,25 @@ export function resetPassword(resetLink, newPass) {
 			console.log(error);
 		}
 	};
+
+
+
+}
+
+export function loginGmail(data) {
+	return async (dispatch) => {
+		try {
+			console.log('request al server http://localhost:3001/authGmail ')
+			console.log(data)
+			const res = await axios.post('http://localhost:3001/authGmail', data);
+			console.log('desde el action', res.data.token);
+
+			dispatch({
+				type: SUCCESS_LOGIN,
+				payload: res.data.token,
+			});
+		} catch (error) {
+			console.log(error)
+		}
+	};
 }
