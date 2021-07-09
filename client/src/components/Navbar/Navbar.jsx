@@ -19,7 +19,7 @@ const Navbar = () => {
 	useEffect(() => {
 		axios
 			.get('http://localhost:3001/products')
-			.then((res) => setSuggestions(res.data))
+			.then((res) => setSuggestions(res.data.product))
 			.catch((error) => console.log(error));
 	}, []);
 

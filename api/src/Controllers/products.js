@@ -97,7 +97,11 @@ const postNewProduct = async function postNewProduct(req, res) {
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
 		const allProduct = await Product.findAll({ include: Brand });
-		res.status(200).json(allProduct);
+		const allCategories = await Category.findAll();
+		res.status(200).json({
+			product: allProduct,
+			category: allCategories
+		});
 	} catch (error) {
 		next(error);
 	}
@@ -189,6 +193,16 @@ const orderProducts = async function orderProducts(req, res, next) {
 	}
 };
 
+const getAllCategories= async function getAllCategories(req, res, next) {
+	try {
+		const allCategories = await Category.findAll();
+		console.log(allCategories)
+		res.status(200).json(allCategories);
+	} catch (error) {
+		next(error);
+	}
+};
+
 module.exports = {
 	postNewProduct,
 	getProductName,
@@ -196,7 +210,7 @@ module.exports = {
 	getAllProducts,
 	getBrandProduct,
 	getIdProduct,
-
+	getAllCategories,
 	// getCategoryProduct,
 	productsDb,
 };

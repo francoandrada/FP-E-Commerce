@@ -11,7 +11,7 @@ function Products() {
         dispatch(getProducts())
     }, [dispatch])
 
-    const allCategories = useSelector(state=> state.categories.allCategories)
+    const allCategories = useSelector(state=> state.category.allCategories)
 
 
 

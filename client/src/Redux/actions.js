@@ -10,6 +10,7 @@ import {
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
+	GET_CATEGORIES
 } from './actionsName';
 
 import axios from 'axios';
@@ -43,7 +44,17 @@ export function getSuggestions() {
 export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data });
+			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
+			dispatch({type: GET_CATEGORIES, payload: response.data.category})
+			;
+		});
+	};
+}
+
+export function getCategories() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products/').then((response) => {
+			dispatch({ type: GET_CATEGORIES, payload: response.data });
 		});
 	};
 }
