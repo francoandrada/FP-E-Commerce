@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import './Searchbar.css';
 
 const SearchBar = ({ options, onInputChange }) => {
 	const ulRef = useRef();
@@ -19,16 +20,17 @@ const SearchBar = ({ options, onInputChange }) => {
 	}, [onInputChange]);
 
 	return (
-		<div>
+		<div className='suggestions-container'>
 			<input
 				type='text'
 				placeholder='Search...'
 				ref={inputRef}
 				onChange={onInputChange}
 			/>
-			<ul ref={ulRef}>
-				{options.map((option, key) => (
+			<ul className='list-suggestions' ref={ulRef}>
+				{options.slice(0, 6).map((option, key) => (
 					<button
+						className='suggestion-items'
 						onClick={(event) => {
 							inputRef.current.value = option;
 						}}

@@ -1,0 +1,27 @@
+.suggestion-container {
+	position: relative;
+	background: blue;
+}
+
+.list-suggestions {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: absolute;
+	width: 250px;
+	top: 41px;
+	right: 90px;
+	font-family: 'Arial';
+	border-radius: 4px;
+}
+
+.suggestion-items {
+	background: white;
+	border: none;
+	width: 300px;
+	padding: 5px;
+}
+
+.suggestion-items:hover {
+	background: #e8f6ef;
+}

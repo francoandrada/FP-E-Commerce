@@ -9,6 +9,10 @@ function Products() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProducts())
+    }, [])
+
+    const allCategories = useSelector(state=> state.categories.allCategories)
+
 
     }, [dispatch])
 
