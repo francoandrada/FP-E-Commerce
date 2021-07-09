@@ -3,12 +3,13 @@ import { useEffect } from 'react'
 import { getProducts } from '../../Redux/actions'
 
 function Products() {
-    const allProducts = useSelector(state => state.productReducer.allProducts)
+    const allProducts = useSelector(state => state.product.allProducts)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProducts())
-    
-    }, [allProducts])
+    }, [])
+
+    const allCategories = useSelector(state=> state.categories.allCategories)
 
     return(
         <div>
