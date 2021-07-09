@@ -4,7 +4,7 @@ import { getProductById } from '../../Redux/actions'
 
 function DetailProduct(props) {
     const dispatch = useDispatch()
-    const productDetail = useSelector(state => state.productDetail)
+    const productDetail = useSelector(state => state.productReducer.productDetail)
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
     }, [])
