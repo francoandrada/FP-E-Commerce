@@ -3,16 +3,16 @@ import { useEffect } from 'react'
 import { getProducts } from '../../Redux/actions'
 
 function Products() {
-    const products = useSelector(state => state.products)
+    const allProducts = useSelector(state => state.productReducer.allProducts)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProducts())
     
-    }, [products])
+    }, [allProducts])
 
     return(
         <div>
-            {products.map(p =>{
+            {allProducts.map(p =>{
                 return(
                     <div> 
                         <span>{p.name}</span>

@@ -1,10 +1,7 @@
-
 import {
 	AUTH_USER,
 	ERROR_LOGIN,
-	GET_PRODUCTS,
 	LOG_OUT,
-  PRODUCT_DETAIL,
 	SUCCESS_LOGIN,
 	SUGGESTIONS,
 	FETCH_PENDING,
@@ -32,17 +29,6 @@ function userReducer(state = initialState, action) {
 				...state,
 				message: action.payload,
 			};
-		case GET_PRODUCTS:
-			return {
-				...state,
-
-				products: action.payload
-			}
-		case PRODUCT_DETAIL:
-			return {
-				...state,
-				productDetail: action.payload
-			}
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
 			return {
