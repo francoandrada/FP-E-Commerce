@@ -1,6 +1,6 @@
 import {
 	AUTH_USER,
-	ERROR_LOGIN,
+	ERROR,
 	LOG_OUT,
 	SUCCESS_LOGIN,
 	SUGGESTIONS,
@@ -11,7 +11,7 @@ import {
 
 const initialState = {
 	token: localStorage.getItem('token'),
-	message: undefined,
+	setError: [],
 	authenticated: false,
 	user: undefined,
 	products: [],
@@ -19,15 +19,18 @@ const initialState = {
 	error: null,
 	pending: false,
 	suggestions: undefined,
-
 };
 
 function userReducer(state = initialState, action) {
+
+
 	switch (action.type) {
-		case ERROR_LOGIN:
+
+		case ERROR:
+			console.log('desde reducer', action.payload)
 			return {
 				...state,
-				message: action.payload,
+				setError: action.payload,
 			};
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
@@ -63,6 +66,7 @@ function userReducer(state = initialState, action) {
 		case SUGGESTIONS:
 			return {
 				...state,
+				pending: false,
 				suggestions: action.payload,
 			};
 		default: {

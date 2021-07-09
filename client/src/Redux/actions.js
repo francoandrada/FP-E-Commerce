@@ -1,19 +1,18 @@
 import {
 	SUCCESS_LOGIN,
-	ERROR_LOGIN,
+	ERROR,
 	AUTH_USER,
 	LOG_OUT,
 	GET_PRODUCTS,
 	FORGOT_PASSWORD,
 	RESET_PASSWORD,
-  PRODUCT_DETAIL,
+	PRODUCT_DETAIL,
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
 } from './actionsName';
 
 import axios from 'axios';
-
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -29,11 +28,11 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions(url) {
+export function getSuggestions() {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
-			const res = await axios.get(url);
+			const res = await axios.get('http://localhost:3001/products/');
 			dispatch(fetchSuggestions(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
@@ -51,24 +50,26 @@ export function getProducts() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/allproducts/' + id).then(response => {
-			dispatch({ type: PRODUCT_DETAIL, payload: response.data })
-		})
-	}
+		axios
+			.get('http://localhost:3001/products/allproducts/' + id)
+			.then((response) => {
+				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
+			});
+	};
 }
-export function logIn(data) {
+
+export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-			const res = await axios.post('http://localhost:3001/auth', data);
-			console.log('desde el action', res.data.token);
-
+			const res = await axios.post('http://localhost:3001/auth', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
 			});
 		} catch (error) {
+			console.log('error', error.response.data.msg);
 			dispatch({
-				type: ERROR_LOGIN,
+				type: ERROR,
 				payload: error.response.data.msg,
 			});
 		}
@@ -98,7 +99,6 @@ export function authUser(data) {
 					type: AUTH_USER,
 					payload: res.data,
 				});
-				console.log('desde action imprimiendo usuario', res.data);
 			}
 		} catch (error) {
 			console.log(error);
@@ -124,7 +124,12 @@ export function forgotPassword(email) {
 				payload: email,
 			});
 		} catch (error) {
-			console.log(error);
+			console.log('error', error.response.data.msg);
+
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
 		}
 	};
 }
@@ -140,12 +145,32 @@ export function resetPassword(resetLink, newPass) {
 				type: RESET_PASSWORD,
 				payload: {
 					resetLink,
-
 					newPass,
 				},
 			});
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+
+
+}
+
+export function loginGmail(data) {
+	return async (dispatch) => {
+		try {
+			console.log('request al server http://localhost:3001/authGmail ')
+			console.log(data)
+			const res = await axios.post('http://localhost:3001/authGmail', data);
+			console.log('desde el action', res.data.token);
+
+			dispatch({
+				type: SUCCESS_LOGIN,
+				payload: res.data.token,
+			});
+		} catch (error) {
+			console.log(error)
 		}
 	};
 }
