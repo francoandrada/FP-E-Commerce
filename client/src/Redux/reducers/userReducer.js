@@ -8,7 +8,6 @@ import {
 	FETCH_ERROR,
 } from '../actionsName';
 
-
 const initialState = {
 	token: localStorage.getItem('token'),
 	message: undefined,
@@ -19,7 +18,6 @@ const initialState = {
 	error: null,
 	pending: false,
 	suggestions: undefined,
-
 };
 
 function userReducer(state = initialState, action) {
@@ -63,6 +61,7 @@ function userReducer(state = initialState, action) {
 		case SUGGESTIONS:
 			return {
 				...state,
+				pending: false,
 				suggestions: action.payload,
 			};
 		default: {
