@@ -5,7 +5,16 @@ const { jsonProducts } = require('../../jsonProducts');
 // ----------------  Products to Db -----------------
 const productsDb = async function setProductsToDb() {
 	var aux = jsonProducts.forEach(
-		({ name, priceNormal, priceSpecial, img, description, weight, brand }) => {
+		({
+			name,
+			priceNormal,
+			priceSpecial,
+			img,
+			description,
+			weight,
+			brand,
+			category,
+		}) => {
 			(async function creatProd() {
 				var pr = await Product.create(
 					{
@@ -33,13 +42,13 @@ const productsDb = async function setProductsToDb() {
 						var brandDb = await Brand.findOrCreate({
 							where: { name: brand },
 						});
-						// .then((thisBrand) => {
-						// 	//console.log(thisBrand[0].dataValues.id);
-						// 	await product[0].setBrand(thisBrand[0].dataValues.id);
-						// });
-						//console.log(brandDb[0].dataValues.name);
 						await product.setBrand(brandDb[0]);
-						//console.log(product);
+					})();
+					(async function createCategoryProd() {
+						var categoryDb = await Category.findOrCreate({
+							where: { name: category },
+						});
+						await product.addCategories(categoryDb[0]);
 					})();
 				});
 			})();
