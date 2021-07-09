@@ -1,29 +1,44 @@
 .container{
-    border: 2px solid black;
+   
     max-width: 85%;
-    min-width: 500px;
+    
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
-    justify-content: left;
-    align-items:flex-end ;
+    margin: 4rem auto;
+    box-shadow: 10px 8px 40px gray;
+    
+    border-radius: 10px;
+    justify-content: right;
 }
 .imgContainer{
     display: flex;
-    border: 1px solid black;
-    width: 40%;
+    
     justify-content: center;
+    min-width: min-content;
+    
 }
 .data{
     max-width: 50%;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    justify-content: flex-end;
-}
+   border-top: 1px solid gray;
+   padding: 0 25%;
+    margin: 0 auto;
 
+}
+.card{
+    display: flex;
+   
+}
 .productCard{
+    font-size: 25px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+  
+    padding: 1rem;
+    
+}
+.productCard button{
+    margin: 0 auto;
+    font-size: 25px;
 }
