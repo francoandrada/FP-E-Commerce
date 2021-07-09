@@ -1,8 +1,10 @@
 import { useState } from "react"
 
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 function Register() {
+    const history = useHistory();
     const [User, setUser] = useState({
         name: '',
         surname: '',
@@ -33,6 +35,7 @@ function Register() {
                 phone: User.phone,
             })
         }
+        history.push('/')
 
     }
     return (

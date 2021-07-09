@@ -2,7 +2,7 @@ import { AUTH_USER, ERROR, GET_PRODUCTS, LOG_OUT, SUCCESS_LOGIN } from '../actio
 
 const initialState = {
 	token: localStorage.getItem('token'),
-	setError: null,
+	setError: [],
 	authenticated: false,
 	user: undefined,
 	products: []
@@ -19,11 +19,6 @@ function userReducer(state = initialState, action) {
 				...state,
 				setError: action.payload,
 			};
-			case ERROR:
-				return {
-					...state,
-					mensaje: action.payload
-				}  
 		case GET_PRODUCTS:
 			return {
 				...state,

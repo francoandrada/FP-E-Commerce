@@ -8,7 +8,7 @@ const AuthUser = () => {
 
 	const history = useHistory();
 
-	const user = useSelector((state) => state.user);
+	const user = useSelector((state) => state.user.user);
 
 	useEffect(() => {
 		dispatch(authUser());

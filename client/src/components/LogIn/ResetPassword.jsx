@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { resetPassword } from '../../Redux/actions';
 
-
 const ResetPassword = () => {
-
-
-	const history = useHistory()
+	const history = useHistory();
 	const { resetLink } = useParams();
 	const dispatch = useDispatch();
+
 
 	const formik = useFormik({
 		initialValues: {
@@ -32,8 +30,10 @@ const ResetPassword = () => {
 			),
 		}),
 		onSubmit: (values) => {
-			dispatch(resetPassword(resetLink, values.password));
-		    history.push('/');
+			 dispatch(resetPassword(resetLink, values.password));
+			alert('password changed')
+				history.push('/')
+
 		},
 	});
 

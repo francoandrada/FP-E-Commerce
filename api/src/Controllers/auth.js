@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: '.env' });
 var nodemailer = require('nodemailer');
 
-
-
 exports.authUser = async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -21,7 +19,7 @@ exports.authUser = async (req, res) => {
 			},
 		});
 		if (!user) {
-			res.status(401).send({msg:'The user does not exist'});
+			res.status(401).send({ msg: 'The user does not exist' });
 		}
 
 		if (bcrypt.compareSync(password, user.password)) {
@@ -37,7 +35,7 @@ exports.authUser = async (req, res) => {
 			);
 			res.json({ token });
 		} else {
-			res.status(401).send({msg: 'The password is incorrect'});
+			res.status(401).send({ msg: 'The password is incorrect' });
 			return next();
 		}
 	} catch (error) {
@@ -49,18 +47,16 @@ exports.userAuth = async (req, res, next) => {
 	res.json({ user: req.user });
 };
 
-
 ///FORGOT PASWORD
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
-console.log('imprimiendo req.body',email)
 	let user = await User.findOne({
 		where: {
 			email: email,
 		},
 	});
 	if (!user) {
-		res.status(400).json('The user doesnt exist');
+		res.status(400).json({ msg:'The user doesnt exist'});
 	}
 	let transporter = nodemailer.createTransport({
 		service: 'gmail',
@@ -78,14 +74,13 @@ console.log('imprimiendo req.body',email)
 		process.env.RESET_PASSWORD_KEY,
 		{ expiresIn: '6h' }
 	);
-	console.log('imprimiendo token', token);
 	var mailOptions = {
-		from: 'salomoneanapaulah3@gmail.com',
-		to: 'salomoneanapaulah3@gmail.com',
+		from: 'hardwarecommerce@gmail.com',
+		to: 'hardwarecommerce@gmail.com',
 		subject: 'Reset your password',
 		html: `
 		 <h2>Please click on given link to reset your password </h2>
-		 <p>${process.env.CLIENT_URL}/reset-password/${token}</p>
+		 <a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
 		 `,
 	};
 
@@ -95,11 +90,9 @@ console.log('imprimiendo req.body',email)
 		if (error) {
 			console.log(error);
 		}
-		res.send('Email sent: ' + info.response);
+		res.send({ msg:'Email sent: ' + info.response});
 	});
 };
-
-
 
 ///RESET PASWORD
 exports.resetPassword = async (req, res) => {
@@ -107,7 +100,7 @@ exports.resetPassword = async (req, res) => {
 
 	if (!resetLink || !newPass) {
 		return res.status(401).json({
-			error: 'Incorrect token or it is expired',
+			msg: 'Incorrect token or it is expired',
 		});
 	}
 	let jwtPayload;
@@ -117,7 +110,7 @@ exports.resetPassword = async (req, res) => {
 		user = await User.findOne({ where: { resetLink } });
 	} catch (error) {
 		console.log(error);
-		return res.status(401).json({ error: 'Something went wrong' });
+		return res.status(401).json({ msg: 'Something went wrong' });
 	}
 
 	const salt = await bcrypt.genSalt(10);
@@ -126,5 +119,5 @@ exports.resetPassword = async (req, res) => {
 	user.password = pass;
 	user.save();
 
-	res.send('pasword change');
+	res.send({ msg:'pasword change'});
 };

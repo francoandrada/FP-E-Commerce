@@ -21,21 +21,21 @@ export function getProducts() {
 export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-			console.log('desde el action try')
 
 			const res = await axios.post('http://localhost:3001/auth', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
-				payload: res.dato.token,
+				payload: res.data.token,
 			});
+
 		} catch (error) {
-			
-			console.log('desde el action catch', error.response.data)
+			console.log('error', error.response.data.msg)
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.errors[0].msg
+				payload: error.response.data.msg
 			});
 		}
+	
 	};
 }
 
@@ -62,13 +62,14 @@ export function authUser(data) {
 					type: AUTH_USER,
 					payload: res.data,
 				});
-				console.log('desde action imprimiendo usuario', res.data);
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
+
+
 
 export function logOut(data) {
 	return async (dispatch) => {
@@ -77,6 +78,8 @@ export function logOut(data) {
 		});
 	};
 }
+
+
 
 export function forgotPassword(email) {
 	return async (dispatch) => {
@@ -88,7 +91,11 @@ export function forgotPassword(email) {
 				payload: email,
 			});
 		} catch (error) {
-			console.log(error);
+			console.log('error', error.response.data.msg)
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg
+			});
 		}
 	};
 }
