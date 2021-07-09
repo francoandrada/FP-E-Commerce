@@ -60,8 +60,9 @@ const productsDb = async function setProductsToDb() {
 
 const postNewProduct = async function postNewProduct(req, res) {
 	try {
-		const { name, price, description, weight, Image, stock, brand, category } =
-			req.body;
+
+		const { name, price, description, weight, image, stock, brand, category } = req.body;
+
 
 		const brands = await Brand.findAll({
 			attributes: ['id', 'name', 'image'],
@@ -73,7 +74,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 				price,
 				description,
 				weight,
-				Image,
+				image,
 				stock,
 			},
 		});

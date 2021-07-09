@@ -3,33 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import style from './LogIn.module.css';
-import { logIn } from '../../Redux/actions';
+import { logIn,loginGmail } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 /* global google */
 import jwt_decode from 'jwt-decode';
 
 const LogIn = () => {
+
 	///////// Login vía Google
 	const googleApiKey =
 		'850649775650-vbs3e60jk6hkjba2l896eotkb4a3d16h.apps.googleusercontent.com';
 	// Simulo con react; luego debería estar en el estado de redux esta data.
 	// Sirve para saber que mostrar en función a si está o no logueado.
-	// const [isSignedIn, setIsSignedIn] = useState(false);
-	const [userInfo, setUserInfo] = useState(null);
+	const [isSignedIn, setIsSignedIn] = useState(false);
+	const [userInfo, setUserInfo] = useState({});
 
 	const onOneTapSignedIn = (response) => {
 		const decodedToken = jwt_decode(response.credential);
-		setUserInfo(decodedToken.email);
+		console.log(decodedToken)
+		setUserInfo({
+			email: decodedToken.email,
+			password: decodedToken.sub,
+			verified: decodedToken.email_verified
+		});
 	};
 
-	const gmailValidation = () => {
-		if (userInfo) {
-			dispatch({ type: 'AUTH_USER', payload: userInfo });
-		}
-	};
+	useEffect(()=>{if(isSignedIn){dispatch(loginGmail(userInfo))}},
+	 [isSignedIn]);
+	useEffect(() =>{if(userInfo.verified){ setIsSignedIn(true)}}, [userInfo]);
 
-	useEffect(() => gmailValidation(), [userInfo]);
 
 	const initializeGSI = () => {
 		google.accounts.id.initialize({
@@ -54,10 +57,12 @@ const LogIn = () => {
 	};
 
 	useEffect(() => {
-		const el = document.createElement('script');
-		el.setAttribute('src', 'https://accounts.google.com/gsi/client');
-		el.onload = () => initializeGSI();
-		document.querySelector('body').appendChild(el);
+		if(!token){
+			const el = document.createElement('script');
+			el.setAttribute('src', 'https://accounts.google.com/gsi/client');
+			el.onload = () => initializeGSI();
+			document.querySelector('body').appendChild(el);
+		}
 	}, []);
 
 	///////////////
@@ -65,7 +70,12 @@ const LogIn = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const authenticated = useSelector((state) => state.authenticated);
+	const authenticated = useSelector((state) => state.user.authenticated);
+	const token = useSelector((state) => state.user.token);
+
+
+	const setError = useSelector((state) => state.user.setError);
+
 
 	useEffect(() => {
 		if (authenticated) {
@@ -79,19 +89,19 @@ const LogIn = () => {
 			password: '',
 		},
 		validationSchema: Yup.object({
-			email: Yup.string().email('Invalid email address').required('Required'),
-			password: Yup.string().required('Required'),
+			email: Yup.string().email('Invalid email address').required('Enter an email'),
+			password: Yup.string().required('Enter a password').min(6)
 		}),
 		onSubmit: (values) => {
+			console.log(values)
 			dispatch(logIn(values));
-			//alert(JSON.stringify(values, null, 2));
-			console.log(values);
 		},
 	});
 
 	return (
 		<>
 			<div className={style.loginContainer}>
+		<p>{setError}</p>
 				<form className={style.formContainer} onSubmit={formik.handleSubmit}>
 					<label htmlFor='email'>Email Address</label>
 					<input
@@ -129,3 +139,4 @@ const LogIn = () => {
 };
 
 export default LogIn;
+

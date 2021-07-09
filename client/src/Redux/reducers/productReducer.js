@@ -3,8 +3,8 @@ import { GET_PRODUCTS, PRODUCT_DETAIL } from "../actionsName";
 const initialState = {
     allProducts: [],
     detailProducts: {},
-
 }
+
 function productReducer(state = initialState, action) {
     switch (action.type) {
         case GET_PRODUCTS:
