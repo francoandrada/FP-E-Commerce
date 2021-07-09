@@ -1,4 +1,16 @@
-import { AUTH_USER, ERROR_LOGIN, GET_PRODUCTS, LOG_OUT, PRODUCT_DETAIL, SUCCESS_LOGIN } from '../actionsName';
+
+import {
+	AUTH_USER,
+	ERROR_LOGIN,
+	GET_PRODUCTS,
+	LOG_OUT,
+  PRODUCT_DETAIL,
+	SUCCESS_LOGIN,
+	SUGGESTIONS,
+	FETCH_PENDING,
+	FETCH_ERROR,
+} from '../actionsName';
+
 
 const initialState = {
 	token: localStorage.getItem('token'),
@@ -6,7 +18,11 @@ const initialState = {
 	authenticated: false,
 	user: undefined,
 	products: [],
-	productDetail: {}
+	productDetail: {},
+	error: null,
+	pending: false,
+	suggestions: undefined,
+
 };
 
 function userReducer(state = initialState, action) {
@@ -19,6 +35,7 @@ function userReducer(state = initialState, action) {
 		case GET_PRODUCTS:
 			return {
 				...state,
+
 				products: action.payload
 			}
 		case PRODUCT_DETAIL:
@@ -46,6 +63,21 @@ function userReducer(state = initialState, action) {
 				user: null,
 				token: null,
 				authenticated: null,
+			};
+		case FETCH_ERROR:
+			return {
+				...state,
+				error: action.error,
+			};
+		case FETCH_PENDING:
+			return {
+				...state,
+				pending: true,
+			};
+		case SUGGESTIONS:
+			return {
+				...state,
+				suggestions: action.payload,
 			};
 		default: {
 			return state;
