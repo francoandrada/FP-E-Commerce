@@ -6,14 +6,13 @@ import {
 	GET_PRODUCTS,
 	FORGOT_PASSWORD,
 	RESET_PASSWORD,
-  PRODUCT_DETAIL,
+	PRODUCT_DETAIL,
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
 } from './actionsName';
 
 import axios from 'axios';
-
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -29,11 +28,11 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions(url) {
+export function getSuggestions() {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
-			const res = await axios.get(url);
+			const res = await axios.get('http://localhost:3001/products/');
 			dispatch(fetchSuggestions(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
@@ -51,10 +50,12 @@ export function getProducts() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/allproducts/' + id).then(response => {
-			dispatch({ type: PRODUCT_DETAIL, payload: response.data })
-		})
-	}
+		axios
+			.get('http://localhost:3001/products/allproducts/' + id)
+			.then((response) => {
+				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
+			});
+	};
 }
 export function logIn(data) {
 	return async (dispatch) => {
