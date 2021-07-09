@@ -6,9 +6,39 @@ import {
 	GET_PRODUCTS,
 	FORGOT_PASSWORD,
 	RESET_PASSWORD,
+	PRODUCT_DETAIL,
+	SUGGESTIONS,
+	FETCH_PENDING,
+	FETCH_ERROR,
 } from './actionsName';
 
 import axios from 'axios';
+
+export const fetchPending = () => ({
+	type: FETCH_PENDING,
+});
+
+export const fetchError = (error) => ({
+	type: FETCH_ERROR,
+	error,
+});
+
+export const fetchSuggestions = (payload) => ({
+	type: SUGGESTIONS,
+	payload,
+});
+
+export function getSuggestions() {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get('http://localhost:3001/products/');
+			dispatch(fetchSuggestions(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
 
 export function getProducts() {
 	return async (dispatch) => {
@@ -18,24 +48,31 @@ export function getProducts() {
 	};
 }
 
+export function getProductById(id) {
+	return async (dispatch) => {
+		axios
+			.get('http://localhost:3001/products/allproducts/' + id)
+			.then((response) => {
+				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
+			});
+	};
+}
+
 export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-
 			const res = await axios.post('http://localhost:3001/auth', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
 			});
-
 		} catch (error) {
-			console.log('error', error.response.data.msg)
+			console.log('error', error.response.data.msg);
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.msg
+				payload: error.response.data.msg,
 			});
 		}
-	
 	};
 }
 
@@ -69,8 +106,6 @@ export function authUser(data) {
 	};
 }
 
-
-
 export function logOut(data) {
 	return async (dispatch) => {
 		dispatch({
@@ -78,8 +113,6 @@ export function logOut(data) {
 		});
 	};
 }
-
-
 
 export function forgotPassword(email) {
 	return async (dispatch) => {
@@ -91,10 +124,11 @@ export function forgotPassword(email) {
 				payload: email,
 			});
 		} catch (error) {
-			console.log('error', error.response.data.msg)
+			console.log('error', error.response.data.msg);
+
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.msg
+				payload: error.response.data.msg,
 			});
 		}
 	};

@@ -11,40 +11,36 @@ module.exports = (sequelize) => {
 		},
 		name: {
 			type: STRING,
-			allowNull: false,
 		},
 		surname: {
 			type: STRING,
-			allowNull: false,
 		},
 		email: {
 			type: STRING,
+<<<<<<< HEAD
 			allowNull: false,
 			unique: true
+=======
+>>>>>>> main
 		},
 		password: {
 			type: STRING,
-			allowNull: false,
 		},
 		address: {
 			type: STRING,
-			allowNull: false,
 		},
 		addressNumber: {
 			type: INTEGER,
-			allowNull: false,
 		},
 		postalCode: {
 			type: INTEGER,
-			allowNull: false,
 		},
 		phone: {
 			type: INTEGER,
-			allowNull: true,
 		},
 		resetLink: {
 			type: STRING,
-			default: ''
-		}
+			default: '',
+		},
 	});
 };
