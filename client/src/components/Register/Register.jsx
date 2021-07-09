@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import Swal from 'sweetalert2';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
@@ -22,7 +22,12 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (User.name === "" || User.surname === "" || User.email === "" || User.password === "" || User.address === '' || User.addressNumber === '' || User.postalCode === '' || User.phone === '') {
-            return alert("You must complete all the fields")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You must complete all the fields'
+              })
+              
         } else {
             await axios.post('http://localhost:3001/users', {
                 name: User.name,
@@ -34,9 +39,16 @@ function Register() {
                 postalCode: User.postalCode,
                 phone: User.phone,
             })
-        }
+        
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'The user was succesfully created',
+            showConfirmButton: false,
+            timer: 1500
+          })
         history.push('/')
-
+        }
     }
     return (
         <div>

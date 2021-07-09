@@ -6,6 +6,7 @@ import style from './LogIn.module.css';
 import { logIn,loginGmail } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
 /* global google */
 import jwt_decode from 'jwt-decode';
 
@@ -89,7 +90,6 @@ const LogIn = () => {
 			password: Yup.string().required('Enter a password').min(6)
 		}),
 		onSubmit: (values) => {
-			console.log(values)
 			dispatch(logIn(values));
 		},
 	});
