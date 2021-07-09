@@ -1,3 +1,5 @@
+// TEST COMMENT
+
 const jsonProducts = [
 	{
 		name: 'Smartband Samsung Fit Silver Acelerom Cardio',
