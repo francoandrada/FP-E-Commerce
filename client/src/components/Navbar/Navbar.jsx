@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSuggestions, getProducts } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import SearchBar from '../Searchbar/Searchbar.jsx';
 import './Navbar.css';
@@ -11,8 +13,22 @@ for (let i = 0; i < 10; i++) {
 }
 
 const Navbar = () => {
+	const { suggestions, products } = useSelector((state) => state);
 	const [showLinks, setShowLinks] = useState(false);
 	const [options, setOptions] = useState([]);
+	const dispatch = useDispatch();
+
+	let sug = [];
+	useEffect(async () => {
+		const res = await fetch('http://localhost:3001/products');
+		console.log('response', res);
+		sug = await res.json();
+	}, [fetch]);
+
+	console.log('suggestions', suggestions);
+	console.log('products', products);
+	console.log('suggentions fetch', sug);
+
 	const onInputChange = (event) => {
 		if (event.target.value.trim().length)
 			setOptions(
