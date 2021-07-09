@@ -57,10 +57,12 @@ const LogIn = () => {
 	};
 
 	useEffect(() => {
-		const el = document.createElement('script');
-		el.setAttribute('src', 'https://accounts.google.com/gsi/client');
-		el.onload = () => initializeGSI();
-		document.querySelector('body').appendChild(el);
+		if(!token){
+			const el = document.createElement('script');
+			el.setAttribute('src', 'https://accounts.google.com/gsi/client');
+			el.onload = () => initializeGSI();
+			document.querySelector('body').appendChild(el);
+		}
 	}, []);
 
 	///////////////
@@ -69,6 +71,8 @@ const LogIn = () => {
 	const history = useHistory();
 
 	const authenticated = useSelector((state) => state.user.authenticated);
+	const token = useSelector((state) => state.user.token);
+
 
 	const setError = useSelector((state) => state.user.setError);
 
