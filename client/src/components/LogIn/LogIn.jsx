@@ -72,7 +72,6 @@ const LogIn = () => {
 
 	const setError = useSelector((state) => state.user.setError);
 
-n
 
 	useEffect(() => {
 		if (authenticated) {
