@@ -9,12 +9,12 @@ function Products() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProducts())
-    }, [])
+    }, [dispatch])
 
     const allCategories = useSelector(state=> state.categories.allCategories)
 
 
-    }, [dispatch])
+
 
     return (
         <div className={styles.cardsContainer}>
