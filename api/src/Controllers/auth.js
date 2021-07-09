@@ -127,3 +127,36 @@ exports.resetPassword = async (req, res) => {
 
 	res.send('pasword change');
 };
+
+exports.authUserGmail = async (req, res) => {
+	try {
+		console.log('llegó al controller de la API');
+		console.log(req.body);
+		const { email, password } = req.body;
+
+		let user = await User.findOrCreate({
+			where: {
+				email: email,
+			},
+			defaults: {
+				email: email,
+				password: password
+			},
+		});
+
+		const token = jwt.sign(
+				{
+					id: user.userId,
+					email: user.email,
+				},
+				process.env.SECRET,
+				{
+					expiresIn: '8h',
+				}
+			);
+			res.json({ token });
+
+	} catch (error) {
+		console.log(error);
+	}
+};
