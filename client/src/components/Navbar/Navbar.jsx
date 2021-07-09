@@ -4,13 +4,6 @@ import axios from 'axios';
 import SearchBar from '../Searchbar/Searchbar.jsx';
 import './Navbar.css';
 
-const defaultOptions = [];
-for (let i = 0; i < 10; i++) {
-	defaultOptions.push(`hardware ${i}`);
-	defaultOptions.push(`keyboard ${i}`);
-	defaultOptions.push(`RAM ${i}`);
-}
-
 const Navbar = () => {
 	const [showLinks, setShowLinks] = useState(false);
 	const [options, setOptions] = useState([]);
@@ -19,16 +12,20 @@ const Navbar = () => {
 	useEffect(() => {
 		axios
 			.get('http://localhost:3001/products')
-			.then((res) => setSuggestions(res.data.product))
+			.then((res) => {
+				setSuggestions(res.data);
+			})
 			.catch((error) => console.log(error));
 	}, []);
 
-	const productsSuggestions = suggestions.map(({ name }) => name.toLowerCase());
+	const productsSuggestions = suggestions?.map(({ name }) =>
+		name.toLowerCase()
+	);
 
 	const onInputChange = (event) => {
-		if (event.target.value.trim().length)
+		if (event.target.value.trim().length && productsSuggestions)
 			setOptions(
-				productsSuggestions.filter((suggestion) =>
+				productsSuggestions?.filter((suggestion) =>
 					suggestion.includes(event.target.value)
 				)
 			);
@@ -40,6 +37,7 @@ const Navbar = () => {
 				<div className='links' id={showLinks ? 'hidden' : ''}>
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
+					<Link to='/catalog'>Catalog</Link>
 				</div>
 				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>
