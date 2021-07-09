@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSuggestions, getProducts } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import SearchBar from '../Searchbar/Searchbar.jsx';
 import './Navbar.css';
 
@@ -13,26 +12,25 @@ for (let i = 0; i < 10; i++) {
 }
 
 const Navbar = () => {
-	const { suggestions, products } = useSelector((state) => state);
 	const [showLinks, setShowLinks] = useState(false);
 	const [options, setOptions] = useState([]);
-	const dispatch = useDispatch();
+	const [suggestions, setSuggestions] = useState([]);
 
-	let sug = [];
-	useEffect(async () => {
-		const res = await fetch('http://localhost:3001/products');
-		console.log('response', res);
-		sug = await res.json();
-	}, [fetch]);
+	useEffect(() => {
+		axios
+			.get('http://localhost:3001/products')
+			.then((res) => setSuggestions(res.data))
+			.catch((error) => console.log(error));
+	}, []);
 
-	console.log('suggestions', suggestions);
-	console.log('products', products);
-	console.log('suggentions fetch', sug);
+	const productsSuggestions = suggestions.map(({ name }) => name.toLowerCase());
 
 	const onInputChange = (event) => {
 		if (event.target.value.trim().length)
 			setOptions(
-				defaultOptions.filter((option) => option.includes(event.target.value))
+				productsSuggestions.filter((suggestion) =>
+					suggestion.includes(event.target.value)
+				)
 			);
 	};
 

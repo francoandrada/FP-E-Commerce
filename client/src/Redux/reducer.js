@@ -11,7 +11,4 @@ export default combineReducers({
     category: categoryReducer
 
 })
-// const rootReducer = combineReducers({user: userReducer, product: productReducer})
 
-
-// export default rootReducer;
