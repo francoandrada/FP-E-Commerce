@@ -1,34 +1,57 @@
 const { Sequelize } = require('sequelize');
 const { Product, Brand, Category } = require('../db');
-const { jsonProducts } = require('../../jsonProducts')
-
+const { jsonProducts } = require('../../jsonProducts');
 
 // ----------------  Products to Db -----------------
 const productsDb = async function setProductsToDb() {
-	jsonProducts.forEach(
-		({ name, priceNormal, priceSpecial, img, description, weight }) => {
-			Product.create(
-				{
-					name: name,
-					price: priceNormal,
-					priceSpecial: priceSpecial,
-					image: img,
-					description: description,
-					weight: weight,
-					stock: 1,
-				},
-				{
-					fields: [
-						'name',
-						'price',
-						'priceSpecial',
-						'image',
-						'description',
-						'weight',
-						'stock',
-					],
-				}
-			);
+	var aux = jsonProducts.forEach(
+		({
+			name,
+			priceNormal,
+			priceSpecial,
+			img,
+			description,
+			weight,
+			brand,
+			category,
+		}) => {
+			(async function creatProd() {
+				var pr = await Product.create(
+					{
+						name: name,
+						price: priceNormal,
+						priceSpecial: priceSpecial,
+						image: img,
+						description: description,
+						weight: weight,
+						stock: 1,
+					},
+					{
+						fields: [
+							'name',
+							'price',
+							'priceSpecial',
+							'image',
+							'description',
+							'weight',
+							'stock',
+						],
+					}
+				).then((product) => {
+					(async function createBrandProd() {
+						var brandDb = await Brand.findOrCreate({
+							where: { name: brand },
+						});
+						await product.setBrand(brandDb[0]);
+					})();
+					(async function createCategoryProd() {
+						var categoryDb = await Category.findOrCreate({
+							where: { name: category },
+						});
+						await product.addCategories(categoryDb[0]);
+					})();
+				});
+			})();
 		}
 	);
 };
@@ -37,7 +60,9 @@ const productsDb = async function setProductsToDb() {
 
 const postNewProduct = async function postNewProduct(req, res) {
 	try {
+
 		const { name, price, description, weight, image, stock, brand, category } = req.body;
+
 
 		const brands = await Brand.findAll({
 			attributes: ['id', 'name', 'image'],
@@ -50,7 +75,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 				description,
 				weight,
 				image,
-				stock
+				stock,
 			},
 		});
 		if (newProduct) {
@@ -59,8 +84,8 @@ const postNewProduct = async function postNewProduct(req, res) {
 					var response = await newProduct[0].setBrand(brands[i]);
 				}
 			}
-			const productComplete= await response.addCategories(category)
-			res.json(productComplete)
+			const productComplete = await response.addCategories(category);
+			res.json(productComplete);
 		}
 		// return res.status(200).json({ message: 'product created succesfully' });
 	} catch (error) {
@@ -71,7 +96,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 // ----------------  FIND ALL PRODUCTS -----------------
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
-		const allProduct = await Product.findAll({include: Brand});
+		const allProduct = await Product.findAll({ include: Brand });
 		res.status(200).json(allProduct);
 	} catch (error) {
 		next(error);
@@ -82,7 +107,7 @@ const getIdProduct = async function getIdProduct(req, res, next) {
 	try {
 		const id = parseInt(req.params.id);
 		const IdProduct = await Product.findOne({
-			include: {model: Brand },
+			include: { model: Brand },
 			where: {
 				id: id,
 			},
@@ -174,5 +199,4 @@ module.exports = {
 
 	// getCategoryProduct,
 	productsDb,
-
 };
