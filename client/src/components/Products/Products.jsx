@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getProducts } from '../../Redux/actions'
+import { getProducts, getCategories } from '../../Redux/actions'
 
 function Products() {
     const allProducts = useSelector(state => state.product.allProducts)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProducts())
+        dispatch(getCategories())
     }, [])
 
-    const allCategories = useSelector(state=> state.categories.allCategories)
+    const allCategories = useSelector(state=> state.category.allCategories)
 
     return(
         <div>
