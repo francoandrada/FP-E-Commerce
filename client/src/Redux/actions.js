@@ -1,15 +1,50 @@
-
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
-
+import {
+	SUCCESS_LOGIN,
+	ERROR_LOGIN,
+	AUTH_USER,
+	LOG_OUT,
+	GET_PRODUCTS,
+	FORGOT_PASSWORD,
+	RESET_PASSWORD,
+	SUGGESTIONS,
+	FETCH_PENDING,
+	FETCH_ERROR,
+} from './actionsName';
 
 import axios from 'axios';
 
+export const fetchPending = () => ({
+	type: FETCH_PENDING,
+});
+
+export const fetchError = (error) => ({
+	type: FETCH_ERROR,
+	error,
+});
+
+export const fetchSuggestions = (payload) => ({
+	type: SUGGESTIONS,
+	payload,
+});
+
+export function getSuggestions(url) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(url);
+			dispatch(fetchSuggestions(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
 export function getProducts() {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/').then(response => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data })
-		})
-	}
+		axios.get('http://localhost:3001/products/').then((response) => {
+			dispatch({ type: GET_PRODUCTS, payload: response.data });
+		});
+	};
 }
 export function logIn(data) {
 	return async (dispatch) => {
@@ -69,38 +104,37 @@ export function logOut(data) {
 	};
 }
 
-
 export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/forgot-password', {email});
+			await axios.put('http://localhost:3001/auth/forgot-password', { email });
 
 			dispatch({
 				type: FORGOT_PASSWORD,
-				payload: email
+				payload: email,
 			});
-
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
 
-
 export function resetPassword(resetLink, newPass) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/reset-password', {resetLink, newPass});
+			await axios.put('http://localhost:3001/auth/reset-password', {
+				resetLink,
+				newPass,
+			});
 			dispatch({
 				type: RESET_PASSWORD,
 				payload: {
-					resetLink, 
-					newPass
-				}
+					resetLink,
+					newPass,
+				},
 			});
-
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
