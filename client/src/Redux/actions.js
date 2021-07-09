@@ -6,12 +6,14 @@ import {
 	GET_PRODUCTS,
 	FORGOT_PASSWORD,
 	RESET_PASSWORD,
+  PRODUCT_DETAIL,
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
 } from './actionsName';
 
 import axios from 'axios';
+
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -45,6 +47,14 @@ export function getProducts() {
 			dispatch({ type: GET_PRODUCTS, payload: response.data });
 		});
 	};
+}
+
+export function getProductById(id) {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products/allproducts/' + id).then(response => {
+			dispatch({ type: PRODUCT_DETAIL, payload: response.data })
+		})
+	}
 }
 export function logIn(data) {
 	return async (dispatch) => {
@@ -130,6 +140,7 @@ export function resetPassword(resetLink, newPass) {
 				type: RESET_PASSWORD,
 				payload: {
 					resetLink,
+
 					newPass,
 				},
 			});
