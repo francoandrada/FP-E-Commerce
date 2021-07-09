@@ -9,6 +9,7 @@ import ResetPassword from './components/LogIn/ResetPassword';
 import Catalog from './components/Catalog/Catalog';
 
 import './App.css';
+import DetailProduct from './components/ProductDetail/ProductDetail'
 function App() {
 	return (
 		<div className='App'>
@@ -24,6 +25,7 @@ function App() {
 					component={ResetPassword}
 				/>
 				<Route path='/catalog' exact component={Catalog} />
+				<Route path='/catalog/:id' exact component={DetailProduct} />
 			</Switch>
 		</div>
 	);
