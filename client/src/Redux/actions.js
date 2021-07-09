@@ -1,6 +1,6 @@
 import {
 	SUCCESS_LOGIN,
-	ERROR_LOGIN,
+	ERROR,
 	AUTH_USER,
 	LOG_OUT,
 	GET_PRODUCTS,
@@ -57,19 +57,19 @@ export function getProductById(id) {
 			});
 	};
 }
-export function logIn(data) {
+
+export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-			const res = await axios.post('http://localhost:3001/auth', data);
-			console.log('desde el action', res.data.token);
-
+			const res = await axios.post('http://localhost:3001/auth', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
 			});
 		} catch (error) {
+			console.log('error', error.response.data.msg);
 			dispatch({
-				type: ERROR_LOGIN,
+				type: ERROR,
 				payload: error.response.data.msg,
 			});
 		}
@@ -99,7 +99,6 @@ export function authUser(data) {
 					type: AUTH_USER,
 					payload: res.data,
 				});
-				console.log('desde action imprimiendo usuario', res.data);
 			}
 		} catch (error) {
 			console.log(error);
@@ -125,7 +124,12 @@ export function forgotPassword(email) {
 				payload: email,
 			});
 		} catch (error) {
-			console.log(error);
+			console.log('error', error.response.data.msg);
+
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
 		}
 	};
 }
@@ -141,7 +145,6 @@ export function resetPassword(resetLink, newPass) {
 				type: RESET_PASSWORD,
 				payload: {
 					resetLink,
-
 					newPass,
 				},
 			});

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
 const LogIn = () => {
+
 	///////// Login vía Google
 	const googleApiKey =
 		'850649775650-vbs3e60jk6hkjba2l896eotkb4a3d16h.apps.googleusercontent.com';
@@ -69,6 +70,9 @@ const LogIn = () => {
 
 	const authenticated = useSelector((state) => state.user.authenticated);
 
+	const setError = useSelector((state) => state.user.setError);
+
+
 	useEffect(() => {
 		if (authenticated) {
 			history.push('/');
@@ -81,19 +85,19 @@ const LogIn = () => {
 			password: '',
 		},
 		validationSchema: Yup.object({
-			email: Yup.string().email('Invalid email address').required('Required'),
-			password: Yup.string().required('Required'),
+			email: Yup.string().email('Invalid email address').required('Enter an email'),
+			password: Yup.string().required('Enter a password').min(6)
 		}),
 		onSubmit: (values) => {
+			console.log(values)
 			dispatch(logIn(values));
-			//alert(JSON.stringify(values, null, 2));
-			console.log(values);
 		},
 	});
 
 	return (
 		<>
 			<div className={style.loginContainer}>
+		<p>{setError}</p>
 				<form className={style.formContainer} onSubmit={formik.handleSubmit}>
 					<label htmlFor='email'>Email Address</label>
 					<input
@@ -131,3 +135,4 @@ const LogIn = () => {
 };
 
 export default LogIn;
+

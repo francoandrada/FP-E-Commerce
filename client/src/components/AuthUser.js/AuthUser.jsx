@@ -1,6 +1,6 @@
 import React, {useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authUser, logIn, logOut } from '../../Redux/actions';
+import { authUser, logOut } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 const AuthUser = () => {
@@ -8,7 +8,7 @@ const AuthUser = () => {
 
 	const history = useHistory();
 
-	const user = useSelector((state) => state.user);
+	const user = useSelector((state) => state.user.user);
 
 	useEffect(() => {
 		dispatch(authUser());
@@ -18,21 +18,14 @@ const AuthUser = () => {
 		<div>
 			{user ? (
 				<div>
-					<p>Hola</p>
-
+					<p>Hola usuario cleinte</p>
+					<p>MERCADO PAGO</p>
 					<button type='submit' onClick={() => dispatch(logOut())}>
 						Log Out
 					</button>
 				</div>
 			) : (
-				<>
-					<Link to='/logIn'>
-						<button>LogIn</button>
-					</Link>
-					<Link to='/register'>
-						<button>Register</button>
-					</Link>
-				</>
+				<p>Hola usuario guest</p>
 			)}
 		</div>
 	);
