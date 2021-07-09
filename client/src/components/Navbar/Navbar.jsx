@@ -24,7 +24,6 @@ const Navbar = () => {
 		<div className='navbar'>
 			<div className='leftSide'>
 				<div className='links' id={showLinks ? 'hidden' : ''}>
-					<Link to='/'>AuthUser</Link>
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 				</div>

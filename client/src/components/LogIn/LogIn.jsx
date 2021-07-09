@@ -10,6 +10,10 @@ import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
 const LogIn = () => {
+	const setError = useSelector((state) => state.setError);
+	console.log('desde el componente', setError)
+
+	
 	///////// Login vía Google
 	const googleApiKey =
 		'850649775650-vbs3e60jk6hkjba2l896eotkb4a3d16h.apps.googleusercontent.com';
@@ -67,6 +71,10 @@ const LogIn = () => {
 
 	const authenticated = useSelector((state) => state.authenticated);
 
+
+
+
+
 	useEffect(() => {
 		if (authenticated) {
 			history.push('/');
@@ -79,13 +87,12 @@ const LogIn = () => {
 			password: '',
 		},
 		validationSchema: Yup.object({
-			email: Yup.string().email('Invalid email address').required('Required'),
-			password: Yup.string().required('Required'),
+			email: Yup.string().email('Invalid email address').required('Enter an email'),
+			password: Yup.string().required('Enter a password')
+			// .matches("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", 'The password must have minimum eight characters, at least one letter and one number')
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));
-			//alert(JSON.stringify(values, null, 2));
-			console.log(values);
 		},
 	});
 

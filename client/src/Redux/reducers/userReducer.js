@@ -1,20 +1,29 @@
-import { AUTH_USER, ERROR_LOGIN, GET_PRODUCTS, LOG_OUT, SUCCESS_LOGIN } from '../actionsName';
+import { AUTH_USER, ERROR, GET_PRODUCTS, LOG_OUT, SUCCESS_LOGIN } from '../actionsName';
 
 const initialState = {
 	token: localStorage.getItem('token'),
-	message: undefined,
+	setError: null,
 	authenticated: false,
 	user: undefined,
 	products: []
 };
 
 function userReducer(state = initialState, action) {
+
+
 	switch (action.type) {
-		case ERROR_LOGIN:
+
+		case ERROR:
+			console.log('desde reducer', action.payload)
 			return {
 				...state,
-				message: action.payload,
+				setError: action.payload,
 			};
+			case ERROR:
+				return {
+					...state,
+					mensaje: action.payload
+				}  
 		case GET_PRODUCTS:
 			return {
 				...state,

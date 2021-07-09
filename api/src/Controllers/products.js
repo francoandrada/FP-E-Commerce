@@ -172,7 +172,7 @@ module.exports = {
 	getBrandProduct,
 	getIdProduct,
 
-	getCategoryProduct,
+	// getCategoryProduct,
 	productsDb,
 
 };

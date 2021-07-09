@@ -5,12 +5,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: '.env' });
 var nodemailer = require('nodemailer');
 
+
+
 exports.authUser = async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
-
 	try {
 		const { email, password } = req.body;
 
@@ -20,7 +21,7 @@ exports.authUser = async (req, res) => {
 			},
 		});
 		if (!user) {
-			res.status(400).json('The user doesnt exist');
+			res.status(401).send({msg:'The user does not exist'});
 		}
 
 		if (bcrypt.compareSync(password, user.password)) {
@@ -36,7 +37,7 @@ exports.authUser = async (req, res) => {
 			);
 			res.json({ token });
 		} else {
-			res.status(401).json('The password is incorrect');
+			res.status(401).send({msg: 'The password is incorrect'});
 			return next();
 		}
 	} catch (error) {

@@ -1,30 +1,39 @@
-
-import { SUCCESS_LOGIN, ERROR_LOGIN, AUTH_USER, LOG_OUT, GET_PRODUCTS, FORGOT_PASSWORD, RESET_PASSWORD } from './actionsName';
-
+import {
+	SUCCESS_LOGIN,
+	ERROR,
+	AUTH_USER,
+	LOG_OUT,
+	GET_PRODUCTS,
+	FORGOT_PASSWORD,
+	RESET_PASSWORD,
+} from './actionsName';
 
 import axios from 'axios';
 
 export function getProducts() {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/').then(response => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data })
-		})
-	}
+		axios.get('http://localhost:3001/products/').then((response) => {
+			dispatch({ type: GET_PRODUCTS, payload: response.data });
+		});
+	};
 }
-export function logIn(data) {
+
+export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-			const res = await axios.post('http://localhost:3001/auth', data);
-			console.log('desde el action', res.data.token);
+			console.log('desde el action try')
 
+			const res = await axios.post('http://localhost:3001/auth', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
-				payload: res.data.token,
+				payload: res.dato.token,
 			});
 		} catch (error) {
+			
+			console.log('desde el action catch', error.response.data)
 			dispatch({
-				type: ERROR_LOGIN,
-				payload: error.response.data.msg,
+				type: ERROR,
+				payload: error.response.data.errors[0].msg
 			});
 		}
 	};
@@ -69,38 +78,37 @@ export function logOut(data) {
 	};
 }
 
-
 export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/forgot-password', {email});
+			await axios.put('http://localhost:3001/auth/forgot-password', { email });
 
 			dispatch({
 				type: FORGOT_PASSWORD,
-				payload: email
+				payload: email,
 			});
-
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
 
-
 export function resetPassword(resetLink, newPass) {
 	return async (dispatch) => {
 		try {
-			 await axios.put('http://localhost:3001/auth/reset-password', {resetLink, newPass});
+			await axios.put('http://localhost:3001/auth/reset-password', {
+				resetLink,
+				newPass,
+			});
 			dispatch({
 				type: RESET_PASSWORD,
 				payload: {
-					resetLink, 
-					newPass
-				}
+					resetLink,
+					newPass,
+				},
 			});
-
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
