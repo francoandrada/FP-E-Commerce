@@ -7,12 +7,14 @@ import Navbar from './components/Navbar/Navbar';
 import ForgotPassword from './components/LogIn/ForgotPassword';
 import ResetPassword from './components/LogIn/ResetPassword';
 import Catalog from './components/Catalog/Catalog';
+import Home from './components/ContainerComponents/Home/Home';
 
 import './App.css';
 function App() {
 	return (
 		<div className='App'>
 			<Navbar />
+			<Route path='/home' exact component={Home} />
 			<Switch>
 				<Route path='/' exact component={AuthUser} />
 				<Route path='/LogIn' exact component={LogIn} />

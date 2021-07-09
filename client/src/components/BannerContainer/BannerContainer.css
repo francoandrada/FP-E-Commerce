@@ -1,0 +1,19 @@
+.BannerContainer {
+    background-color: rgba(255, 255, 255, 0.013);
+    margin-top: 50px;
+    padding: 3% 5% 3% 5%;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-image: url('../../images/BannerNegro.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Bannerinfo {
+    color: white;
+    text-align: left;
+    font-size: 40px;
+ 
+}
