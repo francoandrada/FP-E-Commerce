@@ -17,11 +17,8 @@ module.exports = (sequelize) => {
 		},
 		email: {
 			type: STRING,
-<<<<<<< HEAD
 			allowNull: false,
 			unique: true
-=======
->>>>>>> main
 		},
 		password: {
 			type: STRING,
