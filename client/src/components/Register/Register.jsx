@@ -44,22 +44,42 @@ function Register() {
         <div id={styles.regForm}>
             <form onSubmit={handleSubmit}>
             <div className="form-row">
-                <label className="form-group col-md-6" >Name</label>
+                <div className="form-group col-md-6">
+                <label>Name</label>
                 <input type="text" name="name" value={User.name} onChange={handleChange} className="form-control" id="inputEmail4"/>
-                <label className="form-group col-md-6">Surname</label>
-                <input type="text" name="surname" value={User.surname} onChange={handleChange} id="inputPassword4" />
+                </div>
+                <div className="form-group col-md-6">
+                <label>Surname</label>
+                <input type="text" name="surname" value={User.surname} onChange={handleChange} className="form-control" id="inputPassword4" />
+                </div>
+            </div>
+            <div className='form-group'>
                 <label>email</label>
-                <input type="text" name="email" value={User.email} onChange={handleChange} />
+                <input type="text" name="email" value={User.email} onChange={handleChange} className="form-control" id="inputPassword4" />
+            </div>
+            <div className='form-group'>
                 <label>password</label>
-                <input type="text" name="password" value={User.password} onChange={handleChange} />
+                <input type="text" name="password" value={User.password} onChange={handleChange} className="form-control" id="inputPassword4" />
+            </div>
+            <div>
+            <div className='form-group'>
                 <label>address</label>
-                <input type="text" name="address" value={User.address} onChange={handleChange} />
+                <input type="text" name="address" value={User.address} onChange={handleChange} className="form-control" id="inputPassword4" />
+            </div>
+            <div className='form-group'>
                 <label>addressNumber</label>
-                <input type="text" name="addressNumber" value={User.addressNumber} onChange={handleChange} />
+                <input type="text" name="addressNumber" value={User.addressNumber} onChange={handleChange} className="form-control" id="inputPassword4" />
+            </div>
+            <div className="form-row">
+                <div className="form-group col-md-6">
                 <label>postalCode</label>
-                <input type="text" name="postalCode" value={User.postalCode} onChange={handleChange} />
+                <input type="text" name="postalCode" value={User.postalCode} onChange={handleChange} className="form-control" id="inputEmail4"/>
+                </div>
+                <div className="form-group col-md-6">
                 <label>phone</label>
-                <input type="text" name="phone" value={User.phone} onChange={handleChange} />
+                <input type="text" name="phone" value={User.phone} onChange={handleChange} className="form-control" id="inputEmail4"/>
+                </div>
+            </div>
                 <button type="submit" className="btn btn-primary"> Register </button>
             </div>
             </form>
