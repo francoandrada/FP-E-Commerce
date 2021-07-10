@@ -1,4 +1,9 @@
-.div_celena{
+.divCelena{
     background-color: aliceblue;
-    color: white
+    color: black;
+    width: 100%;
+}
+
+.title{
+    width: 100%;
 }
