@@ -1,7 +1,7 @@
 import Products from "../Products/Products";
 import { useDispatch,useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getCategories } from '../../Redux/actions'
+import { getCategories, getBrands } from '../../Redux/actions'
 
 
 
@@ -12,6 +12,10 @@ function Catalog() {
 
     useEffect(() => {
         dispatch(getCategories())    
+    }, [] )
+
+    useEffect(() => {
+        dispatch(getBrands())    
     }, [] )
 
 

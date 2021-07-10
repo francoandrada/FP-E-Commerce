@@ -12,6 +12,7 @@ import {
 	FETCH_ERROR,
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
+	GET_BRANDS
 } from './actionsName';
 
 import axios from 'axios';
@@ -54,6 +55,14 @@ export function getCategories() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/categories/').then((response) => {
 			dispatch({ type: GET_CATEGORIES, payload: response.data });
+		});
+	};
+}
+
+export function getBrands() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/brands/').then((response) => {
+			dispatch({ type: GET_BRANDS, payload: response.data });
 		});
 	};
 }
