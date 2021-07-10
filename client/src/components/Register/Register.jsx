@@ -13,14 +13,15 @@ function Register() {
         email: '',
         password: '',
         address: '',
-        addressNumber: '',
+        addressNumber: undefined,
         postalCode: '',
         phone: ''
     })
     const handleChange = (event) => {
         setUser({ ...User, [event.target.name]: event.target.value })
+        console.log(User)
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (User.name === "" || User.surname === "" || User.email === "" || User.password === "" || User.address === '' || User.addressNumber === '' || User.postalCode === '' || User.phone === '') {
@@ -32,13 +33,12 @@ function Register() {
                 email: User.email,
                 password: User.password,
                 address: User.address,
-                addressNumber: User.addressNumber,
-                postalCode: User.postalCode,
-                phone: User.phone,
+                addressNumber: parseInt(User.addressNumber),
+                postalCode: parseInt(User.postalCode),
+                phone: parseInt(User.phone),
             })
         }
         history.push('/')
-
     }
     return (
         <div id={styles.regForm}>
@@ -55,11 +55,11 @@ function Register() {
             </div>
             <div className='form-group'>
                 <label>email</label>
-                <input type="text" name="email" value={User.email} onChange={handleChange} className="form-control" id="inputPassword4" />
+                <input type="email" name="email" value={User.email} onChange={handleChange} className="form-control" id="inputPassword4" />
             </div>
             <div className='form-group'>
                 <label>password</label>
-                <input type="text" name="password" value={User.password} onChange={handleChange} className="form-control" id="inputPassword4" />
+                <input type="password" name="password" value={User.password} onChange={handleChange} className="form-control" id="inputPassword4" />
             </div>
             <div>
             <div className='form-group'>
@@ -68,16 +68,16 @@ function Register() {
             </div>
             <div className='form-group'>
                 <label>addressNumber</label>
-                <input type="text" name="addressNumber" value={User.addressNumber} onChange={handleChange} className="form-control" id="inputPassword4" />
+                <input type="number" name="addressNumber" value={User.addressNumber} onChange={handleChange} className="form-control" id="inputPassword4" />
             </div>
             <div className="form-row">
                 <div className="form-group col-md-6">
                 <label>postalCode</label>
-                <input type="text" name="postalCode" value={User.postalCode} onChange={handleChange} className="form-control" id="inputEmail4"/>
+                <input type="number" name="postalCode" value={User.postalCode} onChange={handleChange} className="form-control" id="inputEmail4"/>
                 </div>
                 <div className="form-group col-md-6">
                 <label>phone</label>
-                <input type="text" name="phone" value={User.phone} onChange={handleChange} className="form-control" id="inputEmail4"/>
+                <input type="number" name="phone" value={User.phone} onChange={handleChange} className="form-control" id="inputEmail4"/>
                 </div>
             </div>
                 <button type="submit" className="btn btn-primary"> Register </button>
