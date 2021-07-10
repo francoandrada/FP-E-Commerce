@@ -1,9 +1,9 @@
 .card{
-  
+    background-color: rgb(197, 197, 197);
     width: min-content;
     margin: 2rem 2rem;
     border-radius: 8px;
-    box-shadow:10px 10px 30px gray ;
+    color:black
 }
 .cardsContainer{
     display: flex;

@@ -5,21 +5,23 @@ import { useHistory } from 'react-router-dom';
 import styles from './Register.module.css';
 
 function Register() {
-	const history = useHistory();
-	const [User, setUser] = useState({
-		name: '',
-		surname: '',
-		email: '',
-		password: '',
-		address: '',
-		addressNumber: '',
-		postalCode: '',
-		phone: '',
-	});
-	const handleChange = (event) => {
-		setUser({ ...User, [event.target.name]: event.target.value });
-	};
 
+    const history = useHistory();
+    const [User, setUser] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        address: '',
+        addressNumber: undefined,
+        postalCode: '',
+        phone: ''
+    })
+    const handleChange = (event) => {
+        setUser({ ...User, [event.target.name]: event.target.value })
+        console.log(User)
+    }
+    
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (
@@ -47,8 +49,10 @@ function Register() {
 		}
 		history.push('/');
 	};
-	return (
-		<div id={styles.regForm}>
+    
+
+    return (
+            <div id={styles.regForm}>
 			<form onSubmit={handleSubmit}>
 				<div className='form-row' id={styles.row}>
 					<div className='form-group col-md-5' id={styles.input}>
@@ -152,7 +156,6 @@ function Register() {
 				</div>
 			</form>
 			<div />
-		</div>
-	);
-}
+		</div> 
+    )}
 export default Register;

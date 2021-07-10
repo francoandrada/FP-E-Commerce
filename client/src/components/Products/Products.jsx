@@ -17,23 +17,21 @@ function Products() {
 
     return (
         <div className={styles.cardsContainer}>
-            {allProducts.length>0?
-                    allProducts.map(p => 
-                    <div className={styles.card}>
-                        <div className={styles.cardImage}> 
-                        <img className={styles.img} src={p.image} alt="product" />
+            {allProducts.length > 0 ?
+                allProducts.map(p =>
+                    <Link key={p.id} to={`/catalog/${p.id}`}>
+                        <div className={styles.card}>
+                            <div className={styles.cardImage}>
+                                <img className={styles.img} src={p.image} alt="product" />
+                            </div>
+                            <div className={styles.data}>
+                                <span>{p.name}</span>
+                                <span>${p.price}</span>
+                            </div>
                         </div>
-                        <div className={styles.data}> 
-                        <Link key={p.id} to={`/catalog/${p.id}`}>
-                            <span>{p.name}</span>
-                        </Link>
-                        <span>${p.price}</span>
-                        </div>
-                    </div>)
-                    :
-                    <div>
-
-                    </div>
+                    </Link>
+                )
+                : null
             }
         </div>
     )
