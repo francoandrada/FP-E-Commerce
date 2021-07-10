@@ -60,9 +60,8 @@ const productsDb = async function setProductsToDb() {
 
 const postNewProduct = async function postNewProduct(req, res) {
 	try {
-
-		const { name, price, description, weight, image, stock, brand, category } = req.body;
-
+		const { name, price, description, weight, image, stock, brand, category } =
+			req.body;
 
 		const brands = await Brand.findAll({
 			attributes: ['id', 'name', 'image'],
@@ -100,7 +99,7 @@ const getAllProducts = async function getAllProducts(req, res, next) {
 		const allCategories = await Category.findAll();
 		res.status(200).json({
 			product: allProduct,
-			category: allCategories
+			category: allCategories,
 		});
 	} catch (error) {
 		next(error);
@@ -193,10 +192,10 @@ const orderProducts = async function orderProducts(req, res, next) {
 	}
 };
 
-const getAllCategories= async function getAllCategories(req, res, next) {
+const getAllCategories = async function getAllCategories(req, res, next) {
 	try {
 		const allCategories = await Category.findAll();
-		console.log(allCategories)
+		console.log(allCategories);
 		res.status(200).json(allCategories);
 	} catch (error) {
 		next(error);

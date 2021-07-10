@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SearchBar from '../Searchbar/Searchbar.jsx';
 import './Navbar.css';
+import LogoStyle from '../StyledComponents/LogoStyle';
 
 const Navbar = () => {
 	const [showLinks, setShowLinks] = useState(false);
@@ -13,12 +14,11 @@ const Navbar = () => {
 		axios
 			.get('http://localhost:3001/products')
 			.then((res) => {
-				setSuggestions(res.data.products);
-				//resp.data.products...la respuesta no solo llega con los products
+				setSuggestions(res.data.product);
 			})
 			.catch((error) => console.log(error));
 	}, []);
-
+	console.log(suggestions)
 	const productsSuggestions = suggestions?.map(({ name }) =>
 		name.toLowerCase()
 	);
@@ -36,9 +36,11 @@ const Navbar = () => {
 		<div className='navbar'>
 			<div className='leftSide'>
 				<div className='links' id={showLinks ? 'hidden' : ''}>
+                    
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 					<Link to='/catalog'>Catalog</Link>
+                    <Link to='/'><LogoStyle>HardwareStore</LogoStyle></Link>
 				</div>
 				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>

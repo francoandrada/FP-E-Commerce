@@ -10,14 +10,13 @@ import Catalog from './components/Catalog/Catalog';
 import Home from './components/ContainerComponents/Home/Home';
 
 import './App.css';
-import DetailProduct from './components/ProductDetail/ProductDetail'
+import DetailProduct from './components/ProductDetail/ProductDetail';
 function App() {
 	return (
 		<div className='App'>
 			<Navbar />
-			<Route path='/home' exact component={Home} />
 			<Switch>
-				<Route path='/' exact component={AuthUser} />
+				<Route path='/' exact component={Home} />
 				<Route path='/LogIn' exact component={LogIn} />
 				<Route path='/register' exact component={Register} />
 				<Route path='/forgot-password' exact component={ForgotPassword} />

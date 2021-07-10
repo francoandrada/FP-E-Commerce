@@ -10,7 +10,8 @@ import {
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
-	GET_CATEGORIES
+	GET_CATEGORIES,
+	GET_HIGHLIGHTS,
 } from './actionsName';
 
 import axios from 'axios';
@@ -45,8 +46,7 @@ export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
 			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
-			dispatch({type: GET_CATEGORIES, payload: response.data.category})
-			;
+			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
 		});
 	};
 }
@@ -66,6 +66,14 @@ export function getProductById(id) {
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
+	};
+}
+
+export function getHighlightProd() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products').then((response) => {
+			dispatch({ type: GET_HIGHLIGHTS, payload: response.data.product });
+		});
 	};
 }
 
@@ -163,16 +171,13 @@ export function resetPassword(resetLink, newPass) {
 			console.log(error);
 		}
 	};
-
-
-
 }
 
 export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
-			console.log('request al server http://localhost:3001/authGmail ')
-			console.log(data)
+			console.log('request al server http://localhost:3001/authGmail ');
+			console.log(data);
 			const res = await axios.post('http://localhost:3001/authGmail', data);
 			console.log('desde el action', res.data.token);
 
@@ -181,7 +186,7 @@ export function loginGmail(data) {
 				payload: res.data.token,
 			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
