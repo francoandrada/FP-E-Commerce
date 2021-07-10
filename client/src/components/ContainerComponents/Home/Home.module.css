@@ -1,0 +1,11 @@
+.HomeContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.prueba {
+    display: flex;
+    justify-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}

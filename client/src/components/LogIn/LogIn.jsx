@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import style from './LogIn.module.css';
 import { logIn,loginGmail } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -58,10 +57,12 @@ const LogIn = () => {
 	};
 
 	useEffect(() => {
-		const el = document.createElement('script');
-		el.setAttribute('src', 'https://accounts.google.com/gsi/client');
-		el.onload = () => initializeGSI();
-		document.querySelector('body').appendChild(el);
+		if(!token){
+			const el = document.createElement('script');
+			el.setAttribute('src', 'https://accounts.google.com/gsi/client');
+			el.onload = () => initializeGSI();
+			document.querySelector('body').appendChild(el);
+		}
 	}, []);
 
 	///////////////
@@ -70,6 +71,8 @@ const LogIn = () => {
 	const history = useHistory();
 
 	const authenticated = useSelector((state) => state.user.authenticated);
+	const token = useSelector((state) => state.user.token);
+
 
 	const setError = useSelector((state) => state.user.setError);
 
@@ -96,9 +99,9 @@ const LogIn = () => {
 
 	return (
 		<>
-			<div className={style.loginContainer}>
+			<div >
 		<p>{setError}</p>
-				<form className={style.formContainer} onSubmit={formik.handleSubmit}>
+				<form onSubmit={formik.handleSubmit}>
 					<label htmlFor='email'>Email Address</label>
 					<input
 						id='email'

@@ -41,7 +41,7 @@ const Navbar = () => {
 			<div className='leftSide'>
 				<div className='links' id={showLinks ? 'hidden' : ''}>
 					<Link to='/LogIn'>Login</Link>
-					<Link to='/register'>Register</Link>
+					<Link to='/register'>Sing Up</Link>
 				</div>
 				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>
