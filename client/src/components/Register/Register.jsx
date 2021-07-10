@@ -45,7 +45,7 @@ function Register() {
             <form onSubmit={handleSubmit}>
             <div className="form-row">
                 <div className="form-group col-md-6">
-                <label>Name</label>
+                <label>Name </label>
                 <input type="text" name="name" value={User.name} onChange={handleChange} className="form-control" id="inputEmail4"/>
                 </div>
                 <div className="form-group col-md-6">
