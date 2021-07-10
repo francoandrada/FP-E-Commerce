@@ -13,6 +13,7 @@ function categoryReducer(state = initialState, action) {
                 allCategories: action.payload,
             }
         case SELECTED_CATEGORY:
+            //falta hacer
             return {
                 ...state,
                 selectedCategory: action.payload

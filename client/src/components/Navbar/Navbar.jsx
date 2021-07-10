@@ -13,7 +13,8 @@ const Navbar = () => {
 		axios
 			.get('http://localhost:3001/products')
 			.then((res) => {
-				setSuggestions(res.data);
+				setSuggestions(res.data.products);
+				//resp.data.products...la respuesta no solo llega con los products
 			})
 			.catch((error) => console.log(error));
 	}, []);
