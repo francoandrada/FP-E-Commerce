@@ -11,9 +11,10 @@ function DetailProduct(props) {
         dispatch(getProductById(props.match.params.id))
     }, [])
     console.log(productDetail)
+    
     return (
         <div className={styles.container}>
-            {productDetail ?
+             {productDetail ?
                 <div>
                     <div className={styles.card}>
                         <div className={styles.imgContainer}>
@@ -28,7 +29,10 @@ function DetailProduct(props) {
                 </div> : null}
                         <div className={styles.data}>
                             <p>{productDetail.description} </p>
-                            <p>{productDetail.brand} </p>
+                            {productDetail.brand ?
+                            <p>{productDetail.brand.name} </p>
+                            : null
+                        }
                             <p>{productDetail.weigth} </p>
                             <p>{productDetail.stock} </p>
                         </div>
