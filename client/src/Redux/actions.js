@@ -45,15 +45,14 @@ export function getSuggestions() {
 export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
-			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
+			dispatch({ type: GET_PRODUCTS, payload: response.data });
 		});
 	};
 }
 
 export function getCategories() {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/').then((response) => {
+		axios.get('http://localhost:3001/categories/').then((response) => {
 			dispatch({ type: GET_CATEGORIES, payload: response.data });
 		});
 	};
@@ -72,7 +71,7 @@ export function getProductById(id) {
 export function getHighlightProd() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products').then((response) => {
-			dispatch({ type: GET_HIGHLIGHTS, payload: response.data.product });
+			dispatch({ type: GET_HIGHLIGHTS, payload: response.data });
 		});
 	};
 }
