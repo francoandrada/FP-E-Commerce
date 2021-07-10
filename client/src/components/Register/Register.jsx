@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
+import styles from './Register.module.css'
+
 
 function Register() {
     const history = useHistory();
@@ -39,12 +41,13 @@ function Register() {
 
     }
     return (
-        <div>
+        <div id={styles.regForm}>
             <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input type="text" name="name" value={User.name} onChange={handleChange} />
-                <label>Surname</label>
-                <input type="text" name="surname" value={User.surname} onChange={handleChange} />
+            <div className="form-row">
+                <label className="form-group col-md-6" >Name</label>
+                <input type="text" name="name" value={User.name} onChange={handleChange} className="form-control" id="inputEmail4"/>
+                <label className="form-group col-md-6">Surname</label>
+                <input type="text" name="surname" value={User.surname} onChange={handleChange} id="inputPassword4" />
                 <label>email</label>
                 <input type="text" name="email" value={User.email} onChange={handleChange} />
                 <label>password</label>
@@ -57,9 +60,13 @@ function Register() {
                 <input type="text" name="postalCode" value={User.postalCode} onChange={handleChange} />
                 <label>phone</label>
                 <input type="text" name="phone" value={User.phone} onChange={handleChange} />
-                <button type="submit"> Register </button>
+                <button type="submit" className="btn btn-primary"> Register </button>
+            </div>
             </form>
-        </div>
+        <div/>    
+
+    </div>
+    
     )
 }
 export default Register;
