@@ -16,6 +16,7 @@ function App() {
 		<div className='App'>
 			<Navbar />
 			<Route path='/home' exact component={Home} />
+
 			<Switch>
 				<Route path='/' exact component={AuthUser} />
 				<Route path='/LogIn' exact component={LogIn} />

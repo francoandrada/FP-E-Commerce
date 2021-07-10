@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SearchBar from '../Searchbar/Searchbar.jsx';
 import './Navbar.css';
+import LogoStyle from '../StyledComponents/LogoStyle';
 
 const Navbar = () => {
 	const [showLinks, setShowLinks] = useState(false);
@@ -36,9 +37,11 @@ const Navbar = () => {
 		<div className='navbar'>
 			<div className='leftSide'>
 				<div className='links' id={showLinks ? 'hidden' : ''}>
+                    
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 					<Link to='/catalog'>Catalog</Link>
+                    <Link to='/home'><LogoStyle>HardwareStore</LogoStyle></Link>
 				</div>
 				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>
