@@ -5,7 +5,6 @@ import styles from './Home.module.css'
 import BannerContainer from '../../BannerContainer/BannerContainer';
 import HighlightedProdContainer from '../HighlightedProdContainer/HighlightedProdContainer'
 import Footer from '../Footer/Footer'
-import Highlights from '../../Highlights/Highlights';
 
 
 function Home() {
@@ -21,7 +20,6 @@ function Home() {
                 <BannerContainer></BannerContainer>
                 <HighlightedProdContainer></HighlightedProdContainer>
             </div>
-            <Highlights></Highlights>
             
             <div>
                 <Footer></Footer>
