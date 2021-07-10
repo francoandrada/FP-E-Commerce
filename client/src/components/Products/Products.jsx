@@ -11,15 +11,14 @@ function Products() {
         dispatch(getProducts())
     }, [dispatch])
 
-    const allCategories = useSelector(state=> state.category.allCategories)
 
 
 
 
     return (
         <div className={styles.cardsContainer}>
-            {allProducts.map(p => {
-                return (
+            {allProducts.length>0?
+                    allProducts.map(p => 
                     <div className={styles.card}>
                         <div className={styles.cardImage}> 
                         <img className={styles.img} src={p.image} alt="product" />
@@ -30,9 +29,12 @@ function Products() {
                         </Link>
                         <span>${p.price}</span>
                         </div>
+                    </div>)
+                    :
+                    <div>
+
                     </div>
-                )
-            })}
+            }
         </div>
     )
 }
