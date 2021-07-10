@@ -17,7 +17,7 @@ const Navbar = () => {
 			})
 			.catch((error) => console.log(error));
 	}, []);
-
+	console.log(suggestions)
 	const productsSuggestions = suggestions?.map(({ name }) =>
 		name.toLowerCase()
 	);

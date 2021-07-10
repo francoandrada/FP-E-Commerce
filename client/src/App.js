@@ -10,7 +10,7 @@ import Catalog from './components/Catalog/Catalog';
 import Home from './components/ContainerComponents/Home/Home';
 
 import './App.css';
-import DetailProduct from './components/ProductDetail/ProductDetail'
+import DetailProduct from './components/ProductDetail/ProductDetail';
 function App() {
 	return (
 		<div className='App'>
