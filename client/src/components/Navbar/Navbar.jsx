@@ -65,9 +65,9 @@ const Navbar = () => {
 	useKey('Enter', searchProduct);
 
 	return (
-		<div className={styles.navbar}>
-			<div className={styles.leftSide}>
-				<div className={styles.links} id={showLinks ? 'hidden' : ''}>
+		<div className={styles.navbarEcommerce}>
+			<div className={styles.leftSideEcommerce}>
+				<div className={styles.linksEcommerce} id={showLinks ? 'hidden' : ''}>
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 					<Link to='/catalog'>Catalog</Link>
@@ -80,21 +80,22 @@ const Navbar = () => {
 
 			<button onClick={openModal}>open modal</button>
 
-			<div className={styles.rightSide}>
+			<div className={styles.rightSideEcommerce}>
 				<Modal isOpen={isOpenModal} closeModal={closeModal}>
-					<div className={styles.modalSearchContainer}>
+					<div className={styles.modalSearchContainerEcommerce}>
 						<div
-							className={`${styles.flexContainer} ${styles.flexColumn} ${styles.posRel}`}
+							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
 							ref={wrapperRef}
 						>
 							<input
+								className={styles.inputEcommerce}
 								value={search}
 								onClick={() => setDisplay(!display)}
 								onChange={(event) => setSearch(event.target.value)}
 								placeholder='Search...'
 							/>
 							{display && (
-								<div className={styles.autoContainer}>
+								<div className={styles.autoContainerEcommerce}>
 									{options
 										.filter((product) =>
 											product.toLowerCase().includes(search.toLowerCase())
@@ -103,12 +104,12 @@ const Navbar = () => {
 										.map((value, index) => {
 											return (
 												<div
-													className={styles.option}
+													className={styles.optionEcommerce}
 													onClick={() => searchHandle(value)}
 													key={index}
 													tabIndex='0'
 												>
-													<span>{value}</span>
+													<span className={styles.spanEcommerce}>{value}</span>
 												</div>
 											);
 										})}

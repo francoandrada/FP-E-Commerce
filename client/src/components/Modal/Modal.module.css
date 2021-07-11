@@ -1,4 +1,4 @@
-.modal {
+.modalEcommerce {
 	position: fixed;
 	z-index: 999;
 	top: 0;
@@ -11,11 +11,11 @@
 	align-items: center;
 }
 
-.modal.isOpen {
+.modalEcommerce.isOpenEcommerce {
 	display: flex;
 }
 
-.modalContainer {
+.modalContainerEcommerce {
 	position: relative;
 	padding: 1.5rem;
 	min-width: 300px;
@@ -27,13 +27,13 @@
 	border-radius: 8px;
 }
 
-.modalClose {
+.modalCloseEcommerce {
 	position: absolute;
 	top: 0.3rem;
 	right: 0.3rem;
 }
 
-.btnModal {
+.btnModalEcommerce {
 	background-color: #d54c4c;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -42,6 +42,6 @@
 	border-radius: 4px;
 }
 
-.btnModal:hover {
+.btnModalEcommerce:hover {
 	background-color: #8d2828;
 }
