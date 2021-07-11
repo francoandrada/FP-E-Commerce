@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getProducts } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
@@ -10,6 +10,12 @@ function Products() {
 	const filterCategory = useSelector(
 		(state) => state.category.selectedCategory
 	);
+	const orderPrice = useSelector((state) => state.price.order);
+	const [ currentPage, setPage ] = useState({
+        first: 0,
+        last: 8
+        })
+
 	const dispatch = useDispatch();
 
 	if (filterCategory) {
@@ -17,6 +23,34 @@ function Products() {
 			(product) => product.categories[0].name === filterCategory
 		);
 	}
+
+	if(orderPrice==='ascending'){
+		allProducts.sort(function (a, b) {
+			if (a.price > b.price) {
+			  return 1;
+			}
+			if (a.price < b.price) {
+			  return -1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+	if(orderPrice==='descending'){
+		allProducts.sort(function (b, a) {
+			if (b.price > a.price) {
+			  return -1;
+			}
+			if (b.price < a.price) {
+			  return 1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+
 
 	var formatNumber = {
 		separator: '.',
@@ -39,10 +73,41 @@ function Products() {
 		},
 	};
 
+
+
+    function handleNextPage (event) {
+        event.preventDefault()
+        setPage({...currentPage, 
+            first: currentPage.first + 8,
+            last: currentPage.last + 8
+        })        
+    } 
+
+    function handlePrevPage (event) {
+        event.preventDefault()
+        if (currentPage.first === 0){
+            setPage({...currentPage, 
+                first: 0,
+                last: 8
+            })
+
+        } else {
+            setPage({...currentPage, 
+                first: currentPage.first - 8,
+                last: currentPage.last - 8
+            })
+        }
+      
+    } 
+
 	return (
 		<div className={styles.cardsContainer}>
+			<button onClick={handlePrevPage}>PREV</button>
+			<button onClick={handleNextPage}>NEXT</button>
+
 			{allProducts
-				? allProducts.map((p) => {
+				? allProducts.slice(currentPage.first, currentPage.last)
+				.map((p) => {
 						if (p.name.length > 55) {
 							var aux = p.name.slice(0, 55).concat('...');
 							p.name = aux;

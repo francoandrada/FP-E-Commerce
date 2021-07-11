@@ -15,6 +15,7 @@ import {
 	GET_BRANDS,
 	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
+	FILTER_PRICE
 } from './actionsName';
 
 import axios from 'axios';
@@ -95,12 +96,12 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
+			console.log('dato', dato)
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
 			});
 		} catch (error) {
-			console.log('error', error.response.data.msg);
 			dispatch({
 				type: ERROR,
 				payload: error.response.data.msg,
@@ -151,13 +152,12 @@ export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
 			await axios.put('http://localhost:3001/auth/forgot-password', { email });
-
+console.log(email)
 			dispatch({
 				type: FORGOT_PASSWORD,
 				payload: email,
 			});
 		} catch (error) {
-			console.log('error', error.response.data.msg);
 
 			dispatch({
 				type: ERROR,
@@ -208,5 +208,10 @@ export function loginGmail(data) {
 export const filterCategory = (name)=> {
 	console.log(name)
 	return {type: FILTER_CATEGORIES,
+	payload: name}}
+
+export const filterPrice = (name)=> {
+	console.log(name)
+	return {type: FILTER_PRICE,
 	payload: name}}
 
