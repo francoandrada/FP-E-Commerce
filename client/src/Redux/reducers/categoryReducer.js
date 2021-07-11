@@ -22,7 +22,7 @@ function categoryReducer(state = initialState, action) {
         case FILTER_CATEGORIES:
             return {
                     ...state,
-                    allCategories: action.payload
+                    selectedCategory: action.payload
                 }
         default:
             return state

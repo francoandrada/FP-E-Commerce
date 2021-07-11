@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const TitleStyle = styled.h1`
-color: white;
+font-family: 'Roboto', sans-serif; 
 font-size: 35px;
 line-height: 30px;
-text-align:left;
+
 
 `;
 

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const SubtitleStyle = styled.h1`
-color: black;
-font-size: 25px;
-line-height: 30px;
-text-align:left;
+font-family: 'Roboto', sans-serif; 
+font-size: 18px;
+line-height: 18px;
+
 
 `;
 

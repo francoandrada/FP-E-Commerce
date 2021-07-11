@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ButtonRed = styled.button`
+    font-family: 'Roboto', sans-serif; 
     width: 134px;
     height: 4opx;
     border-style: none;

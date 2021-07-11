@@ -70,8 +70,7 @@ export function getBrands() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios
-			.get('http://localhost:3001/products/allproducts/' + id)
+		axios.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
