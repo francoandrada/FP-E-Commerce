@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import styles from './Register.module.css'
+import ButtonRed from '../StyledComponents/ButtonRed'
 
 
 
@@ -59,6 +60,8 @@ function Register() {
         }
     }
     return (
+
+		<div className={styles.registerFormContainer}>
             <div id={styles.regForm}>
 			<form onSubmit={handleSubmit}>
 				<div className='form-row' id={styles.row}>
@@ -156,13 +159,14 @@ function Register() {
 							/>
 						</div>
 					</div>
-					<div className='form-row' id={styles.row}></div>
-					<button type='submit' className='btn btn-primary'>
-						Register
-					</button>
+					<div className={styles.registerButtonRow}>
+						<ButtonRed type='submit'>Register</ButtonRed>
+					</div>
+					
 				</div>
 			</form>
 			<div />
 		</div> 
+	</div>
     )}
 export default Register;
