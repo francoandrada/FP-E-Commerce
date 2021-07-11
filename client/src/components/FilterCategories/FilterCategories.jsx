@@ -1,25 +1,30 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import {getCategories, filterCategory} from '../../Redux/actions'
 import styles from './Filter.module.css'
 function FilterCategories() {
 const categories= useSelector((state)=> state.category.allCategories)
-const Dispatch =useDispatch()
+const dispatch =useDispatch()
 
-// console.log(categories)
-useEffect({
-
-})
+useEffect(() => {
+    dispatch(getCategories())
+}, [dispatch])
+console.log(categories[0].products)
 
     return ( 
         <div>
-            <h1 className={styles.div_celena}>Hola</h1>
             {
                 categories.map((item, index)=>(
-                    <div className={styles.div_celena} key={index}>
+                    <button  
+                    key={index}
+                    // value={item.name}
+                    onClick={() => dispatch(filterCategory(item.name)) }
+                    >
                         <p>{item.name}</p>
-                    </div>
+                    </button>
                 ))
             }
+           
         </div>
     )
 }

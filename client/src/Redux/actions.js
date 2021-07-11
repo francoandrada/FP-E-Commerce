@@ -12,7 +12,8 @@ import {
 	FETCH_ERROR,
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
-	GET_BRANDS
+	GET_BRANDS,
+	FILTER_CATEGORIES
 } from './actionsName';
 
 import axios from 'axios';
@@ -197,4 +198,18 @@ export function loginGmail(data) {
 			console.log(error);
 		}
 	};
+}
+export function filterCategory(name){
+	return async (dispatch)=>{
+		try {
+			const response = await axios.get('http://localhost:3001/admin/productcategoryget/' + name)
+			dispatch({
+				type: FILTER_CATEGORIES,
+				payload: response.data,
+			});
+			
+		} catch (error) {
+			console.log(error)
+		}
+	}
 }

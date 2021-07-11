@@ -1,5 +1,5 @@
 import Products from "../Products/Products";
-import FilterCategories from "../FilterCategories/FilterCategories"
+import FilterCategories from "../FilterCategories/"
 import { useDispatch,useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getCategories, getBrands } from '../../Redux/actions'
@@ -22,8 +22,8 @@ function Catalog() {
 
     return (
         <div>
-             {/* <Products />  */}
-            <FilterCategories /> 
+            <Products />
+            <FilterCategories/>
         </div>
     )
 }
