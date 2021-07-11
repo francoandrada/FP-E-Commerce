@@ -95,8 +95,11 @@ const postNewProduct = async function postNewProduct(req, res) {
 // ----------------  FIND ALL PRODUCTS -----------------
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
-		const allProduct = await Product.findAll({ include: Brand });
-		res.status(200).json(allProduct);
+		const allProductCategory = await Product.findAll({})
+		const allRelations = await Category.findAll({include: Brand})// Aca Deberian Cargarse las relaciones 
+		
+
+		res.status(200).json();
 	} catch (error) {
 		next(error);
 	}
