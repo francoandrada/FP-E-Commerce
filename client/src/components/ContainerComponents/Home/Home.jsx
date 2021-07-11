@@ -1,13 +1,18 @@
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getHighlightProd } from '../../../Redux/actions'
 import styles from './Home.module.css'
 import BannerContainer from '../../BannerContainer/BannerContainer';
 import HighlightedProdContainer from '../HighlightedProdContainer/HighlightedProdContainer'
 import Footer from '../Footer/Footer'
 
-import CardContainerStyle from '../../StyledComponents/CardContainerStyle';
-import SubtitleStyle from '../../StyledComponents/SubtitleStyle';
-import ButtonGrey from '../../StyledComponents/ButtonGrey';
 
 function Home() {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getHighlightProd())    
+    }, [] )
 
     return(
         <div className={styles.HomeContainer}>
@@ -16,17 +21,6 @@ function Home() {
                 <HighlightedProdContainer></HighlightedProdContainer>
             </div>
             
-            <div className={styles.prueba}>
-                <SubtitleStyle>Esto es un subtitulo</SubtitleStyle>
-                <SubtitleStyle>$6000.-</SubtitleStyle>
-                <CardContainerStyle></CardContainerStyle>
-                <CardContainerStyle></CardContainerStyle>
-                <CardContainerStyle></CardContainerStyle>
-
-            </div>
-              <ButtonGrey>Este es boton gris</ButtonGrey>
-
-          
             <div>
                 <Footer></Footer>
             </div>

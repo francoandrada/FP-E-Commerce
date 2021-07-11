@@ -1,0 +1,46 @@
+.highlightProdContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    margin: 20px;
+    width: 250px;
+    height: 320px;
+    border-radius: 14px;
+}
+
+
+.ImageDiv {
+    height: 130px;
+}
+
+.buyHighlightDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+
+}
+
+.HighlightImagSize {
+    width: 150px;
+}
+
+.HighlightTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    height: 120px;
+    padding: 10px;
+    color:black;
+}
+
+.highlightLinks {
+    text-decoration: none;
+    
+}
+
+.highlightLinks :hover {
+    color: rgba(105, 105, 105, 0.328);
+}

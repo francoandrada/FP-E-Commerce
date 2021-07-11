@@ -22,17 +22,11 @@ const newBrand = async function newBrand(req, res) {
 
 // ----------------  FIND BRAND BY NAME -----------------
 
-const getBrand = async function getBrand(req, res) {
+const getBrands = async function getBrands(req, res) {
 	try {
-		const { name } = req.params;
+		const brands = await Brand.findAll();
 
-		const brandfound = await Brand.findAll({
-			where: {
-				name,
-			},
-		});
-
-		res.status(200).json(brandfound);
+		res.status(200).json(brands);
 	} catch (error) {
 		res.send(error);
 	}
@@ -40,5 +34,5 @@ const getBrand = async function getBrand(req, res) {
 
 module.exports = {
 	newBrand,
-	getBrand,
+	getBrands,
 };

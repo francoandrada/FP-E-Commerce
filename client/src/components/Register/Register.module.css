@@ -1,0 +1,20 @@
+#regForm {
+    color: white;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#row{
+    display:flex;
+    justify-content: center;
+    
+}
+
+#input{
+    margin: 1%
+}
+
+
+
+

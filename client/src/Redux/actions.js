@@ -11,6 +11,8 @@ import {
 	FETCH_PENDING,
 	FETCH_ERROR,
 	GET_CATEGORIES,
+	GET_HIGHLIGHTS,
+	GET_BRANDS
 } from './actionsName';
 
 import axios from 'axios';
@@ -52,19 +54,34 @@ export function getProducts() {
 
 export function getCategories() {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/').then((response) => {
+		axios.get('http://localhost:3001/categories/').then((response) => {
 			dispatch({ type: GET_CATEGORIES, payload: response.data });
+		});
+	};
+}
+
+export function getBrands() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/brands/').then((response) => {
+			dispatch({ type: GET_BRANDS, payload: response.data });
 		});
 	};
 }
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios
-			.get('http://localhost:3001/products/allproducts/' + id)
+		axios.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
+	};
+}
+
+export function getHighlightProd() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/products').then((response) => {
+			dispatch({ type: GET_HIGHLIGHTS, payload: response.data });
+		});
 	};
 }
 
