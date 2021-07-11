@@ -5,15 +5,16 @@
 	border-radius: 8px;
 	height: 368px;
 }
-.card:hover{
+.card:hover {
 	transform: scale(1.1);
 	transition: 300ms;
 }
 .cardsContainer {
 	display: flex;
+	width: 80%;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	margin: 2em 4em 2em 4em;
+	margin: 2em 3.5em 2em 3.5em;
 }
 .data {
 	display: flex;
