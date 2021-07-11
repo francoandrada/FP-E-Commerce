@@ -66,8 +66,8 @@ Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
 
 
-Brand.belongsToMany(Category, { through:'brand_category'})
-Category.belongsToMany(Brand, { through:'brand_category'})
+// Brand.belongsToMany(Category, { through:'brand_category'})
+// Category.belongsToMany(Brand, { through:'brand_category'})
 
 module.exports = {
 	...sequelize.models,
