@@ -42,9 +42,9 @@ function Register() {
 				email: User.email,
 				password: User.password,
 				address: User.address,
-				addressNumber: User.addressNumber,
-				postalCode: User.postalCode,
-				phone: User.phone,
+				addressNumber: parseInt(User.addressNumber),
+				postalCode: parseInt(User.postalCode),
+				phone: parseInt(User.phone),
 			});
 		}
 		history.push('/');
