@@ -1,22 +1,34 @@
 const { Sequelize } = require('sequelize');
-const { Review } = require('../db');
+const { Review, User, Product } = require('../db');
 
-const newReview = async function newReview(req, res) {
-	try {
-		const { description, stars } = req.body;
+// const newReview = async function newReview(req, res) {
+// 	try {
+// 		const { userId, productId, description, stars } = req.body;
 
-		const createdReview = await Review.findOrCreate({
-			where: {
-				description,
-				stars,
-			},
-		});
+// 		const userReview = await User.findOne({
+// 			where: {
+// 				userId,
+// 			},
+// 		});
+// 		if (userReview) {
+// 			var response = await userReview.addReview(
+// 				{
+// 					through: {
 
-		res.status(200).json({ message: 'Review created succesfully' });
-	} catch (error) {
-		res.send(error);
-	}
-};
+// 						description,
+// 						stars,
+// 						userId,
+// 						productId,
+// 					},
+// 				}
+// 			);
+// 		}
+
+// 		res.status(200).json(response);
+// 	} catch (error) {
+// 		res.send(error);
+// 	}
+// };
 
 const getAllReviews = async function getAllReviews(req, res) {
 	try {
