@@ -64,7 +64,7 @@ i {
 	color: black;
 } */
 
-.rightSide .search-btn {
+.rightSide .searchBtn {
 	height: 32px;
 	width: 70px;
 	font-size: 16px;
@@ -133,7 +133,7 @@ input {
 	text-transform: capitalize;
 }
 
-.pos-rel {
+.posRel {
 	position: relative;
 }
 
@@ -168,10 +168,10 @@ span {
 	text-transform: capitalize;
 }
 
-.flex-container {
+.flexContainer {
 	display: flex;
 }
 
-.flex-column {
+.flexColumn {
 	flex-direction: column;
 }
