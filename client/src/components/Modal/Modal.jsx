@@ -4,12 +4,15 @@ import styles from './Modal.module.css';
 const Modal = ({ children, isOpen, closeModal }) => {
 	return (
 		<div
-			className={`${styles.modal} ${isOpen && styles.isOpen}`}
+			className={`${styles.modalEcommerce} ${isOpen && styles.isOpenEcommerce}`}
 			onClick={closeModal}
 		>
-			<div className={styles.modalContainer} onClick={handleCloseClick}>
-				<div className={styles.modalClose}>
-					<button className={styles.btnModal} onClick={closeModal}>
+			<div
+				className={styles.modalContainerEcommerce}
+				onClick={handleCloseClick}
+			>
+				<div className={styles.modalCloseEcommerce}>
+					<button className={styles.btnModalEcommerce} onClick={closeModal}>
 						X
 					</button>
 				</div>
