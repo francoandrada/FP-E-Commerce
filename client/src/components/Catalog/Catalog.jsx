@@ -2,13 +2,12 @@ import Products from "../Products/Products";
 import FilterCategories from "../FilterCategories/FilterCategories"
 import { useDispatch,useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getCategories, getBrands } from '../../Redux/actions'
+import { getCategories, getBrands,getProducts } from '../../Redux/actions'
 import styles from './Catalog.module.css'
 
 
 
 function Catalog() {
-    const allCategories = useSelector(state=> state.category.allCategories)
 
     const dispatch = useDispatch()
 
@@ -19,6 +18,10 @@ function Catalog() {
     useEffect(() => {
         dispatch(getBrands())    
     }, [] )
+
+    useEffect(() => {
+		dispatch(getProducts());
+	}, []);
 
 
     return (

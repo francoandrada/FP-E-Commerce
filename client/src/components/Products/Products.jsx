@@ -8,9 +8,7 @@ import ButtonRed from '../StyledComponents/ButtonRed';
 function Products() {
 	const allProducts = useSelector((state) => state.product.allProducts);
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
+
 
 	var formatNumber = {
 		separator: '.',
