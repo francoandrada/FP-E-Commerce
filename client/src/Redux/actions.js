@@ -31,12 +31,12 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions() {
+export function getSuggestions(name) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get('http://localhost:3001/products/');
-			dispatch(fetchSuggestions(res.data));
+			dispatch(fetchSuggestions({ productSuggestions: res.data, name }));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -46,7 +46,8 @@ export function getSuggestions() {
 export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data });
+			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
+			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
 		});
 	};
 }

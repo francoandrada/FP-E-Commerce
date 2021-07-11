@@ -54,7 +54,7 @@ i {
 	padding-right: 25px;
 }
 
-.rightSide input {
+/* .rightSide input {
 	width: 220px;
 	height: 30px;
 	border: none;
@@ -62,7 +62,7 @@ i {
 	font-size: 20px;
 	padding-left: 15px;
 	color: black;
-}
+} */
 
 .rightSide .search-btn {
 	height: 32px;
@@ -112,4 +112,66 @@ i {
 		margin: 10px;
 		font-size: 25px;
 	}
+}
+
+/* Search bar */
+.auto-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+}
+
+input {
+	padding: 10px;
+	height: 10px;
+	width: 200px; /* 500 */
+	border: 1px solid purple;
+	margin: 10px;
+	margin-top: 12px; /* no estaba */
+	font-size: 18px;
+	text-transform: capitalize;
+}
+
+.pos-rel {
+	position: relative;
+}
+
+.autoContainer {
+	position: absolute;
+	border-width: 0px 1px 1px 1px;
+	border-style: solid;
+	border-color: goldenrod;
+	background-color: whitesmoke;
+	right: 10px;
+	top: 45px;
+	width: 220px; /* 520 */
+}
+
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 200px;
+	padding: 5px;
+	background-color: white;
+}
+
+.option:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+.option,
+span {
+	font-size: 12px;
+	text-transform: capitalize;
+}
+
+.flex-container {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
 }

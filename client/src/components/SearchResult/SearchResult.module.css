@@ -1,0 +1,25 @@
+.card {
+	width: min-content;
+	margin: 2rem 2rem;
+	border-radius: 8px;
+	box-shadow: 10px 10px 30px gray;
+	/* borrar despues */
+	background-color: red;
+}
+.cardsContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.data {
+	display: flex;
+	padding: 0.5rem;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.cardImage {
+	padding: 1rem;
+}
+.img {
+	width: 200px;
+}
