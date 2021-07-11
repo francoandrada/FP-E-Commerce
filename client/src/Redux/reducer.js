@@ -3,6 +3,7 @@ import userReducer from './reducers/userReducer';
 import productReducer from './reducers/productReducer';
 import categoryReducer from './reducers/categoryReducer';
 import brandsReducer from './reducers/brandReducer';
+import priceReducer from './reducers/priceReducer';
 
 
 export default combineReducers({
@@ -10,7 +11,8 @@ export default combineReducers({
     user: userReducer,
     product: productReducer,
     category: categoryReducer,
-    brands: brandsReducer
+    brands: brandsReducer,
+    price: priceReducer
 
 })
 

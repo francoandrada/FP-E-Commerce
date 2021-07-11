@@ -10,6 +10,7 @@ function Products() {
 	const filterCategory = useSelector(
 		(state) => state.category.selectedCategory
 	);
+	const orderPrice = useSelector((state) => state.price.order);
 	const [ currentPage, setPage ] = useState({
         first: 0,
         last: 8
@@ -20,6 +21,34 @@ function Products() {
 	if(filterCategory){
 		allProducts = allProducts.filter(product=>product.categories[0].name===filterCategory)
 	}
+
+	if(orderPrice==='ascending'){
+		allProducts.sort(function (a, b) {
+			if (a.price > b.price) {
+			  return 1;
+			}
+			if (a.price < b.price) {
+			  return -1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+	if(orderPrice==='descending'){
+		allProducts.sort(function (b, a) {
+			if (b.price > a.price) {
+			  return -1;
+			}
+			if (b.price < a.price) {
+			  return 1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+
 
 	var formatNumber = {
 		separator: '.',
