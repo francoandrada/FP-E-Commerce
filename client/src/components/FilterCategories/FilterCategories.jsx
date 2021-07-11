@@ -8,9 +8,6 @@ function FilterCategories() {
 
 	const categoriesName = useSelector((state) => state.category.allCategories);
    
-	const categoriesProducts = useSelector(
-		(state) => state.category.selectedCategory
-	);
 	const dispatch = useDispatch();
 
     const [categoryChecked, setCategoryChecked] = useState("");
