@@ -3,7 +3,7 @@ import { GET_PRODUCTS, PRODUCT_DETAIL, GET_HIGHLIGHTS } from '../actionsName';
 const initialState = {
 	allProducts: [],
 	detailProducts: {},
-	highlights: [],
+	highlights: []
 };
 
 function productReducer(state = initialState, action) {
@@ -22,7 +22,7 @@ function productReducer(state = initialState, action) {
 		case GET_HIGHLIGHTS:
 			return {
 				...state,
-				highlights: action.payload,
+				highlights: action.payload
 			};
 		default:
 			return state;

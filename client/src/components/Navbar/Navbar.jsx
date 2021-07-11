@@ -40,7 +40,7 @@ const Navbar = () => {
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 					<Link to='/catalog'>Catalog</Link>
-                    <Link to='/home'><LogoStyle>HardwareStore</LogoStyle></Link>
+                    <Link to='/'><LogoStyle>HardwareStore</LogoStyle></Link>
 				</div>
 				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>
