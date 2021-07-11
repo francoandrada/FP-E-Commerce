@@ -124,11 +124,11 @@ i {
 
 input {
 	padding: 10px;
-	height: 10px;
-	width: 200px; /* 500 */
+	width: 350px;
+	height: 40px;
 	border: 1px solid purple;
 	margin: 10px;
-	margin-top: 12px; /* no estaba */
+	margin-top: 12px;
 	font-size: 18px;
 	text-transform: capitalize;
 }
@@ -141,18 +141,18 @@ input {
 	position: absolute;
 	border-width: 0px 1px 1px 1px;
 	border-style: solid;
-	border-color: goldenrod;
-	background-color: whitesmoke;
-	right: 10px;
-	top: 45px;
-	width: 220px; /* 520 */
+	/* 	border-color: goldenrod; */
+	border: none;
+	right: 130px;
+	top: 40px;
+	width: 220px;
 }
 
 .option {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 200px;
+	width: 350px;
 	padding: 5px;
 	background-color: white;
 }
@@ -174,4 +174,13 @@ span {
 
 .flexColumn {
 	flex-direction: column;
+}
+
+.modalSearchContainer {
+	margin-top: 20px;
+	width: 400px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
