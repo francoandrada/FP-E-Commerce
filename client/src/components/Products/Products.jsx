@@ -35,7 +35,7 @@ function Products() {
 
 	return (
 		<div className={styles.cardsContainer}>
-			{allProducts.length > 0
+			{allProducts
 				? allProducts.map((p) => {
 						if (p.name.length > 55) {
 							var aux = p.name.slice(0, 55).concat('...');
