@@ -12,7 +12,8 @@ import {
 	FETCH_ERROR,
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
-	GET_BRANDS
+	GET_BRANDS,
+	CLEAN_SUGGESTIONS,
 } from './actionsName';
 
 import axios from 'axios';
@@ -29,6 +30,11 @@ export const fetchError = (error) => ({
 export const fetchSuggestions = (payload) => ({
 	type: SUGGESTIONS,
 	payload,
+});
+
+export const cleanSuggestions = () => ({
+	type: CLEAN_SUGGESTIONS,
+	payload: undefined,
 });
 
 export function getSuggestions(name) {
@@ -70,7 +76,8 @@ export function getBrands() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/allproducts/' + id)
+		axios
+			.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});

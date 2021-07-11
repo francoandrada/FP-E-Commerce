@@ -6,6 +6,7 @@ import {
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
+	CLEAN_SUGGESTIONS,
 } from '../actionsName';
 
 const initialState = {
@@ -73,6 +74,11 @@ function userReducer(state = initialState, action) {
 					action.payload.productSuggestions.product,
 					action.payload.name
 				),
+			};
+		case CLEAN_SUGGESTIONS:
+			return {
+				...state,
+				suggestions: action.payload,
 			};
 		default: {
 			return state;
