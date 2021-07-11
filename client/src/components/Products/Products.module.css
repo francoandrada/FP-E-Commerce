@@ -1,14 +1,8 @@
-.card {
-	background-color: white;
-	width: min-content;
-	margin: 1rem 1.5rem;
-	border-radius: 8px;
-	height: 368px;
-}
 .card:hover {
 	transform: scale(1.1);
 	transition: 300ms;
 }
+
 .cardsContainer {
 	display: flex;
 	width: 80%;
@@ -16,23 +10,18 @@
 	justify-content: space-evenly;
 	margin: 2em 3.5em 2em 3.5em;
 }
+
 .data {
 	display: flex;
 	padding: 0.5rem;
 	flex-direction: column;
-	justify-content: flex-end;
-	color: black;
-}
-.cardImage {
-	padding: 1rem;
-}
-.img {
-	width: 200px;
-	height: 200px;
+	color: #6c757d;
+	min-height: 54.4px;
 }
 
 .productName {
 	font-size: 13px;
+	font-weight: 500;
 }
 
 .lineProd {
@@ -49,14 +38,68 @@
 
 .footerCard {
 	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
 .productPrice {
 	float: left;
 	width: 50%;
+	color: black;
+	font-size: 22px;
+	font-weight: 500;
 }
 
 .buttonBuy {
 	float: left;
 	width: 50%;
+}
+
+.buttonBuy button {
+	font-family: 'Roboto', sans-serif;
+	width: 88px;
+	height: 30px;
+	border-style: none;
+	border-radius: 8px;
+	color: white;
+	font-size: 18px;
+	background-color: #ff3c4a;
+}
+
+.buttonBuy button:hover {
+	background-color: #cc242f;
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 600px) {
+	.card {
+		background-color: white;
+		width: min-content;
+		margin: 1rem 1.5rem;
+		border-radius: 8px;
+		height: 368px;
+	}
+	.cardImage {
+		padding: 1rem;
+	}
+	.img {
+		width: 200px;
+		height: 200px;
+	}
+}
+
+@media only screen and (max-width: 2400px) and (min-width: 1301px) {
+	.card {
+		background-color: white;
+		width: min-content;
+		margin: 1rem 0.7rem;
+		border-radius: 8px;
+		height: 481px;
+	}
+	.cardImage {
+		padding: 1rem;
+	}
+	.img {
+		width: 300px;
+		height: 300px;
+	}
 }

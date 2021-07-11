@@ -12,8 +12,10 @@ function Products() {
 	);
 	const dispatch = useDispatch();
 
-	if(filterCategory){
-		allProducts = allProducts.filter(product=>product.categories[0].name===filterCategory)
+	if (filterCategory) {
+		allProducts = allProducts.filter(
+			(product) => product.categories[0].name === filterCategory
+		);
 	}
 
 	var formatNumber = {
