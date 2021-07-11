@@ -95,7 +95,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 // ----------------  FIND ALL PRODUCTS -----------------
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
-		const allProduct = await Product.findAll({ include: Brand });
+		const allProduct = await Product.findAll({include: Category})
 		res.status(200).json(allProduct);
 	} catch (error) {
 		next(error);

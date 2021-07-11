@@ -1,6 +1,17 @@
-// TEST COMMENT
-
 const jsonProducts = [
+	{
+		name: 'Disco Seagate Ironwolf 10Tb 35 Sata',
+		priceNormal: 99999,
+		priceSpecial: 66999,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53524_800_image.jpg',
+		description:
+			'Tanto si eres un usuario doméstico como un profesional creativo, para uso doméstico u oficina, la unidad de disco duro NAS IronWolf de 10 TB de Seagate es la solución de almacenamiento de alta capacidad que necesita.',
+		weight: 1,
+		brand: 'Seagate',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/disco_seagate_ironwolf_10tb_35_sata-53524.html',
+	},
 	{
 		name: 'Smartband Samsung Fit Silver Acelerom Cardio',
 		priceNormal: 8899,
@@ -26,6 +37,19 @@ const jsonProducts = [
 		category: 'monitores',
 		descriptionLink:
 			'https://delta.com.ar/monitor_gamer_27_acer_predator_xb271h_144hz-m44304.html',
+	},
+	{
+		name: 'Notebook 2 En 1 Hp Envy R5 4500U 8Gb 256Gb 13 W10H',
+		priceNormal: 179999,
+		priceSpecial: 167489,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49526_800_image.jpg',
+		description:
+			'Descripción\nDiseño\nLa notebook HP ENVYx360 convertible cuenta con un diseño compacto y funcional. Sus prácticas medidas de: 30,65 cm de largo x 19,46 cm de ancho x 1,64 cm de alto, y su liviano peso de tan sólo: 1,32 Kg permiten que puedas llevarla con vos a donde vayas.\nDesempeño\nSu procesador AMD Ryzen 5 4500U y su memoria de 8 GB se complementan para ofrecer un mayor rendimiento con un bajo consumo de energía.\nAdemás, su disco sólido de 256GB le da una gran capacidad de almacenamiento de datos y te permite guardar una mayor cantidad de contenido multimedia.\nPantalla\nPosee una pantalla multitáctil con retroiluminación WLED FHD IPS de 13,3" pulgadas con una resolución de 1920x1080 que te permitirá disfrutar de una gran calidad de colores e imagen. Ideal para ver maratones de series y películas.',
+		weight: 2420,
+		brand: 'HP',
+		category: 'notebooks',
+		descriptionLink:
+			'https://delta.com.ar/notebook_2_en_1_hp_envy_r5_4500u_8gb_256gb_13_w10h-49526.html',
 	},
 	{
 		name: 'Tablet Lenovo Tb-7305F 1Gb Ram 16Gb',
@@ -66,6 +90,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/monitor_acer_19_v206hql_vgahdmi-m49703.html',
 	},
+
 	{
 		name: 'Placa de Video Palit Stormx Geforce Gtx 1050 Gddr5 4Gb',
 		priceNormal: 79999,
@@ -158,6 +183,20 @@ const jsonProducts = [
 			'https://delta.com.ar/notebook_lenovo_ideapad_gaming_3_intel_i5_10300h_8gb_ddr4_gtx1650_4gb_1tb_hdd_128gb_ssd-49755.html',
 	},
 	{
+		name: 'Mb Amd (Am4) Asus Tuf Gaming B550M-Plus',
+		priceNormal: 25599,
+		priceSpecial: 21299,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/8/48556_800_image.jpg',
+		description:
+			'Zócalo AMD AM4: listo para procesadores AMD Ryzen ™ de tercera generación\nSolución de potencia mejorada: 8 + 2 etapas de potencia DrMOS, conector ProCool, componentes TUF de grado militar y Digi + VRM para una máxima durabilidad\nRefrigeración completa: disipadores de calor VRM, disipador de calor sin ventilador PCH, disipador de calor M.2, cabezales de ventilador híbridos y utilidad Fan Xpert 2+.\nConectividad de última generación: compatibilidad con PCIe 4.0 M.2, USB 3.2 Gen 2 tipo A y tipo C.\nHecho para juegos en línea: tecnología Ethernet 2.5Gb, TUF LANGuard y TurboLAN.\nCódec Realtek S1200A: calidad de audio impecable con una relación señal / ruido de 108 dB sin precedentes para salida de línea estéreo y SNR de 103 dB para entrada de línea.\nMicrófono con cancelación de ruido AI: proporciona una comunicación de voz clara en el juego.',
+		weight: 1,
+		brand: 'Asus',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/catalog/product/view/id/6590/s/mb_amd_am4_asus_tuf_gaming_b550m_plus-48556/category/2160/',
+	},
+
+	{
 		name: 'Notebook Lenovo Ip3 -14ada05 R7 8gb',
 		priceNormal: 147999,
 		priceSpecial: 139999,
@@ -183,19 +222,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/combo_teclado_y_mouse_gamer_lenovo_legion_km300_rgb-52901.html',
 	},
-	{
-		name: 'Notebook 2 En 1 Hp Envy R5 4500U 8Gb 256Gb 13 W10H',
-		priceNormal: 179999,
-		priceSpecial: 167489,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49526_800_image.jpg',
-		description:
-			'Descripción\nDiseño\nLa notebook HP ENVYx360 convertible cuenta con un diseño compacto y funcional. Sus prácticas medidas de: 30,65 cm de largo x 19,46 cm de ancho x 1,64 cm de alto, y su liviano peso de tan sólo: 1,32 Kg permiten que puedas llevarla con vos a donde vayas.\nDesempeño\nSu procesador AMD Ryzen 5 4500U y su memoria de 8 GB se complementan para ofrecer un mayor rendimiento con un bajo consumo de energía.\nAdemás, su disco sólido de 256GB le da una gran capacidad de almacenamiento de datos y te permite guardar una mayor cantidad de contenido multimedia.\nPantalla\nPosee una pantalla multitáctil con retroiluminación WLED FHD IPS de 13,3" pulgadas con una resolución de 1920x1080 que te permitirá disfrutar de una gran calidad de colores e imagen. Ideal para ver maratones de series y películas.',
-		weight: 2420,
-		brand: 'HP',
-		category: 'notebooks',
-		descriptionLink:
-			'https://delta.com.ar/notebook_2_en_1_hp_envy_r5_4500u_8gb_256gb_13_w10h-49526.html',
-	},
+
 	{
 		name: 'Smartwatch Fitbit Sense - Lunar WhiteSoft Gold Stainless Steel',
 		priceNormal: 49999,
@@ -235,18 +262,19 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/tablet_lenovo_yt3_smart_10_4gb_64gb-22395.html',
 	},
+
 	{
-		name: 'MB Intel (1200) Asus Prime B460M-Plus',
-		priceNormal: 19599,
-		priceSpecial: 15730,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49098_800_image.jpg',
+		name: 'Disco Rigido Externo 1tb Seagate Usb 30',
+		priceNormal: 7317,
+		priceSpecial: 6469,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/7/47045_800_image.jpg',
 		description:
-			'Socket Intel® LGA 1200: listo para procesadores Intel® Core ™ de 10a generación\nASUS OptiMem: enrutamiento cuidadoso de trazas y vías para preservar la integridad de la señal para mejorar la estabilidad de la memoria.\nFan Xpert 2+: controles flexibles para la máxima refrigeración y tranquilidad, además de detección de temperatura de GPU para juegos más frescos.\n5X Protection III: múltiples protecciones de hardware para una protección integral.\nConectividad ultrarrápida: flexibilidad suprema con soporte nativo M.2 para velocidades de almacenamiento ultrarrápidas',
+			'Su capacidad de 1TB es útil para guardar programas y todo tipo de documentos.\nTamaño de 2.5".\nApto para pc.\nEs compatible con Windows.\nFácil e ideal de transportar a cualquier lugar.\nAccesorios incluidos: cable USB 3.0.\nInterfaz de conexión: USB 3.0.',
 		weight: 1,
-		brand: 'Asus',
+		brand: 'Seagate',
 		category: 'componentes',
 		descriptionLink:
-			'https://delta.com.ar/mb_intel_1200_asus_prime_b460m_plus-49098.html',
+			'https://delta.com.ar/catalog/product/view/id/6152/s/disco_rigido_externo_1tb_seagate_usb_30-47045/category/2160/',
 	},
 	{
 		name: 'Notebook Acer Amd R7 Aspire 3 12Gb 1Tb 156 Black W10H SDvd',
@@ -365,19 +393,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/catalog/product/view/id/11523/s/all_in_one_lenovo_a9_9425_1tb_4gb-53912/category/2159/',
 	},
-	{
-		name: 'Disco Ssd Kingston 960Gb Ssdnow A400 Sata3 25 7Mm',
-		priceNormal: 19166,
-		priceSpecial: 13999,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/0/50604_800_image.jpg',
-		description:
-			'-Arranques, cargas y transferencias de archivos todos con mayor rapidez.\n-Más fiable y duradera que las unidades de disco duro.\n-Varias capacidades, para almacenar las aplicaciones o sustituir del todo unidades de disco duro.\n-SSD SATA A400 en formatos 2,5" y M.2\n-La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.\n-Brinda lapsos de arranque, carga y de transferencia de archivos increíblemente más breves en comparación con las unidades de disco duro mecánico.\n-Apoyada en su controlador de la más reciente generación, que ofrece velocidades de lectura y escritura de hasta 500 MB/s y 450 MB/s, respectivamente, esta unidad SSD es 10 veces más rápida que los discos duros tradicionales y provee un mejor rendimiento, velocidad de respuesta ultrarrápida en el procesamiento multitareas y una aceleración general del sistema.\n-Además son más fiables y duraderas que las unidades de disco duro, y están disponibles en varias capacidades que van de 120 GB hasta 1,92 TB.\n-Factor de forma\t2,5"\n-Interfaz\tSATA Rev. 3.0 (6 Gb/s), retro compatible con SATA Rev. 2.0 (3 Gb/s)\n-Capacidad 960GB\n-NAND\t3D\nRendimiento de referencia\n-Transferencia de datos (ATTO)\n-960 GB – hasta 500 MB/s en lectura y 450 MB/s en escritura\n-Consumo de energía\t0,195 W en reposo / 0,279 W promedio / 0,642 W (máx) lectura / 1,535 W (máx) escritura\n-Temperatura de almacenamiento\t-40°C~85°C\n-Temperatura de servicio\t0°C~70°C\n-Dimensiones\t100,0 mm x 69,9 mm x 7,0 mm (2,5”) 80 mm x 22 mm x 1,35 mm (M.2)\n-Vibración en funcionamiento\t2,17 G máxima (7–800 Hz)\n-Vibración en reposo\t20 G máxima (10–2000 Hz)\n-Vida útil\t1 millón de horas MTBF\n-Garantía/asistencia\tTres años de garantía limitada, con asistencia técnica gratuita\n-Total de bytes escritos (TBW)\t960GB: 300TB',
-		weight: 1,
-		brand: 'Kingston',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/disco_ssd_kingston_960gb_ssdnow_a400_sata3_25_7mm-50604.html',
-	},
+
 	{
 		name: 'Memoria Sodimm Crucial Basics 16Gb Ddr4-2666 (Cb16Gs2666)',
 		priceNormal: 13999,
@@ -534,19 +550,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/base_p_notebook_razer_chroma_rc21_01110200_r3m1-51368.html',
 	},
-	{
-		name: 'Disco Seagate Ironwolf 10Tb 35 Sata',
-		priceNormal: 99999,
-		priceSpecial: 66999,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53524_800_image.jpg',
-		description:
-			'Tanto si eres un usuario doméstico como un profesional creativo, para uso doméstico u oficina, la unidad de disco duro NAS IronWolf de 10 TB de Seagate es la solución de almacenamiento de alta capacidad que necesita.',
-		weight: 1,
-		brand: 'Seagate',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/disco_seagate_ironwolf_10tb_35_sata-53524.html',
-	},
+
 	{
 		name: 'Disco Rigido Skyhawk 2Tb Seagate Surveillance Sata 64Mb',
 		priceNormal: 9999,
@@ -560,19 +564,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/disco_rigido_skyhawk_2tb_seagate_surveillance_sata_64mb-47037.html',
 	},
-	{
-		name: 'Mb Amd (Am4) Asus Tuf Gaming B550M-Plus',
-		priceNormal: 25599,
-		priceSpecial: 21299,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/8/48556_800_image.jpg',
-		description:
-			'Zócalo AMD AM4: listo para procesadores AMD Ryzen ™ de tercera generación\nSolución de potencia mejorada: 8 + 2 etapas de potencia DrMOS, conector ProCool, componentes TUF de grado militar y Digi + VRM para una máxima durabilidad\nRefrigeración completa: disipadores de calor VRM, disipador de calor sin ventilador PCH, disipador de calor M.2, cabezales de ventilador híbridos y utilidad Fan Xpert 2+.\nConectividad de última generación: compatibilidad con PCIe 4.0 M.2, USB 3.2 Gen 2 tipo A y tipo C.\nHecho para juegos en línea: tecnología Ethernet 2.5Gb, TUF LANGuard y TurboLAN.\nCódec Realtek S1200A: calidad de audio impecable con una relación señal / ruido de 108 dB sin precedentes para salida de línea estéreo y SNR de 103 dB para entrada de línea.\nMicrófono con cancelación de ruido AI: proporciona una comunicación de voz clara en el juego.',
-		weight: 1,
-		brand: 'Asus',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/catalog/product/view/id/6590/s/mb_amd_am4_asus_tuf_gaming_b550m_plus-48556/category/2160/',
-	},
+
 	{
 		name: 'Smartband Samsung Fit - Negro Acelerom Cardio',
 		priceNormal: 8899,
@@ -586,19 +578,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/smartband_samsung_fit_negro_acelerom_cardio-40398.html',
 	},
-	{
-		name: 'Notebook Hp Gamer OMEN 15-ek0062la Intel® Core™ i7-10750H 8GB 512GB SSD 32GB Intel® Optane™ ',
-		priceNormal: 229000,
-		priceSpecial: 198999,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49529_800_image.jpg',
-		description:
-			'Notebook Hp Omen 15-Ek0062La Ci7 10750H 8Gb Ssd 512Gb Optane 32Gb Gf1650Ti 4Gb 15" W10H (1M1L9La#Ac8)\nSISTEMA OPERATIVO Windows 10 Home 64\nFAMILIA DE PROCESADOR Procesador Intel® Core ™ i7 de 10.ª generación\nPROCESADOR Intel® Core ™ i7-10750H (frecuencia base de 2,6 GHz, hasta 5,0 GHz con tecnología Intel® Turbo Boost, 12 MB de caché L3 y 6 núcleos)\nMEMORIA 8 GB de SDRAM DDR4-2933 (1 x 8 GB) 1 x 8 GB\nDISCO DURO Unidad de estado sólido Intel® de 512 GB\nSERVICIO EN LA NUBE Dropbox\nMONITOR Pantalla con retroiluminación WLED FHD, IPS, antirreflectante y microborde, de 15,6 "en diagonal, 250 nits, 45% de NTSC (1920 x 1080)\nGRÁFICOS Integrada\nGRÁFICOS Gráficos Intel® UHD\nGRÁFICOS Discreto\nGRÁFICOS NVIDIA® GeForce® GTX 1650 Ti (GDDR6 de 4 GB dedicado)\nPUERTOS 1 USB Type-C® con SuperSpeed ??de 5 Gbps Velocidad de señalización (DisplayPort ™ 1.4, HP Sleep and Charge); 1 USB tipo A con SuperSpeed ??de 5 Gbps Velocidad de señalización (HP Sleep and Charge); 2 USB Tipo-A con SuperSpeed ??de 5 Gbps Velocidad de señalización; 1 Mini DisplayPort ™; 1 HDMI 2.0a; 1 RJ-45; 1 conector inteligente CA; 1 combinación de auriculares y micrófono\nRANURAS DE EXPANSIÓN 1 lector de tarjetas SD multiformato\nCÁMARA WEB Cámara HD HP Wide Vision con doble micrófono digital integrado\nFUNCIONES DE AUDIO Audio de Bang &amp; Olufsen; DTS: X® Ultra; Soporte de control de audio OMEN DTS: X® Ultra; Altavoces dobles; HP Audio Boost 2.0\nTECLADO Teclado de tamaño completo, retroiluminado con RGB en 4 zonas, de color negro sombra, con teclado numérico y tecnología de teclas antiefecto fantasma con 26 pulsaciones de teclas simultáneas\nDISPOSITIVO APUNTADOR Mousepad que admite gestos multitáctiles\nCONEXIÓN INALÁMBRICA Conjunto Intel® Wi-Fi 6 AX 201 (2x2) y Bluetooth® 5 (compatible con velocidades de transferencia de archivos gigabit)\nINTERFAZ DE RED LAN 10/100/1000 GbE integrada\nTIPO DE FUENTE DE ALIMENTACIÓN Adaptador de alimentación de CA inteligente de 150 W\nTIPO DE BATERÍA Iones de litio de 3 celdas y 52,5 Wh\nEFICIENCIA ENERGÉTICA Certificación ENERGY STAR®\nDIMENSIONES (ANCHO X FONDO X ALTO) 35,79 x 23,97 x 2,25 centímetros\nPESO 2,36 kg A partir de 5,20 libras\nDISEÑO DE PRODUCTOS Base y cubierta mate de metal, marco de teclado anodizado\nGARANTÍA 1 año de garantía limitada de hardware con soporte técnico telefónico gratuito; 90 días de soporte técnico limitado para software (a partir de la fecha de compra)\nSOFTWARE INCLUIDO\nMcAfee LiveSafe ™ Netflix\nCOLOR DE PRODUCTO Cubierta y base negras sombra y armazón de teclado en aluminio negro sombra',
-		weight: 3650,
-		brand: 'HP',
-		category: 'notebooks',
-		descriptionLink:
-			'https://delta.com.ar/notebook_hp_omen_15_ek0062la_ci7_10750h_8gb_ssd_512gb_optane_32gb_gf1650ti_4gb_15_w10h-49529.html',
-	},
+
 	{
 		name: 'Auricular CMic Corsair Virtuoso Wireless White',
 		priceNormal: 34999,
@@ -690,32 +670,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/pad_mouse_sharkoon_1337_v2_gaming_mat_xl_444x355x24mm_240grs-50760.html',
 	},
-	{
-		name: 'D Rigido Pc Seagate 1Tb Skyhawk',
-		priceNormal: 7999,
-		priceSpecial: 6199,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/7/47036_800_image.jpg',
-		description:
-			'Características principales\nMarca\tSeagate\nLínea\tSkyHawk\nModelo\tST1000VX005\nCapacidad\t1 TB\nOtras características\nTecnología de almacenamientoHDD\nInterfacesSATA III\nAplicacionesSistema de videovigilancia\nUbicación del discoInterno\nFactor de forma3.5"\nCaché de datos64 MB\nCon RAIDSí',
-		weight: 1,
-		brand: 'Seagate',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/d_rigido_pc_seagate_1tb_skyhawk-47036.html',
-	},
-	{
-		name: 'Disco Rigido Externo 1tb Seagate Usb 30',
-		priceNormal: 7317,
-		priceSpecial: 6469,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/7/47045_800_image.jpg',
-		description:
-			'Su capacidad de 1TB es útil para guardar programas y todo tipo de documentos.\nTamaño de 2.5".\nApto para pc.\nEs compatible con Windows.\nFácil e ideal de transportar a cualquier lugar.\nAccesorios incluidos: cable USB 3.0.\nInterfaz de conexión: USB 3.0.',
-		weight: 1,
-		brand: 'Seagate',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/catalog/product/view/id/6152/s/disco_rigido_externo_1tb_seagate_usb_30-47045/category/2160/',
-	},
+
 	{
 		name: 'Mouse Wireless Lenovo 530 Abyss Blue',
 		priceNormal: 3875,
@@ -729,6 +684,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/mouse_wireless_lenovo_530_abyss_blue-52896.html',
 	},
+
 	{
 		name: 'Soporte PAuricular Razer V2 Chroma Usb 31 Hub White',
 		priceNormal: 13999,
@@ -755,19 +711,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/mouse_mat_gamer_corsair_cgmm350_exl_ch_9413571_ww-51256.html',
 	},
-	{
-		name: 'Disco Seagate Ironwolf Pro 10Tb 35 Sata',
-		priceNormal: 109999,
-		priceSpecial: 68999,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53527_800_image.jpg',
-		description:
-			'La unidad IronWolf Pro está diseñada para todo lo relacionado con los sistemas NAS empresariales y brinda un índice de carga de trabajo de 300 TB/año. Viene con un rendimiento con capacidad de expansión y activo todos los días y a toda hora en los entornos de múltiples bahías de los sistemas NAS para profesionales creativos y pequeñas empresas.',
-		weight: 1,
-		brand: 'Seagate',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/disco_seagate_ironwolf_pro_10tb_35_sata-53527.html',
-	},
+
 	{
 		name: 'Disco Rigido Externo 2Tb Seagate Slim PS4 Marvel',
 		priceNormal: 14999,
@@ -794,19 +738,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/placa_pci_paralelo_noganet-19183.html',
 	},
-	{
-		name: 'EQUIPO TODO EN UNO HP',
-		priceNormal: 110999,
-		priceSpecial: 84099,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/2/42291_800_image.jpg',
-		description:
-			'Obtén todo lo que necesitas con el elegante PC Todo-en-Uno empresarial HP 205. Mantén tu trabajo y tu espacio organizados con esta poderosa, confiable y asequible Todo-en-Uno.\nAdministre con eficiencia su espacio de trabajo gracias a este diseño inteligente y delgado. El HP 205 es fácil de configurar y de usar; basta desempacar, colocar en el escritorio, conectar y empezar a trabajar.',
-		weight: 1,
-		brand: 'HP',
-		category: 'computadoras',
-		descriptionLink:
-			'https://delta.com.ar/catalog/product/view/id/11476/s/equipo_todo_en_uno_hp-42291/category/2159/',
-	},
+
 	{
 		name: 'Pc Pcbox Core I3 Coffee lake 4gb 240ssd w10',
 		priceNormal: 67985,
@@ -833,19 +765,7 @@ const jsonProducts = [
 		descriptionLink:
 			'https://delta.com.ar/protector_de_voltaje_forza_fvp_1202n_a_zion_220v_1800w_rj45_negro-48344.html',
 	},
-	{
-		name: 'Disco Seagate Ironwolf 12Tb 35 Sata',
-		priceNormal: 109999,
-		priceSpecial: 79999,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53525_800_image.jpg',
-		description:
-			'La unidad IronWolf está diseñada para todo lo relacionado con los sistemas NAS. Acostúmbrese a un rendimiento robusto, listo para usar y con capacidad de expansión todos los días y a toda hora, que puede manejar entornos de múltiples bahías de los sistemas NAS con una amplia gama de capacidades.',
-		weight: 1,
-		brand: 'Seagate',
-		category: 'componentes',
-		descriptionLink:
-			'https://delta.com.ar/disco_seagate_ironwolf_12tb_35_sata-53525.html',
-	},
+
 	{
 		name: 'Placa Riser Ver009S PCI-E 1X a 16X',
 		priceNormal: 3299,
@@ -925,6 +845,32 @@ const jsonProducts = [
 			'https://delta.com.ar/mouse_mat_gamer_razer_gigantus_v2_soft_xxl_nasa_pad-51408.html',
 	},
 	{
+		name: 'Notebook Hp Gamer OMEN 15-ek0062la Intel® Core™ i7-10750H 8GB 512GB SSD 32GB Intel® Optane™ ',
+		priceNormal: 229000,
+		priceSpecial: 198999,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49529_800_image.jpg',
+		description:
+			'Notebook Hp Omen 15-Ek0062La Ci7 10750H 8Gb Ssd 512Gb Optane 32Gb Gf1650Ti 4Gb 15" W10H (1M1L9La#Ac8)\nSISTEMA OPERATIVO Windows 10 Home 64\nFAMILIA DE PROCESADOR Procesador Intel® Core ™ i7 de 10.ª generación\nPROCESADOR Intel® Core ™ i7-10750H (frecuencia base de 2,6 GHz, hasta 5,0 GHz con tecnología Intel® Turbo Boost, 12 MB de caché L3 y 6 núcleos)\nMEMORIA 8 GB de SDRAM DDR4-2933 (1 x 8 GB) 1 x 8 GB\nDISCO DURO Unidad de estado sólido Intel® de 512 GB\nSERVICIO EN LA NUBE Dropbox\nMONITOR Pantalla con retroiluminación WLED FHD, IPS, antirreflectante y microborde, de 15,6 "en diagonal, 250 nits, 45% de NTSC (1920 x 1080)\nGRÁFICOS Integrada\nGRÁFICOS Gráficos Intel® UHD\nGRÁFICOS Discreto\nGRÁFICOS NVIDIA® GeForce® GTX 1650 Ti (GDDR6 de 4 GB dedicado)\nPUERTOS 1 USB Type-C® con SuperSpeed ??de 5 Gbps Velocidad de señalización (DisplayPort ™ 1.4, HP Sleep and Charge); 1 USB tipo A con SuperSpeed ??de 5 Gbps Velocidad de señalización (HP Sleep and Charge); 2 USB Tipo-A con SuperSpeed ??de 5 Gbps Velocidad de señalización; 1 Mini DisplayPort ™; 1 HDMI 2.0a; 1 RJ-45; 1 conector inteligente CA; 1 combinación de auriculares y micrófono\nRANURAS DE EXPANSIÓN 1 lector de tarjetas SD multiformato\nCÁMARA WEB Cámara HD HP Wide Vision con doble micrófono digital integrado\nFUNCIONES DE AUDIO Audio de Bang &amp; Olufsen; DTS: X® Ultra; Soporte de control de audio OMEN DTS: X® Ultra; Altavoces dobles; HP Audio Boost 2.0\nTECLADO Teclado de tamaño completo, retroiluminado con RGB en 4 zonas, de color negro sombra, con teclado numérico y tecnología de teclas antiefecto fantasma con 26 pulsaciones de teclas simultáneas\nDISPOSITIVO APUNTADOR Mousepad que admite gestos multitáctiles\nCONEXIÓN INALÁMBRICA Conjunto Intel® Wi-Fi 6 AX 201 (2x2) y Bluetooth® 5 (compatible con velocidades de transferencia de archivos gigabit)\nINTERFAZ DE RED LAN 10/100/1000 GbE integrada\nTIPO DE FUENTE DE ALIMENTACIÓN Adaptador de alimentación de CA inteligente de 150 W\nTIPO DE BATERÍA Iones de litio de 3 celdas y 52,5 Wh\nEFICIENCIA ENERGÉTICA Certificación ENERGY STAR®\nDIMENSIONES (ANCHO X FONDO X ALTO) 35,79 x 23,97 x 2,25 centímetros\nPESO 2,36 kg A partir de 5,20 libras\nDISEÑO DE PRODUCTOS Base y cubierta mate de metal, marco de teclado anodizado\nGARANTÍA 1 año de garantía limitada de hardware con soporte técnico telefónico gratuito; 90 días de soporte técnico limitado para software (a partir de la fecha de compra)\nSOFTWARE INCLUIDO\nMcAfee LiveSafe ™ Netflix\nCOLOR DE PRODUCTO Cubierta y base negras sombra y armazón de teclado en aluminio negro sombra',
+		weight: 3650,
+		brand: 'HP',
+		category: 'notebooks',
+		descriptionLink:
+			'https://delta.com.ar/notebook_hp_omen_15_ek0062la_ci7_10750h_8gb_ssd_512gb_optane_32gb_gf1650ti_4gb_15_w10h-49529.html',
+	},
+	{
+		name: 'MB Intel (1200) Asus Prime B460M-Plus',
+		priceNormal: 19599,
+		priceSpecial: 15730,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/9/49098_800_image.jpg',
+		description:
+			'Socket Intel® LGA 1200: listo para procesadores Intel® Core ™ de 10a generación\nASUS OptiMem: enrutamiento cuidadoso de trazas y vías para preservar la integridad de la señal para mejorar la estabilidad de la memoria.\nFan Xpert 2+: controles flexibles para la máxima refrigeración y tranquilidad, además de detección de temperatura de GPU para juegos más frescos.\n5X Protection III: múltiples protecciones de hardware para una protección integral.\nConectividad ultrarrápida: flexibilidad suprema con soporte nativo M.2 para velocidades de almacenamiento ultrarrápidas',
+		weight: 1,
+		brand: 'Asus',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/mb_intel_1200_asus_prime_b460m_plus-49098.html',
+	},
+	{
 		name: 'Auricular Marshall Major IV On Ear Bt',
 		priceNormal: 20999,
 		priceSpecial: 15999,
@@ -975,6 +921,19 @@ const jsonProducts = [
 		category: 'notebooks',
 		descriptionLink:
 			'https://delta.com.ar/notebook_acer_i5_1135g7_swift_3_8gb_256gb_ssd_14_silver_w10hsl-53493.html',
+	},
+	{
+		name: 'D Rigido Pc Seagate 1Tb Skyhawk',
+		priceNormal: 7999,
+		priceSpecial: 6199,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/7/47036_800_image.jpg',
+		description:
+			'Características principales\nMarca\tSeagate\nLínea\tSkyHawk\nModelo\tST1000VX005\nCapacidad\t1 TB\nOtras características\nTecnología de almacenamientoHDD\nInterfacesSATA III\nAplicacionesSistema de videovigilancia\nUbicación del discoInterno\nFactor de forma3.5"\nCaché de datos64 MB\nCon RAIDSí',
+		weight: 1,
+		brand: 'Seagate',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/d_rigido_pc_seagate_1tb_skyhawk-47036.html',
 	},
 	{
 		name: 'Mouse Gamer Lenovo Legion M300 Rgb',
@@ -1042,6 +1001,19 @@ const jsonProducts = [
 			'https://delta.com.ar/pad_mouse_sharkoon_1337_rgb_v2_360x270x3mm_235grs-50762.html',
 	},
 	{
+		name: 'Kit de 3 Coolers Aerocool Duo 12 Pro ARGB - Dual Ring',
+		priceNormal: 8549,
+		priceSpecial: 6899,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/5/45369_800_image.jpg',
+		description:
+			'Ventilador.\nModelo: Duo 12 Pro Dual Ring ARGB.\nIncluido: Duo 12 x 3 / Hub x 1 / Control remoto x 1.\nDimensión del ventilador (L x W x H): 120 x 120 x 25 mm.\nVelocidad del ventilador: 1000 rpm.\nTipo de conector: 6 pines.\nVoltaje de arranque del ventilador: 6 V.\nTensión nominal: 12 V.\nCorriente nominal: 0.15A.\nConsumo de energía: 1.8 W.\nPresión de aire: 1.29 mmH2O.\nFlujo de aire: 33.4CFM.\nNivel de ruido del ventilador: 19.7dBA.\nTipo de rodamiento: rodamiento hidráulico.\nMTBF (tiempo medio antes de la falla): 60000 h.\nControl remoto.\nTipo: RF inalámbrico.\nFrecuencia: 433.92 MHZ.\nAlcance de recepción 10m.\nHub (H66F).\nConector: SATA.\nTensión nominal: 12V / 5V.\nCorriente nominal: 3A.\nPuerto para ventilador: 6. ',
+		weight: 1,
+		brand: 'AeroCool',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/kit_de_3_coolers_aerocool_duo_12_pro_argb_dual_ring-45369.html',
+	},
+	{
 		name: 'Pad Mouse Sharkoon 1337 Rgb V2 800X300X3Mm 510Grs',
 		priceNormal: 4999,
 		priceSpecial: 3899,
@@ -1053,6 +1025,19 @@ const jsonProducts = [
 		category: 'informaticaaccesorios',
 		descriptionLink:
 			'https://delta.com.ar/pad_mouse_sharkoon_1337_rgb_v2_800x300x3mm_510grs-50763.html',
+	},
+	{
+		name: 'Disco Ssd Kingston 960Gb Ssdnow A400 Sata3 25 7Mm',
+		priceNormal: 19166,
+		priceSpecial: 13999,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/0/50604_800_image.jpg',
+		description:
+			'-Arranques, cargas y transferencias de archivos todos con mayor rapidez.\n-Más fiable y duradera que las unidades de disco duro.\n-Varias capacidades, para almacenar las aplicaciones o sustituir del todo unidades de disco duro.\n-SSD SATA A400 en formatos 2,5" y M.2\n-La unidad A400 de estado sólido de Kingston ofrece enormes mejoras en la velocidad de respuesta, sin actualizaciones adicionales del hardware.\n-Brinda lapsos de arranque, carga y de transferencia de archivos increíblemente más breves en comparación con las unidades de disco duro mecánico.\n-Apoyada en su controlador de la más reciente generación, que ofrece velocidades de lectura y escritura de hasta 500 MB/s y 450 MB/s, respectivamente, esta unidad SSD es 10 veces más rápida que los discos duros tradicionales y provee un mejor rendimiento, velocidad de respuesta ultrarrápida en el procesamiento multitareas y una aceleración general del sistema.\n-Además son más fiables y duraderas que las unidades de disco duro, y están disponibles en varias capacidades que van de 120 GB hasta 1,92 TB.\n-Factor de forma\t2,5"\n-Interfaz\tSATA Rev. 3.0 (6 Gb/s), retro compatible con SATA Rev. 2.0 (3 Gb/s)\n-Capacidad 960GB\n-NAND\t3D\nRendimiento de referencia\n-Transferencia de datos (ATTO)\n-960 GB – hasta 500 MB/s en lectura y 450 MB/s en escritura\n-Consumo de energía\t0,195 W en reposo / 0,279 W promedio / 0,642 W (máx) lectura / 1,535 W (máx) escritura\n-Temperatura de almacenamiento\t-40°C~85°C\n-Temperatura de servicio\t0°C~70°C\n-Dimensiones\t100,0 mm x 69,9 mm x 7,0 mm (2,5”) 80 mm x 22 mm x 1,35 mm (M.2)\n-Vibración en funcionamiento\t2,17 G máxima (7–800 Hz)\n-Vibración en reposo\t20 G máxima (10–2000 Hz)\n-Vida útil\t1 millón de horas MTBF\n-Garantía/asistencia\tTres años de garantía limitada, con asistencia técnica gratuita\n-Total de bytes escritos (TBW)\t960GB: 300TB',
+		weight: 1,
+		brand: 'Kingston',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/disco_ssd_kingston_960gb_ssdnow_a400_sata3_25_7mm-50604.html',
 	},
 	{
 		name: 'Monitor 24 Acer V246Hl HDMI',
@@ -1133,18 +1118,19 @@ const jsonProducts = [
 			'https://delta.com.ar/adaptador_vertical_pplaca_grafica_sharkoon_elite_shark_series-50754.html',
 	},
 	{
-		name: 'Kit de 3 Coolers Aerocool Duo 12 Pro ARGB - Dual Ring',
-		priceNormal: 8549,
-		priceSpecial: 6899,
-		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/5/45369_800_image.jpg',
+		name: 'Disco Seagate Ironwolf Pro 10Tb 35 Sata',
+		priceNormal: 109999,
+		priceSpecial: 68999,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53527_800_image.jpg',
 		description:
-			'Ventilador.\nModelo: Duo 12 Pro Dual Ring ARGB.\nIncluido: Duo 12 x 3 / Hub x 1 / Control remoto x 1.\nDimensión del ventilador (L x W x H): 120 x 120 x 25 mm.\nVelocidad del ventilador: 1000 rpm.\nTipo de conector: 6 pines.\nVoltaje de arranque del ventilador: 6 V.\nTensión nominal: 12 V.\nCorriente nominal: 0.15A.\nConsumo de energía: 1.8 W.\nPresión de aire: 1.29 mmH2O.\nFlujo de aire: 33.4CFM.\nNivel de ruido del ventilador: 19.7dBA.\nTipo de rodamiento: rodamiento hidráulico.\nMTBF (tiempo medio antes de la falla): 60000 h.\nControl remoto.\nTipo: RF inalámbrico.\nFrecuencia: 433.92 MHZ.\nAlcance de recepción 10m.\nHub (H66F).\nConector: SATA.\nTensión nominal: 12V / 5V.\nCorriente nominal: 3A.\nPuerto para ventilador: 6. ',
+			'La unidad IronWolf Pro está diseñada para todo lo relacionado con los sistemas NAS empresariales y brinda un índice de carga de trabajo de 300 TB/año. Viene con un rendimiento con capacidad de expansión y activo todos los días y a toda hora en los entornos de múltiples bahías de los sistemas NAS para profesionales creativos y pequeñas empresas.',
 		weight: 1,
-		brand: 'AeroCool',
+		brand: 'Seagate',
 		category: 'componentes',
 		descriptionLink:
-			'https://delta.com.ar/kit_de_3_coolers_aerocool_duo_12_pro_argb_dual_ring-45369.html',
+			'https://delta.com.ar/disco_seagate_ironwolf_pro_10tb_35_sata-53527.html',
 	},
+
 	{
 		name: 'Pad Mouse Sharkoon 1337 V2 355X255X14mm 100Grs',
 		priceNormal: 1999,
@@ -1157,6 +1143,19 @@ const jsonProducts = [
 		category: 'informaticaaccesorios',
 		descriptionLink:
 			'https://delta.com.ar/pad_mouse_sharkoon_1337_v2_355x255x14mm_100grs-50759.html',
+	},
+	{
+		name: 'EQUIPO TODO EN UNO HP',
+		priceNormal: 110999,
+		priceSpecial: 84099,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/4/2/42291_800_image.jpg',
+		description:
+			'Obtén todo lo que necesitas con el elegante PC Todo-en-Uno empresarial HP 205. Mantén tu trabajo y tu espacio organizados con esta poderosa, confiable y asequible Todo-en-Uno.\nAdministre con eficiencia su espacio de trabajo gracias a este diseño inteligente y delgado. El HP 205 es fácil de configurar y de usar; basta desempacar, colocar en el escritorio, conectar y empezar a trabajar.',
+		weight: 1,
+		brand: 'HP',
+		category: 'computadoras',
+		descriptionLink:
+			'https://delta.com.ar/catalog/product/view/id/11476/s/equipo_todo_en_uno_hp-42291/category/2159/',
 	},
 	{
 		name: 'Gabinete Corsair Gamer 465X Rgb Tg White (Cc-9011189-Ww)',
@@ -1274,6 +1273,19 @@ const jsonProducts = [
 		category: 'informaticaaccesorios',
 		descriptionLink:
 			'https://delta.com.ar/auricular_sony_wi_c200b_sport_bt_negro-42120.html',
+	},
+	{
+		name: 'Disco Seagate Ironwolf 12Tb 35 Sata',
+		priceNormal: 109999,
+		priceSpecial: 79999,
+		img: 'https://delta.com.ar/pub/media/catalog/product/cache/9ad6f34536129571d4e291377abfd37f/5/3/53525_800_image.jpg',
+		description:
+			'La unidad IronWolf está diseñada para todo lo relacionado con los sistemas NAS. Acostúmbrese a un rendimiento robusto, listo para usar y con capacidad de expansión todos los días y a toda hora, que puede manejar entornos de múltiples bahías de los sistemas NAS con una amplia gama de capacidades.',
+		weight: 1,
+		brand: 'Seagate',
+		category: 'componentes',
+		descriptionLink:
+			'https://delta.com.ar/disco_seagate_ironwolf_12tb_35_sata-53525.html',
 	},
 ];
 
