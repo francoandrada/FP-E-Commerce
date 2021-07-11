@@ -1,5 +1,5 @@
 import { handleCloseClick } from './ModalLogic';
-import './modal.css';
+import './Modal.css';
 
 const Modal = ({ children, isOpen, closeModal }) => {
 	return (
