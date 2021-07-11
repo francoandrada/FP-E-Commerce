@@ -7,7 +7,11 @@ import ButtonRed from '../StyledComponents/ButtonRed';
 
 function Products() {
 	const allProducts = useSelector((state) => state.product.allProducts);
+	const filterCategory = useSelector((state) => state.category.selectedCategory);
 	const dispatch = useDispatch();
+
+	//Esta función esta comentada hasta que allProducts traiga también la categoría del producto
+	// if(filterCategory){allProducts.filter(product=>product.category===filterCategory)}
 
 
 	var formatNumber = {
