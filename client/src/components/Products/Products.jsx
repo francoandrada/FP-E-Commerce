@@ -8,9 +8,7 @@ import ButtonRed from '../StyledComponents/ButtonRed';
 function Products() {
 	const allProducts = useSelector((state) => state.product.allProducts);
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
+
 
 	var formatNumber = {
 		separator: '.',
@@ -35,7 +33,7 @@ function Products() {
 
 	return (
 		<div className={styles.cardsContainer}>
-			{allProducts.length > 0
+			{allProducts
 				? allProducts.map((p) => {
 						if (p.name.length > 55) {
 							var aux = p.name.slice(0, 55).concat('...');
