@@ -1,9 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { cleanSuggestions } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './SearchResult.module.css';
 
 const SearchResult = () => {
 	const { suggestions } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => dispatch(cleanSuggestions());
+	}, [dispatch]);
 
 	return (
 		<div className={styles.cardsContainer}>
