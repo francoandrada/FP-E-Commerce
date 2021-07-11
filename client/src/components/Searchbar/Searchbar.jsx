@@ -19,6 +19,10 @@ const SearchBar = ({ options, onInputChange }) => {
 		});
 	}, [onInputChange]);
 
+	const handleClick = (event, option) => {
+		inputRef.current.value = option;
+	};
+
 	return (
 		<div className='suggestions-container'>
 			<input
@@ -31,9 +35,7 @@ const SearchBar = ({ options, onInputChange }) => {
 				{options.slice(0, 6).map((option, key) => (
 					<button
 						className='suggestion-items'
-						onClick={(event) => {
-							inputRef.current.value = option;
-						}}
+						onClick={(event) => handleClick(event, option)}
 						key={key}
 						type='button'
 					>

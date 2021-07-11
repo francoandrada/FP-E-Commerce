@@ -6,8 +6,8 @@ import {
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
+	CLEAN_SUGGESTIONS,
 } from '../actionsName';
-
 
 const initialState = {
 	token: localStorage.getItem('token'),
@@ -21,13 +21,16 @@ const initialState = {
 	suggestions: undefined,
 };
 
+const productSuggestions = (array, name) => {
+	return array.filter((product) =>
+		product.name.toLowerCase().includes(name.toLowerCase())
+	);
+};
+
 function userReducer(state = initialState, action) {
-
-
 	switch (action.type) {
-
 		case ERROR:
-			console.log('desde reducer', action.payload)
+			console.log('desde reducer', action.payload);
 			return {
 				...state,
 				setError: action.payload,
@@ -67,6 +70,14 @@ function userReducer(state = initialState, action) {
 			return {
 				...state,
 				pending: false,
+				suggestions: productSuggestions(
+					action.payload.productSuggestions.product,
+					action.payload.name
+				),
+			};
+		case CLEAN_SUGGESTIONS:
+			return {
+				...state,
 				suggestions: action.payload,
 			};
 		default: {
