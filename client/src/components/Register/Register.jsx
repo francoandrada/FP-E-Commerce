@@ -26,6 +26,7 @@ function Register() {
     }
     
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (User.name === "" || User.surname === "" || User.email === "" || User.password === "" || User.address === '' || User.addressNumber === '' || User.postalCode === '' || User.phone === '') {
