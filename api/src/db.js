@@ -65,7 +65,6 @@ User.belongsToMany(Product, {
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
 
-
 module.exports = {
 	...sequelize.models,
 	conn: sequelize,
