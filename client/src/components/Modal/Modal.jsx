@@ -9,7 +9,9 @@ const Modal = ({ children, isOpen, closeModal }) => {
 		>
 			<div className={styles.modalContainer} onClick={handleCloseClick}>
 				<div className={styles.modalClose}>
-					<button onClick={closeModal}>X</button>
+					<button className={styles.btnModal} onClick={closeModal}>
+						X
+					</button>
 				</div>
 				{children}
 			</div>
