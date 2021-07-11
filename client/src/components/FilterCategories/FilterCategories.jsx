@@ -1,66 +1,74 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-<<<<<<< HEAD
-import {getCategories, filterCategory} from '../../Redux/actions'
+import { useEffect, useState } from 'react';
+import { filterCategory } from '../../Redux/actions';
 import styles from './Filter.module.css';
 // import styles from './Filter.module.css'
 
 function FilterCategories() {
-    const categoriesName= useSelector((state)=> state.category.allCategories)
-    const categoriesProducts= useSelector((state)=> state.category.selectedCategory)
-    const dispatch =useDispatch()
-    useEffect(() => {
-        dispatch(getCategories())
-    }, [dispatch])
+
+	const categoriesName = useSelector((state) => state.category.allCategories);
+   
+	const dispatch = useDispatch();
+
+    const [categoryChecked, setCategoryChecked] = useState("");
     
+    let prueba = undefined
+    if(document.getElementById("monitores")){
+        prueba = document.getElementById("monitores")
+    }
 
-    // console.log(categories.products)
-	return (
-       
-        <ul className={styles.divCelena}>
-			<h1 className={styles.title}>Hola</h1>
-			{categoriesName.map((item, index) => (
-                <ul>
-			  <button  
-              key={index}
-              // value={item.name}
-              onClick={() => dispatch(filterCategory(item.name)) }
-              >
-                  <p>{item.name}</p>
-              </button>
-              </ul>
-			))}
-            {/* { 
-                categoriesProducts ? categoriesProducts.products.map((x, index)=>(
-                    <div>
-                        <div>{x.name.products[0]}</div>
-                    </div>
-                ))
-                : <p>holados</p>
-            } */}
-		</ul>
-=======
-import styles from './Filter.module.css';
+    useEffect(()=>unCheck(categoryChecked),[categoryChecked]
+    )
 
-function FilterCategories() {
-	const categories = useSelector((state) => state.category.allCategories);
+    useEffect(()=>dispatch(filterCategory(categoryChecked)),[categoryChecked]
+    )
 
+    const unCheck = (category)=>{
+        let boxes = document.getElementsByClassName("form-check-input")
+        for(let i=0;i<boxes.length;i++){
+            boxes[i].id===category?
+            boxes[i].checked= true
+            : boxes[i].checked= false
+        }
+    }
+
+    const onClickedBox=(event)=>{
+        event.target.checked?setCategoryChecked(event.target.id):setCategoryChecked("")
+    }
+
+	// console.log(categories.products)
 	return (
 		<div className={styles.divCelena}>
-			<h1 className={styles.title}>Hola</h1>
-			{categories.map((item, index) => (
-				<div className={styles.div_celena} key={index}>
-					<p>{item.name}</p>
-				</div>
-			))}
+			<h6 className={styles.title}>Filter by categories</h6>
+            <hr></hr>
+			{categoriesName ? (
+				categoriesName.map((item, index) => (
+					<div className='form-check'>
+						<input
+							className='form-check-input'
+							type='checkbox'
+							id={item.name}
+                            // checked='true'
+							key={index}
+							onClick={(event) => onClickedBox(event)}
+                            // onClick={() => console.log(prueba.checked)}
+
+						/>
+						<label className='form-check-label' for='defaultCheck1'>
+							{item.name}
+						</label>
+					</div>
+				))
+			) : (
+				<ul></ul>
+			)}
+                    <hr></hr>
+                    <h6 className={styles.title}>Order by price</h6>
+                    <hr></hr>
+                    <h6 className={styles.title}>Order by rating</h6>
+
 		</div>
->>>>>>> 8c3cf3ddf8e75d85be4782dd3c5efbbf96a42680
 	);
 }
 
 export default FilterCategories;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 8c3cf3ddf8e75d85be4782dd3c5efbbf96a42680

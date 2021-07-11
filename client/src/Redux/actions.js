@@ -53,8 +53,7 @@ export function getSuggestions(name) {
 export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
-			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
+			dispatch({ type: GET_PRODUCTS, payload: response.data });
 		});
 	};
 }
@@ -205,17 +204,9 @@ export function loginGmail(data) {
 		}
 	};
 }
-export function filterCategory(name){
-	return async (dispatch)=>{
-		try {
-			const response = await axios.get('http://localhost:3001/admin/productcategoryget/' + name)
-			dispatch({
-				type: FILTER_CATEGORIES,
-				payload: response.data,
-			});
-			
-		} catch (error) {
-			console.log(error)
-		}
-	}
-}
+
+export const filterCategory = (name)=> {
+	console.log(name)
+	return {type: FILTER_CATEGORIES,
+	payload: name}}
+

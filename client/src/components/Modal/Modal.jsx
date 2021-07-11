@@ -1,12 +1,20 @@
 import { handleCloseClick } from './ModalLogic';
-import './Modal.css';
+import styles from './Modal.module.css';
 
 const Modal = ({ children, isOpen, closeModal }) => {
 	return (
-		<div className={`modal ${isOpen && 'is-open'}`} onClick={closeModal}>
-			<div className='modal-container' onClick={handleCloseClick}>
-				<div className='modal-close'>
-					<button onClick={closeModal}>X</button>
+		<div
+			className={`${styles.modalEcommerce} ${isOpen && styles.isOpenEcommerce}`}
+			onClick={closeModal}
+		>
+			<div
+				className={styles.modalContainerEcommerce}
+				onClick={handleCloseClick}
+			>
+				<div className={styles.modalCloseEcommerce}>
+					<button className={styles.btnModalEcommerce} onClick={closeModal}>
+						X
+					</button>
 				</div>
 				{children}
 			</div>

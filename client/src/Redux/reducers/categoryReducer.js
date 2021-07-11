@@ -2,7 +2,7 @@ import { GET_CATEGORIES, SELECTED_CATEGORY, FILTER_CATEGORIES} from "../actionsN
 
 const initialState = {
     allCategories: [],
-    selectCategory: [],
+    selectedCategory: "",
 }
 
 function categoryReducer(state = initialState, action) {
@@ -20,6 +20,7 @@ function categoryReducer(state = initialState, action) {
                 selectedCategory: action.payload
             }
         case FILTER_CATEGORIES:
+            console.log(action)
             return {
                     ...state,
                     selectedCategory: action.payload
