@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, SELECTED_CATEGORY } from "../actionsName";
+import { GET_CATEGORIES, SELECTED_CATEGORY, FILTER_CATEGORIES} from "../actionsName";
 
 const initialState = {
     allCategories: [],
@@ -19,6 +19,11 @@ function categoryReducer(state = initialState, action) {
                 ...state,
                 selectedCategory: action.payload
             }
+        case FILTER_CATEGORIES:
+            return {
+                    ...state,
+                    selectedCategory: action.payload
+                }
         default:
             return state
     }

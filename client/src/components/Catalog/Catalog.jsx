@@ -23,9 +23,14 @@ function Catalog() {
 
     return (
         <div id={styles.catalogue}>
-            <FilterCategories id={styles.filterContainer}/> 
-            <Products id={styles.productsContainer}/> 
-        </div>
+
+        
+                <FilterCategories id={styles.filterContainer}/> 
+                 <Products id={styles.productsContainer}/> 
+        
+        
+       </div> 
+
     )
 }
 

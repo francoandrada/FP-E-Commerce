@@ -8,6 +8,7 @@ import ForgotPassword from './components/LogIn/ForgotPassword';
 import ResetPassword from './components/LogIn/ResetPassword';
 import Catalog from './components/Catalog/Catalog';
 import Home from './components/ContainerComponents/Home/Home';
+import SearchProducts from './components/searchProducts/SearchProducts';
 
 import './App.css';
 import DetailProduct from './components/ProductDetail/ProductDetail';
@@ -27,6 +28,7 @@ function App() {
 				/>
 				<Route path='/catalog' exact component={Catalog} />
 				<Route path='/catalog/:id' exact component={DetailProduct} />
+				<Route path='/searchproduct' exact component={SearchProducts} />
 			</Switch>
 		</div>
 	);

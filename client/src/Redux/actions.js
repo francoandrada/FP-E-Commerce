@@ -12,7 +12,9 @@ import {
 	FETCH_ERROR,
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
-	GET_BRANDS
+	GET_BRANDS,
+	FILTER_CATEGORIES,
+	CLEAN_SUGGESTIONS,
 } from './actionsName';
 
 import axios from 'axios';
@@ -31,12 +33,17 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions() {
+export const cleanSuggestions = () => ({
+	type: CLEAN_SUGGESTIONS,
+	payload: undefined,
+});
+
+export function getSuggestions(name) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get('http://localhost:3001/products/');
-			dispatch(fetchSuggestions(res.data));
+			dispatch(fetchSuggestions({ productSuggestions: res.data, name }));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -46,7 +53,8 @@ export function getSuggestions() {
 export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data });
+			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
+			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
 		});
 	};
 }
@@ -196,4 +204,18 @@ export function loginGmail(data) {
 			console.log(error);
 		}
 	};
+}
+export function filterCategory(name){
+	return async (dispatch)=>{
+		try {
+			const response = await axios.get('http://localhost:3001/admin/productcategoryget/' + name)
+			dispatch({
+				type: FILTER_CATEGORIES,
+				payload: response.data,
+			});
+			
+		} catch (error) {
+			console.log(error)
+		}
+	}
 }
