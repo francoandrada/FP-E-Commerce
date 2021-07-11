@@ -8,7 +8,7 @@ import { useModal } from '../../hooks/useModal';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
 import Modal from '../Modal/Modal';
-import './Navbar.css';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
 	const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -58,9 +58,9 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className='navbar'>
-			<div className='leftSide'>
-				<div className='links' id={showLinks ? 'hidden' : ''}>
+		<div className={styles.navbar}>
+			<div className={styles.leftSide}>
+				<div className={styles.links} id={showLinks ? 'hidden' : ''}>
 					<Link to='/LogIn'>Login</Link>
 					<Link to='/register'>Register</Link>
 					<Link to='/catalog'>Catalog</Link>
@@ -73,9 +73,12 @@ const Navbar = () => {
 
 			<button onClick={openModal}>open modal</button>
 
-			<div className='rightSide'>
+			<div className={styles.rightSide}>
 				<Modal isOpen={isOpenModal} closeModal={closeModal}>
-					<div className='flex-container flex-column pos-rel' ref={wrapperRef}>
+					<div
+						className={`${styles.flexContainer} ${styles.flexColumn} ${styles.posRel}`}
+						ref={wrapperRef}
+					>
 						<input
 							value={search}
 							onClick={() => setDisplay(!display)}
@@ -83,7 +86,7 @@ const Navbar = () => {
 							placeholder='Search...'
 						/>
 						{display && (
-							<div className='autoContainer'>
+							<div className={styles.autoContainer}>
 								{options
 									.filter((product) =>
 										product.toLowerCase().includes(search.toLowerCase())
@@ -92,7 +95,7 @@ const Navbar = () => {
 									.map((value, index) => {
 										return (
 											<div
-												className='option'
+												className={styles.option}
 												onClick={() => searchHandle(value)}
 												key={index}
 												tabIndex='0'
@@ -104,7 +107,7 @@ const Navbar = () => {
 							</div>
 						)}
 					</div>
-					<button onClick={searchProduct} className='search-btn'>
+					<button onClick={searchProduct} className={styles.searchBtn}>
 						Search
 					</button>
 				</Modal>
