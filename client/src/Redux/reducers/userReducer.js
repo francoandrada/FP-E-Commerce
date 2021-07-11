@@ -71,7 +71,7 @@ function userReducer(state = initialState, action) {
 				...state,
 				pending: false,
 				suggestions: productSuggestions(
-					action.payload.productSuggestions.product,
+					action.payload.productSuggestions,
 					action.payload.name
 				),
 			};
