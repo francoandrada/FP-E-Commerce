@@ -1,9 +1,13 @@
 .card {
 	background-color: white;
 	width: min-content;
-	margin: 1rem 0rem;
+	margin: 1rem 1.5rem;
 	border-radius: 8px;
 	height: 368px;
+}
+.card:hover{
+	transform: scale(1.1);
+	transition: 300ms;
 }
 .cardsContainer {
 	display: flex;

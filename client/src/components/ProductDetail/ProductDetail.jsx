@@ -12,10 +12,10 @@ function DetailProduct(props) {
         dispatch(getProductById(props.match.params.id))
     }, [])
     console.log(productDetail)
-    
+
     return (
         <div className={styles.container}>
-             {productDetail ?
+            {productDetail ?
                 <div>
                     <div className={styles.card}>
                         <div className={styles.imgContainer}>
@@ -23,24 +23,26 @@ function DetailProduct(props) {
                         </div>
                         <div className={styles.productCard}>
                             <TitleStyle>
-                            {productDetail.name} 
+                                {productDetail.name}
                             </TitleStyle>
                             <p>${productDetail.price} </p>
-                            <ButtonRed>
-                            Shop
-                            </ButtonRed>
+                            <span> Stock: {productDetail.stock} </span>
+                            <div>
+                                <ButtonRed>
+                                    Shop
+                                </ButtonRed>
+                            </div>
                         </div>
                     </div>
                 </div> : null}
-                        <div className={styles.descriptionProduct}>
-                            <p>{productDetail.description} </p>
-                            {productDetail.brand ?
-                            <p>{productDetail.brand.name} </p>
-                            : null
-                        }
-                            <p>{productDetail.weigth} </p>
-                            <p>{productDetail.stock} </p>
-                        </div>
+            <div className={styles.descriptionProduct}>
+                <p>{productDetail.description} </p>
+                {productDetail.brand ?
+                    <p>{productDetail.brand.name} </p>
+                    : null
+                }
+                <p>{productDetail.weigth} </p>
+            </div>
         </div>
     )
 }
