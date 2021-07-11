@@ -6,13 +6,15 @@ import styles from './Products.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
 
 function Products() {
-	const allProducts = useSelector((state) => state.product.allProducts);
+	let allProducts = useSelector((state) => state.product.allProducts);
 	const filterCategory = useSelector(
 		(state) => state.category.selectedCategory
 	);
 	const dispatch = useDispatch();
 
-	if(filterCategory){allProducts.filter(product=>product.categories[0].name===filterCategory)}
+	if(filterCategory){
+		allProducts = allProducts.filter(product=>product.categories[0].name===filterCategory)
+	}
 
 	var formatNumber = {
 		separator: '.',
