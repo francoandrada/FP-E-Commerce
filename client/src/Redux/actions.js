@@ -13,6 +13,7 @@ import {
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
 	GET_BRANDS,
+	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
 } from './actionsName';
 
@@ -76,8 +77,7 @@ export function getBrands() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios
-			.get('http://localhost:3001/products/allproducts/' + id)
+		axios.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
@@ -204,4 +204,18 @@ export function loginGmail(data) {
 			console.log(error);
 		}
 	};
+}
+export function filterCategory(name){
+	return async (dispatch)=>{
+		try {
+			const response = await axios.get('http://localhost:3001/admin/productcategoryget/' + name)
+			dispatch({
+				type: FILTER_CATEGORIES,
+				payload: response.data,
+			});
+			
+		} catch (error) {
+			console.log(error)
+		}
+	}
 }
