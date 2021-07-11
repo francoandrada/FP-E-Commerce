@@ -59,8 +59,8 @@ const SearchResult = () => {
 					}
 					var formatPrice = formatNumber.new(p.price, '$');
 					return (
-						<div className={styles.card}>
-							<Link key={p.id} to={`/catalog/${p.id}`}>
+						<div key={p.id} className={styles.card}>
+							<Link to={`/catalog/${p.id}`}>
 								<div className={styles.cardImage}>
 									<img className={styles.img} src={p.image} alt='product' />
 								</div>
@@ -87,21 +87,3 @@ const SearchResult = () => {
 };
 
 export default SearchResult;
-
-/*
-			{suggestions &&
-				suggestions.map((p) => (
-					<Link key={p.id} to={`/catalog/${p.id}`}>
-						<div className={styles.card}>
-							<div className={styles.cardImage}>
-								<img className={styles.img} src={p.image} alt='product' />
-							</div>
-							<div className={styles.data}>
-								<span>{p.name}</span>
-								<span>${p.price}</span>
-							</div>
-						</div>
-					</Link>
-				))}
-
-*/
