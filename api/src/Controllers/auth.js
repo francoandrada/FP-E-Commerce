@@ -78,10 +78,11 @@ exports.forgotPassword = async (req, res) => {
 		);
 		var mailOptions = {
 			from: 'hardwarecommerce@gmail.com',
-			to: 'hardwarecommerce@gmail.com',
+			to: email,
 			subject: 'Reset your password',
 			html: `
 		 <h2>Please click on given link to reset your password </h2>
+		 <a href="url">${process.env.CLIENT_URL}/reset-password/${token}</a>
 		 <a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
 		 `,
 		};

@@ -95,6 +95,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
+			console.log('dato', dato)
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,

@@ -6,35 +6,28 @@ import { logIn, loginGmail } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
-import imag from '../../images/5.jpeg';
+import img from '../../images/12.png';
 import Button from '../StyledComponents/ButtonRed';
 /* global google */
 import jwt_decode from 'jwt-decode';
 
 const GlobalStyle = createGlobalStyle`
+
   body {
 	  background-image: none;
-	  background-color: black;
+	  background-color: black; 
+	  font-family: 'Roboto', sans-serif ;
+}
 
-  }
 `;
 const Img = styled.img`
-   width: 400px;
-    height: 400px;
+    width: 100px;
+    height: 100px;
+	margin-bottom: 1rem;
       @media  (max-width: 600px) {
         width: 200px;
         height: 150px;
     }
-`;
-
-const Paddign = styled.div`
-	padding: 1rem 2rem;
-	background-color: gray;
-	border-radius: 5px;
-	margin-top: 3rem;
-	:hover {
-  transform: scale(1.03);
-	}
 `;
 
 const Div = styled.div`
@@ -49,16 +42,16 @@ const Div = styled.div`
 
 const Text = styled.h1`
 	font-weight: 700;
+	background-color: white;
+	color: #FF3C4A;
 	border-radius: 5px;
 	text-align: center;
-	margin: 1rem 0;
+	margin: 1rem;
+	padding: 2rem;
+	font-family: 'Roboto', sans-serif;
 `;
 
-const Input = styled.input`
-	
-	border-radius: 5px;
-	text-align: center;
-`;
+
 const LogIn = () => {
 	///////// Login vía Google
 	const googleApiKey =
@@ -126,10 +119,13 @@ const LogIn = () => {
 	const history = useHistory();
 
 	const authenticated = useSelector((state) => state.user.authenticated);
+	console.log(authenticated)
 	const token = useSelector((state) => state.user.token);
 
 	const setError = useSelector((state) => state.user.setError);
 
+	console.log(setError)
+	
 	useEffect(() => {
 		if (authenticated) {
 			history.push('/');
@@ -150,39 +146,45 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			dispatch(logIn(values));
+			 console.log(values)
+			 dispatch(logIn(values));
+		
 		},
 	});
 
 	return (
 		<>
 			<GlobalStyle />
-			<div class='container d-flex justify-content-center mt-4'>
-				<div class=' row  '>
-					<div class='col bg-white m-0 rounded'>
-						<form class='p-3'>
-							<Text>Sing In</Text>
+			<div class='container d-flex justify-content-center mt-5 '>
+				<div class=' row'>
+					<div class='col bg-white px-5 rounded pb-4'>
+					<p>{setError}</p>
+						<form  onSubmit={formik.handleSubmit} class='p-3'>
+							<div class=' d-flex justify-content-center'>
+							<Img src={`${img}`} /></div>
 
-							<div class='form-group'>
-								{formik.touched.email && formik.errors.email ? (
-									<Div>{formik.errors.email}</Div>
-								) : null}
-								<Input
+							{formik.touched.email && formik.errors.email ? (
+								<Div>{formik.errors.email}</Div>
+							) : null}
+
+
+							<div class='form-group d-flex justify-content-center'>
+								<input
 									type='email'
 									class='form-control'
-									id='exampleDropdownFormEmail1'
-									placeholder='email@example.com'
+									id='email'
+									placeholder='Email'
 									name='email'
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									value={formik.values.email}
 								/>
 							</div>
-							<div class='form-group'>
-								{formik.touched.password && formik.errors.password ? (
-									<Div>{formik.errors.password}</Div>
-								) : null}
-								<Input
+							{formik.touched.password && formik.errors.password ? (
+								<Div>{formik.errors.password}</Div>
+							) : null}
+							<div class='form-group d-flex justify-content-center'>
+								<input
 									type='password'
 									class='form-control'
 									id='password'
@@ -195,25 +197,36 @@ const LogIn = () => {
 								/>
 							</div>
 							<div class='d-flex justify-content-center'>
-								<Button type='submit' class='btn btn-primary'>
+								<Button
+									type='submit'
+									class='btn btn-primary btn-block  mb-2  shadow-sm'
+								>
 									Sign in
 								</Button>
 							</div>
 						</form>
-						<div class='dropdown-divider'></div>
-						<Link
-							class='dropdown-item bg-secondary rounded text-center'
-							to={'/register'}
-						>
-							<p>New around here? Sign up</p>
-						</Link>
-
-						<Link
-							class='dropdown-item rounded text-center'
-							to={'/forgot-password'}
-						>
-							<p>Forgot your password?</p>
-						</Link>
+						
+						<div class=' d-flex justify-content-center '>
+							<Link
+								class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
+								to={'/forgot-password'}
+							>
+								Forgot your password?
+							</Link>
+						</div>
+					</div>
+					<div class='col bg-secondary p-5 rounded'>
+						<div class='p-5'>
+							<Text>Hardware Store</Text>
+							<div class=' d-flex justify-content-center '>
+							<Link
+								class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
+								to={'/register'}
+							>
+								Don't have an account? Sign up
+							</Link>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>
