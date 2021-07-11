@@ -10,7 +10,7 @@ import {
 	SUGGESTIONS,
 	FETCH_PENDING,
 	FETCH_ERROR,
-	GET_CATEGORIES
+	GET_CATEGORIES,
 } from './actionsName';
 
 import axios from 'axios';
@@ -29,12 +29,12 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions() {
+export function getSuggestions(name) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get('http://localhost:3001/products/');
-			dispatch(fetchSuggestions(res.data));
+			dispatch(fetchSuggestions({ productSuggestions: res.data, name }));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -45,8 +45,7 @@ export function getProducts() {
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/products/').then((response) => {
 			dispatch({ type: GET_PRODUCTS, payload: response.data.product });
-			dispatch({type: GET_CATEGORIES, payload: response.data.category})
-			;
+			dispatch({ type: GET_CATEGORIES, payload: response.data.category });
 		});
 	};
 }
@@ -163,16 +162,13 @@ export function resetPassword(resetLink, newPass) {
 			console.log(error);
 		}
 	};
-
-
-
 }
 
 export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
-			console.log('request al server http://localhost:3001/authGmail ')
-			console.log(data)
+			console.log('request al server http://localhost:3001/authGmail ');
+			console.log(data);
 			const res = await axios.post('http://localhost:3001/authGmail', data);
 			console.log('desde el action', res.data.token);
 
@@ -181,7 +177,7 @@ export function loginGmail(data) {
 				payload: res.data.token,
 			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }

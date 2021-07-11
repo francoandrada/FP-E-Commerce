@@ -8,7 +8,6 @@ import {
 	FETCH_ERROR,
 } from '../actionsName';
 
-
 const initialState = {
 	token: localStorage.getItem('token'),
 	setError: [],
@@ -21,13 +20,16 @@ const initialState = {
 	suggestions: undefined,
 };
 
+const productSuggestions = (array, name) => {
+	return array.filter((product) =>
+		product.name.toLowerCase().includes(name.toLowerCase())
+	);
+};
+
 function userReducer(state = initialState, action) {
-
-
 	switch (action.type) {
-
 		case ERROR:
-			console.log('desde reducer', action.payload)
+			console.log('desde reducer', action.payload);
 			return {
 				...state,
 				setError: action.payload,
@@ -67,7 +69,10 @@ function userReducer(state = initialState, action) {
 			return {
 				...state,
 				pending: false,
-				suggestions: action.payload,
+				suggestions: productSuggestions(
+					action.payload.productSuggestions.product,
+					action.payload.name
+				),
 			};
 		default: {
 			return state;
