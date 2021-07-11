@@ -39,7 +39,8 @@ function FilterCategories() {
 	// console.log(categories.products)
 	return (
 		<div className={styles.divCelena}>
-			<h1 className={styles.title}>Hola</h1>
+			<h6 className={styles.title}>Filter by categories</h6>
+            <hr></hr>
 			{categoriesName ? (
 				categoriesName.map((item, index) => (
 					<div className='form-check'>
@@ -61,6 +62,11 @@ function FilterCategories() {
 			) : (
 				<ul></ul>
 			)}
+                    <hr></hr>
+                    <h6 className={styles.title}>Order by price</h6>
+                    <hr></hr>
+                    <h6 className={styles.title}>Order by rating</h6>
+
 		</div>
 	);
 }
