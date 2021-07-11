@@ -12,7 +12,9 @@ import {
 	FETCH_ERROR,
 	GET_CATEGORIES,
 	GET_HIGHLIGHTS,
-	GET_BRANDS
+	GET_BRANDS,
+	FILTER_CATEGORIES,
+	CLEAN_SUGGESTIONS,
 } from './actionsName';
 
 import axios from 'axios';
@@ -31,12 +33,17 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
-export function getSuggestions() {
+export const cleanSuggestions = () => ({
+	type: CLEAN_SUGGESTIONS,
+	payload: undefined,
+});
+
+export function getSuggestions(name) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get('http://localhost:3001/products/');
-			dispatch(fetchSuggestions(res.data));
+			dispatch(fetchSuggestions({ productSuggestions: res.data, name }));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -69,8 +76,7 @@ export function getBrands() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios
-			.get('http://localhost:3001/products/allproducts/' + id)
+		axios.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
@@ -196,3 +202,9 @@ export function loginGmail(data) {
 		}
 	};
 }
+
+export const filterCategory = (name)=> {
+	console.log(name)
+	return {type: FILTER_CATEGORIES,
+	payload: name}}
+

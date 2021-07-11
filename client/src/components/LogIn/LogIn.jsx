@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import imag from '../../images/5.jpeg';
+import Button from '../StyledComponents/ButtonRed';
 /* global google */
 import jwt_decode from 'jwt-decode';
 
@@ -20,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
 const Img = styled.img`
    width: 400px;
     height: 400px;
-	padding: 0;
       @media  (max-width: 600px) {
         width: 200px;
         height: 150px;
@@ -28,12 +28,37 @@ const Img = styled.img`
 `;
 
 const Paddign = styled.div`
-padding: 1rem 2rem;
-background-color: gray;
-border-radius: 5px;
-margin-top: 1rem;
+	padding: 1rem 2rem;
+	background-color: gray;
+	border-radius: 5px;
+	margin-top: 3rem;
+	:hover {
+  transform: scale(1.03);
+	}
 `;
 
+const Div = styled.div`
+	padding: .5rem;
+	color: #FF3C4A;
+	font-weight: 700;
+	border-radius: 5px;
+	text-align: center;
+	margin: .5rem;
+	
+`;
+
+const Text = styled.h1`
+	font-weight: 700;
+	border-radius: 5px;
+	text-align: center;
+	margin: 1rem 0;
+`;
+
+const Input = styled.input`
+	
+	border-radius: 5px;
+	text-align: center;
+`;
 const LogIn = () => {
 	///////// Login vía Google
 	const googleApiKey =
@@ -120,7 +145,9 @@ const LogIn = () => {
 			email: Yup.string()
 				.email('Invalid email address')
 				.required('Enter an email'),
-			password: Yup.string().required('Enter a password').min(6),
+			password: Yup.string()
+				.required('Enter a password')
+				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));
@@ -130,74 +157,65 @@ const LogIn = () => {
 	return (
 		<>
 			<GlobalStyle />
-			<div class='container d-flex justify-content-center mt-2 '>
-			<div class=' row  '>
-			<Paddign>
+			<div class='container d-flex justify-content-center mt-4'>
+				<div class=' row  '>
 					<div class='col bg-white m-0 rounded'>
-				
-			
-					<form class='p-3'>
-				
-						<div class='form-group'>
-							<label for='email'>Email address</label>
-							{formik.touched.email && formik.errors.email ? (
-								<div>{formik.errors.email}</div>
-							) : null}
-							<input
-								type='email'
-								class='form-control'
-								id='exampleDropdownFormEmail1'
-								placeholder='email@example.com'
-								class='form-control'
-								name='email'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.email}
-							/>
-						</div>
-						<div class='form-group'>
-							<label for='password'>Password</label>
-							{formik.touched.password && formik.errors.password ? (
-								<div>{formik.errors.password}</div>
-							) : null}
-							<input
-								type='password'
-								class='form-control'
-								id='password'
-								name='password'
-								type='password'
-								placeholder='Password'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.password}
-							/>
-						</div>
-						<div class='form-check'>
-							<input
-								type='checkbox'
-								class='form-check-input'
-								id='dropdownCheck'
-							/>
-							<label class='form-check-label' for='dropdownCheck'>
-								Remember me
-							</label>
-						</div>
-						<button type='submit' class='btn btn-primary'>
-							Sign in
-						</button>
-					
-					</form>
-					<div class='dropdown-divider'></div>
-					<Link class='dropdown-item' to={'/register'}>
-						<p>New around here? Sign up</p>
-					</Link>
-					
-					<Link class='dropdown-item' to={'/forgot-password'}>
-						<p>Forgot your password?</p>
-					</Link>
+						<form class='p-3'>
+							<Text>Sing In</Text>
+
+							<div class='form-group'>
+								{formik.touched.email && formik.errors.email ? (
+									<Div>{formik.errors.email}</Div>
+								) : null}
+								<Input
+									type='email'
+									class='form-control'
+									id='exampleDropdownFormEmail1'
+									placeholder='email@example.com'
+									name='email'
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.email}
+								/>
+							</div>
+							<div class='form-group'>
+								{formik.touched.password && formik.errors.password ? (
+									<Div>{formik.errors.password}</Div>
+								) : null}
+								<Input
+									type='password'
+									class='form-control'
+									id='password'
+									name='password'
+									type='password'
+									placeholder='Password'
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.password}
+								/>
+							</div>
+							<div class='d-flex justify-content-center'>
+								<Button type='submit' class='btn btn-primary'>
+									Sign in
+								</Button>
+							</div>
+						</form>
+						<div class='dropdown-divider'></div>
+						<Link
+							class='dropdown-item bg-secondary rounded text-center'
+							to={'/register'}
+						>
+							<p>New around here? Sign up</p>
+						</Link>
+
+						<Link
+							class='dropdown-item rounded text-center'
+							to={'/forgot-password'}
+						>
+							<p>Forgot your password?</p>
+						</Link>
 					</div>
-					</Paddign>
-			</div>
+				</div>
 			</div>
 		</>
 	);

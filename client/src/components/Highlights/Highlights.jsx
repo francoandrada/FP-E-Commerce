@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import HighlightProd from '../HighlightProd/HighlightProd'
+import './Highlights.css'
 
 
 function Highlights() {
@@ -42,12 +43,12 @@ function Highlights() {
     return (
         <div>
 
-            <button onClick={handlePrevPage}>PREV</button>
-            <button onClick={handleNextPage}>NEXT</button>
-
+            
+            
+        
             <div>   
-                <div>
-                        
+                <div className="divCarrousel" >  
+                <button className="botonCarrousel" onClick={handlePrevPage}>PREV</button>
                     {   
                         highlights.length !== 0 && highlights.slice(currentPage.first, currentPage.last)
                         .map(el => {
@@ -60,6 +61,7 @@ function Highlights() {
                             />
                             </div>})
                     }
+                    <button className="botonCarrousel" onClick={handleNextPage}>NEXT</button>
                 </div>   
             </div>
 

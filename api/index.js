@@ -11,4 +11,5 @@ conn
 			console.log('%s listening at 3001');
 		});
 	})
-	.then(() => productsDb());
+	.then(() => productsDb())
+	

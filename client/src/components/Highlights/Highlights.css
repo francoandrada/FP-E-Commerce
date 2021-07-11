@@ -1,0 +1,15 @@
+.divCarrousel {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   
+    
+}
+
+.botonCarrousel {
+    color: black;
+    border-style: hidden;
+    border-radius: 100px;
+    height: 50px;
+}

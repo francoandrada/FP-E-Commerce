@@ -54,7 +54,7 @@ i {
 	padding-right: 25px;
 }
 
-.rightSide input {
+/* .rightSide input {
 	width: 220px;
 	height: 30px;
 	border: none;
@@ -62,9 +62,9 @@ i {
 	font-size: 20px;
 	padding-left: 15px;
 	color: black;
-}
+} */
 
-.rightSide .search-btn {
+.rightSide .searchBtn {
 	height: 32px;
 	width: 70px;
 	font-size: 16px;
@@ -112,4 +112,75 @@ i {
 		margin: 10px;
 		font-size: 25px;
 	}
+}
+
+/* Search bar */
+.auto-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+}
+
+input {
+	padding: 10px;
+	width: 350px;
+	height: 40px;
+	border: 1px solid purple;
+	margin: 10px;
+	margin-top: 12px;
+	font-size: 18px;
+	text-transform: capitalize;
+}
+
+.posRel {
+	position: relative;
+}
+
+.autoContainer {
+	position: absolute;
+	border-width: 0px 1px 1px 1px;
+	border-style: solid;
+	/* 	border-color: goldenrod; */
+	border: none;
+	right: 130px;
+	top: 40px;
+	width: 220px;
+}
+
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 350px;
+	padding: 5px;
+	background-color: white;
+}
+
+.option:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+.option,
+span {
+	font-size: 12px;
+	text-transform: capitalize;
+}
+
+.flexContainer {
+	display: flex;
+}
+
+.flexColumn {
+	flex-direction: column;
+}
+
+.modalSearchContainer {
+	margin-top: 20px;
+	width: 400px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
