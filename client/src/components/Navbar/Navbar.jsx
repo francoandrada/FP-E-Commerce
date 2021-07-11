@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getSuggestions } from '../../Redux/actions';
 import { useModal } from '../../hooks/useModal';
+import { useKey } from '../../hooks/useKey';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
 import Modal from '../Modal/Modal';
@@ -51,11 +52,17 @@ const Navbar = () => {
 
 	const searchProduct = (event) => {
 		event.preventDefault();
-		history.push('/searchproduct');
-		dispatch(getSuggestions(search));
-		setSearch('');
-		closeModal();
+		if (search.trim()) {
+			history.push('/searchproduct');
+			dispatch(getSuggestions(search));
+			setSearch('');
+			closeModal();
+		} else {
+			setSearch('');
+			closeModal();
+		}
 	};
+	useKey('Enter', searchProduct);
 
 	return (
 		<div className={styles.navbar}>
@@ -75,41 +82,40 @@ const Navbar = () => {
 
 			<div className={styles.rightSide}>
 				<Modal isOpen={isOpenModal} closeModal={closeModal}>
-					<div
-						className={`${styles.flexContainer} ${styles.flexColumn} ${styles.posRel}`}
-						ref={wrapperRef}
-					>
-						<input
-							value={search}
-							onClick={() => setDisplay(!display)}
-							onChange={(event) => setSearch(event.target.value)}
-							placeholder='Search...'
-						/>
-						{display && (
-							<div className={styles.autoContainer}>
-								{options
-									.filter((product) =>
-										product.toLowerCase().includes(search.toLowerCase())
-									)
-									.slice(0, 7)
-									.map((value, index) => {
-										return (
-											<div
-												className={styles.option}
-												onClick={() => searchHandle(value)}
-												key={index}
-												tabIndex='0'
-											>
-												<span>{value}</span>
-											</div>
-										);
-									})}
-							</div>
-						)}
+					<div className={styles.modalSearchContainer}>
+						<div
+							className={`${styles.flexContainer} ${styles.flexColumn} ${styles.posRel}`}
+							ref={wrapperRef}
+						>
+							<input
+								value={search}
+								onClick={() => setDisplay(!display)}
+								onChange={(event) => setSearch(event.target.value)}
+								placeholder='Search...'
+							/>
+							{display && (
+								<div className={styles.autoContainer}>
+									{options
+										.filter((product) =>
+											product.toLowerCase().includes(search.toLowerCase())
+										)
+										.slice(0, 7)
+										.map((value, index) => {
+											return (
+												<div
+													className={styles.option}
+													onClick={() => searchHandle(value)}
+													key={index}
+													tabIndex='0'
+												>
+													<span>{value}</span>
+												</div>
+											);
+										})}
+								</div>
+							)}
+						</div>
 					</div>
-					<button onClick={searchProduct} className={styles.searchBtn}>
-						Search
-					</button>
 				</Modal>
 			</div>
 		</div>
