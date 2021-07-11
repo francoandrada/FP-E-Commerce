@@ -1,19 +1,27 @@
 body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color:rgb(231, 231, 231);
-  background-image: url(./images/stars-background-ecommerce1920x1080.jpg);
-  background-repeat: repeat-y;
-
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: rgb(231, 231, 231);
+	background-image: url(./images/stars-background-ecommerce1920x1080.jpg);
+	background-repeat: repeat-y;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
-a:link{
-  text-decoration: none!important;
+a:link {
+	text-decoration: none !important;
+}
+
+#credential_picker_container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
 }
