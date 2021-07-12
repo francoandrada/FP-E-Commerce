@@ -197,7 +197,7 @@ const LogIn = () => {
 
 							<div class=' d-flex justify-content-center'>
 								<Link
-									class='dropdown-item bg-secondary m-2 p-2 rounded text-center '
+									class=' bg-secondary m-2 p-2 rounded text-center border border-secondary '
 									to={'/register'}
 								>
 									Don't have an account? Sign up
