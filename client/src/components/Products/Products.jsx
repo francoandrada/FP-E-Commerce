@@ -1,20 +1,51 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getProducts } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
+import PagingBox from '../PagingBox/PagingBox';
 
 function Products() {
 	let allProducts = useSelector((state) => state.product.allProducts);
 	const filterCategory = useSelector(
 		(state) => state.category.selectedCategory
 	);
+	const orderPrice = useSelector((state) => state.price.order);
+
 	const dispatch = useDispatch();
 
 	if(filterCategory){
 		allProducts = allProducts.filter(product=>product.categories[0].name===filterCategory)
 	}
+
+	if(orderPrice==='ascending'){
+		allProducts.sort(function (a, b) {
+			if (a.price > b.price) {
+			  return 1;
+			}
+			if (a.price < b.price) {
+			  return -1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+	if(orderPrice==='descending'){
+		allProducts.sort(function (b, a) {
+			if (b.price > a.price) {
+			  return -1;
+			}
+			if (b.price < a.price) {
+			  return 1;
+			}
+			// a must be equal to b
+			return 0;
+		  });
+	}
+
+
 
 	var formatNumber = {
 		separator: '.',
@@ -37,10 +68,21 @@ function Products() {
 		},
 	};
 
+	  //Paginado
+	  const productsPerPage = 9;
+	  const pagesQty = Math.ceil(allProducts.length / productsPerPage);
+	  const [actualPage, setActualPage] = useState(1);
+	  const setPage = (value) => setActualPage(value);
+	  const endIndex = productsPerPage * actualPage;
+	  const initIndex = endIndex - productsPerPage;
+
+	
+
 	return (
 		<div className={styles.cardsContainer}>
 			{allProducts
-				? allProducts.map((p) => {
+				? 
+				allProducts.slice(initIndex, endIndex).map((p) => {
 						if (p.name.length > 55) {
 							var aux = p.name.slice(0, 55).concat('...');
 							p.name = aux;
@@ -67,10 +109,14 @@ function Products() {
 										</div>
 									</div>
 								</Link>
+								<div id={styles.paginado}>
+                </div>
+
 							</div>
 						);
-				  })
-				: null}
+					})
+					: null}
+					<PagingBox pagesQty={pagesQty} setPage={setPage} actualPage={actualPage}/>
 		</div>
 	);
 }
