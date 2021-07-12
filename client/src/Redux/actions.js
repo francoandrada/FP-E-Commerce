@@ -1,6 +1,7 @@
 import {
 	SUCCESS_LOGIN,
 	ERROR,
+	HIDE_ALERT,
 	AUTH_USER,
 	LOG_OUT,
 	GET_PRODUCTS,
@@ -16,6 +17,7 @@ import {
 	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
 	FILTER_PRICE
+
 } from './actionsName';
 
 import axios from 'axios';
@@ -107,6 +109,7 @@ export function logIn(dato) {
 				payload: error.response.data.msg,
 			});
 		}
+	
 	};
 }
 
@@ -151,12 +154,16 @@ export function logOut(data) {
 export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
-			await axios.put('http://localhost:3001/auth/forgot-password', { email });
-console.log(email)
+			const res =await axios.put('http://localhost:3001/auth/forgot-password', { email });
+			let hola = res.data.msg
 			dispatch({
 				type: FORGOT_PASSWORD,
-				payload: email,
+				payload: {
+					email,
+					hola
+				},
 			});
+			console.log('desde el action', res.data.msg)
 		} catch (error) {
 
 			dispatch({
@@ -164,6 +171,11 @@ console.log(email)
 				payload: error.response.data.msg,
 			});
 		}
+		setTimeout(() => {
+            dispatch({
+                type: HIDE_ALERT
+            })
+        }, 3000);
 	};
 }
 
@@ -190,8 +202,7 @@ export function resetPassword(resetLink, newPass) {
 export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
-			console.log('request al server http://localhost:3001/authGmail ');
-			console.log(data);
+				
 			const res = await axios.post('http://localhost:3001/authGmail', data);
 			console.log('desde el action', res.data.token);
 

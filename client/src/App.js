@@ -17,6 +17,7 @@ function App() {
 				<Route path='/LogIn' exact component={LogIn} />
 				<Route path='/register' exact component={Register} />
 				<Route path='/forgot-password' exact component={ForgotPassword} />
+				<Route path='/forgot-password/fp' exact component={ForgotPassword} />
 				<Route
 					path='/reset-password/:resetLink'
 					exact
