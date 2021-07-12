@@ -15,6 +15,7 @@ import {
 	GET_BRANDS,
 	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
+	FILTER_BRANDS
 } from './actionsName';
 
 import axios from 'axios';
@@ -210,3 +211,27 @@ export const filterCategory = (name)=> {
 	return {type: FILTER_CATEGORIES,
 	payload: name}}
 
+
+export const filterBrandProduct = (id)=> {
+		console.log(id)
+		return {type: FILTER_BRANDS,
+		payload: id}}
+
+
+export function Filter_Brands(elem) {
+	return async (dispatch, getState) => {
+		console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+		let all = getState().product.allProducts
+		let arrayBrands= []
+		for(let i= 0; i< all.length; i++){
+			if(all[i].brandId === parseInt(elem)){
+				arrayBrands.push(all[i])
+			}
+		}
+				dispatch({ 
+					type: FILTER_BRANDS,
+					 payload: arrayBrands
+				});
+			
+		};
+	}

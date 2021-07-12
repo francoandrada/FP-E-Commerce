@@ -10,10 +10,14 @@ function Products() {
 	const filterCategory = useSelector(
 		(state) => state.category.selectedCategory
 	);
+	const filterBrand= useSelector((state)=> state.brands.selectedBrand)
 	const dispatch = useDispatch();
 
 	if(filterCategory){
 		allProducts = allProducts.filter(product=>product.categories[0].name===filterCategory)
+	}
+	if(filterBrand.length > 0){
+		allProducts= allProducts.filter(product=>product.brandId===parseInt(filterBrand))
 	}
 
 	var formatNumber = {

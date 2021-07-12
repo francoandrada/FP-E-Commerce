@@ -1,7 +1,7 @@
-.divCelena {
-	background-color: aliceblue;
-	color: black;
-	width: 20%;
+.div_cont_filter {
+	background-color: rgba(0, 0, 0, 0.383);
+	color: rgb(250, 248, 248);
+	/* width: 20%; */
 }
 
 .title {

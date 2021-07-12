@@ -1,8 +1,8 @@
-import { GET_BRANDS, SELECTED_BRANDS } from "../actionsName";
+import { GET_BRANDS, SELECTED_BRANDS, FILTER_BRANDS } from "../actionsName";
 
 const initialState = {
     allBrands: [],
-    selectBrand: [],
+    selectedBrand:''
 }
 
 function brandsReducer(state = initialState, action) {
@@ -18,6 +18,11 @@ function brandsReducer(state = initialState, action) {
                 ...state,
                 selectedBrand: action.payload
             }
+        case FILTER_BRANDS: 
+        return {
+            ...state,
+            selectedBrand: action.payload
+        }
         default:
             return state
     }

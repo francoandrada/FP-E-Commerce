@@ -5,7 +5,9 @@
 }
 
 #filterContainer{
-   width: 15% 
+   width: 15% ;
+  margin-top: 1%;
+   
 }
 
 #productsContainer{

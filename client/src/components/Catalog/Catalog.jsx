@@ -1,5 +1,6 @@
 import Products from "../Products/Products";
 import FilterCategories from "../FilterCategories/FilterCategories"
+import FilterBrands from "../FilterBrands/FilterBrands";
 import { useDispatch,useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getCategories, getBrands,getProducts } from '../../Redux/actions'
@@ -27,9 +28,13 @@ function Catalog() {
     return (
         <div id={styles.catalogue}>
 
-        
-                <FilterCategories id={styles.filterContainer}/> 
-                 <Products id={styles.productsContainer}/> 
+                
+                <div id={styles.filterContainer}>
+                <FilterCategories id={styles.filterContaine} /> 
+                 <FilterBrands id={styles.filter}/>
+
+                </div>
+                 <Products id={styles.productsContainer}/>
         
         
        </div> 

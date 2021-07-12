@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { filterCategory } from '../../Redux/actions';
 import styles from './Filter.module.css';
-// import styles from './Filter.module.css'
+
+
 
 function FilterCategories() {
 
@@ -38,7 +39,7 @@ function FilterCategories() {
 
 	// console.log(categories.products)
 	return (
-		<div className={styles.divCelena}>
+		<div className={styles.div_cont_filter}>
 			<h6 className={styles.title}>Filter by categories</h6>
             <hr></hr>
 			{categoriesName ? (
@@ -62,11 +63,12 @@ function FilterCategories() {
 			) : (
 				<ul></ul>
 			)}
+                    
                     <hr></hr>
                     <h6 className={styles.title}>Order by price</h6>
                     <hr></hr>
                     <h6 className={styles.title}>Order by rating</h6>
-
+                    <hr></hr>
 		</div>
 	);
 }
