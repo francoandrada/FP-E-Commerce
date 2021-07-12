@@ -33,7 +33,7 @@ function userReducer(state = initialState, action) {
 			console.log('desde reducer', action.payload);
 			return {
 				...state,
-				setError: action.payload,
+				setError: [action.payload],
 			};
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
