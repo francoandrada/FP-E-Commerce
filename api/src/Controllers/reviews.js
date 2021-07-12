@@ -11,17 +11,14 @@ const newReview = async function newReview(req, res) {
 			},
 		});
 		if (userReview) {
-			var response = await userReview.addReview(
-				{
-					through: {
-
-						description,
-						stars,
-						userId,
-						productId,
-					},
-				}
-			);
+			var response = await userReview.addReview({
+				through: {
+					description,
+					stars,
+					userId,
+					productId,
+				},
+			});
 		}
 
 		res.status(200).json(response);
