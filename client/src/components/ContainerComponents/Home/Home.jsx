@@ -16,7 +16,7 @@ function Home() {
 
 	return (
 		<div className={styles.HomeContainer}>
-			<AuthenticatedUser />
+		
 			<div>
 				<BannerContainer></BannerContainer>
 				<HighlightedProdContainer></HighlightedProdContainer>
