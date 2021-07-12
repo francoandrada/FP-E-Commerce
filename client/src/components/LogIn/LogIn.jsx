@@ -7,12 +7,11 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import img from '../../images/12.png';
+import imge from '../../images/5.jpeg';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
 /* global google */
 /* global gapi */
-import jwt_decode from 'jwt-decode';
-import styles from './LogIn.module.css';
 import { GoogleLogin } from 'react-google-login';
 
 const GlobalStyle = createGlobalStyle`
@@ -32,19 +31,29 @@ const Img = styled.img`
         height: 150px;
     }
 `;
-
-const Text = styled.h1`
-	font-weight: 700;
-	background-color: white;
-	color: #FF3C4A;
+const Imge = styled.img`
+    width: 370px;
+    height: 300px;
 	border-radius: 10px;
-	margin: 1rem;
-	padding: 2rem;
-	font-family: 'Roboto', sans-serif;
-	:hover{
-		background-color: #303030;
-	}
+	background-size: cover;
+	margin: 0;
+      @media  (max-width: 600px) {
+        width: 200px;
+        height: 150px;
+    }
 `;
+// const Text = styled.h1`
+// 	font-weight: 700;
+// 	background-color: white;
+// 	color: #FF3C4A;
+// 	border-radius: 10px;
+// 	margin: 1rem;
+// 	padding: 2rem;
+// 	font-family: 'Roboto', sans-serif;
+// 	:hover{
+// 		background-color: #303030;
+// 	}
+// `;
 
 const LogIn = () => {
 	///////// Login vía Google
@@ -55,23 +64,21 @@ const LogIn = () => {
 	const [isSignedIn, setIsSignedIn] = useState(false);
 	const [userInfo, setUserInfo] = useState({});
 
-	const responseGoogle = (response)=>{
-		console.log(response)
-		if(response.tokenId){
+	const responseGoogle = (response) => {
+		console.log(response);
+		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
 				password: response.tokenId,
 			});
-
 		}
-	}	
+	};
 
-	useEffect(()=>{
+	useEffect(() => {
 		if (userInfo.password) {
 			setIsSignedIn(true);
 		}
-	},[userInfo])
-
+	}, [userInfo]);
 
 	useEffect(() => {
 		if (isSignedIn) {
@@ -89,7 +96,6 @@ const LogIn = () => {
 	const token = useSelector((state) => state.user.token);
 
 	const setError = useSelector((state) => state.user.setError);
-
 
 	useEffect(() => {
 		if (authenticated) {
@@ -112,22 +118,18 @@ const LogIn = () => {
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));
-
 		},
 	});
 
 	return (
 		<>
 			<GlobalStyle />
-			<div class='container d-flex justify-content-center mt-5 '>
+			<div class='container d-flex justify-content-center mt-5 rounded'>
 				<div class=' row'>
 					<div class='col bg-white px-5 rounded pb-4'>
+						{setError !== null ? <Error>{setError}</Error> : null}
 
-					{setError !== null ? <Error>{setError}</Error> : null }
-						
-
-						<form  onSubmit={formik.handleSubmit} class='p-3'>
-
+						<form onSubmit={formik.handleSubmit} class='p-3'>
 							<div class=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
 							</div>
@@ -172,9 +174,15 @@ const LogIn = () => {
 							</div>
 							<GoogleLogin
 								clientId={googleApiKey}
-								render={renderProps => (
-									<button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn btn-primary btn-block">Sign-In with Google</button>
-								  )}
+								render={(renderProps) => (
+									<button
+										onClick={renderProps.onClick}
+										disabled={renderProps.disabled}
+										className='btn btn-primary btn-block'
+									>
+										Sign-In with Google
+									</button>
+								)}
 								onSuccess={responseGoogle}
 								onFailure={responseGoogle}
 								cookiePolicy={'single_host_origin'}
@@ -189,19 +197,22 @@ const LogIn = () => {
 							</Link>
 						</div>
 					</div>
-					<div class='col bg-secondary p-5 rounded'>
-						<div class='p-5'>
-							<Link to={'/'}>
-								<Text>Hardware Store</Text>
-							</Link>
-
-							<div class=' d-flex justify-content-center'>
-								<Link
+					<div class=' rounded'>
+						<Link to={'/'}>
+							<div class=''>
+								<Imge src={`${imge}`} />
+							</div>
+						</Link>
+						<div class='p-5 rounded bg-secondary'>
+							<div>
+								<div class=' d-flex justify-content-center'>
+									<Link
 									class='dropdown-item bg-secondary m-2 p-2 rounded text-center '
-									to={'/register'}
-								>
-									Don't have an account? Sign up
-								</Link>
+										to={'/register'}
+									>
+										Don't have an account? Sign up
+									</Link>
+								</div>
 							</div>
 						</div>
 					</div>

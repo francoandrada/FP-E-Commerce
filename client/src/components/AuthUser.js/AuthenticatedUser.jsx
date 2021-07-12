@@ -26,10 +26,6 @@ const AuthenticatedUser = () => {
 			<Link to='/catalog'>Catalog</Link>
 
 			{token ? (
-				// <input type="submit" 
-				// value='Log Out'
-				// onClick={() =>{ dispatch(logOut())}}
-				// />
 				<button type="submit" 
 				className={styles.but}
 				onClick={() =>{ dispatch(logOut())}}
@@ -37,7 +33,7 @@ const AuthenticatedUser = () => {
 	
 			) : (
 				<Fragment>
-					<Link to='/register'>Register</Link>
+					<Link to='/register'>Sing Up</Link>
 					<Link to='/LogIn'>Login</Link>
 				</Fragment>
 			)}
