@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import HighlightProd from '../HighlightProd/HighlightProd'
 import './Highlights.css'
-
+import {BsChevronRight} from 'react-icons/bs'
 
 function Highlights() {
     const dispatch = useDispatch()
@@ -61,7 +61,8 @@ function Highlights() {
                             />
                             </div>})
                     }
-                    <button className="botonCarrousel" onClick={handleNextPage}>NEXT</button>
+                    <button onClick={handleNextPage}>NEXT</button>
+                
                 </div>   
             </div>
 

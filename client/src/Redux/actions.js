@@ -15,6 +15,7 @@ import {
 	GET_BRANDS,
 	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
+	FILTER_PRICE
 } from './actionsName';
 
 import axios from 'axios';
@@ -207,5 +208,10 @@ export function loginGmail(data) {
 export const filterCategory = (name)=> {
 	console.log(name)
 	return {type: FILTER_CATEGORIES,
+	payload: name}}
+
+export const filterPrice = (name)=> {
+	console.log(name)
+	return {type: FILTER_PRICE,
 	payload: name}}
 

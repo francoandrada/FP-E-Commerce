@@ -1,0 +1,43 @@
+#container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+}
+
+#contenedorNumbers {
+    width: 100%;
+    align-items: center;
+
+}
+
+.numbers {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonPagin {
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.buttonPagin:hover { 
+    background: whitesmoke; 
+    color: black 
+}
+
+.active { 
+    background: whitesmoke; 
+    color: black;
+    font-weight: bold; 
+}
+
+.prevNext {
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+

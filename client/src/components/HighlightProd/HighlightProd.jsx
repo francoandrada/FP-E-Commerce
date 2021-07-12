@@ -43,7 +43,7 @@ function HighlightProd({ id, image, name, price }) {
 
 						<div className='HighlightTextContainer'>
 							<SubtitleStyle className='nameProduct'>{name}</SubtitleStyle>
-							<TitleStyle>{formatPrice}.-</TitleStyle>
+							<TitleStyle>{formatPrice}</TitleStyle>
 						</div>
 					</Link>
 
