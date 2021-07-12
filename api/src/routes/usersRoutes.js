@@ -14,7 +14,7 @@ router.post('/',
 
     [
         check('email', 'Add a valid email').isEmail(),
-        check('password', 'The password must be at least 6 characters').isLength({ min: 6 }).matches(/^[a-zA-Z0-9]{5}$/, "i"),
+        check('password', 'The password must be at least 6 characters').isLength({ min: 6 }),
     ],
     newUser
 
