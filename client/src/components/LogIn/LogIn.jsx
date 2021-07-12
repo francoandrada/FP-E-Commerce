@@ -7,9 +7,12 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import img from '../../images/12.png';
-import Button from '../StyledComponents/ButtonRed';
+import Error from '../StyledComponents/ErrorMessages';
+import Div from '../StyledComponents/Validation';
 /* global google */
 import jwt_decode from 'jwt-decode';
+
+
 
 const GlobalStyle = createGlobalStyle`
 
@@ -18,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
 	  background-color: black; 
 	  font-family: 'Roboto', sans-serif ;
 }
-
 `;
 const Img = styled.img`
     width: 100px;
@@ -30,25 +32,20 @@ const Img = styled.img`
     }
 `;
 
-const Div = styled.div`
-	padding: .5rem;
-	color: #FF3C4A;
-	font-weight: 700;
-	border-radius: 5px;
-	text-align: center;
-	margin: .5rem;
-	
-`;
+
+
 
 const Text = styled.h1`
 	font-weight: 700;
 	background-color: white;
 	color: #FF3C4A;
-	border-radius: 5px;
-	text-align: center;
+	border-radius: 10px;
 	margin: 1rem;
 	padding: 2rem;
 	font-family: 'Roboto', sans-serif;
+	:hover{
+		background-color: #303030;
+	}
 `;
 
 
@@ -119,12 +116,12 @@ const LogIn = () => {
 	const history = useHistory();
 
 	const authenticated = useSelector((state) => state.user.authenticated);
-	console.log(authenticated)
+
 	const token = useSelector((state) => state.user.token);
 
 	const setError = useSelector((state) => state.user.setError);
 
-	console.log(setError)
+	console.log(setError.length)
 	
 	useEffect(() => {
 		if (authenticated) {
@@ -146,7 +143,7 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			 console.log(values)
+		
 			 dispatch(logIn(values));
 		
 		},
@@ -158,7 +155,9 @@ const LogIn = () => {
 			<div class='container d-flex justify-content-center mt-5 '>
 				<div class=' row'>
 					<div class='col bg-white px-5 rounded pb-4'>
-					<p>{setError}</p>
+						{setError.length >0 ? <Error>{setError}</Error> : null }
+						
+
 						<form  onSubmit={formik.handleSubmit} class='p-3'>
 							<div class=' d-flex justify-content-center'>
 							<Img src={`${img}`} /></div>
@@ -197,12 +196,12 @@ const LogIn = () => {
 								/>
 							</div>
 							<div class='d-flex justify-content-center'>
-								<Button
+								<button
 									type='submit'
 									class='btn btn-primary btn-block  mb-2  shadow-sm'
 								>
 									Sign in
-								</Button>
+								</button>
 							</div>
 						</form>
 						
@@ -217,10 +216,11 @@ const LogIn = () => {
 					</div>
 					<div class='col bg-secondary p-5 rounded'>
 						<div class='p-5'>
-							<Text>Hardware Store</Text>
-							<div class=' d-flex justify-content-center '>
+						<Link to={'/'}><Text>Hardware Store</Text></Link>
+							
+							<div class=' d-flex justify-content-center'>
 							<Link
-								class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
+								class='dropdown-item bg-secondary m-2 p-2 rounded text-center '
 								to={'/register'}
 							>
 								Don't have an account? Sign up

@@ -114,7 +114,7 @@ function Register() {
 					<div className='form-group col-md-2 ' id={styles.input}>
 						<label>Phone</label>
 						<input
-							type='text'
+							type='phone'
 							name='phone'
 							value={User.phone}
 							onChange={handleChange}

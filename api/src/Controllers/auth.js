@@ -56,7 +56,7 @@ exports.forgotPassword = async (req, res) => {
 		},
 	});
 	if (!user) {
-		res.status(400).send({ msg: 'The user doesnt exist' });
+		res.status(400).send({ msg: "The user doesn't exist" });
 	}
 
 	try {
