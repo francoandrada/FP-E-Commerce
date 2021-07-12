@@ -3,7 +3,8 @@ import { GET_PRODUCTS, PRODUCT_DETAIL, GET_HIGHLIGHTS } from '../actionsName';
 const initialState = {
 	allProducts: [],
 	detailProducts: {},
-	highlights: []
+	highlights: [],
+	filterByCategories:[]
 };
 
 function productReducer(state = initialState, action) {
