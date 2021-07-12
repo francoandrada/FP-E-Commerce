@@ -75,7 +75,7 @@ function Register() {
 					<div className='form-group col-md-5' id={styles.input}>
 						<label>Password</label>
 						<input
-							type='text'
+							type='password'
 							name='password'
 							value={User.password}
 							onChange={handleChange}
@@ -110,7 +110,7 @@ function Register() {
 					<div className='form-group col-md-2 ' id={styles.input}>
 						<label>Phone</label>
 						<input
-							type='text'
+							type='phone'
 							name='phone'
 							value={User.phone}
 							onChange={handleChange}

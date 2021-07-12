@@ -25,7 +25,7 @@ const AuthenticatedUser = () => {
 					</button>
 				</div>
 			) : (
-				<p>Hola usuario guest</p>
+				null
 			)}
 		</div>
 	);
