@@ -1,10 +1,15 @@
 .card {
 	background-color: white;
 	width: min-content;
-	margin: 1rem 0rem;
+	margin: 1rem 1rem;
 	border-radius: 8px;
 	height: 368px;
 }
+.card:hover {
+	transform: scale(1.1);
+	transition: 300ms;
+}
+
 .cardsContainer {
 	display: flex;
 	flex-wrap: wrap;
@@ -15,8 +20,9 @@
 	display: flex;
 	padding: 0.5rem;
 	flex-direction: column;
-	justify-content: flex-end;
-	color: black;
+	color: #6c757d;
+	min-height: 54.4px;
+	text-align: center;
 }
 .cardImage {
 	padding: 1rem;
@@ -44,16 +50,35 @@
 
 .footerCard {
 	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
 .productPrice {
 	float: left;
 	width: 50%;
+	color: black;
+	font-size: 22px;
+	font-weight: 500;
+	padding-left: 13px;
 }
 
 .buttonBuy {
 	float: left;
 	width: 50%;
+}
+.buttonBuy button {
+	font-family: 'Roboto', sans-serif;
+	width: 88px;
+	height: 30px;
+	border-style: none;
+	border-radius: 8px;
+	color: white;
+	font-size: 18px;
+	background-color: #ff3c4a;
+}
+.buttonBuy button:hover {
+	background-color: #cc242f;
 }
 
 /* .card {
