@@ -131,6 +131,30 @@
 	align-items: center;
 }
 
+@media only screen and (max-width: 1120px) {
+	.searchBtnEcommerce {
+		right: 0px;
+		top: 38px;
+	}
+
+	.inputEcommerce {
+		width: 195px;
+	}
+
+	.autoContainerEcommerce {
+		right: -15px;
+		top: 88%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 220px;
+	}
+
+	.optionEcommerce {
+		width: 195px;
+	}
+}
+
 /*
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {
 	max-height: 80px;

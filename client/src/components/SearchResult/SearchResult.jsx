@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './SearchResult.module.css';
 
 const SearchResult = () => {
-	const { suggestions } = useSelector((state) => state.user);
+	let { suggestions } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -33,6 +33,7 @@ const SearchResult = () => {
 		},
 	};
 
+	const isEqual = (a, b) => a.name === b.name;
 	return (
 		<div className={styles.cardsContainer}>
 			{/* cambiar por spinner */}
@@ -52,36 +53,41 @@ const SearchResult = () => {
 			)}
 
 			{suggestions &&
-				suggestions.map((p) => {
-					if (p.name.length > 55) {
-						var aux = p.name.slice(0, 55).concat('...');
-						p.name = aux;
-					}
-					var formatPrice = formatNumber.new(p.price, '$');
-					return (
-						<div key={p.id} className={styles.card}>
-							<Link to={`/catalog/${p.id}`}>
-								<div className={styles.cardImage}>
-									<img className={styles.img} src={p.image} alt='product' />
-								</div>
-								<div>
-									<hr id={styles.line} />
-								</div>
-								<div className={styles.data}>
-									<span className={styles.productName}>{p.name}</span>
-								</div>
-								<div className={styles.footerCard}>
-									<div className={styles.productPrice}>
-										<span>{formatPrice}</span>
+				suggestions
+					.filter(
+						(value) =>
+							value === suggestions.find((item) => isEqual(item, value))
+					)
+					.map((p) => {
+						if (p.name.length > 55) {
+							var aux = p.name.slice(0, 55).concat('...');
+							p.name = aux;
+						}
+						var formatPrice = formatNumber.new(p.price, '$');
+						return (
+							<div key={p.id} className={styles.card}>
+								<Link to={`/catalog/${p.id}`}>
+									<div className={styles.cardImage}>
+										<img className={styles.img} src={p.image} alt='product' />
 									</div>
-									<div className={styles.buttonBuy}>
-										<button>Buy</button>
+									<div>
+										<hr id={styles.line} />
 									</div>
-								</div>
-							</Link>
-						</div>
-					);
-				})}
+									<div className={styles.data}>
+										<span className={styles.productName}>{p.name}</span>
+									</div>
+									<div className={styles.footerCard}>
+										<div className={styles.productPrice}>
+											<span>{formatPrice}</span>
+										</div>
+										<div className={styles.buttonBuy}>
+											<button>Buy</button>
+										</div>
+									</div>
+								</Link>
+							</div>
+						);
+					})}
 		</div>
 	);
 };
