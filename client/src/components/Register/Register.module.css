@@ -1,3 +1,12 @@
+.registerFormContainer {
+    display: flex;
+    background-color: #303030;
+    padding: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+}
+
 #regForm {
     color: white;
     width: 100%;
@@ -14,6 +23,14 @@
 #input{
     margin: 1%
 }
+
+.registerButtonRow {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+
 
 
 
