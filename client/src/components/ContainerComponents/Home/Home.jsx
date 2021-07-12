@@ -16,7 +16,7 @@ function Home() {
 
 	return (
 		<div className={styles.HomeContainer}>
-			<AuthenticatedUser />
+		
 			<div>
 				<BannerContainer></BannerContainer>
 				<HighlightedProdContainer></HighlightedProdContainer>
@@ -25,6 +25,7 @@ function Home() {
 			<div>{/* <Footer></Footer> */}</div>
 		</div>
 	);
+
 }
 
 export default Home;

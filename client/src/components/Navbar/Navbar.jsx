@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { getSuggestions } from '../../Redux/actions';
+import { authUser, getSuggestions, logOut } from '../../Redux/actions';
 // import { useModal } from '../../hooks/useModal';
 // import { useKey } from '../../hooks/useKey';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
 // import Modal from '../Modal/Modal';
 import styles from './Navbar.module.css';
+import AuthenticatedUser from '../AuthUser.js/AuthenticatedUser';
 
 const Navbar = () => {
 	// const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -61,6 +62,17 @@ const Navbar = () => {
 		}
 	};
 
+	const user = useSelector((state) => state.user.user);
+
+	useEffect(() => {
+		dispatch(authUser());
+	}, []);
+
+	const myFunction = () => {
+		dispatch(logOut());
+	};
+
+	<button onclick='myFunction()'>Click me</button>;
 	return (
 		<div className={styles.navbarEcommerce}>
 			<div className={styles.leftSideEcommerce}>
@@ -70,13 +82,10 @@ const Navbar = () => {
 					</Link>
 				</div>
 			</div>
+
 			<div className={styles.rightSideEcommerce}>
-				<div className={styles.linksNavEcommerce}>
-					<Link to='/'>Home</Link>
-					<Link to='/catalog'>Catalog</Link>
-					<Link to='/register'>Register</Link>
-					<Link to='/LogIn'>Login</Link>
-				</div>
+		<AuthenticatedUser />
+	
 
 				<div className={styles.theSearchBarEcommerce}>
 					<div

@@ -143,7 +143,7 @@ export function authUser(data) {
 	};
 }
 
-export function logOut(data) {
+export function logOut() {
 	return async (dispatch) => {
 		dispatch({
 			type: LOG_OUT,
