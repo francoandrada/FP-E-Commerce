@@ -4,16 +4,16 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getSuggestions } from '../../Redux/actions';
-import { useModal } from '../../hooks/useModal';
-import { useKey } from '../../hooks/useKey';
+// import { useModal } from '../../hooks/useModal';
+// import { useKey } from '../../hooks/useKey';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
-import Modal from '../Modal/Modal';
+// import Modal from '../Modal/Modal';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-	const [isOpenModal, openModal, closeModal] = useModal(false);
-	const [showLinks, setShowLinks] = useState(false);
+	// const [isOpenModal, openModal, closeModal] = useModal(false);
+	// const [showLinks, setShowLinks] = useState(false);
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState('');
@@ -56,68 +56,66 @@ const Navbar = () => {
 			history.push('/searchproduct');
 			dispatch(getSuggestions(search));
 			setSearch('');
-			closeModal();
 		} else {
 			setSearch('');
-			closeModal();
 		}
 	};
-	useKey('Enter', searchProduct);
 
 	return (
 		<div className={styles.navbarEcommerce}>
 			<div className={styles.leftSideEcommerce}>
-				<div className={styles.linksEcommerce} id={showLinks ? 'hidden' : ''}>
-					<Link to='/LogIn'>Login</Link>
-					<Link to='/register'>Register</Link>
-					<Link to='/catalog'>Catalog</Link>
+				<div className={styles.storeNameEcommerce}>
 					<Link to='/'>
 						<LogoStyle>HardwareStore</LogoStyle>
 					</Link>
 				</div>
-				<button onClick={() => setShowLinks(!showLinks)}>Open</button>
 			</div>
-
-			<button onClick={openModal}>open modal</button>
-
 			<div className={styles.rightSideEcommerce}>
-				<Modal isOpen={isOpenModal} closeModal={closeModal}>
-					<div className={styles.modalSearchContainerEcommerce}>
-						<div
-							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
-							ref={wrapperRef}
-						>
-							<input
-								className={styles.inputEcommerce}
-								value={search}
-								onClick={() => setDisplay(!display)}
-								onChange={(event) => setSearch(event.target.value)}
-								placeholder='Search...'
-							/>
-							{display && (
-								<div className={styles.autoContainerEcommerce}>
-									{options
-										.filter((product) =>
-											product.toLowerCase().includes(search.toLowerCase())
-										)
-										.slice(0, 7)
-										.map((value, index) => {
-											return (
-												<div
-													className={styles.optionEcommerce}
-													onClick={() => searchHandle(value)}
-													key={index}
-													tabIndex='0'
-												>
-													<span className={styles.spanEcommerce}>{value}</span>
-												</div>
-											);
-										})}
-								</div>
-							)}
-						</div>
+				<div className={styles.linksNavEcommerce}>
+					<Link to='/'>Home</Link>
+					<Link to='/catalog'>Catalog</Link>
+					<Link to='/register'>Register</Link>
+					<Link to='/LogIn'>Login</Link>
+				</div>
+
+				<div className={styles.theSearchBarEcommerce}>
+					<div
+						className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
+						ref={wrapperRef}
+					>
+						<input
+							className={styles.inputEcommerce}
+							value={search}
+							onClick={() => setDisplay(!display)}
+							onChange={(event) => setSearch(event.target.value)}
+							placeholder='Search...'
+						/>
+						{display && (
+							<div className={styles.autoContainerEcommerce}>
+								{options
+									.filter((product) =>
+										product.toLowerCase().includes(search.toLowerCase())
+									)
+									.slice(0, 7)
+									.map((value, index) => {
+										return (
+											<div
+												className={styles.optionEcommerce}
+												onClick={() => searchHandle(value)}
+												key={index}
+												tabIndex='0'
+											>
+												<span className={styles.spanEcommerce}>{value}</span>
+											</div>
+										);
+									})}
+							</div>
+						)}
 					</div>
-				</Modal>
+					<button className={styles.searchBtnEcommerce} onClick={searchProduct}>
+						<i className='fas fa-search'></i>
+					</button>
+				</div>
 			</div>
 		</div>
 	);
