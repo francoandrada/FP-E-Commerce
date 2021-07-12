@@ -1,0 +1,77 @@
+.footerContainer {
+	background-color: #303030;
+	margin-top: 100px;
+	height: 170px;
+	top: 100%;
+}
+
+.footerInfo {
+	color: #ff3c4a;
+	height: 100%;
+	overflow: hidden;
+}
+
+.logo {
+	font-size: 43px;
+}
+
+.logoContainer {
+	width: 33%;
+	float: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.contentContainer {
+	width: 33%;
+	height: 100%;
+	float: left;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 24px;
+	padding-block-end: 2px;
+	flex-direction: row;
+	display: flex;
+}
+
+.contentContainer span {
+	/* margin-block-end: 3px; */
+	margin-inline-end: 30px;
+	color: white;
+}
+
+.containerGit {
+	width: 3rem;
+	height: 3rem;
+}
+
+.gitLink {
+	text-decoration: none;
+	color: #ff3c4a;
+	font-size: 25px;
+}
+
+.iconGit {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.contentContact {
+	width: 33%;
+	height: 100%;
+	float: left;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	padding-block-end: 2px;
+	flex-direction: row;
+	display: flex;
+}
+
+a:link {
+	color: #ff3c4a;
+}

@@ -8,7 +8,7 @@ const authToken = require('../middlewares/authToken');
 router.post('/',
     [
         check('email', 'Add a valid email').isEmail(),
-        check('password', 'The password must be at least 6 characters').isLength({ min: 6 }),
+        check('password', 'The password must be at least 6 characters').isLength({ min: 6 })
     ],
   authUser
 );

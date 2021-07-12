@@ -1,11 +1,10 @@
 .HighlightContainer {
-    display: flex;
-    background-color: #303030;
-    margin-top: 50px;
-    padding: 5%;
-    margin-bottom: 10px;
-    margin-left: 10%;
-    margin-right: 10%;
-    border-radius: 14px;
+	display: flex;
+	background-color: rgb(48 48 48 / 85%);
+	margin-top: 50px;
+	padding: 5%;
+	margin-bottom: 10px;
+	margin-left: 10%;
+	margin-right: 10%;
+	border-radius: 14px;
 }
-

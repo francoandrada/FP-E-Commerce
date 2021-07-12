@@ -90,7 +90,6 @@ const LogIn = () => {
 
 	const setError = useSelector((state) => state.user.setError);
 
-	console.log(setError.length);
 
 	useEffect(() => {
 		if (authenticated) {
@@ -122,8 +121,12 @@ const LogIn = () => {
 			<div class='container d-flex justify-content-center mt-5 '>
 				<div class=' row'>
 					<div class='col bg-white px-5 rounded pb-4'>
-						{setError.length > 0 ? <Error>{setError}</Error> : null}
-						<form onSubmit={formik.handleSubmit} class='p-3'>
+
+					{setError !== null ? <Error>{setError}</Error> : null }
+						
+
+						<form  onSubmit={formik.handleSubmit} class='p-3'>
+
 							<div class=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
 							</div>
