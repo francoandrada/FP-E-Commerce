@@ -4,7 +4,7 @@
 	font-family: 'Arial';
 	display: flex;
 	align-items: center;
-	background-color: #303030;
+	background-color: rgb(48 48 48 / 85%);
 }
 
 .searchBtnEcommerce {
