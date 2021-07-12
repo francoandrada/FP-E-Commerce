@@ -1,7 +1,6 @@
 .navbarEcommerce {
 	width: 100%;
 	height: 100px;
-	font-family: 'Arial';
 	display: flex;
 	align-items: center;
 	background-color: #303030;
@@ -21,6 +20,7 @@
 }
 .searchBtnEcommerce:hover {
 	color: #cd113b;
+
 }
 
 .navbarEcommerce .leftSideEcommerce {
@@ -78,7 +78,9 @@
 	background-color: #626466;
 	color: white;
 }
-
+.inputEcommerce:hover{
+	background-color: #a2a3a4;
+}
 .posRelEcommerce {
 	position: relative;
 }
@@ -154,6 +156,18 @@
 		width: 195px;
 	}
 }
+
+.but{
+	background-color: #303030;
+	border: none;
+	color: white;
+	font-size: 24px;
+	
+}
+.but:hover {
+	color: #cd113b;
+}
+
 
 /*
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {

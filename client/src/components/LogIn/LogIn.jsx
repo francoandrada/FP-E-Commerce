@@ -141,7 +141,6 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-		
 			 dispatch(logIn(values));
 		
 		},

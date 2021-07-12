@@ -74,7 +74,7 @@ function Register() {
 								value={User.email}
 								onChange={handleChange}
 								className='form-control'
-								id='inputPassword4'
+						
 							/>
 						</div>
 						<div className='form-group col-md-5' id={styles.input}>
@@ -85,7 +85,7 @@ function Register() {
 								value={User.password}
 								onChange={handleChange}
 								className='form-control'
-								id='inputPassword4'
+						
 								pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
 								title='Must contain at least one number and one uppercase and lowercase letter, and at least 6 characters'
 								required
@@ -102,7 +102,7 @@ function Register() {
 								value={User.name}
 								onChange={handleChange}
 								className='form-control'
-								id='inputEmail4'
+					
 							/>
 						</div>
 						<div className='form-group col-md-4' id={styles.input}>
@@ -113,18 +113,18 @@ function Register() {
 								value={User.surname}
 								onChange={handleChange}
 								className='form-control'
-								id='inputPassword4'
+				
 							/>
 						</div>
 						<div className='form-group col-md-2 ' id={styles.input}>
 							<label>Phone</label>
 							<input
-								type='tel'
+								type='number'
 								name='phone'
 								value={User.phone}
 								onChange={handleChange}
 								className='form-control'
-								id='inputEmail4'
+					
 							/>
 						</div>
 					</div>
@@ -138,29 +138,29 @@ function Register() {
 									value={User.address}
 									onChange={handleChange}
 									className='form-control'
-									id='inputPassword4'
+								
 								/>
 							</div>
 							<div className='form-group col-md-3' id={styles.input}>
 								<label>Address Number</label>
 								<input
-									type='text'
+									type='number'
 									name='addressNumber'
 									value={User.addressNumber}
 									onChange={handleChange}
 									className='form-control'
-									id='inputPassword4'
+								
 								/>
 							</div>
 							<div className='form-group col-md-3 ' id={styles.input}>
 								<label>Postal Code</label>
 								<input
-									type='text'
+									type='number'
 									name='postalCode'
 									value={User.postalCode}
 									onChange={handleChange}
 									className='form-control'
-									id='inputEmail4'
+									
 								/>
 							</div>
 						</div>
