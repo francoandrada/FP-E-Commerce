@@ -4,6 +4,7 @@ import { getProducts } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
+import PagingBox from '../PagingBox/PagingBox';
 
 function Products() {
 	let allProducts = useSelector((state) => state.product.allProducts);
@@ -11,10 +12,6 @@ function Products() {
 		(state) => state.category.selectedCategory
 	);
 	const orderPrice = useSelector((state) => state.price.order);
-	const [ currentPage, setPage ] = useState({
-        first: 0,
-        last: 8
-        })
 
 	const dispatch = useDispatch();
 
@@ -71,41 +68,21 @@ function Products() {
 		},
 	};
 
+	  //Paginado
+	  const productsPerPage = 9;
+	  const pagesQty = Math.ceil(allProducts.length / productsPerPage);
+	  const [actualPage, setActualPage] = useState(1);
+	  const setPage = (value) => setActualPage(value);
+	  const endIndex = productsPerPage * actualPage;
+	  const initIndex = endIndex - productsPerPage;
 
-
-    function handleNextPage (event) {
-        event.preventDefault()
-        setPage({...currentPage, 
-            first: currentPage.first + 8,
-            last: currentPage.last + 8
-        })        
-    } 
-
-    function handlePrevPage (event) {
-        event.preventDefault()
-        if (currentPage.first === 0){
-            setPage({...currentPage, 
-                first: 0,
-                last: 8
-            })
-
-        } else {
-            setPage({...currentPage, 
-                first: currentPage.first - 8,
-                last: currentPage.last - 8
-            })
-        }
-      
-    } 
+	
 
 	return (
 		<div className={styles.cardsContainer}>
-			<button onClick={handlePrevPage}>PREV</button>
-			<button onClick={handleNextPage}>NEXT</button>
-
 			{allProducts
-				? allProducts.slice(currentPage.first, currentPage.last)
-				.map((p) => {
+				? 
+				allProducts.slice(initIndex, endIndex).map((p) => {
 						if (p.name.length > 55) {
 							var aux = p.name.slice(0, 55).concat('...');
 							p.name = aux;
@@ -132,10 +109,14 @@ function Products() {
 										</div>
 									</div>
 								</Link>
+								<div id={styles.paginado}>
+                </div>
+
 							</div>
 						);
-				  })
-				: null}
+					})
+					: null}
+					<PagingBox pagesQty={pagesQty} setPage={setPage} actualPage={actualPage}/>
 		</div>
 	);
 }
