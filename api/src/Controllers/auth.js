@@ -82,7 +82,6 @@ exports.forgotPassword = async (req, res) => {
 			subject: 'Reset your password',
 			html: `
 		 <h2>Please click on given link to reset your password </h2>
-		 <a href="url">${process.env.CLIENT_URL}/reset-password/${token}</a>
 		 <a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
 		 `,
 		};
@@ -93,7 +92,7 @@ exports.forgotPassword = async (req, res) => {
 			if (error) {
 				console.log(error);
 			}
-			res.send({ msg: 'Email sent: ' + info.response });
+			res.send({ msg: 'Check your email and open the link we sent to continue' });
 		});
 	} catch (error) {
 		console.log(error);
