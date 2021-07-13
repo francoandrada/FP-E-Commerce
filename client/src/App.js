@@ -10,6 +10,8 @@ import SearchProducts from './components/searchProducts/SearchProducts';
 import DetailProduct from './components/ProductDetail/ProductDetail';
 import Footer from './components/ContainerComponents/Footer/Footer';
 import './App.css';
+import ProductCartModal from './components/CartModal/ProductCartModal';
+import CartModal from './components/CartModal/CartModal';
 
 function App() {
 	return (
@@ -29,6 +31,8 @@ function App() {
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+					<Route path='/cartTest' exact component={CartModal} />
+
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />
