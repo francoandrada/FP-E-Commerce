@@ -1,5 +1,6 @@
 export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
 export const ERROR = 'ERROR';
+export const HIDE_ALERT ='HIDE_ALERT'
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const AUTH_USER = 'AUTH_USER';
 export const LOG_OUT = 'LOG_OUT';
@@ -16,4 +17,6 @@ export const GET_BRANDS = 'GET_BRANDS';
 export const SELECTED_BRANDS = 'SELECTED_BRANDS';
 export const FILTER_CATEGORIES= 'FILTER_CATEGORIES'
 export const CLEAN_SUGGESTIONS = 'CLEAN_SUGGESTIONS';
-export const FILTER_BRANDS= 'FILTER_BRANDS'
+export const FILTER_BRANDS= 'FILTER_BRANDS';
+export const FILTER_PRICE = 'FILTER_PRICE';
+

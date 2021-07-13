@@ -2,11 +2,11 @@ import React, {useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authUser, logOut } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-const AuthUser = () => {
-	const dispatch = useDispatch();
 
-	const history = useHistory();
+
+
+const AuthenticatedUser = () => {
+	const dispatch = useDispatch();
 
 	const user = useSelector((state) => state.user.user);
 
@@ -25,10 +25,10 @@ const AuthUser = () => {
 					</button>
 				</div>
 			) : (
-				<p>Hola usuario guest</p>
+				null
 			)}
 		</div>
 	);
 };
 
-export default AuthUser;
+export default AuthenticatedUser;

@@ -5,6 +5,7 @@ const initialState = {
 	detailProducts: {},
 	highlights: [],
 	
+	filterByCategories:[]
 };
 
 function productReducer(state = initialState, action) {

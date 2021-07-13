@@ -9,8 +9,15 @@
 	border-radius: 14px;
 }
 
+.highlightProdContainer:hover {
+	transform: scale(1.1);
+	transition: 400ms;
+}
+
 .ImageDiv {
+	display: flex;
 	height: 130px;
+	justify-content: center;
 }
 .ImageDiv img {
 	height: 100%;
@@ -42,7 +49,8 @@
 }
 
 .highlightLinks :hover {
-	color: rgba(105, 105, 105, 0.328);
+	color: #ff3c4a;
+	transition: 100ms;
 }
 
 .nameProduct {

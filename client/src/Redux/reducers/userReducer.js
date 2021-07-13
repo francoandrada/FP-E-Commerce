@@ -7,11 +7,14 @@ import {
 	FETCH_PENDING,
 	FETCH_ERROR,
 	CLEAN_SUGGESTIONS,
+	HIDE_ALERT,
+	FORGOT_PASSWORD,
 } from '../actionsName';
 
 const initialState = {
 	token: localStorage.getItem('token'),
-	setError: [],
+	setError: null,
+	alert: null,
 	authenticated: false,
 	user: undefined,
 	products: [],
@@ -35,12 +38,26 @@ function userReducer(state = initialState, action) {
 				...state,
 				setError: action.payload,
 			};
+		case FORGOT_PASSWORD: {
+			console.log('desde reducer', action.payload.hola);
+			return{
+			...state,
+			alert: action.payload.hola
+			}
+		}
+		case HIDE_ALERT:
+			return {
+				...state,
+				setError: null,
+				alert: null
+			};
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
 			return {
 				...state,
 				token: action.payload,
 				authenticated: true,
+				
 			};
 		case AUTH_USER:
 			return {

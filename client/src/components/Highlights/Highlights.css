@@ -1,15 +1,23 @@
 .divCarrousel {
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-   
-    
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
-.botonCarrousel {
-    color: black;
-    border-style: hidden;
-    border-radius: 100px;
-    height: 50px;
+.icon {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	color: white;
+}
+
+.containerIcon {
+	width: 3rem;
+	height: 3rem;
+}
+
+.icon:hover {
+	color: #ff3c4a;
+	padding: 2px;
 }

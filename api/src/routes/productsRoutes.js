@@ -3,8 +3,9 @@ const { Router } = require('express');
 const { postNewProduct, 
         getProductName,
         orderProducts, getAllProducts,  getBrandProduct,
-        getIdProduct, getCategoryProduct } = require('../Controllers/products')
+        getIdProduct, getCategoryProduct,getFilteredProducts } = require('../Controllers/products')
 const router = Router();
+
 
 router.post('/addproduct', postNewProduct);
 

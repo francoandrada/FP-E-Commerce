@@ -5,8 +5,9 @@ async function postProduct(req, res, next) {
 			name,
 			price,
 			description,
+			priceSpecial,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 			category,
@@ -15,8 +16,9 @@ async function postProduct(req, res, next) {
 			name,
 			price,
 			description,
+			priceSpecial,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 		});
@@ -33,9 +35,10 @@ async function putProduct(req, res, next) {
 			id,
 			name,
 			price,
+			priceSpecial,
 			description,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 			category,
@@ -43,9 +46,10 @@ async function putProduct(req, res, next) {
 		let variable = {};
 		if (name.length > 0) variable.name = name;
 		if (price) variable.price = price;
+		if(priceSpecial) variable.priceSpecial= priceSpecial;
 		if (description.length > 0) variable.description = description;
 		if (weight) variable.weight = weight;
-		if (Image.length > 0) variable.Image = Image;
+		if (image.length > 0) variable.image = image;
 		if (stock) variable.stock = stock;
 		if (brandId) variable.brandId = brandId;
 		if (category) variable.category = category;
@@ -62,9 +66,11 @@ async function putProduct(req, res, next) {
 async function postBrand(req, res, next) {
 	try {
 		const { name, image } = req.body;
-		const createBrand = await Brand.create({
-			name: name,
-			image: image,
+		const createBrand = await Brand.findOrCreate({
+			where:{
+				name: name,
+				image: image
+			}
 		});
 		res.json(createBrand);
 	} catch (error) {
@@ -92,7 +98,7 @@ async function postCategoryProduct(req, res, next) {
 		const { name } = req.body;
 		const categoryCreated = await Category.findOrCreate({
 			where: {
-				name: name,
+				name: name
 			},
 		});
 		res.send(categoryCreated);

@@ -1,18 +1,23 @@
-.loginContainer{
-    border:2px solid black;
-    width: 25%;
-    margin: 0 auto;
-    margin-top: 25%;
-    padding: 5rem 5rem;
-}
-.formContainer{
-    display:flex;
-    flex-direction: column;
+.gmailSquare{
+    text-transform:none;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    
-    
-    
-   
-    
-    
+}
+
+.logoGmail{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: red;
+}
+
+.googleSignIn{
+    margin-top:7px;
+    margin-right:8px
+}
+
+#blue{
+    background-color: blue;
+    color: blue;
 }

@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { filterCategory } from '../../Redux/actions';
-import styles from './Filter.module.css';
-
-
+// import styles from './Filter.module.css';
+import styles from './FilterCategories.module.css';
+import OrderByPrice from '../OrderBox/OrderByPrice';
 
 function FilterCategories() {
 
@@ -65,7 +65,7 @@ function FilterCategories() {
 			)}
                     
                     <hr></hr>
-                    <h6 className={styles.title}>Order by price</h6>
+                    <OrderByPrice id={styles.filterContainer}/> 
                     <hr></hr>
                     <h6 className={styles.title}>Order by rating</h6>
                     <hr></hr>

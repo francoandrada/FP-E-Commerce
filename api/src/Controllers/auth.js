@@ -56,42 +56,47 @@ exports.forgotPassword = async (req, res) => {
 		},
 	});
 	if (!user) {
-		res.status(400).json({ msg:'The user doesnt exist'});
+		res.status(400).send({ msg: "The user doesn't exist" });
 	}
-	let transporter = nodemailer.createTransport({
-		service: 'gmail',
-		auth: {
-			type: 'OAuth2',
-			user: process.env.MAIL_USERNAME,
-			pass: process.env.MAIL_PASSWORD,
-			clientId: process.env.OAUTH_CLIENTID,
-			clientSecret: process.env.OAUTH_CLIENT_SECRET,
-			refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-		},
-	});
-	const token = jwt.sign(
-		{ id: user.userId, name: user.name },
-		process.env.RESET_PASSWORD_KEY,
-		{ expiresIn: '6h' }
-	);
-	var mailOptions = {
-		from: 'hardwarecommerce@gmail.com',
-		to: 'hardwarecommerce@gmail.com',
-		subject: 'Reset your password',
-		html: `
+
+	try {
+		let transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				type: 'OAuth2',
+				user: process.env.MAIL_USERNAME,
+				pass: process.env.MAIL_PASSWORD,
+				clientId: process.env.OAUTH_CLIENTID,
+				clientSecret: process.env.OAUTH_CLIENT_SECRET,
+				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+			},
+		});
+		const token = jwt.sign(
+			{ id: user.userId, name: user.name },
+			process.env.RESET_PASSWORD_KEY,
+			{ expiresIn: '6h' }
+		);
+		var mailOptions = {
+			from: 'hardwarecommerce@gmail.com',
+			to: email,
+			subject: 'Reset your password',
+			html: `
 		 <h2>Please click on given link to reset your password </h2>
 		 <a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
 		 `,
-	};
+		};
 
-	user.update({ resetLink: token });
+		user.update({ resetLink: token });
 
-	transporter.sendMail(mailOptions, function (error, info) {
-		if (error) {
-			console.log(error);
-		}
-		res.send({ msg:'Email sent: ' + info.response});
-	});
+		transporter.sendMail(mailOptions, function (error, info) {
+			if (error) {
+				console.log(error);
+			}
+			res.send({ msg: 'Check your email and open the link we sent to continue' });
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 ///RESET PASWORD
@@ -119,7 +124,7 @@ exports.resetPassword = async (req, res) => {
 	user.password = pass;
 	user.save();
 
-	res.send({ msg:'pasword change'});
+	res.send({ msg: 'pasword change' });
 };
 
 exports.authUserGmail = async (req, res) => {
@@ -134,22 +139,21 @@ exports.authUserGmail = async (req, res) => {
 			},
 			defaults: {
 				email: email,
-				password: password
+				password: password,
 			},
 		});
 
 		const token = jwt.sign(
-				{
-					id: user.userId,
-					email: user.email,
-				},
-				process.env.SECRET,
-				{
-					expiresIn: '8h',
-				}
-			);
-			res.json({ token });
-
+			{
+				id: user.userId,
+				email: user.email,
+			},
+			process.env.SECRET,
+			{
+				expiresIn: '8h',
+			}
+		);
+		res.json({ token });
 	} catch (error) {
 		console.log(error);
 	}

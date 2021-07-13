@@ -95,7 +95,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 // ----------------  FIND ALL PRODUCTS -----------------
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
-		const allProduct = await Product.findAll({include: Category})
+		const allProduct = await Product.findAll({ include: Category });
 		res.status(200).json(allProduct);
 	} catch (error) {
 		next(error);
@@ -146,6 +146,7 @@ const getBrandProduct = async function getBrandProduct(req, res, next) {
 // 		next(error);
 // 	}
 // };
+
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
 
 const getProductName = async function getProductName(req, res) {
@@ -198,6 +199,95 @@ const getAllCategories = async function getAllCategories(req, res, next) {
 	}
 };
 
+// http://localhost:3001/products/catalog?category=pc&brand=asus&order=descending&page=1
+const getFilteredProducts = async function getFilteredProducts(req, res, next) {
+	console.log(req.query);
+	//req.query = { category: 'pc', brand: 'asus', price: 'descending', page: '1' }
+	
+	try {
+
+		const {category,brand,price,page,qty} = req.query
+
+		const pageNumber = page || 1
+
+		console.log(category)
+
+		let allProduct = await Product.findAll({
+			include: [{model: Category},{model: Brand}],
+		});
+
+		let result = []
+
+		// if(category){
+		// 	allProduct.forEach(product=>{
+		// 		if(product.categories[0].name===category){
+		// 			result.push(product)
+		// 		}	
+		// 	})
+		// }
+
+
+		function filter(){
+			let allProduct1 = allProduct
+			if(category){
+				allProduct1 = allProduct.filter(product=>product.categories[0].name===category)
+			}
+			if(brand){
+				allProduct1 = allProduct1.filter(product=>product.brand.name===brand)
+			}
+			if(price==='ascending'){
+					allProduct1.sort(function (a, b) {
+						if (a.price > b.price) {
+						  return 1;
+						}
+						if (a.price < b.price) {
+						  return -1;
+						}
+						// a must be equal to b
+						return 0;
+					  });
+			}
+			
+			if(price==='descending'){
+				allProduct1.sort(function (b, a) {
+					if (b.price > a.price) {
+						return -1;
+					}
+					if (b.price < a.price) {
+						return 1;
+					}
+					// a must be equal to b
+					return 0;
+					});
+			}
+
+			if(price==='descending'){
+				allProduct1.sort(function (b, a) {
+					if (b.price > a.price) {
+						return -1;
+					}
+					if (b.price < a.price) {
+						return 1;
+					}
+					// a must be equal to b
+					return 0;
+					});
+			}
+
+			return allProduct1.slice((pageNumber-1)*qty,pageNumber*qty)
+		}
+
+		let result1 = await filter()
+
+
+		res.status(200).json(result1);
+		// const allProduct = await Product.findAll({ include: Category });
+		// res.send('Nico');
+	} catch (error) {
+		next(error);
+	}
+};
+
 module.exports = {
 	postNewProduct,
 	getProductName,
@@ -206,6 +296,7 @@ module.exports = {
 	getBrandProduct,
 	getIdProduct,
 	getAllCategories,
-	// getCategoryProduct,
 	productsDb,
+	getFilteredProducts,
+	// getCategoryProduct,
 };
