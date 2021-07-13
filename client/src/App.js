@@ -21,14 +21,11 @@ function App() {
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />
 					<Route path='/forgot-password' exact component={ForgotPassword} />
-					<Route
-						path='/reset-password/:resetLink'
-						exact
-						component={ResetPassword}
-					/>
+					<Route path='/reset-password/:resetLink' exact component={ResetPassword}/>
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+					{/* <Route path='/cart' exact component={Carrito} /> */}
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />

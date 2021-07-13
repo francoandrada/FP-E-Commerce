@@ -19,7 +19,11 @@ import {
 	FILTER_PRICE,
 	FILTERED_PRODUCTS,
 	SELECTED_PAGE,
-	CLEAN_FILTERS
+	CLEAN_FILTERS,
+	ADD_TO_CART,
+	REMOVE_FROM_CART,
+	ADJUST_ITEM_QTY,
+	LOAD_CURRENT_ITEM,
 
 } from './actionsName';
 
@@ -222,12 +226,11 @@ export function loginGmail(data) {
 }
 
 export const filterCategory = (name)=> {
-	console.log(name)
 	return {type: FILTER_CATEGORIES,
 	payload: name}}
 
 export const filterPrice = (name)=> {
-	console.log(name)
+
 	return {type: FILTER_PRICE,
 	payload: name}}
 
@@ -250,3 +253,42 @@ export const selectPage = (page)=> {
 	return {type: SELECTED_PAGE,
 	payload: page}}
 
+
+
+
+export const addToCart = (itemId) =>{
+	return{
+		type: ADD_TO_CART,
+		payload: itemId
+	}
+}
+
+
+export const RemoveFromCart = (itemId) =>{
+	return{
+		type: REMOVE_FROM_CART,
+		payload: {
+			id: itemId
+		}
+	}
+}
+//ajustar cantidas
+export const adjustQty = (itemId, value) =>{
+	return{
+		type: ADJUST_ITEM_QTY,
+		payload: {
+			id: itemId,
+			qty: value
+		}
+	}
+}
+
+//recibo el item entero con toda su data
+export const loadCurrentItem = (itemId) =>{
+	return{
+		type: LOAD_CURRENT_ITEM,
+		payload: {
+			id: itemId
+		}
+	}
+}
