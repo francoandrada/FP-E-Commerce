@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { authUser, getSuggestions, logOut } from '../../Redux/actions';
-// import { useModal } from '../../hooks/useModal';
-// import { useKey } from '../../hooks/useKey';
+import {
+	authUser,
+	getSuggestions,
+	logOut,
+	cleanSuggestions,
+} from '../../Redux/actions';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
-// import Modal from '../Modal/Modal';
 import styles from './Navbar.module.css';
 import AuthenticatedUser from '../AuthUser.js/AuthenticatedUser';
 
 const Navbar = () => {
-	// const [isOpenModal, openModal, closeModal] = useModal(false);
-	// const [showLinks, setShowLinks] = useState(false);
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState('');
@@ -54,6 +54,7 @@ const Navbar = () => {
 	const searchProduct = (event) => {
 		event.preventDefault();
 		if (search.trim()) {
+			dispatch(cleanSuggestions());
 			history.push('/searchproduct');
 			dispatch(getSuggestions(search));
 			setSearch('');
@@ -84,8 +85,7 @@ const Navbar = () => {
 			</div>
 
 			<div className={styles.rightSideEcommerce}>
-		<AuthenticatedUser />
-	
+				<AuthenticatedUser />
 
 				<div className={styles.theSearchBarEcommerce}>
 					<div
