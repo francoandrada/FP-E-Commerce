@@ -203,18 +203,18 @@ const LogIn = () => {
 								<Imge src={`${imge}`} />
 							</div>
 						</Link>
-						<div class='p-5 rounded bg-secondary'>
-							<div>
-								<div class=' d-flex justify-content-center'>
-									<Link
-									class='dropdown-item bg-secondary m-2 p-2 rounded text-center '
-										to={'/register'}
-									>
-										Don't have an account? Sign up
-									</Link>
-								</div>
+						
+						
+						<div class=' d-flex justify-content-start bg-secondary p-5'>
+								<Link
+									class='dropdown-item bg-secondary rounded text-center '
+									to={'/register'}
+								>
+									Don't have an account? Sign up
+								</Link>
 							</div>
-						</div>
+								
+							
 					</div>
 				</div>
 			</div>
