@@ -52,6 +52,7 @@ function userReducer(state = initialState, action) {
 				alert: null
 			};
 		case SUCCESS_LOGIN:
+			console.log('llegó al success login')
 			localStorage.setItem('token', action.payload);
 			return {
 				...state,

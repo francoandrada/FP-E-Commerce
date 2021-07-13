@@ -16,7 +16,10 @@ import {
 	GET_BRANDS,
 	FILTER_CATEGORIES,
 	CLEAN_SUGGESTIONS,
-	FILTER_PRICE
+	FILTER_PRICE,
+	FILTERED_PRODUCTS,
+	SELECTED_PAGE,
+	CLEAN_FILTERS
 
 } from './actionsName';
 
@@ -200,6 +203,8 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
+	console.log('llego a loginGmail')
+	console.log(data)
 	return async (dispatch) => {
 		try {
 				
@@ -225,4 +230,23 @@ export const filterPrice = (name)=> {
 	console.log(name)
 	return {type: FILTER_PRICE,
 	payload: name}}
+
+export function getFilteredProducts(query) {
+	
+	const {category,brand,price,page,qty} = query 
+
+	return async (dispatch) => {
+		axios.get(`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}`)
+			.then((response) => {
+				dispatch({ type: FILTERED_PRODUCTS, payload: response.data });
+			});
+	};
+}
+
+export const cleanFilters = ()=> {
+	return {type: CLEAN_FILTERS}}
+
+export const selectPage = (page)=> {
+	return {type: SELECTED_PAGE,
+	payload: page}}
 
