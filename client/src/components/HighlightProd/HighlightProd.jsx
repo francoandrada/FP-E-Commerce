@@ -49,7 +49,7 @@ function HighlightProd({ id, image, name, price }) {
 
 					<div className='buyHighlightDiv'>
 						<Link to={'/register'}>
-							<ButtonRed>Buy</ButtonRed>
+							<ButtonRed >Buy</ButtonRed>
 						</Link>
 					</div>
 				</div>

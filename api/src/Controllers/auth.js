@@ -134,20 +134,20 @@ exports.authUserGmail = async (req, res) => {
 		const emailBody= req.body.email
 		const passwordBody = req.body.password
 
-		console.log(emailBody)
-		console.log(passwordBody)
+		// console.log(emailBody)
+		// console.log(passwordBody)
 
 		let user = await User.findOrCreate({
 			where: {
 				email: emailBody,
 			},
 			defaults: {
-				email: email,
+				email: emailBody,
 				password: passwordBody,
 			},
 		});
 
-		console.log(user)
+		console.log('usuario ya logeado', user)
 
 		const token = jwt.sign(
 			{

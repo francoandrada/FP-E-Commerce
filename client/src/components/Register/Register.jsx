@@ -165,7 +165,7 @@ function Register() {
 							</div>
 						</div>
 						<div className={styles.registerButtonRow}>
-							<ButtonRed type='submit'>Register</ButtonRed>
+							<ButtonRed type='submit'>Sing Up</ButtonRed>
 						</div>
 					</div>
 				</form>
