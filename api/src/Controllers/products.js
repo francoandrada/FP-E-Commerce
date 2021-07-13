@@ -274,7 +274,12 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 					});
 			}
 
-			return allProduct1.slice((pageNumber-1)*qty,pageNumber*qty)
+			let respuesta = {
+				products: allProduct1.slice((pageNumber-1)*qty,pageNumber*qty),
+				length : allProduct1.length
+			}
+
+			return respuesta
 		}
 
 		let result1 = await filter()
