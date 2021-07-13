@@ -264,7 +264,7 @@ export const addToCart = (itemId) =>{
 }
 
 
-export const RemoveFromCart = (itemId) =>{
+export const removeFromCart = (itemId) =>{
 	return{
 		type: REMOVE_FROM_CART,
 		payload: {

@@ -19,9 +19,6 @@ function cartReducer(state = initialState, action) {
 		//carrito
 		case ADD_TO_CART:
 			console.log('desde el reducer', action.payload);
-			// const item = state.allProducts.find(
-			// 	(elem) => elem.id === action.payload.id
-			// );
 
 			const inCart = state.cart.find((elem) =>
 				elem.id === action.payload.id ? true : false
