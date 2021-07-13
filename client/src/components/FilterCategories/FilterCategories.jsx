@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { filterCategory } from '../../Redux/actions';
+import { filterCategory} from '../../Redux/actions';
 import styles from './FilterCategories.module.css';
 import OrderByPrice from '../OrderBox/OrderByPrice';
 
@@ -24,7 +24,7 @@ function FilterCategories() {
     )
 
     const unCheck = (category)=>{
-        let boxes = document.getElementsByClassName("form-check-input")
+        let boxes = document.getElementsByClassName("orderC")
         for(let i=0;i<boxes.length;i++){
             boxes[i].id===category?
             boxes[i].checked= true
@@ -45,7 +45,7 @@ function FilterCategories() {
 				categoriesName.map((item, index) => (
 					<div className='form-check'>
 						<input
-							className='form-check-input'
+							className={`${'form-check-input'} ${'orderC'}`}
 							type='checkbox'
 							id={item.name}
                             // checked='true'

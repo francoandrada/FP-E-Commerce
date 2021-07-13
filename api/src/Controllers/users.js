@@ -29,7 +29,7 @@ exports.newUser = async (req, res) => {
 		if (user) {
 			res.status(400).json('The user is alredy singed up');
 		}
-
+		//bcrypt libreria
 		const salt = await bcrypt.genSalt(10);
 		const pass = await bcrypt.hash(password, salt);
 

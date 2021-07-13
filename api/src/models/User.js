@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, TEXT } = require('sequelize');
 
-const { STRING, INTEGER } = DataTypes;
+const { STRING, INTEGER} = DataTypes;
 module.exports = (sequelize) => {
 	sequelize.define('user', {
 		userId: {
@@ -21,10 +21,10 @@ module.exports = (sequelize) => {
 			unique: true
 		},
 		password: {
-			type: STRING,
+			type: TEXT,
 		},
 		address: {
-			type: STRING,
+			type: TEXT,
 		},
 		addressNumber: {
 			type: INTEGER,

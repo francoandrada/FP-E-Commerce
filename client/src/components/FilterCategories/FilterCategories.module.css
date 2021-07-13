@@ -1,6 +1,7 @@
 .divCelena {
-	background-color: aliceblue;
-	color: black;
+	padding-left: 1.6rem;
+	background-color: rgb(48 48 48 / 85%);
+	color: rgb(255, 255, 255);
 	width: 20%;
 }
 

@@ -1,18 +1,23 @@
-import { FILTER_PRICE} from "../actionsName";
+import { FILTER_PRICE,CLEAN_FILTERS } from '../actionsName';
 
 const initialState = {
-    order: "",
-}
+	order: '',
+};
 
 function priceReducer(state = initialState, action) {
-    switch (action.type) {
-        case FILTER_PRICE:
-            return {
-                ...state,
-                order: action.payload,
-            }
-        default:
-            return state
-    }
+	switch (action.type) {
+		case FILTER_PRICE:
+			return {
+				...state,
+				order: action.payload,
+			};
+		case CLEAN_FILTERS:
+			return {
+				...state,
+				order: ''
+			};
+		default:
+			return state;
+	}
 }
 export default priceReducer;
