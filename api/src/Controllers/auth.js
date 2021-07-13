@@ -131,17 +131,23 @@ exports.authUserGmail = async (req, res) => {
 	try {
 		console.log('llegó al controller de la API');
 		console.log(req.body);
-		const { email, password } = req.body;
+		const emailBody= req.body.email
+		const passwordBody = req.body.password
+
+		console.log(emailBody)
+		console.log(passwordBody)
 
 		let user = await User.findOrCreate({
 			where: {
-				email: email,
+				email: emailBody,
 			},
 			defaults: {
 				email: email,
-				password: password,
+				password: passwordBody,
 			},
 		});
+
+		console.log(user)
 
 		const token = jwt.sign(
 			{
@@ -155,6 +161,6 @@ exports.authUserGmail = async (req, res) => {
 		);
 		res.json({ token });
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 	}
 };

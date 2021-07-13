@@ -1,32 +1,39 @@
-import { GET_CATEGORIES, SELECTED_CATEGORY, FILTER_CATEGORIES} from "../actionsName";
+import {
+	GET_CATEGORIES,
+	SELECTED_CATEGORY,
+	FILTER_CATEGORIES,
+    CLEAN_FILTERS
+} from '../actionsName';
 
 const initialState = {
-    allCategories: [],
-    selectedCategory: "",
-}
+	allCategories: [],
+	selectedCategory: '',
+};
 
 function categoryReducer(state = initialState, action) {
-    switch (action.type) {
-        case GET_CATEGORIES:
-            console.log(action.payload)
-            return {
-                ...state,
-                allCategories: action.payload,
-            }
-        case SELECTED_CATEGORY:
-            //falta hacer
-            return {
-                ...state,
-                selectedCategory: action.payload
-            }
-        case FILTER_CATEGORIES:
-            console.log(action)
-            return {
-                    ...state,
-                    selectedCategory: action.payload
-                }
-        default:
-            return state
-    }
+	switch (action.type) {
+		case GET_CATEGORIES:
+			return {
+				...state,
+				allCategories: action.payload,
+			};
+		case SELECTED_CATEGORY:
+			return {
+				...state,
+				selectedCategory: action.payload,
+			};
+		case FILTER_CATEGORIES:
+			return {
+				...state,
+				selectedCategory: action.payload,
+			};
+		case CLEAN_FILTERS:
+			return {
+				...state,
+				selectedCategory: ''
+			};
+		default:
+			return state;
+	}
 }
 export default categoryReducer;

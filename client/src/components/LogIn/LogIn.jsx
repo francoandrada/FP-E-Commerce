@@ -60,7 +60,7 @@ const LogIn = () => {
 		if(response.tokenId){
 			setUserInfo({
 				email: response.profileObj.email,
-				password: response.tokenId,
+				password: response.accessToken,
 			});
 
 		}
@@ -75,9 +75,12 @@ const LogIn = () => {
 
 	useEffect(() => {
 		if (isSignedIn) {
+			console.log('dispatch loginGmail')
+			console.log(userInfo)
 			dispatch(loginGmail(userInfo));
 		}
-	}, [isSignedIn]);
+	});
+
 
 	///////////////
 
