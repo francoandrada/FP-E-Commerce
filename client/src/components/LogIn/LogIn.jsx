@@ -69,7 +69,7 @@ const LogIn = () => {
 		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
-				password: response.tokenId,
+				password: response.accessToken,
 			});
 		}
 	};
@@ -82,9 +82,12 @@ const LogIn = () => {
 
 	useEffect(() => {
 		if (isSignedIn) {
+			console.log('dispatch loginGmail')
+			console.log(userInfo)
 			dispatch(loginGmail(userInfo));
 		}
-	}, [isSignedIn]);
+	});
+
 
 	///////////////
 
@@ -207,7 +210,9 @@ const LogIn = () => {
 						
 						<div class=' d-flex justify-content-start bg-secondary p-5'>
 								<Link
+
 									class='dropdown-item bg-secondary rounded text-center '
+
 									to={'/register'}
 								>
 									Don't have an account? Sign up

@@ -5,6 +5,10 @@ import styles from './OrderByPrice.module.css';
 
 function OrderByPrice() {
 
+	let category = useSelector((state) => state.category.selectedCategory);
+
+	useEffect(()=>unCheck(""),[category]
+    )
 
     const dispatch = useDispatch();
 
@@ -17,7 +21,7 @@ function OrderByPrice() {
     )
 
     const unCheck = (category)=>{
-        let boxes = document.getElementsByClassName("form-check-input")
+        let boxes = document.getElementsByClassName("orderE")
         for(let i=0;i<boxes.length;i++){
             boxes[i].id===category?
             boxes[i].checked= true
@@ -37,7 +41,7 @@ function OrderByPrice() {
             <hr></hr>
 					<div className='form-check'>
 						<input
-							className='form-check-input'
+							className={`${'form-check-input'} ${'orderE'}`}
 							type='checkbox'
 							id='descending'
                             // checked='true'
@@ -50,7 +54,7 @@ function OrderByPrice() {
 					</div>
                     <div className='form-check'>
 						<input
-							className='form-check-input'
+							className={`${'form-check-input'} ${'orderE'}`}
 							type='checkbox'
 							id='ascending'
                             // checked='true'
