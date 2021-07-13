@@ -29,8 +29,8 @@ export const PagingBox = (props) => {
 		dispatch(selectPage(1));
 	}, [price]);
 
-    console.log(actualPage)
-    console.log(maxPage)
+    // console.log(actualPage)
+    // console.log(maxPage)
     
     
     function pagePrev(){

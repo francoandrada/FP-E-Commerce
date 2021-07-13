@@ -42,18 +42,6 @@ const Imge = styled.img`
         height: 150px;
     }
 `;
-// const Text = styled.h1`
-// 	font-weight: 700;
-// 	background-color: white;
-// 	color: #FF3C4A;
-// 	border-radius: 10px;
-// 	margin: 1rem;
-// 	padding: 2rem;
-// 	font-family: 'Roboto', sans-serif;
-// 	:hover{
-// 		background-color: #303030;
-// 	}
-// `;
 
 const LogIn = () => {
 	///////// Login vía Google
@@ -96,7 +84,6 @@ const LogIn = () => {
 
 	const authenticated = useSelector((state) => state.user.authenticated);
 
-	const token = useSelector((state) => state.user.token);
 
 	const setError = useSelector((state) => state.user.setError);
 

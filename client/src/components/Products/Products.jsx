@@ -4,18 +4,23 @@ import {
 	getProducts,
 	getFilteredProducts,
 	selectPage,
-	cleanFilters
+	cleanFilters,
+	addToCart
 } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
 import PagingBox from '../PagingBox/PagingBox';
 
+
 function Products() {
+
 	let allProducts = useSelector((state) => state.product.allProducts);
+
 	let filteredProducts = useSelector(
 		(state) => state.product.filterByCategories
 	);
+
 
 	let productsToRender = allProducts;
 
@@ -132,6 +137,7 @@ function Products() {
 									<div className={styles.cardImage}>
 										<img className={styles.img} src={p.image} alt='product' />
 									</div>
+									</Link>
 									<div>
 										<hr id={styles.line} />
 									</div>
@@ -142,11 +148,21 @@ function Products() {
 										<div className={styles.productPrice}>
 											<span>{formatPrice}</span>
 										</div>
+										
 										<div className={styles.buttonBuy}>
 											<button>Buy</button>
 										</div>
+										<div className={styles.buttonBuy}>
+
+										<button
+											type='submit'
+											onClick={() => dispatch(addToCart(p))}
+										>
+											Add to Cart
+										</button>
+										</div>
 									</div>
-								</Link>
+			
 								<div id={styles.paginado}></div>
 							</div>
 						);
