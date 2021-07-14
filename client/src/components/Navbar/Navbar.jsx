@@ -24,7 +24,7 @@ const Navbar = () => {
 	const [cartCount, SetCartCount] = useState(0);
 
 	const cart = useSelector((state) => state.cart.cart);
-	localStorage.setItem("cart", JSON.stringify(cart))
+	
 
 	
 	useEffect(() => {
@@ -35,6 +35,7 @@ const Navbar = () => {
 			});
 		}
 		SetCartCount(count);
+		localStorage.setItem("cart", JSON.stringify(cart))
 	}, [cart, cartCount]);
 	
 

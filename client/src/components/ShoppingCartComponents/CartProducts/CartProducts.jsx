@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useState } from 'react';
-import {addToCart, removeFromCart} from '../../Redux/actions'
+import {addToCart, removeFromCart, adjustQty} from '../../Redux/actions'
 import style from './CartProducts.module.css'
 import {BsTrash} from 'react-icons/bs'
 
 function CartList({info, image, name, price, qty}) {
     const dispatch = useDispatch();
     const [prodInfo, setProdInfo] = useState(info)
-    
 
     function handlePlus() {
         setProdInfo(info)
@@ -15,8 +14,17 @@ function CartList({info, image, name, price, qty}) {
     }
 
     function handleMinus() {
-        setProdInfo(info)
-        dispatch(removeFromCart(prodInfo))
+        let newQuantity = qty
+        if (qty === 1 ) {
+            newQuantity = qty
+        } else {
+            newQuantity = qty - 1
+        }
+        dispatch(adjustQty(info.id, newQuantity))
+    }
+
+    function handleDeleteProd() {
+        dispatch(removeFromCart(info.id))
     }
 	
 	return (
@@ -28,7 +36,7 @@ function CartList({info, image, name, price, qty}) {
                         <img src={image} className={style.cartImage} alt='productFoto' />
                     </div>
                     <p>{name}</p>
-                    <h1>{price}</h1>
+                    <h3>${price*qty}</h3>
                 
                     <div className={style.modifyQtyButtons}>
                         <button 
@@ -40,7 +48,7 @@ function CartList({info, image, name, price, qty}) {
                         className={style.plusMinusButtons}>+</button>
                     </div>
                 
-                    <button className={style.trashButtonCart}><BsTrash/></button>
+                    <button onClick={handleDeleteProd} className={style.trashButtonCart}><BsTrash/></button>
                 </div>
             </div>
 		</div>
