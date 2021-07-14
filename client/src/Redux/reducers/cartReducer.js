@@ -8,7 +8,6 @@ import {
 } from '../actionsName';
 
 const initialState = {
-	
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
 };
@@ -17,11 +16,6 @@ function cartReducer(state = initialState, action) {
 	switch (action.type) {
 		//carrito
 		case ADD_TO_CART:
-<<<<<<< HEAD
-			// console.log('desde el reducer', action.payload);
-
-=======
->>>>>>> main
 			const inCart = state.cart.find((elem) =>
 				elem.id === action.payload.id ? true : false
 			);

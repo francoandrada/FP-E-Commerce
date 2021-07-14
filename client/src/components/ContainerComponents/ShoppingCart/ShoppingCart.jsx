@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import CartList from '../../CartList/CartList'
-import SubTotal from '../../SubTotal/SubTotal'
+import CartList from '../../ShoppingCartComponents/CartList/CartList'
+import SubTotal from '../../ShoppingCartComponents/SubTotal/SubTotal'
 import style from './ShoppingCart.module.css'
 
 function ShoppingCart() {
