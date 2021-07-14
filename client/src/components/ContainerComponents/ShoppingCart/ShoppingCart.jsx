@@ -8,7 +8,7 @@ function ShoppingCart() {
     const userLogged = useSelector((state) => state.user.authenticated);
 	const dispatch = useDispatch();
 
-    console.log(userLogged)
+
 
 	return (
         <div className={style.shoppingCartContainer}>

@@ -192,7 +192,7 @@ const orderProducts = async function orderProducts(req, res, next) {
 const getAllCategories = async function getAllCategories(req, res, next) {
 	try {
 		const allCategories = await Category.findAll();
-		console.log(allCategories);
+	
 		res.status(200).json(allCategories);
 	} catch (error) {
 		next(error);
@@ -201,7 +201,7 @@ const getAllCategories = async function getAllCategories(req, res, next) {
 
 // http://localhost:3001/products/catalog?category=pc&brand=asus&order=descending&page=1
 const getFilteredProducts = async function getFilteredProducts(req, res, next) {
-	console.log(req.query);
+
 	//req.query = { category: 'pc', brand: 'asus', price: 'descending', page: '1' }
 	
 	try {
@@ -210,7 +210,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 
 		const pageNumber = page || 1
 
-		console.log(category)
+
 
 		let allProduct = await Product.findAll({
 			include: [{model: Category},{model: Brand}],

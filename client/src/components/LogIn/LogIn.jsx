@@ -53,7 +53,7 @@ const LogIn = () => {
 	const [userInfo, setUserInfo] = useState({});
 
 	const responseGoogle = (response) => {
-		console.log(response);
+
 		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
@@ -71,7 +71,7 @@ const LogIn = () => {
 	useEffect(() => {
 		if (isSignedIn) {
 			console.log('dispatch loginGmail')
-			console.log(userInfo)
+
 			dispatch(loginGmail(userInfo));
 		}
 	});
