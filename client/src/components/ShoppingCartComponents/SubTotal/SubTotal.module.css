@@ -1,0 +1,38 @@
+.subtotalContainerMain {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.subdivTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 20px;
+    border-top-color: rgb(226, 226, 226);
+    border-top-style: solid;
+    padding-top: 20px;
+    border-top-width: 0.5px;
+
+}
+
+.paymentButton {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FF3C4A;
+    color: white;
+    font-weight: bold;
+    border-style: hidden;
+    border-radius: 10px;
+}
+.paymentButton:hover {
+    background-color: #c5c5c5;  
+    color:#FF3C4A; 
+}
+.paymentButton:active {
+    background-color: #bd2d36;   
+}
