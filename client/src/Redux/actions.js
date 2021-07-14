@@ -24,7 +24,7 @@ import {
 	REMOVE_FROM_CART,
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
-
+	LIST_PRODUCT_ON_TABLE,
 } from './actionsName';
 
 import axios from 'axios';
@@ -43,10 +43,30 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
+export const fetchListProducts = (payload) => ({
+	type: LIST_PRODUCT_ON_TABLE,
+	payload,
+});
+
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined,
 });
+
+export function getListOfProductTable(page, object) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.post(
+				`http://localhost:3001/admin/tablepagination?page${page}`,
+				object
+			);
+			dispatch(fetchListProducts(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
 
 export function getSuggestions(name) {
 	return async (dispatch) => {
@@ -86,7 +106,8 @@ export function getBrands() {
 
 export function getProductById(id) {
 	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/allproducts/' + id)
+		axios
+			.get('http://localhost:3001/products/allproducts/' + id)
 			.then((response) => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
@@ -105,7 +126,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-			console.log('dato', dato)
+			console.log('dato', dato);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -116,7 +137,6 @@ export function logIn(dato) {
 				payload: error.response.data.msg,
 			});
 		}
-	
 	};
 }
 
@@ -161,28 +181,30 @@ export function logOut() {
 export function forgotPassword(email) {
 	return async (dispatch) => {
 		try {
-			const res =await axios.put('http://localhost:3001/auth/forgot-password', { email });
-			let hola = res.data.msg
+			const res = await axios.put(
+				'http://localhost:3001/auth/forgot-password',
+				{ email }
+			);
+			let hola = res.data.msg;
 			dispatch({
 				type: FORGOT_PASSWORD,
 				payload: {
 					email,
-					hola
+					hola,
 				},
 			});
-			console.log('desde el action', res.data.msg)
+			console.log('desde el action', res.data.msg);
 		} catch (error) {
-
 			dispatch({
 				type: ERROR,
 				payload: error.response.data.msg,
 			});
 		}
 		setTimeout(() => {
-            dispatch({
-                type: HIDE_ALERT
-            })
-        }, 3000);
+			dispatch({
+				type: HIDE_ALERT,
+			});
+		}, 3000);
 	};
 }
 
@@ -207,11 +229,10 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
-	console.log('llego a loginGmail')
-	console.log(data)
+	console.log('llego a loginGmail');
+	console.log(data);
 	return async (dispatch) => {
 		try {
-				
 			const res = await axios.post('http://localhost:3001/authGmail', data);
 			console.log('desde el action', res.data.token);
 
@@ -225,70 +246,68 @@ export function loginGmail(data) {
 	};
 }
 
-export const filterCategory = (name)=> {
-	return {type: FILTER_CATEGORIES,
-	payload: name}}
+export const filterCategory = (name) => {
+	return { type: FILTER_CATEGORIES, payload: name };
+};
 
-export const filterPrice = (name)=> {
-
-	return {type: FILTER_PRICE,
-	payload: name}}
+export const filterPrice = (name) => {
+	return { type: FILTER_PRICE, payload: name };
+};
 
 export function getFilteredProducts(query) {
-	
-	const {category,brand,price,page,qty} = query 
+	const { category, brand, price, page, qty } = query;
 
 	return async (dispatch) => {
-		axios.get(`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}`)
+		axios
+			.get(
+				`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}`
+			)
 			.then((response) => {
 				dispatch({ type: FILTERED_PRODUCTS, payload: response.data });
 			});
 	};
 }
 
-export const cleanFilters = ()=> {
-	return {type: CLEAN_FILTERS}}
+export const cleanFilters = () => {
+	return { type: CLEAN_FILTERS };
+};
 
-export const selectPage = (page)=> {
-	return {type: SELECTED_PAGE,
-	payload: page}}
+export const selectPage = (page) => {
+	return { type: SELECTED_PAGE, payload: page };
+};
 
-
-
-
-export const addToCart = (itemId) =>{
-	return{
+export const addToCart = (itemId) => {
+	return {
 		type: ADD_TO_CART,
-		payload: itemId
-	}
-}
+		payload: itemId,
+	};
+};
 
-
-export const RemoveFromCart = (itemId) =>{
-	return{
+export const RemoveFromCart = (itemId) => {
+	return {
 		type: REMOVE_FROM_CART,
 		payload: {
-			id: itemId
-		}
-	}
-}
+			id: itemId,
+		},
+	};
+};
 //ajustar cantidas
-export const adjustQty = (itemId, value) =>{
-	return{
+export const adjustQty = (itemId, value) => {
+	return {
 		type: ADJUST_ITEM_QTY,
 		payload: {
 			id: itemId,
-			qty: value
-		}
-	}
-}
+			qty: value,
+		},
+	};
+};
 
 //recibo el item entero con toda su data
-export const loadCurrentItem = (itemId) =>{
-	return{
+export const loadCurrentItem = (itemId) => {
+	return {
 		type: LOAD_CURRENT_ITEM,
 		payload: {
-			id: itemId
-		}
-	}
-}
+			id: itemId,
+		},
+	};
+};
