@@ -24,11 +24,10 @@ const Navbar = () => {
 	const [cartCount, SetCartCount] = useState(0);
 
 	const cart = useSelector((state) => state.cart.cart);
-	// localStorage.setItem('cart', JSON.stringify(cart));
 
 	useEffect(() => {
 		let count = 0;
-		if (cart !== undefined) {
+		if (cart !== null) {
 			cart.forEach((item) => {
 				count = count + item.qty;
 			});

@@ -11,7 +11,7 @@ function DetailProduct(props) {
     useEffect(() => {
         dispatch(getProductById(props.match.params.id))
     }, [])
-    console.log(productDetail)
+ 
 
     return (
         <div className={styles.container}>

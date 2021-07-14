@@ -16,7 +16,7 @@
 	padding: 0.5rem;
 	flex-direction: column;
 	color: #6c757d;
-	height: 54.4px;
+	min-height: 54.4px;
 	text-align: center;
 }
 
@@ -27,9 +27,8 @@
 
 #line {
 	width: 90%;
-	/* margin-left: 5%;
-	margin-right: 5%; */
-	margin: 0;
+	margin-left: 5%;
+	margin-right: 5%;
 	color: black;
 }
 
@@ -45,7 +44,9 @@
 	color: black;
 	font-size: 22px;
 	font-weight: 500;
-	padding-left: 13px;
+	display: flex;
+	justify-content: center;
+	/* padding-left: 13px; */
 }
 
 .buttonBuy {
@@ -74,10 +75,10 @@
 		width: min-content;
 		margin: 1rem 1.5rem;
 		border-radius: 8px;
-		/* height: 368px; */
+		height: 368px;
 	}
 	.cardImage {
-		padding: .1rem;
+		padding: 1rem;
 	}
 	.img {
 		width: 200px;
@@ -97,14 +98,14 @@
 		width: min-content;
 		margin: 1rem 0.7rem;
 		border-radius: 8px;
-		/* height: 481px; */
+		height: 421px;
 	}
 	.cardImage {
 		padding: 1rem;
 	}
 	.img {
-		width: 180px;
-		height: 180px;
+		width: 250px;
+		height: 250px;
 	}
 	.productName {
 		font-size: 15px;
@@ -117,7 +118,7 @@
 		color: black;
 		font-size: 22px;
 		font-weight: 500;
-		padding-left: 50px;
+		/* padding-left: 50px; */
 	}
 
 	.buttonBuy button {

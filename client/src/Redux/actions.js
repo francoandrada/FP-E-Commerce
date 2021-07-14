@@ -126,7 +126,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-			console.log('dato', dato);
+		
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -193,7 +193,7 @@ export function forgotPassword(email) {
 					hola,
 				},
 			});
-			console.log('desde el action', res.data.msg);
+			
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -229,12 +229,12 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
-	console.log('llego a loginGmail');
-	console.log(data);
+
+
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
-			console.log('desde el action', res.data.token);
+		
 
 			dispatch({
 				type: SUCCESS_LOGIN,
