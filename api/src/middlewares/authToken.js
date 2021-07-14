@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
 
 		try {
 			const user = jwt.verify(token, process.env.SECRET);
-			console.log(user);
+	
 			req.user = user;
 		} catch (error) {
 			console.log(error)

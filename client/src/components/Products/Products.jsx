@@ -6,20 +6,19 @@ import {
 	selectPage,
 	cleanFilters,
 	addToCart,
-	removeFromCart
+	removeFromCart,
 } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
 
 function Products() {
+	const dispatch = useDispatch();
 	let allProducts = useSelector((state) => state.product.allProducts);
 
 	let filteredProducts = useSelector(
 		(state) => state.product.filterByCategories
 	);
-
-	console.log(allProducts[0])
 
 	let productsToRender = allProducts;
 
@@ -50,7 +49,7 @@ function Products() {
 			qty: productsPerPage,
 		});
 		return () => {
-			console.log('unmount');
+	
 			dispatch(cleanFilters());
 		};
 	}, []);
@@ -94,7 +93,9 @@ function Products() {
 		dispatch(getFilteredProducts(query));
 	}, [query]);
 
-	const dispatch = useDispatch();
+	
+
+
 
 	var formatNumber = {
 		separator: '.',
@@ -139,7 +140,8 @@ function Products() {
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
 								</div>
-								<div className={styles.footerCard}>
+								{/* <div className={styles.footerCard}> */}
+								<div class='d-flex justify-content-center'>
 									<div className={styles.productPrice}>
 										<span>{formatPrice}</span>
 									</div>
@@ -151,10 +153,9 @@ function Products() {
 										>
 											Add to Cart
 										</button>
-										
 									</div>
 								</div>
-
+								{/* </div> */}
 								<div id={styles.paginado}></div>
 							</div>
 						);

@@ -12,7 +12,6 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/Table/Table';
 import './App.css';
-import PutProduct from './adminPutForm/putProduct';
 
 function App() {
 	return (
@@ -37,7 +36,6 @@ function App() {
 
 					
 					<Route path='/table' exact component={Table} />
-					<Route path='/adminputproduct' component={PutProduct} />
 
 				</Switch>
 			</div>

@@ -33,13 +33,13 @@ const productSuggestions = (array, name) => {
 function userReducer(state = initialState, action) {
 	switch (action.type) {
 		case ERROR:
-			console.log('desde reducer', action.payload);
+		
 			return {
 				...state,
 				setError: action.payload,
 			};
 		case FORGOT_PASSWORD: {
-			console.log('desde reducer', action.payload.hola);
+		
 			return{
 			...state,
 			alert: action.payload.hola

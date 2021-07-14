@@ -34,14 +34,14 @@ export const PagingBox = (props) => {
     
     
     function pagePrev(){
-        console.log('prev')
+ 
         if(actualPage>1){
             dispatch(selectPage(actualPage-1));
         }
     }
 
     function pagePost(){
-        console.log('post')
+
         if(actualPage<maxPage){
             dispatch(selectPage(actualPage+1));
         }

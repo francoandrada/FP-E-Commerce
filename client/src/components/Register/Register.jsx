@@ -63,11 +63,11 @@ function Register() {
 				history.push('/');
 			} catch (error) {
 				hola.push(error.response);
-				console.log(hola);
+			
 			}
 		}
 	};
-	console.log('dfsfer', hola);
+
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
