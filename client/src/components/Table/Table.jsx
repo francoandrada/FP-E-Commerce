@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getListOfProductTable } from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
+import Loader from '../Loader/Loader';
+import styles from './Table.module.css';
 
 const Table = () => {
 	const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const Table = () => {
 	return (
 		<div>
 			{listProductsOnTable ? (
-				<table {...getTableProps()}>
+				<table {...getTableProps()} className={styles.tableEcommerce}>
 					<thead>
 						{headerGroups.map((headerGroup) => (
 							<tr {...headerGroup.getHeaderGroupProps()}>
@@ -61,7 +63,7 @@ const Table = () => {
 					</tbody>
 				</table>
 			) : (
-				<h1>Loading...</h1>
+				<Loader />
 			)}
 		</div>
 	);
