@@ -311,3 +311,20 @@ export const loadCurrentItem = (itemId) => {
 		},
 	};
 };
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
+
+export function modifyProduct(elem) {
+	return async () => {
+		try {
+	 	await axios.post('http://localhost:3001/admin/putproduct', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
