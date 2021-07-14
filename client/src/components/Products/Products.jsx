@@ -19,6 +19,8 @@ function Products() {
 		(state) => state.product.filterByCategories
 	);
 
+	console.log(allProducts[0])
+
 	let productsToRender = allProducts;
 
 	if (filteredProducts) {
