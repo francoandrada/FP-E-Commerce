@@ -23,4 +23,8 @@ export const COLUMNS = [
 		Header: 'Stock',
 		accessor: 'stock',
 	},
+	{
+		Header: 'Category',
+		accessor: 'category',
+	},
 ];
