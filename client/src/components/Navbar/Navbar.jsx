@@ -3,24 +3,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { authUser, getSuggestions, logOut } from '../../Redux/actions';
-// import { useModal } from '../../hooks/useModal';
-// import { useKey } from '../../hooks/useKey';
+import {
+	authUser,
+	getSuggestions,
+	logOut,
+	cleanSuggestions,
+} from '../../Redux/actions';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
-// import Modal from '../Modal/Modal';
 import styles from './Navbar.module.css';
-import AuthenticatedUser from '../AuthUser.js/AuthenticatedUser';
 
 const Navbar = () => {
-	// const [isOpenModal, openModal, closeModal] = useModal(false);
-	// const [showLinks, setShowLinks] = useState(false);
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState('');
 	const wrapperRef = useRef(null);
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const token = useSelector((state) => state.user.token);
+
+	//CARRITO
+	const [cartCount, SetCartCount] = useState(0);
+
+	const cart = useSelector((state) => state.cart.cart);
+	localStorage.setItem('cart', JSON.stringify(cart));
+
+	useEffect(() => {
+		let count = 0;
+		if (cart !== null) {
+			cart.forEach((item) => {
+				count = count + item.qty;
+			});
+		}
+		SetCartCount(count);
+	}, [cart, cartCount]);
 
 	useEffect(() => {
 		axios
@@ -33,6 +49,7 @@ const Navbar = () => {
 	}, []);
 
 	useEffect(() => {
+		dispatch(authUser());
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
@@ -54,22 +71,13 @@ const Navbar = () => {
 	const searchProduct = (event) => {
 		event.preventDefault();
 		if (search.trim()) {
+			dispatch(cleanSuggestions());
 			history.push('/searchproduct');
 			dispatch(getSuggestions(search));
 			setSearch('');
 		} else {
 			setSearch('');
 		}
-	};
-
-	const user = useSelector((state) => state.user.user);
-
-	useEffect(() => {
-		dispatch(authUser());
-	}, []);
-
-	const myFunction = () => {
-		dispatch(logOut());
 	};
 
 	<button onclick='myFunction()'>Click me</button>;
@@ -84,8 +92,29 @@ const Navbar = () => {
 			</div>
 
 			<div className={styles.rightSideEcommerce}>
-		<AuthenticatedUser />
-	
+				<div className={styles.linksNavEcommerce}>
+					<Link to='/'>Home</Link>
+					<Link to='/catalog'>Catalog</Link>
+					<Link to='/'>CarritoLOGO</Link>
+					<p>{cartCount}</p>
+
+					{token ? (
+						<button
+							type='submit'
+							className={styles.but}
+							onClick={() => {
+								dispatch(logOut());
+							}}
+						>
+							Log Out
+						</button>
+					) : (
+						<>
+							<Link to='/register'>Sing Up</Link>
+							<Link to='/LogIn'>Login</Link>
+						</>
+					)}
+				</div>
 
 				<div className={styles.theSearchBarEcommerce}>
 					<div
