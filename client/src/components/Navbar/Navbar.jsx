@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { authUser, getSuggestions, logOut } from '../../Redux/actions';
+import {
+	authUser,
+	getSuggestions,
+	logOut,
+	cleanSuggestions,
+} from '../../Redux/actions';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
-// import Modal from '../Modal/Modal';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-	// const [isOpenModal, openModal, closeModal] = useModal(false);
-	// const [showLinks, setShowLinks] = useState(false);
 	const [display, setDisplay] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [search, setSearch] = useState('');
@@ -24,9 +26,7 @@ const Navbar = () => {
 	const [cartCount, SetCartCount] = useState(0);
 
 	const cart = useSelector((state) => state.cart.cart);
-	
 
-	
 	useEffect(() => {
 		let count = 0;
 		if (cart !== null) {
@@ -35,10 +35,8 @@ const Navbar = () => {
 			});
 		}
 		SetCartCount(count);
-		localStorage.setItem("cart", JSON.stringify(cart))
+		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart, cartCount]);
-	
-
 
 	useEffect(() => {
 		axios
@@ -56,7 +54,6 @@ const Navbar = () => {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-
 	}, []);
 
 	const handleClickOutside = (event) => {
@@ -74,6 +71,7 @@ const Navbar = () => {
 	const searchProduct = (event) => {
 		event.preventDefault();
 		if (search.trim()) {
+			dispatch(cleanSuggestions());
 			history.push('/searchproduct');
 			dispatch(getSuggestions(search));
 			setSearch('');
@@ -81,7 +79,6 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-	
 
 	<button onclick='myFunction()'>Click me</button>;
 	return (

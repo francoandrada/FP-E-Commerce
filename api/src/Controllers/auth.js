@@ -129,8 +129,8 @@ exports.resetPassword = async (req, res) => {
 
 exports.authUserGmail = async (req, res) => {
 	try {
-		console.log('llegó al controller de la API');
-		console.log(req.body);
+
+
 		const emailBody= req.body.email
 		const passwordBody = req.body.password
 
@@ -144,7 +144,7 @@ exports.authUserGmail = async (req, res) => {
 			},
 		});
 
-		console.log('usuario ya logeado', user)
+	
 
 		const token = jwt.sign(
 			{

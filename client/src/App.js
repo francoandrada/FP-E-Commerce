@@ -10,7 +10,9 @@ import SearchProducts from './components/searchProducts/SearchProducts';
 import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
+import Table from './components/Table/Table';
 import './App.css';
+import Admin from './components/Admin/Admin';
 
 function App() {
 	return (
@@ -18,6 +20,14 @@ function App() {
 			<div class='totalvh'>
 				<Navbar />
 				<Switch>
+					<Route path='/admin' exact component={Admin}/>
+					<Route path='/admin/products' exact component={Admin}/>
+					<Route path='/admin/users' exact component={Admin}/>
+					<Route path='/admin/orders' exact component={Admin}/>
+					<Route path='/admin/categories' exact component={Admin}/>
+					<Route path='/admin/brands' exact component={Admin}/>
+					<Route path='/admin/stock' exact component={Admin}/>
+					
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />
@@ -30,7 +40,12 @@ function App() {
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
+
+					
+					<Route path='/table' exact component={Table} />
+
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />

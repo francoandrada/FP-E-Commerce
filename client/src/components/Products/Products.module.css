@@ -44,7 +44,9 @@
 	color: black;
 	font-size: 22px;
 	font-weight: 500;
-	padding-left: 13px;
+	display: flex;
+	justify-content: center;
+	/* padding-left: 13px; */
 }
 
 .buttonBuy {
@@ -96,14 +98,14 @@
 		width: min-content;
 		margin: 1rem 0.7rem;
 		border-radius: 8px;
-		height: 481px;
+		height: 421px;
 	}
 	.cardImage {
 		padding: 1rem;
 	}
 	.img {
-		width: 300px;
-		height: 300px;
+		width: 250px;
+		height: 250px;
 	}
 	.productName {
 		font-size: 15px;
@@ -116,7 +118,7 @@
 		color: black;
 		font-size: 22px;
 		font-weight: 500;
-		padding-left: 50px;
+		/* padding-left: 50px; */
 	}
 
 	.buttonBuy button {
