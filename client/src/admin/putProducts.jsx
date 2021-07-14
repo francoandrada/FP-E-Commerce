@@ -34,7 +34,7 @@ function PutProduct(){
         }
         
         const submit=(data, e)=>{
-            console.log(data)
+            // console.log(data)
             if(data.id && data.id.length >0){
                 dispatch(putProductAdmin(data))
                 e.target.reset()
