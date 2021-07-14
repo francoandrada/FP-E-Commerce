@@ -8,10 +8,7 @@ import {
 } from '../actionsName';
 
 const initialState = {
-<<<<<<< HEAD
-=======
 	
->>>>>>> main
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
 };
