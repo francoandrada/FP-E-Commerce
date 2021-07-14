@@ -1,26 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	getProducts,
 	getFilteredProducts,
 	selectPage,
 	cleanFilters,
-	addToCart
+	addToCart,
+	removeFromCart
 } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
-import ButtonRed from '../StyledComponents/ButtonRed';
 import PagingBox from '../PagingBox/PagingBox';
 
-
 function Products() {
-
 	let allProducts = useSelector((state) => state.product.allProducts);
 
 	let filteredProducts = useSelector(
 		(state) => state.product.filterByCategories
 	);
-
 
 	let productsToRender = allProducts;
 
@@ -42,29 +39,26 @@ function Products() {
 		qty: productsPerPage,
 	});
 
-	useEffect(
-		() =>{
-			setQuery({
-				category: categoryS,
-				brand: brandS,
-				price: priceS,
-				page: actualPage,
-				qty: productsPerPage,
-			});
-			return () => {
-				console.log('unmount')
-				dispatch(cleanFilters())
-			  }	
-		},[]
-	);
+	useEffect(() => {
+		setQuery({
+			category: categoryS,
+			brand: brandS,
+			price: priceS,
+			page: actualPage,
+			qty: productsPerPage,
+		});
+		return () => {
+			console.log('unmount');
+			dispatch(cleanFilters());
+		};
+	}, []);
 
-	// useEffect(() => 
+	// useEffect(() =>
 	// {dispatch(getFilteredProducts(query));
 	// 	return () => {
 	// 		console.log('unmount')
-	// 	  }	
+	// 	  }
 	// }, []);
-
 
 	useEffect(() => {
 		setQuery({
@@ -97,7 +91,6 @@ function Products() {
 	useEffect(() => {
 		dispatch(getFilteredProducts(query));
 	}, [query]);
-
 
 	const dispatch = useDispatch();
 
@@ -137,32 +130,29 @@ function Products() {
 									<div className={styles.cardImage}>
 										<img className={styles.img} src={p.image} alt='product' />
 									</div>
-									</Link>
-									<div>
-										<hr id={styles.line} />
+								</Link>
+								<div>
+									<hr id={styles.line} />
+								</div>
+								<div className={styles.data}>
+									<span className={styles.productName}>{p.name}</span>
+								</div>
+								<div className={styles.footerCard}>
+									<div className={styles.productPrice}>
+										<span>{formatPrice}</span>
 									</div>
-									<div className={styles.data}>
-										<span className={styles.productName}>{p.name}</span>
-									</div>
-									<div className={styles.footerCard}>
-										<div className={styles.productPrice}>
-											<span>{formatPrice}</span>
-										</div>
-										
-										<div className={styles.buttonBuy}>
-											<button>Buy</button>
-										</div>
-										<div className={styles.buttonBuy}>
 
+									<div className={styles.buttonBuy}>
 										<button
 											type='submit'
 											onClick={() => dispatch(addToCart(p))}
 										>
 											Add to Cart
 										</button>
-										</div>
+										
 									</div>
-			
+								</div>
+
 								<div id={styles.paginado}></div>
 							</div>
 						);

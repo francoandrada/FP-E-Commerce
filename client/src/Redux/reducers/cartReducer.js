@@ -9,9 +9,9 @@ import {
 } from '../actionsName';
 
 const initialState = {
-	// cart: [],
+	 cart: [],
 	currentItem: null,
-    cart: JSON.parse(localStorage.getItem('cart')),
+    // cart: JSON.parse(localStorage.getItem('cart')),
 };
 
 function cartReducer(state = initialState, action) {
@@ -19,14 +19,12 @@ function cartReducer(state = initialState, action) {
 		//carrito
 		case ADD_TO_CART:
 			console.log('desde el reducer', action.payload);
-			// const item = state.allProducts.find(
-			// 	(elem) => elem.id === action.payload.id
-			// );
 
 			const inCart = state.cart.find((elem) =>
 				elem.id === action.payload.id ? true : false
 			);
-			localStorage.setItem("cart", JSON.stringify(action.payload))
+
+			// localStorage.setItem("cart", JSON.stringify(action.payload))
 			return {
 				...state,
 
