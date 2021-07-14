@@ -318,7 +318,29 @@ export const loadCurrentItem = (itemId) => {
 export function modifyProduct(elem) {
 	return async () => {
 		try {
-	 	await axios.post('http://localhost:3001/admin/putproduct', elem);
+	 	await axios.put('http://localhost:3001/admin/putproduct', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyCateogry(elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putcategory', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyBrand (elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putbrand', elem);
 
 		} catch (error) {
 			console.log(error);

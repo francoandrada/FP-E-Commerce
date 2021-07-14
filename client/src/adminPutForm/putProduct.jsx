@@ -151,7 +151,7 @@ function PutProduct(){
             // },
             maxLength:{
                 value: 8,
-                massage:"menos de 20 caracteres"
+                massage:"menos de 8 caracteres"
             },
             minLength:{
                 value: 3,
@@ -181,7 +181,7 @@ function PutProduct(){
             // },
             maxLength:{
                 value: 8,
-                massage:"menos de 20 caracteres"
+                massage:"menos de 8 caracteres"
             },
             minLength:{
                 value: 3,
@@ -210,12 +210,12 @@ function PutProduct(){
             //     massage: "debe ingresar un nombre"
             // },
             maxLength:{
-                value: 300,
-                massage:"menos de 20 caracteres"
+                value: 200,
+                massage:"menos de 200 caracteres"
             },
             minLength:{
                 value: 10,
-                message:"mas de 3 caracteres"
+                message:"mas de 10 caracteres"
             },
             pattern:{
                 value: /^[a-zA-Z]*$/,
@@ -240,11 +240,11 @@ function PutProduct(){
             // },
             maxLength:{
                 value: 4,
-                massage:"menos de 20 caracteres"
+                massage:"menos de 4 caracteres"
             },
             minLength:{
                 value: 1,
-                message:"mas de 3 caracteres"
+                message:"mas de 1 caracteres"
             },
             // pattern:{
             //     value: /^[a-zA-Z]*$/,
@@ -397,4 +397,4 @@ function PutProduct(){
         </div>
     )
 }
-export default PutProduct
+export default PutProduct;
