@@ -140,7 +140,7 @@ function Products() {
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
 								</div>
-								{/* <div className={styles.footerCard}> */}
+							
 								<div class='d-flex justify-content-center'>
 									<div className={styles.productPrice}>
 										<span>{formatPrice}</span>
