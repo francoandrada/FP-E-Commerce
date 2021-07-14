@@ -1,16 +1,10 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { cleanSuggestions } from '../../Redux/actions';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 import styles from './SearchResult.module.css';
 
 const SearchResult = () => {
 	let { suggestions } = useSelector((state) => state.user);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		return () => dispatch(cleanSuggestions());
-	}, [dispatch]);
 
 	var formatNumber = {
 		separator: '.',
@@ -36,14 +30,7 @@ const SearchResult = () => {
 	const isEqual = (a, b) => a.name === b.name;
 	return (
 		<div className={styles.cardsContainer}>
-			{/* cambiar por spinner */}
-			{suggestions === undefined && (
-				<h1
-					style={{ color: 'white', display: 'flex', justifyContent: 'center' }}
-				>
-					Loading...
-				</h1>
-			)}
+			{suggestions === undefined && <Loader />}
 			{suggestions && !suggestions.length && (
 				<h1
 					style={{ color: 'white', display: 'flex', justifyContent: 'center' }}
