@@ -24,9 +24,8 @@ const Navbar = () => {
 	const [cartCount, SetCartCount] = useState(0);
 
 	const cart = useSelector((state) => state.cart.cart);
-	
-	console.log(cart)
 	localStorage.setItem("cart", JSON.stringify(cart))
+
 	
 	useEffect(() => {
 		let count = 0;
