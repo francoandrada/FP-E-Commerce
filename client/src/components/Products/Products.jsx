@@ -21,6 +21,8 @@ function Products() {
 		(state) => state.product.filterByCategories
 	);
 
+	console.log(allProducts[0])
+
 	let productsToRender = allProducts;
 
 	if (filteredProducts) {
@@ -139,20 +141,20 @@ function Products() {
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
 								</div>
-								<div class='d-flex justify-content-center m-1'>
-									{formatPrice}
+								<div class='d-block '>
+									<div class='d-flex justify-content-center m-3'>{formatPrice}</div>
+
+									<div class='d-flex justify-content-center mb-2'>
+										<ButtonRed
+											type='submit'
+											onClick={() => dispatch(addToCart(p))}
+										>
+											Add to Cart
+										</ButtonRed>
+										
+									</div>
 								</div>
-								<div className={styles.buttonBuy}>
-									{/* <div class='d-flex justify-content-center mb-5 bg-white rounded'> */}
-									<button
-									
-										type='submit'
-										onClick={() => dispatch(addToCart(p))}
-									>
-										Add to Cart
-									</button>
-									{/* </div> */}
-								</div>
+
 								<div id={styles.paginado}></div>
 							</div>
 						);
@@ -162,6 +164,7 @@ function Products() {
 		</div>
 	);
 }
+
 
 export default Products;
 
