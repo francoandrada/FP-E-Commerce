@@ -3,6 +3,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
+import { useState } from 'react';
 
 const Icon = styled.div`
   color: #ff3c4a;
@@ -20,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 
-const CardContainer = styled.div`
+const CartContainer = styled.div`
       /* display: flex;
     justify-content: flex-end;
     margin: 0% 10% 0% 0%; */
@@ -127,43 +128,50 @@ const ButtonPay = styled.section`
 // border-bottom: 2px solid var(--gray-06);
 // color='#ff3c4a'
 function CartModal() {
+	const [active, setActive] = useState(false);
+
+	const toggle = () => {
+		setActive(!active);
+	};
+
 	return (
 		<>
 			<GlobalStyle />
-			<Icon>
+			<Icon onClick={toggle}>
 				<FaShoppingCart />
 			</Icon>
+			{active && (
+				<CartContainer active={active} toggle={toggle}>
+					<CartHeader>
+						<h3>Cart</h3>
 
-			<CardContainer>
-				<CartHeader>
-					<h3>Cart</h3>
-
-					<div>
-						<p>Subtotal</p>
-						<span>$3.000,00</span>
-					</div>
-				</CartHeader>
-				<ProductsCart>
-					<ul>
-						<li>
-							<ProductCartModal />
-						</li>
-						<li>
-							<ProductCartModal />
-						</li>
-						<li>
-							<ProductCartModal />
-						</li>
-						<li>
-							<ProductCartModal />
-						</li>
-					</ul>
-				</ProductsCart>
-				<CartPay>
-					<ButtonClose>Close</ButtonClose>
-					<ButtonPay>Pay</ButtonPay>
-				</CartPay>
-			</CardContainer>
+						<div>
+							<p>Subtotal</p>
+							<span>$3.000,00</span>
+						</div>
+					</CartHeader>
+					<ProductsCart>
+						<ul>
+							<li>
+								<ProductCartModal />
+							</li>
+							<li>
+								<ProductCartModal />
+							</li>
+							<li>
+								<ProductCartModal />
+							</li>
+							<li>
+								<ProductCartModal />
+							</li>
+						</ul>
+					</ProductsCart>
+					<CartPay>
+						<ButtonClose onClick={toggle}>Close</ButtonClose>
+						<ButtonPay>Pay</ButtonPay>
+					</CartPay>
+				</CartContainer>
+			)}
 		</>
 	);
 }
