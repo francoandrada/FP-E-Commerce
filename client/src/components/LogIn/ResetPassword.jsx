@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { resetPassword } from '../../Redux/actions';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
-import Div from '../StyledComponents/Validation';
+
 
 const Text = styled.h2`
 	  font-family: 'Roboto', sans-serif ;
