@@ -1,80 +1,46 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import {addToCart, removeFromCart} from '../../Redux/actions'
 import style from './CartProducts.module.css'
 import {BsTrash} from 'react-icons/bs'
 
-function CartList() {
-    // const dispatch = useDispatch();
-    // const cartProducts = useSelector((state) => state.product.cart);
-    const [quantity, setQuantity] = useState(1)
-    const [subtotal, setSubtotal] = useState(0)
+function CartList({info, image, name, price, qty}) {
+    const dispatch = useDispatch();
+    const [prodInfo, setProdInfo] = useState(info)
+    
+
+    function handlePlus() {
+        setProdInfo(info)
+        dispatch(addToCart(prodInfo))
+    }
+
+    function handleMinus() {
+        setProdInfo(info)
+        dispatch(removeFromCart(prodInfo))
+    }
 	
-    // useEffect(() => {
-	// 	dispatch(getCart());
-	// }, []);
-
-    function ChangeQuantityMinus(event) {
-       
-        if (quantity <= 0) {
-            setQuantity(0)
-            // dispatch(deleteFromCart())
-        } else {
-            setQuantity(quantity - 1)
-        }
-    };
-
-    function ChangeQuantityPlus(event) {
-            setQuantity(quantity + 1)
-            // dispatch(addQuantity(quantity))
-            
-        
-    };
-
-    // function calculateSubtotal() {
-    //     let newSubtotal = subtotal
-
-    //     for (let i = 0; cartProducts.lenght; i++) {
-    //         newSubtotal = newSubtotal + cartProducts[i].price
-    //         return newSubtotal
-    //     }
-    //     setSubtotal(newSubtotal)
-                
-    // }
-
-
-
 	return (
 		<div>
-            {/* <div>
-                <img src={cartProducts.image} alt='productFoto' />
-                <p>{cartProducts.name}</p>
-                <h1>{cartProducts.price}</h1>
-                <input type="number" name="quantity"></input>
-                <button>ELIMINATE</button>
-            </div> */}
+        
             <div className={style.shoppingCartContainer}>
                 <div className={style.cartProductsContainer}>
-                    <div>IMAGE HERE</div>
-                    <p>Product Name</p>
-                    <h1>$ 12.000</h1>
+                    <div className={style.cartImageDiv}>
+                        <img src={image} className={style.cartImage} alt='productFoto' />
+                    </div>
+                    <p>{name}</p>
+                    <h1>{price}</h1>
                 
                     <div className={style.modifyQtyButtons}>
                         <button 
-                        onClick={ChangeQuantityMinus} 
+                        onClick={handleMinus} 
                         className={style.plusMinusButtons}>-</button>
-                        <h3>{quantity}</h3>
+                        <h3>{qty}</h3>
                         <button 
-                        onClick={ChangeQuantityPlus}
+                        onClick={handlePlus}
                         className={style.plusMinusButtons}>+</button>
                     </div>
                 
                     <button className={style.trashButtonCart}><BsTrash/></button>
-                </div>
-
-                <div className={style.subtotalContainerMain}>
-                    <h1>SUBTOTAL:</h1>
-                    <h1>{subtotal}</h1>
-                    <button className={style.paymentButton}>GO TO PAY</button>
                 </div>
             </div>
 		</div>

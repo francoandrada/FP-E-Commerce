@@ -1,20 +1,23 @@
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CartProducts from '../CartProducts/CartProducts'
 
 function CartList() {
-    const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	dispatch(getCart());
-	// }, []);
+	const cartProducts = useSelector((state) => state.cart.cart);
 
 
 	return (
 		<div>
-			<h1>THIS IS SHOPPING CART</h1>
-            <h1>LIST OF PRODUCTS ADDED</h1>
-            <h1>SUBTOTAL AND GOT O PAY</h1>
+				{ cartProducts && cartProducts.map(el => {
+                    return <div key={el.id}> 
+                        <CartProducts
+                            info ={el}
+                            image={el.image}
+                            name={el.name}
+                            price={el.price}
+                            qty={el.qty}
+                        />
+                    </div>})
+                }
 		</div>
 	);
 

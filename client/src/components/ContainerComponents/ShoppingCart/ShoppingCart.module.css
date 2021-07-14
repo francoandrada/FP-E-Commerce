@@ -1,6 +1,27 @@
+.shoppingCartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 .shoppingCartMain {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
     background-color: grey;
     margin-top: 5%;
-    margin-left: 50px;
-    margin-right: 50px;
+
+}
+
+.cartDiv {
+    width: 70%;
+    
+}
+
+.subtotalDiv {
+   display: flex;
+   justify-items: center;
+   padding: 20px;
 }
