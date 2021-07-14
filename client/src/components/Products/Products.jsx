@@ -149,12 +149,7 @@ function Products() {
 										>
 											Add to Cart
 										</button>
-										<button
-											type='submit'
-											// onClick={() => dispatch(removeFromCart(p.id))}
-										>
-											delete
-										</button>
+										
 									</div>
 								</div>
 
