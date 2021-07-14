@@ -30,6 +30,7 @@ function App() {
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+					{/* <Route path='/cart' exact component={Carrito} /> */}
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 				</Switch>
 			</div>
