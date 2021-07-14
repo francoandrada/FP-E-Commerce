@@ -13,20 +13,21 @@ import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/Table/Table';
 import './App.css';
 import Admin from './components/Admin/Admin';
+import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
 
 function App() {
 	return (
 		<div className='App'>
 			<div class='totalvh'>
 				<Navbar />
-				<Switch>
 					<Route path='/admin' exact component={Admin}/>
 					<Route path='/admin/products' exact component={Admin}/>
 					<Route path='/admin/users' exact component={Admin}/>
 					<Route path='/admin/orders' exact component={Admin}/>
-					<Route path='/admin/categories' exact component={Admin}/>
+					<Route path='/admin/categories' exact component={AdminCategories}/>
 					<Route path='/admin/brands' exact component={Admin}/>
 					<Route path='/admin/stock' exact component={Admin}/>
+				<Switch>
 					
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
