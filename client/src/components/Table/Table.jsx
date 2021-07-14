@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getListOfProductTable } from '../../Redux/actions';
+import { getCategories, getListOfProductTable } from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
+import Loader from '../Loader/Loader';
+import styles from './Table.module.css';
 
 const Table = () => {
 	const dispatch = useDispatch();
@@ -10,18 +12,35 @@ const Table = () => {
 	const test = {
 		orderBy: 'price',
 		order: 'ASC',
-		category: 'tabletas',
+		category: 'default',
 	};
 
 	useEffect(() => {
 		dispatch(getListOfProductTable(0, test));
 	}, [dispatch]);
 
+	const mapData = (array) => {
+		const data = array.map((e) => {
+			return {
+				id: e.id,
+				image: e.image,
+				description: e.description,
+				price: e.price,
+				specialPrice: e.specialPrice,
+				stock: e.stock,
+				weight: e.weight,
+				category: e.categories[0].name,
+			};
+		});
+		return data;
+	};
+
+	const dataToPrint = listProductsOnTable
+		? mapData(listProductsOnTable.products)
+		: [];
+
 	const columns = useMemo(() => COLUMNS, []);
-	const data = useMemo(
-		() => listProductsOnTable?.products,
-		[listProductsOnTable?.products]
-	);
+	const data = useMemo(() => dataToPrint, [dataToPrint]);
 
 	const tableInstance = useTable({
 		columns,
@@ -33,7 +52,7 @@ const Table = () => {
 	return (
 		<div>
 			{listProductsOnTable ? (
-				<table {...getTableProps()}>
+				<table {...getTableProps()} className={styles.tableEcommerce}>
 					<thead>
 						{headerGroups.map((headerGroup) => (
 							<tr {...headerGroup.getHeaderGroupProps()}>
@@ -61,7 +80,7 @@ const Table = () => {
 					</tbody>
 				</table>
 			) : (
-				<h1>Loading...</h1>
+				<Loader />
 			)}
 		</div>
 	);
