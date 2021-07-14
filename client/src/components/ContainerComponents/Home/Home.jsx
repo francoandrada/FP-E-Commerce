@@ -4,7 +4,11 @@ import { getHighlightProd } from '../../../Redux/actions';
 import styles from './Home.module.css';
 import BannerContainer from '../../BannerContainer/BannerContainer';
 import HighlightedProdContainer from '../HighlightedProdContainer/HighlightedProdContainer';
+<<<<<<< HEAD
 import AuthenticatedUser from '../../AuthUser.js/AuthenticatedUser';
+=======
+
+>>>>>>> main
 
 function Home() {
 	const dispatch = useDispatch();

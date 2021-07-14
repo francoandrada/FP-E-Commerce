@@ -134,9 +134,6 @@ exports.authUserGmail = async (req, res) => {
 		const emailBody= req.body.email
 		const passwordBody = req.body.password
 
-		// console.log(emailBody)
-		// console.log(passwordBody)
-
 		let user = await User.findOrCreate({
 			where: {
 				email: emailBody,
