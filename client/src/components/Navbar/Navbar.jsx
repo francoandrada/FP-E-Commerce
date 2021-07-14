@@ -24,20 +24,18 @@ const Navbar = () => {
 	const [cartCount, SetCartCount] = useState(0);
 
 	const cart = useSelector((state) => state.cart.cart);
-	localStorage.setItem("cart", JSON.stringify(cart))
+	// localStorage.setItem('cart', JSON.stringify(cart));
 
-	
 	useEffect(() => {
 		let count = 0;
-		if (cart !== null) {
+		if (cart !== undefined) {
 			cart.forEach((item) => {
 				count = count + item.qty;
 			});
 		}
 		SetCartCount(count);
+		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart, cartCount]);
-	
-
 
 	useEffect(() => {
 		axios
@@ -55,7 +53,6 @@ const Navbar = () => {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-
 	}, []);
 
 	const handleClickOutside = (event) => {
@@ -80,7 +77,6 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-	
 
 	<button onclick='myFunction()'>Click me</button>;
 	return (
