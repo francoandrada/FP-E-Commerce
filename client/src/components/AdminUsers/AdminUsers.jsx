@@ -22,7 +22,7 @@ function AdminUsers() {
                 {allUsers?.map(c => {
                     return (
                         <div className={styles.category}>
-                            <span>Name: {c.name}</span>
+                            <span>User: {c.email}</span>
                             <div>
                             <Link key={c.id} to={`/admin/putbrands/${c.id}`}>
                                     <button className={styles.btnEdit}>
