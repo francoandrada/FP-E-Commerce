@@ -34,7 +34,7 @@ function PutProduct(props) {
 	const changeInput = (e) => {
 		const value = e.target.value;
 		const name = e.target.name;
-		//  console.log(value, name)
+		
 	};
 
 	const submit = (data, e) => {
