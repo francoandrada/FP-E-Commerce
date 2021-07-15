@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
-import { getUserToEdit,editUser } from '../../Redux/actions';
+import { getUserToEdit} from '../../Redux/actions';
 
 function UserPanel() {
 	const history = useHistory();
@@ -31,6 +31,7 @@ function UserPanel() {
 		address: '',
 		addressNumber: '',
 		postalCode: '',
+		admin:''
 	});
 
     useEffect(()=>{
@@ -44,6 +45,7 @@ function UserPanel() {
                 address: userToEdit.address,
                 addressNumber: userToEdit.addressNumber,
                 postalCode: userToEdit.postalCode,
+				admin:userToEdit.admin
             })
         }
     },[userToEdit])
@@ -63,6 +65,7 @@ function UserPanel() {
 			address: '',
 			addressNumber: '',
 			postalCode: '',
+			admin:''
 		},
 		validationSchema: Yup.object({
 			email: Yup.string()
@@ -102,11 +105,18 @@ function UserPanel() {
 	});
 
     const handleChange =(event)=>{
-        console.log(user)
-        setUser({
-            ...user,
-            [event.target.name]: event.target.value
-        })
+        console.log(event)
+		if(event.target.name!=='admin'){
+			setUser({
+				...user,
+				[event.target.name]: event.target.value
+			})
+		} else {
+			setUser({
+				...user,
+				[event.target.name]: event.target.checked
+			})
+		}
     }
 
     const handleSubmit = async ()=>{
@@ -117,7 +127,7 @@ function UserPanel() {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'The user was succesfully created',
+                        title: 'The user was succesfully edited',
                         showConfirmButton: false,
                         timer: 1500,
                     });
@@ -130,18 +140,6 @@ function UserPanel() {
 				setHola(error.response.data.msg);
 			}
 	};
-
-    // const editUser=(user)=> {
-    //     // const {name, surname,email,password,address,addressNumber, postalCode, phone} = user
-    //     console.log('llegó a editUser')
-    //     return async () => {
-    //         try {
-    //             await axios.put('http://localhost:3001/admin/user/edit',user);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    // }
 
 	return (
 		<div className={styles.registerFormContainer}>
@@ -181,6 +179,17 @@ function UserPanel() {
 								<Div>{formik.errors.password}</Div>
 							) : null}
 						</div>
+						<div className='form-group col-md-1' id={styles.adminLabel}>
+								<label>Admin?</label>
+								<input
+									type='checkbox'
+									name='admin'
+                                    checked={user.admin}
+									onChange={handleChange}
+									onBlur={formik.handleBlur}
+									className='form-control'
+								/>
+							</div>
 					</div>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-4' id={styles.input}>
@@ -270,6 +279,7 @@ function UserPanel() {
 									<Div>{formik.errors.postalCode}</Div>
 								) : null}
 							</div>
+
 						</div>
 						<div className={styles.registerButtonRow}>
 							<ButtonRed type='submit'>Confirm</ButtonRed>

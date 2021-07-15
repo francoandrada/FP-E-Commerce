@@ -172,7 +172,8 @@ async function putUserInfo(req, res, next) {
 		user.address= newUserInfo.address,
 		user.addressNumber= newUserInfo.addressNumber? parseInt(newUserInfo.addressNumber):null,
 		user.postalCode= newUserInfo.postalCode? parseInt(newUserInfo.postalCode): null,
-		user.phone= newUserInfo.phone
+		user.phone= newUserInfo.phone,
+		user.admin= newUserInfo.admin
 		await user.save()
 		res.json(user);
 	} catch (error) {

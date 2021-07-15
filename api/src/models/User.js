@@ -1,6 +1,6 @@
-const { DataTypes, TEXT, BIGINT } = require('sequelize');
+const { DataTypes} = require('sequelize');
 
-const { STRING, INTEGER} = DataTypes;
+const { STRING, INTEGER, TEXT, BIGINT, BOOLEAN } = DataTypes;
 module.exports = (sequelize) => {
 	sequelize.define('user', {
 		userId: {
@@ -37,7 +37,12 @@ module.exports = (sequelize) => {
 		},
 		resetLink: {
 			type: STRING,
-			default: '',
+			defaultValue: '',
 		},
+		admin: {
+			type: BOOLEAN,
+			defaultValue: false,
+			allowNull: true
+		}
 	});
 };
