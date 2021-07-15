@@ -50,7 +50,6 @@ function UserPanel() {
         }
     },[userToEdit])
 
-    console.log(user)
 
 
 
@@ -84,24 +83,6 @@ function UserPanel() {
 			addressNumber: Yup.string().required('Enter an address number'),
 			postalCode: Yup.number().required('Enter a postal code'),
 		}),
-		// onSubmit: async (values) => {
-		// 	console.log(user);
-		// 	try {
-		// 		await editUser(user);
-
-		// 		Swal.fire({
-		// 			position: 'center',
-		// 			icon: 'success',
-		// 			title: 'The user was succesfully created',
-		// 			showConfirmButton: false,
-		// 			timer: 1500,
-		// 		});
-		// 		history.push('/');
-		// 	} catch (error) {
-		// 		console.log(error.response.data.msg);
-		// 		setHola(error.response.data.msg);
-		// 	}
-		// },
 	});
 
     const handleChange =(event)=>{
