@@ -117,7 +117,6 @@ function Products() {
 			return this.formatear(num);
 		},
 	};
-
 	return (
 		<div className={styles.cardsContainer}>
 			{productsToRender
@@ -166,53 +165,5 @@ function Products() {
 	);
 }
 
-
-// 	return (
-// 		<div className={styles.cardsContainer}>
-// 			{productsToRender
-// 				? productsToRender.map((p) => {
-// 						if (p.name.length > 55) {
-// 							var aux = p.name.slice(0, 55).concat('...');
-// 							p.name = aux;
-// 						}
-// 						var formatPrice = formatNumber.new(p.price, '$');
-// 						return (
-// 							<div className={styles.card}>
-// 								<Link key={p.id} to={`/catalog/${p.id}`}>
-// 									<div className={styles.cardImage}>
-// 										<img className={styles.img} src={p.image} alt='product' />
-// 									</div>
-// 								</Link>
-// 								<div>
-// 									<hr id={styles.line} />
-// 								</div>
-// 								<div className={styles.data}>
-// 									<span className={styles.productName}>{p.name}</span>
-// 								</div>
-// 								{/* <div className={styles.footerCard}> */}
-// 								<div class='d-flex justify-content-center'>
-// 									<div className={styles.productPrice}>
-// 										<span>{formatPrice}</span>
-// 									</div>
-
-// 									<div className={styles.buttonBuy}>
-// 										<button
-// 											type='submit'
-// 											onClick={() => dispatch(addToCart(p))}
-// 										>
-// 											Add to Cart
-// 										</button>
-// 									</div>
-// 								</div>
-// 								{/* </div> */}
-// 								<div id={styles.paginado}></div>
-// 							</div>
-// 						);
-// 				  })
-// 				: null}
-// 			<PagingBox productsPerPage={productsPerPage} />
-// 		</div>
-// 	);
-// }
 
 export default Products;

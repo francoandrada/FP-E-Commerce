@@ -53,5 +53,13 @@ exports.newUser = async (req, res) => {
 };
 
 //---------- SEARCHS ALL USERS FOR ADMIN ONLY --------------
-// como se usa solo en admin, la pasé al controller dentro de admin.
 
+exports.getUsers = async (req, res) => {
+	try {
+		const usersList = await User.findAll();
+		return res.status(200).json(usersList);
+	} catch (error) {
+		res.send(error);
+	}
+
+};

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const ButtonRed = styled.button`
+export const ButtonRedOther = styled.button`
     font-family: 'Roboto', sans-serif; 
-    width: 134px;
-    height: 38px;
+
     border-style: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    padding: .5rem;
     color: white;
     font-size: 18px;
     background-color: #FF3C4A;
@@ -14,4 +14,7 @@ export const ButtonRed = styled.button`
     } 
 `;
 
-export default ButtonRed;
+
+
+
+export default ButtonRedOther;
