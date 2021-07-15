@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 
 
-function PutBrand () {
+function PutBrand (props) {
     const dispatch = useDispatch()
-
+    var id = props.match.params.id
     useEffect(()=>{
     //  dispatch(getBrands())
     //  dispatch(getCategories())
@@ -30,7 +30,8 @@ function PutBrand () {
         }
 
     const submit=(data, e)=>{
-        // console.log(data)
+        data.id = id
+        console.log(data)
         if(data.id && data.id.length >0){
             dispatch(modifyBrand(data))
             e.target.reset()

@@ -25,33 +25,9 @@ import {
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
 	LIST_PRODUCT_ON_TABLE,
-	SIZE_PAGINATION,
-	ORDER_TABLE,
-	TABLE_FILTER_BY_CATEGORY,
-	SORT_TABLE_BY,
 } from './actionsName';
 
 import axios from 'axios';
-
-export const changePaginationSize = (payload) => ({
-	type: SIZE_PAGINATION,
-	payload,
-});
-
-export const sortTableAction = (payload) => ({
-	type: SORT_TABLE_BY,
-	payload,
-});
-
-export const tableFilterByCategory = (payload) => ({
-	type: TABLE_FILTER_BY_CATEGORY,
-	payload,
-});
-
-export const changeOrderTable = (payload) => ({
-	type: ORDER_TABLE,
-	payload,
-});
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -82,7 +58,7 @@ export function getListOfProductTable(page, object) {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
-				`http://localhost:3001/admin/tablepagination?page=${page}`,
+				`http://localhost:3001/admin/tablepagination?page${page}`,
 				object
 			);
 			dispatch(fetchListProducts(res.data));
@@ -150,7 +126,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-
+		
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -217,6 +193,7 @@ export function forgotPassword(email) {
 					hola,
 				},
 			});
+			
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -252,9 +229,12 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
+
+
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
+		
 
 			dispatch({
 				type: SUCCESS_LOGIN,

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
 	getListOfProductTable,
-	sortTableAction,
+	// sortTableAction,
 } from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
@@ -60,7 +60,7 @@ const Table = () => {
 
 	const sortTableHandle = (event) => {
 		event.preventDefault();
-		dispatch(sortTableAction(event.target.value));
+		// dispatch(sortTableAction(event.target.value));
 	};
 	return (
 		<div>
