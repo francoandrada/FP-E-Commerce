@@ -8,11 +8,12 @@
 
 .searchBtnEcommerce {
 	color: white;
-	background-color: #303030;
-	border: none;
-	position: absolute;
+	background-color: transparent;
 	right: 35px;
-	top: 38px;
+	margin-top: 0px;
+	width: 56px;
+	height: 37px;
+	border-color: transparent;
 }
 
 .searchBtnEcommerce i {
@@ -20,11 +21,10 @@
 }
 .searchBtnEcommerce:hover {
 	color: #cd113b;
-
 }
 
 .navbarEcommerce .leftSideEcommerce {
-	flex: 30%;
+	flex: 20%;
 	display: flex;
 	justify-content: left;
 	align-items: center;
@@ -35,11 +35,13 @@
 }
 
 .linksNavEcommerce {
+	flex: 30%;
 	display: flex;
 	justify-content: space-around;
 	width: 500px;
 	height: 100%;
 	font-size: 24px;
+	align-items: center;
 }
 
 .linksNavEcommerce a {
@@ -51,9 +53,9 @@
 }
 
 .navbarEcommerce .rightSideEcommerce {
-	flex: 70%;
+	flex: 50%;
 	display: flex;
-	justify-content: left;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -78,7 +80,7 @@
 	background-color: #626466;
 	color: white;
 }
-.inputEcommerce:hover{
+.inputEcommerce:hover {
 	background-color: #a2a3a4;
 }
 .posRelEcommerce {
@@ -114,10 +116,6 @@
 .spanEcommerce {
 	font-size: 12px;
 	text-transform: capitalize;
-}
-
-.flexContainerEcommerce {
-	display: flex;
 }
 
 .flexColumnEcommerce {
@@ -157,12 +155,11 @@
 	}
 }
 
-.but{
+.but {
 	background: none;
 	border: none;
 	color: white;
 	font-size: 24px;
-	
 }
 .but:hover {
 	color: #cd113b;
@@ -170,6 +167,47 @@
 	background: none;
 }
 
+.cartLogoContainer {
+	display: flex;
+	height: 100%;
+	align-items: center;
+}
+
+.sectionsContainer {
+	width: 100%;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(48 48 48 / 85%);
+}
+
+.sections {
+	width: 70%;
+	padding-bottom: 1em;
+	color: white;
+}
+
+.sections a {
+	color: white;
+	margin-right: 1em;
+	font-size: 22px;
+}
+
+.countCart {
+	background-color: white;
+	border-radius: 100%;
+	width: 25px;
+	height: 21px;
+	display: flex;
+	justify-content: center;
+	font-size: 15px;
+	color: red;
+	font-weight: 700;
+	position: absolute;
+	margin-bottom: 33px;
+	margin-left: 19px;
+}
 
 /*
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import CartModal from '../CartModal/CartModal';
 import {
 	authUser,
 	getSuggestions,
@@ -82,22 +83,61 @@ const Navbar = () => {
 
 	<button onclick='myFunction()'>Click me</button>;
 	return (
-		<div className={styles.navbarEcommerce}>
-			<div className={styles.leftSideEcommerce}>
-				<div className={styles.storeNameEcommerce}>
-					<Link to='/'>
-						<LogoStyle>HardwareStore</LogoStyle>
-					</Link>
+		<>
+			<div className={styles.navbarEcommerce}>
+				<div className={styles.leftSideEcommerce}>
+					<div className={styles.storeNameEcommerce}>
+						<Link to='/'>
+							<LogoStyle>HardwareStore</LogoStyle>
+						</Link>
+					</div>
 				</div>
-			</div>
 
-			<div className={styles.rightSideEcommerce}>
+				<div className={styles.rightSideEcommerce}>
+					<div className={styles.theSearchBarEcommerce}>
+						<div
+							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
+							ref={wrapperRef}
+						>
+							<input
+								className={styles.inputEcommerce}
+								value={search}
+								onClick={() => setDisplay(!display)}
+								onChange={(event) => setSearch(event.target.value)}
+								placeholder='Search...'
+							/>
+							{display && (
+								<div className={styles.autoContainerEcommerce}>
+									{options
+										.filter((product) =>
+											product.toLowerCase().includes(search.toLowerCase())
+										)
+										.slice(0, 7)
+										.map((value, index) => {
+											return (
+												<div
+													className={styles.optionEcommerce}
+													onClick={() => searchHandle(value)}
+													key={index}
+													tabIndex='0'
+												>
+													<span className={styles.spanEcommerce}>{value}</span>
+												</div>
+											);
+										})}
+								</div>
+							)}
+
+							<button
+								className={styles.searchBtnEcommerce}
+								onClick={searchProduct}
+							>
+								<i className='fas fa-search'></i>
+							</button>
+						</div>
+					</div>
+				</div>
 				<div className={styles.linksNavEcommerce}>
-					<Link to='/'>Home</Link>
-					<Link to='/catalog'>Catalog</Link>
-					<Link to='/'>CarritoLOGO</Link>
-					<p>{cartCount}</p>
-
 					{token ? (
 						<button
 							type='submit'
@@ -114,48 +154,23 @@ const Navbar = () => {
 							<Link to='/LogIn'>Login</Link>
 						</>
 					)}
-				</div>
-
-				<div className={styles.theSearchBarEcommerce}>
-					<div
-						className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
-						ref={wrapperRef}
-					>
-						<input
-							className={styles.inputEcommerce}
-							value={search}
-							onClick={() => setDisplay(!display)}
-							onChange={(event) => setSearch(event.target.value)}
-							placeholder='Search...'
-						/>
-						{display && (
-							<div className={styles.autoContainerEcommerce}>
-								{options
-									.filter((product) =>
-										product.toLowerCase().includes(search.toLowerCase())
-									)
-									.slice(0, 7)
-									.map((value, index) => {
-										return (
-											<div
-												className={styles.optionEcommerce}
-												onClick={() => searchHandle(value)}
-												key={index}
-												tabIndex='0'
-											>
-												<span className={styles.spanEcommerce}>{value}</span>
-											</div>
-										);
-									})}
+					<div className={styles.cartLogoContainer}>
+						<CartModal />
+						{cartCount !== 0 ? (
+							<div className={styles.countCart}>
+								<p>{cartCount}</p>
 							</div>
-						)}
+						) : null}
 					</div>
-					<button className={styles.searchBtnEcommerce} onClick={searchProduct}>
-						<i className='fas fa-search'></i>
-					</button>
 				</div>
 			</div>
-		</div>
+			<div className={styles.sectionsContainer}>
+				<div className={styles.sections}>
+					<Link to='/'>Home</Link>
+					<Link to='/catalog'>Catalog</Link>
+				</div>
+			</div>
+		</>
 	);
 };
 
