@@ -1,4 +1,4 @@
-const { Product, Brand, Category } = require('../db');
+const { Product, Brand, Category, User } = require('../db');
 async function postProduct(req, res, next) {
 	try {
 		const {
@@ -139,6 +139,7 @@ async function getProductAll(req, res, next) {
 }
 
 async function getUsers (req, res) {
+	console.log('llega al back el getUsers')
 	try {
 		const usersList = await User.findAll();
 		return res.status(200).json(usersList);
