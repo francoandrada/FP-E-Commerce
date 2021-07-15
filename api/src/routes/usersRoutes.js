@@ -25,4 +25,3 @@ router.get('/userslist', getUsers )
 
 
 module.exports = router;
-
