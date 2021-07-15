@@ -5,7 +5,7 @@ const {check} = require('express-validator');
 // const { newUser, prueba } = require('../Controllers/users');
 // =======
 const { newUser,
-        getUsers } = require('../Controllers/users');
+        } = require('../Controllers/users');
 
 const router = Router();
 
@@ -20,7 +20,7 @@ router.post('/',
 
 );
 
-router.get('/userslist', getUsers )
+// router.get('/userslist', getUsers )
 
 
 
