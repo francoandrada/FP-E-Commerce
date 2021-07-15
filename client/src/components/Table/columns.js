@@ -1,5 +1,16 @@
 export const COLUMNS = [
 	{
+		Header: 'Image',
+		accessor: 'image',
+		Cell: (row) => {
+			return (
+				<div>
+					<img width={50} src={row.row.original.image} />
+				</div>
+			);
+		},
+	},
+	{
 		Header: 'Id',
 		accessor: 'id',
 	},
