@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
 	// getCategories,
 	changePaginationSize,
@@ -6,7 +7,7 @@ import {
 	changeOrderTable,
 	tableFilterByCategory,
 	sortTableAction,
-} from '../../Redux/actions';
+} from '../../../Redux/actions';
 
 const TableLogic = () => {
 	const dispatch = useDispatch();

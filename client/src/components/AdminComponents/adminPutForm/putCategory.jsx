@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {modifyCateogry} from "../Redux/actions"
+import {modifyCateogry} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 

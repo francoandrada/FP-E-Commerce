@@ -4,15 +4,15 @@ import {
 	getCategories,
 	getListOfProductTable,
 	changeTablePage,
-} from '../../Redux/actions';
+} from '../../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
-import Loader from '../Loader/Loader';
-import Select from '../Select/Select';
+import Loader from '../../Loader/Loader';
+import Select from '../../Select/Select';
 import TableLogic from './TableLogic';
 import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
-
+import Admin from '../Admin/Admin'
 const Table = () => {
 	const dispatch = useDispatch();
 
@@ -78,6 +78,7 @@ const Table = () => {
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
 		<div>
+			<Admin />
 			<div
 				style={{
 					height: '100px',
