@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const COLUMNS = [
 	{
 		Header: 'Image',
@@ -53,10 +55,13 @@ export const COLUMNS = [
 		Header: 'Update',
 		accesor: 'update',
 		Cell: (row) => {
+			console.log(row.row)
 			return (
-				<button onClick={row.row.original.update}>
-					<i class='fas fa-wrench'></i>
-				</button>
+				<Link key={row.row.original.id} to={`/admin/putproduct/${row.row.original.id}`}>
+					
+						<i class='fas fa-wrench'></i>
+
+				</Link>
 			);
 		},
 	},
