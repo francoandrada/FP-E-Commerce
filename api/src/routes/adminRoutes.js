@@ -11,7 +11,8 @@ const {
 	getProductAll,
 	getUsers,
 	getUserToEdit,
-	putUserInfo
+	putUserInfo,
+	deleteUser
 	
 } = require('../Controllers/admin');
 
@@ -31,6 +32,8 @@ router.get('/productos', getProductAll);
 router.get('/users', getUsers);
 router.get('/user/:email', getUserToEdit);
 router.put('/user/edit', putUserInfo);
+router.put('/user/delete', deleteUser);
+
 
 
 
