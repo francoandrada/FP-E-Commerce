@@ -29,6 +29,7 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
+	GET_USERS
 } from './actionsName';
 
 import axios from 'axios';
@@ -371,6 +372,15 @@ export function modifyBrand (elem) {
 		}
 	};
 }
+
+export function getUsers() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/admin/users').then((response) => {
+			dispatch({ type: GET_USERS, payload: response.data });
+		});
+	};
+}
+
 
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////
