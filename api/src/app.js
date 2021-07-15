@@ -8,11 +8,11 @@ require('./db.js');
 
 const server = express();
 
-const mercadopago = require ('mercadopago');
+// const mercadopago = require ('mercadopago');
 
-mercadopago.configure({
-	access_token: process.env.PROD_ACCESS_TOKEN
-  });
+// mercadopago.configure({
+// 	access_token: process.env.PROD_ACCESS_TOKEN
+//   });
 server.name = 'API';
 
 server.use(cors());

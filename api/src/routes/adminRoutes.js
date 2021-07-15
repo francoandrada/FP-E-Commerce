@@ -9,9 +9,8 @@ const {
 	putCategoryProduct,
 	getProductCategory,
 	getProductAll,
-	getUsers
+	getUsers,
 } = require('../Controllers/admin');
-
 
 const router = Router();
 const routerHelper = require('../helpers/routerHelper');
@@ -27,6 +26,5 @@ router.put('/putcategory', putCategoryProduct);
 router.get('/productcategoryget/:name', getProductCategory);
 router.get('/productos', getProductAll);
 router.get('/users', getUsers);
-
 
 module.exports = router;
