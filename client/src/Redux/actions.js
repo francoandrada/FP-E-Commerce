@@ -31,6 +31,7 @@ import {
 	SORT_TABLE_BY,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
+	GET_USER_TO_EDIT
 } from './actionsName';
 
 import axios from 'axios';
@@ -373,12 +374,6 @@ export function modifyBrand(elem) {
 
 export function getUsers() {
 
-//	console.log('getUsers activation');
-//	return async (dispatch) => {
-//		axios.get('http://localhost:3001/admin/users').then((response) => {
-//			console.log('respuesta llegó');
-//			console.log(response);
-
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/admin/users').then((response) => {
 
@@ -386,5 +381,19 @@ export function getUsers() {
 		});
 	};
 }
+
+export function getUserToEdit(email) {
+
+		return async (dispatch) => {
+			axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
+				dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
+			});
+		};
+	}
+
+
+
+
+	
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////

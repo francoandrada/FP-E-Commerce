@@ -24,7 +24,7 @@ function AdminUsers() {
                         <div className={styles.category} key={c.email}>
                             <span>User: {c.email}</span>
                             <div>
-                            <Link to={`/admin/users/${c.email}`}>
+                            <Link to={`/admin/user/${c.email}`}>
                                     <button className={styles.btnEdit}>
                                         <MdModeEdit />
                                     </button>
