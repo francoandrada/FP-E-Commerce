@@ -59,6 +59,7 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				sortTable: payload,
 			};
 		case GET_USERS:
+			console.log(payload)
 			return {
 				...state,
 				usersFromDB: payload,
