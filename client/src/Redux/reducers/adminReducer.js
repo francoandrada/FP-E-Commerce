@@ -6,6 +6,7 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
+	GET_USERS
 } from '../actionsName';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
 	orderTable: 'default',
 	filterByCategory: 'default',
 	sortTable: 'name',
+	usersFromDB: []
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -55,6 +57,11 @@ function adminReducer(state = initialState, { type, payload, error }) {
 			return {
 				...state,
 				sortTable: payload,
+			};
+		case GET_USERS:
+			return {
+				...state,
+				usersFromDB: payload,
 			};
 		default:
 			return state;
