@@ -14,6 +14,7 @@ import Table from './components/Table/Table';
 import './App.css';
 import Admin from './components/Admin/Admin';
 import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
+import PutCategory from './adminPutForm/putCategory';
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 					<Route path='/admin/users' exact component={Admin}/>
 					<Route path='/admin/orders' exact component={Admin}/>
 					<Route path='/admin/categories' exact component={AdminCategories}/>
+					<Route path='/admin/putCategory/:id' exact component={PutCategory}/>
 					<Route path='/admin/brands' exact component={Admin}/>
 					<Route path='/admin/stock' exact component={Admin}/>
 				<Switch>

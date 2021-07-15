@@ -4,6 +4,7 @@ import Admin from "../Admin/Admin";
 import { getCategories } from "../../Redux/actions";
 import { MdModeEdit } from 'react-icons/md'
 import styles from './AdminCategories.module.css'
+import { Link } from "react-router-dom";
 function AdminCategories() {
     const allCategories = useSelector(state => state.category.allCategories)
     const dispatch = useDispatch()
@@ -23,9 +24,11 @@ function AdminCategories() {
                         <div className={styles.category}>
                             <span>Name: {c.name}</span>
                             <div>
-                                <button className={styles.btnEdit}>
-                                    <MdModeEdit />
-                                </button>
+                            <Link key={c.id} to={`/putCategory/${c.id}`}>
+                                    <button className={styles.btnEdit}>
+                                        <MdModeEdit />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     )
