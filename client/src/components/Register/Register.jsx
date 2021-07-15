@@ -4,53 +4,56 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styles from './Register.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
+import Div from '../StyledComponents/Validation';
 function Register() {
 	const history = useHistory();
-	const [User, setUser] = useState({
-		name: '',
-		surname: '',
-		email: '',
-		password: '',
-		address: '',
-		addressNumber: undefined,
-		postalCode: '',
-		phone: '',
-	});
-	const handleChange = (event) => {
-		setUser({ ...User, [event.target.name]: event.target.value });
-	};
 
-	let hola = [];
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (
-			User.name === '' ||
-			User.surname === '' ||
-			User.email === '' ||
-			User.password === '' ||
-			User.address === '' ||
-			User.addressNumber === '' ||
-			User.postalCode === '' ||
-			User.phone === ''
-		) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'You must complete all the fields',
-			});
-		} else {
+	const [hola, setHola] = useState([])
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+			name: '',
+			surname: '',
+			name: '',
+			phone: '',
+			address: '',
+			addressNumber: '',
+			postalCode: '',
+		},
+		validationSchema: Yup.object({
+			email: Yup.string()
+				.email('Invalid email address')
+				.required('Enter an email'),
+			password: Yup.string()
+				.required('Please Enter your password')
+				.matches(
+					/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
+					'Must contain 6 Characters, one uppercase, one lowercase and one number'
+				),
+			name: Yup.string().required('Enter a name'),
+			surname: Yup.string().required('Enter a surname'),
+			name: Yup.string().required('Enter a name'),
+			phone: Yup.number().required('Enter a valid phone number'),
+			address: Yup.string().required('Enter an address'),
+			addressNumber: Yup.string().required('Enter an address number'),
+			postalCode: Yup.number().required('Enter a postal code'),
+		}),
+		onSubmit: async (values) => {
+			console.log(values);
 			try {
 				await axios.post('http://localhost:3001/users', {
-					name: User.name,
-					surname: User.surname,
-					email: User.email,
-					password: User.password,
-					address: User.address,
-					addressNumber: User.addressNumber,
-					postalCode: User.postalCode,
-					phone: User.phone,
+					name: values.name,
+					surname: values.surname,
+					email: values.email,
+					password: values.password,
+					address: values.address,
+					addressNumber: values.addressNumber,
+					postalCode: values.postalCode,
+					phone: values.phone,
 				});
 
 				Swal.fire({
@@ -62,40 +65,50 @@ function Register() {
 				});
 				history.push('/');
 			} catch (error) {
-				hola.push(error.response);
-			
+				console.log(error.response.data.msg);
+			setHola(error.response.data.msg)
 			}
-		}
-	};
+		},
+	});
 
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
-				<form onSubmit={handleSubmit}>
-				
+			{hola.length > 0? <Error>{hola}</Error> : null}
+				<form onSubmit={formik.handleSubmit}>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-5' id={styles.input}>
+			
 							<label>Email</label>
+						
 							<input
 								type='email'
+								class='form-control'
+								id='email'
+								placeholder='Email'
 								name='email'
-								value={User.email}
-								onChange={handleChange}
-								className='form-control'
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 							/>
+								{formik.touched.email && formik.errors.email ? (
+								<Div>{formik.errors.email}</Div>
+							) : null}
 						</div>
+
 						<div className='form-group col-md-5' id={styles.input}>
+					
 							<label>Password</label>
+						
 							<input
 								type='password'
 								name='password'
-								value={User.password}
-								onChange={handleChange}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 								className='form-control'
-								pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
-								title='Must contain at least one number and one uppercase and lowercase letter, and at least 6 characters'
-								required
 							/>
+							{formik.touched.password && formik.errors.password ? (
+								<Div>{formik.errors.password}</Div>
+							) : null}
 						</div>
 					</div>
 					<div className='form-row' id={styles.row}>
@@ -104,30 +117,39 @@ function Register() {
 							<input
 								type='text'
 								name='name'
-								value={User.name}
-								onChange={handleChange}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
+							{formik.touched.name && formik.errors.name ? (
+								<Div>{formik.errors.name}</Div>
+							) : null}
 						</div>
 						<div className='form-group col-md-4' id={styles.input}>
 							<label>Surname</label>
 							<input
 								type='text'
 								name='surname'
-								value={User.surname}
-								onChange={handleChange}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
+							{formik.touched.surname && formik.errors.surname ? (
+								<Div>{formik.errors.surname}</Div>
+							) : null}
 						</div>
 						<div className='form-group col-md-2 ' id={styles.input}>
 							<label>Phone</label>
 							<input
-								type='number'
+								type='tel'
 								name='phone'
-								value={User.phone}
-								onChange={handleChange}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
+							{formik.touched.phone && formik.errors.phone ? (
+								<Div>{formik.errors.phone}</Div>
+							) : null}
 						</div>
 					</div>
 					<div>
@@ -137,30 +159,39 @@ function Register() {
 								<input
 									type='text'
 									name='address'
-									value={User.address}
-									onChange={handleChange}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
+								{formik.touched.address && formik.errors.address ? (
+									<Div>{formik.errors.address}</Div>
+								) : null}
 							</div>
 							<div className='form-group col-md-3' id={styles.input}>
 								<label>Address Number</label>
 								<input
 									type='number'
 									name='addressNumber'
-									value={User.addressNumber}
-									onChange={handleChange}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
+								{formik.touched.addressNumber && formik.errors.addressNumber ? (
+									<Div>{formik.errors.addressNumber}</Div>
+								) : null}
 							</div>
 							<div className='form-group col-md-3 ' id={styles.input}>
 								<label>Postal Code</label>
 								<input
 									type='number'
 									name='postalCode'
-									value={User.postalCode}
-									onChange={handleChange}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
+								{formik.touched.postalCode && formik.errors.postalCode ? (
+									<Div>{formik.errors.postalCode}</Div>
+								) : null}
 							</div>
 						</div>
 						<div className={styles.registerButtonRow}>
