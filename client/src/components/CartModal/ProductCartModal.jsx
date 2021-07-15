@@ -1,6 +1,10 @@
 //import styles from './productDetail.module.css'
 import styled from 'styled-components';
 import { FiMinusCircle, FiPlusCircle } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { addToCart, adjustQty, removeFromCart } from '../../Redux/actions';
+import { BsTrash } from 'react-icons/bs';
 
 const ProductCart = styled.section`
     display: grid;
@@ -22,6 +26,8 @@ grid-area: info;
 display: flex;
 flex-direction: column;
 margin-left: 0.5em;
+font-size: 18px;
+    font-weight: 700;
 `;
 
 const Icon = styled.section`
@@ -57,30 +63,52 @@ const Price = styled.section`
     font-weight: 700;
     font-size: 20px;
     color: #ff3c4a;
+    margin-top: 18px;
 `;
 const Image = styled.section`
     grid-area: img;
     width: 64px;
     height: 64px;
+
+    img {
+        width: 64px;
+    }
 `;
-function ProductCartModal() {
+
+function ProductCartModal({ info, image, name, price, qty }) {
+	const [productInfo, setProductInfo] = useState(info);
+	const dispatch = useDispatch();
+
+	function handlePlus() {
+		setProductInfo(info);
+		dispatch(addToCart(productInfo));
+	}
+
+	function handleMinus() {
+		let newQty = qty;
+		qty === 1 ? dispatch(removeFromCart(info.id)) : (newQty -= 1);
+		dispatch(adjustQty(info.id, newQty));
+	}
+
 	return (
 		<ProductCart>
-			<Image>Image</Image>
-			<ProductName>Product Name</ProductName>
+			<Image>
+				<img src={image} alt='' />
+			</Image>
+			<ProductName>{name}</ProductName>
 			<div>
 				<CantProducts>
 					<div>
-						<Icon>
-							<FiMinusCircle size={26} />
+						<Icon onClick={handleMinus}>
+							{qty === 1 ? <BsTrash size={26} /> : <FiMinusCircle size={26} />}
 						</Icon>
-						<span>2</span>
-						<Icon>
+						<span>{qty}</span>
+						<Icon onClick={handlePlus}>
 							<FiPlusCircle size={26} />
 						</Icon>
 					</div>
 					<Price>
-						<span>$3.000,00</span>
+						<span>{price}</span>
 					</Price>
 				</CantProducts>
 			</div>
