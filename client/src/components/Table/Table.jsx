@@ -3,30 +3,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
 	getListOfProductTable,
-	sortTableAction,
+	changeTablePage,
 } from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
 import Loader from '../Loader/Loader';
 import Select from '../Select/Select';
 import TableLogic from './TableLogic';
+import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
 
 const Table = () => {
+	const dispatch = useDispatch();
+
 	const {
 		mapData,
 		paginationSizeHandle,
 		orderTableHandle,
 		filterByCategoryHandle,
+		sortTableHandle,
 	} = TableLogic();
-	const dispatch = useDispatch();
+
 	const {
 		filterByCategory,
 		listProductsOnTable,
 		sizePagination,
 		orderTable,
 		sortTable,
+		gotoTablePage,
 	} = useSelector((state) => state.admin);
+
 	const { allCategories } = useSelector((state) => state.category);
 
 	// react-table
@@ -46,22 +52,30 @@ const Table = () => {
 
 	useEffect(() => {
 		dispatch(
-			getListOfProductTable(0, {
+			getListOfProductTable(gotoTablePage, {
 				sortBy: sortTable,
 				order: orderTable,
 				category: filterByCategory,
 				limit: sizePagination,
 			})
 		);
-	}, [dispatch, sizePagination, orderTable, filterByCategory, sortTable]);
+	}, [
+		dispatch,
+		sizePagination,
+		orderTable,
+		filterByCategory,
+		sortTable,
+		gotoTablePage,
+	]);
 
+	/*
+		the size of the img can be changed on the "columns" file, also the "icons"
+		icons that I used https://fontawesome.com/v5.15/icons/wrench?style=solid
+	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
 
-	const sortTableHandle = (event) => {
-		event.preventDefault();
-		dispatch(sortTableAction(event.target.value));
-	};
+	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
 		<div>
 			<div
@@ -129,6 +143,13 @@ const Table = () => {
 				</table>
 			) : (
 				<Loader />
+			)}
+
+			{listProductsOnTable && listProductsOnTable?.totalPages > 1 && (
+				<PaginationTable
+					totalPages={listProductsOnTable?.totalPages}
+					paginate={paginate}
+				/>
 			)}
 		</div>
 	);
