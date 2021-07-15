@@ -372,11 +372,16 @@ export function modifyBrand(elem) {
 }
 
 export function getUsers() {
-	console.log('getUsers activation');
+
+//	console.log('getUsers activation');
+//	return async (dispatch) => {
+//		axios.get('http://localhost:3001/admin/users').then((response) => {
+//			console.log('respuesta llegó');
+//			console.log(response);
+
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/admin/users').then((response) => {
-			console.log('respuesta llegó');
-			console.log(response);
+
 			dispatch({ type: GET_USERS, payload: response.data });
 		});
 	};
