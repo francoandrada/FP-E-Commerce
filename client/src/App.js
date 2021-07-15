@@ -12,15 +12,29 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/Table/Table';
 import './App.css';
+
 import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
+import Admin from './components/Admin/Admin';
+import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
+import PutCategory from './adminPutForm/putCategory';
+
 
 function App() {
 	return (
 		<div className='App'>
 			<div class='totalvh'>
 				<Navbar />
+					<Route path='/admin' exact component={Admin}/>
+					<Route path='/admin/products' exact component={Admin}/>
+					<Route path='/admin/users' exact component={Admin}/>
+					<Route path='/admin/orders' exact component={Admin}/>
+					<Route path='/admin/categories' exact component={AdminCategories}/>
+					<Route path='/admin/putCategory/:id' exact component={PutCategory}/>
+					<Route path='/admin/brands' exact component={Admin}/>
+					<Route path='/admin/stock' exact component={Admin}/>
 				<Switch>
+					
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />

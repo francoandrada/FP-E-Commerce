@@ -1,5 +1,16 @@
 export const COLUMNS = [
 	{
+		Header: 'Image',
+		accessor: 'image',
+		Cell: (row) => {
+			return (
+				<div>
+					<img width={50} src={row.row.original.image} />
+				</div>
+			);
+		},
+	},
+	{
 		Header: 'Id',
 		accessor: 'id',
 	},
@@ -12,7 +23,7 @@ export const COLUMNS = [
 		accessor: 'price',
 	},
 	{
-		Header: 'Offer',
+		Header: 'PriceSpecial',
 		accessor: 'priceSpecial',
 	},
 	{
@@ -22,5 +33,9 @@ export const COLUMNS = [
 	{
 		Header: 'Stock',
 		accessor: 'stock',
+	},
+	{
+		Header: 'Category',
+		accessor: 'category',
 	},
 ];

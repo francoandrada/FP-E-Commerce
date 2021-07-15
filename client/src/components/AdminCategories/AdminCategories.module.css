@@ -1,0 +1,21 @@
+.categoriesContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -5rem;
+    color: white;
+}
+.category{
+    background-color: grey;
+    padding: 1rem;
+    display: flex;
+    margin: 1rem;
+    border-radius: 12px;
+}
+.btnEdit{
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    outline: none;
+    
+}

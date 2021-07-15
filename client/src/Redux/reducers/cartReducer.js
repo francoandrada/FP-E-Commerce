@@ -8,7 +8,6 @@ import {
 } from '../actionsName';
 
 const initialState = {
-	
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
 };

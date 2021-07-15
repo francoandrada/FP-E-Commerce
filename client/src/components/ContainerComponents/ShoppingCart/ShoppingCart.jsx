@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import CartList from '../../CartList/CartList'
-import SubTotal from '../../SubTotal/SubTotal'
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import CartList from '../../ShoppingCartComponents/CartList/CartList'
+import SubTotal from '../../ShoppingCartComponents/SubTotal/SubTotal'
 import style from './ShoppingCart.module.css'
 
 function ShoppingCart() {
     const userLogged = useSelector((state) => state.user.authenticated);
-	const dispatch = useDispatch();
-
 
 
 	return (
         <div className={style.shoppingCartContainer}>
+      
             <div className={style.shoppingCartMain}>
                 <div className={style.cartDiv}>
                 <CartList/>
@@ -21,6 +20,12 @@ function ShoppingCart() {
                 <SubTotal userLogged={userLogged}/>
                 </div>
 		    </div>
+            <div>
+                <NavLink to='/catalog'>
+                <button className={style.gobackButton}>GO BACK TO CATALOG</button>
+                </NavLink>
+            </div>
+           
         </div>
 		
 	);
