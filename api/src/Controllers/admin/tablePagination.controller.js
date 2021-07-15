@@ -1,8 +1,9 @@
+const { Op } = require('sequelize');
 const { Product, Category } = require('../../db.js');
 
 const tablePagination = async (req, res, next) => {
 	let products = {};
-	const { category, sortBy, order, limit } = req.body;
+	const { category, sortBy, order, limit, search } = req.body;
 	const pageAsNumber = Number.parseInt(req.query.page);
 
 	let page = 0;
@@ -12,15 +13,51 @@ const tablePagination = async (req, res, next) => {
 		url: http://localhost:3001/admin/tablepagination?page=0
 		send by body:
 		{
-			"sortBy": "price",
-			"order": "ASC",
-			"category": "tabletas"
+			"sortBy": "name",
+			"order": "default", ["ASC", "DESC"]
+			"category": "default"
 			"limit": paginationNumber
+			"search": ""
 		}
 	*/
 
-	// filtered by category, and order
-	if (category && order && category !== 'default' && order !== 'default') {
+	if (category && category !== 'default') {
+		if (order && order !== 'default' && search && search.trim().length) {
+			products = await Product.findAndCountAll({
+				limit: limit,
+				offset: page * limit,
+				include: {
+					model: Category,
+					where: {
+						name: category,
+					},
+				},
+				order: [[sortBy, order]],
+			});
+			return res.json({
+				totalPages: Math.floor(products.count / limit),
+				products: products.rows.filter(({ name }) => name.includes(search)),
+			});
+		}
+
+		if (order && order !== 'default') {
+			products = await Product.findAndCountAll({
+				limit: limit,
+				offset: page * limit,
+				include: {
+					model: Category,
+					where: {
+						name: category,
+					},
+				},
+				order: [[sortBy, order]],
+			});
+			return res.json({
+				totalPages: Math.floor(products.count / limit),
+				products: products.rows,
+			});
+		}
+
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
@@ -30,7 +67,6 @@ const tablePagination = async (req, res, next) => {
 					name: category,
 				},
 			},
-			order: [[sortBy, order]],
 		});
 		return res.json({
 			totalPages: Math.floor(products.count / limit),
@@ -38,19 +74,19 @@ const tablePagination = async (req, res, next) => {
 		});
 	}
 
-	// filter by category withour ordered
-	if (category && category !== 'default') {
+	if (order && search && order !== 'default' && search.trim().length) {
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
 			include: {
 				model: Category,
-				attributes: ['name'],
-				where: {
-					name: category,
+			},
+			where: {
+				name: {
+					[Op.iLike]: `%${search}%`,
 				},
 			},
-			attributes: ['id', 'name', 'priceSpecial', 'price', 'stock'],
+			order: [[sortBy, order]],
 		});
 		return res.json({
 			totalPages: Math.floor(products.count / limit),
@@ -73,7 +109,27 @@ const tablePagination = async (req, res, next) => {
 		});
 	}
 
-	// default values without any order
+	if (search && search.trim().length) {
+		products = await Product.findAndCountAll({
+			limit: limit,
+			offset: page * limit,
+			include: {
+				model: Category,
+			},
+			where: {
+				name: {
+					[Op.iLike]: `%${search}%`,
+				},
+			},
+		});
+		return res.json({
+			totalPages: Math.floor(products.count / limit),
+			products: products.rows,
+		});
+	}
+
+	console.log('default');
+	// without any order or sort
 	products = await Product.findAndCountAll({
 		limit: limit,
 		offset: page * limit,
