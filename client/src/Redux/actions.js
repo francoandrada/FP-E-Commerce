@@ -27,12 +27,24 @@ import {
 	LIST_PRODUCT_ON_TABLE,
 	SIZE_PAGINATION,
 	ORDER_TABLE,
+	TABLE_FILTER_BY_CATEGORY,
+	SORT_TABLE_BY,
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const sortTableAction = (payload) => ({
+	type: SORT_TABLE_BY,
+	payload,
+});
+
+export const tableFilterByCategory = (payload) => ({
+	type: TABLE_FILTER_BY_CATEGORY,
 	payload,
 });
 
@@ -70,7 +82,7 @@ export function getListOfProductTable(page, object) {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
-				`http://localhost:3001/admin/tablepagination?page${page}`,
+				`http://localhost:3001/admin/tablepagination?page=${page}`,
 				object
 			);
 			dispatch(fetchListProducts(res.data));

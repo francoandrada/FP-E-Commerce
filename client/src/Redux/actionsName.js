@@ -24,6 +24,8 @@ export const CLEAN_FILTERS = 'CLEAN_FILTERS';
 export const LIST_PRODUCT_ON_TABLE = 'LIST_PRODUCT_ON_TABLE';
 export const SIZE_PAGINATION = 'SIZE_PAGINATION';
 export const ORDER_TABLE = 'ORDER_TABLE';
+export const TABLE_FILTER_BY_CATEGORY = 'TABLE_FILTER_BY_CATEGORY';
+export const SORT_TABLE_BY = 'SORT_TABLE_BY';
 
 //carrito
 export const ADD_TO_CART = 'ADD_TO_CART';
