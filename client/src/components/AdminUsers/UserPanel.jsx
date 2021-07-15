@@ -11,7 +11,16 @@ import Div from '../StyledComponents/Validation';
 function UserPanel() {
 	const history = useHistory();
 
-    const [user,setUser]=useState("nico")
+    const [user,setUser]=useState({
+        email: 'nicolas.lupo.86@gmail.com',
+        password: '1112231412asdgfasdgqghqeghasdg',
+        name: '',
+        surname: '',
+        phone: '',
+        address: '',
+        addressNumber: '',
+        postalCode: ''
+    })
 
 	const [hola, setHola] = useState([])
 	const formik = useFormik({
@@ -20,7 +29,6 @@ function UserPanel() {
 			password: '',
 			name: '',
 			surname: '',
-			name: '',
 			phone: '',
 			address: '',
 			addressNumber: '',
@@ -87,7 +95,7 @@ function UserPanel() {
 								type='email'
 								class='form-control'
 								id='email'
-								value={user}
+								value={user.email}
 								name='email'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
@@ -104,6 +112,7 @@ function UserPanel() {
 							<input
 								type='password'
 								name='password'
+                                value={user.password}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
