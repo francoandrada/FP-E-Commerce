@@ -12,7 +12,7 @@ export const COLUMNS = [
 		accessor: 'price',
 	},
 	{
-		Header: 'Offer',
+		Header: 'PriceSpecial',
 		accessor: 'priceSpecial',
 	},
 	{
@@ -22,5 +22,9 @@ export const COLUMNS = [
 	{
 		Header: 'Stock',
 		accessor: 'stock',
+	},
+	{
+		Header: 'Category',
+		accessor: 'category',
 	},
 ];
