@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const COLUMNS = [
 	{
 		Header: 'Image',
@@ -37,5 +39,30 @@ export const COLUMNS = [
 	{
 		Header: 'Category',
 		accessor: 'category',
+	},
+	{
+		Header: 'Delete',
+		accesor: 'delete',
+		Cell: (row) => {
+			return (
+				<button onClick={row.row.original.delete}>
+					<i className='fas fa-trash-alt'></i>
+				</button>
+			);
+		},
+	},
+	{
+		Header: 'Update',
+		accesor: 'update',
+		Cell: (row) => {
+			console.log(row.row)
+			return (
+				<Link key={row.row.original.id} to={`/admin/putproduct/${row.row.original.id}`}>
+					
+						<i class='fas fa-wrench'></i>
+
+				</Link>
+			);
+		},
 	},
 ];

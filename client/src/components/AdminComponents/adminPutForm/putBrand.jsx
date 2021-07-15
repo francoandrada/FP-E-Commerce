@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {modifyBrand} from "../Redux/actions"
+import {modifyBrand} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 
 
 function PutBrand (props) {
     const dispatch = useDispatch()
+    const brands = useSelector((state)=> state.brands.allBrands)
+    console.log(brands)
     var id = props.match.params.id
     useEffect(()=>{
     //  dispatch(getBrands())
@@ -32,7 +34,17 @@ function PutBrand (props) {
     const submit=(data, e)=>{
         data.id = id
         console.log(data)
-        if(data.id && data.id.length >0){
+        for(let i=0 ; i< brands.length; i++){
+            if(brands[i].name.toLowerCase() === data.name.toLowerCase()){
+             return  swal({
+                    title: 'Existing name',
+                    icon: 'warning',
+                    button: 'ok',
+                    timer: '5000',
+                })
+            }
+        }
+        if(data.name && data.name.length >0){
             dispatch(modifyBrand(data))
             e.target.reset()
             swal({
@@ -72,22 +84,18 @@ function PutBrand (props) {
             name="name"
             onChange={(e)=>changeInput(e)}
             {...register("name", {
-            // required:{
-            //     value: true,
-            //     massage: "debe ingresar un nombre"
-            // },
-            // maxLength:{
-            //     value: 20,
-            //     massage:"menos de 20 caracteres"
-            // },
-            // minLength:{
-            //     value: 3,
-            //     message:"mas de 3 caracteres"
-            // },
-            // pattern:{
-            //     value: /^[a-zA-Z]*$/,
-            //     message:"no debe ingresar numeros"
-            // }
+            maxLength:{
+                value: 20,
+                massage:"menos de 20 caracteres"
+            },
+            minLength:{
+                value: 3,
+                message:"mas de 3 caracteres"
+            },
+            pattern:{
+                value: /^[a-zA-Z]*$/,
+                message:"no debe ingresar numeros"
+            }
             })}
             >
             
@@ -95,7 +103,7 @@ function PutBrand (props) {
             <span>{errors?.name?.message}</span> 
 
             {/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
-            <button type="submit"></button>
+            <button type="submit">Change</button>
 
             </form>
 

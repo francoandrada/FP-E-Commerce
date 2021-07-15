@@ -1,13 +1,13 @@
-import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { COLUMNS } from './columns';
+import { Link } from 'react-router-dom';
 import {
 	// getCategories,
 	changePaginationSize,
 	// getListOfProductTable,
 	changeOrderTable,
 	tableFilterByCategory,
-} from '../../Redux/actions';
+	sortTableAction,
+} from '../../../Redux/actions';
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
@@ -24,6 +24,14 @@ const TableLogic = () => {
 				stock: e.stock,
 				weight: e.weight,
 				category: e.categories[0].name,
+				delete: (event) => {
+					event.preventDefault();
+					console.log('el id del producto a eliminar', e.id);
+				},
+				update: (event) => {
+					event.preventDefault();
+					console.log('el id del producto a actualizar', e.id);
+				},
 			};
 		});
 		return data;
@@ -44,6 +52,11 @@ const TableLogic = () => {
 		dispatch(changeOrderTable(event.target.value));
 	};
 
+	const sortTableHandle = (event) => {
+		event.preventDefault();
+		dispatch(sortTableAction(event.target.value));
+	};
+
 	return {
 		// react-table
 		mapData,
@@ -51,6 +64,7 @@ const TableLogic = () => {
 		paginationSizeHandle,
 		orderTableHandle,
 		filterByCategoryHandle,
+		sortTableHandle,
 	};
 };
 

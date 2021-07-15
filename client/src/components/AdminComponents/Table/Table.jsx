@@ -3,17 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
 	getListOfProductTable,
-	sortTableAction,
 	changeTablePage,
-} from '../../Redux/actions';
+} from '../../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
-import Loader from '../Loader/Loader';
-import Select from '../Select/Select';
+import Loader from '../../Loader/Loader';
+import Select from '../../Select/Select';
 import TableLogic from './TableLogic';
 import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
-
+import Admin from '../Admin/Admin'
 const Table = () => {
 	const dispatch = useDispatch();
 
@@ -22,6 +21,7 @@ const Table = () => {
 		paginationSizeHandle,
 		orderTableHandle,
 		filterByCategoryHandle,
+		sortTableHandle,
 	} = TableLogic();
 
 	const {
@@ -68,16 +68,17 @@ const Table = () => {
 		gotoTablePage,
 	]);
 
+	/*
+		the size of the img can be changed on the "columns" file, also the "icons"
+		icons that I used https://fontawesome.com/v5.15/icons/wrench?style=solid
+	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
 
-	const sortTableHandle = (event) => {
-		event.preventDefault();
-		dispatch(sortTableAction(event.target.value));
-	};
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
 		<div>
+			<Admin />
 			<div
 				style={{
 					height: '100px',

@@ -29,6 +29,7 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
+	CREATED_BRAND,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
 	GET_USER_TO_EDIT
@@ -371,6 +372,22 @@ export function modifyBrand(elem) {
 		}
 	};
 }
+
+export function createdBrand (elem) {
+	return async (dispatch) => {
+		try {
+	 	const response =await axios.post('http://localhost:3001/admin/createdbrand', elem);
+		 console.log(response)
+		 dispatch({
+			type: CREATED_BRAND,
+		   payload:response.data
+		   })
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
 
 export function getUsers() {
 

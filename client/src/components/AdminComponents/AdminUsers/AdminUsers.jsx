@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
 import Admin from "../Admin/Admin";
-import { getCategories } from "../../Redux/actions";
+import { getUsers } from "../../../Redux/actions";
 import { MdModeEdit } from 'react-icons/md'
-import styles from './AdminCategories.module.css'
+import styles from '../AdminCategories/AdminCategories.module.css'
 import { Link } from "react-router-dom";
-function AdminCategories() {
-    const allCategories = useSelector(state => state.category.allCategories)
+function AdminUsers() {
+    const allUsers = useSelector(state => state.admin.usersFromDB)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getCategories())
-    }, [dispatch])
+        dispatch(getUsers())
+    }, [])
     return (
         <>
             <div>
@@ -18,13 +18,13 @@ function AdminCategories() {
             </div>
             <div className={styles.categoriesContainer}>
 
-                <h1> Categories </h1>
-                {allCategories.map(c => {
+                <h1> Users </h1>
+                {allUsers?.map(c => {
                     return (
-                        <div className={styles.category}>
-                            <span>Name: {c.name}</span>
+                        <div className={styles.category} key={c.email}>
+                            <span>User: {c.email}</span>
                             <div>
-                            <Link key={c.id} to={`/admin/putCategory/${c.id}`}>
+                            <Link to={`/admin/user/${c.email}`}>
                                     <button className={styles.btnEdit}>
                                         <MdModeEdit />
                                     </button>
@@ -38,4 +38,4 @@ function AdminCategories() {
         </>
     )
 }
-export default AdminCategories;
+export default AdminUsers;

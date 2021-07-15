@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {modifyCateogry} from "../Redux/actions"
+import {createdBrand} from "../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 
 
-function PutCategory(props) {
+function AddBrand (props) {
     const dispatch = useDispatch()
-var id = props.match.params.id
+    var id = props.match.params.id
     useEffect(()=>{
     //  dispatch(getBrands())
     //  dispatch(getCategories())
@@ -30,14 +30,13 @@ var id = props.match.params.id
         }
 
     const submit=(data, e)=>{
-
         data.id = id
         console.log(data)
         if(data.id && data.id.length >0){
-            dispatch(modifyCateogry(data))
+            dispatch(createdBrand(data))
             e.target.reset()
             swal({
-                title:"Category modificada!!",
+                title:"Brand Modified!!",
                 icon: "success",
                 button: "ok",
                 timer: "5000"
@@ -48,7 +47,7 @@ var id = props.match.params.id
 
         }else{
             swal({
-                title:"Debe ingresar Category",
+                title:"Require Brand",
                 icon: "error",
                 button: "ok",
                 timer: "5000"
@@ -66,29 +65,29 @@ var id = props.match.params.id
             onSubmit={handleSubmit(submit)}
             >
                 
-           <h6> New Name Category</h6>
+           <h6> New Name Brand</h6>
             <input
             className=""
             type="text"
             name="name"
             onChange={(e)=>changeInput(e)}
             {...register("name", {
-            // required:{
-            //     value: true,
-            //     massage: "debe ingresar un nombre"
-            // },
-            // maxLength:{
-            //     value: 20,
-            //     massage:"menos de 20 caracteres"
-            // },
-            // minLength:{
-            //     value: 3,
-            //     message:"mas de 3 caracteres"
-            // },
-            // pattern:{
-            //     value: /^[a-zA-Z]*$/,
-            //     message:"no debe ingresar numeros"
-            // }
+            required:{
+                value: true,
+                massage: "debe ingresar un nombre"
+            },
+            maxLength:{
+                value: 20,
+                massage:"menos de 20 caracteres"
+            },
+            minLength:{
+                value: 3,
+                message:"mas de 3 caracteres"
+            },
+            pattern:{
+                value: /^[a-zA-Z]*$/,
+                message:"no debe ingresar numeros"
+            }
             })}
             >
             
@@ -103,4 +102,4 @@ var id = props.match.params.id
         </div>
     )
 }
-export default PutCategory;
+export default AddBrand;
