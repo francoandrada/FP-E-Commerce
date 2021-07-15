@@ -1,10 +1,10 @@
 import styles from './CartModal.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Icon = styled.div`
   color: #ff3c4a;
@@ -103,6 +103,7 @@ const ButtonClose = styled.section`
     &:hover {
         background-color:#919090;
         color: white;
+        transition: 200ms;
     }
 `;
 
@@ -121,7 +122,8 @@ const ButtonPay = styled.section`
     cursor: pointer;
 
     &:hover {
-        background-color: rgb(255, 45, 74);
+        background-color: #d4202d;
+        transition: 200ms;
     }
 `;
 
@@ -144,8 +146,16 @@ function CartModal() {
 	const cartProducts = useSelector((state) => state.cart.cart);
 
 	const toggle = () => {
-		setActive(!active);
+		if (cartProducts.length !== 0) {
+			setActive(!active);
+		}
 	};
+
+	useEffect(() => {
+		if (cartProducts.length === 0) {
+			setActive(false);
+		}
+	}, [active, cartProducts]);
 
 	let subtotal = function () {
 		let subTotal = 0;
@@ -188,8 +198,9 @@ function CartModal() {
 			{active && (
 				<CartContainer active={active} toggle={toggle}>
 					<CartHeader>
-						<h3>Cart</h3>
-
+						<h2>CART</h2>
+						&nbsp;
+						<FaShoppingCart />
 						<div>
 							<p>Subtotal</p>
 							{subtotal() ? <span>{formatsubtotal}</span> : <span>0</span>}
