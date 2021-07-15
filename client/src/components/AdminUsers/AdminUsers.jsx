@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
 import Admin from "../Admin/Admin";
-import { getBrands } from "../../Redux/actions";
+import { getUsers } from "../../Redux/actions";
 import { MdModeEdit } from 'react-icons/md'
 import styles from '../AdminCategories/AdminCategories.module.css'
 import { Link } from "react-router-dom";
 function AdminUsers() {
-    const allBrands = useSelector(state => state.brands.allBrands)
+    const allUsers = useSelector(state => state.admin.usersFromDB)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBrands())
-    }, [dispatch])
+        dispatch(getUsers())
+    }, [])
     return (
         <>
             <div>
@@ -18,8 +18,8 @@ function AdminUsers() {
             </div>
             <div className={styles.categoriesContainer}>
 
-                <h1> Brands </h1>
-                {allBrands.map(c => {
+                <h1> Users </h1>
+                {allUsers?.map(c => {
                     return (
                         <div className={styles.category}>
                             <span>Name: {c.name}</span>
