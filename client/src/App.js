@@ -12,9 +12,13 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/Table/Table';
 import './App.css';
+
+import ProductCartModal from './components/CartModal/ProductCartModal';
+import CartModal from './components/CartModal/CartModal';
 import Admin from './components/Admin/Admin';
 import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
 import PutCategory from './adminPutForm/putCategory';
+
 
 function App() {
 	return (
@@ -43,12 +47,11 @@ function App() {
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+					<Route path='/cartTest' exact component={CartModal} />
 
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 
-					
 					<Route path='/table' exact component={Table} />
-
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />
