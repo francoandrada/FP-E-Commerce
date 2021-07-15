@@ -1,4 +1,4 @@
-const { Product, Brand, Category } = require('../db');
+const { Product, Brand, Category, User } = require('../db');
 async function postProduct(req, res, next) {
 	try {
 		const {
@@ -6,7 +6,7 @@ async function postProduct(req, res, next) {
 			price,
 			description,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 			category,
@@ -16,7 +16,7 @@ async function postProduct(req, res, next) {
 			price,
 			description,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 		});
@@ -35,7 +35,7 @@ async function putProduct(req, res, next) {
 			price,
 			description,
 			weight,
-			Image,
+			image,
 			stock,
 			brandId,
 			category,
@@ -45,7 +45,7 @@ async function putProduct(req, res, next) {
 		if (price) variable.price = price;
 		if (description.length > 0) variable.description = description;
 		if (weight) variable.weight = weight;
-		if (Image.length > 0) variable.Image = Image;
+		if (image.length > 0) variable.image = image;
 		if (stock) variable.stock = stock;
 		if (brandId) variable.brandId = brandId;
 		if (category) variable.category = category;
@@ -138,6 +138,16 @@ async function getProductAll(req, res, next) {
 	}
 }
 
+async function getUsers (req, res) {
+	try {
+		const usersList = await User.findAll();
+		return res.status(200).json(usersList);
+	} catch (error) {
+		res.send(error);
+	}
+
+};
+
 module.exports = {
 	putProduct,
 	postBrand,
@@ -147,4 +157,5 @@ module.exports = {
 	putCategoryProduct,
 	getProductCategory,
 	getProductAll,
+	getUsers
 };

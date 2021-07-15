@@ -117,7 +117,6 @@ function Products() {
 			return this.formatear(num);
 		},
 	};
-
 	return (
 		<div className={styles.cardsContainer}>
 			{productsToRender
@@ -165,5 +164,6 @@ function Products() {
 		</div>
 	);
 }
+
 
 export default Products;

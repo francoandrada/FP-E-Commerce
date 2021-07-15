@@ -1,14 +1,13 @@
 const { DataTypes } = require('sequelize');
 
-const { INTEGER } = DataTypes;
-module.exports = (sequilize) => {
-	sequilize.define('order_detail', {
+module.exports = (sequelize) => {
+	sequelize.define('order_detail', {
 		price: {
-			type: INTEGER,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		quantity: {
-			type: INTEGER,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 	});

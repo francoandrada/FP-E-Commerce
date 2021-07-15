@@ -25,3 +25,14 @@
    justify-items: center;
    padding: 20px;
 }
+
+.gobackButton {
+    width: 20%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FF3C4A;
+    color: white;
+    font-weight: bold;
+    border-style: hidden;
+    border-radius: 10px;
+}

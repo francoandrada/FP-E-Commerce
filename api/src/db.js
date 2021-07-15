@@ -70,6 +70,10 @@ User.belongsToMany(Product, {
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
 
+Order.hasMany(Order_detail);
+Product.hasMany(Order_detail);
+Order_detail.belongsTo(Product);
+
 module.exports = {
 	...sequelize.models,
 	conn: sequelize,

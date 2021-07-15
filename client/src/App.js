@@ -12,21 +12,40 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/Table/Table';
 import './App.css';
+
+import ProductCartModal from './components/CartModal/ProductCartModal';
+import CartModal from './components/CartModal/CartModal';
 import Admin from './components/Admin/Admin';
+import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
+import PutCategory from './adminPutForm/putCategory';
+
+import AdminProducts from './components/adminProducts/adminProduc'
+import PutProduct from './adminPutForm/putProduct'
+import AdminBrands from './components/AdminBrands/AdminBrands'
+import PutBrand from './adminPutForm/putBrand'
+import AdminUsers from './components/AdminUsers/AdminUsers';
+import UserPanel from './components/AdminUsers/UserPanel';
+
+
+
 
 function App() {
 	return (
 		<div className='App'>
 			<div class='totalvh'>
 				<Navbar />
-				<Switch>
 					<Route path='/admin' exact component={Admin}/>
-					<Route path='/admin/products' exact component={Admin}/>
-					<Route path='/admin/users' exact component={Admin}/>
+					<Route path='/admin/products' exact component={AdminProducts}/>
+					<Route path='/admin/putproduct/:id' exact component={PutProduct}/>
+					<Route path='/admin/users/:email' exact component={UserPanel}/>
+					<Route path='/admin/users' exact component={AdminUsers}/>
 					<Route path='/admin/orders' exact component={Admin}/>
-					<Route path='/admin/categories' exact component={Admin}/>
-					<Route path='/admin/brands' exact component={Admin}/>
+					<Route path='/admin/categories' exact component={AdminCategories}/>
+					<Route path='/admin/putCategory/:id' exact component={PutCategory}/>
+					<Route path='/admin/brands' exact component={AdminBrands}/>
+					<Route path='/admin/putbrands/:id' exact component={PutBrand}/>
 					<Route path='/admin/stock' exact component={Admin}/>
+				<Switch>
 					
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
@@ -40,12 +59,11 @@ function App() {
 					<Route path='/catalog' exact component={Catalog} />
 					<Route path='/catalog/:id' exact component={DetailProduct} />
 					<Route path='/searchproduct' exact component={SearchProducts} />
+					<Route path='/cartTest' exact component={CartModal} />
 
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 
-					
 					<Route path='/table' exact component={Table} />
-
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />

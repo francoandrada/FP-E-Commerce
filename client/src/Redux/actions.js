@@ -25,9 +25,34 @@ import {
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
 	LIST_PRODUCT_ON_TABLE,
+	SIZE_PAGINATION,
+	ORDER_TABLE,
+	TABLE_FILTER_BY_CATEGORY,
+	SORT_TABLE_BY,
+	GET_USERS
 } from './actionsName';
 
 import axios from 'axios';
+
+export const changePaginationSize = (payload) => ({
+	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const sortTableAction = (payload) => ({
+	type: SORT_TABLE_BY,
+	payload,
+});
+
+export const tableFilterByCategory = (payload) => ({
+	type: TABLE_FILTER_BY_CATEGORY,
+	payload,
+});
+
+export const changeOrderTable = (payload) => ({
+	type: ORDER_TABLE,
+	payload,
+});
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -311,3 +336,51 @@ export const loadCurrentItem = (itemId) => {
 		},
 	};
 };
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
+
+export function modifyProduct(elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putproduct', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyCateogry(elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putcategory', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyBrand (elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putbrand', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getUsers() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/admin/users').then((response) => {
+			dispatch({ type: GET_USERS, payload: response.data });
+		});
+	};
+}
+
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
