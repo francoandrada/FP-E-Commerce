@@ -11,7 +11,7 @@ import { COLUMNS } from './columns';
 import Loader from '../Loader/Loader';
 import Select from '../Select/Select';
 import TableLogic from './TableLogic';
-import PaginationTable from './TablePagination';
+import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
 
 const Table = () => {
