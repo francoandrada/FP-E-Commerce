@@ -38,4 +38,26 @@ export const COLUMNS = [
 		Header: 'Category',
 		accessor: 'category',
 	},
+	{
+		Header: 'Delete',
+		accesor: 'delete',
+		Cell: (row) => {
+			return (
+				<button onClick={row.row.original.delete}>
+					<i className='fas fa-trash-alt'></i>
+				</button>
+			);
+		},
+	},
+	{
+		Header: 'Update',
+		accesor: 'update',
+		Cell: (row) => {
+			return (
+				<button onClick={row.row.original.update}>
+					<i class='fas fa-wrench'></i>
+				</button>
+			);
+		},
+	},
 ];

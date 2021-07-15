@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
 	getListOfProductTable,
-	sortTableAction,
 	changeTablePage,
 } from '../../Redux/actions';
 import { useTable } from 'react-table';
@@ -22,6 +21,7 @@ const Table = () => {
 		paginationSizeHandle,
 		orderTableHandle,
 		filterByCategoryHandle,
+		sortTableHandle,
 	} = TableLogic();
 
 	const {
@@ -68,13 +68,13 @@ const Table = () => {
 		gotoTablePage,
 	]);
 
+	/*
+		the size of the img can be changed on the "columns" file, also the "icons"
+		icons that I used https://fontawesome.com/v5.15/icons/wrench?style=solid
+	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
 
-	const sortTableHandle = (event) => {
-		event.preventDefault();
-		dispatch(sortTableAction(event.target.value));
-	};
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
 		<div>
