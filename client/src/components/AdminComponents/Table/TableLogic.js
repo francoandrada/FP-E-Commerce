@@ -7,7 +7,7 @@ import {
 	changeOrderTable,
 	tableFilterByCategory,
 	sortTableAction,
-} from '../../Redux/actions';
+} from '../../../Redux/actions';
 
 const TableLogic = () => {
 	const dispatch = useDispatch();

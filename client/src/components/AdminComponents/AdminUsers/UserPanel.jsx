@@ -2,12 +2,12 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import styles from '../Register/Register.module.css';
-import ButtonRed from '../StyledComponents/ButtonRed';
+import styles from '../../Register/Register.module.css';
+import ButtonRed from '../../StyledComponents/ButtonRed';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Error from '../StyledComponents/ErrorMessages';
-import Div from '../StyledComponents/Validation';
+import Error from '../../StyledComponents/ErrorMessages';
+import Div from '../../StyledComponents/Validation';
 function UserPanel() {
 	const history = useHistory();
 

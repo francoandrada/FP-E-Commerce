@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
 import Admin from "../Admin/Admin";
-import { getUsers } from "../../Redux/actions";
+import { getUsers } from "../../../Redux/actions";
 import { MdModeEdit } from 'react-icons/md'
 import styles from '../AdminCategories/AdminCategories.module.css'
 import { Link } from "react-router-dom";

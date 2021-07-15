@@ -10,21 +10,19 @@ import SearchProducts from './components/searchProducts/SearchProducts';
 import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
-import Table from './components/Table/Table';
+import Table from './components/AdminComponents/Table/Table'
 import './App.css';
 
 import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
-import Admin from './components/Admin/Admin';
-import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
-import PutCategory from './adminPutForm/putCategory';
-
-import AdminProducts from './components/adminProducts/adminProduc'
-import PutProduct from './adminPutForm/putProduct'
-import AdminBrands from './components/AdminBrands/AdminBrands'
-import PutBrand from './adminPutForm/putBrand'
-import AdminUsers from './components/AdminUsers/AdminUsers';
-import UserPanel from './components/AdminUsers/UserPanel';
+import Admin from './components/AdminComponents/Admin/Admin'
+import AdminCategories from './components/AdminComponents/AdminCategories/AdminCategories.jsx';
+import PutCategory from './components/AdminComponents/adminPutForm/putCategory'
+import PutProduct from './components/AdminComponents/adminPutForm/putProduct'
+import AdminBrands from './components/AdminComponents/AdminBrands/AdminBrands'
+import PutBrand from './components/AdminComponents/adminPutForm/putBrand'
+import AdminUsers from './components/AdminComponents/AdminUsers/AdminUsers';
+import UserPanel from './components/AdminComponents/AdminUsers/UserPanel';
 
 
 
