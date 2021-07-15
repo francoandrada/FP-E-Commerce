@@ -3,13 +3,13 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import styles from '../Register/Register.module.css';
-import ButtonRed from '../StyledComponents/ButtonRed';
+import styles from '../../Register/Register.module.css';
+import ButtonRed from '../../StyledComponents/ButtonRed';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Error from '../StyledComponents/ErrorMessages';
-import Div from '../StyledComponents/Validation';
-import { getUserToEdit} from '../../Redux/actions';
+import Error from '../../StyledComponents/ErrorMessages';
+import Div from '../../StyledComponents/Validation';
+import { getUserToEdit} from '../../../Redux/actions';
 
 function UserPanel() {
 	const history = useHistory();
