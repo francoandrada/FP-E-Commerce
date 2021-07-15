@@ -1,27 +1,25 @@
 const { Router } = require('express');
-const {check} = require('express-validator');
+const { check } = require('express-validator');
 
 // <<<<<<< HEAD
 // const { newUser, prueba } = require('../Controllers/users');
 // =======
-const { newUser,
-        getUsers } = require('../Controllers/users');
+const { newUser, getUsers } = require('../Controllers/users');
 
 const router = Router();
 
+router.post(
+	'/',
 
-router.post('/',
-
-    [
-        check('email', 'Add a valid email').isEmail(),
-        check('password', 'The password must be at least 6 characters').isLength({ min: 6 }),
-    ],
-    newUser
-
+	[
+		check('email', 'Add a valid email').isEmail(),
+		check('password', 'The password must be at least 6 characters').isLength({
+			min: 6,
+		}),
+	],
+	newUser
 );
 
-router.get('/userslist', getUsers )
-
-
+router.get('/userslist', getUsers);
 
 module.exports = router;
