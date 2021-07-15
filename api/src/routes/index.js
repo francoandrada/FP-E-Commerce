@@ -9,6 +9,7 @@ const authGmailRoutes = require('./authGmailRoutes');
 const categoriesRoutes = require('./categoriesRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const catalogRoutes = require('./catalogRoutes');
+const mercadopagoRoutes = require('./mercadopagoRoutes');
 
 const router = Router();
 
@@ -22,7 +23,6 @@ router.use('/admin', adminRoutes);
 router.use('/brands', brandRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/catalog', catalogRoutes);
-
-
+router.use('/mercadopago', mercadopagoRoutes);
 
 module.exports = router;
