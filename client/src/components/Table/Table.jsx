@@ -1,56 +1,71 @@
 import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories, getListOfProductTable } from '../../Redux/actions';
+import {
+	getCategories,
+	changePaginationSize,
+	getListOfProductTable,
+	changeOrderTable,
+} from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
 import Loader from '../Loader/Loader';
+import Select from '../Select/Select';
+import TableLogic from './TableLogic';
 import styles from './Table.module.css';
 
 const Table = () => {
+	const { mapData, paginationSizeHandle, orderTableHandle } = TableLogic();
 	const dispatch = useDispatch();
-	const { listProductsOnTable } = useSelector((state) => state.admin);
-	const test = {
-		orderBy: 'price',
-		order: 'ASC',
-		category: 'default',
-	};
-
-	useEffect(() => {
-		dispatch(getListOfProductTable(0, test));
-	}, [dispatch]);
-
-	const mapData = (array) => {
-		const data = array.map((e) => {
-			return {
-				id: e.id,
-				image: e.image,
-				description: e.description,
-				price: e.price,
-				specialPrice: e.specialPrice,
-				stock: e.stock,
-				weight: e.weight,
-				category: e.categories[0].name,
-			};
-		});
-		return data;
-	};
-
+	const { listProductsOnTable, sizePagination, orderTable } = useSelector(
+		(state) => state.admin
+	);
+	// react-table
 	const dataToPrint = listProductsOnTable
 		? mapData(listProductsOnTable.products)
 		: [];
-
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => dataToPrint, [dataToPrint]);
-
 	const tableInstance = useTable({
 		columns,
-		data: data || [],
+		data: data,
 	});
+
+	useEffect(() => {
+		dispatch(
+			getListOfProductTable(0, {
+				orderBy: 'price',
+				order: orderTable,
+				category: 'default',
+				limit: sizePagination,
+			})
+		);
+	}, [dispatch, sizePagination, orderTable]);
 
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
 	return (
 		<div>
+			<div
+				style={{
+					height: '100px',
+					background: 'gray',
+					display: 'flex',
+					justifyContent: 'space-around',
+					alignItems: 'center',
+				}}
+			>
+				<Select
+					initialValue={sizePagination}
+					onChange={paginationSizeHandle}
+					values={[10, 20, 50, 100, 120]}
+				/>
+
+				<Select
+					initialValue={orderTable}
+					onChange={orderTableHandle}
+					values={['default', 'ASC', 'DESC']}
+				/>
+			</div>
 			{listProductsOnTable ? (
 				<table {...getTableProps()} className={styles.tableEcommerce}>
 					<thead>

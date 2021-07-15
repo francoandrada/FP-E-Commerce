@@ -25,9 +25,21 @@ import {
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
 	LIST_PRODUCT_ON_TABLE,
+	SIZE_PAGINATION,
+	ORDER_TABLE,
 } from './actionsName';
 
 import axios from 'axios';
+
+export const changePaginationSize = (payload) => ({
+	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const changeOrderTable = (payload) => ({
+	type: ORDER_TABLE,
+	payload,
+});
 
 export const fetchPending = () => ({
 	type: FETCH_PENDING,
@@ -126,7 +138,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-		
+
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -193,7 +205,6 @@ export function forgotPassword(email) {
 					hola,
 				},
 			});
-			
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -229,12 +240,9 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
-
-
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
-		
 
 			dispatch({
 				type: SUCCESS_LOGIN,
@@ -311,3 +319,42 @@ export const loadCurrentItem = (itemId) => {
 		},
 	};
 };
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
+
+export function modifyProduct(elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putproduct', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyCateogry(elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putcategory', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function modifyBrand (elem) {
+	return async () => {
+		try {
+	 	await axios.put('http://localhost:3001/admin/putbrand', elem);
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+/////////////////////////////////////////////// ADMINISTRADOR//////////
