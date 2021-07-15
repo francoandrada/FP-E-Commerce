@@ -181,6 +181,20 @@ async function putUserInfo(req, res, next) {
 	}
 }
 
+async function deleteUser(req, res, next) {
+	try {
+		// console.log(req.body.email)
+		// res.send('ok')
+		const userToDelete = req.body.email;
+		console.log(req.body.email);
+		const user = await User.findOne({ where: { email: userToDelete } });
+		await user.destroy()
+		res.json(userToDelete);
+	} catch (error) {
+		next(error);
+	}
+}
+
 module.exports = {
 	putProduct,
 	postBrand,
@@ -192,5 +206,6 @@ module.exports = {
 	getProductAll,
 	getUsers,
 	getUserToEdit,
-	putUserInfo
+	putUserInfo,
+	deleteUser
 };
