@@ -28,6 +28,8 @@ export const ORDER_TABLE = 'ORDER_TABLE';
 export const TABLE_FILTER_BY_CATEGORY = 'TABLE_FILTER_BY_CATEGORY';
 export const SORT_TABLE_BY = 'SORT_TABLE_BY';
 export const GOTO_TABLE_PAGE = 'GOTO_TABLE_PAGE';
+export const GET_USER_TO_EDIT = 'GET_USER_TO_EDIT';
+
 
 //carrito
 export const ADD_TO_CART = 'ADD_TO_CART';

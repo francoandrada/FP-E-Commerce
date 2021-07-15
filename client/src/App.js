@@ -35,7 +35,7 @@ function App() {
 					<Route path='/admin' exact component={Admin}/>
 					<Route path='/admin/products' exact component={Table}/>
 					<Route path='/admin/putproduct/:id' exact component={PutProduct}/>
-					<Route path='/admin/users/:email' exact component={UserPanel}/>
+					<Route path='/admin/user/:email' exact component={UserPanel}/>
 					<Route path='/admin/users' exact component={AdminUsers}/>
 					<Route path='/admin/orders' exact component={Admin}/>
 					<Route path='/admin/categories' exact component={AdminCategories}/>

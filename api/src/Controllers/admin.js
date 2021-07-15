@@ -148,6 +148,39 @@ async function getUsers (req, res) {
 
 };
 
+async function getUserToEdit (req, res) {
+	const userEmail= req.params.email
+	try {
+		const user = await User.findOne({ where: { email: userEmail } });
+		return res.status(200).json(user);
+	} catch (error) {
+		res.send(error);
+	}
+
+};
+
+async function putUserInfo(req, res, next) {
+	try {
+		// console.log(req.body)
+		// res.send('ok')
+		const newUserInfo = req.body;
+		const user = await User.findOne({ where: { email: newUserInfo.email } });
+		user.name= newUserInfo.name,
+		user.surname= newUserInfo.surname,
+		user.email= newUserInfo.email,
+		user.password= newUserInfo.password, 
+		user.address= newUserInfo.address,
+		user.addressNumber= newUserInfo.addressNumber? parseInt(newUserInfo.addressNumber):null,
+		user.postalCode= newUserInfo.postalCode? parseInt(newUserInfo.postalCode): null,
+		user.phone= newUserInfo.phone,
+		user.admin= newUserInfo.admin
+		await user.save()
+		res.json(user);
+	} catch (error) {
+		next(error);
+	}
+}
+
 module.exports = {
 	putProduct,
 	postBrand,
@@ -157,5 +190,7 @@ module.exports = {
 	putCategoryProduct,
 	getProductCategory,
 	getProductAll,
-	getUsers
+	getUsers,
+	getUserToEdit,
+	putUserInfo
 };

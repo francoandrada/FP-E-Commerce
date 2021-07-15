@@ -8,6 +8,7 @@ import {
 	SORT_TABLE_BY,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
+	GET_USER_TO_EDIT
 } from '../actionsName';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
 	sortTable: 'name',
 	usersFromDB: [],
 	gotoTablePage: 0,
+	userToEdit: undefined
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -61,11 +63,16 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				sortTable: payload,
 			};
 		case GET_USERS:
-			console.log(payload)
 			return {
 				...state,
 				usersFromDB: payload,
 			};
+			
+		case GET_USER_TO_EDIT:
+			return {
+				...state,
+				userToEdit: payload,
+			};	
 		case GOTO_TABLE_PAGE:
 			return {
 				...state,

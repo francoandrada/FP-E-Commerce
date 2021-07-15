@@ -10,6 +10,9 @@ const {
 	getProductCategory,
 	getProductAll,
 	getUsers,
+	getUserToEdit,
+	putUserInfo
+	
 } = require('../Controllers/admin');
 
 const router = Router();
@@ -26,5 +29,9 @@ router.put('/putcategory', putCategoryProduct);
 router.get('/productcategoryget/:name', getProductCategory);
 router.get('/productos', getProductAll);
 router.get('/users', getUsers);
+router.get('/user/:email', getUserToEdit);
+router.put('/user/edit', putUserInfo);
+
+
 
 module.exports = router;
