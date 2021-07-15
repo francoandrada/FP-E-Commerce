@@ -1,5 +1,6 @@
 import styles from './CartModal.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
@@ -7,7 +8,7 @@ import { useState } from 'react';
 
 const Icon = styled.div`
   color: #ff3c4a;
-  font-size: 55px;
+  font-size: 30px;
   display: flex;
     justify-content: flex-end;
     margin: 0em 10% 0em 0em;
@@ -32,6 +33,7 @@ const CartContainer = styled.div`
     right: 5%;
     border-radius: 5px;
     width: 440px;
+    color: #495057;
 `;
 
 const CartHeader = styled.div`
@@ -90,12 +92,18 @@ const ButtonClose = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    
     background-color: transparent;
     color: black;
     font-size: 20px;
     font-weight: 400;
     cursor: pointer;
+    border: 1px solid;
+    border-radius: 5px;
+
+    &:hover {
+        background-color:#919090;
+        color: white;
+    }
 `;
 
 const ButtonPay = styled.section`
@@ -111,6 +119,10 @@ const ButtonPay = styled.section`
     font-size: 20px;
     font-weight: 400;
     cursor: pointer;
+
+    &:hover {
+        background-color: rgb(255, 45, 74);
+    }
 `;
 
 // const SubtotalContainer = styled.div`
@@ -129,10 +141,43 @@ const ButtonPay = styled.section`
 // color='#ff3c4a'
 function CartModal() {
 	const [active, setActive] = useState(false);
+	const cartProducts = useSelector((state) => state.cart.cart);
 
 	const toggle = () => {
 		setActive(!active);
 	};
+
+	let subtotal = function () {
+		let subTotal = 0;
+		cartProducts.map((product) => {
+			subTotal += product.price * product.qty;
+		});
+		return subTotal;
+	};
+
+	var formatNumber = {
+		separator: '.',
+		decimalSeparator: ',',
+		formatear: function (num) {
+			num += '';
+			var splitStr = num.split('.');
+			var splitLeft = splitStr[0];
+			var splitRight =
+				splitStr.length > 1 ? this.decimalSeparator + splitStr[1] : '';
+			var regx = /(\d+)(\d{3})/;
+			while (regx.test(splitLeft)) {
+				splitLeft = splitLeft.replace(regx, '$1' + this.separator + '$2');
+			}
+			return this.simbol + splitLeft + splitRight;
+		},
+		new: function (num, simbol) {
+			this.simbol = simbol || '';
+			return this.formatear(num);
+		},
+	};
+
+	let subtot = subtotal();
+	let formatsubtotal = formatNumber.new(subtot, '$');
 
 	return (
 		<>
@@ -147,23 +192,26 @@ function CartModal() {
 
 						<div>
 							<p>Subtotal</p>
-							<span>$3.000,00</span>
+							{subtotal() ? <span>{formatsubtotal}</span> : <span>0</span>}
 						</div>
 					</CartHeader>
 					<ProductsCart>
 						<ul>
-							<li>
-								<ProductCartModal />
-							</li>
-							<li>
-								<ProductCartModal />
-							</li>
-							<li>
-								<ProductCartModal />
-							</li>
-							<li>
-								<ProductCartModal />
-							</li>
+							{cartProducts &&
+								cartProducts.map((product) => {
+									let formatPrice = formatNumber.new(product.price, '$');
+									return (
+										<li key={product.id}>
+											<ProductCartModal
+												info={product}
+												image={product.image}
+												name={product.name}
+												price={formatPrice}
+												qty={product.qty}
+											/>
+										</li>
+									);
+								})}
 						</ul>
 					</ProductsCart>
 					<CartPay>
