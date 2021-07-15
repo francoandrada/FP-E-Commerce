@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import CartModal from '../CartModal/CartModal';
 import {
 	authUser,
 	getSuggestions,
@@ -154,8 +155,12 @@ const Navbar = () => {
 						</>
 					)}
 					<div className={styles.cartLogoContainer}>
-						<Link to='/'>CarritoLOGO</Link>
-						<p>{cartCount}</p>
+						<CartModal />
+						{cartCount !== 0 ? (
+							<div className={styles.countCart}>
+								<p>{cartCount}</p>
+							</div>
+						) : null}
 					</div>
 				</div>
 			</div>
