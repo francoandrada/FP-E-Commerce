@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { COLUMNS } from './columns';
 import {
 	// getCategories,
-	// changePaginationSize,
+	changePaginationSize,
 	// getListOfProductTable,
-	// changeOrderTable,
-	// tableFilterByCategory,
+	changeOrderTable,
+	tableFilterByCategory,
 } from '../../Redux/actions';
 
 const TableLogic = () => {
@@ -31,17 +31,17 @@ const TableLogic = () => {
 
 	const filterByCategoryHandle = (event) => {
 		event.preventDefault();
-		// dispatch(tableFilterByCategory(event.target.value));
+		dispatch(tableFilterByCategory(event.target.value));
 	};
 
 	const paginationSizeHandle = (event) => {
 		event.preventDefault();
-		// dispatch(changePaginationSize(event.target.value));
+		dispatch(changePaginationSize(event.target.value));
 	};
 
 	const orderTableHandle = (event) => {
 		event.preventDefault();
-		// dispatch(changeOrderTable(event.target.value));
+		dispatch(changeOrderTable(event.target.value));
 	};
 
 	return {
