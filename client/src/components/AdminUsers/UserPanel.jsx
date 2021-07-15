@@ -2,19 +2,21 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import styles from './Register.module.css';
+import styles from '../Register/Register.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
-function Register() {
+function UserPanel() {
 	const history = useHistory();
+
+    const [user,setUser]=useState("nico")
 
 	const [hola, setHola] = useState([])
 	const formik = useFormik({
 		initialValues: {
-			email: '',
+			email: 'nicolas',
 			password: '',
 			name: '',
 			surname: '',
@@ -85,7 +87,7 @@ function Register() {
 								type='email'
 								class='form-control'
 								id='email'
-								placeholder='Email'
+								value={user}
 								name='email'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
@@ -195,7 +197,7 @@ function Register() {
 							</div>
 						</div>
 						<div className={styles.registerButtonRow}>
-							<ButtonRed type='submit'>Sign Up</ButtonRed>
+							<ButtonRed type='submit'>Confirm</ButtonRed>
 						</div>
 					</div>
 				</form>
@@ -204,4 +206,4 @@ function Register() {
 		</div>
 	);
 }
-export default Register;
+export default UserPanel;
