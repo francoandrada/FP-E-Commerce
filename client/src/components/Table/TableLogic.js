@@ -6,6 +6,7 @@ import {
 	changePaginationSize,
 	// getListOfProductTable,
 	changeOrderTable,
+	tableFilterByCategory,
 } from '../../Redux/actions';
 
 const TableLogic = () => {
@@ -28,6 +29,11 @@ const TableLogic = () => {
 		return data;
 	}
 
+	const filterByCategoryHandle = (event) => {
+		event.preventDefault();
+		dispatch(tableFilterByCategory(event.target.value));
+	};
+
 	const paginationSizeHandle = (event) => {
 		event.preventDefault();
 		dispatch(changePaginationSize(event.target.value));
@@ -44,6 +50,7 @@ const TableLogic = () => {
 		// Select
 		paginationSizeHandle,
 		orderTableHandle,
+		filterByCategoryHandle,
 	};
 };
 

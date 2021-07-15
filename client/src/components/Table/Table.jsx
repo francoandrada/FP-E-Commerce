@@ -2,9 +2,8 @@ import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
-	changePaginationSize,
 	getListOfProductTable,
-	changeOrderTable,
+	sortTableAction,
 } from '../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
@@ -14,11 +13,22 @@ import TableLogic from './TableLogic';
 import styles from './Table.module.css';
 
 const Table = () => {
-	const { mapData, paginationSizeHandle, orderTableHandle } = TableLogic();
+	const {
+		mapData,
+		paginationSizeHandle,
+		orderTableHandle,
+		filterByCategoryHandle,
+	} = TableLogic();
 	const dispatch = useDispatch();
-	const { listProductsOnTable, sizePagination, orderTable } = useSelector(
-		(state) => state.admin
-	);
+	const {
+		filterByCategory,
+		listProductsOnTable,
+		sizePagination,
+		orderTable,
+		sortTable,
+	} = useSelector((state) => state.admin);
+	const { allCategories } = useSelector((state) => state.category);
+
 	// react-table
 	const dataToPrint = listProductsOnTable
 		? mapData(listProductsOnTable.products)
@@ -31,18 +41,27 @@ const Table = () => {
 	});
 
 	useEffect(() => {
+		dispatch(getCategories());
+	}, [dispatch]);
+
+	useEffect(() => {
 		dispatch(
 			getListOfProductTable(0, {
-				orderBy: 'price',
+				sortBy: sortTable,
 				order: orderTable,
-				category: 'default',
+				category: filterByCategory,
 				limit: sizePagination,
 			})
 		);
-	}, [dispatch, sizePagination, orderTable]);
+	}, [dispatch, sizePagination, orderTable, filterByCategory, sortTable]);
 
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
+
+	const sortTableHandle = (event) => {
+		event.preventDefault();
+		dispatch(sortTableAction(event.target.value));
+	};
 	return (
 		<div>
 			<div
@@ -61,10 +80,24 @@ const Table = () => {
 				/>
 
 				<Select
+					initialValue={sortTable}
+					onChange={sortTableHandle}
+					values={['name', 'id', 'price', 'priceSpecial', 'weight', 'stock']}
+				/>
+
+				<Select
 					initialValue={orderTable}
 					onChange={orderTableHandle}
 					values={['default', 'ASC', 'DESC']}
 				/>
+
+				{allCategories && (
+					<Select
+						initialvalue={filterByCategory}
+						onChange={filterByCategoryHandle}
+						values={['default', ...allCategories.map(({ name }) => name)]}
+					/>
+				)}
 			</div>
 			{listProductsOnTable ? (
 				<table {...getTableProps()} className={styles.tableEcommerce}>
