@@ -4,7 +4,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styles from './Register.module.css';
 import ButtonRed from '../StyledComponents/ButtonRed';
-import Error from '../StyledComponents/ErrorMessages';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import Div from '../StyledComponents/Validation';
+
 function Register() {
 	const history = useHistory();
 	const [User, setUser] = useState({
@@ -67,11 +70,26 @@ function Register() {
 			}
 		}
 	};
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+		},
+		validationSchema: Yup.object({
+			email: Yup.string()
+				.email('Invalid email address')
+				.required('Enter an email'),
+			password: Yup.string()
+				.required('Enter a password')
+				.min(6, 'The password must be at least 6 characters'),
+		}),
+	});
 
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit}
+				onSubmit={formik.handleSubmit}>
 				
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-5' id={styles.input}>
@@ -81,9 +99,13 @@ function Register() {
 								name='email'
 								value={User.email}
 								onChange={handleChange}
+								onChange={formik.handleChange}
 								className='form-control'
 							/>
 						</div>
+						{formik.touched.email && formik.errors.email ? (
+								<Div>{formik.errors.email}</Div>
+							) : null}
 						<div className='form-group col-md-5' id={styles.input}>
 							<label>Password</label>
 							<input
@@ -91,9 +113,8 @@ function Register() {
 								name='password'
 								value={User.password}
 								onChange={handleChange}
+								onChange={formik.handleChange}
 								className='form-control'
-								pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
-								title='Must contain at least one number and one uppercase and lowercase letter, and at least 6 characters'
 								required
 							/>
 						</div>
@@ -106,6 +127,7 @@ function Register() {
 								name='name'
 								value={User.name}
 								onChange={handleChange}
+								onChange={formik.handleChange}
 								className='form-control'
 							/>
 						</div>
@@ -116,6 +138,7 @@ function Register() {
 								name='surname'
 								value={User.surname}
 								onChange={handleChange}
+								onChange={formik.handleChange}
 								className='form-control'
 							/>
 						</div>
@@ -126,6 +149,7 @@ function Register() {
 								name='phone'
 								value={User.phone}
 								onChange={handleChange}
+								onChange={formik.handleChange}
 								className='form-control'
 							/>
 						</div>
@@ -139,6 +163,7 @@ function Register() {
 									name='address'
 									value={User.address}
 									onChange={handleChange}
+									onChange={formik.handleChange}
 									className='form-control'
 								/>
 							</div>
@@ -149,6 +174,7 @@ function Register() {
 									name='addressNumber'
 									value={User.addressNumber}
 									onChange={handleChange}
+									onChange={formik.handleChange}
 									className='form-control'
 								/>
 							</div>
@@ -159,6 +185,7 @@ function Register() {
 									name='postalCode'
 									value={User.postalCode}
 									onChange={handleChange}
+									onChange={formik.handleChange}
 									className='form-control'
 								/>
 							</div>

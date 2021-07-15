@@ -15,11 +15,12 @@
  }
  .descriptionProduct{
     border-top: 1px solid gray;
-    padding: 1rem 25%;
+    padding: 1rem 10%;
      margin: auto;
  }
  .card{
      display: flex;
+   
  }
  .productCard{
      text-align: center;

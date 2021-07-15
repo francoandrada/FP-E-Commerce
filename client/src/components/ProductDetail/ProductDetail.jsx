@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { addToCart, getProductById } from '../../Redux/actions';
 import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
@@ -21,36 +21,72 @@ function DetailProduct(props) {
 						<div className={styles.imgContainer}>
 							<img src={productDetail.image} alt='product' />
 						</div>
+
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
 							<p>${productDetail.price} </p>
 							<span> Stock: {productDetail.stock} </span>
-                            <div class='m-3 d-block'>
-							<div class='m-3'>
-                            <ButtonRedOther class='btn btn-outline-danger'
-									type='submit'
-									onClick={() => dispatch(addToCart(productDetail.id))}
-								>
-									Add to Cart
-								</ButtonRedOther >
+							<div class='m-3 d-block'>
+								<div class='m-3'>
+									<ButtonRedOther
+										class='btn btn-outline-danger'
+										type='submit'
+										onClick={() => dispatch(addToCart(productDetail.id))}
+									>
+										Add to Cart
+									</ButtonRedOther>
+								</div>
+								<div class='m-3'>
+									<ButtonGreyOther
+										class='btn btn-secondary'
+										type='submit'
+										onClick={() => dispatch(addToCart(productDetail.id))}
+									>
+										Checkout
+									</ButtonGreyOther>
+								</div>
 							</div>
-                            <div class='m-3'>
-								<ButtonGreyOther class='btn btn-secondary'
-									type='submit'
-									onClick={() => dispatch(addToCart(productDetail.id))}
-								>
-									Checkout
-								</ButtonGreyOther >
-							</div>
-                            </div>
 						</div>
 					</div>
 				</div>
 			) : null}
+
 			<div className={styles.descriptionProduct}>
-				<p>{productDetail.description} </p>
-				{productDetail.brand ? <p>{productDetail.brand.name} </p> : null}
-				<p>{productDetail.weigth} </p>
+				<div class='container'>
+					<div class='row'>
+						<div class='col col-lg-2 '>
+							<p>Description</p>
+						</div>
+
+						<div class='col'>
+							<p>{productDetail.description} </p>
+						</div>
+                        <div class="w-100 d-none d-md-block"></div>
+
+						{productDetail.brand ? (
+							<Fragment>
+                                <div class='col col-lg-2 '>
+									<p>Brand</p>
+								</div>
+								<div class='col '>
+									<p>{productDetail.brand.name} </p>
+								</div>
+								
+							</Fragment>
+						) : null}
+  <div class="w-100 d-none d-md-block"></div>
+						{productDetail.weigth ? (
+							<Fragment>
+								<div class='col-6 col-sm-4'>
+									<p>{productDetail.brand.name} </p>
+								</div>
+								<div class='col-6 col-sm-4'>
+									<p>Weigth</p>
+								</div>
+							</Fragment>
+						) : null}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
