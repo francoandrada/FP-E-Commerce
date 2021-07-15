@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const mercadopago = require('mercadopago');
 const router = Router();
-const { getOrder } = require('../Controllers/mercadopago');
+const { getOrder, createOrder } = require('../Controllers/mercadopago');
 
 const { PROD_ACCESS_TOKEN } = process.env;
 
@@ -10,5 +10,7 @@ mercadopago.configure({
 });
 
 router.post('/', getOrder);
+
+router.post('/createorder', createOrder);
 
 module.exports = router;
