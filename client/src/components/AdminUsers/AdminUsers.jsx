@@ -21,10 +21,10 @@ function AdminUsers() {
                 <h1> Users </h1>
                 {allUsers?.map(c => {
                     return (
-                        <div className={styles.category}>
+                        <div className={styles.category} key={c.email}>
                             <span>User: {c.email}</span>
                             <div>
-                            <Link key={c.id} to={`/admin/putbrands/${c.id}`}>
+                            <Link to={`/admin/users/${c.email}`}>
                                     <button className={styles.btnEdit}>
                                         <MdModeEdit />
                                     </button>
