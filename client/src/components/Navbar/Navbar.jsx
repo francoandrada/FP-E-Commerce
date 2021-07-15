@@ -150,7 +150,7 @@ const Navbar = () => {
 						</button>
 					) : (
 						<>
-							<Link to='/register'>Sing Up</Link>
+							<Link to='/register'>Sign Up</Link>
 							<Link to='/LogIn'>Login</Link>
 						</>
 					)}
