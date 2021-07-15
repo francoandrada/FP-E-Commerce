@@ -10,7 +10,8 @@ const {
 	getProductCategory,
 	getProductAll,
 	getUsers,
-	getUserToEdit
+	getUserToEdit,
+	putUserInfo
 	
 } = require('../Controllers/admin');
 
@@ -29,7 +30,7 @@ router.get('/productcategoryget/:name', getProductCategory);
 router.get('/productos', getProductAll);
 router.get('/users', getUsers);
 router.get('/user/:email', getUserToEdit);
-router.put('/user/edit', getUserToEdit);
+router.put('/user/edit', putUserInfo);
 
 
 

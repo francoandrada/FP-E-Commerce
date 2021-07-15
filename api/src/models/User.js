@@ -1,4 +1,4 @@
-const { DataTypes, TEXT } = require('sequelize');
+const { DataTypes, TEXT, BIGINT } = require('sequelize');
 
 const { STRING, INTEGER} = DataTypes;
 module.exports = (sequelize) => {
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
 			type: INTEGER,
 		},
 		phone: {
-			type: INTEGER,
+			type: BIGINT,
 		},
 		resetLink: {
 			type: STRING,
