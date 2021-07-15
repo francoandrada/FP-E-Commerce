@@ -6,9 +6,10 @@ import ButtonGrey from '../components/StyledComponents/ButtonGrey'
 import swal from 'sweetalert';
 
 
-function PutProduct(){
+function PutProduct(props){
     const dispatch = useDispatch()
-
+    var id = props.match.params.id
+    
     useEffect(()=>{
      dispatch(getBrands())
      dispatch(getCategories())
@@ -36,7 +37,8 @@ function PutProduct(){
         }
         
         const submit=(data, e)=>{
-            // console.log(data)
+            data.id = id
+            console.log(data)
             if(data.id && data.id.length >0){
                 dispatch(modifyProduct(data))
                 e.target.reset()
@@ -74,7 +76,7 @@ function PutProduct(){
 
 
 <h6>Product</h6>
-            <select 
+            {/* <select 
             className=""
             type="text"
             name="id"
@@ -105,7 +107,7 @@ function PutProduct(){
                )) 
             }
             </select>
-            <span>{errors?.id?.message}</span> 
+            <span>{errors?.id?.message}</span>  */}
 
 
             <h6>Name</h6>

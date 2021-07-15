@@ -82,7 +82,7 @@ export function getListOfProductTable(page, object) {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
-				`http://localhost:3001/admin/tablepagination?page=${page}`,
+				`http://localhost:3001/admin/tablepagination?page${page}`,
 				object
 			);
 			dispatch(fetchListProducts(res.data));
@@ -150,7 +150,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-
+		
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -217,6 +217,7 @@ export function forgotPassword(email) {
 					hola,
 				},
 			});
+			
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -252,9 +253,12 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
+
+
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
+		
 
 			dispatch({
 				type: SUCCESS_LOGIN,
