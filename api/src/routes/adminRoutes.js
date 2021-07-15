@@ -9,7 +9,10 @@ const {
 	putCategoryProduct,
 	getProductCategory,
 	getProductAll,
+	getUsers
 } = require('../Controllers/admin');
+
+
 const router = Router();
 const routerHelper = require('../helpers/routerHelper');
 const tablePagination = require('../Controllers/admin/tablePagination.controller');
@@ -23,5 +26,7 @@ router.post('/addCategory', postCategoryProduct);
 router.put('/putcategory', putCategoryProduct);
 router.get('/productcategoryget/:name', getProductCategory);
 router.get('/productos', getProductAll);
+router.get('/users', getUsers);
+
 
 module.exports = router;

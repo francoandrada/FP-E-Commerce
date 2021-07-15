@@ -27,12 +27,25 @@ import {
 	LIST_PRODUCT_ON_TABLE,
 	SIZE_PAGINATION,
 	ORDER_TABLE,
+	TABLE_FILTER_BY_CATEGORY,
+	SORT_TABLE_BY,
+	GET_USERS
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const sortTableAction = (payload) => ({
+	type: SORT_TABLE_BY,
+	payload,
+});
+
+export const tableFilterByCategory = (payload) => ({
+	type: TABLE_FILTER_BY_CATEGORY,
 	payload,
 });
 
@@ -138,7 +151,7 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-
+		
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data.token,
@@ -205,6 +218,7 @@ export function forgotPassword(email) {
 					hola,
 				},
 			});
+			
 		} catch (error) {
 			dispatch({
 				type: ERROR,
@@ -240,9 +254,12 @@ export function resetPassword(resetLink, newPass) {
 }
 
 export function loginGmail(data) {
+
+
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
+		
 
 			dispatch({
 				type: SUCCESS_LOGIN,
@@ -355,6 +372,15 @@ export function modifyBrand (elem) {
 		}
 	};
 }
+
+export function getUsers() {
+	return async (dispatch) => {
+		axios.get('http://localhost:3001/admin/users').then((response) => {
+			dispatch({ type: GET_USERS, payload: response.data });
+		});
+	};
+}
+
 
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////
