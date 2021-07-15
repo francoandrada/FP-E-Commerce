@@ -35,7 +35,7 @@ function App() {
 			<div class='totalvh'>
 				<Navbar />
 					<Route path='/admin' exact component={Admin}/>
-					<Route path='/admin/products' exact component={AdminProducts}/>
+					<Route path='/admin/products' exact component={Table}/>
 					<Route path='/admin/putproduct/:id' exact component={PutProduct}/>
 					<Route path='/admin/users/:email' exact component={UserPanel}/>
 					<Route path='/admin/users' exact component={AdminUsers}/>
@@ -44,7 +44,6 @@ function App() {
 					<Route path='/admin/putCategory/:id' exact component={PutCategory}/>
 					<Route path='/admin/brands' exact component={AdminBrands}/>
 					<Route path='/admin/putbrands/:id' exact component={PutBrand}/>
-					<Route path='/admin/stock' exact component={Admin}/>
 				<Switch>
 					
 					<Route path='/' exact component={Home} />
