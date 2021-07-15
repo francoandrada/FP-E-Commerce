@@ -29,6 +29,7 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
+	CREATED_BRAND
 } from './actionsName';
 
 import axios from 'axios';
@@ -371,6 +372,22 @@ export function modifyBrand (elem) {
 		}
 	};
 }
+
+export function createdBrand (elem) {
+	return async (dispatch) => {
+		try {
+	 	const response =await axios.post('http://localhost:3001/admin/createdbrand', elem);
+		 console.log(response)
+		 dispatch({
+			type: CREATED_BRAND,
+		   payload:response.data
+		   })
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
 
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////

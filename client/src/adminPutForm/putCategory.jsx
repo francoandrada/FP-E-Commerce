@@ -7,6 +7,8 @@ import swal from 'sweetalert';
 
 function PutCategory(props) {
     const dispatch = useDispatch()
+    const nameCategory= useSelector((state)=> state.category.allCategories)
+    console.log(nameCategory)
 var id = props.match.params.id
     useEffect(()=>{
     //  dispatch(getBrands())
@@ -33,7 +35,17 @@ var id = props.match.params.id
 
         data.id = id
         console.log(data)
-        if(data.id && data.id.length >0){
+        for(let i=0 ; i< nameCategory.length; i++){
+            if(nameCategory[i].name.toLowerCase() === data.name.toLowerCase()){
+             return  swal({
+                    title: 'Existing name',
+                    icon: 'warning',
+                    button: 'ok',
+                    timer: '5000',
+                })
+            }
+        }
+        if(data.name && data.name.length >0 ){
             dispatch(modifyCateogry(data))
             e.target.reset()
             swal({
@@ -71,32 +83,33 @@ var id = props.match.params.id
             className=""
             type="text"
             name="name"
+            autoComplete="off"
             onChange={(e)=>changeInput(e)}
             {...register("name", {
             // required:{
             //     value: true,
             //     massage: "debe ingresar un nombre"
             // },
-            // maxLength:{
-            //     value: 20,
-            //     massage:"menos de 20 caracteres"
-            // },
-            // minLength:{
-            //     value: 3,
-            //     message:"mas de 3 caracteres"
-            // },
-            // pattern:{
-            //     value: /^[a-zA-Z]*$/,
-            //     message:"no debe ingresar numeros"
-            // }
+            maxLength:{
+                value: 20,
+                massage:"menos de 20 caracteres"
+            },
+            minLength:{
+                value: 3,
+                message:"mas de 3 caracteres"
+            },
+            pattern:{
+                value: /^[a-zA-Z]*$/,
+                message:"no debe ingresar numeros"
+            }
             })}
             >
             
             </input>
             <span>{errors?.name?.message}</span> 
 
-            {/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
-            <button type="submit"></button>
+           
+            <button type="submit">Change</button>
 
             </form>
 
