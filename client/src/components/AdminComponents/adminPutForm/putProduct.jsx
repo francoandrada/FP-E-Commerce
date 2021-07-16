@@ -4,26 +4,67 @@ import {
 	modifyProduct,
 	getBrands,
 	getCategories,
-	getProducts,
+	getProductById,
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import ButtonGrey from '../../../components/StyledComponents/ButtonGrey';
-import swal from 'sweetalert';
+import ButtonRed from '../../../components/StyledComponents/ButtonRed';
+import Swal from 'sweetalert2';
+import styles from '../../Register/Register.module.css';
+import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
+
+
+
 
 function PutProduct(props) {
 	const dispatch = useDispatch();
-	var id = props.match.params.id;
+	const history = useHistory();
+
+	const { id } = useParams();
+
+	const brand = useSelector((state) => state.brands.allBrands);
+	const categories = useSelector((state) => state.category.allCategories);
+	const productToEdit = useSelector((state) => state.admin.productToEdit);
+
+
 
 	useEffect(() => {
 		dispatch(getBrands());
 		dispatch(getCategories());
-		dispatch(getProducts());
-	}, [dispatch]);
+		dispatch(getProductById(id));
+	}, []);
 
-	const brand = useSelector((state) => state.brands.allBrands);
-	const categories = useSelector((state) => state.category.allCategories);
-	const products = useSelector((state) => state.product.allProducts);
-	// console.log(products);
+	const [product, setProduct] = useState({
+		id:'',
+		name: '',
+		price: '',
+		priceSpecial: '',
+		description: '',
+		weight: '',
+		image: '',
+		stock: '',
+		brand: '',
+		category:'',
+	});
+
+	useEffect(() => {
+		if (productToEdit) {
+			setProduct({
+				id: productToEdit.id,
+				name: productToEdit.name,
+				price: productToEdit.price,
+				priceSpecial: productToEdit.priceSpecial,
+				description: productToEdit.description,
+				weight: productToEdit.weight,
+				image: productToEdit.image,
+				stock: productToEdit.stock,
+				brand: productToEdit.brand.name,
+				category: productToEdit.category,
+			});
+		}
+	}, [productToEdit]);
+
+	console.log(product);
 	const {
 		register,
 		handleSubmit,
@@ -31,76 +72,53 @@ function PutProduct(props) {
 		reset,
 	} = useForm();
 
-	const changeInput = (e) => {
-		const value = e.target.value;
-		const name = e.target.name;
-		
+	const handleChange = (event) => {
+		console.log(event)
+		setProduct({
+			...product,
+			[event.target.name]: event.target.value,
+		});
 	};
 
-	const submit = (data, e) => {
-		data.id = id;
-		console.log(data);
-        for(let i=0 ; i< products.length; i++){
-            if(products[i].name.toLowerCase() === data.name.toLowerCase()){
-             return  swal({
-                    title: 'Existing name',
-                    icon: 'warning',
-                    button: 'ok',
-                    timer: '5000',
-                })
-            }
-        }
-		if (
-			(data.name && data.name.length > 0) ||
-			(data.price && data.price.length > 0) ||
-			(data.priceSpecial && data.priceSpecial.length > 0) ||
-			(data.description && data.description.length > 0) ||
-			(data.weight && data.weight.length > 0) ||
-			(data.image && data.image.length > 0) ||
-			(data.stock && data.stock.length > 0) ||
-			(data.category && data.category.length > 0) ||
-			(data.brandId && data.brandId.length > 0)
-		) {
-			dispatch(modifyProduct(data));
-			e.target.reset();
-			swal({
-				title: 'modified fields',
-				icon: 'success',
-				button: 'ok',
-				timer: '5000',
-			}).then(() => dispatch(getProducts()));
 
-			reset({ data });
-		} else {
-			swal({
-				title: 'Required fields',
-				icon: 'error',
-				button: 'ok',
-				timer: '5000',
-			});
-		}
+
+    const onSubmit = async ()=>{
+			try {
+				await axios.put('http://localhost:3001/admin/putproduct',product)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'The user was succesfully edited',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    history.push('/');
+                }
+                )
+
+			} catch (error) {
+				console.log(error.response.data.msg);
+			}
 	};
 
 	return (
-		<div>
+		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
 			<form
 				className=''
-				onChange={(e) => changeInput(e)}
-				onSubmit={handleSubmit(submit)}
+				onChange={(e) => handleChange(e)}
+				onSubmit={onSubmit}
 			>
+				<h6>Product</h6>
 	
 
 				<h6>Name</h6>
 				<input
-					className=''
-					type='text'
+					className='form-group col-md-12' 
 					name='name'
-					onChange={(e) => changeInput(e)}
+					value={product.name}
+					onChange={(e) => handleChange(e)}
 					{...register('name', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 20,
 							massage: 'menos de 20 caracteres',
@@ -119,15 +137,12 @@ function PutProduct(props) {
 
 				<h6>Price</h6>
 				<input
-					className=''
+					className='form-group col-md-12' 
 					type='number'
 					name='price'
-					onChange={(e) => changeInput(e)}
+					value={product.price}
+					onChange={(e) => handleChange(e)}
 					{...register('price', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 8,
 							massage: 'menos de 8 caracteres',
@@ -136,25 +151,19 @@ function PutProduct(props) {
 							value: 3,
 							message: 'mas de 3 caracteres',
 						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				/>
 				<span>{errors?.price?.message}</span>
 
 				<h6>Special Price</h6>
 				<input
-					className=''
+					className='form-group col-md-12'
 					type='number'
 					name='priceSpecial'
-					onChange={(e) => changeInput(e)}
+					value={product.priceSpecial}
+
+					onChange={(e) => handleChange(e)}
 					{...register('priceSpecial', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 8,
 							massage: 'menos de 8 caracteres',
@@ -163,25 +172,19 @@ function PutProduct(props) {
 							value: 3,
 							message: 'mas de 3 caracteres',
 						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				/>
 				<span>{errors?.priceSpecial?.message}</span>
 
 				<h6>Description</h6>
-				<input
-					className=''
+				<textarea
+					className='form-group col-md-12' 
 					type='text'
 					name='description'
-					onChange={(e) => changeInput(e)}
+					value={product.description}
+
+					onChange={(e) => handleChange(e)}
 					{...register('description', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 200,
 							massage: 'menos de 200 caracteres',
@@ -200,15 +203,13 @@ function PutProduct(props) {
 
 				<h6>Weight</h6>
 				<input
-					className=''
+					className='form-group col-md-12'
 					type='number'
 					name='weight'
-					onChange={(e) => changeInput(e)}
+					value={product.weight}
+
+					onChange={(e) => handleChange(e)}
 					{...register('weight', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 4,
 							massage: 'menos de 4 caracteres',
@@ -217,25 +218,19 @@ function PutProduct(props) {
 							value: 1,
 							message: 'mas de 1 caracteres',
 						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				/>
 				<span>{errors?.weight?.message}</span>
 
 				<h6>Image</h6>
 				<input
-					className=''
+					className='form-group col-md-12' 
 					type='text'
 					name='image'
-					onChange={(e) => changeInput(e)}
+					value={product.image}
+
+					onChange={(e) => handleChange(e)}
 					{...register('image', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 20,
 							massage: 'menos de 20 caracteres',
@@ -254,60 +249,36 @@ function PutProduct(props) {
 
 				<h6>Stock</h6>
 				<input
-					className=''
+					className='form-group col-md-12'
 					type='number'
 					name='stock'
 					min='0'
-					onChange={(e) => changeInput(e)}
+					value={product.stock}
+
+					onChange={(e) => handleChange(e)}
 					{...register('stock', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
 						maxLength: {
 							value: 4,
 							massage: 'menos de 4 caracteres',
 						},
-						// minLength:{
-						//     value: 1,
-						//     message:"mas de 3 caracteres"
-						// },
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				/>
 				<span>{errors?.stock?.message}</span>
 
 				<h6>Brand</h6>
 				<select
-					className=''
+					className='form-group col-md-12' 
 					type='text'
-					name='brandId'
-					onChange={(e) => changeInput(e)}
+					name='brand'
+					value={product.brand}
+
+					onChange={(e) => handleChange(e)}
 					{...register('brandId', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						// maxLength:{
-						//     value: 20,
-						//     massage:"menos de 20 caracteres"
-						// },
-						// minLength:{
-						//     value: 3,
-						//     message:"mas de 3 caracteres"
-						// },
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				>
 					<option></option>
 					{brand.map((x, index) => (
-						<option key={index} value={x.id}>
+						<option key={index} value={x.name}>
 							{x.name}
 						</option>
 					))}
@@ -316,27 +287,13 @@ function PutProduct(props) {
 
 				<h6>Category</h6>
 				<select
-					className=''
+					className='form-group col-md-12'
 					type='text'
 					name='category'
-					onChange={(e) => changeInput(e)}
+					value={product.category}
+
+					onChange={(e) => handleChange(e)}
 					{...register('category', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						// maxLength:{
-						//     value: 20,
-						//     massage:"menos de 20 caracteres"
-						// },
-						// minLength:{
-						//     value: 3,
-						//     message:"mas de 3 caracteres"
-						// },
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
 					})}
 				>
 					<option></option>
@@ -347,8 +304,9 @@ function PutProduct(props) {
 					))}
 				</select>
 				<span>{errors?.category?.message}</span>
-
-				<ButtonGrey type='submit'>Modificar</ButtonGrey>
+				<div className={styles.registerButtonRow}>
+							<ButtonRed type='submit'>Confirm</ButtonRed>
+				</div>
 			</form>
 		</div>
 	);
