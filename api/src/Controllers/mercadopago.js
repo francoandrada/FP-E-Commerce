@@ -5,6 +5,8 @@ const { Order, OrderDetail, Product } = require('../db');
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, prodCarrito } = req.body;
+
+	console.log(req.body)
 	try {
 		var newOrder = await Order.create(
 			{
@@ -39,7 +41,7 @@ const createOrder = async function createOrder(req, res) {
 					})();
 				});
 		});
-		res.status(200).json('Order created successfully!');
+		// res.status(200).json('Order created successfully!');
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
 		const itemsCarrito = prodCarrito.map((i) => ({
@@ -52,7 +54,7 @@ const createOrder = async function createOrder(req, res) {
 			items: itemsCarrito,
 
 			back_urls: {
-				success: 'http://localhost:3001/mercadopago/pagos',
+				success: 'http://localhost:3000/mercadopago/success',
 				failure: 'http://localhost:3001/mercadopago/pagos',
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
@@ -63,7 +65,7 @@ const createOrder = async function createOrder(req, res) {
 			.then(function (response) {
 				console.log(response.body);
 
-				res.redirect(response.body.init_point);
+				res.send(response.body.init_point);
 			})
 			.catch(function (error) {
 				console.log(error);

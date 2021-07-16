@@ -5,6 +5,7 @@ import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
+import { Link } from 'react-router-dom';
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -31,19 +32,21 @@ function DetailProduct(props) {
 									<ButtonRedOther
 										class='btn btn-outline-danger'
 										type='submit'
-										onClick={() => dispatch(addToCart(productDetail.id))}
+										onClick={() => dispatch(addToCart(productDetail))}
 									>
 										Add to Cart
 									</ButtonRedOther>
 								</div>
 								<div class='m-3'>
+									<Link to='/shoppingcart'>
 									<ButtonGreyOther
 										class='btn btn-secondary'
 										type='submit'
-										onClick={() => dispatch(addToCart(productDetail.id))}
+										onClick={() => dispatch(addToCart(productDetail))}
 									>
 										Checkout
 									</ButtonGreyOther>
+									</Link>
 								</div>
 							</div>
 						</div>

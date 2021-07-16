@@ -1,5 +1,6 @@
 export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
 export const ERROR = 'ERROR';
+export const ERRORTOKEN = 'ERRORTOKEN';
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const AUTH_USER = 'AUTH_USER';
@@ -39,6 +40,9 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const ADJUST_ITEM_QTY = 'ADJUST_ITEM_QTY';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
+
+// pago
+export const SET_CART = 'SET_CART'
 
 /////////////////ADMIN
 // export const CREATED_BRAND= 'CREATED_BRAND';

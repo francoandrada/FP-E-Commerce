@@ -149,13 +149,13 @@ function CartModal() {
 	const cartProducts = useSelector((state) => state.cart.cart);
 
 	const toggle = () => {
-		if (cartProducts.length !== 0) {
+		if (cartProducts && cartProducts.length !== 0) {
 			setActive(!active);
 		}
 	};
 
 	useEffect(() => {
-		if (cartProducts.length === 0) {
+		if (cartProducts && cartProducts.length === 0) {
 			setActive(false);
 		}
 	}, [active, cartProducts]);

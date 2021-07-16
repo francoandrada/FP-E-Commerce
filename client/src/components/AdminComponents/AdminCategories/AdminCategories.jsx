@@ -16,13 +16,16 @@ function AdminCategories() {
             <div>
                 <Admin />
             </div>
+            <Link to= '/admin/addcategory'>
+            <button> Add Category </button>
+            </Link>
             <div className={styles.categoriesContainer}>
 
                 <h1> Categories </h1>
                 {allCategories.map(c => {
                     return (
                         <div className={styles.category}>
-                            <span>Name: {c.name}</span>
+                            <span> Name: {c.name}</span>
                             <div>
                             <Link key={c.id} to={`/admin/putCategory/${c.id}`}>
                                     <button className={styles.btnEdit}>
