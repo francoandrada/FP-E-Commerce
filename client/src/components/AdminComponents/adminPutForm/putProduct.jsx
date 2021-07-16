@@ -58,8 +58,8 @@ function PutProduct(props) {
 				weight: productToEdit.weight,
 				image: productToEdit.image,
 				stock: productToEdit.stock,
-				brand: productToEdit.brand.name,
-				category: productToEdit.category,
+				brand: productToEdit.brand.id,
+				category: productToEdit.categories[0].id,
 			});
 		}
 	}, [productToEdit]);
@@ -270,15 +270,12 @@ function PutProduct(props) {
 					className='form-group col-md-12' 
 					type='text'
 					name='brand'
-					value={product.brand}
+					value={product.brand.id}
 
 					onChange={(e) => handleChange(e)}
-					{...register('brandId', {
-					})}
 				>
-					<option></option>
 					{brand.map((x, index) => (
-						<option key={index} value={x.name}>
+						<option key={index} value={x.id} selected={x.id === product.brand.id}>
 							{x.name}
 						</option>
 					))}
@@ -293,12 +290,9 @@ function PutProduct(props) {
 					value={product.category}
 
 					onChange={(e) => handleChange(e)}
-					{...register('category', {
-					})}
 				>
-					<option></option>
 					{categories.map((x, index) => (
-						<option key={index} value={x.id}>
+						<option key={index} value={x.id} selected={x.id === product.category.id}>
 							{x.name}
 						</option>
 					))}

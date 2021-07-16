@@ -106,7 +106,7 @@ const getIdProduct = async function getIdProduct(req, res, next) {
 	try {
 		const id = parseInt(req.params.id);
 		const IdProduct = await Product.findOne({
-			include: { model: Brand },
+			include: [{ model: Brand }, {model: Category}],
 			where: {
 				id: id,
 			},
