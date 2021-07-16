@@ -1,5 +1,6 @@
 const { Product, Brand, Category, User } = require('../db');
 async function postProduct(req, res, next) {
+
 	try {
 		const {
 			name,
@@ -9,6 +10,7 @@ async function postProduct(req, res, next) {
 			image,
 			stock,
 			brandId,
+			priceSpecial,
 			category,
 		} = req.body;
 		const producto = await Product.create({
@@ -16,6 +18,7 @@ async function postProduct(req, res, next) {
 			price,
 			description,
 			weight,
+			priceSpecial,
 			image,
 			stock,
 			brandId,
@@ -131,7 +134,8 @@ async function getProductCategory(req, res, next) {
 }
 async function getProductAll(req, res, next) {
 	try {
-		const resAll = await Product.findAll({ include: Category });
+		
+		const resAll = await Product.findAll({})
 		res.send(resAll);
 	} catch (error) {
 		next(error);
