@@ -32,7 +32,6 @@ let sequelize =
 				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 				{ logging: false, native: false }
 		  );
-
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -55,13 +54,22 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, Role, User, Category, Brand, Order } = sequelize.models;
+const { Product, Role, User, Category, Brand, Order, OrderDetail } =
+	sequelize.models;
 
 Role.hasMany(User, { foreignKey: 'roleId' });
 User.belongsTo(Role, { foreignKey: 'roleId' });
 
 User.hasMany(Order, { foreignKey: 'userId' });
 Order.belongsTo(User, { foreignKey: 'userId' });
+
+Order.hasMany(OrderDetail, {
+	foreignKey: 'orderId',
+});
+Product.hasMany(OrderDetail, {
+	foreignKey: 'productId',
+});
+OrderDetail.belongsTo(Product);
 
 Product.belongsToMany(Category, {
 	through: 'category_product',
