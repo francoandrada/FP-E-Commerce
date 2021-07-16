@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
@@ -15,6 +15,7 @@ import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
 import Admin from '../Admin/Admin';
 const Table = () => {
+	const [searchFilter, setSearchFilter] = useState('');
 	const dispatch = useDispatch();
 
 	const {
@@ -66,6 +67,7 @@ const Table = () => {
 				category: filterByCategory,
 				limit: sizePagination,
 				brand: tableByBrand,
+				search: searchFilter,
 			})
 		);
 	}, [
@@ -76,6 +78,7 @@ const Table = () => {
 		sortTable,
 		gotoTablePage,
 		tableByBrand,
+		searchFilter,
 	]);
 
 	/*
@@ -84,6 +87,12 @@ const Table = () => {
 	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
+
+	const searchFilterHandle = (event) => {
+		event.preventDefault();
+		const inputText = event.target.value;
+		setSearchFilter(inputText);
+	};
 
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
@@ -98,6 +107,13 @@ const Table = () => {
 					alignItems: 'center',
 				}}
 			>
+				<input
+					type='text'
+					value={searchFilter}
+					placeholder='Search...'
+					onChange={searchFilterHandle}
+				/>
+
 				<Select
 					initialValue={sizePagination}
 					onChange={paginationSizeHandle}
