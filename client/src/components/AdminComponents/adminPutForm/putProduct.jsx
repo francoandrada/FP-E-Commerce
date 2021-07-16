@@ -5,9 +5,9 @@ import {
 	getBrands,
 	getCategories,
 	getProducts,
-} from '../Redux/actions';
+} from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import ButtonGrey from '../components/StyledComponents/ButtonGrey';
+import ButtonGrey from '../../../components/StyledComponents/ButtonGrey';
 import swal from 'sweetalert';
 
 function PutProduct(props) {

@@ -1,12 +1,11 @@
 import { useDispatch } from 'react-redux';
 import {
-	// getCategories,
 	changePaginationSize,
-	// getListOfProductTable,
 	changeOrderTable,
 	tableFilterByCategory,
 	sortTableAction,
-} from '../../Redux/actions';
+	tableFilterByBrand,
+} from '../../../Redux/actions';
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
@@ -23,6 +22,7 @@ const TableLogic = () => {
 				stock: e.stock,
 				weight: e.weight,
 				category: e.categories[0].name,
+				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
 					console.log('el id del producto a eliminar', e.id);
@@ -35,6 +35,11 @@ const TableLogic = () => {
 		});
 		return data;
 	}
+
+	const filterByBrandHandle = (event) => {
+		event.preventDefault();
+		dispatch(tableFilterByBrand(event.target.value));
+	};
 
 	const filterByCategoryHandle = (event) => {
 		event.preventDefault();
@@ -64,6 +69,7 @@ const TableLogic = () => {
 		orderTableHandle,
 		filterByCategoryHandle,
 		sortTableHandle,
+		filterByBrandHandle,
 	};
 };
 

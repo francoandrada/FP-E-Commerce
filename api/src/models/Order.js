@@ -13,9 +13,9 @@ module.exports = (sequilize) => {
 			allowNull: false,
 		},
 		status: {
-			type: ENUM('pending', 'complete'),
+			type: ENUM('created', 'processing', 'cancelled', 'completed'),
 			allowNull: true,
-			defaultValue: 'pending',
+			defaultValue: 'processing',
 		},
 	});
 };

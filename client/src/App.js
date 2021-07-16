@@ -10,24 +10,34 @@ import SearchProducts from './components/searchProducts/SearchProducts';
 import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
-import Table from './components/Table/Table';
+import Table from './components/AdminComponents/Table/Table'
 import './App.css';
 
 import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
-import Admin from './components/Admin/Admin';
-import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
-import PutCategory from './adminPutForm/putCategory';
+// import Admin from './components/Admin/Admin';
+// import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
+// import PutCategory from './adminPutForm/putCategory';
 
-import AdminProducts from './components/adminProducts/adminProduc'
-import PutProduct from './adminPutForm/putProduct'
-import AdminBrands from './components/AdminBrands/AdminBrands'
-import PutBrand from './adminPutForm/putBrand'
-import AdminUsers from './components/AdminUsers/AdminUsers';
-import UserPanel from './components/AdminUsers/UserPanel';
+// import AdminProducts from './components/adminProducts/adminProduc'
+// import PutProduct from './adminPutForm/putProduct'
+// import AdminBrands from './components/AdminBrands/AdminBrands'
+// import PutBrand from './adminPutForm/putBrand'
+// import AdminUsers from './components/AdminUsers/AdminUsers';
+// import UserPanel from './components/AdminUsers/UserPanel';
 import AddBrand from './AdminAddForm/AdminAddBrand'
 import AddCategory from './AdminAddForm/AdminAddCategory'
 import AddProduct from './AdminAddForm/AdminAddProduct'
+import Admin from './components/AdminComponents/Admin/Admin'
+import AdminCategories from './components/AdminComponents/AdminCategories/AdminCategories.jsx';
+import PutCategory from './components/AdminComponents/adminPutForm/putCategory'
+import PutProduct from './components/AdminComponents/adminPutForm/putProduct'
+import AdminBrands from './components/AdminComponents/AdminBrands/AdminBrands'
+import PutBrand from './components/AdminComponents/adminPutForm/putBrand'
+import AdminUsers from './components/AdminComponents/AdminUsers/AdminUsers';
+import UserPanel from './components/AdminComponents/AdminUsers/UserPanel';
+
+
 
 
 function App() {
@@ -36,10 +46,11 @@ function App() {
 			<div class='totalvh'>
 				<Navbar />
 					<Route path='/admin' exact component={Admin}/>
-					<Route path='/admin/products' exact component={AdminProducts}/>
+					<Route path='/admin/products' exact component={Table}/>
 					<Route path='/admin/putproduct/:id' exact component={PutProduct}/>
 					<Route path='/admin/addproduct/' exact component={AddProduct}/>
 					<Route path='/admin/users/:email' exact component={UserPanel}/>
+					<Route path='/admin/user/:email' exact component={UserPanel}/>
 					<Route path='/admin/users' exact component={AdminUsers}/>
 					<Route path='/admin/orders' exact component={Admin}/>
 					<Route path='/admin/categories' exact component={AdminCategories}/>

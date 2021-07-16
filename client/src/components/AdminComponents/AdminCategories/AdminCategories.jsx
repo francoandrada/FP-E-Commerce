@@ -1,15 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react'
 import Admin from "../Admin/Admin";
-import { getBrands } from "../../Redux/actions";
+import { getCategories } from "../../../Redux/actions";
 import { MdModeEdit } from 'react-icons/md'
-import styles from '../AdminCategories/AdminCategories.module.css'
+import styles from './AdminCategories.module.css'
 import { Link } from "react-router-dom";
-function AdminBrands() {
-    const allBrands = useSelector(state => state.brands.allBrands)
+function AdminCategories() {
+    const allCategories = useSelector(state => state.category.allCategories)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBrands())
+        dispatch(getCategories())
     }, [dispatch])
     return (
         <>
@@ -18,13 +18,13 @@ function AdminBrands() {
             </div>
             <div className={styles.categoriesContainer}>
 
-                <h1> Brands </h1>
-                {allBrands.map(c => {
+                <h1> Categories </h1>
+                {allCategories.map(c => {
                     return (
                         <div className={styles.category}>
                             <span>Name: {c.name}</span>
                             <div>
-                            <Link key={c.id} to={`/admin/putbrands/${c.id}`}>
+                            <Link key={c.id} to={`/admin/putCategory/${c.id}`}>
                                     <button className={styles.btnEdit}>
                                         <MdModeEdit />
                                     </button>
@@ -38,4 +38,4 @@ function AdminBrands() {
         </>
     )
 }
-export default AdminBrands;
+export default AdminCategories;

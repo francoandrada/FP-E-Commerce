@@ -1,30 +1,70 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import styles from '../Register/Register.module.css';
-import ButtonRed from '../StyledComponents/ButtonRed';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import styles from '../../Register/Register.module.css';
+import ButtonRed from '../../StyledComponents/ButtonRed';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Error from '../StyledComponents/ErrorMessages';
-import Div from '../StyledComponents/Validation';
+import Error from '../../StyledComponents/ErrorMessages';
+import Div from '../../StyledComponents/Validation';
+import { getUserToEdit} from '../../../Redux/actions';
+
 function UserPanel() {
 	const history = useHistory();
+	const { email } = useParams();
 
-    const [user,setUser]=useState("nico")
+	const userToEdit = useSelector((state) => state.admin.userToEdit);
+	const dispatch = useDispatch();
 
-	const [hola, setHola] = useState([])
+	useEffect(() => {
+		dispatch(getUserToEdit(email));
+	}, []);
+
+	const [user, setUser] = useState({
+		email: '',
+		password: '',
+		name: '',
+		surname: '',
+		phone: '',
+		address: '',
+		addressNumber: '',
+		postalCode: '',
+		admin:''
+	});
+
+    useEffect(()=>{
+        if(userToEdit){
+            setUser({
+                email: userToEdit.email,
+                password: userToEdit.password,
+                name: userToEdit.name,
+                surname: userToEdit.surname,
+                phone: userToEdit.phone,
+                address: userToEdit.address,
+                addressNumber: userToEdit.addressNumber,
+                postalCode: userToEdit.postalCode,
+				admin:userToEdit.admin
+            })
+        }
+    },[userToEdit])
+
+
+
+
+	const [hola, setHola] = useState([]);
 	const formik = useFormik({
 		initialValues: {
-			email: 'nicolas',
+			email: '',
 			password: '',
 			name: '',
 			surname: '',
-			name: '',
 			phone: '',
 			address: '',
 			addressNumber: '',
 			postalCode: '',
+			admin:''
 		},
 		validationSchema: Yup.object({
 			email: Yup.string()
@@ -38,73 +78,81 @@ function UserPanel() {
 				),
 			name: Yup.string().required('Enter a name'),
 			surname: Yup.string().required('Enter a surname'),
-			name: Yup.string().required('Enter a name'),
 			phone: Yup.number().required('Enter a valid phone number'),
 			address: Yup.string().required('Enter an address'),
 			addressNumber: Yup.string().required('Enter an address number'),
 			postalCode: Yup.number().required('Enter a postal code'),
 		}),
-		onSubmit: async (values) => {
-			console.log(values);
-			try {
-				await axios.post('http://localhost:3001/users', {
-					name: values.name,
-					surname: values.surname,
-					email: values.email,
-					password: values.password,
-					address: values.address,
-					addressNumber: values.addressNumber,
-					postalCode: values.postalCode,
-					phone: values.phone,
-				});
+	});
 
-				Swal.fire({
-					position: 'center',
-					icon: 'success',
-					title: 'The user was succesfully created',
-					showConfirmButton: false,
-					timer: 1500,
-				});
-				history.push('/');
+    const handleChange =(event)=>{
+        console.log(event)
+		if(event.target.name!=='admin'){
+			setUser({
+				...user,
+				[event.target.name]: event.target.value
+			})
+		} else {
+			setUser({
+				...user,
+				[event.target.name]: event.target.checked
+			})
+		}
+    }
+
+    const handleSubmit = async ()=>{
+			console.log(user);
+			try {
+				await axios.put('http://localhost:3001/admin/user/edit',user)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'The user was succesfully edited',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    history.push('/');
+                }
+                )
+
 			} catch (error) {
 				console.log(error.response.data.msg);
-			setHola(error.response.data.msg)
+				setHola(error.response.data.msg);
 			}
-		},
-	});
+	};
 
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
-			{hola.length > 0? <Error>{hola}</Error> : null}
-				<form onSubmit={formik.handleSubmit}>
+				{hola.length > 0 ? <Error>{hola}</Error> : null}
+				<form onSubmit={handleSubmit}>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-5' id={styles.input}>
-			
 							<label>Email</label>
-						
+
 							<input
 								type='email'
 								class='form-control'
 								id='email'
-								value={user}
+								value={user.email}
 								name='email'
-								onChange={formik.handleChange}
+								onChange={handleChange}
 								onBlur={formik.handleBlur}
 							/>
-								{formik.touched.email && formik.errors.email ? (
+							{formik.touched.email && formik.errors.email ? (
 								<Div>{formik.errors.email}</Div>
 							) : null}
 						</div>
 
 						<div className='form-group col-md-5' id={styles.input}>
-					
 							<label>Password</label>
-						
+
 							<input
-								type='password'
+								type='text'
 								name='password'
-								onChange={formik.handleChange}
+								value={user.password}
+								onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
@@ -112,6 +160,17 @@ function UserPanel() {
 								<Div>{formik.errors.password}</Div>
 							) : null}
 						</div>
+						<div className='form-group col-md-1' id={styles.adminLabel}>
+								<label>Admin?</label>
+								<input
+									type='checkbox'
+									name='admin'
+                                    checked={user.admin}
+									onChange={handleChange}
+									onBlur={formik.handleBlur}
+									className='form-control'
+								/>
+							</div>
 					</div>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-4' id={styles.input}>
@@ -119,7 +178,8 @@ function UserPanel() {
 							<input
 								type='text'
 								name='name'
-								onChange={formik.handleChange}
+                                value={user.name}
+								onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
@@ -132,7 +192,8 @@ function UserPanel() {
 							<input
 								type='text'
 								name='surname'
-								onChange={formik.handleChange}
+                                value={user.surname}
+								onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
@@ -145,7 +206,8 @@ function UserPanel() {
 							<input
 								type='tel'
 								name='phone'
-								onChange={formik.handleChange}
+                                value={user.phone}
+								onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
@@ -161,7 +223,8 @@ function UserPanel() {
 								<input
 									type='text'
 									name='address'
-									onChange={formik.handleChange}
+                                    value={user.address}
+									onChange={handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
@@ -174,7 +237,8 @@ function UserPanel() {
 								<input
 									type='number'
 									name='addressNumber'
-									onChange={formik.handleChange}
+                                    value={user.addressNumber}
+									onChange={handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
@@ -187,7 +251,8 @@ function UserPanel() {
 								<input
 									type='number'
 									name='postalCode'
-									onChange={formik.handleChange}
+                                    value={user.postalCode}
+									onChange={handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
 								/>
@@ -195,6 +260,7 @@ function UserPanel() {
 									<Div>{formik.errors.postalCode}</Div>
 								) : null}
 							</div>
+
 						</div>
 						<div className={styles.registerButtonRow}>
 							<ButtonRed type='submit'>Confirm</ButtonRed>
