@@ -34,7 +34,26 @@ const getOrderById = async function getOrderById(req, res, next) {
 	}
 };
 
+const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
+	const id = parseInt(req.params.id);
+	const newStatus = req.body.status;
+
+	try {
+		const orderById = await Order.findOne({
+			where: { orderId: id },
+		});
+		const updatedStatus = await orderById.update({
+			status: newStatus,
+		});
+
+		res.status(200).json(updatedStatus.dataValues.status);
+	} catch (error) {
+		next(error);
+	}
+};
+
 module.exports = {
 	getOrders,
 	getOrderById,
+	modifyOrderStatus,
 };
