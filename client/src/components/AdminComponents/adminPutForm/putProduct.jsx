@@ -110,6 +110,8 @@ function PutProduct(props) {
 				onSubmit={onSubmit}
 			>
 				<h6>Product</h6>
+	
+
 				<h6>Name</h6>
 				<input
 					className='form-group col-md-12' 
@@ -126,7 +128,7 @@ function PutProduct(props) {
 							message: 'mas de 3 caracteres',
 						},
 						pattern: {
-							value: /^[a-zA-Z]*$/,
+							value: /^[a-zA-Z ]*$/,
 							message: 'no debe ingresar numeros',
 						},
 					})}

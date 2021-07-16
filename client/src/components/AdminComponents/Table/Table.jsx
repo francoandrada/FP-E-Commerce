@@ -1,7 +1,8 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
+	getBrands,
 	getListOfProductTable,
 	changeTablePage,
 } from '../../../Redux/actions';
@@ -12,8 +13,9 @@ import Select from '../../Select/Select';
 import TableLogic from './TableLogic';
 import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
-import Admin from '../Admin/Admin'
+import Admin from '../Admin/Admin';
 const Table = () => {
+	const [searchFilter, setSearchFilter] = useState('');
 	const dispatch = useDispatch();
 
 	const {
@@ -22,6 +24,7 @@ const Table = () => {
 		orderTableHandle,
 		filterByCategoryHandle,
 		sortTableHandle,
+		filterByBrandHandle,
 	} = TableLogic();
 
 	const {
@@ -31,9 +34,11 @@ const Table = () => {
 		orderTable,
 		sortTable,
 		gotoTablePage,
+		tableByBrand,
 	} = useSelector((state) => state.admin);
 
 	const { allCategories } = useSelector((state) => state.category);
+	const { allBrands } = useSelector((state) => state.brands);
 
 	// react-table
 	const dataToPrint = listProductsOnTable
@@ -51,12 +56,18 @@ const Table = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+		dispatch(getBrands());
+	}, [dispatch]);
+
+	useEffect(() => {
 		dispatch(
 			getListOfProductTable(gotoTablePage, {
 				sortBy: sortTable,
 				order: orderTable,
 				category: filterByCategory,
 				limit: sizePagination,
+				brand: tableByBrand,
+				search: searchFilter,
 			})
 		);
 	}, [
@@ -66,6 +77,8 @@ const Table = () => {
 		filterByCategory,
 		sortTable,
 		gotoTablePage,
+		tableByBrand,
+		searchFilter,
 	]);
 
 	/*
@@ -74,6 +87,12 @@ const Table = () => {
 	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
+
+	const searchFilterHandle = (event) => {
+		event.preventDefault();
+		const inputText = event.target.value;
+		setSearchFilter(inputText);
+	};
 
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
@@ -88,6 +107,13 @@ const Table = () => {
 					alignItems: 'center',
 				}}
 			>
+				<input
+					type='text'
+					value={searchFilter}
+					placeholder='Search...'
+					onChange={searchFilterHandle}
+				/>
+
 				<Select
 					initialValue={sizePagination}
 					onChange={paginationSizeHandle}
@@ -111,6 +137,14 @@ const Table = () => {
 						initialvalue={filterByCategory}
 						onChange={filterByCategoryHandle}
 						values={['default', ...allCategories.map(({ name }) => name)]}
+					/>
+				)}
+
+				{allBrands && (
+					<Select
+						initialValue={tableByBrand}
+						onChange={filterByBrandHandle}
+						values={['default', ...allBrands.map(({ name }) => name)]}
 					/>
 				)}
 			</div>

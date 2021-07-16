@@ -23,7 +23,7 @@ const tablePagination = require('../Controllers/admin/tablePagination.controller
 router.post('/tablepagination', routerHelper(tablePagination));
 router.put('/putproduct', putProduct);
 router.post('/createdbrand', postBrand);
-// router.post('/addproduct', postProduct)
+router.post('/addproduct', postProduct)
 router.put('/putbrand', putBrand);
 router.post('/addCategory', postCategoryProduct);
 router.put('/putcategory', putCategoryProduct);

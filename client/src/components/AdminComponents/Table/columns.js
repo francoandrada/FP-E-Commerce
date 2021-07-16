@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export const COLUMNS = [
 	{
@@ -41,6 +41,10 @@ export const COLUMNS = [
 		accessor: 'category',
 	},
 	{
+		Header: 'Brand',
+		accessor: 'brand',
+	},
+	{
 		Header: 'Delete',
 		accesor: 'delete',
 		Cell: (row) => {
@@ -55,12 +59,12 @@ export const COLUMNS = [
 		Header: 'Update',
 		accesor: 'update',
 		Cell: (row) => {
-			console.log(row.row)
 			return (
-				<Link key={row.row.original.id} to={`/admin/putproduct/${row.row.original.id}`}>
-					
-						<i class='fas fa-wrench'></i>
-
+				<Link
+					key={row.row.original.id}
+					to={`/admin/putproduct/${row.row.original.id}`}
+				>
+					<i class='fas fa-wrench'></i>
 				</Link>
 			);
 		},
