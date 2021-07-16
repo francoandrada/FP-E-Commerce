@@ -37,24 +37,24 @@ async function putProduct(req, res, next) {
 			weight,
 			image,
 			stock,
-			brandId,
+			// brandId,
 			category,
 		} = req.body;
 		let variable = {};
-		if (name.length > 0) variable.name = name;
-		if (price) variable.price = price;
-		if (description.length > 0) variable.description = description;
-		if (weight) variable.weight = weight;
-		if (image.length > 0) variable.image = image;
-		if (stock) variable.stock = stock;
-		if (brandId) variable.brandId = brandId;
-		if (category) variable.category = category;
-		const putProductSelect = await Product.update(variable, {
+		const product = await Product.findOne({
 			where: {
 				id: id,
 			},
 		});
-		res.send(putProductSelect);
+		product.id = id
+		product.name = name
+		product.price = price
+		product.description = description
+		product.weight = weight 
+		product.image = image
+		product.stock = stock
+		await product.save()
+		res.send(product);
 	} catch (error) {
 		next(error);
 	}

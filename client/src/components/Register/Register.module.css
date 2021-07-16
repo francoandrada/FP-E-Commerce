@@ -36,7 +36,11 @@
     display: flex;
 } */
 
-
-
+#registerFormOne{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: cornsilk;
+}
 
 
