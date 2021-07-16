@@ -29,7 +29,6 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
-	CREATED_BRAND,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
 } from './actionsName';
@@ -373,19 +372,35 @@ export function modifyBrand(elem) {
 }
 
 export function createdBrand (elem) {
-	return async (dispatch) => {
+	return async () => {
 		try {
-	 	const response =await axios.post('http://localhost:3001/admin/createdbrand', elem);
-		 console.log(response)
-		 dispatch({
-			type: CREATED_BRAND,
-		   payload:response.data
-		   })
+	  	await axios.post('http://localhost:3001/admin/createdbrand', elem);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
+
+export function createdCategory (elem) {
+	return async () => {
+		try {
+	  	await axios.post('http://localhost:3001/admin/addCategory', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function createdProduct(elem) {
+	return async () => {
+		try {
+	  	await axios.post('http://localhost:3001/admin/addproduct', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
 
 
 export function getUsers() {
