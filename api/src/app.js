@@ -6,10 +6,8 @@ const cors = require('cors');
 require('dotenv').config({ path: '.env' });
 require('./db.js');
 
-//Deploy
-const { REACT_APP_API, REACT_APP_API_HEROKU } = process.env;
-
 const server = express();
+
 
 // const mercadopago = require ('mercadopago');
 
@@ -18,6 +16,7 @@ const server = express();
 //   });
 
 server.name = 'API';
+
 
 server.use(cors());
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
