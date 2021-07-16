@@ -11,6 +11,7 @@ function SubTotal({ qty, userLogged }) {
 	const [totalItems, setTotalItems] = useState(0);
 
 
+	const dispatch = useDispatch();
 	const mercadoPago = useSelector((state) => state.cart.link);
 
 	if (mercadoPago !== '') {
@@ -66,25 +67,14 @@ function SubTotal({ qty, userLogged }) {
 						TOTAL:<br></br>(without shipping)
 					</p>
 				</div>
-				{/* <h3>$ {totalPrice}</h3>
-				</div>
-
 				{userLogged ? (
-			
-						<button
+	
+							<button
 							className={style.paymentButton}
-							onClick={() => dispatch(postCart(hola))}
+							onClick={() => dispatch(postCart(bodyObject))}
 						>
 							Checkout
 						</button>
-
-					<h3>{totalFormat}</h3> */}
-				{/* </div> */}
-
-				{userLogged ? (
-					<NavLink to='/payment'>
-						<button className={style.paymentButton}>Checkout</button>
-					</NavLink>
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Checkout</button>

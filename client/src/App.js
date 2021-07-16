@@ -37,11 +37,28 @@ import PutBrand from './components/AdminComponents/adminPutForm/putBrand'
 import AdminUsers from './components/AdminComponents/AdminUsers/AdminUsers';
 import UserPanel from './components/AdminComponents/AdminUsers/UserPanel';
 import Success from './components/ShoppingCartComponents/Success';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { logOut } from './Redux/actions';
 
 
 
 
 function App() {
+	const dispatch = useDispatch();
+	const setError = useSelector((state) => state.user.setError);
+
+	useEffect(() => {
+		if (setError) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Your session has expired, please login again',
+			  })
+			dispatch(logOut());
+		}
+	}, [setError]);
 	return (
 		<div className='App'>
 			<div class='totalvh'>

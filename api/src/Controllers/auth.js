@@ -31,7 +31,7 @@ exports.authUser = async (req, res) => {
 				},
 				process.env.SECRET,
 				{
-					expiresIn: '1m',
+					expiresIn: '8h',
 				}
 			);
 			
