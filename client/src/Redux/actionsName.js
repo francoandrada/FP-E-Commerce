@@ -38,6 +38,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 
 
-
+// pago
+export const SET_CART = 'SET_CART'
 /////////////////ADMIN
 export const CREATED_BRAND= 'CREATED_BRAND';

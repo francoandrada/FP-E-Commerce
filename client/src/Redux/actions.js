@@ -32,10 +32,12 @@ import {
 	CREATED_BRAND,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
-	GET_USER_TO_EDIT
+	GET_USER_TO_EDIT,
+	SET_CART,
 } from './actionsName';
 
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -373,44 +375,61 @@ export function modifyBrand(elem) {
 	};
 }
 
-export function createdBrand (elem) {
+export function createdBrand(elem) {
 	return async (dispatch) => {
 		try {
-	 	const response =await axios.post('http://localhost:3001/admin/createdbrand', elem);
-		 console.log(response)
-		 dispatch({
-			type: CREATED_BRAND,
-		   payload:response.data
-		   })
+			const response = await axios.post(
+				'http://localhost:3001/admin/createdbrand',
+				elem
+			);
+			console.log(response);
+			dispatch({
+				type: CREATED_BRAND,
+				payload: response.data,
+			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-
 export function getUsers() {
-
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/admin/users').then((response) => {
-
 			dispatch({ type: GET_USERS, payload: response.data });
 		});
 	};
 }
 
 export function getUserToEdit(email) {
+	return async (dispatch) => {
+		axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
+			dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
+		});
+	};
+}
 
-		return async (dispatch) => {
-			axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
-				dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
+//MERCADO PAGO
+
+export function postCart(data) {
+	return async (dispatch) => {
+		
+		console.log(data);
+
+		try {
+			const res = await axios.post('http://localhost:3001/mercadopago/createorder', data);
+
+			console.log(res.data)
+			
+			dispatch({
+				type: SET_CART,
+				payload: res.data,
 			});
-		};
-	}
-
-
-
-
+		} catch (error) {
+			console.log(error)
+		}
 	
+	}
+}
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////

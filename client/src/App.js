@@ -23,6 +23,7 @@ import AdminBrands from './components/AdminComponents/AdminBrands/AdminBrands'
 import PutBrand from './components/AdminComponents/adminPutForm/putBrand'
 import AdminUsers from './components/AdminComponents/AdminUsers/AdminUsers';
 import UserPanel from './components/AdminComponents/AdminUsers/UserPanel';
+import Success from './components/ShoppingCartComponents/Success';
 
 
 
@@ -59,8 +60,11 @@ function App() {
 					<Route path='/cartTest' exact component={CartModal} />
 
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
-
 					<Route path='/table' exact component={Table} />
+
+
+					<Route path='mercadopago/success' exact component={Success} />
+				
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />
