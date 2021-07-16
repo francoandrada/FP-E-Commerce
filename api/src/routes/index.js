@@ -10,6 +10,7 @@ const categoriesRoutes = require('./categoriesRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const catalogRoutes = require('./catalogRoutes');
 const mercadopagoRoutes = require('./mercadopagoRoutes');
+const orderRoutes = require('./orderRoutes');
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use('/brands', brandRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/catalog', catalogRoutes);
 router.use('/mercadopago', mercadopagoRoutes);
+router.use('/orders', orderRoutes);
 
 module.exports = router;
