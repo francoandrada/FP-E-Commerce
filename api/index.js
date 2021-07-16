@@ -7,7 +7,7 @@ conn
 	.sync({ force: false })
 	.then(() => {
 		console.log('-----successful database connection-----');
-		server.listen(process.env.PORT || 5000, () => {
+		server.listen(process.env.PORT, () => {
 			console.log('%s listening at 3001');
 		});
 	})
