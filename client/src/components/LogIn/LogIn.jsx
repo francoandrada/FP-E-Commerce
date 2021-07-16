@@ -77,7 +77,6 @@ const LogIn = () => {
 	});
 
 
-	///////////////
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -89,7 +88,7 @@ const LogIn = () => {
 
 	useEffect(() => {
 		if (authenticated) {
-			history.push('/');
+			history.goBack()
 		}
 	}, [authenticated]);
 
@@ -113,104 +112,104 @@ const LogIn = () => {
 
 	return (
 		<>
-			<GlobalStyle />
-			<div class='container d-flex justify-content-center mt-5 rounded'>
-				<div class=' row'>
-					<div class='col bg-white px-5 rounded pb-4'>
-						{setError !== null ? <Error>{setError}</Error> : null}
+		<GlobalStyle />
+		<div class='container d-flex justify-content-center mt-5 rounded'>
+			<div class=' row'>
+				<div class='col bg-white px-5 rounded pb-4'>
+					{setError !== null ? <Error>{setError}</Error> : null}
 
-						<form onSubmit={formik.handleSubmit} class='p-3'>
-							<div class=' d-flex justify-content-center'>
-								<Img src={`${img}`} />
-							</div>
-							{formik.touched.email && formik.errors.email ? (
-								<Div>{formik.errors.email}</Div>
-							) : null}
-							<div class='form-group d-flex justify-content-center'>
-								<input
-									type='email'
-									class='form-control'
-									id='email'
-									placeholder='Email'
-									name='email'
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									value={formik.values.email}
-								/>
-							</div>
-							{formik.touched.password && formik.errors.password ? (
-								<Div>{formik.errors.password}</Div>
-							) : null}
-							<div class='form-group d-flex justify-content-center'>
-								<input
-									type='password'
-									class='form-control'
-									id='password'
-									name='password'
-									type='password'
-									placeholder='Password'
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									value={formik.values.password}
-								/>
-							</div>
-							<div class='d-flex justify-content-center'>
-								<button
-									type='submit'
-									class='btn btn-primary btn-block  mb-2  shadow-sm'
-								>
-									Sign in
-								</button>
-							</div>
-							<GoogleLogin
-								clientId={googleApiKey}
-								render={(renderProps) => (
-									<button
-										onClick={renderProps.onClick}
-										disabled={renderProps.disabled}
-										className='btn btn-primary btn-block'
-									>
-										Sign-In with Google
-									</button>
-								)}
-								onSuccess={responseGoogle}
-								onFailure={responseGoogle}
-								cookiePolicy={'single_host_origin'}
-							/>
-						</form>
-						<div class=' d-flex justify-content-center '>
-							<Link
-								class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
-								to={'/forgot-password'}
-							>
-								Forgot your password?
-							</Link>
+					<form onSubmit={formik.handleSubmit} class='p-3'>
+						<div class=' d-flex justify-content-center'>
+							<Img src={`${img}`} />
 						</div>
-					</div>
-					<div class=' rounded'>
-						<Link to={'/'}>
-							<div class=''>
-								<Imge src={`${imge}`} />
-							</div>
-						</Link>
-						
-						
-						<div class=' d-flex justify-content-start bg-secondary p-5'>
-								<Link
-
-									class='dropdown-item bg-secondary rounded text-center '
-
-									to={'/register'}
+						{formik.touched.email && formik.errors.email ? (
+							<Div>{formik.errors.email}</Div>
+						) : null}
+						<div class='form-group d-flex justify-content-center'>
+							<input
+								type='email'
+								class='form-control'
+								id='email'
+								placeholder='Email'
+								name='email'
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.email}
+							/>
+						</div>
+						{formik.touched.password && formik.errors.password ? (
+							<Div>{formik.errors.password}</Div>
+						) : null}
+						<div class='form-group d-flex justify-content-center'>
+							<input
+								type='password'
+								class='form-control'
+								id='password'
+								name='password'
+								type='password'
+								placeholder='Password'
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.password}
+							/>
+						</div>
+						<div class='d-flex justify-content-center'>
+							<button
+								type='submit'
+								class='btn btn-primary btn-block  mb-2  shadow-sm'
+							>
+								Sign in
+							</button>
+						</div>
+						<GoogleLogin
+							clientId={googleApiKey}
+							render={(renderProps) => (
+								<button
+									onClick={renderProps.onClick}
+									disabled={renderProps.disabled}
+									className='btn btn-primary btn-block'
 								>
-									Don't have an account? Sign up
-								</Link>
-							</div>
-								
-							
+									Sign-In with Google
+								</button>
+							)}
+							onSuccess={responseGoogle}
+							onFailure={responseGoogle}
+							cookiePolicy={'single_host_origin'}
+						/>
+					</form>
+					<div class=' d-flex justify-content-center '>
+						<Link
+							class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
+							to={'/forgot-password'}
+						>
+							Forgot your password?
+						</Link>
 					</div>
 				</div>
+				<div class=' rounded'>
+					<Link to={'/'}>
+						<div class=''>
+							<Imge src={`${imge}`} />
+						</div>
+					</Link>
+					
+					
+					<div class=' d-flex justify-content-start bg-secondary p-5'>
+							<Link
+
+								class='dropdown-item bg-secondary rounded text-center '
+
+								to={'/register'}
+							>
+								Don't have an account? Sign up
+							</Link>
+						</div>
+							
+						
+				</div>
 			</div>
-		</>
+		</div>
+	</>
 	);
 };
 

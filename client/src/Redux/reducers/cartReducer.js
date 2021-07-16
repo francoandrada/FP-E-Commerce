@@ -5,11 +5,13 @@ import {
 	REMOVE_FROM_CART,
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
+	SET_CART,
 } from '../actionsName';
 
 const initialState = {
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
+	link: ''
 };
 
 function cartReducer(state = initialState, action) {
@@ -55,6 +57,11 @@ function cartReducer(state = initialState, action) {
 				...state,
 				currentItem: action.payload,
 			};
+		case SET_CART:
+			return{
+				...state,
+				link: action.payload
+			}
 		default:
 			return state;
 	}

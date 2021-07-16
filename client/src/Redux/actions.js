@@ -32,10 +32,13 @@ import {
 	GET_USERS,
 	GOTO_TABLE_PAGE,
 	GET_USER_TO_EDIT,
+	SET_CART,
 	TABLE_FILTER_BRAND,
+	ERRORTOKEN,
 } from './actionsName';
 
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -196,11 +199,17 @@ export function authUser(data) {
 
 		try {
 			const res = await axios.get('http://localhost:3001/auth');
+			console.log(res.data.msg.message)
 			if (res.data.user) {
 				dispatch({
 					type: AUTH_USER,
 					payload: res.data,
 				});
+			}else{
+				dispatch({
+					type: ERRORTOKEN,
+					payload: res.data.msg.message
+				})
 			}
 		} catch (error) {
 			console.log(error);
@@ -378,6 +387,7 @@ export function modifyBrand(elem) {
 	};
 }
 
+
 export function createdBrand (elem) {
 	return async () => {
 		try {
@@ -402,13 +412,12 @@ export function createdProduct(elem) {
 	return async () => {
 		try {
 	  	await axios.post('http://localhost:3001/admin/addproduct', elem);
+
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
-
-
 
 export function getUsers() {
 	return async (dispatch) => {
@@ -425,5 +434,26 @@ export function getUserToEdit(email) {
 		});
 	};
 }
+//MERCADO PAGO
 
+export function postCart(data) {
+	return async (dispatch) => {
+		
+		console.log(data);
+
+		try {
+			const res = await axios.post('http://localhost:3001/mercadopago/createorder', data);
+
+			console.log(res.data)
+			
+			dispatch({
+				type: SET_CART,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error)
+		}
+	
+	}
+}
 /////////////////////////////////////////////// ADMINISTRADOR//////////

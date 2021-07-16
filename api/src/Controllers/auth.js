@@ -23,6 +23,7 @@ exports.authUser = async (req, res) => {
 		}
 
 		if (bcrypt.compareSync(password, user.password)) {
+			console.log('antes del token');
 			const token = jwt.sign(
 				{
 					id: user.userId,
@@ -30,16 +31,16 @@ exports.authUser = async (req, res) => {
 				},
 				process.env.SECRET,
 				{
-					expiresIn: '8h',
+					expiresIn: '1m',
 				}
 			);
-			res.json({ token });
+			
+			res.send({token})
 		} else {
 			res.status(401).send({ msg: 'The password is incorrect' });
-			return next();
 		}
 	} catch (error) {
-		console.log(error);
+		console.log('ERRORORROOR', error);
 	}
 };
 
@@ -92,7 +93,9 @@ exports.forgotPassword = async (req, res) => {
 			if (error) {
 				console.log(error);
 			}
-			res.send({ msg: 'Check your email and open the link we sent to continue' });
+			res.send({
+				msg: 'Check your email and open the link we sent to continue',
+			});
 		});
 	} catch (error) {
 		console.log(error);
@@ -108,10 +111,10 @@ exports.resetPassword = async (req, res) => {
 			msg: 'Incorrect token or it is expired',
 		});
 	}
-	let jwtPayload;
+
 	let user;
 	try {
-		jwtPayload = jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY);
+		let jwtPayload = jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY);
 		user = await User.findOne({ where: { resetLink } });
 	} catch (error) {
 		console.log(error);
@@ -129,10 +132,8 @@ exports.resetPassword = async (req, res) => {
 
 exports.authUserGmail = async (req, res) => {
 	try {
-
-
-		const emailBody= req.body.email
-		const passwordBody = req.body.password
+		const emailBody = req.body.email;
+		const passwordBody = req.body.password;
 
 		let user = await User.findOrCreate({
 			where: {
@@ -143,9 +144,6 @@ exports.authUserGmail = async (req, res) => {
 				password: passwordBody,
 			},
 		});
-
-	
-
 		const token = jwt.sign(
 			{
 				id: user.userId,
