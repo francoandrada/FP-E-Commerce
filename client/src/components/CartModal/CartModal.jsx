@@ -162,9 +162,10 @@ function CartModal() {
 
 	let subtotal = function () {
 		let subTotal = 0;
-		cartProducts.map((product) => {
-			subTotal += product.price * product.qty;
-		});
+		cartProducts &&
+			cartProducts.map((product) => {
+				subTotal += product.price * product.qty;
+			});
 		return subTotal;
 	};
 
