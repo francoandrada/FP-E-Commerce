@@ -31,7 +31,7 @@ export const SORT_TABLE_BY = 'SORT_TABLE_BY';
 export const GOTO_TABLE_PAGE = 'GOTO_TABLE_PAGE';
 export const GET_USER_TO_EDIT = 'GET_USER_TO_EDIT';
 export const GET_PRODUCT_TO_EDIT = 'GET_PRODUCT_TO_EDIT';
-
+export const FILTER_STOCK = 'FILTER_STOCK';
 
 export const TABLE_FILTER_BRAND = 'TABLE_FILTER_BRAND';
 

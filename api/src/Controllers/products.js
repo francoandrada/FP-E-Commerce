@@ -206,7 +206,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 	
 	try {
 
-		const {category,brand,price,page,qty} = req.query
+		const {category,brand,price,page,qty, stock} = req.query
 
 		const pageNumber = page || 1
 
@@ -234,6 +234,12 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			}
 			if(brand){
 				allProduct1 = allProduct1.filter(product=>product.brand.name===brand)
+			}
+			if(stock==='true'){
+				allProduct1 = allProduct1.filter(product=>product.stock>=1)
+			}
+			if(stock==='false'){
+				allProduct1 = allProduct1.filter(product=>product.stock<=0)
 			}
 			if(price==='ascending'){
 					allProduct1.sort(function (a, b) {
