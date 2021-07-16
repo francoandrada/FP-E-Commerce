@@ -9,11 +9,13 @@ import {
 	CLEAN_SUGGESTIONS,
 	HIDE_ALERT,
 	FORGOT_PASSWORD,
+	ERRORTOKEN,
 } from '../actionsName';
 
 const initialState = {
 	token: localStorage.getItem('token'),
 	setError: null,
+	errorToken: null,
 	alert: null,
 	authenticated: false,
 	user: undefined,
@@ -33,23 +35,21 @@ const productSuggestions = (array, name) => {
 function userReducer(state = initialState, action) {
 	switch (action.type) {
 		case ERROR:
-		
 			return {
 				...state,
 				setError: action.payload,
 			};
 		case FORGOT_PASSWORD: {
-		
-			return{
-			...state,
-			alert: action.payload.hola
-			}
+			return {
+				...state,
+				alert: action.payload.hola,
+			};
 		}
 		case HIDE_ALERT:
 			return {
 				...state,
 				setError: null,
-				alert: null
+				alert: null,
 			};
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload);
@@ -57,7 +57,6 @@ function userReducer(state = initialState, action) {
 				...state,
 				token: action.payload,
 				authenticated: true,
-				
 			};
 		case AUTH_USER:
 			return {
@@ -72,7 +71,7 @@ function userReducer(state = initialState, action) {
 				user: null,
 				token: null,
 				authenticated: null,
-				setError: null
+				errorToken: null,
 			};
 		case FETCH_ERROR:
 			return {
@@ -97,6 +96,11 @@ function userReducer(state = initialState, action) {
 			return {
 				...state,
 				suggestions: action.payload,
+			};
+		case ERRORTOKEN:
+			return {
+				...state,
+				errorToken: action.payload,
 			};
 		default: {
 			return state;

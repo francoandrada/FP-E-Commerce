@@ -34,6 +34,7 @@ import {
 	GET_USER_TO_EDIT,
 	SET_CART,
 	TABLE_FILTER_BRAND,
+	ERRORTOKEN,
 } from './actionsName';
 
 import axios from 'axios';
@@ -206,7 +207,7 @@ export function authUser(data) {
 				});
 			}else{
 				dispatch({
-					type: ERROR,
+					type: ERRORTOKEN,
 					payload: res.data.msg.message
 				})
 			}

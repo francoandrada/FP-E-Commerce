@@ -1,5 +1,6 @@
 export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
 export const ERROR = 'ERROR';
+export const ERRORTOKEN = 'ERRORTOKEN';
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const AUTH_USER = 'AUTH_USER';
