@@ -1,9 +1,9 @@
 const { Op } = require('sequelize');
-const { Product, Category } = require('../../db.js');
+const { Product, Category, Brand } = require('../../db.js');
 
 const tablePagination = async (req, res, next) => {
 	let products = {};
-	const { category, sortBy, order, limit, search } = req.body;
+	const { category, sortBy, order, limit, search, brand } = req.body;
 	const pageAsNumber = Number.parseInt(req.query.page);
 
 	let page = 0;
@@ -15,23 +15,22 @@ const tablePagination = async (req, res, next) => {
 		{
 			"sortBy": "name",
 			"order": "default", ["ASC", "DESC"]
-			"category": "default"
-			"limit": paginationNumber
+			"category": "default",
+			"limit": paginationNumber,
+			"brand": "default",
 			"search": ""
 		}
 	*/
 
-	if (category && category !== 'default') {
+	if (brand && brand !== 'default') {
 		if (order && order !== 'default' && search && search.trim().length) {
 			products = await Product.findAndCountAll({
 				limit: limit,
 				offset: page * limit,
-				include: {
-					model: Category,
-					where: {
-						name: category,
-					},
-				},
+				include: [
+					{ model: Brand, where: { name: brand } },
+					{ model: Category },
+				],
 				order: [[sortBy, order]],
 			});
 			return res.json({
@@ -44,12 +43,10 @@ const tablePagination = async (req, res, next) => {
 			products = await Product.findAndCountAll({
 				limit: limit,
 				offset: page * limit,
-				include: {
-					model: Category,
-					where: {
-						name: category,
-					},
-				},
+				include: [
+					{ model: Brand, where: { name: brand } },
+					{ model: Category },
+				],
 				order: [[sortBy, order]],
 			});
 			return res.json({
@@ -61,12 +58,55 @@ const tablePagination = async (req, res, next) => {
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
-			include: {
-				model: Category,
-				where: {
-					name: category,
-				},
-			},
+			include: [{ model: Brand, where: { name: brand } }, { model: Category }],
+		});
+		return res.json({
+			totalPages: Math.floor(products.count / limit),
+			products: products.rows,
+		});
+	}
+
+	// ==============
+	if (category && category !== 'default') {
+		if (order && order !== 'default' && search && search.trim().length) {
+			products = await Product.findAndCountAll({
+				limit: limit,
+				offset: page * limit,
+				include: [
+					{ model: Category, where: { name: category } },
+					{ model: Brand },
+				],
+				order: [[sortBy, order]],
+			});
+			return res.json({
+				totalPages: Math.floor(products.count / limit),
+				products: products.rows.filter(({ name }) => name.includes(search)),
+			});
+		}
+
+		if (order && order !== 'default') {
+			products = await Product.findAndCountAll({
+				limit: limit,
+				offset: page * limit,
+				include: [
+					{ model: Category, where: { name: category } },
+					{ model: Brand },
+				],
+				order: [[sortBy, order]],
+			});
+			return res.json({
+				totalPages: Math.floor(products.count / limit),
+				products: products.rows,
+			});
+		}
+
+		products = await Product.findAndCountAll({
+			limit: limit,
+			offset: page * limit,
+			include: [
+				{ model: Category, where: { name: category } },
+				{ model: Brand },
+			],
 		});
 		return res.json({
 			totalPages: Math.floor(products.count / limit),
@@ -78,9 +118,7 @@ const tablePagination = async (req, res, next) => {
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
-			include: {
-				model: Category,
-			},
+			include: [Category, Brand],
 			where: {
 				name: {
 					[Op.iLike]: `%${search}%`,
@@ -98,9 +136,7 @@ const tablePagination = async (req, res, next) => {
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
-			include: {
-				model: Category,
-			},
+			include: [Category, Brand],
 			order: [[sortBy, order]],
 		});
 		return res.json({
@@ -113,9 +149,7 @@ const tablePagination = async (req, res, next) => {
 		products = await Product.findAndCountAll({
 			limit: limit,
 			offset: page * limit,
-			include: {
-				model: Category,
-			},
+			include: [Category, Brand],
 			where: {
 				name: {
 					[Op.iLike]: `%${search}%`,
@@ -133,9 +167,7 @@ const tablePagination = async (req, res, next) => {
 	products = await Product.findAndCountAll({
 		limit: limit,
 		offset: page * limit,
-		include: {
-			model: Category,
-		},
+		include: [Category, Brand],
 	});
 	return res.json({
 		totalPages: Math.floor(products.count / limit),
