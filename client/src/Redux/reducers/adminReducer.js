@@ -8,7 +8,8 @@ import {
 	SORT_TABLE_BY,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
-	GET_USER_TO_EDIT
+	GET_USER_TO_EDIT,
+	TABLE_FILTER_BRAND,
 } from '../actionsName';
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
 	sortTable: 'name',
 	usersFromDB: [],
 	gotoTablePage: 0,
-	userToEdit: undefined
+	userToEdit: undefined,
+	tableByBrand: 'default',
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -67,16 +69,21 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				...state,
 				usersFromDB: payload,
 			};
-			
+
 		case GET_USER_TO_EDIT:
 			return {
 				...state,
 				userToEdit: payload,
-			};	
+			};
 		case GOTO_TABLE_PAGE:
 			return {
 				...state,
 				gotoTablePage: payload,
+			};
+		case TABLE_FILTER_BRAND:
+			return {
+				...state,
+				tableByBrand: payload,
 			};
 		default:
 			return state;

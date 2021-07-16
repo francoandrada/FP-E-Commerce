@@ -3,21 +3,20 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
 import { postCart } from '../../../Redux/actions';
+import { formatNumber } from '../../../helper/priceFormater';
 
 function SubTotal({ qty, userLogged }) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
-	const dispatch = useDispatch();
-
 
 
 	const mercadoPago = useSelector((state) => state.cart.link);
-console.log(mercadoPago)
 
-  if(mercadoPago !== ''){
-    window.location.href = mercadoPago;
-  }
+	if (mercadoPago !== '') {
+		window.location.href = mercadoPago;
+	}
+
 	useEffect(() => {
 		let items = 0;
 		let price = 0;
@@ -33,7 +32,7 @@ console.log(mercadoPago)
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
 	let status = 'created';
-	let chau = [];
+	let array = [];
 	for (let i = 0; i < cartProducts.length; i++) {
 		const element = {
 			prodId: cartProducts[i].id,
@@ -41,17 +40,17 @@ console.log(mercadoPago)
 			qty: cartProducts[i].qty,
 		};
 
-		chau.push(element);
+		array.push(element);
 	}
-	console.log('chauuu', chau);
 
-	let hola = {
-		prodCarrito: chau,
+
+	let bodyObject = {
+		prodCarrito: array,
 		ammount: totalPrice,
 		status: status,
 	};
-	console.log(hola);
 
+	let totalFormat = formatNumber.new(totalPrice, '$');
 
 	return (
 		<div>
@@ -66,7 +65,8 @@ console.log(mercadoPago)
 					<p>
 						TOTAL:<br></br>(without shipping)
 					</p>
-					<h3>$ {totalPrice}</h3>
+				</div>
+				{/* <h3>$ {totalPrice}</h3>
 				</div>
 
 				{userLogged ? (
@@ -77,6 +77,14 @@ console.log(mercadoPago)
 						>
 							Checkout
 						</button>
+
+					<h3>{totalFormat}</h3> */}
+				{/* </div> */}
+
+				{userLogged ? (
+					<NavLink to='/payment'>
+						<button className={style.paymentButton}>Checkout</button>
+					</NavLink>
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Checkout</button>

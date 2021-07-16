@@ -1,63 +1,83 @@
 .shoppingCartContainer {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 20px;
-
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	padding: 20px;
 }
 
 .cartProductsContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    width: 100%;
-    height: 150px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: white;
+	border-radius: 10px;
+	padding: 30px;
+	width: 100%;
+	height: 150px;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 44%);
 }
 
 .plusMinusButtons {
-    border-style: hidden;
-    background-color: rgba(169, 169, 169, 0);
+	border-style: hidden;
+	background-color: rgba(169, 169, 169, 0);
 }
 
 .modifyQtyButtons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100px;
-    padding: 10px;
-    border-style: solid;
-    border-width: 0.5px;
-    border-color: darkgray;
-    border-radius: 10px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100px;
+	padding: 10px;
+	border-style: solid;
+	border-width: 0.5px;
+	border-color: darkgray;
+	border-radius: 10px;
 }
 
 .trashButtonCart {
-    width: 50px;
-    height: 50px;
-    border-style: hidden;
-    border-radius: 10px;
-    padding: 10px;
+	width: 50px;
+	height: 50px;
+	border-style: hidden;
+	border-radius: 10px;
+	padding: 10px;
 }
 
 .trashButtonCart:hover {
-    background-color: #ff3c49bc;
-
+	background-color: #ff3c49bc;
 }
 
 .trashButtonCart:active {
-    background-color: darkgray;
-
+	background-color: darkgray;
 }
 
 .cartImageDiv {
-    width: 100px;
-    height: 100px;
-
+	width: 100px;
+	height: 100px;
 }
 
 .cartImage {
-    width: 100%;
+	width: 100%;
+}
+
+.imgcontainerDiv {
+	width: 15%;
+}
+
+.prodName {
+	width: 50%;
+}
+
+.prodName p {
+	margin-bottom: 0px;
+}
+
+.cantAndPrice {
+	width: 20%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.subtot {
+	width: 15%;
 }

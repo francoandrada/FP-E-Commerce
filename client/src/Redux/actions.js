@@ -29,11 +29,11 @@ import {
 	ORDER_TABLE,
 	TABLE_FILTER_BY_CATEGORY,
 	SORT_TABLE_BY,
-	CREATED_BRAND,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
 	GET_USER_TO_EDIT,
 	SET_CART,
+	TABLE_FILTER_BRAND,
 } from './actionsName';
 
 import axios from 'axios';
@@ -41,6 +41,11 @@ import { useEffect } from 'react';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const tableFilterByBrand = (payload) => ({
+	type: TABLE_FILTER_BRAND,
 	payload,
 });
 
@@ -193,11 +198,17 @@ export function authUser(data) {
 
 		try {
 			const res = await axios.get('http://localhost:3001/auth');
+			console.log(res.data.msg.message)
 			if (res.data.user) {
 				dispatch({
 					type: AUTH_USER,
 					payload: res.data,
 				});
+			}else{
+				dispatch({
+					type: ERROR,
+					payload: res.data.msg.message
+				})
 			}
 		} catch (error) {
 			console.log(error);
@@ -375,18 +386,32 @@ export function modifyBrand(elem) {
 	};
 }
 
-export function createdBrand(elem) {
-	return async (dispatch) => {
+
+export function createdBrand (elem) {
+	return async () => {
 		try {
-			const response = await axios.post(
-				'http://localhost:3001/admin/createdbrand',
-				elem
-			);
-			console.log(response);
-			dispatch({
-				type: CREATED_BRAND,
-				payload: response.data,
-			});
+	  	await axios.post('http://localhost:3001/admin/createdbrand', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function createdCategory (elem) {
+	return async () => {
+		try {
+	  	await axios.post('http://localhost:3001/admin/addCategory', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function createdProduct(elem) {
+	return async () => {
+		try {
+	  	await axios.post('http://localhost:3001/admin/addproduct', elem);
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -408,7 +433,6 @@ export function getUserToEdit(email) {
 		});
 	};
 }
-
 //MERCADO PAGO
 
 export function postCart(data) {
@@ -431,5 +455,4 @@ export function postCart(data) {
 	
 	}
 }
-
 /////////////////////////////////////////////// ADMINISTRADOR//////////

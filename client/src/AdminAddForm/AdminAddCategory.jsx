@@ -1,17 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {createdBrand, getBrands} from "../Redux/actions"
+import {createdCategory, getCategories} from "../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 
 
-function AddBrand () {
+function AddCategory () {
     const dispatch = useDispatch()
-    const allBrands = useSelector(state => state.brands.allBrands)
-    // var id = props.match.params.id
-    console.log(allBrands)
+    const nameCategory= useSelector((state)=> state.category.allCategories)
+   
+    console.log(nameCategory)
     useEffect(()=>{
-     dispatch(getBrands())
+     dispatch(getCategories())
     },[dispatch])
 
     const {
@@ -32,8 +32,8 @@ function AddBrand () {
     const submit=(data, e)=>{
         // data.id = id
         console.log(data)
-        for(let i=0 ; i< allBrands.length; i++){
-            if(allBrands[i].name.toLowerCase() === data.name.toLowerCase()){
+        for(let i=0 ; i< nameCategory.length; i++){
+            if(nameCategory[i].name.toLowerCase() === data.name.toLowerCase()){
              return  swal({
                     title: 'Existing name',
                     icon: 'warning',
@@ -43,21 +43,21 @@ function AddBrand () {
             }
         }
         if(data.name && data.name.length > 0 ){
-            dispatch(createdBrand(data))
+            dispatch(createdCategory(data))
             e.target.reset()
             swal({
-                title:"Brand Created!!",
+                title:"Category Created!!",
                 icon: "success",
                 button: "ok",
                 timer: "5000"
             })
-            .then(()=> dispatch(getBrands()))
+            .then(()=> dispatch(getCategories()))
 
             reset({data})
 
         }else{
             swal({
-                title:"Require Brand",
+                title:"Require name Category",
                 icon: "error",
                 button: "ok",
                 timer: "5000"
@@ -75,7 +75,7 @@ function AddBrand () {
             onSubmit={handleSubmit(submit)}
             >
                 
-           <h6> New Name Brand</h6>
+           <h6> Created Category</h6>
             <input
             className=""
             type="text"
@@ -112,4 +112,4 @@ function AddBrand () {
         </div>
     )
 }
-export default AddBrand;
+export default AddCategory;

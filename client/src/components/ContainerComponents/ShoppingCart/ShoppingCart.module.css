@@ -1,38 +1,42 @@
 .shoppingCartContainer {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    padding-left: 5%;
-    padding-right: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .shoppingCartMain {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: grey;
-    margin-top: 5%;
-
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	background-color: #808080d1;
+	margin-top: 5%;
+	border-radius: 5px;
 }
 
 .cartDiv {
-    width: 70%;
-    
+	width: 70%;
 }
 
 .subtotalDiv {
-   display: flex;
-   justify-items: center;
-   padding: 20px;
+	display: flex;
+	justify-items: center;
+	padding: 20px;
 }
 
 .gobackButton {
-    width: 20%;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #FF3C4A;
-    color: white;
-    font-weight: bold;
-    border-style: hidden;
-    border-radius: 10px;
+	width: 20%;
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #ff3c4a;
+	color: white;
+	font-weight: bold;
+	border-style: hidden;
+	border-radius: 10px;
+}
+
+.gobackButton:hover {
+	background-color: #d4202d;
+	transition: 200ms;
 }

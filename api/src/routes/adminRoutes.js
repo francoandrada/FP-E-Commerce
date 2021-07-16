@@ -11,7 +11,8 @@ const {
 	getProductAll,
 	getUsers,
 	getUserToEdit,
-	putUserInfo
+	putUserInfo,
+	deleteUser
 	
 } = require('../Controllers/admin');
 
@@ -22,7 +23,7 @@ const tablePagination = require('../Controllers/admin/tablePagination.controller
 router.post('/tablepagination', routerHelper(tablePagination));
 router.put('/putproduct', putProduct);
 router.post('/createdbrand', postBrand);
-// router.post('/addproduct', postProduct)
+router.post('/addproduct', postProduct)
 router.put('/putbrand', putBrand);
 router.post('/addCategory', postCategoryProduct);
 router.put('/putcategory', putCategoryProduct);
@@ -31,6 +32,8 @@ router.get('/productos', getProductAll);
 router.get('/users', getUsers);
 router.get('/user/:email', getUserToEdit);
 router.put('/user/edit', putUserInfo);
+router.put('/user/delete', deleteUser);
+
 
 
 

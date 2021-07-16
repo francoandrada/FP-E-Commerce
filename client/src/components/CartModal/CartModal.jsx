@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { formatNumber } from '../../helper/priceFormater';
 
 const Icon = styled.div`
   color: #ff3c4a;
@@ -34,6 +36,7 @@ const CartContainer = styled.div`
     border-radius: 5px;
     width: 440px;
     color: #495057;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 72%);
 `;
 
 const CartHeader = styled.div`
@@ -70,8 +73,8 @@ const CartHeader = styled.div`
 const ProductsCart = styled.section`
         max-height: 350px;
     overflow-y: scroll;
-    border-top: 2px solid gray;
-    border-bottom: 2px solid gray;
+    border-top: 2px solid rgb(128 128 128 / 35%);
+    border-bottom: 2px solid rgb(128 128 128 / 35%);
 
     ul {
         list-style: none;
@@ -159,31 +162,11 @@ function CartModal() {
 
 	let subtotal = function () {
 		let subTotal = 0;
-		cartProducts.map((product) => {
-			subTotal += product.price * product.qty;
-		});
+		cartProducts &&
+			cartProducts.map((product) => {
+				subTotal += product.price * product.qty;
+			});
 		return subTotal;
-	};
-
-	var formatNumber = {
-		separator: '.',
-		decimalSeparator: ',',
-		formatear: function (num) {
-			num += '';
-			var splitStr = num.split('.');
-			var splitLeft = splitStr[0];
-			var splitRight =
-				splitStr.length > 1 ? this.decimalSeparator + splitStr[1] : '';
-			var regx = /(\d+)(\d{3})/;
-			while (regx.test(splitLeft)) {
-				splitLeft = splitLeft.replace(regx, '$1' + this.separator + '$2');
-			}
-			return this.simbol + splitLeft + splitRight;
-		},
-		new: function (num, simbol) {
-			this.simbol = simbol || '';
-			return this.formatear(num);
-		},
 	};
 
 	let subtot = subtotal();
@@ -227,7 +210,9 @@ function CartModal() {
 					</ProductsCart>
 					<CartPay>
 						<ButtonClose onClick={toggle}>Close</ButtonClose>
-						<ButtonPay>Pay</ButtonPay>
+						<Link to='/shoppingcart'>
+							<ButtonPay onClick={toggle}>Checkout</ButtonPay>
+						</Link>
 					</CartPay>
 				</CartContainer>
 			)}

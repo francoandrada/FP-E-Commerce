@@ -1,38 +1,38 @@
 .subtotalContainerMain {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 44%);
 }
 
 .subdivTotal {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-size: 20px;
-    border-top-color: rgb(226, 226, 226);
-    border-top-style: solid;
-    padding-top: 20px;
-    border-top-width: 0.5px;
-
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	font-size: 20px;
+	border-top-color: rgb(226, 226, 226);
+	border-top-style: solid;
+	padding-top: 20px;
+	border-top-width: 0.5px;
 }
 
 .paymentButton {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #FF3C4A;
-    color: white;
-    font-weight: bold;
-    border-style: hidden;
-    border-radius: 10px;
+	width: 100%;
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #ff3c4a;
+	color: white;
+	font-weight: bold;
+	border-style: hidden;
+	border-radius: 10px;
 }
 .paymentButton:hover {
-    background-color: #c5c5c5;  
-    color:#FF3C4A; 
+	background-color: #d4202d;
+	transition: 200ms;
 }
 .paymentButton:active {
-    background-color: #bd2d36;   
+	background-color: #bd2d36;
 }

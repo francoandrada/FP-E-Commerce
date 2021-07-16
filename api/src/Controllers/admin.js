@@ -1,5 +1,6 @@
 const { Product, Brand, Category, User } = require('../db');
 async function postProduct(req, res, next) {
+
 	try {
 		const {
 			name,
@@ -9,6 +10,7 @@ async function postProduct(req, res, next) {
 			image,
 			stock,
 			brandId,
+			priceSpecial,
 			category,
 		} = req.body;
 		const producto = await Product.create({
@@ -16,6 +18,7 @@ async function postProduct(req, res, next) {
 			price,
 			description,
 			weight,
+			priceSpecial,
 			image,
 			stock,
 			brandId,
@@ -131,7 +134,8 @@ async function getProductCategory(req, res, next) {
 }
 async function getProductAll(req, res, next) {
 	try {
-		const resAll = await Product.findAll({ include: Category });
+		
+		const resAll = await Product.findAll({})
 		res.send(resAll);
 	} catch (error) {
 		next(error);
@@ -181,6 +185,20 @@ async function putUserInfo(req, res, next) {
 	}
 }
 
+async function deleteUser(req, res, next) {
+	try {
+		// console.log(req.body.email)
+		// res.send('ok')
+		const userToDelete = req.body.email;
+		console.log(req.body.email);
+		const user = await User.findOne({ where: { email: userToDelete } });
+		await user.destroy()
+		res.json(userToDelete);
+	} catch (error) {
+		next(error);
+	}
+}
+
 module.exports = {
 	putProduct,
 	postBrand,
@@ -192,5 +210,6 @@ module.exports = {
 	getProductAll,
 	getUsers,
 	getUserToEdit,
-	putUserInfo
+	putUserInfo,
+	deleteUser
 };
