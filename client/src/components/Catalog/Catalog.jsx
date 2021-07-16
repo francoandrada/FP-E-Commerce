@@ -7,7 +7,6 @@ import { getCategories, getBrands,getProducts } from '../../Redux/actions'
 import styles from './Catalog.module.css'
 
 
-
 function Catalog() {
 
     const dispatch = useDispatch()
@@ -31,7 +30,6 @@ function Catalog() {
         
                 <FilterCategories id={styles.filterContainer}/> 
                  <Products id={styles.productsContainer}/> 
-        
         
        </div> 
 
