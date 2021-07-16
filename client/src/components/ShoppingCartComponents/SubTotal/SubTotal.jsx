@@ -61,12 +61,13 @@ function SubTotal({ qty, userLogged }) {
 					<p>Items in Cart:</p>
 					<p>{totalItems}</p>
 				</div>
-
 				<div className={style.subdivTotal}>
 					<p>
 						TOTAL:<br></br>(without shipping)
 					</p>
+					<h3>{totalFormat}</h3>
 				</div>
+		
 				{userLogged ? (
 	
 							<button
