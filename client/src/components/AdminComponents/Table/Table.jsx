@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	getCategories,
+	getBrands,
 	getListOfProductTable,
 	changeTablePage,
 } from '../../../Redux/actions';
@@ -12,7 +13,7 @@ import Select from '../../Select/Select';
 import TableLogic from './TableLogic';
 import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
-import Admin from '../Admin/Admin'
+import Admin from '../Admin/Admin';
 const Table = () => {
 	const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ const Table = () => {
 		orderTableHandle,
 		filterByCategoryHandle,
 		sortTableHandle,
+		filterByBrandHandle,
 	} = TableLogic();
 
 	const {
@@ -31,9 +33,11 @@ const Table = () => {
 		orderTable,
 		sortTable,
 		gotoTablePage,
+		tableByBrand,
 	} = useSelector((state) => state.admin);
 
 	const { allCategories } = useSelector((state) => state.category);
+	const { allBrands } = useSelector((state) => state.brands);
 
 	// react-table
 	const dataToPrint = listProductsOnTable
@@ -51,12 +55,17 @@ const Table = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+		dispatch(getBrands());
+	}, [dispatch]);
+
+	useEffect(() => {
 		dispatch(
 			getListOfProductTable(gotoTablePage, {
 				sortBy: sortTable,
 				order: orderTable,
 				category: filterByCategory,
 				limit: sizePagination,
+				brand: tableByBrand,
 			})
 		);
 	}, [
@@ -66,6 +75,7 @@ const Table = () => {
 		filterByCategory,
 		sortTable,
 		gotoTablePage,
+		tableByBrand,
 	]);
 
 	/*
@@ -111,6 +121,14 @@ const Table = () => {
 						initialvalue={filterByCategory}
 						onChange={filterByCategoryHandle}
 						values={['default', ...allCategories.map(({ name }) => name)]}
+					/>
+				)}
+
+				{allBrands && (
+					<Select
+						initialValue={tableByBrand}
+						onChange={filterByBrandHandle}
+						values={['default', ...allBrands.map(({ name }) => name)]}
 					/>
 				)}
 			</div>

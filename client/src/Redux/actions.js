@@ -32,13 +32,19 @@ import {
 	CREATED_BRAND,
 	GET_USERS,
 	GOTO_TABLE_PAGE,
-	GET_USER_TO_EDIT
+	GET_USER_TO_EDIT,
+	TABLE_FILTER_BRAND,
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const tableFilterByBrand = (payload) => ({
+	type: TABLE_FILTER_BRAND,
 	payload,
 });
 
@@ -373,44 +379,38 @@ export function modifyBrand(elem) {
 	};
 }
 
-export function createdBrand (elem) {
+export function createdBrand(elem) {
 	return async (dispatch) => {
 		try {
-	 	const response =await axios.post('http://localhost:3001/admin/createdbrand', elem);
-		 console.log(response)
-		 dispatch({
-			type: CREATED_BRAND,
-		   payload:response.data
-		   })
+			const response = await axios.post(
+				'http://localhost:3001/admin/createdbrand',
+				elem
+			);
+			console.log(response);
+			dispatch({
+				type: CREATED_BRAND,
+				payload: response.data,
+			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-
 export function getUsers() {
-
 	return async (dispatch) => {
 		axios.get('http://localhost:3001/admin/users').then((response) => {
-
 			dispatch({ type: GET_USERS, payload: response.data });
 		});
 	};
 }
 
 export function getUserToEdit(email) {
-
-		return async (dispatch) => {
-			axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
-				dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
-			});
-		};
-	}
-
-
-
-
-	
+	return async (dispatch) => {
+		axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
+			dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
+		});
+	};
+}
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////
