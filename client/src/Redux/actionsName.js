@@ -29,7 +29,7 @@ export const TABLE_FILTER_BY_CATEGORY = 'TABLE_FILTER_BY_CATEGORY';
 export const SORT_TABLE_BY = 'SORT_TABLE_BY';
 export const GOTO_TABLE_PAGE = 'GOTO_TABLE_PAGE';
 export const GET_USER_TO_EDIT = 'GET_USER_TO_EDIT';
-
+export const TABLE_FILTER_BRAND = 'TABLE_FILTER_BRAND';
 
 //carrito
 export const ADD_TO_CART = 'ADD_TO_CART';
@@ -37,7 +37,5 @@ export const ADJUST_ITEM_QTY = 'ADJUST_ITEM_QTY';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 
-
-
 /////////////////ADMIN
-export const CREATED_BRAND= 'CREATED_BRAND';
+export const CREATED_BRAND = 'CREATED_BRAND';
