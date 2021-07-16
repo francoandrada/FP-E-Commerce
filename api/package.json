@@ -23,6 +23,7 @@
 		"morgan": "^1.10.0",
 		"nodemailer": "^6.6.2",
 		"nodemon": "^2.0.12",
+		"npm": "^7.20.0",
 		"pg": "^8.5.1",
 		"pg-hstore": "^2.3.4",
 		"sequelize": "^6.3.5"
