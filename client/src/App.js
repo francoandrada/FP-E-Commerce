@@ -11,13 +11,16 @@ import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/AdminComponents/Table/Table';
-
+import Swal from 'sweetalert2';
 import AdminRoutes from './components/Routes/AdminRoutes';
 
 import './App.css';
 
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { logOut } from './Redux/actions';
 
 // import AddBrand from './components/AdminComponents/AdminAddForm/AdminAddBrand';
 // import AddCategory from './AdminAddForm/AdminAddCategory';
@@ -35,6 +38,7 @@ function App() {
 	/* ======================================================
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
+
 	const dispatch = useDispatch();
 	const errorToken = useSelector((state) => state.user.errorToken);
 console.log(errorToken)
@@ -49,6 +53,7 @@ console.log(errorToken)
 		}
 	}, [errorToken]);
 	
+
 	return (
 		<div className='App'>
 			<div class='totalvh'>
