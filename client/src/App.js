@@ -25,9 +25,9 @@ import CartModal from './components/CartModal/CartModal';
 // import PutBrand from './adminPutForm/putBrand'
 // import AdminUsers from './components/AdminUsers/AdminUsers';
 // import UserPanel from './components/AdminUsers/UserPanel';
-import AddBrand from './AdminAddForm/AdminAddBrand'
-import AddCategory from './AdminAddForm/AdminAddCategory'
-import AddProduct from './AdminAddForm/AdminAddProduct'
+import AddBrand from './components/AdminComponents/AdminAddForm/AdminAddBrand'
+import AddCategory from './components/AdminComponents/AdminAddForm/AdminAddCategory'
+import AddProduct from './components/AdminComponents/AdminAddForm/AdminAddProduct'
 import Admin from './components/AdminComponents/Admin/Admin'
 import AdminCategories from './components/AdminComponents/AdminCategories/AdminCategories.jsx';
 import PutCategory from './components/AdminComponents/adminPutForm/putCategory'
