@@ -16,6 +16,9 @@ function AdminBrands() {
             <div>
                 <Admin />
             </div>
+            <Link to='/admin/addbrands'>
+            <button> Add Brand </button>
+            </Link>
             <div className={styles.categoriesContainer}>
 
                 <h1> Brands </h1>

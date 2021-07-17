@@ -141,7 +141,7 @@ function Register() {
 						<div className='form-group col-md-2 ' id={styles.input}>
 							<label>Phone</label>
 							<input
-								type='tel'
+								type='number'
 								name='phone'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}

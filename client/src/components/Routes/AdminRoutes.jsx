@@ -2,8 +2,8 @@ import { Route, Switch } from 'react-router';
 
 import Admin from '../AdminComponents/Admin/Admin';
 import AddBrand from '../AdminComponents/AdminAddForm/AdminAddBrand';
-import AddCategory from '../../AdminAddForm/AdminAddCategory'; // esta carpeta esta mal ubicada
-import AddProduct from '../../AdminAddForm/AdminAddProduct'; // esta carpeta esta mal ubicada
+import AddCategory from '../AdminComponents/AdminAddForm/AdminAddCategory';
+import AddProduct from '../AdminComponents/AdminAddForm/AdminAddProduct';
 import AdminCategories from '../AdminComponents/AdminCategories/AdminCategories';
 import PutCategory from '../AdminComponents/adminPutForm/putCategory';
 import PutProduct from '../AdminComponents/adminPutForm/putProduct';
