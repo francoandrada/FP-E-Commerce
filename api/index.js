@@ -9,7 +9,7 @@ conn
 	.sync({ force: true })
 	.then(() => {
 		console.log('-----successful database connection-----');
-		server.listen(process.env.PORT, () => {
+		server.listen(3001, () => {
 			console.log('%s listening at 3001');
 		});
 	})
