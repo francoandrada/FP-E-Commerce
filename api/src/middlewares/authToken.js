@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 		
 			req.user = user;
 		} catch (error) {
-			console.log('ERRROR',error);
+
 			res.send({ msg: error });
 		}
 	}

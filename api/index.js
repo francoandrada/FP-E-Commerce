@@ -6,7 +6,7 @@ const { conn } = require('./src/db.js');
 console.log('hola')
 // Syncing all the models at once.
 conn
-	.sync({ force: true })
+	.sync({ force: false })
 	.then(() => {
 		console.log('-----successful database connection-----');
 		server.listen(3001, () => {

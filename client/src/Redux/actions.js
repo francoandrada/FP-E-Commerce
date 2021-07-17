@@ -183,20 +183,21 @@ export function getHighlightProd() {
 
 export function logIn(dato) {
 	return async (dispatch) => {
-		try {
-			const res = await axios.post('http://localhost:3001/auth', dato);
+	try {
+		const res = await axios.post('http://localhost:3001/auth', dato);
+		console.log(res)
+		dispatch({
+			type: SUCCESS_LOGIN,
+			payload: res.data,
+		});
+	} catch (error) {
 
-			dispatch({
-				type: SUCCESS_LOGIN,
-				payload: res.data.token,
-			});
-		} catch (error) {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data.msg,
-			});
-		}
-	};
+		dispatch({
+			type: ERROR,
+			payload: error.response.data.msg,
+		});
+	}
+};
 }
 
 // Retorne el Usuario autenticado en base al JWT
@@ -296,10 +297,10 @@ export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
-
+			console.log(res)
 			dispatch({
 				type: SUCCESS_LOGIN,
-				payload: res.data.token,
+				payload: res.data,
 			});
 		} catch (error) {
 			console.log(error);
