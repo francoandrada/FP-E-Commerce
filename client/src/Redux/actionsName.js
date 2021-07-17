@@ -32,7 +32,7 @@ export const GOTO_TABLE_PAGE = 'GOTO_TABLE_PAGE';
 export const GET_USER_TO_EDIT = 'GET_USER_TO_EDIT';
 export const GET_PRODUCT_TO_EDIT = 'GET_PRODUCT_TO_EDIT';
 export const FETCH_COUNT_OF_BRAND = 'FETCH_COUNT_OF_BRAND';
-
+export const FILTER_STOCK = 'FILTER_STOCK';
 export const TABLE_FILTER_BRAND = 'TABLE_FILTER_BRAND';
 
 //carrito
