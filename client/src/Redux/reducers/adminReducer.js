@@ -12,6 +12,7 @@ import {
 	PRODUCT_DETAIL,
 	TABLE_FILTER_BRAND,
 	FETCH_COUNT_OF_BRAND,
+	FETCH_COUNT_OF_CATEGORIES,
 } from '../actionsName';
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
 	productToEdit: undefined,
 	tableByBrand: 'default',
 	brandCount: undefined,
+	categoriesCount: undefined,
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -99,6 +101,12 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				...state,
 				pending: false,
 				brandCount: payload,
+			};
+		case FETCH_COUNT_OF_CATEGORIES:
+			return {
+				...state,
+				pending: false,
+				categoriesCount: payload,
 			};
 		default:
 			return state;
