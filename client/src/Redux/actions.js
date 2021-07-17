@@ -408,6 +408,38 @@ export function createdProduct(elem) {
 	};
 }
 
+export function deleProduct(elem) {
+	return async () => {
+		try {
+	  	await axios.delete('http://localhost:3001/admin/deleteproduct', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleBrand(elem) {
+	return async () => {
+		try {
+	  	await axios.delete('http://localhost:3001/admin/deletebrand', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleCategory(elem) {
+	return async () => {
+		try {
+	  	await axios.delete('http://localhost:3001/admin/deletecategory', elem);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
 
 
 export function getUsers() {
@@ -425,5 +457,7 @@ export function getUserToEdit(email) {
 		});
 	};
 }
+
+
 
 /////////////////////////////////////////////// ADMINISTRADOR//////////

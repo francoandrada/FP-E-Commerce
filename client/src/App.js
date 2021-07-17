@@ -15,17 +15,6 @@ import './App.css';
 
 import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
-// import Admin from './components/Admin/Admin';
-// import AdminCategories from './components/AdminCategories/AdminCategories.jsx';
-// import PutCategory from './adminPutForm/putCategory';
-
-// import AdminProducts from './components/adminProducts/adminProduc'
-// import PutProduct from './adminPutForm/putProduct'
-// import AdminBrands from './components/AdminBrands/AdminBrands'
-// import PutBrand from './adminPutForm/putBrand'
-// import AdminUsers from './components/AdminUsers/AdminUsers';
-// import UserPanel from './components/AdminUsers/UserPanel';
-// import AddBrand from './AdminAddForm/AdminAddBrand'
 import AddBrand from './components/AdminComponents/AdminAddForm/AdminAddBrand';
 import AddCategory from './AdminAddForm/AdminAddCategory';
 import AddProduct from './AdminAddForm/AdminAddProduct';

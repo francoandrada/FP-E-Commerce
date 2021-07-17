@@ -93,7 +93,7 @@ function PutBrand (props) {
                 message:"mas de 3 caracteres"
             },
             pattern:{
-                value: /^[a-zA-Z]*$/,
+                value: /^[a-zA-Z ]*$/,
                 message:"no debe ingresar numeros"
             }
             })}
