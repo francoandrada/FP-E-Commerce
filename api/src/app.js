@@ -8,7 +8,7 @@ require('./db.js');
 
 const server = express();
 
-
+console.log('hola')
 // const mercadopago = require ('mercadopago');
 
 // mercadopago.configure({
