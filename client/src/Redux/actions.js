@@ -34,6 +34,7 @@ import {
 	GET_USER_TO_EDIT,
 	SET_CART,
 	TABLE_FILTER_BRAND,
+	FILTER_STOCK,
 	ERRORTOKEN,
 	FETCH_COUNT_OF_BRAND,
 	FETCH_COUNT_OF_CATEGORIES,
@@ -330,17 +331,21 @@ export const filterCategory = (name) => {
 	return { type: FILTER_CATEGORIES, payload: name };
 };
 
+export const filterStock = (name) => {
+	return { type: FILTER_STOCK, payload: name };
+};
+
 export const filterPrice = (name) => {
 	return { type: FILTER_PRICE, payload: name };
 };
 
 export function getFilteredProducts(query) {
-	const { category, brand, price, page, qty } = query;
+	const { category, brand, price, page, qty, stock } = query;
 
 	return async (dispatch) => {
 		axios
 			.get(
-				`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}`
+				`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}&stock=${stock}`
 			)
 			.then((response) => {
 				dispatch({ type: FILTERED_PRODUCTS, payload: response.data });
