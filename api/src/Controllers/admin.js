@@ -31,6 +31,7 @@ async function postProduct(req, res, next) {
 }
 
 async function putProduct(req, res, next) {
+	console.log(req.body)
 	try {
 		const {
 			id,
@@ -40,7 +41,7 @@ async function putProduct(req, res, next) {
 			weight,
 			image,
 			stock,
-			// brandId,
+			brand,
 			category,
 		} = req.body;
 		let variable = {};
@@ -57,6 +58,8 @@ async function putProduct(req, res, next) {
 		product.image = image
 		product.stock = stock
 		await product.save()
+		await product.setBrand(brand);
+		await product.setCategories(parseInt(category));
 		res.send(product);
 	} catch (error) {
 		next(error);

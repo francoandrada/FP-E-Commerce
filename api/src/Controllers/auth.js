@@ -31,11 +31,11 @@ exports.authUser = async (req, res) => {
 				},
 				process.env.SECRET,
 				{
-					expiresIn: '1m',
+					expiresIn: '8h',
 				}
 			);
 			
-			res.send({token})
+			res.send({token, user})
 		} else {
 			res.status(401).send({ msg: 'The password is incorrect' });
 		}
@@ -154,7 +154,8 @@ exports.authUserGmail = async (req, res) => {
 				expiresIn: '8h',
 			}
 		);
-		res.json({ token });
+	
+		res.send({token, user})
 	} catch (error) {
 		// console.log(error);
 	}

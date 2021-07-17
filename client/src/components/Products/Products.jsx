@@ -26,6 +26,7 @@ function Products() {
 		productsToRender = filteredProducts;
 	}
 
+	let stockS = useSelector((state) => state.stock.order);
 	let categoryS = useSelector((state) => state.category.selectedCategory);
 	let brandS = useSelector((state) => state.brands.selectBrand);
 	let priceS = useSelector((state) => state.price.order);
@@ -38,6 +39,7 @@ function Products() {
 		price: priceS,
 		page: actualPage,
 		qty: productsPerPage,
+		stock: stockS
 	});
 
 	useEffect(() => {
@@ -47,6 +49,7 @@ function Products() {
 			price: priceS,
 			page: actualPage,
 			qty: productsPerPage,
+			stock: stockS
 		});
 		return () => {
 	
@@ -81,6 +84,13 @@ function Products() {
 			price: priceS,
 		});
 	}, [priceS]);
+
+	useEffect(() => {
+		setQuery({
+			...query,
+			stock: stockS,
+		});
+	}, [stockS]);
 
 	useEffect(() => {
 		setQuery({
@@ -146,12 +156,20 @@ function Products() {
 									</div>
 
 									<div className={styles.buttonBuy}>
+										{p.stock>0?
 										<button
 											type='submit'
 											onClick={() => dispatch(addToCart(p))}
 										>
 											Add to Cart
 										</button>
+										:
+										<button
+										type='submit'
+									>
+										Sin Stock
+									</button>
+										}
 									</div>
 								</div>
 								{/* </div> */}

@@ -88,6 +88,7 @@ const LogIn = () => {
 
 	useEffect(() => {
 		if (authenticated) {
+			
 			history.goBack()
 		}
 	}, [authenticated]);

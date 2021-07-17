@@ -11,6 +11,8 @@ import {
 	GET_USER_TO_EDIT,
 	PRODUCT_DETAIL,
 	TABLE_FILTER_BRAND,
+	FETCH_COUNT_OF_BRAND,
+	FETCH_COUNT_OF_CATEGORIES,
 } from '../actionsName';
 
 const initialState = {
@@ -26,6 +28,8 @@ const initialState = {
 	userToEdit: undefined,
 	productToEdit: undefined,
 	tableByBrand: 'default',
+	brandCount: undefined,
+	categoriesCount: undefined,
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -86,11 +90,23 @@ function adminReducer(state = initialState, { type, payload, error }) {
 			return {
 				...state,
 				productToEdit: payload,
-			};	
+			};
 		case TABLE_FILTER_BRAND:
 			return {
 				...state,
 				tableByBrand: payload,
+			};
+		case FETCH_COUNT_OF_BRAND:
+			return {
+				...state,
+				pending: false,
+				brandCount: payload,
+			};
+		case FETCH_COUNT_OF_CATEGORIES:
+			return {
+				...state,
+				pending: false,
+				categoriesCount: payload,
 			};
 		default:
 			return state;
