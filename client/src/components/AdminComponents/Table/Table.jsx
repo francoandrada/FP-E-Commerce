@@ -14,6 +14,7 @@ import TableLogic from './TableLogic';
 import PaginationTable from '../TablePagination/TablePagination';
 import styles from './Table.module.css';
 import Admin from '../Admin/Admin';
+import { Link } from 'react-router-dom';
 const Table = () => {
 	const [searchFilter, setSearchFilter] = useState('');
 	const dispatch = useDispatch();
@@ -98,6 +99,9 @@ const Table = () => {
 	return (
 		<div>
 			<Admin />
+			<Link to = '/admin/addproduct'>
+				<button> Add Product </button>
+			</Link>
 			<div
 				style={{
 					height: '100px',

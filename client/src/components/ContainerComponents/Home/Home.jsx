@@ -1,12 +1,15 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getHighlightProd } from '../../../Redux/actions';
+import { getHighlightProd, logOut } from '../../../Redux/actions';
 import styles from './Home.module.css';
 import BannerContainer from '../../BannerContainer/BannerContainer';
 import HighlightedProdContainer from '../HighlightedProdContainer/HighlightedProdContainer';
 
+
 function Home() {
 	const dispatch = useDispatch();
+
+
 
 	useEffect(() => {
 		dispatch(getHighlightProd());

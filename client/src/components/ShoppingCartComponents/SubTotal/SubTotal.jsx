@@ -1,13 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
+import { postCart } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
 
 function SubTotal({ qty, userLogged }) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
+
+
+	const dispatch = useDispatch();
+	const mercadoPago = useSelector((state) => state.cart.link);
+
+	if (mercadoPago !== '') {
+		window.location.href = mercadoPago;
+	}
 
 	useEffect(() => {
 		let items = 0;
@@ -23,7 +32,27 @@ function SubTotal({ qty, userLogged }) {
 		setTotalPrice(price);
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
+	let status = 'created';
+	let array = [];
+	for (let i = 0; i < cartProducts.length; i++) {
+		const element = {
+			prodId: cartProducts[i].id,
+			price: cartProducts[i].price,
+			qty: cartProducts[i].qty,
+		};
+
+		array.push(element);
+	}
+
+
+	let bodyObject = {
+		prodCarrito: array,
+		ammount: totalPrice,
+		status: status,
+	};
+
 	let totalFormat = formatNumber.new(totalPrice, '$');
+
 	return (
 		<div>
 			<div className={style.subtotalContainerMain}>
@@ -32,18 +61,21 @@ function SubTotal({ qty, userLogged }) {
 					<p>Items in Cart:</p>
 					<p>{totalItems}</p>
 				</div>
-
 				<div className={style.subdivTotal}>
 					<p>
 						TOTAL:<br></br>(without shipping)
 					</p>
 					<h3>{totalFormat}</h3>
 				</div>
-
+		
 				{userLogged ? (
-					<NavLink to='/payment'>
-						<button className={style.paymentButton}>Checkout</button>
-					</NavLink>
+	
+							<button
+							className={style.paymentButton}
+							onClick={() => dispatch(postCart(bodyObject))}
+						>
+							Checkout
+						</button>
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Checkout</button>

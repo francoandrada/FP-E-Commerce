@@ -9,6 +9,7 @@ import {
 	GET_USERS,
 	GOTO_TABLE_PAGE,
 	GET_USER_TO_EDIT,
+	PRODUCT_DETAIL,
 	TABLE_FILTER_BRAND,
 } from '../actionsName';
 
@@ -23,6 +24,7 @@ const initialState = {
 	usersFromDB: [],
 	gotoTablePage: 0,
 	userToEdit: undefined,
+	productToEdit: undefined,
 	tableByBrand: 'default',
 };
 
@@ -80,6 +82,11 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				...state,
 				gotoTablePage: payload,
 			};
+		case PRODUCT_DETAIL:
+			return {
+				...state,
+				productToEdit: payload,
+			};	
 		case TABLE_FILTER_BRAND:
 			return {
 				...state,
