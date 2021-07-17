@@ -24,7 +24,7 @@ server.use(express.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', `${REACT_APP_API_HEROKU}`);
+	res.header('Access-Control-Allow-Origin', `${REACT_APP_API_HEROKU} `);
 	res.header('Access-Control-Allow-Credentials', 'true');
 	res.header(
 		'Access-Control-Allow-Headers',

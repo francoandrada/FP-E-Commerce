@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { deleProduct } from '../../../Redux/actions';
 import {
 	changePaginationSize,
 	changeOrderTable,
@@ -25,7 +26,8 @@ const TableLogic = () => {
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
-					console.log('el id del producto a eliminar', e.id);
+					// console.log('el id del producto a eliminar', e.id);
+					dispatch(deleProduct(e.id))
 				},
 				update: (event) => {
 					event.preventDefault();

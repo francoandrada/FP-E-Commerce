@@ -28,8 +28,8 @@ function AddProduct () {
 
 
       const  changeInput = (e)=> {
-          const value= e.target.value
-          const name= e.target.name
+        //   const value= e.target.value
+        //   const name= e.target.name
           console.log(e.target.files)
           
         }
@@ -247,11 +247,11 @@ function AddProduct () {
                 <h6>Image</h6>
 				<input
 					className=''
-					type='file'
+					type='text'
 					name='image'
 					// name="images[]"
 					// id="fileInput"
-					multiple
+					// multiple
 					onChange={(e) => changeInput(e)}
 					{...register('image', {
 						// required:{
