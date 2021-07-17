@@ -4,7 +4,6 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
-import DoughnutChart from '../Charts/Doughnut/Doughnut';
 import './Admin.css';
 
 function Admin() {
