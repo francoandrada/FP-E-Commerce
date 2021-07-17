@@ -4,7 +4,8 @@ const { Order, OrderDetail, Product } = require('../db');
 
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
-	const { ammount, status, prodCarrito } = req.body;
+	const { ammount, status, prodCarrito, userId } = req.body;
+	console.log('ESTO ES USER ID', userId);
 
 	try {
 		var newOrder = await Order.create(
@@ -40,6 +41,17 @@ const createOrder = async function createOrder(req, res) {
 					})();
 				});
 		});
+		// .then((response) => {
+		// 	console.log(response);
+		// });
+		// console.log(newOrder);
+		// var currentUser = User.findOne({ where: { userId: userId } });
+		// Promise.all([newOrder, currentUser]).then((response) => {
+		// 	response[0].addUser(response[1]);
+		// });
+
+		// const currentUser = userId.findeOne({ where: { userId: userId } });
+		// newOrder.addUser(currentUser);
 		// res.status(200).json('Order created successfully!');
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
@@ -64,7 +76,7 @@ const createOrder = async function createOrder(req, res) {
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
 
-			"auto_return": "approved",
+			auto_return: 'approved',
 		};
 
 		mercadopago.preferences

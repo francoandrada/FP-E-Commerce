@@ -46,3 +46,6 @@ export const SET_CART = 'SET_CART';
 
 /////////////////ADMIN
 // export const CREATED_BRAND= 'CREATED_BRAND';
+
+//user account
+export const GET_USER_ORDERS = 'GET_USER_ORDERS';

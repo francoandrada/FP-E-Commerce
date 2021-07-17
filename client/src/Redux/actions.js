@@ -37,6 +37,7 @@ import {
 	FILTER_STOCK,
 	ERRORTOKEN,
 	FETCH_COUNT_OF_BRAND,
+	GET_USER_ORDERS,
 } from './actionsName';
 
 import axios from 'axios';
@@ -180,24 +181,23 @@ export function getHighlightProd() {
 		});
 	};
 }
-
+//----------------------------- USER ACTIONS -------------------------------//
 export function logIn(dato) {
 	return async (dispatch) => {
-	try {
-		const res = await axios.post('http://localhost:3001/auth', dato);
-		console.log(res)
-		dispatch({
-			type: SUCCESS_LOGIN,
-			payload: res.data,
-		});
-	} catch (error) {
-
-		dispatch({
-			type: ERROR,
-			payload: error.response.data.msg,
-		});
-	}
-};
+		try {
+			const res = await axios.post('http://localhost:3001/auth', dato);
+			console.log(res);
+			dispatch({
+				type: SUCCESS_LOGIN,
+				payload: res.data,
+			});
+		} catch (error) {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
+		}
+	};
 }
 
 // Retorne el Usuario autenticado en base al JWT
@@ -297,7 +297,7 @@ export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
-			console.log(res)
+			console.log(res);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data,
@@ -307,7 +307,7 @@ export function loginGmail(data) {
 		}
 	};
 }
-
+//----------------------------- FILTER ACTIONS -------------------------------//
 export const filterCategory = (name) => {
 	return { type: FILTER_CATEGORIES, payload: name };
 };
@@ -341,7 +341,7 @@ export const cleanFilters = () => {
 export const selectPage = (page) => {
 	return { type: SELECTED_PAGE, payload: page };
 };
-
+//----------------------------- SHOPPING CART ACTIONS -------------------------------//
 export const addToCart = (itemId) => {
 	return {
 		type: ADD_TO_CART,
@@ -455,7 +455,7 @@ export function getUserToEdit(email) {
 		});
 	};
 }
-//MERCADO PAGO
+//////////////////////////   MERCADO PAGO   ////////////////////////////////
 
 export function postCart(data) {
 	return async (dispatch) => {
@@ -478,4 +478,12 @@ export function postCart(data) {
 		}
 	};
 }
-/////////////////////////////////////////////// ADMINISTRADOR//////////
+////////////////////// USER ACCOUNT ACTIONS  ////////////////////
+
+export function getUserOrders(userId) {
+	return async (dispatch) => {
+		axios.get(`http://localhost:3001/order/user/${userId}`).then((response) => {
+			dispatch({ type: GET_USER_ORDERS, payload: response.data });
+		});
+	};
+}

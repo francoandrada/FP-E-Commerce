@@ -14,6 +14,7 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/AdminComponents/Table/Table';
 import AdminRoutes from './components/Routes/AdminRoutes';
+import UserView from './components/UserComponents/UserView/UserView';
 
 import './App.css';
 
@@ -50,6 +51,7 @@ function App({ location }) {
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 					<Route path='/shoppingcart/success' exact component={Success} />
 					<Route path='/table' exact component={Table} />
+					<Route path='/myaccount' exact component={UserView} />
 				</Switch>
 			</div>
 			<Route path='/' component={Footer} />
