@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountOfBrand } from '../../../../Redux/actions';
 import { Doughnut } from 'react-chartjs-2';
+import Loader from '../../../Loader/Loader';
 
 const DoughnutChart = () => {
 	const dispatch = useDispatch();
+	const [colors, setColors] = useState([]);
 	const { brandCount } = useSelector((state) => state.admin);
 
 	useEffect(() => {
@@ -35,28 +37,9 @@ const DoughnutChart = () => {
 			: [];
 	};
 
-	const randomRGBA = () => {
-		let o = Math.round;
-		let r = Math.random;
-		let s = 255;
-		return (
-			'rgba(' +
-			o(r() * s) +
-			',' +
-			o(r() * s) +
-			',' +
-			o(r() * s) +
-			',' +
-			r().toFixed(1) +
-			')'
-		);
-	};
-
-	const randomColors = () => {
-		return brandCount
-			? [...Array(brandCount.length).keys()].map(() => randomRGBA())
-			: [];
-	};
+	useEffect(() => {
+		setColors(randomHexColors());
+	}, [brandCount]);
 
 	const data = {
 		labels: brandNames(),
@@ -64,7 +47,7 @@ const DoughnutChart = () => {
 			{
 				label: 'Brands',
 				data: brandValues(),
-				backgroundColor: randomHexColors(),
+				backgroundColor: colors,
 			},
 		],
 	};
@@ -77,23 +60,13 @@ const DoughnutChart = () => {
 	};
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				width: '500px',
-				height: '500px',
-				background: '#2C2E43',
-			}}
-		>
+		<div style={{ width: '500px', height: '500px' }}>
 			{brandCount ? (
-				<Doughnut data={data} options={options} />
+				<Doughnut height={500} width={700} data={data} options={options} />
 			) : (
-				<h1>Loading...</h1>
+				<Loader />
 			)}
 		</div>
 	);
 };
-
 export default DoughnutChart;

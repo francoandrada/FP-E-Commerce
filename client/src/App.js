@@ -1,5 +1,4 @@
-import { Route, Switch } from 'react-router';
-import { withRouter } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import LogIn from './components/LogIn/LogIn';
 import Register from './components/Register/Register';

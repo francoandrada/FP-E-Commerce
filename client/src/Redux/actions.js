@@ -37,6 +37,7 @@ import {
 	FILTER_STOCK,
 	ERRORTOKEN,
 	FETCH_COUNT_OF_BRAND,
+	FETCH_COUNT_OF_CATEGORIES,
 } from './actionsName';
 
 import axios from 'axios';
@@ -95,6 +96,11 @@ export const fetchCountOfBrand = (payload) => ({
 	payload,
 });
 
+export const fetchCountOfCategories = (payload) => ({
+	type: FETCH_COUNT_OF_CATEGORIES,
+	payload,
+});
+
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined,
@@ -121,6 +127,20 @@ export function getCountOfBrand() {
 			dispatch(fetchPending());
 			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
 			dispatch(fetchCountOfBrand(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getCountOfCategories() {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(
+				`http://localhost:3001/admin/categoriescount`
+			);
+			dispatch(fetchCountOfCategories(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}

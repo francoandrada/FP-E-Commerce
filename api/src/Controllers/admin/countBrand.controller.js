@@ -20,13 +20,13 @@ const countBrand = async (req, res, next) => {
 	};
 
 	const count = [];
-	let others = 0;
+	let Others = 0;
 	for (const brand of brands) {
 		const n = counter(productsWithBrand, brand);
 		if (n !== 1) count.push({ [brand]: n });
-		else others++;
+		else Others++;
 	}
-	count.push({ others });
+	count.push({ Others });
 	return res.json(count);
 };
 
