@@ -156,12 +156,20 @@ function Products() {
 									</div>
 
 									<div className={styles.buttonBuy}>
+										{p.stock>0?
 										<button
 											type='submit'
 											onClick={() => dispatch(addToCart(p))}
 										>
 											Add to Cart
 										</button>
+										:
+										<button
+										type='submit'
+									>
+										Sin Stock
+									</button>
+										}
 									</div>
 								</div>
 								{/* </div> */}
