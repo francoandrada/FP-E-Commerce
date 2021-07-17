@@ -1,5 +1,7 @@
-import LogIn from './components/LogIn/LogIn';
 import { Route, Switch } from 'react-router';
+import { withRouter } from 'react-router';
+
+import LogIn from './components/LogIn/LogIn';
 import Register from './components/Register/Register';
 import Navbar from './components/Navbar/Navbar';
 import ForgotPassword from './components/LogIn/ForgotPassword';
@@ -19,43 +21,15 @@ import './App.css';
 import CartModal from './components/CartModal/CartModal';
 import Success from './components/ShoppingCartComponents/Success';
 
-// import AddBrand from './components/AdminComponents/AdminAddForm/AdminAddBrand';
-// import AddCategory from './AdminAddForm/AdminAddCategory';
-// import AddProduct from './AdminAddForm/AdminAddProduct';
-// import Admin from './components/AdminComponents/Admin/Admin';
-// import AdminCategories from './components/AdminComponents/AdminCategories/AdminCategories.jsx';
-// import PutCategory from './components/AdminComponents/adminPutForm/putCategory';
-// import PutProduct from './components/AdminComponents/adminPutForm/putProduct';
-// import AdminBrands from './components/AdminComponents/AdminBrands/AdminBrands';
-// import PutBrand from './components/AdminComponents/adminPutForm/putBrand';
-// import AdminUsers from './components/AdminComponents/AdminUsers/AdminUsers';
-// import UserPanel from './components/AdminComponents/AdminUsers/UserPanel';
-
-function App() {
+function App({ location }) {
 	/* ======================================================
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
 
-
 	return (
 		<div className='App'>
 			<div class='totalvh'>
-				<Navbar />
-				{/* <Route path='/admin' exact component={Admin} />
-				<Route path='/admin/products' exact component={Table} />
-				<Route path='/admin/putproduct/:id' exact component={PutProduct} />
-				<Route path='/admin/addproduct/' exact component={AddProduct} />
-				<Route path='/admin/users/:email' exact component={UserPanel} />
-				<Route path='/admin/user/:email' exact component={UserPanel} />
-				<Route path='/admin/users' exact component={AdminUsers} />
-				<Route path='/admin/orders' exact component={Admin} />
-				<Route path='/admin/categories' exact component={AdminCategories} />
-				<Route path='/admin/putCategory/:id' exact component={PutCategory} />
-				<Route path='/admin/addcategory/' exact component={AddCategory} />
-				<Route path='/admin/brands' exact component={AdminBrands} />
-				<Route path='/admin/putbrands/:id' exact component={PutBrand} />
-				<Route path='/admin/addbrands/' exact component={AddBrand} />
-				<Route path='/admin/stock' exact component={Admin} /> */}
+				{!location.pathname.includes('/admin') && <Navbar />}
 
 				<AdminRoutes />
 
@@ -83,4 +57,4 @@ function App() {
 	);
 }
 
-export default App;
+export default withRouter(App);

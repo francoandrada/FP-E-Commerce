@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import CartModal from '../CartModal/CartModal';
 import {
 	authUser,
@@ -24,7 +25,23 @@ const Navbar = () => {
 	const token = useSelector((state) => state.user.token);
 
 	const userName = useSelector((state) => state.user.userData);
-	// console.log(userName[0].email)
+	
+		
+		const errorToken = useSelector((state) => state.user.errorToken);
+		console.log(errorToken);
+		useEffect(() => {
+			if (errorToken) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Your session has expired, please login again',
+				});
+				dispatch(logOut());
+			}
+		}, [errorToken]);
+
+
+	
 
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
@@ -157,10 +174,10 @@ const Navbar = () => {
 						>
 							Log Out
 						</button>
-						{Array.isArray(userName) ? <p class='text-white' >Hola {userName[0].email}!</p>
+						{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName[0].email}!</p>
 						
 					:
-					<p class='text-white' >Hola {userName.name}!</p>
+					<p class='text-white h6' >Hola {userName.name}!</p>
 				
 					}
 					
