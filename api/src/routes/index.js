@@ -27,7 +27,4 @@ router.use('/catalog', catalogRoutes);
 router.use('/mercadopago', mercadopagoRoutes);
 router.use('/orders', orderRoutes);
 
-router.get('/', (req, res) => {
-	res.send('Hello from Express!');
-});
 module.exports = router;
