@@ -22,9 +22,13 @@ const countCategories = async (req, res, next) => {
 		if (n !== 1) count.push({ [category]: n });
 		else others++;
 	}
-	count.push({ others });
+	if (others) count.push({ others });
 
-	return res.json(count);
+	const countOrdered = count.sort(
+		(a, b) => Object.values(b) - Object.values(a)
+	);
+
+	return res.json(countOrdered);
 };
 
 module.exports = countCategories;

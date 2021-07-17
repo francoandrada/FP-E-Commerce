@@ -60,7 +60,7 @@ const DoughnutChart = () => {
 	};
 
 	return (
-		<div style={{ width: '500px', height: '500px' }}>
+		<div style={{ width: '500px', height: '500px', padding: '5px' }}>
 			{brandCount ? (
 				<Doughnut height={500} width={700} data={data} options={options} />
 			) : (
