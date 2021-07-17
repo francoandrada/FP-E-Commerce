@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {createdProduct, getProducts, getCategories, getBrands} from "../Redux/actions"
+import {createdProduct, getProducts, getCategories, getBrands} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 
