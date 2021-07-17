@@ -14,6 +14,8 @@ export const PagingBox = (props) => {
 	let category = useSelector((state) => state.category.selectedCategory);
 	let brand = useSelector((state) => state.brands.selectBrand);
 	let price = useSelector((state) => state.price.order);
+	let stock = useSelector((state) => state.stock.order);
+
 
 	useEffect(() => {
 		dispatch(selectPage(1));
@@ -26,6 +28,10 @@ export const PagingBox = (props) => {
 	useEffect(() => {
 		dispatch(selectPage(1));
 	}, [price]);
+
+	useEffect(() => {
+		dispatch(selectPage(1));
+	}, [stock]);
 
 	// console.log(actualPage)
 	// console.log(maxPage)
