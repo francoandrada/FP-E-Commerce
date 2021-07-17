@@ -36,11 +36,10 @@ import {
 	TABLE_FILTER_BRAND,
 	FILTER_STOCK,
 	ERRORTOKEN,
-
+	FETCH_COUNT_OF_BRAND,
 } from './actionsName';
 
 import axios from 'axios';
-import { useEffect } from 'react';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -91,6 +90,11 @@ export const fetchListProducts = (payload) => ({
 	payload,
 });
 
+export const fetchCountOfBrand = (payload) => ({
+	type: FETCH_COUNT_OF_BRAND,
+	payload,
+});
+
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined,
@@ -105,6 +109,18 @@ export function getListOfProductTable(page, object) {
 				object
 			);
 			dispatch(fetchListProducts(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getCountOfBrand() {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
+			dispatch(fetchCountOfBrand(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -201,17 +217,17 @@ export function authUser(data) {
 
 		try {
 			const res = await axios.get('http://localhost:3001/auth');
-			console.log(res.data.msg.message)
+			console.log(res.data.msg.message);
 			if (res.data.user) {
 				dispatch({
 					type: AUTH_USER,
 					payload: res.data,
 				});
-			}else{
+			} else {
 				dispatch({
 					type: ERRORTOKEN,
-					payload: res.data.msg.message
-				})
+					payload: res.data.msg.message,
+				});
 			}
 		} catch (error) {
 			console.log(error);
@@ -393,21 +409,20 @@ export function modifyBrand(elem) {
 	};
 }
 
-
-export function createdBrand (elem) {
+export function createdBrand(elem) {
 	return async () => {
 		try {
-	  	await axios.post('http://localhost:3001/admin/createdbrand', elem);
+			await axios.post('http://localhost:3001/admin/createdbrand', elem);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-export function createdCategory (elem) {
+export function createdCategory(elem) {
 	return async () => {
 		try {
-	  	await axios.post('http://localhost:3001/admin/addCategory', elem);
+			await axios.post('http://localhost:3001/admin/addCategory', elem);
 		} catch (error) {
 			console.log(error);
 		}
@@ -417,8 +432,7 @@ export function createdCategory (elem) {
 export function createdProduct(elem) {
 	return async () => {
 		try {
-	  	await axios.post('http://localhost:3001/admin/addproduct', elem);
-
+			await axios.post('http://localhost:3001/admin/addproduct', elem);
 		} catch (error) {
 			console.log(error);
 		}
@@ -444,22 +458,23 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		
 		console.log(data);
 
 		try {
-			const res = await axios.post('http://localhost:3001/mercadopago/createorder', data);
+			const res = await axios.post(
+				'http://localhost:3001/mercadopago/createorder',
+				data
+			);
 
-			console.log(res.data)
-			
+			console.log(res.data);
+
 			dispatch({
 				type: SET_CART,
 				payload: res.data,
 			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
-	
-	}
+	};
 }
 /////////////////////////////////////////////// ADMINISTRADOR//////////
