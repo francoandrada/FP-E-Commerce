@@ -26,7 +26,7 @@ const countBrand = async (req, res, next) => {
 		if (n !== 1) count.push({ [brand]: n });
 		else Others++;
 	}
-	count.push({ Others });
+	if (Others) count.push({ Others });
 	return res.json(count);
 };
 

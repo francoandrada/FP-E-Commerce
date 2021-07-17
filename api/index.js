@@ -2,7 +2,6 @@ const server = require('./src/app.js');
 const { productsDb } = require('./src/Controllers/products.js');
 const { conn } = require('./src/db.js');
 
-console.log('hola');
 // Syncing all the models at once.
 conn
 	.sync({ force: false })
