@@ -8,7 +8,7 @@ require('./db.js');
 
 const server = express();
 
-console.log('hola')
+console.log('hola');
 // const mercadopago = require ('mercadopago');
 
 // mercadopago.configure({
@@ -16,7 +16,6 @@ console.log('hola')
 //   });
 
 server.name = 'API';
-
 
 server.use(cors());
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
