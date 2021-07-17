@@ -6,7 +6,6 @@ const { Order, OrderDetail, Product } = require('../db');
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, prodCarrito } = req.body;
 
-	console.log(req.body)
 	try {
 		var newOrder = await Order.create(
 			{
@@ -44,20 +43,28 @@ const createOrder = async function createOrder(req, res) {
 		// res.status(200).json('Order created successfully!');
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
+		// [
+		// 	{ prodId: 5, price: 17399, qty: 3 },
+		// 	{ prodId: 1, price: 99999, qty: 2 },
+		// ];
+
 		const itemsCarrito = prodCarrito.map((i) => ({
 			title: i.name,
 			unit_price: i.price,
 			quantity: i.qty,
+			id: i.prodId,
 		}));
 
 		let preference = {
 			items: itemsCarrito,
 
 			back_urls: {
-				success: 'http://localhost:3000/mercadopago/success',
+				success: 'http://localhost:3000/shoppingcart/success',
 				failure: 'http://localhost:3001/mercadopago/pagos',
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
+
+			"auto_return": "approved",
 		};
 
 		mercadopago.preferences
@@ -74,6 +81,30 @@ const createOrder = async function createOrder(req, res) {
 		res.status(400).json(error);
 	}
 };
+
+// app.post("/create_preference", (req, res) => {
+
+// 	let preference = {
+// 		items: [{
+// 			title: req.body.description,
+// 			unit_price: Number(req.body.price),
+// 			quantity: Number(req.body.quantity),
+// 		}],
+// 		back_urls: {
+// 			"success": "http://localhost:8080/feedback",
+// 			"failure": "http://localhost:8080/feedback",
+// 			"pending": "http://localhost:8080/feedback"
+// 		},
+// 		auto_return: 'approved',
+// 	};
+
+// 	mercadopago.preferences.create(preference)
+// 		.then(function (response) {
+// 			res.json({id :response.body.id})
+// 		}).catch(function (error) {
+// 			console.log(error);
+// 		});
+// });
 
 module.exports = {
 	createOrder,

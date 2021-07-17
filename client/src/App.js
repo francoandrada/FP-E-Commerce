@@ -11,16 +11,13 @@ import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
 import Table from './components/AdminComponents/Table/Table';
-import Swal from 'sweetalert2';
 import AdminRoutes from './components/Routes/AdminRoutes';
 
 import './App.css';
 
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { logOut } from './Redux/actions';
+import Success from './components/ShoppingCartComponents/Success';
 
 // import AddBrand from './components/AdminComponents/AdminAddForm/AdminAddBrand';
 // import AddCategory from './AdminAddForm/AdminAddCategory';
@@ -39,20 +36,6 @@ function App() {
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
 
-	const dispatch = useDispatch();
-	const errorToken = useSelector((state) => state.user.errorToken);
-console.log(errorToken)
-	useEffect(() => {
-		if (errorToken) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Your session has expired, please login again',
-			  })
-			dispatch(logOut());
-		}
-	}, [errorToken]);
-	
 
 	return (
 		<div className='App'>
@@ -91,7 +74,7 @@ console.log(errorToken)
 					<Route path='/searchproduct' exact component={SearchProducts} />
 					<Route path='/cartTest' exact component={CartModal} />
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
-
+					<Route path='/shoppingcart/success' exact component={Success} />
 					<Route path='/table' exact component={Table} />
 				</Switch>
 			</div>

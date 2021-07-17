@@ -14,6 +14,10 @@ function SubTotal({ qty, userLogged }) {
 	const dispatch = useDispatch();
 	const mercadoPago = useSelector((state) => state.cart.link);
 
+	const token = useSelector((state) => state.user.token);
+
+
+
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
 	}
@@ -34,9 +38,11 @@ function SubTotal({ qty, userLogged }) {
 
 	let status = 'created';
 	let array = [];
+	
 	for (let i = 0; i < cartProducts.length; i++) {
 		const element = {
 			prodId: cartProducts[i].id,
+			name: cartProducts[i].name,
 			price: cartProducts[i].price,
 			qty: cartProducts[i].qty,
 		};
@@ -68,7 +74,7 @@ function SubTotal({ qty, userLogged }) {
 					<h3>{totalFormat}</h3>
 				</div>
 		
-				{userLogged ? (
+				{token ? (
 	
 							<button
 							className={style.paymentButton}

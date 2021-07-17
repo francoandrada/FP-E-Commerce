@@ -23,6 +23,9 @@ const Navbar = () => {
 	const history = useHistory();
 	const token = useSelector((state) => state.user.token);
 
+	const userName = useSelector((state) => state.user.userData);
+	// console.log(userName[0].email)
+
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
 
@@ -38,6 +41,10 @@ const Navbar = () => {
 		SetCartCount(count);
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart, cartCount]);
+
+	useEffect(() => {
+		localStorage.setItem("userData", JSON.stringify(userName));
+	}, [userName]);
 
 	useEffect(() => {
 		axios
@@ -99,6 +106,7 @@ const Navbar = () => {
 							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
 							ref={wrapperRef}
 						>
+					
 							<input
 								className={styles.inputEcommerce}
 								value={search}
@@ -139,6 +147,7 @@ const Navbar = () => {
 				</div>
 				<div className={styles.linksNavEcommerce}>
 					{token ? (
+						<div class='d-block mt-4'>
 						<button
 							type='submit'
 							className={styles.but}
@@ -148,6 +157,14 @@ const Navbar = () => {
 						>
 							Log Out
 						</button>
+						{Array.isArray(userName) ? <p class='text-white' >Hola {userName[0].email}!</p>
+						
+					:
+					<p class='text-white' >Hola {userName.name}!</p>
+				
+					}
+					
+						</div>
 					) : (
 						<>
 							<Link to='/register'>Sign Up</Link>
@@ -168,6 +185,7 @@ const Navbar = () => {
 				<div className={styles.sections}>
 					<Link to='/'>Home</Link>
 					<Link to='/catalog'>Catalog</Link>
+					
 				</div>
 			</div>
 		</>
