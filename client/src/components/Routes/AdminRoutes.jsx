@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import Admin from '../AdminComponents/Admin/Admin';
 import AddBrand from '../AdminComponents/AdminAddForm/AdminAddBrand';
@@ -12,8 +12,9 @@ import PutBrand from '../AdminComponents/adminPutForm/putBrand';
 import AdminUsers from '../AdminComponents/AdminUsers/AdminUsers';
 import UserPanel from '../AdminComponents/AdminUsers/UserPanel';
 import Table from '../AdminComponents/Table/Table';
+import DoughnutChart from '../AdminComponents/Charts/Doughnut/Doughnut';
 
-const AdminRoutes = () => {
+const AdminRoutes = ({ location }) => {
 	/* =======================================================================
 			ALL NEW PATH NEED TO GO INSIDE TO THE Switch COMPONENT
 	==========================================================================*/
@@ -37,8 +38,9 @@ const AdminRoutes = () => {
 				<Route path='/admin/users/:email' exact component={UserPanel} />
 				<Route path='/admin/products' exact component={Table} />
 			</Switch>
+			{location.pathname === '/admin' && <DoughnutChart />}
 		</>
 	);
 };
 
-export default AdminRoutes;
+export default withRouter(AdminRoutes);

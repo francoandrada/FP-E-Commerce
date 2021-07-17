@@ -1,0 +1,20 @@
+.chart-container-ecommerce {
+	background-color: #252959;
+	width: 100%;
+	justify-content: space-around;
+	align-items: center;
+	display: flex;
+}
+
+.chart-ecommerce {
+	background-color: #0c0915;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.chart-title {
+	width: 100%;
+	text-align: center;
+	color: white;
+}

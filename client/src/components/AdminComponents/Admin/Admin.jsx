@@ -12,7 +12,6 @@ function Admin() {
 	const showSidebar = () => setSidebar(!sidebar);
 	return (
 		<>
-			<DoughnutChart />
 			<IconContext.Provider value={{ color: '#cd113b' }}>
 				<div className='navbar'>
 					<Link to='#' className='menu-bars'>
