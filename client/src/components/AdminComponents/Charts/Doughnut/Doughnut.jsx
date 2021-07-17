@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountOfBrand } from '../../../../Redux/actions';
 import { Doughnut } from 'react-chartjs-2';
 import Loader from '../../../Loader/Loader';
-import './Doughnut.css';
 
 const DoughnutChart = () => {
 	const dispatch = useDispatch();
@@ -61,24 +60,12 @@ const DoughnutChart = () => {
 	};
 
 	return (
-		<div className='chart-container-ecommerce'>
-			<div className='chart-ecommerce'>
-				<h2 className='chart-title'>Brands</h2>
-				<div className='chart-graphic'>
-					<div style={{ width: '500px', height: '500px' }}>
-						{brandCount ? (
-							<Doughnut
-								height={500}
-								width={700}
-								data={data}
-								options={options}
-							/>
-						) : (
-							<Loader />
-						)}
-					</div>
-				</div>
-			</div>
+		<div style={{ width: '500px', height: '500px' }}>
+			{brandCount ? (
+				<Doughnut height={500} width={700} data={data} options={options} />
+			) : (
+				<Loader />
+			)}
 		</div>
 	);
 };

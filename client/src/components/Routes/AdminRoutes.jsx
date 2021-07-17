@@ -12,7 +12,7 @@ import PutBrand from '../AdminComponents/adminPutForm/putBrand';
 import AdminUsers from '../AdminComponents/AdminUsers/AdminUsers';
 import UserPanel from '../AdminComponents/AdminUsers/UserPanel';
 import Table from '../AdminComponents/Table/Table';
-import DoughnutChart from '../AdminComponents/Charts/Doughnut/Doughnut';
+import Charts from '../AdminComponents/Charts/Charts';
 
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
@@ -38,7 +38,7 @@ const AdminRoutes = ({ location }) => {
 				<Route path='/admin/users/:email' exact component={UserPanel} />
 				<Route path='/admin/products' exact component={Table} />
 			</Switch>
-			{location.pathname === '/admin' && <DoughnutChart />}
+			{location.pathname === '/admin' && <Charts />}
 		</>
 	);
 };
