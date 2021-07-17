@@ -174,7 +174,7 @@ const Navbar = () => {
 						>
 							Log Out
 						</button>
-						{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName[0].email}!</p>
+						{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName.email}!</p>
 						
 					:
 					<p class='text-white h6' >Hola {userName.name}!</p>
