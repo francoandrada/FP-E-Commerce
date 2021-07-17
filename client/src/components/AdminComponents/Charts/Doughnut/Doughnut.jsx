@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountOfBrand } from '../../../../Redux/actions';
 import { Doughnut } from 'react-chartjs-2';
+import Loader from '../../../Loader/Loader';
 import './Doughnut.css';
 
 const DoughnutChart = () => {
 	const dispatch = useDispatch();
+	const [colors, setColors] = useState([]);
 	const { brandCount } = useSelector((state) => state.admin);
 
 	useEffect(() => {
@@ -36,13 +38,17 @@ const DoughnutChart = () => {
 			: [];
 	};
 
+	useEffect(() => {
+		setColors(randomHexColors());
+	}, [brandCount]);
+
 	const data = {
 		labels: brandNames(),
 		datasets: [
 			{
 				label: 'Brands',
 				data: brandValues(),
-				backgroundColor: randomHexColors(),
+				backgroundColor: colors,
 			},
 		],
 	};
@@ -68,18 +74,12 @@ const DoughnutChart = () => {
 								options={options}
 							/>
 						) : (
-							<h1>Loading...</h1>
+							<Loader />
 						)}
 					</div>
-					);
 				</div>
 			</div>
 		</div>
 	);
 };
-
-/*
-
-
-*/
 export default DoughnutChart;
