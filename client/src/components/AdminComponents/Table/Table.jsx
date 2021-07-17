@@ -99,9 +99,11 @@ const Table = () => {
 	return (
 		<div>
 			<Admin />
-			<Link to = '/admin/addproduct'>
-				<button> Add Product </button>
-			</Link>
+			<div className={styles.btnContainer}>
+				<Link to='/admin/addproduct'>
+					<button> Add Product </button>
+				</Link>
+			</div>
 			<div
 				style={{
 					height: '100px',
@@ -109,6 +111,9 @@ const Table = () => {
 					display: 'flex',
 					justifyContent: 'space-around',
 					alignItems: 'center',
+					width:'90%',
+					margin: 'auto',
+					borderRadius:'10px 10px 0 0'
 				}}
 			>
 				<input

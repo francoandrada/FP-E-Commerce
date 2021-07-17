@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-const flex = (align = 'stretch', justify = 'flex-start', direction = 'row') => {
+const flex = (align = 'stretch', justify = 'flex-start', direction = 'row', wrap = 'wrap') => {
 	return `
     display: flex;
     flex-direction: ${direction};
     justify-content: ${justify};
     align-items: ${align};
+    width: 95%;
+    // flex-wrap: ${wrap};
   `;
 };
 export const PaginationBox = styled.div`
