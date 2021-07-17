@@ -10,7 +10,6 @@ const DoughnutChart = () => {
 	useEffect(() => {
 		dispatch(getCountOfBrand());
 	}, [dispatch]);
-	brandCount && console.log('brandCount', brandCount);
 
 	const brandNames = () => {
 		const a = brandCount && brandCount.map((b) => Object.keys(b));
@@ -65,7 +64,7 @@ const DoughnutChart = () => {
 			{
 				label: 'Brands',
 				data: brandValues(),
-				background: randomHexColors(),
+				backgroundColor: randomHexColors(),
 			},
 		],
 	};
