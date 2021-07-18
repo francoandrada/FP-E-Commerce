@@ -13,6 +13,7 @@ import Div from '../StyledComponents/Validation';
 /* global google */
 /* global gapi */
 import { GoogleLogin } from 'react-google-login';
+import AuthenticationButton from '../AuthenticationButton/AuthenticationButton'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -53,7 +54,8 @@ const LogIn = () => {
 	const [userInfo, setUserInfo] = useState({});
 
 	const responseGoogle = (response) => {
-
+		console.log('responseGoogle')
+		console.log(response)
 		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
@@ -71,10 +73,14 @@ const LogIn = () => {
 	useEffect(() => {
 		if (isSignedIn) {
 			console.log('dispatch loginGmail')
-
+			console.log(userInfo)
 			dispatch(loginGmail(userInfo));
 		}
 	});
+
+	// useEffect(() => {
+	// 	console.log(userInfo)
+	// }, [userInfo]);
 
 
 
@@ -186,6 +192,7 @@ const LogIn = () => {
 							Forgot your password?
 						</Link>
 					</div>
+					<AuthenticationButton/>
 				</div>
 				<div class=' rounded'>
 					<Link to={'/'}>

@@ -40,6 +40,7 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
+	SET_MANUAL_AUTHENTICATION
 } from './actionsName';
 
 import axios from 'axios';
@@ -546,5 +547,15 @@ export function getUserOrders(userId) {
 			.then((response) => {
 				dispatch({ type: GET_USER_ORDERS, payload: response.data });
 			});
+	};
+}
+
+////////////////////////// Solo se usa en proyecto deployeado
+export function setAuthentication(payload) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_MANUAL_AUTHENTICATION,
+			payload
+		});
 	};
 }
