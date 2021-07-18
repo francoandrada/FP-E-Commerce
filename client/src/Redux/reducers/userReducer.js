@@ -52,14 +52,12 @@ function userReducer(state = initialState, action) {
 				alert: null,
 			};
 		case SUCCESS_LOGIN:
-	
 			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
 				token: action.payload.token,
 				authenticated: true,
-				userData: action.payload.user
-
+				userData: action.payload.user,
 			};
 		case AUTH_USER:
 			return {
@@ -76,7 +74,7 @@ function userReducer(state = initialState, action) {
 				token: null,
 				authenticated: false,
 				errorToken: null,
-				userData: null
+				userData: [],
 			};
 		case FETCH_ERROR:
 			return {
