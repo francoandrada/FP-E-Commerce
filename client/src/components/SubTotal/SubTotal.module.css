@@ -1,0 +1,21 @@
+.subtotalContainerMain {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.paymentButton {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FF3C4A;
+    color: white;
+    border-style: hidden;
+    border-radius: 10px;
+}
+
+.paymentButton:active {
+    background-color: #bd2d36;   
+}
