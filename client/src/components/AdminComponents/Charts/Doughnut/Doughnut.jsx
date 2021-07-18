@@ -23,9 +23,6 @@ const DoughnutChart = () => {
 		return [a].flat();
 	};
 
-	// CONSOLE.LOG
-	console.log('brandValues', brandValues());
-
 	const randomHexColor = () => {
 		const letters = '0123456789ABCDEF';
 		let color = '#';
