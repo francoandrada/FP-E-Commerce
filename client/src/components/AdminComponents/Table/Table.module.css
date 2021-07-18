@@ -1,10 +1,12 @@
 .tableEcommerce {
 	font-family: 'Arial';
 	border-collapse: collapse;
-	width: 90%;
-	color: white;
-	background-color: gray;
-	margin:0 auto
+	width: 80%;
+	color: black;
+	background-color: white;
+
+	margin-left:20%;
+	
 }
 .btnContainer{
 	display: flex;

@@ -110,12 +110,12 @@ const Table = () => {
 			<div
 				style={{
 					height: '100px',
-					background: 'gray',
+					background: 'white',
 					display: 'flex',
 					justifyContent: 'space-around',
 					alignItems: 'center',
-					width:'90%',
-					margin: 'auto',
+					width:'80%',
+					marginLeft: '20%',
 					borderRadius:'10px 10px 0 0'
 				}}
 			>

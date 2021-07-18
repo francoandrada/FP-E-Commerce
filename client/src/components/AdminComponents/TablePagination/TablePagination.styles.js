@@ -1,18 +1,20 @@
 import styled from 'styled-components';
-const flex = (align = 'stretch', justify = 'flex-start', direction = 'row', wrap = 'wrap') => {
+const flex = (align = 'stretch', justify = 'center', direction = 'row', wrap = 'wrap') => {
 	return `
     display: flex;
     flex-direction: ${direction};
     justify-content: ${justify};
     align-items: ${align};
-    width: 95%;
+    // margin-left: 20%;
+    
     // flex-wrap: ${wrap};
   `;
 };
 export const PaginationBox = styled.div`
   ${flex('center', 'center')};
   color: white;
-  width: 100%;
+  // width: 80%;
+  margin-left: 20%
 
   span {
     padding: 4px;
@@ -28,9 +30,10 @@ export const PaginationBox = styled.div`
 `;
 
 export const PaginationList = styled.ul`
-  ${flex('center', 'space-evenly')};
+  ${flex('center', 'center')};
   padding: 10px;
-
+//  margin-left: 10%;
+// width: 80%;
   li {
     ${flex('center', 'center')};
     width: 45px;
