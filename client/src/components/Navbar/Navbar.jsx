@@ -163,7 +163,7 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={styles.linksNavEcommerce}>
-					{userData && userData.admin!== true ? (
+					{Array.isArray(userData) !== true && userData.admin!== true ? (
 						<Link to='/myaccount'> My Account </Link>
 					) : null }
 					{userData && userData.admin === true ? (
