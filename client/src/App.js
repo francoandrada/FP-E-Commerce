@@ -28,11 +28,15 @@ function App({ location }) {
 
 	return (
 		<div className='App'>
+			<div></div>
+			{!location.pathname.includes('/admin') && <Navbar />}
 			<div class='totalvh'>
-				{!location.pathname.includes('/admin') && <Navbar />}
-
-				<AdminRoutes />
-
+				{location.pathname.includes('/admin') && (
+					<div class='adminn'>
+						{/* <AdminRoutes /> */}
+						<Route path='/admin' component={AdminRoutes} />
+					</div>
+				)}
 				<Switch>
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />

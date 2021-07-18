@@ -1,21 +1,27 @@
-.categoriesContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -5rem;
-    color: white;
+.categoriesContainer {
+	/* display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: -5rem;
+	color: black;
+	background-color: #eee; */
+	background-color: white;
 }
-.category{
-    background-color: grey;
-    padding: 1rem;
-    display: flex;
-    margin: 1rem;
-    border-radius: 12px;
+._container {
+	width: 80%;
+	margin-left: 20%;
 }
-.btnEdit{
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 10px;
-    outline: none;
-    
+
+.category {
+	background-color: grey;
+	padding: 1rem;
+	display: flex;
+	margin: 1rem;
+	border-radius: 12px;
+}
+.btnEdit {
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 10px;
+	outline: none;
 }
