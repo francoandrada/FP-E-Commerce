@@ -105,6 +105,7 @@ const Navbar = () => {
 		}
 	};
 	<button onclick='myFunction()'>Click me</button>;
+	console.log(userData)
 	return (
 		<>
 			<div className={styles.navbarEcommerce}>
@@ -162,7 +163,7 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={styles.linksNavEcommerce}>
-					{userData && userData.length > 0 ? (
+					{userData ? (
 						<button>
 							My Account
 						</button>
