@@ -23,25 +23,25 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const token = useSelector((state) => state.user.token);
-
+	const userData = useSelector((state) => state.user.userData)
 	const userName = useSelector((state) => state.user.userData);
-	
-		
-		const errorToken = useSelector((state) => state.user.errorToken);
-		console.log(errorToken);
-		useEffect(() => {
-			if (errorToken) {
-				Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: 'Your session has expired, please login again',
-				});
-				dispatch(logOut());
-			}
-		}, [errorToken]);
 
 
-	
+	const errorToken = useSelector((state) => state.user.errorToken);
+	console.log(errorToken);
+	useEffect(() => {
+		if (errorToken) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Your session has expired, please login again',
+			});
+			dispatch(logOut());
+		}
+	}, [errorToken]);
+
+
+
 
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
@@ -104,7 +104,6 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-
 	<button onclick='myFunction()'>Click me</button>;
 	return (
 		<>
@@ -123,7 +122,7 @@ const Navbar = () => {
 							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
 							ref={wrapperRef}
 						>
-					
+
 							<input
 								className={styles.inputEcommerce}
 								value={search}
@@ -163,24 +162,37 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={styles.linksNavEcommerce}>
+					{userData && userData.length > 0 ? (
+						<button>
+							My Account
+						</button>
+					) : null }
+					{userData && userData.admin === true ? (
+					<div>
+						<button>
+							Admin Panel
+						</button>
+					</div>
+					) : null
+					}
 					{token ? (
 						<div class='d-block mt-4'>
-						<button
-							type='submit'
-							className={styles.but}
-							onClick={() => {
-								dispatch(logOut());
-							}}
-						>
-							Log Out
-						</button>
-						{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName.email}!</p>
-						
-					:
-					<p class='text-white h6' >Hola {userName.name}!</p>
-				
-					}
-					
+							<button
+								type='submit'
+								className={styles.but}
+								onClick={() => {
+									dispatch(logOut());
+								}}
+							>
+								Log Out
+							</button>
+							{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName.email}!</p>
+
+								:
+								<p class='text-white h6' >Hola {userName.name}!</p>
+
+							}
+
 						</div>
 					) : (
 						<>
@@ -202,7 +214,7 @@ const Navbar = () => {
 				<div className={styles.sections}>
 					<Link to='/'>Home</Link>
 					<Link to='/catalog'>Catalog</Link>
-					
+
 				</div>
 			</div>
 		</>
