@@ -126,7 +126,7 @@ const tablePagination = async (req, res, next) => {
 			include: [Category, Brand],
 			where: {
 				name: {
-					[Op.iLike]: `%${search}%`,
+					[Op.iLike]: `%${search.toLowerCase()}%`,
 				},
 			},
 			order: [[sortBy, order]],

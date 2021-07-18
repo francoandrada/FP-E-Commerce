@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Brand, Product } = require('../../db');
 
 // http://localhost:3001/admin/countofbrand
@@ -13,6 +14,15 @@ const countBrand = async (req, res, next) => {
 		include: {
 			model: Brand,
 		},
+		where: {
+			brandId: {
+				[Op.not]: null,
+			},
+		},
+	});
+
+	const productsWithoutBrand = await Product.findAll({
+		where: { brandId: { [Op.is]: null } },
 	});
 
 	const counter = (array, brand) => {
@@ -30,7 +40,14 @@ const countBrand = async (req, res, next) => {
 		}
 	}
 	if (Others) count.push({ Others });
-	return res.json(count);
+	if (productsWithoutBrand.length)
+		count.push({ ['No Brand']: productsWithoutBrand.length });
+
+	const countOrdered = count.sort(
+		(a, b) => Object.values(a) - Object.values(b)
+	);
+
+	return res.json(countOrdered);
 };
 
 module.exports = countBrand;
