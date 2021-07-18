@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleProduct } from '../../../Redux/actions';
-import { useHistory } from 'react-router';
+// import { deleProduct } from '../../../Redux/actions';
+// import { useHistory } from 'react-router';
 
 import {
 	changePaginationSize,
