@@ -16,7 +16,7 @@ function AdminBrands() {
 
 	const deleteBrandHandle = (e, id) => {
 		e.preventDefault();
-		const response = window.confirm('Delete Category?');
+		const response = window.confirm('Delete Brand?');
 		if (response) {
 			dispatch(deleBrand(id));
 			window.location.reload();
