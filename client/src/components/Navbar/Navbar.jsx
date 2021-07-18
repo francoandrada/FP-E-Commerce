@@ -164,7 +164,7 @@ const Navbar = () => {
 				</div>
 				<div className={styles.linksNavEcommerce}>
 					{userData ? (
-						<button>
+						<button className={styles.but}>
 							My Account
 						</button>
 					) : null }
