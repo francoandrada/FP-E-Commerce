@@ -1,8 +1,21 @@
 .userOptionContainer {
     display: flex;
+    flex-direction: column;
     background-color: white;
     width: 800px;
+    height: 600px;
     margin-left: 20px;
     padding: 20px;
     border-radius: 10px;
+}
+
+
+.orderDetailContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 700px;
+    padding: 20px;
+    border-top: solid;
+    border-top-color: rgb(204, 204, 204);
+    border-width: 0.5px;
 }

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {getUserOrders, getProducts} from '../../../Redux/actions'
 import UserOrders from '../UserOrders/UserOrders';
 import style from './UserView.module.css';
 import {FiUser, FiChevronRight, FiBox, FiHeart, FiHome, FiLogOut} from 'react-icons/fi'
@@ -7,6 +8,7 @@ import {FiUser, FiChevronRight, FiBox, FiHeart, FiHome, FiLogOut} from 'react-ic
 function UserView() {
     const userInfo = useSelector((state) => state.user);
     const userData = userInfo.userData && userInfo.userData
+    const userId = useSelector((state) => state.user.userData.userId);
 	const dispatch = useDispatch();
     const[selectedOption, setSelectedOption] = useState({
         account: '',
@@ -15,6 +17,11 @@ function UserView() {
         adresses: '',
         signout: '',
     })
+
+    useEffect(() => {
+		dispatch(getUserOrders(userId));
+        dispatch(getProducts());
+	}, []);
 
     function setOption (event) {
         setSelectedOption({...selectedOption, [event.target.id]: event.target.id})
@@ -69,7 +76,6 @@ function UserView() {
                 </div>
 
             </div>
-
             <UserOrders/>   
             
 			</div>
