@@ -26,6 +26,7 @@ const Table = () => {
 		filterByCategoryHandle,
 		sortTableHandle,
 		filterByBrandHandle,
+		productToDelete,
 	} = TableLogic();
 
 	const {
@@ -69,6 +70,7 @@ const Table = () => {
 				limit: sizePagination,
 				brand: tableByBrand,
 				search: searchFilter,
+				deleteProduct: productToDelete,
 			})
 		);
 	}, [
@@ -80,6 +82,7 @@ const Table = () => {
 		gotoTablePage,
 		tableByBrand,
 		searchFilter,
+		productToDelete,
 	]);
 
 	/*

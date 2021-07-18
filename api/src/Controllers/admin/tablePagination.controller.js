@@ -3,7 +3,8 @@ const { Product, Category, Brand } = require('../../db.js');
 
 const tablePagination = async (req, res, next) => {
 	let products = {};
-	const { category, sortBy, order, limit, search, brand } = req.body;
+	const { deleteProduct, category, sortBy, order, limit, search, brand } =
+		req.body;
 	const pageAsNumber = Number.parseInt(req.query.page);
 
 	let page = 0;
@@ -18,9 +19,13 @@ const tablePagination = async (req, res, next) => {
 			"category": "default",
 			"limit": paginationNumber,
 			"brand": "default",
-			"search": ""
+			"search": "",
+			"deleteProduct": 0
 		}
 	*/
+	if (deleteProduct && Number.parseInt(deleteProduct) !== 0) {
+		await Product.destroy({ where: { id: deleteProduct } });
+	}
 
 	if (brand && brand !== 'default') {
 		if (order && order !== 'default' && search && search.trim().length) {

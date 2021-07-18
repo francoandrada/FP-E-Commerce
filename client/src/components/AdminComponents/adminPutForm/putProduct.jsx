@@ -45,6 +45,7 @@ function PutProduct(props) {
 		stock: '',
 		brand: '',
 		category:'',
+		// pictures:''
 	});
 
 	useEffect(() => {
@@ -60,6 +61,7 @@ function PutProduct(props) {
 				stock: productToEdit.stock,
 				brand: productToEdit.brand.id,
 				category: productToEdit.categories[0].id,
+				// pictures:''
 			});
 		}
 	}, [productToEdit]);
@@ -80,6 +82,9 @@ function PutProduct(props) {
 		});
 	};
 
+	// const imgUpload = (event)=>{
+	// 	console.log(event)
+	// }
 
 
     const onSubmit = async ()=>{
@@ -246,6 +251,10 @@ function PutProduct(props) {
 					})}
 				/>
 				<span>{errors?.image?.message}</span>
+
+				{/* <h6>Ingresa tus imagenes</h6>
+
+				<input type='file' onChange={(event)=>imgUpload(event)}></input> */}
 
 				<h6>Stock</h6>
 				<input

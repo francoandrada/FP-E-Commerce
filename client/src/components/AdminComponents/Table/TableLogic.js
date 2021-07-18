@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
 	changePaginationSize,
@@ -9,6 +10,7 @@ import {
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
+	const [productToDelete, setProductToDelete] = useState(0);
 
 	function mapData(array) {
 		const data = array.map((e) => {
@@ -21,11 +23,18 @@ const TableLogic = () => {
 				priceSpecial: e.priceSpecial,
 				stock: e.stock,
 				weight: e.weight,
-				category: e.categories[0].name,
+				category: e.categories[0]?.name,
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
-					console.log('el id del producto a eliminar', e.id);
+					const response = window.confirm(
+						`You wanna delete the Product: ${e.name}`
+					);
+					if (response) {
+						setProductToDelete(e.id);
+					} else {
+						setProductToDelete(0);
+					}
 				},
 				update: (event) => {
 					event.preventDefault();
@@ -70,6 +79,7 @@ const TableLogic = () => {
 		filterByCategoryHandle,
 		sortTableHandle,
 		filterByBrandHandle,
+		productToDelete,
 	};
 };
 
