@@ -15,11 +15,11 @@ const Pagination = ({ totalPages, paginate }) => {
 			</span>
 			<PaginationList>
 				{pageNumbers(totalPages).map((number) => (
-					<li key={number}>
+					
 						<PageButton onClick={() => paginate(number)}>
 							{number + 1}
 						</PageButton>
-					</li>
+				
 				))}
 			</PaginationList>
 		</PaginationBox>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SelectStyles = styled.select`
   padding: 8px 18px;
   border-radius: 8px;
-  
+  margin: 0 1rem;
   font-size: 18px;
   font-weight: 700px;
   background-color: rgb(228, 50, 50);

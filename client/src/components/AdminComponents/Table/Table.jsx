@@ -100,65 +100,75 @@ const Table = () => {
 
 	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
 	return (
-		<div>
+		<div className={styles.Container}>
 			<Admin />
 			<div className={styles.btnContainer}>
 				<Link to='/admin/addproduct'>
 					<button> Add Product </button>
 				</Link>
 			</div>
-			<div
-				style={{
-					height: '100px',
-					background: 'white',
-					display: 'flex',
-					justifyContent: 'space-around',
-					alignItems: 'center',
-					width:'80%',
-					marginLeft: '20%',
-					borderRadius:'10px 10px 0 0'
-				}}
-			>
-				<input
-					type='text'
-					value={searchFilter}
-					placeholder='Search...'
-					onChange={searchFilterHandle}
-				/>
+			<div className= {styles.tableContainer}>
 
-				<Select
-					initialValue={sizePagination}
-					onChange={paginationSizeHandle}
-					values={[10, 20, 50, 100, 120]}
-				/>
+				<div
+					style={{
+						height: '100px',
+						background: 'white',
+						display: 'flex',
+						justifyContent: 'space-around',
+						alignItems: 'center',
+						width: '80%',
+						marginLeft: '20%',
+						borderRadius: '10px 10px 0 0',
+						flexDirection: 'column',
+					}}
+				>
+					<div className={styles.searchContainer}>
 
-				<Select
-					initialValue={sortTable}
-					onChange={sortTableHandle}
-					values={['name', 'id', 'price', 'priceSpecial', 'weight', 'stock']}
-				/>
+						<input
+							type='text'
+							value={searchFilter}
+							placeholder='Search...'
+							onChange={searchFilterHandle}
+						/>
 
-				<Select
-					initialValue={orderTable}
-					onChange={orderTableHandle}
-					values={['default', 'ASC', 'DESC']}
-				/>
+					</div>
+					<div className={styles.filterContainer}>
 
-				{allCategories && (
-					<Select
-						initialvalue={filterByCategory}
-						onChange={filterByCategoryHandle}
-						values={['default', ...allCategories.map(({ name }) => name)]}
-					/>
-				)}
+						<Select
+							initialValue={sizePagination}
+							onChange={paginationSizeHandle}
+							values={[10, 20, 50, 100, 120]}
+						/>
 
-				{allBrands && (
-					<Select
-						initialValue={tableByBrand}
-						onChange={filterByBrandHandle}
-						values={['default', ...allBrands.map(({ name }) => name)]}
-					/>
-				)}
+						<Select
+							initialValue={sortTable}
+							onChange={sortTableHandle}
+							values={['name', 'id', 'price', 'priceSpecial', 'weight', 'stock']}
+						/>
+
+						<Select
+							initialValue={orderTable}
+							onChange={orderTableHandle}
+							values={['default', 'ASC', 'DESC']}
+						/>
+
+						{allCategories && (
+							<Select
+								initialvalue={filterByCategory}
+								onChange={filterByCategoryHandle}
+								values={['default', ...allCategories.map(({ name }) => name)]}
+							/>
+						)}
+
+						{allBrands && (
+							<Select
+								initialValue={tableByBrand}
+								onChange={filterByBrandHandle}
+								values={['default', ...allBrands.map(({ name }) => name)]}
+							/>
+						)}
+					</div>
+				</div>
 			</div>
 			{listProductsOnTable ? (
 				<table {...getTableProps()} className={styles.tableEcommerce}>

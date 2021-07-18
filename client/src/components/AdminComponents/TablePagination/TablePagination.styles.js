@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 const flex = (align = 'stretch', justify = 'center', direction = 'row', wrap = 'wrap') => {
-	return `
+  return `
     display: flex;
     flex-direction: ${direction};
     justify-content: ${justify};
@@ -40,17 +40,20 @@ export const PaginationList = styled.ul`
     height: 30px;
     margin: 10px;
     list-style: none;
-    border: 1px solid #a9aac6;
+    border: 1px solid #a9aac6;  
     border-radius: 5px;
   }
 `;
 
 export const PageButton = styled.button`
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
+  width: 45px;
+  height: 30px;
+  margin: 10px;
 
+  background-color:white;
+  border:1px solid rgb(228, 50, 50);
+  border-radius: 10px;
   &:hover {
-    background: orange;
+    background: rgb(228, 50, 50);
   }
 `;
