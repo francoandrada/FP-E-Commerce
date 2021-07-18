@@ -5,7 +5,9 @@ const { Order, OrderDetail, Product, User } = require('../db');
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, prodCarrito, userId } = req.body;
+
 	console.log('userIddd', userId);
+
 	try {
 		var newOrder = await Order.create(
 			{
@@ -50,6 +52,8 @@ const createOrder = async function createOrder(req, res) {
 					})();
 				});
 		});
+
+
 		// res.status(200).json('Order created successfully!', productFind);
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
@@ -74,7 +78,7 @@ const createOrder = async function createOrder(req, res) {
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
 
-			"auto_return": "approved",
+			auto_return: 'approved',
 		};
 
 		mercadopago.preferences
