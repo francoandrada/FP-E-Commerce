@@ -13,41 +13,35 @@ import {
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
-    // const history =useHistory()
+	// const history =useHistory()
 	const [productToDelete, setProductToDelete] = useState(0);
 
 	function mapData(array) {
 		const data = array.map((e) => {
 			return {
-				id: e.id,
-				image: e.image,
-				name: e.name,
-				description: e.description,
-				price: e.price,
-				priceSpecial: e.priceSpecial,
-				stock: e.stock,
-				weight: e.weight,
-				category: e.categories[0]?.name,
-				brand: e.brand.name,
+				id: e?.id,
+				image: e?.image,
+				name: e?.name,
+				description: e?.description || 'No Description',
+				price: e?.price,
+				priceSpecial: e?.priceSpecial,
+				stock: e?.stock,
+				weight: e?.weight,
+				category: e?.categories[0]?.name || 'No Category',
+				brand: e?.brand?.name || 'No Brand',
 				delete: (event) => {
 					event.preventDefault();
-					console.log('el id del producto a eliminar', e.id);
-					// console.log(event.target.value)
-					// history.push('/admin/products');
-					// dispatch(deleProduct(e.id))
-
 					const response = window.confirm(
-						`You wanna delete the Product: ${e.name}`
+						`You wanna delete the Product: ${e?.name}?`
 					);
-					if (response) {
-						setProductToDelete(e.id);
+					if (response && e?.id !== null) {
+						setProductToDelete(e?.id);
 					} else {
 						setProductToDelete(0);
 					}
 				},
 				update: (event) => {
 					event.preventDefault();
-					console.log('el id del producto a actualizar', e.id);
 				},
 			};
 		});
