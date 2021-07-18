@@ -16,7 +16,6 @@ function FilterBrands () {
 
     useEffect(()=>unCheck(brandChecked),[brandChecked]
     )
-
     useEffect(()=>dispatch(filterBrand(brandChecked)),[brandChecked]
     )
     const unCheck = (arg)=>{
