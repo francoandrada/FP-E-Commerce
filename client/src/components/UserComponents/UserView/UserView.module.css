@@ -1,0 +1,45 @@
+.userViewContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-items: center;
+    width: 90%;
+    padding-top: 20px;
+   
+    
+}
+
+.optionsContainer {
+	display: flex;
+	flex-direction: column;
+    justify-content:space-evenly;
+	width: 400px;
+    height: 400px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+	
+}
+
+.optionsLayoutdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.optionsLayoutdiv:hover {
+    background-color: rgb(209, 209, 209);
+}
+
+.subcontainerOptions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ 
+}
+
+.textOptionStyle {
+    text-align: left;
+    margin-bottom: 0;
+    margin-left: 20px;
+   
+}

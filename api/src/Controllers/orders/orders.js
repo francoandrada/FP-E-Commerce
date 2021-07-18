@@ -12,10 +12,6 @@ const getOrders = async function getOrders(req, res, next) {
 	}
 };
 
-module.exports = {
-	getOrders,
-};
-
 //----------------------  GETS ONE ORDER BY ID  ---------------------------//
 
 const getOrderById = async function getOrderById(req, res, next) {
@@ -52,8 +48,25 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 	}
 };
 
+//------------------  GETS ALL ORDERS BY USER ID - FOR USERS ACCOUNT  ----------------------//
+
+const findUserOrders = async function findUserOrders(req, res, next) {
+	const userId = parseInt(req.params.userid);
+
+	try {
+		const allUserOrders = await Order.findAll({
+			where: { userId: userId },
+			include: 'orderDetails',
+		});
+		res.status(200).json(allUserOrders);
+	} catch (error) {
+		next(error);
+	}
+};
+
 module.exports = {
 	getOrders,
 	getOrderById,
 	modifyOrderStatus,
+	findUserOrders,
 };

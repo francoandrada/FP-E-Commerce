@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleProduct } from '../../../Redux/actions';
 import { useHistory } from 'react-router';
@@ -12,7 +13,9 @@ import {
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
-    const history =useHistory()
+    // const history =useHistory()
+	const [productToDelete, setProductToDelete] = useState(0);
+
 	function mapData(array) {
 		const data = array.map((e) => {
 			return {
@@ -24,15 +27,23 @@ const TableLogic = () => {
 				priceSpecial: e.priceSpecial,
 				stock: e.stock,
 				weight: e.weight,
-				category: e.categories[0].name,
+				category: e.categories[0]?.name,
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
 					console.log('el id del producto a eliminar', e.id);
 					// console.log(event.target.value)
-					history.push('/admin/products');
-					dispatch(deleProduct(e.id))
+					// history.push('/admin/products');
+					// dispatch(deleProduct(e.id))
 
+					const response = window.confirm(
+						`You wanna delete the Product: ${e.name}`
+					);
+					if (response) {
+						setProductToDelete(e.id);
+					} else {
+						setProductToDelete(0);
+					}
 				},
 				update: (event) => {
 					event.preventDefault();
@@ -77,6 +88,7 @@ const TableLogic = () => {
 		filterByCategoryHandle,
 		sortTableHandle,
 		filterByBrandHandle,
+		productToDelete,
 	};
 };
 
