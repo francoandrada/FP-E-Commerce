@@ -39,7 +39,6 @@ function AdminCategories() {
 										<th scope='row'>1</th>
 										<td>{c.name}</td>
 										<td>
-											{' '}
 											<div>
 												<Link key={c.id} to={`/admin/putCategory/${c.id}`}>
 													<button className={styles.btnEdit}>

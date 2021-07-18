@@ -16,8 +16,13 @@ function AdminBrands() {
 
 	const deleteBrandHandle = (e, id) => {
 		e.preventDefault();
-		dispatch(deleBrand(id));
-		window.location.reload();
+		const response = window.confirm('Delete Category?');
+		if (response) {
+			dispatch(deleBrand(id));
+			window.location.reload();
+		} else {
+			alert('Delete Aborted');
+		}
 	};
 
 	return (
