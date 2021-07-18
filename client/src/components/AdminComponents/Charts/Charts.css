@@ -1,9 +1,10 @@
 .chart-container-ecommerce {
 	background-color: #252959;
-	width: 100%;
+	width: 80%;
 	justify-content: space-around;
 	align-items: center;
 	display: flex;
+	margin-left: 20%;
 }
 
 .chart-ecommerce {
