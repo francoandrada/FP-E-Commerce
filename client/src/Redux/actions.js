@@ -459,31 +459,31 @@ export function createdProduct(elem) {
 		}
 	};
 }
-
-export function deleProduct(elem) {
+//http://localhost:3001/admin/deletebrand/27
+export function deleProduct(id) {
 	return async () => {
 		try {
-	  	await axios.delete('http://localhost:3001/admin/deleteproduct', elem);
+	  	await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-export function deleBrand(elem) {
+export function deleBrand(id) {
 	return async () => {
 		try {
-	  	await axios.delete('http://localhost:3001/admin/deletebrand', elem);
+	  	await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-export function deleCategory(elem) {
+export function deleCategory(id) {
 	return async () => {
 		try {
-	  	await axios.delete('http://localhost:3001/admin/deletecategory', elem);
+	  	await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
