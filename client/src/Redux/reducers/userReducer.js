@@ -75,7 +75,8 @@ function userReducer(state = initialState, action) {
 				token: null,
 				authenticated: false,
 				errorToken: null,
-				userData: null,
+				userData: [],
+
 			};
 		case FETCH_ERROR:
 			return {
