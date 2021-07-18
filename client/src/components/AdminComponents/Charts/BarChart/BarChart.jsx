@@ -25,8 +25,6 @@ const BarChart = () => {
 		return a.flat();
 	};
 
-	console.log('values', categoryValues());
-
 	const randomHexColor = () => {
 		const letters = '0123456789ABCDEF';
 		let color = '#';
@@ -55,8 +53,6 @@ const BarChart = () => {
 			},
 		],
 	};
-
-	console.log('categories', categoriesCount);
 
 	return (
 		<div style={{ width: '500px', height: '500px', padding: '5px' }}>
