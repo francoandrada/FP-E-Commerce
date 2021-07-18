@@ -1,10 +1,25 @@
 .tableEcommerce {
 	font-family: 'Arial';
 	border-collapse: collapse;
-	width: 100%;
-	color: red;
+	width: 90%;
+	color: white;
+	background-color: gray;
+	margin:0 auto
 }
-
+.btnContainer{
+	display: flex;
+	flex-direction: row-reverse;
+	margin-bottom: 1.5rem;
+	margin-right: 1.5rem;
+}
+.btnContainer button{
+	padding: 6px 10px;
+	border-radius: 14px;
+	border: 0;
+	background-color: rgb(228, 50, 50);
+	color: white;
+	font-weight: 700;
+}
 .tableEcommerce td,
 .tableEcommerce th {
 	border: 1px solid white;
@@ -12,17 +27,17 @@
 }
 
 .tableEcommerce tr:nth-child(even) {
-	background-color: #f2f2f2;
+	/* background-color: #f2f2f2; */
 }
 
 .tableEcommerce tr:hover {
-	background-color: #ddd;
+	background-color:rgb(228, 50, 50);
 }
 
 .tableEcommerce th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #4caf50;
+	background-color: rgb(228, 50, 50);
 	color: white;
 }
