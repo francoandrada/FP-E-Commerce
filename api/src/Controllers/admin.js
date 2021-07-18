@@ -167,6 +167,7 @@ async function getUserToEdit (req, res) {
 };
 
 async function putUserInfo(req, res, next) {
+	console.log(req.body)
 	try {
 		// console.log(req.body)
 		// res.send('ok')

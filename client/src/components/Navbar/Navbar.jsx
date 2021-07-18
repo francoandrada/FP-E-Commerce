@@ -163,16 +163,12 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={styles.linksNavEcommerce}>
-					{userData ? (
-						<button className={styles.but}>
-							My Account
-						</button>
+					{userData && userData.admin!== true ? (
+						<Link to='/myaccount'> My Account </Link>
 					) : null }
 					{userData && userData.admin === true ? (
 					<div>
-						<button>
-							Admin Panel
-						</button>
+						<Link to='/admin'>Admin Panel</Link>
 					</div>
 					) : null
 					}
@@ -187,10 +183,10 @@ const Navbar = () => {
 							>
 								Log Out
 							</button>
-							{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName.email}!</p>
+							{Array.isArray(userName) ? <p class='text-white h6' >Hi, {userName.email}!</p>
 
 								:
-								<p class='text-white h6' >Hola {userName.name}!</p>
+								<p class='text-white h6' >Hi, {userName.name}!</p>
 
 							}
 
