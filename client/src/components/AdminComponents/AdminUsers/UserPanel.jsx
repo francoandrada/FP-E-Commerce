@@ -100,8 +100,9 @@ function UserPanel() {
 		}
     }
 
-    const handleSubmit = async ()=>{
+    const handleSubmit = async (e )=>{
 			console.log(user);
+			e.preventDefault()
 			try {
 				await axios.put('http://localhost:3001/admin/user/edit',user)
                 .then(()=>{

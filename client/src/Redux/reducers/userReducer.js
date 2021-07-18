@@ -10,6 +10,7 @@ import {
 	HIDE_ALERT,
 	FORGOT_PASSWORD,
 	ERRORTOKEN,
+	SET_MANUAL_AUTHENTICATION,
 } from '../actionsName';
 
 const initialState = {
@@ -75,6 +76,7 @@ function userReducer(state = initialState, action) {
 				authenticated: false,
 				errorToken: null,
 				userData: [],
+
 			};
 		case FETCH_ERROR:
 			return {
@@ -104,6 +106,12 @@ function userReducer(state = initialState, action) {
 			return {
 				...state,
 				errorToken: action.payload,
+			};
+		case SET_MANUAL_AUTHENTICATION:
+			console.log('en reducer');
+			return {
+				...state,
+				authenticated: action.payload,
 			};
 		default: {
 			return state;

@@ -1,16 +1,23 @@
 .tableEcommerce {
 	font-family: 'Arial';
 	border-collapse: collapse;
-	width: 90%;
-	color: white;
-	background-color: gray;
-	margin:0 auto
+	width: 80%;
+	color: black;
+	background-color: white;
+	margin-left:20%;
+}
+.Container{
+	margin-right: 10%;
+	margin-left: 10%;
+}
+
+.filterContainer{
+	display: flex;
 }
 .btnContainer{
 	display: flex;
 	flex-direction: row-reverse;
-	margin-bottom: 1.5rem;
-	margin-right: 1.5rem;
+	margin: 2rem;
 }
 .btnContainer button{
 	padding: 6px 10px;

@@ -28,7 +28,7 @@ function Products() {
 
 	let stockS = useSelector((state) => state.stock.order);
 	let categoryS = useSelector((state) => state.category.selectedCategory);
-	let brandS = useSelector((state) => state.brands.selectBrand);
+	let brandS = useSelector((state) => state.brands.selectedBrand);
 	let priceS = useSelector((state) => state.price.order);
 	let actualPage = useSelector((state) => state.product.page);
 	let productsPerPage = 9;

@@ -1,8 +1,11 @@
-import { GET_BRANDS, SELECTED_BRANDS,CLEAN_FILTERS } from '../actionsName';
+import { GET_BRANDS,
+	 SELECTED_BRANDS,
+	  FILTER_BRANDS,
+	   CLEAN_FILTERS } from '../actionsName';
 
 const initialState = {
 	allBrands: [],
-	selectBrand: '',
+	selectedBrand: '',
 };
 
 function brandsReducer(state = initialState, action) {
@@ -13,7 +16,11 @@ function brandsReducer(state = initialState, action) {
 				allBrands: action.payload,
 			};
 		case SELECTED_BRANDS:
-			//falta hacer
+				return {
+					...state,
+					selectedBrand: action.payload,
+				};	
+		case FILTER_BRANDS:
 			return {
 				...state,
 				selectedBrand: action.payload,
@@ -22,7 +29,7 @@ function brandsReducer(state = initialState, action) {
 		case CLEAN_FILTERS:
 			return {
 				...state,
-				selectBrand: ''
+				selectedBrand: ''
 			};
 		default:
 			return state;

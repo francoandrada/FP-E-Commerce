@@ -25,11 +25,12 @@ function AddProduct () {
         reset
       } = useForm();
 
-      
+
+
       const  changeInput = (e)=> {
-          const value= e.target.value
-          const name= e.target.name
-          //  console.log(value, name)
+        //   const value= e.target.value
+        //   const name= e.target.name
+          console.log(e.target.files)
           
         }
 
@@ -248,6 +249,9 @@ function AddProduct () {
 					className=''
 					type='text'
 					name='image'
+					// name="images[]"
+					// id="fileInput"
+					// multiple
 					onChange={(e) => changeInput(e)}
 					{...register('image', {
 						// required:{

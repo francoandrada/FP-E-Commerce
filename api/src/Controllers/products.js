@@ -82,6 +82,7 @@ const postNewProduct = async function postNewProduct(req, res) {
 };
 
 // ----------------  FIND ALL PRODUCTS -----------------
+// producto con brnadId y category
 const getAllProducts = async function getAllProducts(req, res, next) {
 	try {
 		const allProduct = await Product.findAll({ include: Category });
@@ -120,21 +121,6 @@ const getBrandProduct = async function getBrandProduct(req, res, next) {
 		next(error);
 	}
 };
-// ----------------     GET BY CATEGORY -----------------
-// const getCategoryProduct = async function getCategoryProduct(req, res, next) {
-// 	try {
-// 		const category = req.params.category;
-// 		const getCategory = await Product.findAll({
-// 			include: Category,
-// 			where: {
-// 				name: category,
-// 			},
-// 		});
-// 		res.status(200).json(getCategory);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// };
 
 // ----------------  SEARCH PRODUCTS BY NAME -----------------
 

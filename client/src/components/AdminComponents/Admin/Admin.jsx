@@ -7,23 +7,18 @@ import { IconContext } from 'react-icons';
 import './Admin.css';
 
 function Admin() {
-	const [sidebar, setSidebar] = useState(false);
-	const showSidebar = () => setSidebar(!sidebar);
+	// const [sidebar, setSidebar] = useState(false);
+	// const showSidebar = () => setSidebar(!sidebar);
 	return (
-		<>
+		<div className='container'>
 			<IconContext.Provider value={{ color: '#cd113b' }}>
-				<div className='navbar'>
+				{/* <div className='navbar'>
 					<Link to='#' className='menu-bars'>
 						<FaIcons.FaBars onClick={showSidebar} />
 					</Link>
-				</div>
-				<nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-					<ul className='nav-menu-items' onClick={showSidebar}>
-						<li className='navbar-toggle'>
-							<Link to='#' className='menu-bars'>
-								<AiIcons.AiOutlineClose />
-							</Link>
-						</li>
+				</div> */}
+				<div className='nav-menu active'>
+					<ul className='nav-menu-items'>
 						{SidebarData.map((item, index) => {
 							return (
 								<li key={index} className={item.cName}>
@@ -40,9 +35,9 @@ function Admin() {
                         <Link to='/admin/users'><li className='navbar-toggle'> Users </li></Link>
                         <Link to='/admin/orders'><li className='navbar-toggle'> Orders </li></Link> */}
 					</ul>
-				</nav>
+				</div>
 			</IconContext.Provider>
-		</>
+		</div>
 	);
 }
 

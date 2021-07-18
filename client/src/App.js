@@ -11,7 +11,6 @@ import SearchProducts from './components/searchProducts/SearchProducts';
 import DetailProduct from './components/ProductDetail/ProductDetail';
 import ShoppingCart from './components/ContainerComponents/ShoppingCart/ShoppingCart';
 import Footer from './components/ContainerComponents/Footer/Footer';
-import Table from './components/AdminComponents/Table/Table';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import Error404View from './components/ErrorComponents/Error404View';
@@ -29,11 +28,15 @@ function App({ location }) {
 
 	return (
 		<div className='App'>
+			<div></div>
+			{!location.pathname.includes('/admin') && <Navbar />}
 			<div class='totalvh'>
-				{!location.pathname.includes('/admin') && <Navbar />}
-
-				<AdminRoutes />
-
+				{location.pathname.includes('/admin') && (
+					<div class='adminn'>
+						{/* <AdminRoutes /> */}
+						<Route path='/admin' component={AdminRoutes} />
+					</div>
+				)}
 				<Switch>
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
@@ -50,12 +53,11 @@ function App({ location }) {
 					<Route path='/cartTest' exact component={CartModal} />
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 					<Route path='/shoppingcart/success' exact component={Success} />
-					<Route path='/table' exact component={Table} />
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/error' exact component={Error404View} />
 				</Switch>
 			</div>
-			<Route path='/' component={Footer} />
+			{!location.pathname.includes('/admin') && <Footer />}
 		</div>
 	);
 }

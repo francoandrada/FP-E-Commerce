@@ -15,6 +15,7 @@ import {
 	GET_HIGHLIGHTS,
 	GET_BRANDS,
 	FILTER_CATEGORIES,
+	FILTER_BRANDS,
 	CLEAN_SUGGESTIONS,
 	FILTER_PRICE,
 	FILTERED_PRODUCTS,
@@ -39,6 +40,7 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
+	SET_MANUAL_AUTHENTICATION
 } from './actionsName';
 
 import axios from 'axios';
@@ -339,6 +341,9 @@ export const filterStock = (name) => {
 export const filterPrice = (name) => {
 	return { type: FILTER_PRICE, payload: name };
 };
+export const filterBrand = (name) => {
+	return { type: FILTER_BRANDS, payload: name };
+};
 
 export function getFilteredProducts(query) {
 	const { category, brand, price, page, qty, stock } = query;
@@ -459,6 +464,40 @@ export function createdProduct(elem) {
 		}
 	};
 }
+//http://localhost:3001/admin/deletebrand/27
+export function deleProduct(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleBrand(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleCategory(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
+
 
 export function getUsers() {
 	return async (dispatch) => {
@@ -508,5 +547,15 @@ export function getUserOrders(userId) {
 			.then((response) => {
 				dispatch({ type: GET_USER_ORDERS, payload: response.data });
 			});
+	};
+}
+
+////////////////////////// Solo se usa en proyecto deployeado
+export function setAuthentication(payload) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_MANUAL_AUTHENTICATION,
+			payload
+		});
 	};
 }
