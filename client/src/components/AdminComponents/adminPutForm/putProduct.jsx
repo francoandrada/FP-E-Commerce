@@ -199,7 +199,7 @@ function PutProduct(props) {
 							message: 'mas de 10 caracteres',
 						},
 						pattern: {
-							value: /^[a-zA-Z]*$/,
+							value: /^[a-zA-Z ]*$/,
 							message: 'no debe ingresar numeros',
 						},
 					})}

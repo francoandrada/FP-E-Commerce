@@ -15,6 +15,7 @@ import {
 	GET_HIGHLIGHTS,
 	GET_BRANDS,
 	FILTER_CATEGORIES,
+	FILTER_BRANDS,
 	CLEAN_SUGGESTIONS,
 	FILTER_PRICE,
 	FILTERED_PRODUCTS,
@@ -339,6 +340,9 @@ export const filterStock = (name) => {
 export const filterPrice = (name) => {
 	return { type: FILTER_PRICE, payload: name };
 };
+export const filterBrand = (name) => {
+	return { type: FILTER_BRANDS, payload: name };
+};
 
 export function getFilteredProducts(query) {
 	const { category, brand, price, page, qty, stock } = query;
@@ -459,6 +463,40 @@ export function createdProduct(elem) {
 		}
 	};
 }
+//http://localhost:3001/admin/deletebrand/27
+export function deleProduct(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleBrand(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleCategory(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
+
 
 export function getUsers() {
 	return async (dispatch) => {

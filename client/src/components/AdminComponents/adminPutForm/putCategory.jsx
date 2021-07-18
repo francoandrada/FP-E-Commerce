@@ -99,7 +99,7 @@ var id = props.match.params.id
                 message:"mas de 3 caracteres"
             },
             pattern:{
-                value: /^[a-zA-Z]*$/,
+                value: /^[a-zA-Z ]*$/,
                 message:"no debe ingresar numeros"
             }
             })}

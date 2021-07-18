@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+// import { deleProduct } from '../../../Redux/actions';
+// import { useHistory } from 'react-router';
+
 import {
 	changePaginationSize,
 	changeOrderTable,
@@ -10,6 +13,7 @@ import {
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
+    // const history =useHistory()
 	const [productToDelete, setProductToDelete] = useState(0);
 
 	function mapData(array) {
@@ -27,6 +31,11 @@ const TableLogic = () => {
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
+					console.log('el id del producto a eliminar', e.id);
+					// console.log(event.target.value)
+					// history.push('/admin/products');
+					// dispatch(deleProduct(e.id))
+
 					const response = window.confirm(
 						`You wanna delete the Product: ${e.name}`
 					);
