@@ -501,9 +501,12 @@ export function postCart(data) {
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
+	console.log('desde reducer', userId);
 	return async (dispatch) => {
-		axios.get(`http://localhost:3001/order/user/${userId}`).then((response) => {
-			dispatch({ type: GET_USER_ORDERS, payload: response.data });
-		});
+		axios
+			.get(`http://localhost:3001/orders/order/user/${userId}`)
+			.then((response) => {
+				dispatch({ type: GET_USER_ORDERS, payload: response.data });
+			});
 	};
 }

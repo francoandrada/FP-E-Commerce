@@ -1,0 +1,17 @@
+.errorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.error404Image {
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    height: 800px;
+    background-image: url('../../images/batman_404.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}

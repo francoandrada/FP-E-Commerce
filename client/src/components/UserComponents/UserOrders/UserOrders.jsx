@@ -1,18 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
+import UserOrderDetail from './UserOrderDetail'
 import style from './UserOrders.module.css';
 
 
 function UserOrders() {
     const userId = useSelector((state) => state.user.userData.userId);
-    // const userAllOrders = useSelector((state) => state.userOrders);
+    const userOrders = useSelector((state) => state.useraccount.userOrdersList);
+	const orderProducts = useSelector((state) => state.product.allProducts);
 	const dispatch = useDispatch();
 
-    // useEffect(() => {
-	// 	getUserOrders(userId);
-
-	// });
-   
 
 	return (
 		<div>
@@ -20,7 +16,18 @@ function UserOrders() {
             
             <h3>My Orders</h3>
             <div>
-                
+			{userOrders && userOrders.map((order) => {
+				return (
+					<div>
+					<UserOrderDetail
+						ammount={order.ammount}
+						status={order.status}
+					/>
+					</div>
+				)
+			}
+
+			)}
 
 
             </div>
