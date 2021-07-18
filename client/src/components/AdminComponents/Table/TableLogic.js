@@ -27,7 +27,12 @@ const TableLogic = () => {
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
-					setProductToDelete(e.id);
+					const res = window.confirm(`You wanna delete the product: ${e.name}`);
+					if (res) {
+						setProductToDelete(e.id);
+					} else {
+						setProductToDelete(0);
+					}
 				},
 				update: (event) => {
 					event.preventDefault();
