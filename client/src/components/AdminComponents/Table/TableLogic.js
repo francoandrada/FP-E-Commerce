@@ -23,11 +23,18 @@ const TableLogic = () => {
 				priceSpecial: e.priceSpecial,
 				stock: e.stock,
 				weight: e.weight,
-				category: e.categories[0].name,
+				category: e.categories[0]?.name,
 				brand: e.brand.name,
 				delete: (event) => {
 					event.preventDefault();
-					setProductToDelete(e.id);
+					const response = window.confirm(
+						`You wanna delete the Product: ${e.name}`
+					);
+					if (response) {
+						setProductToDelete(e.id);
+					} else {
+						setProductToDelete(0);
+					}
 				},
 				update: (event) => {
 					event.preventDefault();
