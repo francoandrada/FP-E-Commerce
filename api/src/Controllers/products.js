@@ -4,7 +4,7 @@ const { jsonProducts } = require('../../jsonProducts');
 
 // ----------------  Products to Db -----------------
 const productsDb = async function setProductsToDb() {
-	var aux = jsonProducts.forEach(
+	jsonProducts.forEach(
 		({
 			name,
 			priceNormal,
@@ -16,8 +16,8 @@ const productsDb = async function setProductsToDb() {
 			category,
 		}) => {
 			(async function creatProd() {
-				var pr = await Product.create(
-					{
+				var pr = await Product.findOrCreate({
+					where: {
 						name: name,
 						price: priceNormal,
 						priceSpecial: priceSpecial,
@@ -26,29 +26,18 @@ const productsDb = async function setProductsToDb() {
 						weight: weight,
 						stock: 1,
 					},
-					{
-						fields: [
-							'name',
-							'price',
-							'priceSpecial',
-							'image',
-							'description',
-							'weight',
-							'stock',
-						],
-					}
-				).then((product) => {
+				}).then((product) => {
 					(async function createBrandProd() {
 						var brandDb = await Brand.findOrCreate({
 							where: { name: brand },
 						});
-						await product.setBrand(brandDb[0]);
+						await product[0].setBrand(brandDb[0]);
 					})();
 					(async function createCategoryProd() {
 						var categoryDb = await Category.findOrCreate({
 							where: { name: category },
 						});
-						await product.addCategories(categoryDb[0]);
+						await product[0].addCategories(categoryDb[0]);
 					})();
 				});
 			})();
@@ -106,7 +95,7 @@ const getIdProduct = async function getIdProduct(req, res, next) {
 	try {
 		const id = parseInt(req.params.id);
 		const IdProduct = await Product.findOne({
-			include: [{ model: Brand }, {model: Category}],
+			include: [{ model: Brand }, { model: Category }],
 			where: {
 				id: id,
 			},
@@ -192,7 +181,7 @@ const orderProducts = async function orderProducts(req, res, next) {
 const getAllCategories = async function getAllCategories(req, res, next) {
 	try {
 		const allCategories = await Category.findAll();
-	
+
 		res.status(200).json(allCategories);
 	} catch (error) {
 		next(error);
@@ -201,60 +190,59 @@ const getAllCategories = async function getAllCategories(req, res, next) {
 
 // http://localhost:3001/products/catalog?category=pc&brand=asus&order=descending&page=1
 const getFilteredProducts = async function getFilteredProducts(req, res, next) {
-
 	//req.query = { category: 'pc', brand: 'asus', price: 'descending', page: '1' }
-	
+
 	try {
+		const { category, brand, price, page, qty, stock } = req.query;
 
-		const {category,brand,price,page,qty, stock} = req.query
-
-		const pageNumber = page || 1
-
-
+		const pageNumber = page || 1;
 
 		let allProduct = await Product.findAll({
-			include: [{model: Category},{model: Brand}],
+			include: [{ model: Category }, { model: Brand }],
 		});
 
-		let result = []
+		let result = [];
 
 		// if(category){
 		// 	allProduct.forEach(product=>{
 		// 		if(product.categories[0].name===category){
 		// 			result.push(product)
-		// 		}	
+		// 		}
 		// 	})
 		// }
 
+		function filter() {
+			let allProduct1 = allProduct;
+			if (category) {
+				allProduct1 = allProduct.filter(
+					(product) => product.categories[0].name === category
+				);
+			}
+			if (brand) {
+				allProduct1 = allProduct1.filter(
+					(product) => product.brand.name === brand
+				);
+			}
+			if (stock === 'true') {
+				allProduct1 = allProduct1.filter((product) => product.stock >= 1);
+			}
+			if (stock === 'false') {
+				allProduct1 = allProduct1.filter((product) => product.stock <= 0);
+			}
+			if (price === 'ascending') {
+				allProduct1.sort(function (a, b) {
+					if (a.price > b.price) {
+						return 1;
+					}
+					if (a.price < b.price) {
+						return -1;
+					}
+					// a must be equal to b
+					return 0;
+				});
+			}
 
-		function filter(){
-			let allProduct1 = allProduct
-			if(category){
-				allProduct1 = allProduct.filter(product=>product.categories[0].name===category)
-			}
-			if(brand){
-				allProduct1 = allProduct1.filter(product=>product.brand.name===brand)
-			}
-			if(stock==='true'){
-				allProduct1 = allProduct1.filter(product=>product.stock>=1)
-			}
-			if(stock==='false'){
-				allProduct1 = allProduct1.filter(product=>product.stock<=0)
-			}
-			if(price==='ascending'){
-					allProduct1.sort(function (a, b) {
-						if (a.price > b.price) {
-						  return 1;
-						}
-						if (a.price < b.price) {
-						  return -1;
-						}
-						// a must be equal to b
-						return 0;
-					  });
-			}
-			
-			if(price==='descending'){
+			if (price === 'descending') {
 				allProduct1.sort(function (b, a) {
 					if (b.price > a.price) {
 						return -1;
@@ -264,10 +252,10 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 					}
 					// a must be equal to b
 					return 0;
-					});
+				});
 			}
 
-			if(price==='descending'){
+			if (price === 'descending') {
 				allProduct1.sort(function (b, a) {
 					if (b.price > a.price) {
 						return -1;
@@ -277,19 +265,18 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 					}
 					// a must be equal to b
 					return 0;
-					});
+				});
 			}
 
 			let respuesta = {
-				products: allProduct1.slice((pageNumber-1)*qty,pageNumber*qty),
-				length : allProduct1.length
-			}
+				products: allProduct1.slice((pageNumber - 1) * qty, pageNumber * qty),
+				length: allProduct1.length,
+			};
 
-			return respuesta
+			return respuesta;
 		}
 
-		let result1 = await filter()
-
+		let result1 = await filter();
 
 		res.status(200).json(result1);
 		// const allProduct = await Product.findAll({ include: Category });
