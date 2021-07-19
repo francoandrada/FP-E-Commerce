@@ -65,7 +65,7 @@ function FilterCategories() {
 				<ul></ul>
 			)}
                     <hr></hr>
-                    <OrderByPrice id={styles.filterContainer}/> 
+                    <OrderByPrice id={styles.filterContainer}/>  
                     <hr></hr>
                     <h6 className={styles.title}>Order by rating</h6>
                     <hr></hr>
