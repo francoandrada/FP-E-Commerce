@@ -5,8 +5,12 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 50px;
+    flex-direction: column;
 }
-
+.btnBackContainer{
+    font-size: 40px;
+    margin-right: 70%;
+}
 #regForm {
     color: white;
     width: 100%;

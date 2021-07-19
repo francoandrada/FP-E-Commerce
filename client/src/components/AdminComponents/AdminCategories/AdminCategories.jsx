@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Admin from '../Admin/Admin';
 import { deleCategory, getCategories } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
+import { FaTrashAlt } from 'react-icons/fa';
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 function AdminCategories() {
@@ -56,7 +57,7 @@ function AdminCategories() {
 													</button>
 												</Link>
 												<button onClick={(e) => deleteCategoryHandle(e, c.id)}>
-													Delete
+													<FaTrashAlt />
 												</button>
 											</div>
 										</td>

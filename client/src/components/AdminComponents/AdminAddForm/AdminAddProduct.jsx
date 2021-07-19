@@ -1,53 +1,56 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import {createdProduct, getProducts, getCategories, getBrands} from "../../../Redux/actions"
+import { createdProduct, getProducts, getCategories, getBrands } from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
+import styles from '../../Register/Register.module.css'
+import { MdArrowBack } from 'react-icons/md'
 
 
-function AddProduct () {
-    const dispatch = useDispatch()
-    const products = useSelector((state) => state.product.allProducts)
-    const brand = useSelector((state) => state.brands.allBrands);
+function AddProduct() {
+	const dispatch = useDispatch()
+	const products = useSelector((state) => state.product.allProducts)
+	const brand = useSelector((state) => state.brands.allBrands);
 	const categories = useSelector((state) => state.category.allCategories);
-    // var id = props.match.params.id
-    console.log(products)
-    useEffect(()=>{
-     dispatch(getBrands())
-     dispatch(getCategories());
-    },[dispatch])
+	// var id = props.match.params.id
+	console.log(products)
+	useEffect(() => {
+		dispatch(getBrands())
+		dispatch(getCategories());
+	}, [dispatch])
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset
-      } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset
+	} = useForm();
 
 
 
-      const  changeInput = (e)=> {
-        //   const value= e.target.value
-        //   const name= e.target.name
-          console.log(e.target.files)
-          
-        }
+	const changeInput = (e) => {
+		//   const value= e.target.value
+		//   const name= e.target.name
+		console.log(e.target.files)
 
-    const submit=(data, e)=>{
-        // data.id = id
-        console.log(data)
-        for(let i=0 ; i< products.length; i++){
-            if(products[i].name.toLowerCase() === data.name.toLowerCase()){
-             return  swal({
-                    title: 'Existing name',
-                    icon: 'warning',
-                    button: 'ok',
-                    timer: '5000',
-                })
-            }
-        }
-        if (
+	}
+
+	const submit = (data, e) => {
+		// data.id = id
+		console.log(data)
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
+				return swal({
+					title: 'Existing name',
+					icon: 'warning',
+					button: 'ok',
+					timer: '5000',
+				})
+			}
+		}
+		if (
 			(data.name && data.name.length > 0) &&
 			(data.price && data.price.length > 0) &&
 			(data.priceSpecial && data.priceSpecial.length > 0) &&
@@ -57,76 +60,83 @@ function AddProduct () {
 			(data.stock && data.stock.length > 0) &&
 			(data.category && data.category.length > 0) &&
 			(data.brandId && data.brandId.length > 0)
-		){
-            dispatch(createdProduct(data))
-            e.target.reset()
-            swal({
-                title:"Product Created!!",
-                icon: "success",
-                button: "ok",
-                timer: "5000"
-            })
-            .then(()=> dispatch(getProducts()))
+		) {
+			dispatch(createdProduct(data))
+			e.target.reset()
+			swal({
+				title: "Product Created!!",
+				icon: "success",
+				button: "ok",
+				timer: "5000"
+			})
+				.then(() => dispatch(getProducts()))
 
-            reset({data})
+			reset({ data })
 
-        }else{
-            swal({
-                title:"All fields are required",
-                icon: "error",
-                button: "ok",
-                timer: "5000"
-            })
-        }
-    }
-
-
-
-    return (
-        <div>
-            <form
-            className=""
-            onChange={(e)=>changeInput(e)}
-            onSubmit={handleSubmit(submit)}
-            >
-                
-           <h6> Name Product</h6>
-            <input
-            className=""
-            type="text"
-            name="name"
-            onChange={(e)=>changeInput(e)}
-            {...register("name", {
-            // required:{
-            //     value: true,
-            //     massage: "debe ingresar un nombre"
-            // },
-            maxLength:{
-                value: 20,
-                massage:"menos de 20 caracteres"
-            },
-            minLength:{
-                value: 3,
-                message:"mas de 3 caracteres"
-            },
-            pattern:{
-                value: /^[a-zA-Z ]*$/,
-                message:"no debe ingresar numeros"
-            }
-            })}
-            >
-            
-            </input>
-            <span>{errors?.name?.message}</span> 
+		} else {
+			swal({
+				title: "All fields are required",
+				icon: "error",
+				button: "ok",
+				timer: "5000"
+			})
+		}
+	}
 
 
-            
+
+	return (
+		<div>
+			<div className={styles.btnBackContainer}>
+			<Link to='/admin/products'>
+					
+						<MdArrowBack />
+					
+				</Link>
+			</div>
+			<form
+				className=""
+				onChange={(e) => changeInput(e)}
+				onSubmit={handleSubmit(submit)}
+			>
+
+				<h6> Name Product</h6>
+				<input
+					className=""
+					type="text"
+					name="name"
+					onChange={(e) => changeInput(e)}
+					{...register("name", {
+						// required:{
+						//     value: true,
+						//     massage: "debe ingresar un nombre"
+						// },
+						maxLength: {
+							value: 20,
+							massage: "menos de 20 caracteres"
+						},
+						minLength: {
+							value: 3,
+							message: "mas de 3 caracteres"
+						},
+						pattern: {
+							value: /^[a-zA-Z ]*$/,
+							message: "no debe ingresar numeros"
+						}
+					})}
+				>
+
+				</input>
+				<span>{errors?.name?.message}</span>
+
+
+
 				<h6>Price</h6>
 				<input
 					className=''
 					type='number'
 					name='price'
-                    min='0'
+					min='0'
 					onChange={(e) => changeInput(e)}
 					{...register('price', {
 						// required:{
@@ -151,12 +161,12 @@ function AddProduct () {
 
 
 
-            	<h6>Special Price</h6>
+				<h6>Special Price</h6>
 				<input
 					className=''
 					type='number'
 					name='priceSpecial'
-                    min='0'
+					min='0'
 					onChange={(e) => changeInput(e)}
 					{...register('priceSpecial', {
 						// required:{
@@ -178,12 +188,12 @@ function AddProduct () {
 					})}
 				/>
 				<span>{errors?.priceSpecial?.message}</span>
-            
 
 
 
 
-            	<h6>Description</h6>
+
+				<h6>Description</h6>
 				<input
 					className=''
 					type='text'
@@ -209,17 +219,17 @@ function AddProduct () {
 					})}
 				/>
 				<span>{errors?.description?.message}</span>
-            
 
 
 
 
-            	<h6>Weight</h6>
+
+				<h6>Weight</h6>
 				<input
 					className=''
 					type='number'
 					name='weight'
-                    min='0'
+					min='0'
 					onChange={(e) => changeInput(e)}
 					{...register('weight', {
 						// required:{
@@ -244,7 +254,7 @@ function AddProduct () {
 
 
 
-                <h6>Image</h6>
+				<h6>Image</h6>
 				<input
 					className=''
 					type='text'
@@ -275,7 +285,7 @@ function AddProduct () {
 				<span>{errors?.image?.message}</span>
 
 
-                <h6>Stock</h6>
+				<h6>Stock</h6>
 				<input
 					className=''
 					type='number'
@@ -304,14 +314,14 @@ function AddProduct () {
 				<span>{errors?.stock?.message}</span>
 
 
-                <h6>Brand</h6>
+				<h6>Brand</h6>
 				<select
 					className=''
 					type='text'
 					name='brandId'
 					onChange={(e) => changeInput(e)}
 					{...register('brandId', {
-					
+
 					})}
 				>
 					<option></option>
@@ -325,14 +335,14 @@ function AddProduct () {
 
 
 
-                <h6>Category</h6>
+				<h6>Category</h6>
 				<select
 					className=''
 					type='text'
 					name='category'
 					onChange={(e) => changeInput(e)}
 					{...register('category', {
-				
+
 					})}
 				>
 					<option></option>
@@ -343,12 +353,12 @@ function AddProduct () {
 					))}
 				</select>
 				{/* <span>{errors?.categories?.message}</span> */}
-            {/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
-            <button type="submit">Add</button>
+				{/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
+				<button type="submit">Add</button>
 
-            </form>
+			</form>
 
-        </div>
-    )
+		</div>
+	)
 }
 export default AddProduct;
