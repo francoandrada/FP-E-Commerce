@@ -28,7 +28,7 @@ const Navbar = () => {
 	
 		
 		const errorToken = useSelector((state) => state.user.errorToken);
-		console.log(errorToken);
+		
 		useEffect(() => {
 			if (errorToken) {
 				Swal.fire({

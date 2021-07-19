@@ -46,6 +46,8 @@ const createOrder = async function createOrder(req, res) {
 						if (userFind) {
 							// // Order.belongsTo(User, { foreignKey: 'userId' });
 							await order.setUser(userFind.dataValues.userId);
+						}else{
+							res.status(400).json({msg: 'Errorrrrr'})
 						}
 					})();
 				});
@@ -69,12 +71,12 @@ const createOrder = async function createOrder(req, res) {
 			items: itemsCarrito,
 
 			back_urls: {
-				success: 'http://localhost:3000/shoppingcart/success',
+				success: 'http://localhost:3000/webhook',
 				failure: 'http://localhost:3001/mercadopago/pagos',
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
 
-			"auto_return": "approved",
+			auto_return: "approved",
 		};
 
 		mercadopago.preferences
@@ -92,29 +94,6 @@ const createOrder = async function createOrder(req, res) {
 	}
 };
 
-// app.post("/create_preference", (req, res) => {
-
-// 	let preference = {
-// 		items: [{
-// 			title: req.body.description,
-// 			unit_price: Number(req.body.price),
-// 			quantity: Number(req.body.quantity),
-// 		}],
-// 		back_urls: {
-// 			"success": "http://localhost:8080/feedback",
-// 			"failure": "http://localhost:8080/feedback",
-// 			"pending": "http://localhost:8080/feedback"
-// 		},
-// 		auto_return: 'approved',
-// 	};
-
-// 	mercadopago.preferences.create(preference)
-// 		.then(function (response) {
-// 			res.json({id :response.body.id})
-// 		}).catch(function (error) {
-// 			console.log(error);
-// 		});
-// });
 
 module.exports = {
 	createOrder,

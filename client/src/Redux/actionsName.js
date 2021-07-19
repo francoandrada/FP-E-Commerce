@@ -44,6 +44,6 @@ export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 
 // pago
 export const SET_CART = 'SET_CART';
-
+export const GET_PAY ='GET_PAY';
 /////////////////ADMIN
 // export const CREATED_BRAND= 'CREATED_BRAND';

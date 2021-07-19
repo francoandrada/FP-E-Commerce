@@ -38,9 +38,11 @@ import {
 	ERRORTOKEN,
 	FETCH_COUNT_OF_BRAND,
 	FETCH_COUNT_OF_CATEGORIES,
+	GET_PAY,
 } from './actionsName';
 
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -203,21 +205,20 @@ export function getHighlightProd() {
 
 export function logIn(dato) {
 	return async (dispatch) => {
-	try {
-		const res = await axios.post('http://localhost:3001/auth', dato);
-		console.log(res)
-		dispatch({
-			type: SUCCESS_LOGIN,
-			payload: res.data,
-		});
-	} catch (error) {
-
-		dispatch({
-			type: ERROR,
-			payload: error.response.data.msg,
-		});
-	}
-};
+		try {
+			const res = await axios.get('http://localhost:3001/auth', dato);
+			console.log(res);
+			dispatch({
+				type: SUCCESS_LOGIN,
+				payload: res.data,
+			});
+		} catch (error) {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
+		}
+	};
 }
 
 // Retorne el Usuario autenticado en base al JWT
@@ -317,7 +318,7 @@ export function loginGmail(data) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
-			console.log(res)
+			console.log(res);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data,
@@ -498,4 +499,41 @@ export function postCart(data) {
 		}
 	};
 }
+
+export function getPayInfo(id) {
+	return async (dispatch) => {
+		console.log(id);
+
+		try {
+			const res = await axios.post('http://localhost:3001/webhooks', { id });
+
+			console.log(res.data);
+			dispatch({
+				type: GET_PAY,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+// export function logIn(dato) {
+// 	return async (dispatch) => {
+// 	try {
+// 		const res = await axios.post('http://localhost:3001/auth', dato);
+// 		console.log(res)
+// 		dispatch({
+// 			type: SUCCESS_LOGIN,
+// 			payload: res.data,
+// 		});
+// 	} catch (error) {
+
+// 		dispatch({
+// 			type: ERROR,
+// 			payload: error.response.data.msg,
+// 		});
+// 	}
+// };
+// }
 /////////////////////////////////////////////// ADMINISTRADOR//////////
