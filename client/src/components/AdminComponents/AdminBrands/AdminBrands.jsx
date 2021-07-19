@@ -5,7 +5,7 @@ import { getBrands, deleBrand } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
 import styles from '../AdminCategories/AdminCategories.module.css';
 import { Link } from 'react-router-dom';
-import { FaTrashAlt } from 'react-icons/fa'
+import { FaTrashAlt } from 'react-icons/fa';
 // import { AiOutlineRetweet } from 'react-icons/ai';
 function AdminBrands() {
 	const dispatch = useDispatch();
@@ -19,6 +19,11 @@ function AdminBrands() {
 		e.preventDefault();
 		dispatch(deleBrand(id));
 		window.location.reload();
+	};
+
+	let acu = 0;
+	const sum = () => {
+		return (acu += 1);
 	};
 
 	return (
@@ -36,23 +41,38 @@ function AdminBrands() {
 					<div className={styles.tittleContainer}>
 						<h1> Brands </h1>
 					</div>
-					{allBrands.map((c, key) => {
-						return (
-							<div key={key} className={styles.category}>
-								<span>Name: {c.name}</span>
-								<div>
-									<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
-										<button className={styles.btnEdit}>
-											<MdModeEdit />
-										</button>
-									</Link>
-									<button onClick={(e) => deleteBrandHandle(e, c.id)}>
-										<FaTrashAlt />
-									</button>
-								</div>
-							</div>
-						);
-					})}
+					<table class='table'>
+						<thead>
+							<tr>
+								<th class='col-md-1'>#</th>
+								<th>Name</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{allBrands.map((c, key) => {
+								return (
+									<tr key={c.id}>
+										<th>{sum()}</th>
+										<td>{c.name}</td>
+										<td>
+											<div>
+												<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
+													<button className={styles.btnEdit}>
+														<MdModeEdit />
+													</button>
+												</Link>
+												<button onClick={(e) => deleteBrandHandle(e, c.id)}>
+													<FaTrashAlt />
+												</button>
+											</div>
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</>
