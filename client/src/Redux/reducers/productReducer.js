@@ -17,6 +17,7 @@ const initialState = {
 	detailProducts: {},
 	highlights: [],
 	filterByCategories: [],
+	filterByBrands:[],
 	responseLength: undefined,
 	page: 1,
 };
@@ -42,6 +43,7 @@ function productReducer(state = initialState, action) {
 			return {
 				...state,
 				filterByCategories: action.payload.products,
+				filterByBrands:action.payload.products,
 				responseLength: action.payload.length,
 			};
 		case SELECTED_PAGE:

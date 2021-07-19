@@ -40,10 +40,15 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
+
+	GET_PAY,
+
 	SET_MANUAL_AUTHENTICATION
+
 } from './actionsName';
 
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -537,6 +542,28 @@ export function postCart(data) {
 		}
 	};
 }
+
+
+export function getPayInfo(id) {
+	return async (dispatch) => {
+		console.log(id);
+
+		try {
+			const res = await axios.post('http://localhost:3001/webhooks', { id });
+
+			console.log(res.data);
+			dispatch({
+				type: GET_PAY,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
@@ -559,3 +586,4 @@ export function setAuthentication(payload) {
 		});
 	};
 }
+

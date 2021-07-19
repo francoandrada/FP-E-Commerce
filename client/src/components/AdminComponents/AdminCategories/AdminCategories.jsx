@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Admin from '../Admin/Admin';
-import { getCategories } from '../../../Redux/actions';
+import { deleCategory, getCategories } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
+import { FaTrashAlt } from 'react-icons/fa';
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 function AdminCategories() {
@@ -12,10 +13,19 @@ function AdminCategories() {
 		dispatch(getCategories());
 	}, [dispatch]);
 
+<<<<<<< HEAD
 	let acu = 0;
 	const sum = () => {
 		return (acu += 1);
 	};
+=======
+	const deleteCategoryHandle = (e, id) => {
+		e.preventDefault();
+		dispatch(deleCategory(id));
+		window.location.reload();
+	};
+
+>>>>>>> main
 	return (
 		<>
 			<div>
@@ -51,6 +61,9 @@ function AdminCategories() {
 														<MdModeEdit />
 													</button>
 												</Link>
+												<button onClick={(e) => deleteCategoryHandle(e, c.id)}>
+													<FaTrashAlt />
+												</button>
 											</div>
 										</td>
 									</tr>

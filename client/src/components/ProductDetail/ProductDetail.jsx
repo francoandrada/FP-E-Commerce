@@ -28,24 +28,28 @@ function DetailProduct(props) {
 							<p>${productDetail.price} </p>
 							<span> Stock: {productDetail.stock} </span>
 							<div class='m-3 d-block'>
-								<div class='m-3'>
-									<ButtonRedOther
-										class='btn btn-outline-danger'
-										type='submit'
-										onClick={() => dispatch(addToCart(productDetail))}
-									>
-										Add to Cart
-									</ButtonRedOther>
-								</div>
+								{productDetail.stock > 0 ? (
+									<div class='m-3'>
+										<ButtonRedOther
+											class='btn btn-outline-danger'
+											type='submit'
+											onClick={() => dispatch(addToCart(productDetail))}
+										>
+											Add to Cart
+										</ButtonRedOther>
+									</div>
+								) : (
+									<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
+								)}
 								<div class='m-3'>
 									<Link to='/shoppingcart'>
-									<ButtonGreyOther
-										class='btn btn-secondary'
-										type='submit'
-										onClick={() => dispatch(addToCart(productDetail))}
-									>
-										Checkout
-									</ButtonGreyOther>
+										<ButtonGreyOther
+											class='btn btn-secondary'
+											type='submit'
+											onClick={() => dispatch(addToCart(productDetail))}
+										>
+											Checkout
+										</ButtonGreyOther>
 									</Link>
 								</div>
 							</div>
@@ -64,20 +68,19 @@ function DetailProduct(props) {
 						<div class='col'>
 							<p>{productDetail.description} </p>
 						</div>
-                        <div class="w-100 d-none d-md-block"></div>
+						<div class='w-100 d-none d-md-block'></div>
 
 						{productDetail.brand ? (
 							<Fragment>
-                                <div class='col col-lg-2 '>
+								<div class='col col-lg-2 '>
 									<p>Brand</p>
 								</div>
 								<div class='col '>
 									<p>{productDetail.brand.name} </p>
 								</div>
-								
 							</Fragment>
 						) : null}
-  <div class="w-100 d-none d-md-block"></div>
+						<div class='w-100 d-none d-md-block'></div>
 						{productDetail.weigth ? (
 							<Fragment>
 								<div class='col-6 col-sm-4'>

@@ -17,7 +17,7 @@ function SubTotal({ qty, userLogged, userId }) {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-console.log(user.userId)
+console.log(user)
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -52,15 +52,17 @@ console.log(user.userId)
 		array.push(element);
 	}
 
-
-	let bodyObject = {
+	let bodyObject
+if( user != null){
+	 bodyObject = {
 		userId: user.userId,
 		prodCarrito: array,
 		ammount: totalPrice,
 		status: status,
 		userId: userId
 	};
-
+}
+console.log(bodyObject)
 	let totalFormat = formatNumber.new(totalPrice, '$');
 
 	return (

@@ -78,6 +78,7 @@ function Products() {
 		});
 	}, [brandS]);
 
+	
 	useEffect(() => {
 		setQuery({
 			...query,
