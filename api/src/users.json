@@ -17,7 +17,6 @@
     }
 }
 
-
 {
     "id": 791351389,
     "nickname": "TETE8295856",
@@ -29,6 +28,7 @@
         "public_key": "TEST-f0c0c142-3c17-445c-a205-8f522418592e",
         "acces_token": "TEST-4608114869701410-071422-8a00a438fd873dd5097c3f9c8ccb58a0-791351389"
     },
+  
     "production": {
         "acces_token": "APP_USR-4608114869701410-071422-902a6c785f81b89ceda844db98d8aa79-791351389",
         "public_key": "APP_USR-9478656a-a514-4812-a2c8-452c67477bbb",
@@ -36,3 +36,7 @@
         "client_secret": "gMT1myX7KFtOjmbmROd8cxqoCrhOkMF1"
     }
 }
+
+
+
+

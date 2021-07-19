@@ -11,7 +11,7 @@ const reviewRoutes = require('./reviewRoutes');
 const catalogRoutes = require('./catalogRoutes');
 const mercadopagoRoutes = require('./mercadopagoRoutes');
 const orderRoutes = require('./orderRoutes');
-
+const webHooks = require('./webHooks');
 const router = Router();
 
 // router.use('/pagination', paginationRouter);
@@ -26,5 +26,5 @@ router.use('/reviews', reviewRoutes);
 router.use('/catalog', catalogRoutes);
 router.use('/mercadopago', mercadopagoRoutes);
 router.use('/orders', orderRoutes);
-
+router.use('/webhooks', webHooks);
 module.exports = router;
