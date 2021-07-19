@@ -25,21 +25,19 @@ function AdminCategories() {
 					<table class='table'>
 						<thead>
 							<tr>
-								<th scope='col-md-8'>#</th>
-								<th scope='col'>Name</th>
-								<th scope='col'>Actions</th>
+								<th class='col-md-1'>#</th>
+								<th>Name</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
-					</table>
-					{allCategories.map((c) => {
-						return (
-							<div className={styles.category}>
-								<tbody>
+
+						<tbody>
+							{allCategories.map((c) => {
+								return (
 									<tr>
-										<th scope='row'>1</th>
+										<th>1</th>
 										<td>{c.name}</td>
 										<td>
-											{' '}
 											<div>
 												<Link key={c.id} to={`/admin/putCategory/${c.id}`}>
 													<button className={styles.btnEdit}>
@@ -49,10 +47,10 @@ function AdminCategories() {
 											</div>
 										</td>
 									</tr>
-								</tbody>
-							</div>
-						);
-					})}
+								);
+							})}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</>

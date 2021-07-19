@@ -5,6 +5,7 @@
 	margin-top: -5rem;
 	color: black;
 	background-color: #eee; */
+	margin-right: 5%;
 	background-color: white;
 }
 ._container {
@@ -24,4 +25,8 @@
 	border: 1px solid black;
 	border-radius: 10px;
 	outline: none;
+}
+
+._table {
+	margin-right: 5%;
 }
