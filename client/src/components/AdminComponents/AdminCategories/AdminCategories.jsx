@@ -17,9 +17,11 @@ function AdminCategories() {
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<Link to='/admin/addcategory'>
-					<button> Add Category </button>
-				</Link>
+				<div className={styles.btnContainer}>
+					<Link to='/admin/addcategory'>
+						<button> Add Category </button>
+					</Link>
+				</div>
 				<div className={styles.categoriesContainer}>
 					<h1> Categories </h1>
 					<table class='table'>

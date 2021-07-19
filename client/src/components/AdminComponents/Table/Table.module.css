@@ -1,10 +1,17 @@
 .tableEcommerce {
 	font-family: 'Arial';
 	border-collapse: collapse;
-	width: 80%;
 	color: black;
 	background-color: white;
 	margin-left:20%;
+	border-radius: 0px 0px 20px 20px;
+	box-shadow: 0 10px 30px rgb(172, 171, 171);
+}
+.background{
+	background-color: #eee;
+	background-attachment: fixed;
+	width: 100%;
+
 }
 .Container{
 	margin-right: 10%;
@@ -13,6 +20,7 @@
 
 .filterContainer{
 	display: flex;
+	justify-content: center;
 }
 .btnContainer{
 	display: flex;
@@ -21,7 +29,7 @@
 }
 .btnContainer button{
 	padding: 6px 10px;
-	border-radius: 14px;
+	border-radius: 10px;
 	border: 0;
 	background-color: rgb(228, 50, 50);
 	color: white;
@@ -47,4 +55,12 @@
 	text-align: left;
 	background-color: rgb(228, 50, 50);
 	color: white;
+}
+i{
+	color: rgb(70, 70, 70);
+	width:20px
+}
+button{
+	background-color: transparent;
+	border: 0;
 }
