@@ -44,6 +44,10 @@
      width: 98%;
     
  }
+ .label{
+     font-size: 14px;
+     color:rgb(104, 103, 103) ;
+ }
  .productCard span{
      font-size: 18px;
      font-weight: 600;

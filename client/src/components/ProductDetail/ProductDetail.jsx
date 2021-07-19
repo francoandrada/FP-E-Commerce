@@ -29,29 +29,37 @@ function DetailProduct(props) {
 							<span> Stock: {productDetail.stock} </span>
 							<div class='m-3 d-block'>
 								{productDetail.stock > 0 ? (
-									<div class='m-3'>
-										<ButtonRedOther
-											class='btn btn-outline-danger'
-											type='submit'
-											onClick={() => dispatch(addToCart(productDetail))}
-										>
-											Add to Cart
-										</ButtonRedOther>
-									</div>
-								) : (
-									<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
-								)}
-								<div class='m-3'>
-									<Link to='/shoppingcart'>
-										<ButtonGreyOther
-											class='btn btn-secondary'
-											type='submit'
-											onClick={() => dispatch(addToCart(productDetail))}
-										>
-											Checkout
-										</ButtonGreyOther>
-									</Link>
-								</div>
+									<>
+										<div class='m-3'>
+											<ButtonRedOther
+												class='btn btn-outline-danger'
+												type='submit'
+												onClick={() => dispatch(addToCart(productDetail))}
+											>
+												Add to Cart
+											</ButtonRedOther>
+										</div>
+
+										<div class='m-3'>
+											<Link to='/shoppingcart'>
+												<ButtonGreyOther
+													class='btn btn-secondary'
+													type='submit'
+													onClick={() => dispatch(addToCart(productDetail))}
+												>
+													Checkout
+												</ButtonGreyOther>
+											</Link>
+										</div>
+									</>
+								)
+									: (
+										<>
+										<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
+										
+										<input type='checkbox'/> <label className={styles.label}> I want to know when it is available</label>
+										</>
+									)}
 							</div>
 						</div>
 					</div>
