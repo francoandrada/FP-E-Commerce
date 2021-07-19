@@ -5,8 +5,9 @@ import { createdProduct, getProducts, getCategories, getBrands } from "../../../
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
-import styles from '../../Register/Register.module.css'
+import styles from './stylesForms.module.css'
 import { MdArrowBack } from 'react-icons/md'
+import ButtonRed from '../../StyledComponents/ButtonRed';
 
 
 function AddProduct() {
@@ -86,277 +87,282 @@ function AddProduct() {
 
 
 	return (
-		<div>
+		<div className={styles.background}>
 			<div className={styles.btnBackContainer}>
-			<Link to='/admin/products'>
-					
-						<MdArrowBack />
-					
+				<Link to='/admin/products'>
+
+					<MdArrowBack />
+
 				</Link>
 			</div>
-			<form
-				className=""
-				onChange={(e) => changeInput(e)}
-				onSubmit={handleSubmit(submit)}
-			>
+			<div className={styles.formContainer}>
 
-				<h6> Name Product</h6>
-				<input
+				<form
 					className=""
-					type="text"
-					name="name"
 					onChange={(e) => changeInput(e)}
-					{...register("name", {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 20,
-							massage: "menos de 20 caracteres"
-						},
-						minLength: {
-							value: 3,
-							message: "mas de 3 caracteres"
-						},
-						pattern: {
-							value: /^[a-zA-Z ]*$/,
-							message: "no debe ingresar numeros"
-						}
-					})}
+					onSubmit={handleSubmit(submit)}
 				>
+					<div className={styles.box1}>
+						<label> Name Product: </label>
+						<input
+							className={styles.input}
+							type="text"
+							name="name"
+							onChange={(e) => changeInput(e)}
+							{...register("name", {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 20,
+									massage: "menos de 20 caracteres"
+								},
+								minLength: {
+									value: 3,
+									message: "mas de 3 caracteres"
+								},
+								pattern: {
+									value: /^[a-zA-Z ]*$/,
+									message: "no debe ingresar numeros"
+								}
+							})}
+						>
 
-				</input>
-				<span>{errors?.name?.message}</span>
-
-
-
-				<h6>Price</h6>
-				<input
-					className=''
-					type='number'
-					name='price'
-					min='0'
-					onChange={(e) => changeInput(e)}
-					{...register('price', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 8,
-							massage: 'menos de 8 caracteres',
-						},
-						minLength: {
-							value: 3,
-							message: 'mas de 3 caracteres',
-						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
-					})}
-				/>
-				<span>{errors?.price?.message}</span>
+						</input>
+						<span>{errors?.name?.message}</span>
 
 
 
-				<h6>Special Price</h6>
-				<input
-					className=''
-					type='number'
-					name='priceSpecial'
-					min='0'
-					onChange={(e) => changeInput(e)}
-					{...register('priceSpecial', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 8,
-							massage: 'menos de 8 caracteres',
-						},
-						minLength: {
-							value: 3,
-							message: 'mas de 3 caracteres',
-						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
-					})}
-				/>
-				<span>{errors?.priceSpecial?.message}</span>
+						<label>Price:</label>
+						<input
+							className={styles.input}
+							type='number'
+							name='price'
+							min='0'
+							onChange={(e) => changeInput(e)}
+							{...register('price', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 8,
+									massage: 'menos de 8 caracteres',
+								},
+								minLength: {
+									value: 3,
+									message: 'mas de 3 caracteres',
+								},
+								// pattern:{
+								//     value: /^[a-zA-Z]*$/,
+								//     message:"no debe ingresar numeros"
+								// }
+							})}
+						/>
+						<span>{errors?.price?.message}</span>
 
+					</div>
+					<div className={styles.box1}>
 
-
-
-
-				<h6>Description</h6>
-				<input
-					className=''
-					type='text'
-					name='description'
-					onChange={(e) => changeInput(e)}
-					{...register('description', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 200,
-							massage: 'menos de 200 caracteres',
-						},
-						minLength: {
-							value: 10,
-							message: 'mas de 10 caracteres',
-						},
-						pattern: {
-							value: /^[a-zA-Z ]*$/,
-							message: 'no debe ingresar numeros',
-						},
-					})}
-				/>
-				<span>{errors?.description?.message}</span>
+						<label>Special Price:</label>
+						<input
+							className={styles.input}
+							type='number'
+							name='priceSpecial'
+							min='0'
+							onChange={(e) => changeInput(e)}
+							{...register('priceSpecial', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 8,
+									massage: 'menos de 8 caracteres',
+								},
+								minLength: {
+									value: 3,
+									message: 'mas de 3 caracteres',
+								},
+								// pattern:{
+								//     value: /^[a-zA-Z]*$/,
+								//     message:"no debe ingresar numeros"
+								// }
+							})}
+						/>
+						<span>{errors?.priceSpecial?.message}</span>
 
 
 
 
 
-				<h6>Weight</h6>
-				<input
-					className=''
-					type='number'
-					name='weight'
-					min='0'
-					onChange={(e) => changeInput(e)}
-					{...register('weight', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 4,
-							massage: 'menos de 4 caracteres',
-						},
-						minLength: {
-							value: 1,
-							message: 'mas de 1 caracteres',
-						},
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
-					})}
-				/>
-				<span>{errors?.weight?.message}</span>
+						<label>Description:</label>
+						<input
+							className={styles.input}
+							type='text'
+							name='description'
+							onChange={(e) => changeInput(e)}
+							{...register('description', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 200,
+									massage: 'menos de 200 caracteres',
+								},
+								minLength: {
+									value: 10,
+									message: 'mas de 10 caracteres',
+								},
+								pattern: {
+									value: /^[a-zA-Z ]*$/,
+									message: 'no debe ingresar numeros',
+								},
+							})}
+						/>
+						<span>{errors?.description?.message}</span>
+
+
+					</div>
+					<div className={styles.box1}>
+
+						<label>Weight:</label>
+						<input
+							className={styles.input}
+							type='number'
+							name='weight'
+							min='0'
+							onChange={(e) => changeInput(e)}
+							{...register('weight', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 4,
+									massage: 'menos de 4 caracteres',
+								},
+								minLength: {
+									value: 1,
+									message: 'mas de 1 caracteres',
+								},
+								// pattern:{
+								//     value: /^[a-zA-Z]*$/,
+								//     message:"no debe ingresar numeros"
+								// }
+							})}
+						/>
+						<span>{errors?.weight?.message}</span>
 
 
 
-				<h6>Image</h6>
-				<input
-					className=''
-					type='text'
-					name='image'
-					// name="images[]"
-					// id="fileInput"
-					// multiple
-					onChange={(e) => changeInput(e)}
-					{...register('image', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 20,
-							massage: 'menos de 20 caracteres',
-						},
-						minLength: {
-							value: 3,
-							message: 'mas de 3 caracteres',
-						},
-						pattern: {
-							value: /^[a-zA-Z]*$/,
-							message: 'no debe ingresar numeros',
-						},
-					})}
-				/>
-				<span>{errors?.image?.message}</span>
+						<label>Image:</label>
+						<input
+							className={styles.input}
+							type='text'
+							name='image'
+							// name="images[]"
+							// id="fileInput"
+							// multiple
+							onChange={(e) => changeInput(e)}
+							{...register('image', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 20,
+									massage: 'menos de 20 caracteres',
+								},
+								minLength: {
+									value: 3,
+									message: 'mas de 3 caracteres',
+								},
+								pattern: {
+									value: /^[a-zA-Z]*$/,
+									message: 'no debe ingresar numeros',
+								},
+							})}
+						/>
+						<span>{errors?.image?.message}</span>
+					</div>
+					<div className={styles.box1}>
+						<label>Stock:</label>
+						<input
+							className={styles.input}
+							type='number'
+							name='stock'
+							min='0'
+							onChange={(e) => changeInput(e)}
+							{...register('stock', {
+								// required:{
+								//     value: true,
+								//     massage: "debe ingresar un nombre"
+								// },
+								maxLength: {
+									value: 4,
+									massage: 'menos de 4 caracteres',
+								},
+								// minLength:{
+								//     value: 1,
+								//     message:"mas de 3 caracteres"
+								// },
+								// pattern:{
+								//     value: /^[a-zA-Z]*$/,
+								//     message:"no debe ingresar numeros"
+								// }
+							})}
+						/>
+						<span>{errors?.stock?.message}</span>
 
 
-				<h6>Stock</h6>
-				<input
-					className=''
-					type='number'
-					name='stock'
-					min='0'
-					onChange={(e) => changeInput(e)}
-					{...register('stock', {
-						// required:{
-						//     value: true,
-						//     massage: "debe ingresar un nombre"
-						// },
-						maxLength: {
-							value: 4,
-							massage: 'menos de 4 caracteres',
-						},
-						// minLength:{
-						//     value: 1,
-						//     message:"mas de 3 caracteres"
-						// },
-						// pattern:{
-						//     value: /^[a-zA-Z]*$/,
-						//     message:"no debe ingresar numeros"
-						// }
-					})}
-				/>
-				<span>{errors?.stock?.message}</span>
+						<label>Brand:</label>
+						<select
+							className=''
+							type='text'
+							name='brandId'
+							onChange={(e) => changeInput(e)}
+							{...register('brandId', {
 
-
-				<h6>Brand</h6>
-				<select
-					className=''
-					type='text'
-					name='brandId'
-					onChange={(e) => changeInput(e)}
-					{...register('brandId', {
-
-					})}
-				>
-					<option></option>
-					{brand.map((x, index) => (
-						<option key={index} value={x.id}>
-							{x.name}
-						</option>
-					))}
-				</select>
-				{/* <span>{errors?.brandId.message}</span> */}
+							})}
+						>
+							<option></option>
+							{brand.map((x, index) => (
+								<option key={index} value={x.id}>
+									{x.name}
+								</option>
+							))}
+						</select>
+						{/* <span>{errors?.brandId.message}</span> */}
 
 
 
-				<h6>Category</h6>
-				<select
-					className=''
-					type='text'
-					name='category'
-					onChange={(e) => changeInput(e)}
-					{...register('category', {
+						<label>Category:</label>
+						<select
+							className=''
+							type='text'
+							name='category'
+							onChange={(e) => changeInput(e)}
+							{...register('category', {
 
-					})}
-				>
-					<option></option>
-					{categories.map((x, index) => (
-						<option key={index} value={x.id}>
-							{x.name}
-						</option>
-					))}
-				</select>
-				{/* <span>{errors?.categories?.message}</span> */}
-				{/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
-				<button type="submit">Add</button>
+							})}
+						>
+							<option></option>
+							{categories.map((x, index) => (
+								<option key={index} value={x.id}>
+									{x.name}
+								</option>
+							))}
+						</select>
+					</div>
+					{/* <span>{errors?.categories?.message}</span> */}
+					{/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
+					<ButtonRed type='submit'> Add </ButtonRed>
 
-			</form>
+				</form>
+			</div>
 
 		</div>
 	)

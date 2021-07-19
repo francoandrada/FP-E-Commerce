@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
-
 const sequelize = new Sequelize(
 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 	{
@@ -12,7 +11,7 @@ const sequelize = new Sequelize(
 		native: false,
 	}
 );
-console.log('hola')
+console.log('hola');
 
 const basename = path.basename(__filename);
 
@@ -36,7 +35,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, Role, User, Category, Brand, Order, OrderDetail } =
+const { Product, Role, User, Category, Brand, Order, OrderDetail, Cart } =
 	sequelize.models;
 
 Role.hasMany(User, { foreignKey: 'roleId' });
@@ -52,6 +51,17 @@ Product.hasMany(OrderDetail, {
 	foreignKey: 'productId',
 });
 OrderDetail.belongsTo(Product);
+
+User.hasMany(Cart, {
+	foreignKey: 'userId',
+});
+Product.hasMany(Cart, {
+	foreignKey: 'productId',
+});
+Cart.belongsTo(Product);
+Cart.belongsTo(User, {
+	foreignKey: 'userId',
+});
 
 Product.belongsToMany(Category, {
 	through: 'category_product',
