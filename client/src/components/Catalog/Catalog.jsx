@@ -30,7 +30,6 @@ function Catalog() {
 
         
                 <FilterCategories id={styles.filterContainer}/> 
-                <FilterBrands id={styles.filterContainer}/>
                  <Products id={styles.productsContainer}/> 
         
        </div> 
