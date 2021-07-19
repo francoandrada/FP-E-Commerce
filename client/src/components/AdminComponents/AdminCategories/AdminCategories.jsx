@@ -13,19 +13,16 @@ function AdminCategories() {
 		dispatch(getCategories());
 	}, [dispatch]);
 
-<<<<<<< HEAD
 	let acu = 0;
 	const sum = () => {
 		return (acu += 1);
 	};
-=======
 	const deleteCategoryHandle = (e, id) => {
 		e.preventDefault();
 		dispatch(deleCategory(id));
 		window.location.reload();
 	};
 
->>>>>>> main
 	return (
 		<>
 			<div>
