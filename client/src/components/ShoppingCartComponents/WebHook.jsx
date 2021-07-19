@@ -15,7 +15,7 @@ const WebHook = () => {
 	return (
 		<div class=' d-sm-flex justify-content-center m-5 text-center'>
 			<div class='bg-white p-5'>
-        <h2 class='mb-2 '>Thanks you for buying! </h2>
+        <h2 class='mb-2 '>Thanks for buying in HardwareStore! </h2>
 				<h5>Details of your purchase</h5>
 				<p>Id: {id}</p>
 				<p>Status: {status}</p>
