@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Admin from '../Admin/Admin';
-import { getCategories } from '../../../Redux/actions';
+import { deleCategory, getCategories } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
@@ -11,15 +11,24 @@ function AdminCategories() {
 	useEffect(() => {
 		dispatch(getCategories());
 	}, [dispatch]);
+
+	const deleteCategoryHandle = (e, id) => {
+		e.preventDefault();
+		dispatch(deleCategory(id));
+		window.location.reload();
+	};
+
 	return (
 		<>
 			<div>
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<Link to='/admin/addcategory'>
-					<button> Add Category </button>
-				</Link>
+				<div className={styles.btnContainer}>
+					<Link to='/admin/addcategory'>
+						<button> Add Category </button>
+					</Link>
+				</div>
 				<div className={styles.categoriesContainer}>
 					<h1> Categories </h1>
 					<table class='table'>
@@ -46,6 +55,9 @@ function AdminCategories() {
 														<MdModeEdit />
 													</button>
 												</Link>
+												<button onClick={(e) => deleteCategoryHandle(e, c.id)}>
+													Delete
+												</button>
 											</div>
 										</td>
 									</tr>

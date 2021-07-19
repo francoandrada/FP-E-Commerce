@@ -1,21 +1,22 @@
 .chart-container-ecommerce {
-	background-color: #252959;
+	background-color: white;
 	width: 80%;
 	justify-content: space-around;
 	align-items: center;
 	display: flex;
-	margin-left: 20%;
+	margin-left: 17.5%;
 }
 
 .chart-ecommerce {
-	background-color: #0c0915;
+	background-color: white;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
+	
 }
 
 .chart-title {
 	width: 100%;
 	text-align: center;
-	color: white;
+	color: #555454
 }

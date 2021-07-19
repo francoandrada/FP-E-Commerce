@@ -4,7 +4,7 @@ import { filterCategory} from '../../Redux/actions';
 import styles from './FilterCategories.module.css';
 import OrderByPrice from '../OrderBox/OrderByPrice';
 import FilterStock from "../FilterStock/FilterStock"
-
+import FilterBrands from '../FilterBrand/FilterBrands';
 
 function FilterCategories() {
 
@@ -65,12 +65,14 @@ function FilterCategories() {
 				<ul></ul>
 			)}
                     <hr></hr>
-                    <OrderByPrice id={styles.filterContainer}/> 
+                    <OrderByPrice id={styles.filterContainer}/>  
                     <hr></hr>
                     <h6 className={styles.title}>Order by rating</h6>
                     <hr></hr>
                     <h6 className={styles.title}>Filter by stock</h6>
                     <FilterStock id={styles.filterContainer}/> 
+                    <hr></hr>
+                    <FilterBrands className={styles.div_cont_filter}/>
 
 		</div>
 	);
