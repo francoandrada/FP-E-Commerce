@@ -145,6 +145,42 @@ async function getProductAll(req, res, next) {
 	}
 }
 
+async function deleteProduct(req, res, next) {
+	try {
+		const id = parseInt(req.params.id)
+		console.log(id);
+		const produc = await Product.findOne({ where: { id:id} });
+		await produc.destroy()
+		res.json(id);
+	} catch (error) {
+		next(error);
+	}
+}
+//http://localhost:3001/admin/deletebrand/1
+async function deleteBrand(req, res, next) {
+	try {
+		const id = parseInt(req.params.id)
+		console.log(id);
+		const brand = await Brand.findOne({ where: { id:id} });
+		await brand.destroy()
+		res.json(id);
+	} catch (error) {
+		next(error);
+	}
+}
+//http://localhost:3001/admin/deletecategory/9
+async function deleteCategory(req, res, next) {
+	try {
+		const id = parseInt(req.params.id)
+		console.log(id);
+		const category = await Category.findOne({ where: { id:id} });
+		await category.destroy()
+		res.json(id);
+	} catch (error) {
+		next(error);
+	}
+}
+////////////////USER//////////
 async function getUsers (req, res) {
 	try {
 		const usersList = await User.findAll();
@@ -167,6 +203,7 @@ async function getUserToEdit (req, res) {
 };
 
 async function putUserInfo(req, res, next) {
+	console.log(req.body)
 	try {
 		// console.log(req.body)
 		// res.send('ok')
@@ -214,5 +251,8 @@ module.exports = {
 	getUsers,
 	getUserToEdit,
 	putUserInfo,
-	deleteUser
+	deleteUser,
+	deleteProduct,
+	deleteBrand,
+	deleteCategory
 };

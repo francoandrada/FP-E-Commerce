@@ -5,7 +5,7 @@ import style from './SubTotal.module.css';
 import { postCart } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
 
-function SubTotal({ qty, userLogged }) {
+function SubTotal({ qty, userLogged, userId }) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
@@ -35,6 +35,7 @@ console.log(user)
 
 		setTotalItems(items);
 		setTotalPrice(price);
+
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
 	let status = 'created';
@@ -58,6 +59,7 @@ if( user != null){
 		prodCarrito: array,
 		ammount: totalPrice,
 		status: status,
+		userId: userId
 	};
 }
 console.log(bodyObject)
@@ -78,7 +80,7 @@ console.log(bodyObject)
 					<h3>{totalFormat}</h3>
 				</div>
 		
-				{token ? (
+				{userLogged ? (
 	
 							<button
 							className={style.paymentButton}

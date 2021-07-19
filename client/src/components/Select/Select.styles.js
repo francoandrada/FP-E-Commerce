@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 
 export const SelectStyles = styled.select`
-  padding: 20px auto;
-  border-radius: 3px;
-  font-family: "Roboto Mono";
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin: 0 1rem;
   font-size: 18px;
   font-weight: 700px;
-  background-color: #ff8000;
+  background-color: rgb(228, 50, 50);
   color: white;
   border: 1px solid gray;
 
   &:hover {
-    border-color: #ffd480;
+    background-color: rgb(210, 39, 39);
   }
 
   option {
     background: white;
-    color: #ff8000;
+    color: rgb(228, 50, 50);
   }
 `;

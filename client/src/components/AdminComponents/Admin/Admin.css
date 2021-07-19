@@ -24,7 +24,7 @@
 }
 .nav-menu.active {
 	left: 0;
-	transition: 350ms;
+	width: 15%;
 }
 .nav-text {
 	display: flex;

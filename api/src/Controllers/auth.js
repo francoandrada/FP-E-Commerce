@@ -34,8 +34,8 @@ exports.authUser = async (req, res) => {
 					expiresIn: '8h',
 				}
 			);
-			
-			res.send({token, user})
+
+			res.send({ token, user });
 		} else {
 			res.status(401).send({ msg: 'The password is incorrect' });
 		}
@@ -153,8 +153,8 @@ exports.authUserGmail = async (req, res) => {
 				expiresIn: '8h',
 			}
 		);
-	
-		res.send({token, user})
+
+		res.send({ token, user });
 	} catch (error) {
 		// console.log(error);
 	}

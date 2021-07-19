@@ -15,6 +15,7 @@ import {
 	GET_HIGHLIGHTS,
 	GET_BRANDS,
 	FILTER_CATEGORIES,
+	FILTER_BRANDS,
 	CLEAN_SUGGESTIONS,
 	FILTER_PRICE,
 	FILTERED_PRODUCTS,
@@ -37,8 +38,13 @@ import {
 	FILTER_STOCK,
 	ERRORTOKEN,
 	FETCH_COUNT_OF_BRAND,
+	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
+
 	GET_PAY,
+
+	SET_MANUAL_AUTHENTICATION
+
 } from './actionsName';
 
 import axios from 'axios';
@@ -202,11 +208,11 @@ export function getHighlightProd() {
 		});
 	};
 }
-
+//----------------------------- USER ACTIONS -------------------------------//
 export function logIn(dato) {
 	return async (dispatch) => {
 		try {
-			const res = await axios.get('http://localhost:3001/auth', dato);
+			const res = await axios.post('http://localhost:3001/auth', dato);
 			console.log(res);
 			dispatch({
 				type: SUCCESS_LOGIN,
@@ -328,7 +334,7 @@ export function loginGmail(data) {
 		}
 	};
 }
-
+//----------------------------- FILTER ACTIONS -------------------------------//
 export const filterCategory = (name) => {
 	return { type: FILTER_CATEGORIES, payload: name };
 };
@@ -339,6 +345,9 @@ export const filterStock = (name) => {
 
 export const filterPrice = (name) => {
 	return { type: FILTER_PRICE, payload: name };
+};
+export const filterBrand = (name) => {
+	return { type: FILTER_BRANDS, payload: name };
 };
 
 export function getFilteredProducts(query) {
@@ -362,7 +371,7 @@ export const cleanFilters = () => {
 export const selectPage = (page) => {
 	return { type: SELECTED_PAGE, payload: page };
 };
-
+//----------------------------- SHOPPING CART ACTIONS -------------------------------//
 export const addToCart = (itemId) => {
 	return {
 		type: ADD_TO_CART,
@@ -460,6 +469,40 @@ export function createdProduct(elem) {
 		}
 	};
 }
+//http://localhost:3001/admin/deletebrand/27
+export function deleProduct(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleBrand(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleCategory(id) {
+	return async () => {
+		try {
+	  	await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
+
 
 export function getUsers() {
 	return async (dispatch) => {
@@ -476,7 +519,7 @@ export function getUserToEdit(email) {
 		});
 	};
 }
-//MERCADO PAGO
+//////////////////////////   MERCADO PAGO   ////////////////////////////////
 
 export function postCart(data) {
 	return async (dispatch) => {
@@ -500,6 +543,7 @@ export function postCart(data) {
 	};
 }
 
+
 export function getPayInfo(id) {
 	return async (dispatch) => {
 		console.log(id);
@@ -518,22 +562,28 @@ export function getPayInfo(id) {
 	};
 }
 
-// export function logIn(dato) {
-// 	return async (dispatch) => {
-// 	try {
-// 		const res = await axios.post('http://localhost:3001/auth', dato);
-// 		console.log(res)
-// 		dispatch({
-// 			type: SUCCESS_LOGIN,
-// 			payload: res.data,
-// 		});
-// 	} catch (error) {
 
-// 		dispatch({
-// 			type: ERROR,
-// 			payload: error.response.data.msg,
-// 		});
-// 	}
-// };
-// }
-/////////////////////////////////////////////// ADMINISTRADOR//////////
+
+////////////////////// USER ACCOUNT ACTIONS  ////////////////////
+
+export function getUserOrders(userId) {
+	console.log('desde reducer', userId);
+	return async (dispatch) => {
+		axios
+			.get(`http://localhost:3001/orders/order/user/${userId}`)
+			.then((response) => {
+				dispatch({ type: GET_USER_ORDERS, payload: response.data });
+			});
+	};
+}
+
+////////////////////////// Solo se usa en proyecto deployeado
+export function setAuthentication(payload) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_MANUAL_AUTHENTICATION,
+			payload
+		});
+	};
+}
+

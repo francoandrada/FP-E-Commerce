@@ -23,9 +23,8 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const token = useSelector((state) => state.user.token);
-
+	const userData = useSelector((state) => state.user.userData)
 	const userName = useSelector((state) => state.user.userData);
-	
 		
 		const errorToken = useSelector((state) => state.user.errorToken);
 		
@@ -41,7 +40,6 @@ const Navbar = () => {
 		}, [errorToken]);
 
 
-	
 
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
@@ -104,8 +102,8 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-
 	<button onclick='myFunction()'>Click me</button>;
+	console.log(userData)
 	return (
 		<>
 			<div className={styles.navbarEcommerce}>
@@ -123,7 +121,7 @@ const Navbar = () => {
 							className={`${styles.flexContainerEcommerce} ${styles.flexColumnEcommerce} ${styles.posRelEcommerce}`}
 							ref={wrapperRef}
 						>
-					
+
 							<input
 								className={styles.inputEcommerce}
 								value={search}
@@ -163,24 +161,33 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={styles.linksNavEcommerce}>
+					{userData && userData.admin!== true ? (
+						<Link to='/myaccount'> My Account </Link>
+					) : null }
+					{userData && userData.admin === true ? (
+					<div>
+						<Link to='/admin'>Admin Panel</Link>
+					</div>
+					) : null
+					}
 					{token ? (
 						<div class='d-block mt-4'>
-						<button
-							type='submit'
-							className={styles.but}
-							onClick={() => {
-								dispatch(logOut());
-							}}
-						>
-							Log Out
-						</button>
-						{Array.isArray(userName) ? <p class='text-white h6' >Hola {userName.email}!</p>
-						
-					:
-					<p class='text-white h6' >Hola {userName.name}!</p>
-				
-					}
-					
+							<button
+								type='submit'
+								className={styles.but}
+								onClick={() => {
+									dispatch(logOut());
+								}}
+							>
+								Log Out
+							</button>
+							{Array.isArray(userName) ? <p class='text-white h6' >Hi, {userName.email}!</p>
+
+								:
+								<p class='text-white h6' >Hi, {userName.name}!</p>
+
+							}
+
 						</div>
 					) : (
 						<>
@@ -202,7 +209,7 @@ const Navbar = () => {
 				<div className={styles.sections}>
 					<Link to='/'>Home</Link>
 					<Link to='/catalog'>Catalog</Link>
-					
+
 				</div>
 			</div>
 		</>

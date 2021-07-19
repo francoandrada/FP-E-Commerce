@@ -7,7 +7,7 @@ import priceReducer from './reducers/priceReducer';
 import cartReducer from './reducers/cartReducer';
 import adminReducer from './reducers/adminReducer';
 import stockReducer from './reducers/stockReducer';
-
+import userAccountReducer from './reducers/userAccountReducer';
 
 export default combineReducers({
 	user: userReducer,
@@ -17,5 +17,6 @@ export default combineReducers({
 	price: priceReducer,
 	cart: cartReducer,
 	admin: adminReducer,
-	stock: stockReducer
+	stock: stockReducer,
+	useraccount: userAccountReducer,
 });

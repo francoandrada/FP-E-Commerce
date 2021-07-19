@@ -13,6 +13,9 @@ const {
 	getUserToEdit,
 	putUserInfo,
 	deleteUser,
+	deleteProduct,
+	deleteBrand,
+	deleteCategory,
 } = require('../Controllers/admin');
 
 const router = Router();
@@ -36,5 +39,8 @@ router.get('/users', getUsers);
 router.get('/user/:email', getUserToEdit);
 router.put('/user/edit', putUserInfo);
 router.put('/user/delete', deleteUser);
+router.delete('/deleteproduct/:id', deleteProduct);
+router.delete('/deletebrand/:id', deleteBrand);
+router.delete('/deletecategory/:id', deleteCategory);
 
 module.exports = router;

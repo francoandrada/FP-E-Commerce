@@ -35,7 +35,7 @@ export const FETCH_COUNT_OF_BRAND = 'FETCH_COUNT_OF_BRAND';
 export const FETCH_COUNT_OF_CATEGORIES = 'FETCH_COUNT_OF_CATEGORIES';
 export const FILTER_STOCK = 'FILTER_STOCK';
 export const TABLE_FILTER_BRAND = 'TABLE_FILTER_BRAND';
-
+export const FILTER_BRANDS= 'FILTER_BRANDS';
 //carrito
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const ADJUST_ITEM_QTY = 'ADJUST_ITEM_QTY';
@@ -44,6 +44,16 @@ export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 
 // pago
 export const SET_CART = 'SET_CART';
+
 export const GET_PAY ='GET_PAY';
+
+
+//deploy
+export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
+
+
 /////////////////ADMIN
 // export const CREATED_BRAND= 'CREATED_BRAND';
+
+//user account
+export const GET_USER_ORDERS = 'GET_USER_ORDERS';

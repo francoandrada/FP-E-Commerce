@@ -5,8 +5,9 @@ import SubTotal from '../../ShoppingCartComponents/SubTotal/SubTotal'
 import style from './ShoppingCart.module.css'
 
 function ShoppingCart() {
-    const userLogged = useSelector((state) => state.user.authenticated);
-
+    const userInfo = useSelector((state) => state.user);
+    const userLogged = userInfo.authenticated;
+    const userId = userLogged && userInfo.userData.userId;
 
 	return (
         <div className={style.shoppingCartContainer}>
@@ -17,7 +18,10 @@ function ShoppingCart() {
                 </div>
 
                 <div className={style.subtotalDiv}>
-                <SubTotal userLogged={userLogged}/>
+                <SubTotal 
+                userLogged={userLogged}
+                userId={userId}
+                />
                 </div>
 		    </div>
             <div>
