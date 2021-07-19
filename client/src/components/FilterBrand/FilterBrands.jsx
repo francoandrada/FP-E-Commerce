@@ -31,7 +31,7 @@ function FilterBrands () {
        
     }
 
-    if(category && category.length > 0){
+    if(category && category.length > 0 ){
        var allProducts = products.filter(product=>product.categories[0].name===category)
        
         var array=[]
