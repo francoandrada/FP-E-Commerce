@@ -63,7 +63,10 @@ function AdminBrands() {
 														<MdModeEdit />
 													</button>
 												</Link>
-												<button onClick={(e) => deleteBrandHandle(e, c.id)}>
+												<button
+													className={styles.btnDelete}
+													onClick={(e) => deleteBrandHandle(e, c.id)}
+												>
 													<FaTrashAlt />
 												</button>
 											</div>

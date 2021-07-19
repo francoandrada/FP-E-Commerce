@@ -58,7 +58,10 @@ function AdminCategories() {
 														<MdModeEdit />
 													</button>
 												</Link>
-												<button onClick={(e) => deleteCategoryHandle(e, c.id)}>
+												<button
+													className={styles.btnDelete}
+													onClick={(e) => deleteCategoryHandle(e, c.id)}
+												>
 													<FaTrashAlt />
 												</button>
 											</div>

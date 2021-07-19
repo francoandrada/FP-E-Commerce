@@ -1,18 +1,16 @@
-
-.searchBarContainer{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.searchBarContainer {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.theSearchBarEcommerce{
-    display: flex;
-    width: 50%;
-    flex-direction: row;
+.theSearchBarEcommerce {
+	display: flex;
+	width: 50%;
+	flex-direction: row;
 }
-
 
 .navbarEcommerce {
 	width: 100%;
@@ -23,7 +21,7 @@
 }
 
 .searchBtnEcommerce {
-	color: white;
+	color: #cd113b;
 	background-color: transparent;
 	right: 35px;
 	margin-top: 0px;
@@ -93,11 +91,12 @@
 	margin-top: 12px;
 	font-size: 18px;
 	text-transform: capitalize;
-	background-color: #626466;
-	color: white;
+	background-color: #fff;
+	color: black;
+	outline-color: #cd113b;
 }
 .inputEcommerce:hover {
-	background-color: #a2a3a4;
+	/* background-color: #a2a3a4; */
 }
 .posRelEcommerce {
 	position: relative;
@@ -136,7 +135,7 @@
 
 .flexColumnEcommerce {
 	flex-direction: column;
-    width: 50%;
+	width: 50%;
 }
 
 .modalSearchContainerEcommerce {
@@ -147,7 +146,6 @@
 	justify-content: center;
 	align-items: center;
 }
-
 
 @media only screen and (max-width: 1120px) {
 	.searchBtnEcommerce {

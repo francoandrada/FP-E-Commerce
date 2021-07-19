@@ -113,7 +113,6 @@ function AdminUsers() {
 							})}
 						</tbody>
 					</table>
-					;
 				</div>
 			</div>
 		</div>
