@@ -11,7 +11,8 @@ import ButtonRed from '../../../components/StyledComponents/ButtonRed';
 import Swal from 'sweetalert2';
 import styles from '../../Register/Register.module.css';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md'
 
 
 
@@ -35,7 +36,7 @@ function PutProduct(props) {
 	}, []);
 
 	const [product, setProduct] = useState({
-		id:'',
+		id: '',
 		name: '',
 		price: '',
 		priceSpecial: '',
@@ -44,7 +45,7 @@ function PutProduct(props) {
 		image: '',
 		stock: '',
 		brand: '',
-		category:'',
+		category: '',
 		// pictures:''
 	});
 
@@ -87,39 +88,46 @@ function PutProduct(props) {
 	// }
 
 
-    const onSubmit = async ()=>{
-			try {
-				await axios.put('http://localhost:3001/admin/putproduct',product)
-                .then(()=>{
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'The user was succesfully edited',
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    history.push('/');
-                }
-                )
+	const onSubmit = async () => {
+		try {
+			await axios.put('http://localhost:3001/admin/putproduct', product)
+				.then(() => {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'The user was succesfully edited',
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					history.push('/');
+				}
+				)
 
-			} catch (error) {
-				console.log(error.response.data.msg);
-			}
+		} catch (error) {
+			console.log(error.response.data.msg);
+		}
 	};
 
 	return (
 		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
+			<div className={styles.btnBackContainer}>
+				<Link to='/admin/products'>
+					
+						<MdArrowBack />
+					
+				</Link>
+			</div>
 			<form
 				className=''
 				onChange={(e) => handleChange(e)}
 				onSubmit={onSubmit}
 			>
 				<h6>Product</h6>
-	
+
 
 				<h6>Name</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					name='name'
 					value={product.name}
 					onChange={(e) => handleChange(e)}
@@ -142,7 +150,7 @@ function PutProduct(props) {
 
 				<h6>Price</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='number'
 					name='price'
 					value={product.price}
@@ -183,7 +191,7 @@ function PutProduct(props) {
 
 				<h6>Description</h6>
 				<textarea
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='description'
 					value={product.description}
@@ -229,7 +237,7 @@ function PutProduct(props) {
 
 				<h6>Image</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='image'
 					value={product.image}
@@ -276,7 +284,7 @@ function PutProduct(props) {
 
 				<h6>Brand</h6>
 				<select
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='brand'
 					value={product.brand.id}
@@ -308,7 +316,7 @@ function PutProduct(props) {
 				</select>
 				<span>{errors?.category?.message}</span>
 				<div className={styles.registerButtonRow}>
-							<ButtonRed type='submit'>Confirm</ButtonRed>
+					<ButtonRed type='submit'>Confirm</ButtonRed>
 				</div>
 			</form>
 		</div>
