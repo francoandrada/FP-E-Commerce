@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {createdProduct, getProducts, getCategories, getBrands} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
+import Select from 'react-select';
+// import MultiSelect from "react-multi-select-component";
 import swal from 'sweetalert';
 
 
@@ -12,30 +14,26 @@ function AddProduct () {
     const brand = useSelector((state) => state.brands.allBrands);
 	const categories = useSelector((state) => state.category.allCategories);
     // var id = props.match.params.id
-    console.log(products)
-    useEffect(()=>{
-     dispatch(getBrands())
-     dispatch(getCategories());
-    },[dispatch])
 
+	const [selectCategory, setCategory] = useState([]);
+    useEffect(()=>{
+		dispatch(getBrands())
+		dispatch(getCategories());
+    },[dispatch])
+	
     const {
-        register,
+		register,
         handleSubmit,
         formState: { errors },
         reset
-      } = useForm();
-
-
-
-      const  changeInput = (e)=> {
-        //   const value= e.target.value
-        //   const name= e.target.name
-          console.log(e.target.files)
-          
-        }
+	} = useForm();
+	
+	const  changeInput = (e)=> {
+		console.log(e)
+	}
 
     const submit=(data, e)=>{
-        // data.id = id
+		// data.category =
         console.log(data)
         for(let i=0 ; i< products.length; i++){
             if(products[i].name.toLowerCase() === data.name.toLowerCase()){
@@ -80,8 +78,8 @@ function AddProduct () {
         }
     }
 
-
-
+	
+	var options= categories.map((c)=>({label: c.name, value: c.id}))
     return (
         <div>
             <form
@@ -323,10 +321,31 @@ function AddProduct () {
 				</select>
 				{/* <span>{errors?.brandId.message}</span> */}
 
+				<Select 
+                       
+						isMulti
+                        className= ''
+                        name='category'
+						value={selectCategory}
+						options={options}
+                        onChange={(e) => changeInput(e)} 
+						/>
+                    
+                 
 
-
-                <h6>Category</h6>
-				<select
+			{/* <label for="type">Selected Categories</label>
+              <MultiSelect
+			  name= 'category'
+              className=''
+			  options={options}
+			  value={selectedCategory}
+			  onChange={(e) => changeInput(e)}
+			//   {...register('category', {
+				
+			// })}
+			  /> */}
+			  {/* <h6>Category</h6> */}
+				{/* <select
 					className=''
 					type='text'
 					name='category'
@@ -341,7 +360,7 @@ function AddProduct () {
 							{x.name}
 						</option>
 					))}
-				</select>
+				</select> */}
 				{/* <span>{errors?.categories?.message}</span> */}
             {/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
             <button type="submit">Add</button>
