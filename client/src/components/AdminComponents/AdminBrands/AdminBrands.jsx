@@ -5,6 +5,7 @@ import { getBrands, deleBrand } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
 import styles from '../AdminCategories/AdminCategories.module.css';
 import { Link } from 'react-router-dom';
+import { FaTrashAlt } from 'react-icons/fa'
 // import { AiOutlineRetweet } from 'react-icons/ai';
 function AdminBrands() {
 	const dispatch = useDispatch();
@@ -26,11 +27,15 @@ function AdminBrands() {
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<Link to='/admin/addbrands'>
-					<button> Add Brand </button>
-				</Link>
+				<div className={styles.btnContainer}>
+					<Link to='/admin/addbrands'>
+						<button> Add Brand </button>
+					</Link>
+				</div>
 				<div className={styles.categoriesContainer}>
-					<h1> Brands </h1>
+					<div className={styles.tittleContainer}>
+						<h1> Brands </h1>
+					</div>
 					{allBrands.map((c, key) => {
 						return (
 							<div key={key} className={styles.category}>
@@ -42,7 +47,7 @@ function AdminBrands() {
 										</button>
 									</Link>
 									<button onClick={(e) => deleteBrandHandle(e, c.id)}>
-										Delete
+										<FaTrashAlt />
 									</button>
 								</div>
 							</div>

@@ -4,7 +4,7 @@ import Admin from '../Admin/Admin';
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../../../Redux/actions';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
-import styles from '../AdminCategories/AdminCategories.module.css';
+import styles from './AdminUser.module.css';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -65,15 +65,15 @@ function AdminUsers() {
 		: allUsers;
 
 	return (
-		<div>
+		<div className={styles.UserAdmin}>
 			<div>
 				<Admin />
 			</div>
 			<div id={stylesAdmin.mainContainer}>
-				<div>
+				<div className={styles.SearchBoxContainer}>
 					<SearchBox filter={filter} setFilter={setFilter} />
 				</div>
-				<div>
+				<div className={styles.UserContainer}>
 					<h1> Users </h1>
 					{users?.map((c) => {
 						return (
