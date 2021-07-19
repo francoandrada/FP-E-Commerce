@@ -16,24 +16,28 @@
 	justify-content: space-between;
 	box-shadow: 0 0px 30px rgb(172, 171, 171);
 }
-.tittleContainer{
-	display: flex;
+.categoriesContainer h1 {
+	padding: 0.5em 0em 1em 1em;
+}
+
+.tittleContainer {
+	/* display: flex;
 	align-items: center;
 	justify-content: center;
 	margin: auto;
-	width: 400px;
+	width: 400px; */
+	padding: 0.5em 0em 1em 1em;
 }
 ._container {
 	width: 80%;
 	margin-left: 20%;
-	
 }
-.btnContainer{
+.btnContainer {
 	display: flex;
 	flex-direction: row-reverse;
 	margin: 0 2rem 2rem 0;
 }
-.btnContainer button{
+.btnContainer button {
 	padding: 6px 10px;
 	border-radius: 14px;
 	border: 0;
