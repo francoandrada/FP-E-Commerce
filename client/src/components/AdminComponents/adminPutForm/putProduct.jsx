@@ -88,24 +88,27 @@ function PutProduct(props) {
 	// }
 
 
-	const onSubmit = async () => {
-		try {
-			await axios.put('http://localhost:3001/admin/putproduct', product)
-				.then(() => {
-					Swal.fire({
-						position: 'center',
-						icon: 'success',
-						title: 'The user was succesfully edited',
-						showConfirmButton: false,
-						timer: 1500,
-					});
-					history.push('/');
-				}
-				)
 
-		} catch (error) {
-			console.log(error.response.data.msg);
-		}
+    const onSubmit = async (event)=>{
+			event.preventDefault()
+			try {
+				await axios.put('http://localhost:3001/admin/putproduct',product)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'The product was succesfully edited',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    history.push('/admin');
+                }
+                )
+
+			} catch (error) {
+				console.log(error.response.data.msg);
+			}
+
 	};
 
 	return (

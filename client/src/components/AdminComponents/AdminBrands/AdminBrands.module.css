@@ -2,3 +2,28 @@
 	width: 80%;
 	margin-left: 20%;
 }
+
+.btnEdit {
+	background-color: transparent;
+	border: 0;
+	border-radius: 10px;
+	outline: none;
+	margin: 0 1rem;
+	font-size: 20px;
+}
+
+.btnContainer button:hover {
+	background-color: #d4202d;
+}
+
+.btnEdit:hover {
+	color: #cd113b;
+}
+
+.btnDelete:hover {
+	color: #cd113b;
+}
+
+.btnDelete {
+	font-size: 18px;
+}

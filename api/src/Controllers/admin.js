@@ -37,6 +37,7 @@ async function putProduct(req, res, next) {
 			id,
 			name,
 			price,
+			priceSpecial,
 			description,
 			weight,
 			image,
@@ -53,6 +54,7 @@ async function putProduct(req, res, next) {
 		product.id = id
 		product.name = name
 		product.price = price
+		product.priceSpecial = priceSpecial
 		product.description = description
 		product.weight = weight 
 		product.image = image
