@@ -153,6 +153,8 @@ function Products() {
 									<div className={styles.buttonBuy}>
 										{p.stock > 0 ? (
 											<button
+
+												id={styles.btnBuy}
 												type='submit'
 												onClick={() => dispatch(addToCart(p))}
 											>
