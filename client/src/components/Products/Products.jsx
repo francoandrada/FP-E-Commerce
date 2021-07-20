@@ -39,7 +39,7 @@ function Products() {
 		price: priceS,
 		page: actualPage,
 		qty: productsPerPage,
-		stock: stockS
+		stock: stockS,
 	});
 
 	useEffect(() => {
@@ -49,10 +49,9 @@ function Products() {
 			price: priceS,
 			page: actualPage,
 			qty: productsPerPage,
-			stock: stockS
+			stock: stockS,
 		});
 		return () => {
-	
 			dispatch(cleanFilters());
 		};
 	}, []);
@@ -78,7 +77,6 @@ function Products() {
 		});
 	}, [brandS]);
 
-	
 	useEffect(() => {
 		setQuery({
 			...query,
@@ -103,10 +101,6 @@ function Products() {
 	useEffect(() => {
 		dispatch(getFilteredProducts(query));
 	}, [query]);
-
-	
-
-
 
 	var formatNumber = {
 		separator: '.',
@@ -157,20 +151,17 @@ function Products() {
 									</div>
 
 									<div className={styles.buttonBuy}>
-										{p.stock>0?
-										<button
-											type='submit'
-											onClick={() => dispatch(addToCart(p))}
-										>
-											Add to Cart
-										</button>
-										:
-										<button
-										type='submit'
-									>
-										Sin Stock
-									</button>
-										}
+										{p.stock > 0 ? (
+											<button
+												id={styles.btnBuy}
+												type='submit'
+												onClick={() => dispatch(addToCart(p))}
+											>
+												Add to Cart
+											</button>
+										) : (
+											<button type='submit'>Sin Stock</button>
+										)}
 									</div>
 								</div>
 								{/* </div> */}
@@ -183,6 +174,5 @@ function Products() {
 		</div>
 	);
 }
-
 
 export default Products;
