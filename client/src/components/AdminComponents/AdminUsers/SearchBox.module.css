@@ -1,7 +1,6 @@
 .searchBarContainer {
 	display: flex;
-	width: 100%;
-	flex-direction: column;
+
 	align-items: center;
 	justify-content: center;
 }
@@ -10,6 +9,7 @@
 	display: flex;
 	width: 50%;
 	flex-direction: row;
+	float: left;
 }
 
 .navbarEcommerce {
@@ -28,6 +28,7 @@
 	width: 56px;
 	height: 37px;
 	border-color: transparent;
+	float: left;
 }
 
 .searchBtnEcommerce i {
@@ -83,12 +84,11 @@
 
 .inputEcommerce {
 	padding: 10px;
-	width: 350px;
-	height: 35px;
+
+	height: 42px;
 	border: 1px solid #a2a3a4;
 	border-radius: 5px;
-	margin: 10px;
-	margin-top: 12px;
+
 	font-size: 18px;
 	text-transform: capitalize;
 	background-color: #fff;

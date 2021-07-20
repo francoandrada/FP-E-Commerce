@@ -12,6 +12,10 @@
 	font-size: 20px;
 }
 
+.btnContainer button:hover {
+	background-color: #d4202d;
+}
+
 .btnEdit:hover {
 	color: #cd113b;
 }
