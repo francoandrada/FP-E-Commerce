@@ -127,7 +127,7 @@ function AdminUsers() {
 				<div className={styles.userContainer}>
 					<div className={styles.headerTable}>
 						<div className={styles.btnContainer}>
-							<Link to='/admin/addcategory'>
+							<Link to='/register'>
 								<button>
 									<IoMdAddCircle className={styles.btnAdd} /> Add User
 								</button>
