@@ -21,7 +21,7 @@
 
 .adminn {
 	background-color: #eee;
-	height: 100%;
+	min-height: 100vh;
 	background-attachment: fixed;
 	width: 100%;
 	padding: 2rem 0;
