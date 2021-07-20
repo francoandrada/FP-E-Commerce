@@ -12,11 +12,6 @@ function Admin() {
 	return (
 		<div className='container'>
 			<IconContext.Provider value={{ color: '#cd113b' }}>
-				{/* <div className='navbar'>
-					<Link to='#' className='menu-bars'>
-						<FaIcons.FaBars onClick={showSidebar} />
-					</Link>
-				</div> */}
 				<div className='nav-menu active'>
 					<ul className='nav-menu-items'>
 						{SidebarData.map((item, index) => {
@@ -29,11 +24,6 @@ function Admin() {
 								</li>
 							);
 						})}
-						{/* <Link to='/admin/products'><li className='navbar-toggle'> Products/Stock </li></Link>
-                        <Link to='/admin/categories'><li className='navbar-toggle'> Categories </li></Link>
-                        <Link to='/admin/brands'><li className='navbar-toggle'> Brands </li></Link>
-                        <Link to='/admin/users'><li className='navbar-toggle'> Users </li></Link>
-                        <Link to='/admin/orders'><li className='navbar-toggle'> Orders </li></Link> */}
 					</ul>
 				</div>
 			</IconContext.Provider>

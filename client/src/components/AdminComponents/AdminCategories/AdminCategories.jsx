@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import Admin from '../Admin/Admin';
 import { deleCategory, getCategories } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
+import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
+
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 function AdminCategories() {
@@ -12,6 +15,10 @@ function AdminCategories() {
 		dispatch(getCategories());
 	}, [dispatch]);
 
+	let acu = 0;
+	const sum = () => {
+		return (acu += 1);
+	};
 	const deleteCategoryHandle = (e, id) => {
 		e.preventDefault();
 		dispatch(deleCategory(id));
@@ -24,47 +31,54 @@ function AdminCategories() {
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<div className={styles.btnContainer}>
-					<Link to='/admin/addcategory'>
-						<button> Add Category </button>
-					</Link>
+				<div>
+					<h1>Categories</h1>
 				</div>
 				<div className={styles.categoriesContainer}>
-					<h1> Categories </h1>
+					<div className={styles.btnContainer}>
+						<Link to='/admin/addcategory'>
+							<button>
+								{' '}
+								<IoMdAddCircle className={styles.btnAdd} /> Add Category{' '}
+							</button>
+						</Link>
+					</div>
+					{/* <h1> Categories </h1> */}
 					<table class='table'>
 						<thead>
 							<tr>
-								<th scope='col-md-8'>#</th>
-								<th scope='col'>Name</th>
-								<th scope='col'>Actions</th>
+								<th class='col-md-1'>#</th>
+								<th>Name</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
-					</table>
-					{allCategories.map((c) => {
-						return (
-							<div className={styles.category}>
-								<tbody>
-									<tr>
-										<th scope='row'>1</th>
+
+						<tbody>
+							{allCategories.map((c) => {
+								return (
+									<tr key={c.id}>
+										<th>{sum()}</th>
 										<td>{c.name}</td>
 										<td>
-											{' '}
 											<div>
 												<Link key={c.id} to={`/admin/putCategory/${c.id}`}>
 													<button className={styles.btnEdit}>
-														<MdModeEdit />
+														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
-												<button onClick={(e) => deleteCategoryHandle(e, c.id)}>
-													Delete
+												<button
+													className={styles.btnDelete}
+													onClick={(e) => deleteCategoryHandle(e, c.id)}
+												>
+													<FaTrashAlt title='Remove' />
 												</button>
 											</div>
 										</td>
 									</tr>
-								</tbody>
-							</div>
-						);
-					})}
+								);
+							})}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</>

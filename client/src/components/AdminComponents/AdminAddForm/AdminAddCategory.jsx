@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import {createdCategory, getCategories} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
+import styles from '../../Register/Register.module.css'
+import { MdArrowBack } from 'react-icons/md'
+import { Link } from 'react-router-dom';
 
 
 function AddCategory () {
@@ -69,6 +72,13 @@ function AddCategory () {
 
     return (
         <div>
+              <div className={styles.btnBackContainer}>
+            	<Link to='/admin/categories'>
+					
+                    <MdArrowBack />
+                
+            </Link>
+            </div>
             <form
             className=""
             onChange={(e)=>changeInput(e)}

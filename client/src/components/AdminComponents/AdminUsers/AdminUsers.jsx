@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SearchBox from './SearchBox';
 import stylesAdmin from './AdminUser.module.css';
+import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
 
 function AdminUsers() {
 	const history = useHistory();
@@ -41,6 +43,12 @@ function AdminUsers() {
 				console.log(error.response.data.msg);
 			}
 		
+	let acu = 0;
+	const sum = () => {
+		return (acu += 1);
+	};
+
+
 	};
 
 	const onDeleteClick = (email) => {
@@ -87,30 +95,55 @@ function AdminUsers() {
 				<Admin />
 			</div>
 			<div id={stylesAdmin.mainContainer}>
-				<div className={styles.SearchBoxContainer}>
-					<SearchBox filter={filter} setFilter={setFilter} />
+				<div className={styles.title}>
+					<h1>Users</h1>
 				</div>
-				<div className={styles.UserContainer}>
-					<h1> Users </h1>
-					{users?.map((c) => {
-						return (
-							<div className={styles.category} key={c.email}>
-								<span>User: {c.email}</span>
-								<div>
-									<Link to={`/admin/user/${c.email}`}>
-										<button className={styles.btnEdit}>
-											<MdModeEdit />
-										</button>
-									</Link>
-								</div>
-								<div>
-									<button className={styles.btnEdit}>
-										<MdDelete onClick={() => onDeleteClick(c.email)} />
-									</button>
-								</div>
-							</div>
-						);
-					})}
+
+				<div className={styles.userContainer}>
+					<div className={styles.headerTable}>
+						<div className={styles.btnContainer}>
+							<Link to='/admin/addcategory'>
+								<button>
+									<IoMdAddCircle className={styles.btnAdd} /> Add User
+								</button>
+							</Link>
+						</div>
+						<div className={styles.SearchBoxContainer}>
+							<SearchBox filter={filter} setFilter={setFilter} />
+						</div>
+					</div>
+					<table class='table'>
+						<thead>
+							<tr>
+								<th class='col-md-1'>#</th>
+								<th>Name</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{users?.map((c) => {
+								return (
+									<tr>
+										<th>{sum()}</th>
+										<td>{c.email}</td>
+										<td>
+											<div>
+												<Link key={c.id} to={`/admin/user/${c.email}`}>
+													<button className={styles.btnEdit}>
+														<MdModeEdit title='Edit' />
+													</button>
+												</Link>
+												<button onClick={() => onDeleteClick(c.email)}>
+													<FaTrashAlt title='Remove' />
+												</button>
+											</div>
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
