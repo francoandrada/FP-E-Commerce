@@ -5,7 +5,8 @@ import { getBrands, deleBrand } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
 import styles from '../AdminCategories/AdminCategories.module.css';
 import { Link } from 'react-router-dom';
-import { FaTrashAlt } from 'react-icons/fa'
+import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
 // import { AiOutlineRetweet } from 'react-icons/ai';
 function AdminBrands() {
 	const dispatch = useDispatch();
@@ -21,38 +22,63 @@ function AdminBrands() {
 		window.location.reload();
 	};
 
+	let acu = 0;
+	const sum = () => {
+		return (acu += 1);
+	};
+
 	return (
 		<>
 			<div>
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<div className={styles.btnContainer}>
-					<Link to='/admin/addbrands'>
-						<button> Add Brand </button>
-					</Link>
+				<div>
+					<h1>Brands</h1>
 				</div>
 				<div className={styles.categoriesContainer}>
-					<div className={styles.tittleContainer}>
-						<h1> Brands </h1>
+					<div className={styles.btnContainer}>
+						<Link to='/admin/addcategory'>
+							<button>
+								<IoMdAddCircle className={styles.btnAdd} /> Add Brand{' '}
+							</button>
+						</Link>
 					</div>
-					{allBrands.map((c, key) => {
-						return (
-							<div key={key} className={styles.category}>
-								<span>Name: {c.name}</span>
-								<div>
-									<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
-										<button className={styles.btnEdit}>
-											<MdModeEdit />
-										</button>
-									</Link>
-									<button onClick={(e) => deleteBrandHandle(e, c.id)}>
-										<FaTrashAlt />
-									</button>
-								</div>
-							</div>
-						);
-					})}
+					<table className='table'>
+						<thead>
+							<tr>
+								<th className='col-md-1'>#</th>
+								<th>Name</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{allBrands.map((c, key) => {
+								return (
+									<tr key={c.id}>
+										<th>{sum()}</th>
+										<td>{c.name}</td>
+										<td>
+											<div>
+												<Link /*key={c.id}*/ to={`/admin/putbrands/${c.id}`}>
+													<button className={styles.btnEdit}>
+														<MdModeEdit title='Edit' />
+													</button>
+												</Link>
+												<button
+													className={styles.btnDelete}
+													onClick={(e) => deleteBrandHandle(e, c.id)}
+												>
+													<FaTrashAlt title='Remove' />
+												</button>
+											</div>
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</>
