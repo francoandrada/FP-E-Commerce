@@ -5,6 +5,7 @@ import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import './Admin.css';
+import styles from './Admin.module.css';
 
 function Admin() {
 	// const [sidebar, setSidebar] = useState(false);
