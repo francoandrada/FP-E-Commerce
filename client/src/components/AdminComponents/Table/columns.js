@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-
 export const COLUMNS = [
 	{
 		Header: 'Image',
@@ -44,6 +43,10 @@ export const COLUMNS = [
 	{
 		Header: 'Brand',
 		accessor: 'brand',
+	},
+	{
+		Header: 'IsVisible',
+		accessor: 'isVisible',
 	},
 	{
 		Header: 'Delete',
