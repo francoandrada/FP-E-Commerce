@@ -12,6 +12,7 @@ const catalogRoutes = require('./catalogRoutes');
 const mercadopagoRoutes = require('./mercadopagoRoutes');
 const orderRoutes = require('./orderRoutes');
 const webHooks = require('./webHooks');
+const cartRoutes = require('./cartRoutes');
 const router = Router();
 
 // router.use('/pagination', paginationRouter);
@@ -27,4 +28,5 @@ router.use('/catalog', catalogRoutes);
 router.use('/mercadopago', mercadopagoRoutes);
 router.use('/orders', orderRoutes);
 router.use('/webhooks', webHooks);
+router.use('/shoppingcart', cartRoutes);
 module.exports = router;
