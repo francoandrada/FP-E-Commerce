@@ -44,10 +44,10 @@ function AdminBrands() {
 							</button>
 						</Link>
 					</div>
-					<table class='table'>
+					<table className='table'>
 						<thead>
 							<tr>
-								<th class='col-md-1'>#</th>
+								<th className='col-md-1'>#</th>
 								<th>Name</th>
 								<th>Actions</th>
 							</tr>
