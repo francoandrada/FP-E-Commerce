@@ -61,7 +61,7 @@ function AdminBrands() {
 										<td>{c.name}</td>
 										<td>
 											<div>
-												<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
+												<Link /*key={c.id}*/ to={`/admin/putbrands/${c.id}`}>
 													<button className={styles.btnEdit}>
 														<MdModeEdit title='Edit' />
 													</button>

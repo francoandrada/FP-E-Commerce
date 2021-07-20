@@ -14,7 +14,15 @@ function FilterBrands() {
 	const [brandChecked, setBrandChecked] = useState('');
 
 	useEffect(() => unCheck(brandChecked), [brandChecked]);
-	useEffect(() => dispatch(filterBrand(brandChecked)), [brandChecked]);
+	// useEffect(
+	// 	() => dispatch(filterBrand(brandChecked)),
+	// 	[dispatch, brandChecked]
+	// );
+
+	useEffect(() => {
+		dispatch(filterBrand(brandChecked));
+	}, [dispatch, brandChecked]);
+
 	const unCheck = (arg) => {
 		let boxes = document.getElementsByClassName('orderC');
 		for (let i = 0; i < boxes.length; i++) {
@@ -53,13 +61,13 @@ function FilterBrands() {
 
 			{result && result.length > 0
 				? result.map((item, index) => (
-						<div className='form-check'>
+						<div key={index} className='form-check'>
 							<input
 								className={`${'form-check-input'} ${'orderC'}`}
 								type='checkbox'
 								id={item.name}
 								// checked='true'
-								key={index}
+								// key={index}
 								onClick={(event) => onClickedBox(event)}
 								// onClick={() => console.log(prueba.checked)}
 							/>
@@ -69,7 +77,7 @@ function FilterBrands() {
 						</div>
 				  ))
 				: BrandName.map((item, index) => (
-						<div className='form-check'>
+						<div key={index} className='form-check'>
 							<input
 								className={`${'form-check-input'} ${'orderC'}`}
 								type='checkbox'
