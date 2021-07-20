@@ -34,7 +34,62 @@ const webhooks = async function webhooks(req, res) {
 	}
 };
 
+
+
+
+const emailPurchase = async function emailPurchase(req, res) {
+	try {
+		const { email } = req.body;
+
+			let transporter = nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+					type: 'OAuth2',
+					user: process.env.MAIL_USERNAME,
+					pass: process.env.MAIL_PASSWORD,
+					clientId: process.env.OAUTH_CLIENTID,
+					clientSecret: process.env.OAUTH_CLIENT_SECRET,
+					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+				},
+			});
+	
+			const token = jwt.sign(
+				{ id: user.userId, name: user.name },
+				process.env.RESET_PASSWORD_KEY,
+				{ expiresIn: '6h' }
+			);
+			var mailOptions = {
+				from: 'hardwarecommerce@gmail.com',
+				to: email,
+				subject: 'Reset your password',
+				html: `
+				<div>
+					<h2>Hello,</h2>
+					<p>We've received a request to reset the password for the HardwareStore account associated with ${email}.
+					<p>You can reset your passwordd by clicking the link below:</p>
+					<a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
+					<p>If you did not request a new password, please let us know inmediately by replying to this email.</p>
+				</div>
+			 
+			 `,
+			};
+	
+			user.update({ resetLink: token });
+	
+			transporter.sendMail(mailOptions, function (err, data) {
+				if (err) {
+					console.log('Error ' + err);
+				} else {
+					console.log('Email sent successfully');
+				}
+			});
+	} catch (error) {
+		res.send(error);
+	}
+};
+
 module.exports = {
 	webhooks,
+	emailPurchase
 };
 

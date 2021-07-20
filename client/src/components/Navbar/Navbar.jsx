@@ -102,8 +102,13 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-	<button onclick='myFunction()'>Click me</button>;
-	console.log(userData)
+
+	const handleClick = () =>{
+		dispatch(logOut());
+		history.push('/')
+		window.location.reload();
+		
+	}
 	return (
 		<>
 			<div className={styles.navbarEcommerce}>
@@ -172,15 +177,15 @@ const Navbar = () => {
 					}
 					{token ? (
 						<div class='d-block mt-4'>
+						
 							<button
 								type='submit'
 								className={styles.but}
-								onClick={() => {
-									dispatch(logOut());
-								}}
+								onClick={() => handleClick()}
 							>
 								Log Out
 							</button>
+						
 							{Array.isArray(userName) ? <p class='text-white h6' >Hi, {userName.email}!</p>
 
 								:

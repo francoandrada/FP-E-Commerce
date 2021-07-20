@@ -224,6 +224,11 @@ export function logIn(dato) {
 				payload: error.response.data.msg,
 			});
 		}
+		setTimeout(() => {
+			dispatch({
+				type: HIDE_ALERT,
+			});
+		}, 3000);
 	};
 }
 
@@ -258,7 +263,7 @@ export function authUser(data) {
 				});
 			}
 		} catch (error) {
-			console.log(error);
+		console.log(error)
 		}
 	};
 }
@@ -315,8 +320,16 @@ export function resetPassword(resetLink, newPass) {
 				},
 			});
 		} catch (error) {
-			console.log(error);
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
 		}
+		setTimeout(() => {
+			dispatch({
+				type: HIDE_ALERT,
+			});
+		}, 3000);
 	};
 }
 

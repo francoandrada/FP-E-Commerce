@@ -64,50 +64,57 @@ exports.forgotPassword = async (req, res) => {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-			  type: 'OAuth2',
-			  user: process.env.MAIL_USERNAME,
-			  pass: process.env.MAIL_PASSWORD,
-			  clientId: process.env.OAUTH_CLIENTID,
-			  clientSecret: process.env.OAUTH_CLIENT_SECRET,
-			  refreshToken: process.env.OAUTH_REFRESH_TOKEN
-			}
-		  });
-		// const token = jwt.sign(
-		// 	{ id: user.userId, name: user.name },
-		// 	process.env.RESET_PASSWORD_KEY,
-		// 	{ expiresIn: '6h' }
-		// );
-		// var mailOptions = {
-		// 	from: 'hardwarecommerce@gmail.com',
-		// 	to: email,
-		// 	subject: 'Reset your password',
-		// 	html: `
-		//  <h2>Please click on given link to reset your password </h2>
-		//  `,
-		// };
-		let mailOptions = {
-			from: 'hardwarecommerce@gmail.com',
-			to: 'hardwarecommerce@gmail.com',
-			subject: 'Nodemailer Project',
-			text: 'Hi from your nodemailer project'
-		  };
-		//user.update({ resetLink: token });
+				type: 'OAuth2',
+				user: process.env.MAIL_USERNAME,
+				pass: process.env.MAIL_PASSWORD,
+				clientId: process.env.OAUTH_CLIENTID,
+				clientSecret: process.env.OAUTH_CLIENT_SECRET,
+				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+			},
+		});
 
-		// transporter.sendMail(mailOptions, function (error, info) {
-		// 	if (error) {
-		// 		console.log(error);
-		// 	}
-		// 	res.send({
-		// 		msg: 'Check your email and open the link we sent to continue',
-		// 	});
-		// });
-		transporter.sendMail(mailOptions, function(err, data) {
+		const token = jwt.sign(
+			{ id: user.userId, name: user.name },
+			process.env.RESET_PASSWORD_KEY,
+			{ expiresIn: '6h' }
+		);
+		var mailOptions = {
+			from: 'hardwarecommerce@gmail.com',
+			to: email,
+			subject: 'Reset your password',
+			html: `
+
+				<!DOCTYPE html>
+				<html>
+				<head>
+				</head>
+				<body style="background-color: #424242;">
+				<h1>This is a heading</h1>
+				<p>This is a paragraph.</p>
+				 <div style="color:blue;>
+				 <h1 style="color:blue;">A Blue Heading</h1>
+				 	<h2>Hello,</h2>
+				 	<p>We've received a request to reset the password for the HardwareStore account associated with ${email}.
+				 	<p>You can reset your passwordd by clicking the link below:</p>
+				 	<a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
+				 	<p>If you did not request a new password, please let us know inmediately by replying to this email.</p>
+				 </div>
+				</body>
+				</html>
+		
+		 
+		 `,
+		};
+
+		user.update({ resetLink: token });
+
+		transporter.sendMail(mailOptions, function (err, data) {
 			if (err) {
-			  console.log("Error " + err);
+				console.log('Error ' + err);
 			} else {
-			  console.log("Email sent successfully");
+				console.log('Email sent successfully');
 			}
-		  });
+		});
 	} catch (error) {
 		console.log(error);
 	}
@@ -116,7 +123,7 @@ exports.forgotPassword = async (req, res) => {
 ///RESET PASWORD
 exports.resetPassword = async (req, res) => {
 	const { resetLink, newPass } = req.body;
-console.log(req.body)
+	console.log(req.body);
 	if (!resetLink || !newPass) {
 		return res.status(401).json({
 			msg: 'Incorrect token or it is expired',
@@ -171,5 +178,3 @@ exports.authUserGmail = async (req, res) => {
 		// console.log(error);
 	}
 };
-
-

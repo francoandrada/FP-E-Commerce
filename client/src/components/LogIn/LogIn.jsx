@@ -14,12 +14,14 @@ import Div from '../StyledComponents/Validation';
 /* global gapi */
 import { GoogleLogin } from 'react-google-login';
 import AuthenticationButton from '../AuthenticationButton/AuthenticationButton'
+import Swal from 'sweetalert2'
+
 
 const GlobalStyle = createGlobalStyle`
 
   body {
 	  background-image: none;
-	  background-color: black; 
+	  background-color: black;
 	  font-family: 'Roboto', sans-serif ;
 }
 `;
@@ -113,17 +115,25 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			dispatch(logIn(values));
+			// dispatch(logIn(values));
+			Swal.fire({
+				title: 'Error!',
+				text: 'Do you want to continue',
+				icon: 'error',
+				confirmButtonText: 'Cool'
+			  })
+			
+		
 		},
 	});
 
 	return (
 		<>
 		<GlobalStyle />
-		<div class='container d-flex justify-content-center mt-5 rounded'>
+		<div class='container d-flex justify-content-center mt-5  rounded'>
 			<div class=' row'>
-				<div class='col bg-white px-5 rounded pb-4'>
-					{setError !== null ? <Error>{setError}</Error> : null}
+				<div class='col bg-white p-5 rounded pb-4'>
+					{setError !== null ? <Error>{setError}</Error> : <p></p>}
 
 					<form onSubmit={formik.handleSubmit} class='p-3'>
 						<div class=' d-flex justify-content-center'>
