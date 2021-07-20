@@ -51,51 +51,63 @@ exports.userAuth = async (req, res, next) => {
 ///FORGOT PASWORD
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
-	// let user = await User.findOne({
-	// 	where: {
-	// 		email: email,
-	// 	},
-	// });
-	// if (!user) {
-	// 	res.status(400).send({ msg: "The user doesn't exist" });
-	// }
+	let user = await User.findOne({
+		where: {
+			email: email,
+		},
+	});
+	if (!user) {
+		res.status(400).send({ msg: "The user doesn't exist" });
+	}
 
 	try {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				type: 'OAuth2',
-				user: process.env.MAIL_USERNAME,
-				pass: process.env.MAIL_PASSWORD,
-				clientId: process.env.OAUTH_CLIENTID,
-				clientSecret: process.env.OAUTH_CLIENT_SECRET,
-				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-			},
-		});
+			  type: 'OAuth2',
+			  user: process.env.MAIL_USERNAME,
+			  pass: process.env.MAIL_PASSWORD,
+			  clientId: process.env.OAUTH_CLIENTID,
+			  clientSecret: process.env.OAUTH_CLIENT_SECRET,
+			  refreshToken: process.env.OAUTH_REFRESH_TOKEN
+			}
+		  });
 		// const token = jwt.sign(
 		// 	{ id: user.userId, name: user.name },
 		// 	process.env.RESET_PASSWORD_KEY,
 		// 	{ expiresIn: '6h' }
 		// );
-		var mailOptions = {
+		// var mailOptions = {
+		// 	from: 'hardwarecommerce@gmail.com',
+		// 	to: email,
+		// 	subject: 'Reset your password',
+		// 	html: `
+		//  <h2>Please click on given link to reset your password </h2>
+		//  `,
+		// };
+		let mailOptions = {
 			from: 'hardwarecommerce@gmail.com',
-			to: email,
-			subject: 'Reset your password',
-			html: `
-		 <h2>Please click on given link to reset your password </h2>
-		 `,
-		};
-
+			to: 'hardwarecommerce@gmail.com',
+			subject: 'Nodemailer Project',
+			text: 'Hi from your nodemailer project'
+		  };
 		//user.update({ resetLink: token });
 
-		transporter.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
+		// transporter.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	}
+		// 	res.send({
+		// 		msg: 'Check your email and open the link we sent to continue',
+		// 	});
+		// });
+		transporter.sendMail(mailOptions, function(err, data) {
+			if (err) {
+			  console.log("Error " + err);
+			} else {
+			  console.log("Email sent successfully");
 			}
-			res.send({
-				msg: 'Check your email and open the link we sent to continue',
-			});
-		});
+		  });
 	} catch (error) {
 		console.log(error);
 	}
@@ -159,3 +171,5 @@ exports.authUserGmail = async (req, res) => {
 		// console.log(error);
 	}
 };
+
+
