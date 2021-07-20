@@ -6,6 +6,7 @@ import { MdModeEdit } from 'react-icons/md';
 import styles from '../AdminCategories/AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
 // import { AiOutlineRetweet } from 'react-icons/ai';
 function AdminBrands() {
 	const dispatch = useDispatch();
@@ -32,14 +33,16 @@ function AdminBrands() {
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<div className={styles.btnContainer}>
-					<Link to='/admin/addbrands'>
-						<button> Add Brand </button>
-					</Link>
+				<div>
+					<h1>Brands</h1>
 				</div>
 				<div className={styles.categoriesContainer}>
-					<div className={styles.tittleContainer}>
-						<h1> Brands </h1>
+					<div className={styles.btnContainer}>
+						<Link to='/admin/addcategory'>
+							<button>
+								<IoMdAddCircle className={styles.btnAdd} /> Add Brand{' '}
+							</button>
+						</Link>
 					</div>
 					<table class='table'>
 						<thead>
@@ -60,14 +63,14 @@ function AdminBrands() {
 											<div>
 												<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
 													<button className={styles.btnEdit}>
-														<MdModeEdit />
+														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
 												<button
 													className={styles.btnDelete}
 													onClick={(e) => deleteBrandHandle(e, c.id)}
 												>
-													<FaTrashAlt />
+													<FaTrashAlt title='Remove' />
 												</button>
 											</div>
 										</td>
