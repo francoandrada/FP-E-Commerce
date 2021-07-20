@@ -87,18 +87,19 @@ function PutProduct(props) {
 	// }
 
 
-    const onSubmit = async ()=>{
+    const onSubmit = async (event)=>{
+			event.preventDefault()
 			try {
 				await axios.put('http://localhost:3001/admin/putproduct',product)
                 .then(()=>{
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'The user was succesfully edited',
+                        title: 'The product was succesfully edited',
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    history.push('/');
+                    history.push('/admin');
                 }
                 )
 
