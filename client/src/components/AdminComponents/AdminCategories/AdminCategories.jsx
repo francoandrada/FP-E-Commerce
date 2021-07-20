@@ -56,7 +56,10 @@ function AdminCategories() {
 						<tbody>
 							{allCategories.map((c) => {
 								return (
-									<tr key={c.id}>
+									<tr
+										key={c.id}
+										className={`${!c.isVisible && 'table-danger'}`}
+									>
 										<th>{sum()}</th>
 										<td>{c.name}</td>
 										<td>
