@@ -4,6 +4,8 @@ import Admin from '../Admin/Admin';
 import { deleCategory, getCategories } from '../../../Redux/actions';
 import { MdModeEdit } from 'react-icons/md';
 import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
+
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 function AdminCategories() {
@@ -29,13 +31,19 @@ function AdminCategories() {
 				<Admin />
 			</div>
 			<div className={styles._container}>
-				<div className={styles.btnContainer}>
-					<Link to='/admin/addcategory'>
-						<button> Add Category </button>
-					</Link>
+				<div>
+					<h1>Categories</h1>
 				</div>
 				<div className={styles.categoriesContainer}>
-					<h1> Categories </h1>
+					<div className={styles.btnContainer}>
+						<Link to='/admin/addcategory'>
+							<button>
+								{' '}
+								<IoMdAddCircle className={styles.btnAdd} /> Add Category{' '}
+							</button>
+						</Link>
+					</div>
+					{/* <h1> Categories </h1> */}
 					<table class='table'>
 						<thead>
 							<tr>
@@ -55,14 +63,14 @@ function AdminCategories() {
 											<div>
 												<Link key={c.id} to={`/admin/putCategory/${c.id}`}>
 													<button className={styles.btnEdit}>
-														<MdModeEdit />
+														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
 												<button
 													className={styles.btnDelete}
 													onClick={(e) => deleteCategoryHandle(e, c.id)}
 												>
-													<FaTrashAlt />
+													<FaTrashAlt title='Remove' />
 												</button>
 											</div>
 										</td>
