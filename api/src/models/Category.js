@@ -9,7 +9,6 @@ module.exports = (sequelize) => {
 		isVisible: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true,
-			allowNull: false,
 		},
 	});
 };
