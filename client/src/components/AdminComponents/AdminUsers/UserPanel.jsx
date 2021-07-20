@@ -74,7 +74,7 @@ function UserPanel() {
 				.email('Invalid email address')
 				.required('Enter an email'),
 			password: Yup.string()
-				.required('Please Enter your password')
+				.required(`You can't change the user password, It's private info`)
 				.matches(
 					/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
 					'Must contain 6 Characters, one uppercase, one lowercase and one number'
@@ -142,7 +142,7 @@ function UserPanel() {
 				{hola.length > 0 ? <Error>{hola}</Error> : null}
 				<form onSubmit={handleSubmit}>
 					<div className='form-row' id={styles.row}>
-						<div className='form-group col-md-4' id={styles.input}>
+						<div className='form-group col-md-5' id={styles.input}>
 							<label>Email</label>
 
 							<input
@@ -166,7 +166,7 @@ function UserPanel() {
 								type='password'
 								name='password'
 								value={user.password}
-								onChange={handleChange}
+								// onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>
