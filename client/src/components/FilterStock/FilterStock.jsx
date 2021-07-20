@@ -28,7 +28,7 @@ function FilterStock() {
 	// console.log(categories.products)
 	return (
 		<div className={styles.divCelena}>
-    			<div className='form-check'>
+			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderS'}`}
 					type='checkbox'
@@ -38,11 +38,11 @@ function FilterStock() {
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
 				/>
-				<label className='form-check-label' for='defaultCheck1'>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
 					Yes
 				</label>
 			</div>
-            <div className='form-check'>
+			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderS'}`}
 					type='checkbox'
@@ -52,7 +52,7 @@ function FilterStock() {
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
 				/>
-				<label className='form-check-label' for='defaultCheck1'>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
 					No
 				</label>
 			</div>

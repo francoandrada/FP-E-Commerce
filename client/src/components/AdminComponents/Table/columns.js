@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-
 export const COLUMNS = [
 	{
 		Header: 'Image',
@@ -65,7 +64,7 @@ export const COLUMNS = [
 					key={row.row.original.id}
 					to={`/admin/putproduct/${row.row.original.id}`}
 				>
-					<i class='fas fa-wrench'></i>
+					<i className='fas fa-wrench'></i>
 				</Link>
 			);
 		},
