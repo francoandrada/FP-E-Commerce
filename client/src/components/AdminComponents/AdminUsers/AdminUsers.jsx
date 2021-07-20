@@ -14,6 +14,7 @@ import stylesAdmin from './AdminUser.module.css';
 function AdminUsers() {
 	const history = useHistory();
 
+	const activeUser = useSelector((state) => state.user.userData);
 	let allUsers = useSelector((state) => state.admin.usersFromDB);
 	const [filter, setFilter] = useState('');
 	const dispatch = useDispatch();
@@ -21,43 +22,59 @@ function AdminUsers() {
 		dispatch(getUsers());
 	}, []);
 
-	const handleDelete = async (email) => {
-		try {
-			await axios
-				.put('http://localhost:3001/admin/user/delete', { email: email })
-				.then(() => {
-					Swal.fire({
-						position: 'center',
-						icon: 'success',
-						title: 'The user was succesfully deleted',
-						showConfirmButton: false,
-						timer: 1500,
-					});
-					history.push('/');
-				});
-		} catch (error) {
-			console.log(error.response.data.msg);
-		}
+	const handleDelete = async (email, event) => {
+
+			try {
+				await axios
+					.put('http://localhost:3001/admin/user/delete', { email: email })
+					.then(() => {
+						Swal.fire({
+							position: 'center',
+							icon: 'success',
+							title: 'The user was succesfully deleted',
+							showConfirmButton: false,
+							timer: 1500,
+						});
+					})
+					.then(() => history.push('/admin/users'));
+			} catch (error) {
+				console.log(error.response.data.msg);
+			}
+		
 	};
 
 	const onDeleteClick = (email) => {
-		Swal.fire({
-			title: 'Do you want to delete this user?',
-			showDenyButton: true,
-			confirmButtonText: `Yes`,
-			denyButtonText: `No`,
-			customClass: {
-				confirmButton: 'order-2',
-				denyButton: 'order-3',
-			},
-		}).then((result) => {
-			if (result.isConfirmed) {
-				handleDelete(email);
-				Swal.fire('Saved!', '', 'success');
-			} else if (result.isDenied) {
-				Swal.fire('Changes are not saved', '', 'info');
-			}
-		});
+		if(email === activeUser.email){
+			console.log(email)
+			console.log(activeUser.email)
+			Swal.fire({
+				title: `You can't delete yourself while being into an active session.`,
+				showDenyButton: false,
+				confirmButtonText: `OK`,
+				customClass: {
+					confirmButton: 'order-2',
+				},
+			})
+		} else {
+			Swal.fire({
+				title: 'Do you want to delete this user?',
+				showDenyButton: true,
+				confirmButtonText: `Yes`,
+				denyButtonText: `No`,
+				customClass: {
+					confirmButton: 'order-2',
+					denyButton: 'order-3',
+				},
+			}).then((result) => {
+				if (result.isConfirmed) {
+					handleDelete(email);
+					Swal.fire('Saved!', '', 'success');
+				} else if (result.isDenied) {
+					Swal.fire('Changes are not saved', '', 'info');
+				}
+			});
+
+		}
 	};
 
 	let users = filter

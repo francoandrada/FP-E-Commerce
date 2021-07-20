@@ -113,7 +113,7 @@ function UserPanel() {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    history.push('/');
+                    history.push('/admin/users');
                 }
                 )
 
@@ -125,11 +125,14 @@ function UserPanel() {
 
 	return (
 		<div className={styles.registerFormContainer}>
+			<ButtonRed onClick={()=>history.push('/admin/users')}>
+				Go back
+			</ButtonRed>	
 			<div id={styles.regForm}>
 				{hola.length > 0 ? <Error>{hola}</Error> : null}
 				<form onSubmit={handleSubmit}>
 					<div className='form-row' id={styles.row}>
-						<div className='form-group col-md-5' id={styles.input}>
+						<div className='form-group col-md-4' id={styles.input}>
 							<label>Email</label>
 
 							<input
@@ -146,11 +149,11 @@ function UserPanel() {
 							) : null}
 						</div>
 
-						<div className='form-group col-md-5' id={styles.input}>
+						<div className='form-group col-md-4' id={styles.input}>
 							<label>Password</label>
 
 							<input
-								type='text'
+								type='password'
 								name='password'
 								value={user.password}
 								onChange={handleChange}
