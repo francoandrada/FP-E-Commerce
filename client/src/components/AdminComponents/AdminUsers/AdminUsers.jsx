@@ -11,6 +11,7 @@ import axios from 'axios';
 import SearchBox from './SearchBox';
 import stylesAdmin from './AdminUser.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
 
 function AdminUsers() {
 	const history = useHistory();
@@ -76,11 +77,23 @@ function AdminUsers() {
 				<Admin />
 			</div>
 			<div id={stylesAdmin.mainContainer}>
-				<div className={styles.SearchBoxContainer}>
-					<SearchBox filter={filter} setFilter={setFilter} />
+				<div className={styles.title}>
+					<h1>Users</h1>
 				</div>
+
 				<div className={styles.userContainer}>
-					<h1> Users </h1>
+					<div className={styles.headerTable}>
+						<div className={styles.btnContainer}>
+							<Link to='/admin/addcategory'>
+								<button>
+									<IoMdAddCircle className={styles.btnAdd} /> Add User
+								</button>
+							</Link>
+						</div>
+						<div className={styles.SearchBoxContainer}>
+							<SearchBox filter={filter} setFilter={setFilter} />
+						</div>
+					</div>
 					<table class='table'>
 						<thead>
 							<tr>
@@ -100,11 +113,11 @@ function AdminUsers() {
 											<div>
 												<Link key={c.id} to={`/admin/user/${c.email}`}>
 													<button className={styles.btnEdit}>
-														<MdModeEdit />
+														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
 												<button onClick={() => onDeleteClick(c.email)}>
-													<FaTrashAlt />
+													<FaTrashAlt title='Remove' />
 												</button>
 											</div>
 										</td>
