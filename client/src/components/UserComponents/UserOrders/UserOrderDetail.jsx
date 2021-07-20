@@ -1,21 +1,60 @@
-import { useSelector } from 'react-redux';
-import style from './UserOrders.module.css';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+	addToCart,
+} from '../../../Redux/actions';
+import style from '../../UserComponents/UserOrders.module.css';
+import styled from 'styled-components';
+
+const ButtonRedSmall = styled.button`
+    font-family: 'Roboto', sans-serif; 
+    width: 80px;
+    height: 30px;
+    border-style: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    background-color: #FF3C4A;
+    &:hover{
+        background-color: #cc242f;
+    } 
+`;
 
 
-function UserOrderDetail({ammount, status}) {
+function UserOrderDetail({prodInfo, price, name, image, status}) {
+    const dispatch = useDispatch();
 
 	return (
-		<div>
-			<div className={style.orderDetailContainer}>
-            <div>
-            <p>{status}</p>
-            </div>  
-            <div>
-            <p>DESCRIPTION</p>   
-            </div>
-            <p>${ammount}</p>
+		<div className={style.orderDetailContainer}>
             
-			</div>
+           <div className={style.SizeImagOrderDiv}>
+           <img
+				className={style.sizeImagOrder}
+				src={image}
+				alt='Product Image'
+			/>
+           </div>
+           <div>
+                <p>Status:</p>
+                <p className={style.statusStyle}>{status}</p> 
+           </div>
+            
+            <div className={style.descriptionOrderStyle}>
+            <p>{name}</p>   
+            </div>
+
+            <p>${price}</p>
+    
+            {/* {p.stock>0? */}
+            <Link to={'/shoppingcart'}>
+				<ButtonRedSmall
+					type='submit'
+					onClick={() => dispatch(addToCart(prodInfo))}
+				>
+				Buy Again
+				</ButtonRedSmall>
+            </Link>
+			
 		</div>
 	);
 }
