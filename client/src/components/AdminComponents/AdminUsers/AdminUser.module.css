@@ -1,39 +1,88 @@
 #mainContainer {
-	display: flex;
+	/* display: flex; */
 	flex-direction: column;
 	width: 80%;
 	margin-left: 20%;
 }
-.category{
+/* .category {
 	background-color: rgb(206, 206, 206);
 	padding: 1rem;
 	display: flex;
 	margin: 1rem;
 	border-radius: 12px;
-}
-.UserContainer {
-	/* display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: -5rem;
-	color: black;
-	background-color: #eee; */
+} */
+.userContainer {
 	background-color: white;
 	max-width: 600px;
-	margin: 2rem auto;
+	margin: 0 auto;
 	border-radius: 12px;
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
-	/* flex-wrap: wrap; */
+	justify-content: space-between;
 	box-shadow: 0 0px 30px rgb(172, 171, 171);
-	align-items: center;
-
+	margin-top: 4em;
 }
-.UserAdmin{
+
+.userContainer h1 {
+	padding: 0.5em 0em 1em 1em;
+}
+
+.UserAdmin {
 	width: 100%;
 	height: 100vh;
 }
-.SearchBoxContainer{
-margin-left: 10%;
+.SearchBoxContainer {
+	margin-left: 10%;
+	color: #ff3c4a;
+}
+
+.title {
+	width: min-content;
+}
+
+.btnContainer {
+	display: flex;
+	margin: 0 0rem 1rem 0;
+	float: left;
+}
+.btnContainer button {
+	padding: 6px 10px;
+	border-radius: 14px;
+	border: 0;
+	background-color: rgb(228, 50, 50);
+	color: white;
+	font-weight: 700;
+}
+.btnContainer button:hover {
+	background-color: #d4202d;
+}
+
+.btnEdit {
+	background-color: transparent;
+	border: 0;
+	border-radius: 10px;
+	outline: none;
+	margin: 0 1rem;
+	font-size: 20px;
+}
+
+.btnEdit:hover {
+	color: #cd113b;
+}
+
+.btnDelete:hover {
+	color: #cd113b;
+}
+
+.btnDelete {
+	font-size: 18px;
+}
+
+.btnAdd {
+	font-size: 30px;
+}
+
+.headerTable {
+	overflow: hidden;
 }

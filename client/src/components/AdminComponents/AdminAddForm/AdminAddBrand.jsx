@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import {createdBrand, getBrands} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
-
+import { Link } from 'react-router-dom';
+import styles from '../../Register/Register.module.css'
+import { MdArrowBack } from 'react-icons/md'
 function AddBrand() {
 	const dispatch = useDispatch();
 	const allBrands = useSelector((state) => state.brands.allBrands);
@@ -62,6 +64,13 @@ function AddBrand() {
 
 	return (
 		<div>
+			  <div className={styles.btnBackContainer}>
+            	<Link to='/admin/brands'>
+					
+                    <MdArrowBack />
+                
+            </Link>
+            </div>
 			<form
 				className=''
 				onChange={(e) => changeInput(e)}

@@ -10,6 +10,9 @@ import { useFormik } from 'formik';
 import Error from '../../StyledComponents/ErrorMessages';
 import Div from '../../StyledComponents/Validation';
 import { getUserToEdit} from '../../../Redux/actions';
+import { Link } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md'
+
 
 function UserPanel() {
 	const history = useHistory();
@@ -125,6 +128,13 @@ function UserPanel() {
 
 	return (
 		<div className={styles.registerFormContainer}>
+			  <div className={styles.btnBackContainer}>
+            	<Link to='/admin/users'>
+					
+                    <MdArrowBack />
+                
+            </Link>
+            </div>
 			<div id={styles.regForm}>
 				{hola.length > 0 ? <Error>{hola}</Error> : null}
 				<form onSubmit={handleSubmit}>
