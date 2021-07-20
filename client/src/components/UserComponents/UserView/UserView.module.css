@@ -1,24 +1,36 @@
+/* Main Container Div */
+
 .userViewContainer {
     display: flex;
-    flex-wrap: nowrap;
     justify-items: center;
-    width: 90%;
-    padding-top: 20px;
-   
+    width: 100%;
+    padding: 20px;
+    margin: 20px;
     
+}
+
+/* User Account Options Menu Div */
+
+.optionsPanelContainer {
+    display: flex;
+    width: 30%;
+ 
 }
 
 .optionsContainer {
 	display: flex;
 	flex-direction: column;
     justify-content:space-evenly;
-	width: 400px;
+    width: 100%;
+    min-width: 210px;
     height: 400px;
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
+    
 	
 }
+
 
 .optionsLayoutdiv {
     display: flex;
@@ -42,4 +54,12 @@
     margin-bottom: 0;
     margin-left: 20px;
    
+}
+
+/* Panel Container Div */
+
+.userPanelSelectedContainer {
+    display: flex;
+    padding-left: 30px;
+    width: 70%;
 }

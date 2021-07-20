@@ -18,7 +18,6 @@ const ForgotPassword = () => {
 
 	const alert = useSelector((state) => state.user.alert);
 
-		
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -30,37 +29,35 @@ const ForgotPassword = () => {
 		}),
 		onSubmit: (values) => {
 			dispatch(forgotPassword(values.email));
-		
 		},
 	});
-	if(alert !== null) {
+	if (alert !== null) {
 		Swal.fire({
-		position: 'center',
-		icon: 'success',
-		title: 'Check your inbox to reset the password!',
-		showConfirmButton: false,
-		timer: 3000
-	  })
+			position: 'center',
+			icon: 'success',
+			title: 'Check your inbox to reset the password!',
+			showConfirmButton: false,
+			timer: 3000,
+		});
 	}
-	
+
 	return (
-		<div class=' m-5 d-flex justify-content-center '>
-			<div class='justify-content-center bg-secondary  rounded p-5'>
-			
+		<div className=' m-5 d-flex justify-content-center '>
+			<div className='justify-content-center bg-secondary  rounded p-5'>
 				{setError !== null ? <Error>{setError}</Error> : null}
-				<div class=' text-center text-black'>
+				<div className=' text-center text-black'>
 					<Text>Forgot your password?</Text>
 
 					<p>Please enter your email address registered on your account</p>
 				</div>
-				<div class='bg-white p-4 '>
+				<div className='bg-white p-4 '>
 					<form onSubmit={formik.handleSubmit}>
 						{formik.touched.email && formik.errors.email ? (
 							<Div>{formik.errors.email}</Div>
 						) : null}
 						<input
 							type='email'
-							class='form-control'
+							className='form-control'
 							placeholder='Email'
 							name='email'
 							onChange={formik.handleChange}
@@ -69,7 +66,7 @@ const ForgotPassword = () => {
 						/>
 
 						<button
-							class='btn btn-primary btn-block  my-3  shadow-sm'
+							className='btn btn-primary btn-block  my-3  shadow-sm'
 							type='submit'
 						>
 							Submit
