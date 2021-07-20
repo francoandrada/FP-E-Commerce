@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { /* useSelector,*/ useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { filterStock } from '../../Redux/actions';
 import styles from '../FilterCategories/FilterCategories.module.css';
@@ -10,7 +10,7 @@ function FilterStock() {
 
 	useEffect(() => unCheck(stock), [stock]);
 
-	useEffect(() => dispatch(filterStock(stock)), [stock]);
+	useEffect(() => dispatch(filterStock(stock)), [stock, dispatch]);
 
 	const unCheck = (stock) => {
 		let boxes = document.getElementsByClassName('orderS');

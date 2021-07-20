@@ -13,14 +13,17 @@ function FilterCategories() {
 
 	const [categoryChecked, setCategoryChecked] = useState('');
 
-	let prueba = undefined;
-	if (document.getElementById('monitores')) {
-		prueba = document.getElementById('monitores');
-	}
+	// let prueba = undefined;
+	// if (document.getElementById('monitores')) {
+	// 	prueba = document.getElementById('monitores');
+	// }
 
 	useEffect(() => unCheck(categoryChecked), [categoryChecked]);
 
-	useEffect(() => dispatch(filterCategory(categoryChecked)), [categoryChecked]);
+	useEffect(
+		() => dispatch(filterCategory(categoryChecked)),
+		[dispatch, categoryChecked]
+	);
 
 	const unCheck = (category) => {
 		let boxes = document.getElementsByClassName('orderC');
@@ -44,13 +47,13 @@ function FilterCategories() {
 			<hr></hr>
 			{categoriesName ? (
 				categoriesName.map((item, index) => (
-					<div className='form-check'>
+					<div key={index} className='form-check'>
 						<input
 							className={`${'form-check-input'} ${'orderC'}`}
 							type='checkbox'
 							id={item.name}
 							// checked='true'
-							key={index}
+							// key={index}
 							onClick={(event) => onClickedBox(event)}
 							// onClick={() => console.log(prueba.checked)}
 						/>

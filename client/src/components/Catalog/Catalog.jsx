@@ -1,40 +1,33 @@
-import Products from "../Products/Products";
-import FilterCategories from "../FilterCategories/FilterCategories"
-import OrderByPrice from '../OrderBox/OrderByPrice'
-import { useDispatch,useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getCategories, getBrands,getProducts } from '../../Redux/actions'
-import styles from './Catalog.module.css'
-import FilterBrands from "../FilterBrand/FilterBrands";
-
+import Products from '../Products/Products';
+import FilterCategories from '../FilterCategories/FilterCategories';
+// import OrderByPrice from '../OrderBox/OrderByPrice'
+import { useDispatch /*useSelector*/ } from 'react-redux';
+import { useEffect } from 'react';
+import { getCategories, getBrands, getProducts } from '../../Redux/actions';
+import styles from './Catalog.module.css';
+// import FilterBrands from '../FilterBrand/FilterBrands';
 
 function Catalog() {
+	const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(getCategories());
+	}, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getCategories())    
-    }, [] )
+	useEffect(() => {
+		dispatch(getBrands());
+	}, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getBrands())    
-    }, [] )
-
-    useEffect(() => {
+	useEffect(() => {
 		dispatch(getProducts());
-	}, []);
+	}, [dispatch]);
 
-
-    return (
-        <div id={styles.catalogue}>
-
-        
-                <FilterCategories id={styles.filterContainer}/> 
-                 <Products id={styles.productsContainer}/> 
-        
-       </div> 
-
-    )
+	return (
+		<div id={styles.catalogue}>
+			<FilterCategories id={styles.filterContainer} />
+			<Products id={styles.productsContainer} />
+		</div>
+	);
 }
 
 export default Catalog;
