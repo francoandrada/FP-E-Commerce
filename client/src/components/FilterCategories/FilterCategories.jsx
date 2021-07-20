@@ -1,62 +1,63 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { filterCategory} from '../../Redux/actions';
+import { filterCategory } from '../../Redux/actions';
 import styles from './FilterCategories.module.css';
 import OrderByPrice from '../OrderBox/OrderByPrice';
-import FilterStock from "../FilterStock/FilterStock"
+import FilterStock from '../FilterStock/FilterStock';
 import FilterBrands from '../FilterBrand/FilterBrands';
 
 function FilterCategories() {
-
 	const categoriesName = useSelector((state) => state.category.allCategories);
-   
+
 	const dispatch = useDispatch();
 
-    const [categoryChecked, setCategoryChecked] = useState("");
-    
-    let prueba = undefined
-    if(document.getElementById("monitores")){
-        prueba = document.getElementById("monitores")
-    }
+	const [categoryChecked, setCategoryChecked] = useState('');
 
-    useEffect(()=>unCheck(categoryChecked),[categoryChecked]
-    )
+	// let prueba = undefined;
+	// if (document.getElementById('monitores')) {
+	// 	prueba = document.getElementById('monitores');
+	// }
 
-    useEffect(()=>dispatch(filterCategory(categoryChecked)),[categoryChecked]
-    )
+	useEffect(() => unCheck(categoryChecked), [categoryChecked]);
 
-    const unCheck = (category)=>{
-        let boxes = document.getElementsByClassName("orderC")
-        for(let i=0;i<boxes.length;i++){
-            boxes[i].id===category?
-            boxes[i].checked= true
-            : boxes[i].checked= false
-        }
-    }
+	useEffect(
+		() => dispatch(filterCategory(categoryChecked)),
+		[dispatch, categoryChecked]
+	);
 
-    const onClickedBox=(event)=>{
-        event.target.checked?setCategoryChecked(event.target.id):setCategoryChecked("")
-    }
+	const unCheck = (category) => {
+		let boxes = document.getElementsByClassName('orderC');
+		for (let i = 0; i < boxes.length; i++) {
+			boxes[i].id === category
+				? (boxes[i].checked = true)
+				: (boxes[i].checked = false);
+		}
+	};
+
+	const onClickedBox = (event) => {
+		event.target.checked
+			? setCategoryChecked(event.target.id)
+			: setCategoryChecked('');
+	};
 
 	// console.log(categories.products)
 	return (
 		<div className={styles.divCelena}>
 			<h6 className={styles.title}>Filter by categories</h6>
-            <hr></hr>
+			<hr></hr>
 			{categoriesName ? (
 				categoriesName.map((item, index) => (
-					<div className='form-check'>
+					<div key={index} className='form-check'>
 						<input
 							className={`${'form-check-input'} ${'orderC'}`}
 							type='checkbox'
 							id={item.name}
-                            // checked='true'
-							key={index}
+							// checked='true'
+							// key={index}
 							onClick={(event) => onClickedBox(event)}
-                            // onClick={() => console.log(prueba.checked)}
-
+							// onClick={() => console.log(prueba.checked)}
 						/>
-						<label className='form-check-label' for='defaultCheck1'>
+						<label className='form-check-label' htmlFor='defaultCheck1'>
 							{item.name}
 						</label>
 					</div>
@@ -64,16 +65,15 @@ function FilterCategories() {
 			) : (
 				<ul></ul>
 			)}
-                    <hr></hr>
-                    <OrderByPrice id={styles.filterContainer}/>  
-                    <hr></hr>
-                    <h6 className={styles.title}>Order by rating</h6>
-                    <hr></hr>
-                    <h6 className={styles.title}>Filter by stock</h6>
-                    <FilterStock id={styles.filterContainer}/> 
-                    <hr></hr>
-                    <FilterBrands className={styles.div_cont_filter}/>
-
+			<hr></hr>
+			<OrderByPrice id={styles.filterContainer} />
+			<hr></hr>
+			<h6 className={styles.title}>Order by rating</h6>
+			<hr></hr>
+			<h6 className={styles.title}>Filter by stock</h6>
+			<FilterStock id={styles.filterContainer} />
+			<hr></hr>
+			<FilterBrands className={styles.div_cont_filter} />
 		</div>
 	);
 }

@@ -132,7 +132,7 @@ function Products() {
 						}
 						var formatPrice = formatNumber.new(p.price, '$');
 						return (
-							<div className={styles.card}>
+							<div key={p.id} className={styles.card}>
 								<Link key={p.id} to={`/catalog/${p.id}`}>
 									<div className={styles.cardImage}>
 										<img className={styles.img} src={p.image} alt='product' />
@@ -145,7 +145,7 @@ function Products() {
 									<span className={styles.productName}>{p.name}</span>
 								</div>
 								{/* <div className={styles.footerCard}> */}
-								<div class='d-flex justify-content-center'>
+								<div className='d-flex justify-content-center'>
 									<div className={styles.productPrice}>
 										<span>{formatPrice}</span>
 									</div>
@@ -153,6 +153,7 @@ function Products() {
 									<div className={styles.buttonBuy}>
 										{p.stock > 0 ? (
 											<button
+
 												id={styles.btnBuy}
 												type='submit'
 												onClick={() => dispatch(addToCart(p))}

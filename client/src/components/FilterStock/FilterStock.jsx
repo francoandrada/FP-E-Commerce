@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { /* useSelector,*/ useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { filterStock } from '../../Redux/actions';
 import styles from '../FilterCategories/FilterCategories.module.css';
@@ -10,7 +10,7 @@ function FilterStock() {
 
 	useEffect(() => unCheck(stock), [stock]);
 
-	useEffect(() => dispatch(filterStock(stock)), [stock]);
+	useEffect(() => dispatch(filterStock(stock)), [stock, dispatch]);
 
 	const unCheck = (stock) => {
 		let boxes = document.getElementsByClassName('orderS');
@@ -28,7 +28,7 @@ function FilterStock() {
 	// console.log(categories.products)
 	return (
 		<div className={styles.divCelena}>
-    			<div className='form-check'>
+			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderS'}`}
 					type='checkbox'
@@ -38,11 +38,11 @@ function FilterStock() {
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
 				/>
-				<label className='form-check-label' for='defaultCheck1'>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
 					Yes
 				</label>
 			</div>
-            <div className='form-check'>
+			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderS'}`}
 					type='checkbox'
@@ -52,7 +52,7 @@ function FilterStock() {
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
 				/>
-				<label className='form-check-label' for='defaultCheck1'>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
 					No
 				</label>
 			</div>
