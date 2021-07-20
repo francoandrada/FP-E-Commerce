@@ -56,7 +56,10 @@ function AdminBrands() {
 						<tbody>
 							{allBrands.map((c, key) => {
 								return (
-									<tr key={c.id}>
+									<tr
+										key={c.id}
+										className={`${!c.isVisible && 'table-danger'}`}
+									>
 										<th>{sum()}</th>
 										<td>{c.name}</td>
 										<td>
