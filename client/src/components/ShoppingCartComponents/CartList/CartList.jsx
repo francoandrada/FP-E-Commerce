@@ -15,6 +15,7 @@ function CartList() {
 								image={el.image}
 								name={el.name}
 								price={el.price}
+								stock={el.stock}
 								qty={el.qty}
 							/>
 						</div>
