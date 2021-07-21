@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getUserOrders, getProducts } from '../../../Redux/actions';
 import UserOrders from '../UserOrders/UserOrders';
+import EditAccount from '../UserAccount/EditAccount';
 import UserAccount from '../UserAccount/UserAccount'
 import style from './UserView.module.css';
 import {
@@ -34,8 +35,11 @@ function UserView() {
     if (selectedOption === 'orders') {
         currentPanel = <UserOrders/> 
     } else if (selectedOption === 'account') {
-        currentPanel = <UserAccount/>
+        currentPanel = <UserAccount setOption={setOption}/>
+    } else if (selectedOption === 'edit') {
+        currentPanel = <EditAccount setOption={setOption}/>
     }
+
 
 	return (
 		<div>
