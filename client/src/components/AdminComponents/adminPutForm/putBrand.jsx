@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {modifyBrand} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from '../../Register/Register.module.css'
 import { MdArrowBack } from 'react-icons/md'
@@ -39,7 +39,7 @@ function PutBrand (props) {
         console.log(data)
         for(let i=0 ; i< brands.length; i++){
             if(brands[i].name.toLowerCase() === data.name.toLowerCase()){
-             return  swal({
+             return  Swal({
                     title: 'Existing name',
                     icon: 'warning',
                     button: 'ok',
@@ -50,7 +50,7 @@ function PutBrand (props) {
         if(data.name && data.name.length >0){
             dispatch(modifyBrand(data))
             e.target.reset()
-            swal({
+            Swal({
                 title:"Brand Modified!!",
                 icon: "success",
                 button: "ok",
@@ -61,7 +61,7 @@ function PutBrand (props) {
             reset({data})
 
         }else{
-            swal({
+            Swal({
                 title:"Require Brand",
                 icon: "error",
                 button: "ok",
