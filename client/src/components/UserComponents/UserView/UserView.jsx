@@ -21,6 +21,8 @@ function UserView() {
 	const dispatch = useDispatch();
     const[selectedOption, setSelectedOption] = useState('account')
 
+    console.log('hola')
+
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
 		dispatch(getProducts());
