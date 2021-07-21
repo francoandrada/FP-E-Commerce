@@ -107,10 +107,7 @@ console.log(bodyObject)
 
 	useEffect(() => {
 		if (authenticated) {
-			// history.goBack();
-			// setTimeout(() => {
-			// 	window.location.reload();
-			// }, 1000);
+			 history.goBack();
 			dispatch(postCartUser(bodyObject));
 			
 		}

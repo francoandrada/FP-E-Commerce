@@ -116,6 +116,8 @@ const Navbar = () => {
 	};
 	const handleClick = () => {
 		dispatch(logOut());
+		history.push('/')
+		window.location.reload();
 	};
 
 	return (
