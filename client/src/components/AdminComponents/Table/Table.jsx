@@ -109,7 +109,6 @@ const Table = () => {
 					</Link>
 				</div>
 				<div className={styles.tableContainer}>
-
 					<div
 						style={{
 							height: '100px',
@@ -121,11 +120,10 @@ const Table = () => {
 							marginLeft: '20%',
 							borderRadius: '10px 10px 0 0',
 							flexDirection: 'column',
-							boxShadow: '0 0px 30px rgb(172, 171, 171)'
+							boxShadow: '0 0px 30px rgb(172, 171, 171)',
 						}}
 					>
 						<div className={styles.searchContainer}>
-
 							<input
 								className={styles.searchbar}
 								type='text'
@@ -133,10 +131,8 @@ const Table = () => {
 								placeholder='Search...'
 								onChange={searchFilterHandle}
 							/>
-
 						</div>
 						<div className={styles.filterContainer}>
-
 							<Select
 								initialValue={sizePagination}
 								onChange={paginationSizeHandle}
@@ -146,7 +142,14 @@ const Table = () => {
 							<Select
 								initialValue={sortTable}
 								onChange={sortTableHandle}
-								values={['name', 'id', 'price', 'priceSpecial', 'weight', 'stock']}
+								values={[
+									'name',
+									'id',
+									'price',
+									'priceSpecial',
+									'weight',
+									'stock',
+								]}
 							/>
 
 							<Select
@@ -190,7 +193,12 @@ const Table = () => {
 							{rows.map((row) => {
 								prepareRow(row);
 								return (
-									<tr {...row.getRowProps()}>
+									<tr
+										{...row.getRowProps()}
+										className={`${
+											row.original.isVisible === 'false' && 'table-danger'
+										}`}
+									>
 										{row.cells.map((cell) => {
 											return (
 												<td {...cell.getCellProps()}>{cell.render('Cell')}</td>

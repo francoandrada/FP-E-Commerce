@@ -12,6 +12,8 @@ import SearchBox from './SearchBox';
 import stylesAdmin from './AdminUser.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoMdAddCircle } from 'react-icons/io';
+import { Si1Password } from 'react-icons/si';
+import { forgotPassword } from '../../../Redux/actions';
 
 function AdminUsers() {
 	const history = useHistory();
@@ -25,36 +27,33 @@ function AdminUsers() {
 	}, []);
 
 	const handleDelete = async (email, event) => {
+		try {
+			await axios
+				.put('http://localhost:3001/admin/user/delete', { email: email })
+				.then(() => {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'The user was succesfully deleted',
+						showConfirmButton: false,
+						timer: 1500,
+					});
+				})
+				.then(() => history.push('/admin/users'));
+		} catch (error) {
+			console.log(error.response.data.msg);
+		}
+	};
 
-			try {
-				await axios
-					.put('http://localhost:3001/admin/user/delete', { email: email })
-					.then(() => {
-						Swal.fire({
-							position: 'center',
-							icon: 'success',
-							title: 'The user was succesfully deleted',
-							showConfirmButton: false,
-							timer: 1500,
-						});
-					})
-					.then(() => history.push('/admin/users'));
-			} catch (error) {
-				console.log(error.response.data.msg);
-			}
-		
 	let acu = 0;
 	const sum = () => {
 		return (acu += 1);
 	};
 
-
-	};
-
 	const onDeleteClick = (email) => {
-		if(email === activeUser.email){
-			console.log(email)
-			console.log(activeUser.email)
+		if (email === activeUser.email) {
+			console.log(email);
+			console.log(activeUser.email);
 			Swal.fire({
 				title: `You can't delete yourself while being into an active session.`,
 				showDenyButton: false,
@@ -62,7 +61,7 @@ function AdminUsers() {
 				customClass: {
 					confirmButton: 'order-2',
 				},
-			})
+			});
 		} else {
 			Swal.fire({
 				title: 'Do you want to delete this user?',
@@ -81,8 +80,27 @@ function AdminUsers() {
 					Swal.fire('Changes are not saved', '', 'info');
 				}
 			});
-
 		}
+	};
+
+	const onResetClick = (email) => {
+		Swal.fire({
+			title: `Do you want to reset the user's password?`,
+			showDenyButton: true,
+			confirmButtonText: `Yes`,
+			denyButtonText: `No`,
+			customClass: {
+				confirmButton: 'order-2',
+				denyButton: 'order-3',
+			},
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(forgotPassword(email));
+				Swal.fire('Saved!', '', 'success');
+			} else if (result.isDenied) {
+				Swal.fire('Changes are not saved', '', 'info');
+			}
+		});
 	};
 
 	let users = filter
@@ -102,7 +120,7 @@ function AdminUsers() {
 				<div className={styles.userContainer}>
 					<div className={styles.headerTable}>
 						<div className={styles.btnContainer}>
-							<Link to='/admin/addcategory'>
+							<Link to='/register'>
 								<button>
 									<IoMdAddCircle className={styles.btnAdd} /> Add User
 								</button>
@@ -112,10 +130,10 @@ function AdminUsers() {
 							<SearchBox filter={filter} setFilter={setFilter} />
 						</div>
 					</div>
-					<table class='table'>
+					<table className='table'>
 						<thead>
 							<tr>
-								<th class='col-md-1'>#</th>
+								<th className='col-md-1'>#</th>
 								<th>Name</th>
 								<th>Actions</th>
 							</tr>
@@ -134,8 +152,17 @@ function AdminUsers() {
 														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
-												<button onClick={() => onDeleteClick(c.email)}>
+												<button
+													className={styles.btnEdit}
+													onClick={() => onDeleteClick(c.email)}
+												>
 													<FaTrashAlt title='Remove' />
+												</button>
+												<button
+													className={styles.btnEdit}
+													onClick={() => onResetClick(c.email)}
+												>
+													<Si1Password title='Reset' />
 												</button>
 											</div>
 										</td>

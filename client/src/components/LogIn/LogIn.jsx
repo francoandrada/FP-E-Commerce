@@ -13,13 +13,14 @@ import Div from '../StyledComponents/Validation';
 /* global google */
 /* global gapi */
 import { GoogleLogin } from 'react-google-login';
-import AuthenticationButton from '../AuthenticationButton/AuthenticationButton'
+
+import AuthenticationButton from '../AuthenticationButton/AuthenticationButton';
 
 const GlobalStyle = createGlobalStyle`
 
   body {
 	  background-image: none;
-	  background-color: black; 
+	  background-color: black;
 	  font-family: 'Roboto', sans-serif ;
 }
 `;
@@ -54,8 +55,8 @@ const LogIn = () => {
 	const [userInfo, setUserInfo] = useState({});
 
 	const responseGoogle = (response) => {
-		console.log('responseGoogle')
-		console.log(response)
+		console.log('responseGoogle');
+		console.log(response);
 		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
@@ -72,8 +73,8 @@ const LogIn = () => {
 
 	useEffect(() => {
 		if (isSignedIn) {
-			console.log('dispatch loginGmail')
-			console.log(userInfo)
+			console.log('dispatch loginGmail');
+			console.log(userInfo);
 			dispatch(loginGmail(userInfo));
 		}
 	});
@@ -82,20 +83,16 @@ const LogIn = () => {
 	// 	console.log(userInfo)
 	// }, [userInfo]);
 
-
-
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const authenticated = useSelector((state) => state.user.authenticated);
 
-
 	const setError = useSelector((state) => state.user.setError);
 
 	useEffect(() => {
 		if (authenticated) {
-			
-			history.goBack()
+			history.goBack();
 		}
 	}, [authenticated]);
 
@@ -113,111 +110,113 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			dispatch(logIn(values));
+			 dispatch(logIn(values));
+		
 		},
 	});
 
 	return (
 		<>
-		<GlobalStyle />
-		<div class='container d-flex justify-content-center mt-5 rounded'>
-			<div class=' row'>
-				<div class='col bg-white px-5 rounded pb-4'>
-					{setError !== null ? <Error>{setError}</Error> : null}
+			<GlobalStyle />
+			<div className='container d-flex justify-content-center mt-5 rounded'>
+				<div className=' row '>
+					<div className='col bg-white px-5 rounded '>
+						
 
-					<form onSubmit={formik.handleSubmit} class='p-3'>
-						<div class=' d-flex justify-content-center'>
-							<Img src={`${img}`} />
-						</div>
-						{formik.touched.email && formik.errors.email ? (
-							<Div>{formik.errors.email}</Div>
-						) : null}
-						<div class='form-group d-flex justify-content-center'>
-							<input
-								type='email'
-								class='form-control'
-								id='email'
-								placeholder='Email'
-								name='email'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.email}
-							/>
-						</div>
-						{formik.touched.password && formik.errors.password ? (
-							<Div>{formik.errors.password}</Div>
-						) : null}
-						<div class='form-group d-flex justify-content-center'>
-							<input
-								type='password'
-								class='form-control'
-								id='password'
-								name='password'
-								type='password'
-								placeholder='Password'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.password}
-							/>
-						</div>
-						<div class='d-flex justify-content-center'>
-							<button
-								type='submit'
-								class='btn btn-primary btn-block  mb-2  shadow-sm'
-							>
-								Sign in
-							</button>
-						</div>
-						<GoogleLogin
-							clientId={googleApiKey}
-							render={(renderProps) => (
+						<form onSubmit={formik.handleSubmit} className='px-5 py-4'>
+							<div className=' d-flex justify-content-center'>
+								<Img src={`${img}`} />
+							</div>
+							{formik.touched.email && formik.errors.email ? (
+								<Div>{formik.errors.email}</Div>
+							) : null}
+								{setError !== null ? <Error>{setError}</Error> : <p className='p-1'></p>}
+							<div className='form-group d-flex justify-content-center'>
+								<input
+									type='email'
+									className='form-control'
+									id='email'
+									placeholder='Email'
+									name='email'
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.email}
+								/>
+								
+					
+							</div>
+						
+									{formik.touched.password && formik.errors.password ? (
+								<Div>{formik.errors.password}</Div>
+							) : null}
+							<div className='form-group d-flex justify-content-center'>
+								<input
+									type='password'
+									className='form-control'
+									id='password'
+									name='password'
+									type='password'
+									placeholder='Password'
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.password}
+								/>
+									
+							</div>
+					
+							<div className='d-flex justify-content-center '>
 								<button
-									onClick={renderProps.onClick}
-									disabled={renderProps.disabled}
-									className='btn btn-primary btn-block'
+									type='submit'
+									className='btn btn-primary btn-block  mb-2  shadow-sm'
 								>
-									Sign-In with Google
+									Sign in
 								</button>
-							)}
-							onSuccess={responseGoogle}
-							onFailure={responseGoogle}
-							cookiePolicy={'single_host_origin'}
-						/>
-					</form>
-					<div class=' d-flex justify-content-center '>
-						<Link
-							class='dropdown-item bg-secondary m-2 p-2 rounded text-center'
-							to={'/forgot-password'}
-						>
-							Forgot your password?
-						</Link>
-					</div>
-					{/* <AuthenticationButton/> */}
-				</div>
-				<div class=' rounded'>
-					<Link to={'/'}>
-						<div class=''>
-							<Imge src={`${imge}`} />
-						</div>
-					</Link>
-					
-					
-					<div class=' d-flex justify-content-start bg-secondary p-5'>
+							</div>
+							<GoogleLogin
+								clientId={googleApiKey}
+								render={(renderProps) => (
+									<button
+										onClick={renderProps.onClick}
+										disabled={renderProps.disabled}
+										className='btn btn-primary btn-block'
+									>
+										Sign-In with Google
+									</button>
+								)}
+								onSuccess={responseGoogle}
+								onFailure={responseGoogle}
+								cookiePolicy={'single_host_origin'}
+							/>
+						</form>
+						<div className=' d-flex justify-content-center px-4'>
 							<Link
+								className='dropdown-item bg-secondary m-2 p-2 rounded text-center'
+								to={'/forgot-password'}
+							>
+								Forgot your password?
+							</Link>
+						</div>
+						{/* <AuthenticationButton/> */}
+					</div>
+					<div className=' rounded'>
+						<Link to={'/'}>
+							<div className=''>
+								<Imge src={`${imge}`} />
+							</div>
+						</Link>
 
-								class='dropdown-item bg-secondary rounded text-center '
-
+						<div className=' d-flex justify-content-start bg-secondary p-5'>
+							<Link
+								className='dropdown-item bg-secondary rounded text-center p-4 '
 								to={'/register'}
 							>
 								Don't have an account? Sign up
 							</Link>
 						</div>
-							
-						
+					</div>
 				</div>
 			</div>
-		</div>
-	</>
+		</>
 	);
 };
 

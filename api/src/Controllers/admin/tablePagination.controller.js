@@ -24,7 +24,14 @@ const tablePagination = async (req, res, next) => {
 		}
 	*/
 	if (deleteProduct && Number.parseInt(deleteProduct) !== 0) {
-		await Product.destroy({ where: { id: deleteProduct } });
+		await Product.update(
+			{ isVisible: false },
+			{
+				where: {
+					id: deleteProduct,
+				},
+			}
+		);
 	}
 
 	if (brand && brand !== 'default') {

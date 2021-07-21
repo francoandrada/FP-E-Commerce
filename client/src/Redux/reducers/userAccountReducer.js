@@ -10,6 +10,7 @@ function userAccountReducer(state = initialState, action) {
 			return {
 				...state,
 				userOrdersList: action.payload,
+				
 			};
 
 		default:

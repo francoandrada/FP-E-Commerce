@@ -44,10 +44,10 @@ function AdminCategories() {
 						</Link>
 					</div>
 					{/* <h1> Categories </h1> */}
-					<table class='table'>
+					<table className='table'>
 						<thead>
 							<tr>
-								<th class='col-md-1'>#</th>
+								<th className='col-md-1'>#</th>
 								<th>Name</th>
 								<th>Actions</th>
 							</tr>
@@ -56,7 +56,10 @@ function AdminCategories() {
 						<tbody>
 							{allCategories.map((c) => {
 								return (
-									<tr key={c.id}>
+									<tr
+										key={c.id}
+										className={`${!c.isVisible && 'table-danger'}`}
+									>
 										<th>{sum()}</th>
 										<td>{c.name}</td>
 										<td>

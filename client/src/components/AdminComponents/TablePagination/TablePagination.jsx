@@ -14,12 +14,10 @@ const Pagination = ({ totalPages, paginate }) => {
 				Current Page: <strong>{gotoTablePage + 1}</strong>
 			</span>
 			<PaginationList>
-				{pageNumbers(totalPages).map((number) => (
-					
-						<PageButton onClick={() => paginate(number)}>
-							{number + 1}
-						</PageButton>
-				
+				{pageNumbers(totalPages).map((number, key) => (
+					<PageButton key={key} onClick={() => paginate(number)}>
+						{number + 1}
+					</PageButton>
 				))}
 			</PaginationList>
 		</PaginationBox>

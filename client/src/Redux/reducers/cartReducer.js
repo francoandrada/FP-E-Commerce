@@ -65,7 +65,7 @@ function cartReducer(state = initialState, action) {
 				link: action.payload
 			}
 		case GET_PAY:
-			console.log(action.payload)
+			localStorage.removeItem('cart')
 			return{
 				...state,
 				userPay: action.payload

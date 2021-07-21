@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import {createdBrand, getBrands} from "../../../Redux/actions"
+import React, { useEffect /*, useState*/ } from 'react';
+import { createdBrand, getBrands } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import styles from '../../Register/Register.module.css'
-import { MdArrowBack } from 'react-icons/md'
+import styles from '../../Register/Register.module.css';
+import { MdArrowBack } from 'react-icons/md';
 function AddBrand() {
 	const dispatch = useDispatch();
 	const allBrands = useSelector((state) => state.brands.allBrands);
 	// var id = props.match.params.id
-	console.log(allBrands);
+	// console.log(allBrands);
 	useEffect(() => {
 		dispatch(getBrands());
 	}, [dispatch]);
@@ -33,7 +33,7 @@ function AddBrand() {
 		console.log(data);
 		for (let i = 0; i < allBrands.length; i++) {
 			if (allBrands[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return swal({
+				return Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -44,7 +44,7 @@ function AddBrand() {
 		if (data.name && data.name.length > 0) {
 			dispatch(createdBrand(data));
 			e.target.reset();
-			swal({
+			Swal({
 				title: 'Brand Created!!',
 				icon: 'success',
 				button: 'ok',
@@ -53,7 +53,7 @@ function AddBrand() {
 
 			reset({ data });
 		} else {
-			swal({
+			Swal({
 				title: 'Require Brand',
 				icon: 'error',
 				button: 'ok',
@@ -64,13 +64,11 @@ function AddBrand() {
 
 	return (
 		<div>
-			  <div className={styles.btnBackContainer}>
-            	<Link to='/admin/brands'>
-					
-                    <MdArrowBack />
-                
-            </Link>
-            </div>
+			<div className={styles.btnBackContainer}>
+				<Link to='/admin/brands'>
+					<MdArrowBack />
+				</Link>
+			</div>
 			<form
 				className=''
 				onChange={(e) => changeInput(e)}

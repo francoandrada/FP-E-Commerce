@@ -31,9 +31,9 @@ function App({ location }) {
 		<div className='App'>
 			<div></div>
 			{!location.pathname.includes('/admin') && <Navbar />}
-			<div class='totalvh'>
+			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
-					<div class='adminn'>
+					<div className='adminn'>
 						{/* <AdminRoutes /> */}
 						<Route path='/admin' component={AdminRoutes} />
 					</div>
@@ -58,7 +58,6 @@ function App({ location }) {
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/error' exact component={Error404View} />
 				</Switch>
-
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}
 		</div>

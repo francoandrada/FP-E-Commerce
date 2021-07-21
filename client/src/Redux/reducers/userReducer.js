@@ -54,6 +54,7 @@ function userReducer(state = initialState, action) {
 			};
 		case SUCCESS_LOGIN:
 			localStorage.setItem('token', action.payload.token);
+			console.log('reducer log in',action.payload.user)
 			return {
 				...state,
 				token: action.payload.token,
@@ -69,6 +70,7 @@ function userReducer(state = initialState, action) {
 		case LOG_OUT:
 			localStorage.removeItem('token');
 			localStorage.removeItem('userData');
+			localStorage.removeItem('cart')
 			return {
 				...state,
 				user: null,
