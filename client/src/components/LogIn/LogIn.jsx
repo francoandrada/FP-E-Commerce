@@ -13,6 +13,7 @@ import Div from '../StyledComponents/Validation';
 /* global google */
 /* global gapi */
 import { GoogleLogin } from 'react-google-login';
+
 import AuthenticationButton from '../AuthenticationButton/AuthenticationButton';
 
 const GlobalStyle = createGlobalStyle`
@@ -109,7 +110,10 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			dispatch(logIn(values));
+			 dispatch(logIn(values));
+			 history.goBack();
+			
+		
 		},
 	});
 
@@ -117,17 +121,18 @@ const LogIn = () => {
 		<>
 			<GlobalStyle />
 			<div className='container d-flex justify-content-center mt-5 rounded'>
-				<div className=' row'>
-					<div className='col bg-white px-5 rounded pb-4'>
-						{setError !== null ? <Error>{setError}</Error> : null}
+				<div className=' row '>
+					<div className='col bg-white px-5 rounded '>
+						
 
-						<form onSubmit={formik.handleSubmit} className='p-3'>
+						<form onSubmit={formik.handleSubmit} className='px-5 py-4'>
 							<div className=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
 							</div>
 							{formik.touched.email && formik.errors.email ? (
 								<Div>{formik.errors.email}</Div>
 							) : null}
+								{setError !== null ? <Error>{setError}</Error> : <p className='p-1'></p>}
 							<div className='form-group d-flex justify-content-center'>
 								<input
 									type='email'
@@ -139,8 +144,11 @@ const LogIn = () => {
 									onBlur={formik.handleBlur}
 									value={formik.values.email}
 								/>
+								
+					
 							</div>
-							{formik.touched.password && formik.errors.password ? (
+						
+									{formik.touched.password && formik.errors.password ? (
 								<Div>{formik.errors.password}</Div>
 							) : null}
 							<div className='form-group d-flex justify-content-center'>
@@ -155,8 +163,10 @@ const LogIn = () => {
 									onBlur={formik.handleBlur}
 									value={formik.values.password}
 								/>
+									
 							</div>
-							<div className='d-flex justify-content-center'>
+					
+							<div className='d-flex justify-content-center '>
 								<button
 									type='submit'
 									className='btn btn-primary btn-block  mb-2  shadow-sm'
@@ -180,7 +190,7 @@ const LogIn = () => {
 								cookiePolicy={'single_host_origin'}
 							/>
 						</form>
-						<div className=' d-flex justify-content-center '>
+						<div className=' d-flex justify-content-center px-4'>
 							<Link
 								className='dropdown-item bg-secondary m-2 p-2 rounded text-center'
 								to={'/forgot-password'}
@@ -199,7 +209,7 @@ const LogIn = () => {
 
 						<div className=' d-flex justify-content-start bg-secondary p-5'>
 							<Link
-								className='dropdown-item bg-secondary rounded text-center '
+								className='dropdown-item bg-secondary rounded text-center p-4 '
 								to={'/register'}
 							>
 								Don't have an account? Sign up

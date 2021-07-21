@@ -51,14 +51,14 @@ exports.userAuth = async (req, res, next) => {
 ///FORGOT PASWORD
 exports.forgotPassword = async (req, res) => {
 	const { email } = req.body;
-	// let user = await User.findOne({
-	// 	where: {
-	// 		email: email,
-	// 	},
-	// });
-	// if (!user) {
-	// 	res.status(400).send({ msg: "The user doesn't exist" });
-	// }
+	let user = await User.findOne({
+		where: {
+			email: email,
+		},
+	});
+	if (!user) {
+		res.status(400).send({ msg: "The user doesn't exist" });
+	}
 
 	try {
 		let transporter = nodemailer.createTransport({
@@ -72,29 +72,44 @@ exports.forgotPassword = async (req, res) => {
 				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 			},
 		});
-		// const token = jwt.sign(
-		// 	{ id: user.userId, name: user.name },
-		// 	process.env.RESET_PASSWORD_KEY,
-		// 	{ expiresIn: '6h' }
-		// );
+
+		const token = jwt.sign(
+			{ id: user.userId, name: user.name },
+			process.env.RESET_PASSWORD_KEY,
+			{ expiresIn: '6h' }
+		);
 		var mailOptions = {
 			from: 'hardwarecommerce@gmail.com',
 			to: email,
 			subject: 'Reset your password',
 			html: `
-		 <h2>Please click on given link to reset your password </h2>
+
+				<!DOCTYPE html>
+				<html>
+				<head>
+				</head>
+				<body style="background-color: #424242;">
+			
+				 	<h2>Hello,</h2>
+				 	<p>We've received a request to reset the password for the HardwareStore account associated with ${email}.
+				 	<p>You can reset your passwordd by clicking the link below:</p>
+				 	<a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
+				 	<p>If you did not request a new password, please let us know inmediately by replying to this email.</p>
+				</body>
+				</html>
+		
+		 
 		 `,
 		};
 
-		//user.update({ resetLink: token });
+		user.update({ resetLink: token });
 
-		transporter.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
+		transporter.sendMail(mailOptions, function (err, data) {
+			if (err) {
+				console.log('Error ' + err);
+			} else {
+				console.log('Email sent successfully');
 			}
-			res.send({
-				msg: 'Check your email and open the link we sent to continue',
-			});
 		});
 	} catch (error) {
 		console.log(error);
@@ -104,7 +119,7 @@ exports.forgotPassword = async (req, res) => {
 ///RESET PASWORD
 exports.resetPassword = async (req, res) => {
 	const { resetLink, newPass } = req.body;
-console.log(req.body)
+	console.log(req.body);
 	if (!resetLink || !newPass) {
 		return res.status(401).json({
 			msg: 'Incorrect token or it is expired',

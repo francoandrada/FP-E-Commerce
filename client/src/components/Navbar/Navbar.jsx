@@ -100,7 +100,13 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-	<button onclick='myFunction()'>Click me</button>;
+	const handleClick = () =>{
+		dispatch(logOut());
+		history.push('/')
+		window.location.reload();
+		
+	}
+
 	return (
 		<>
 			<div className={styles.navbarEcommerce}>
@@ -167,20 +173,21 @@ const Navbar = () => {
 					) : null}
 					{token ? (
 						<div className='d-block mt-4'>
+
 							<button
 								type='submit'
 								className={styles.but}
-								onClick={() => {
-									dispatch(logOut());
-								}}
+								onClick={() => handleClick()}
 							>
 								Log Out
 							</button>
+
 							{Array.isArray(userName) ? (
 								<p class='text-white h6'>Hi, {userName.email}!</p>
 							) : (
 								<p class='text-white h6'>Hi, {userName.name}!</p>
 							)}
+
 						</div>
 					) : (
 						<>
