@@ -10,6 +10,8 @@ import {
 	getSuggestions,
 	logOut,
 	cleanSuggestions,
+	getCartUser,
+	postCartUser,
 } from '../../Redux/actions';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
@@ -22,12 +24,14 @@ const Navbar = () => {
 	const wrapperRef = useRef(null);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
 	const token = useSelector((state) => state.user.token);
 	const userData = useSelector((state) => state.user.userData);
 	const userName = useSelector((state) => state.user.userData);
 
 	const errorToken = useSelector((state) => state.user.errorToken);
-
+	const userId = useSelector((state) => state.user.userData.userId);
+	
 	useEffect(() => {
 		if (errorToken) {
 			Swal.fire({
@@ -41,8 +45,16 @@ const Navbar = () => {
 
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
-
+	const authenticated = useSelector((state) => state.user.authenticated);
 	const cart = useSelector((state) => state.cart.cart);
+
+	useEffect(() => {
+		if (authenticated) {
+			setTimeout(() => {
+				dispatch(getCartUser(userId));
+			}, 1000);
+		}
+	}, [authenticated]);
 
 	useEffect(() => {
 		let count = 0;
@@ -54,6 +66,8 @@ const Navbar = () => {
 		SetCartCount(count);
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart, cartCount]);
+
+
 
 	useEffect(() => {
 		localStorage.setItem('userData', JSON.stringify(userName));
@@ -100,12 +114,9 @@ const Navbar = () => {
 			setSearch('');
 		}
 	};
-	const handleClick = () =>{
+	const handleClick = () => {
 		dispatch(logOut());
-		history.push('/')
-		window.location.reload();
-		
-	}
+	};
 
 	return (
 		<>
@@ -173,7 +184,6 @@ const Navbar = () => {
 					) : null}
 					{token ? (
 						<div className='d-block mt-4'>
-
 							<button
 								type='submit'
 								className={styles.but}
@@ -187,7 +197,6 @@ const Navbar = () => {
 							) : (
 								<p class='text-white h6'>Hi, {userName.name}!</p>
 							)}
-
 						</div>
 					) : (
 						<>
