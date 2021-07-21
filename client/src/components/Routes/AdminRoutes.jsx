@@ -13,6 +13,7 @@ import AdminUsers from '../AdminComponents/AdminUsers/AdminUsers';
 import UserPanel from '../AdminComponents/AdminUsers/UserPanel';
 import Table from '../AdminComponents/Table/Table';
 import Charts from '../AdminComponents/Charts/Charts';
+import Orders from '../AdminComponents/Orders/Orders';
 
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
@@ -23,7 +24,8 @@ const AdminRoutes = ({ location }) => {
 		<>
 			<Switch>
 				<Route path='/admin' exact component={Admin} />
-				<Route path='/admin/orders' exact component={Admin} />
+				{/* <Route path='/admin/orders' exact component={Admin} /> */}
+				<Route path='/admin/orders' exact component={Orders} />
 				<Route path='/admin/stock' exact component={Admin} />
 				<Route path='/admin/addbrands/' exact component={AddBrand} />
 				<Route path='/admin/addcategory/' exact component={AddCategory} />
