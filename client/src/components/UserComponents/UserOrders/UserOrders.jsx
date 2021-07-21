@@ -1,37 +1,36 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserOrderDetail from './UserOrderDetail'
-import style from './UserOrders.module.css';
+import style from '../../UserComponents/UserOrders.module.css';
 
 
 function UserOrders() {
     const userId = useSelector((state) => state.user.userData.userId);
     const userOrders = useSelector((state) => state.useraccount.userOrdersList);
-	const orderProducts = useSelector((state) => state.product.allProducts);
-	const dispatch = useDispatch();
 
 
 	return (
 		<div>
 			<div className={style.userOptionContainer}>
             
+			<div className={style.selectedOptionTitle} >
             <h3>My Orders</h3>
-            <div>
+            </div>
+
 			{userOrders && userOrders.map((order) => {
 				return (
-					<div>
+					
 					<UserOrderDetail
-						ammount={order.ammount}
+						prodInfo={order.orderDetails[0].product}
+						price={order.orderDetails[0].product.price}
+						name={order.orderDetails[0].product.name}
+						image={order.orderDetails[0].product.image}
 						status={order.status}
 					/>
-					</div>
-				)
-			}
-
+					
+					)
+				}
 			)}
 
-
-            </div>
-            
 			</div>
 		</div>
 	);

@@ -1,6 +1,8 @@
 import React from 'react'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import * as IoIcons from 'react-icons/io';
+import * as MdIcons from 'react-icons/md';
 export const SidebarData =[
     {
         title: 'Home',
@@ -11,31 +13,37 @@ export const SidebarData =[
     {
         title: 'Products',
         path:'/admin/products',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <FaIcons.FaShoppingCart/>,
         cName: 'nav-text'
     },
     {
         title: 'Categories',
         path:'/admin/categories',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <FaIcons.FaClipboardList/>,
         cName: 'nav-text'
     },
     {
         title: 'Brands',
         path:'/admin/brands',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <AiIcons.AiTwotoneReconciliation/>,
         cName: 'nav-text'
     },
     {
         title: 'Users',
         path:'/admin/users',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <FaIcons.FaUsers/>,
         cName: 'nav-text'
     },
     {
         title: 'Orders',
         path:'/admin/orders',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <IoIcons.IoMdListBox/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Go Back',
+        path:'/',
+        icon: <MdIcons.MdArrowBack/>,
         cName: 'nav-text'
     },
 ]

@@ -26,6 +26,7 @@ const TableLogic = () => {
 				price: e?.price,
 				priceSpecial: e?.priceSpecial,
 				stock: e?.stock,
+				isVisible: `${e?.isVisible}`,
 				weight: e?.weight,
 				category: e?.categories[0]?.name || 'No Category',
 				brand: e?.brand?.name || 'No Brand',

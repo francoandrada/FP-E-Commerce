@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {
-	modifyProduct,
+	/*modifyProduct, */
 	getBrands,
 	getCategories,
 	getProductById,
@@ -11,12 +11,10 @@ import ButtonRed from '../../../components/StyledComponents/ButtonRed';
 import Swal from 'sweetalert2';
 import styles from '../../Register/Register.module.css';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md';
 
-
-
-
-function PutProduct(props) {
+function PutProduct() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -26,16 +24,14 @@ function PutProduct(props) {
 	const categories = useSelector((state) => state.category.allCategories);
 	const productToEdit = useSelector((state) => state.admin.productToEdit);
 
-
-
 	useEffect(() => {
 		dispatch(getBrands());
 		dispatch(getCategories());
 		dispatch(getProductById(id));
-	}, []);
+	}, [dispatch, id]);
 
 	const [product, setProduct] = useState({
-		id:'',
+		id: '',
 		name: '',
 		price: '',
 		priceSpecial: '',
@@ -44,7 +40,7 @@ function PutProduct(props) {
 		image: '',
 		stock: '',
 		brand: '',
-		category:'',
+		category: '',
 		// pictures:''
 	});
 
@@ -69,13 +65,13 @@ function PutProduct(props) {
 	console.log(product);
 	const {
 		register,
-		handleSubmit,
+		/*handleSubmit, */
 		formState: { errors },
-		reset,
+		/*reset, */
 	} = useForm();
 
 	const handleChange = (event) => {
-		console.log(event)
+		console.log(event);
 		setProduct({
 			...product,
 			[event.target.name]: event.target.value,
@@ -86,40 +82,39 @@ function PutProduct(props) {
 	// 	console.log(event)
 	// }
 
-
-    const onSubmit = async ()=>{
-			try {
-				await axios.put('http://localhost:3001/admin/putproduct',product)
-                .then(()=>{
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'The user was succesfully edited',
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    history.push('/');
-                }
-                )
-
-			} catch (error) {
-				console.log(error.response.data.msg);
-			}
+	const onSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			await axios
+				.put('http://localhost:3001/admin/putproduct', product)
+				.then(() => {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'The product was succesfully edited',
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					history.push('/admin');
+				});
+		} catch (error) {
+			console.log(error.response.data.msg);
+		}
 	};
 
 	return (
 		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
-			<form
-				className=''
-				onChange={(e) => handleChange(e)}
-				onSubmit={onSubmit}
-			>
+			<div className={styles.btnBackContainer}>
+				<Link to='/admin/products'>
+					<MdArrowBack />
+				</Link>
+			</div>
+			<form className='' onChange={(e) => handleChange(e)} onSubmit={onSubmit}>
 				<h6>Product</h6>
-	
 
 				<h6>Name</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					name='name'
 					value={product.name}
 					onChange={(e) => handleChange(e)}
@@ -142,7 +137,7 @@ function PutProduct(props) {
 
 				<h6>Price</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='number'
 					name='price'
 					value={product.price}
@@ -166,7 +161,6 @@ function PutProduct(props) {
 					type='number'
 					name='priceSpecial'
 					value={product.priceSpecial}
-
 					onChange={(e) => handleChange(e)}
 					{...register('priceSpecial', {
 						maxLength: {
@@ -183,11 +177,10 @@ function PutProduct(props) {
 
 				<h6>Description</h6>
 				<textarea
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='description'
 					value={product.description}
-
 					onChange={(e) => handleChange(e)}
 					{...register('description', {
 						maxLength: {
@@ -212,7 +205,6 @@ function PutProduct(props) {
 					type='number'
 					name='weight'
 					value={product.weight}
-
 					onChange={(e) => handleChange(e)}
 					{...register('weight', {
 						maxLength: {
@@ -229,11 +221,10 @@ function PutProduct(props) {
 
 				<h6>Image</h6>
 				<input
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='image'
 					value={product.image}
-
 					onChange={(e) => handleChange(e)}
 					{...register('image', {
 						maxLength: {
@@ -263,7 +254,6 @@ function PutProduct(props) {
 					name='stock'
 					min='0'
 					value={product.stock}
-
 					onChange={(e) => handleChange(e)}
 					{...register('stock', {
 						maxLength: {
@@ -276,15 +266,18 @@ function PutProduct(props) {
 
 				<h6>Brand</h6>
 				<select
-					className='form-group col-md-12' 
+					className='form-group col-md-12'
 					type='text'
 					name='brand'
 					value={product.brand.id}
-
 					onChange={(e) => handleChange(e)}
 				>
 					{brand.map((x, index) => (
-						<option key={index} value={x.id} selected={x.id === product.brand.id}>
+						<option
+							key={index}
+							value={x.id}
+							selected={x.id === product.brand.id}
+						>
 							{x.name}
 						</option>
 					))}
@@ -297,18 +290,21 @@ function PutProduct(props) {
 					type='text'
 					name='category'
 					value={product.category}
-
 					onChange={(e) => handleChange(e)}
 				>
 					{categories.map((x, index) => (
-						<option key={index} value={x.id} selected={x.id === product.category.id}>
+						<option
+							key={index}
+							value={x.id}
+							selected={x.id === product.category.id}
+						>
 							{x.name}
 						</option>
 					))}
 				</select>
 				<span>{errors?.category?.message}</span>
 				<div className={styles.registerButtonRow}>
-							<ButtonRed type='submit'>Confirm</ButtonRed>
+					<ButtonRed type='submit'>Confirm</ButtonRed>
 				</div>
 			</form>
 		</div>

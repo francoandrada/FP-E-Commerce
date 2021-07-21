@@ -5,6 +5,10 @@ module.exports = (sequelize) => {
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
-		}
+		},
+		isVisible: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
+		},
 	});
 };

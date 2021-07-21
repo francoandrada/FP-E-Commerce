@@ -4,67 +4,64 @@ import { filterPrice } from '../../Redux/actions';
 import styles from './OrderByPrice.module.css';
 
 function OrderByPrice() {
-
 	let category = useSelector((state) => state.category.selectedCategory);
 
-	useEffect(()=>unCheck(""),[category]
-    )
+	useEffect(() => unCheck(''), [category]);
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const [priceChecked, setPriceChecked] = useState("");
+	const [priceChecked, setPriceChecked] = useState('');
 
-    useEffect(()=>unCheck(priceChecked),[priceChecked]
-    )
+	useEffect(() => unCheck(priceChecked), [priceChecked]);
 
-    useEffect(()=>dispatch(filterPrice(priceChecked)),[priceChecked]
-    )
+	useEffect(() => dispatch(filterPrice(priceChecked)), [priceChecked]);
 
-    const unCheck = (category)=>{
-        let boxes = document.getElementsByClassName("orderE")
-        for(let i=0;i<boxes.length;i++){
-            boxes[i].id===category?
-            boxes[i].checked= true
-            : boxes[i].checked= false
-        }
-    }
+	const unCheck = (category) => {
+		let boxes = document.getElementsByClassName('orderE');
+		for (let i = 0; i < boxes.length; i++) {
+			boxes[i].id === category
+				? (boxes[i].checked = true)
+				: (boxes[i].checked = false);
+		}
+	};
 
-    const onClickedBox=(event)=>{
-        event.target.checked?setPriceChecked(event.target.id):setPriceChecked("")
-    }
-
+	const onClickedBox = (event) => {
+		event.target.checked
+			? setPriceChecked(event.target.id)
+			: setPriceChecked('');
+	};
 
 	// console.log(categories.products)
 	return (
 		<div className={styles.divPrice}>
 			<h6 className={styles.titlePrice}>Order by Price</h6>
-            <hr></hr>
-					<div className='form-check'>
-						<input
-							className={`${'form-check-input'} ${'orderE'}`}
-							type='checkbox'
-							id='descending'
-                            // checked='true'
-							onClick={(event) => onClickedBox(event)}
-                            // onClick={() => console.log(prueba.checked)}
-						/>
-						<label className='form-check-label' for='defaultCheck1'>
-							Descending
-						</label>
-					</div>
-                    <div className='form-check'>
-						<input
-							className={`${'form-check-input'} ${'orderE'}`}
-							type='checkbox'
-							id='ascending'
-                            // checked='true'
-							onClick={(event) => onClickedBox(event)}
-                            // onClick={() => console.log(prueba.checked)}
-						/>
-						<label className='form-check-label' for='defaultCheck1'>
-							Ascending
-						</label>
-					</div>
+			<hr></hr>
+			<div className='form-check'>
+				<input
+					className={`${'form-check-input'} ${'orderE'}`}
+					type='checkbox'
+					id='descending'
+					// checked='true'
+					onClick={(event) => onClickedBox(event)}
+					// onClick={() => console.log(prueba.checked)}
+				/>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
+					Descending
+				</label>
+			</div>
+			<div className='form-check'>
+				<input
+					className={`${'form-check-input'} ${'orderE'}`}
+					type='checkbox'
+					id='ascending'
+					// checked='true'
+					onClick={(event) => onClickedBox(event)}
+					// onClick={() => console.log(prueba.checked)}
+				/>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
+					Ascending
+				</label>
+			</div>
 		</div>
 	);
 }

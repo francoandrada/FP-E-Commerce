@@ -1,6 +1,6 @@
-import styles from './CartModal.module.css';
+// import styles from './CartModal.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { /*useDispatch,*/ useSelector } from 'react-redux';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
@@ -43,7 +43,7 @@ const CartHeader = styled.div`
     padding: .5em 1em;
     align-items: center;
     display: flex;
-    
+
     h3 {
         width: 50%;
         text-align: center;
@@ -86,7 +86,7 @@ const CartPay = styled.section`
     display: flex;
     justify-content: space-around;
     padding: 22px 20px;
-    
+
 `;
 
 const ButtonClose = styled.section`

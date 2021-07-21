@@ -6,12 +6,14 @@ import {
 	ADJUST_ITEM_QTY,
 	LOAD_CURRENT_ITEM,
 	SET_CART,
+	GET_PAY,
 } from '../actionsName';
 
 const initialState = {
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
-	link: ''
+	link: '',
+	userPay: null
 };
 
 function cartReducer(state = initialState, action) {
@@ -61,6 +63,13 @@ function cartReducer(state = initialState, action) {
 			return{
 				...state,
 				link: action.payload
+			}
+		case GET_PAY:
+			localStorage.removeItem('cart')
+			return{
+				...state,
+				userPay: action.payload
+
 			}
 		default:
 			return state;

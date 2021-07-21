@@ -27,25 +27,29 @@ function DetailProduct(props) {
 							<TitleStyle>{productDetail.name}</TitleStyle>
 							<p>${productDetail.price} </p>
 							<span> Stock: {productDetail.stock} </span>
-							<div class='m-3 d-block'>
-								<div class='m-3'>
-									<ButtonRedOther
-										class='btn btn-outline-danger'
-										type='submit'
-										onClick={() => dispatch(addToCart(productDetail))}
-									>
-										Add to Cart
-									</ButtonRedOther>
-								</div>
-								<div class='m-3'>
+							<div className='m-3 d-block'>
+								{productDetail.stock > 0 ? (
+									<div className='m-3'>
+										<ButtonRedOther
+											className='btn btn-outline-danger'
+											type='submit'
+											onClick={() => dispatch(addToCart(productDetail))}
+										>
+											Add to Cart
+										</ButtonRedOther>
+									</div>
+								) : (
+									<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
+								)}
+								<div className='m-3'>
 									<Link to='/shoppingcart'>
-									<ButtonGreyOther
-										class='btn btn-secondary'
-										type='submit'
-										onClick={() => dispatch(addToCart(productDetail))}
-									>
-										Checkout
-									</ButtonGreyOther>
+										<ButtonGreyOther
+											className='btn btn-secondary'
+											type='submit'
+											onClick={() => dispatch(addToCart(productDetail))}
+										>
+											Checkout
+										</ButtonGreyOther>
 									</Link>
 								</div>
 							</div>
@@ -55,35 +59,34 @@ function DetailProduct(props) {
 			) : null}
 
 			<div className={styles.descriptionProduct}>
-				<div class='container'>
-					<div class='row'>
-						<div class='col col-lg-2 '>
+				<div className='container'>
+					<div className='row'>
+						<div className='col col-lg-2 '>
 							<p>Description</p>
 						</div>
 
-						<div class='col'>
+						<div className='col'>
 							<p>{productDetail.description} </p>
 						</div>
-                        <div class="w-100 d-none d-md-block"></div>
+						<div className='w-100 d-none d-md-block'></div>
 
 						{productDetail.brand ? (
 							<Fragment>
-                                <div class='col col-lg-2 '>
+								<div className='col col-lg-2 '>
 									<p>Brand</p>
 								</div>
-								<div class='col '>
+								<div className='col '>
 									<p>{productDetail.brand.name} </p>
 								</div>
-								
 							</Fragment>
 						) : null}
-  <div class="w-100 d-none d-md-block"></div>
+						<div className='w-100 d-none d-md-block'></div>
 						{productDetail.weigth ? (
 							<Fragment>
-								<div class='col-6 col-sm-4'>
+								<div className='col-6 col-sm-4'>
 									<p>{productDetail.brand.name} </p>
 								</div>
-								<div class='col-6 col-sm-4'>
+								<div className='col-6 col-sm-4'>
 									<p>Weigth</p>
 								</div>
 							</Fragment>

@@ -20,6 +20,7 @@ import './App.css';
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
 import Success from './components/ShoppingCartComponents/Success';
+import WebHook from './components/ShoppingCartComponents/WebHook';
 
 function App({ location }) {
 	/* ======================================================
@@ -30,9 +31,9 @@ function App({ location }) {
 		<div className='App'>
 			<div></div>
 			{!location.pathname.includes('/admin') && <Navbar />}
-			<div class='totalvh'>
+			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
-					<div class='adminn'>
+					<div className='adminn'>
 						{/* <AdminRoutes /> */}
 						<Route path='/admin' component={AdminRoutes} />
 					</div>
@@ -53,6 +54,7 @@ function App({ location }) {
 					<Route path='/cartTest' exact component={CartModal} />
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 					<Route path='/shoppingcart/success' exact component={Success} />
+					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/error' exact component={Error404View} />
 				</Switch>

@@ -69,6 +69,10 @@
 	background-color: #cc242f;
 }
 
+#btnBuy {
+	outline: none;
+}
+
 @media only screen and (max-width: 1300px) and (min-width: 600px) {
 	.card {
 		background-color: white;

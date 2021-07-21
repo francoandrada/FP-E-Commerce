@@ -2,7 +2,7 @@
 	font-family: 'Arial';
 	border-collapse: collapse;
 	color: black;
-	background-color: white;
+	background-color: rgb(255, 255, 255);
 	margin-left:20%;
 	border-radius: 0px 0px 20px 20px;
 	box-shadow: 0 10px 30px rgb(172, 171, 171);
@@ -37,7 +37,7 @@
 }
 .tableEcommerce td,
 .tableEcommerce th {
-	border: 1px solid white;
+	border-bottom:0.5px solid rgba(128, 128, 128, 0.213);
 	padding: 8px;
 }
 

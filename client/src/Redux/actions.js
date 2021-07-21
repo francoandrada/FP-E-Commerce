@@ -40,10 +40,15 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
+
+	GET_PAY,
+
 	SET_MANUAL_AUTHENTICATION
+
 } from './actionsName';
 
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -219,6 +224,11 @@ export function logIn(dato) {
 				payload: error.response.data.msg,
 			});
 		}
+		setTimeout(() => {
+			dispatch({
+				type: HIDE_ALERT,
+			});
+		}, 3000);
 	};
 }
 
@@ -253,7 +263,7 @@ export function authUser(data) {
 				});
 			}
 		} catch (error) {
-			console.log(error);
+		console.log(error)
 		}
 	};
 }
@@ -310,8 +320,16 @@ export function resetPassword(resetLink, newPass) {
 				},
 			});
 		} catch (error) {
-			console.log(error);
+			dispatch({
+				type: ERROR,
+				payload: error.response.data.msg,
+			});
 		}
+		setTimeout(() => {
+			dispatch({
+				type: HIDE_ALERT,
+			});
+		}, 3000);
 	};
 }
 
@@ -537,6 +555,28 @@ export function postCart(data) {
 		}
 	};
 }
+
+
+export function getPayInfo(data) {
+	return async (dispatch) => {
+		console.log(data);
+
+		try {
+			const res = await axios.post('http://localhost:3001/webhooks', { data });
+
+			console.log(res.data);
+			dispatch({
+				type: GET_PAY,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
@@ -559,3 +599,4 @@ export function setAuthentication(payload) {
 		});
 	};
 }
+
