@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useTable } from 'react-table';
 import Loader from '../../Loader/Loader';
 
