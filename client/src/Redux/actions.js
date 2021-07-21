@@ -40,13 +40,15 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
-	PRODUCT_WITH_ORDER,
 	GET_PAY,
 	SET_MANUAL_AUTHENTICATION,
+	CREATE_CART_USER,
+	PRODUCT_WITH_ORDER
+
 } from './actionsName';
 
 import axios from 'axios';
-import { bindActionCreators } from 'redux';
+
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -601,6 +603,39 @@ export function getUserOrders(userId) {
 			});
 	};
 }
+
+
+
+export function postCartUser(data) {
+	console.log(data)
+	return async (dispatch) => {
+		try{
+			const res = axios.post('http://localhost:3001/shoppingcart', data)
+			console.log(res)
+		} catch (error) {
+			console.log(error.response)
+		}
+		
+	};
+}
+
+export function getCartUser(id) {
+	return async (dispatch) => {
+		console.log('iiiiidd',id)
+		try {
+			const res = await axios.post('http://localhost:3001/shoppingcart/userCart', {userId: id});
+			console.log('id',res.data)
+			dispatch({
+				type: CREATE_CART_USER,
+				payload: res.data
+			})
+			
+		} catch (error) {
+			console.log(error)
+		}
+	};
+}
+
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {

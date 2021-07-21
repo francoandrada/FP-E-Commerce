@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
 	ADD_TO_CART,
 	REMOVE_FROM_CART,
@@ -7,13 +5,14 @@ import {
 	LOAD_CURRENT_ITEM,
 	SET_CART,
 	GET_PAY,
+	CREATE_CART_USER,
 } from '../actionsName';
 
 const initialState = {
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
 	link: '',
-	userPay: null
+	userPay: null,
 };
 
 function cartReducer(state = initialState, action) {
@@ -23,6 +22,7 @@ function cartReducer(state = initialState, action) {
 			const inCart = state.cart.find((elem) =>
 				elem.id === action.payload.id ? true : false
 			);
+			
 
 			return {
 				...state,
@@ -60,17 +60,22 @@ function cartReducer(state = initialState, action) {
 				currentItem: action.payload,
 			};
 		case SET_CART:
-			return{
+			return {
 				...state,
-				link: action.payload
-			}
+				link: action.payload,
+			};
 		case GET_PAY:
-			localStorage.removeItem('cart')
-			return{
+			localStorage.removeItem('cart');
+			return {
 				...state,
-				userPay: action.payload
-
-			}
+				userPay: action.payload,
+			};
+		case CREATE_CART_USER:
+			console.log('carritooo', action.payload);
+			return {
+				...state,
+				cart: action.payload,
+			};
 		default:
 			return state;
 	}

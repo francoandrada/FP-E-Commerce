@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 	sequelize.define('cart', {
-		quantity: {
+		qty: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
