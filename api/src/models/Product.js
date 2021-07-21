@@ -28,5 +28,9 @@ module.exports = (sequelize) => {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
+		isVisible: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
+		},
 	});
 };

@@ -1,18 +1,25 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { addToCart, removeFromCart, adjustQty } from '../../../Redux/actions';
+import { removeFromCart, adjustQty } from '../../../Redux/actions';
 import style from './CartProducts.module.css';
 import { BsTrash } from 'react-icons/bs';
 import { formatNumber } from '../../../helper/priceFormater';
 
-function CartList({ info, image, name, price, qty }) {
+function CartList({ info, image, name, price, stock, qty }) {
 	const dispatch = useDispatch();
 	const [prodInfo, setProdInfo] = useState(info);
 
 	function handlePlus() {
-		setProdInfo(info);
-		dispatch(addToCart(prodInfo));
+		let plusQuantity = qty
+		if (qty >= stock) {
+			plusQuantity = stock;
+		} else {
+			plusQuantity = qty + 1;
+			dispatch(adjustQty(info.id, plusQuantity));
+		}
+		
 	}
+
 
 	function handleMinus() {
 		let newQuantity = qty;
