@@ -40,11 +40,9 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	GET_USER_ORDERS,
 	FETCH_COUNT_OF_CATEGORIES,
-
+	PRODUCT_WITH_ORDER,
 	GET_PAY,
-
-	SET_MANUAL_AUTHENTICATION
-
+	SET_MANUAL_AUTHENTICATION,
 } from './actionsName';
 
 import axios from 'axios';
@@ -94,6 +92,11 @@ export const fetchSuggestions = (payload) => ({
 	payload,
 });
 
+export const fetchProductWithOrder = (payload) => ({
+	type: PRODUCT_WITH_ORDER,
+	payload,
+});
+
 export const fetchListProducts = (payload) => ({
 	type: LIST_PRODUCT_ON_TABLE,
 	payload,
@@ -123,6 +126,21 @@ export function getListOfProductTable(page, object) {
 				object
 			);
 			dispatch(fetchListProducts(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getProductWithOrderData(page, object) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.post(
+				`http://localhost:3001/admin/listorders?page=${page}`,
+				object
+			);
+			dispatch(fetchProductWithOrder(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -219,7 +237,7 @@ export function logIn(dato) {
 				payload: res.data,
 			});
 		} catch (error) {
-			console.log(error.response)
+			console.log(error.response);
 			dispatch({
 				type: ERROR,
 				payload: error.response.data.msg,
@@ -264,7 +282,7 @@ export function authUser(data) {
 				});
 			}
 		} catch (error) {
-		console.log(error)
+			console.log(error);
 		}
 	};
 }
@@ -487,7 +505,7 @@ export function createdProduct(elem) {
 export function deleProduct(id) {
 	return async () => {
 		try {
-	  	await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
+			await axios.delete(`http://localhost:3001/admin/deleteproduct/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
@@ -497,7 +515,7 @@ export function deleProduct(id) {
 export function deleBrand(id) {
 	return async () => {
 		try {
-	  	await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
+			await axios.delete(`http://localhost:3001/admin/deletebrand/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
@@ -507,16 +525,12 @@ export function deleBrand(id) {
 export function deleCategory(id) {
 	return async () => {
 		try {
-	  	await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
+			await axios.delete(`http://localhost:3001/admin/deletecategory/${id}`);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
-
-
-
-
 
 export function getUsers() {
 	return async (dispatch) => {
@@ -557,7 +571,6 @@ export function postCart(data) {
 	};
 }
 
-
 export function getPayInfo(data) {
 	return async (dispatch) => {
 		console.log(data);
@@ -575,8 +588,6 @@ export function getPayInfo(data) {
 		}
 	};
 }
-
-
 
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
@@ -596,8 +607,7 @@ export function setAuthentication(payload) {
 	return async (dispatch) => {
 		dispatch({
 			type: SET_MANUAL_AUTHENTICATION,
-			payload
+			payload,
 		});
 	};
 }
-
