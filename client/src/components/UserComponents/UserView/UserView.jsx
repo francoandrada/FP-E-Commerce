@@ -27,6 +27,8 @@ function UserView() {
 		signout: '',
 	}); */
 
+    console.log('hola')
+
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
 		dispatch(getProducts());
