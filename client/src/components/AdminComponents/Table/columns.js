@@ -45,6 +45,10 @@ export const COLUMNS = [
 		accessor: 'brand',
 	},
 	{
+		Header: 'IsVisible',
+		accessor: 'isVisible',
+	},
+	{
 		Header: 'Delete',
 		accesor: 'delete',
 		Cell: (row) => {
