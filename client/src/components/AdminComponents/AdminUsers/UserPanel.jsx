@@ -74,7 +74,7 @@ function UserPanel() {
 				.email('Invalid email address')
 				.required('Enter an email'),
 			password: Yup.string()
-				.required('Please Enter your password')
+				.required(`You can't change the user password, It's private info`)
 				.matches(
 					/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
 					'Must contain 6 Characters, one uppercase, one lowercase and one number'
@@ -116,7 +116,7 @@ function UserPanel() {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    history.push('/');
+                    history.push('/admin/users');
                 }
                 )
 
@@ -128,6 +128,8 @@ function UserPanel() {
 
 	return (
 		<div className={styles.registerFormContainer}>
+
+
 			  <div className={styles.btnBackContainer}>
             	<Link to='/admin/users'>
 					
@@ -135,6 +137,7 @@ function UserPanel() {
                 
             </Link>
             </div>
+
 			<div id={styles.regForm}>
 				{hola.length > 0 ? <Error>{hola}</Error> : null}
 				<form onSubmit={handleSubmit}>
@@ -156,14 +159,14 @@ function UserPanel() {
 							) : null}
 						</div>
 
-						<div className='form-group col-md-5' id={styles.input}>
+						<div className='form-group col-md-4' id={styles.input}>
 							<label>Password</label>
 
 							<input
-								type='text'
+								type='password'
 								name='password'
 								value={user.password}
-								onChange={handleChange}
+								// onChange={handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
 							/>

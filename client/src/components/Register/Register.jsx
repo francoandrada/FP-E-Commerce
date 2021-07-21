@@ -11,7 +11,7 @@ import Div from '../StyledComponents/Validation';
 function Register() {
 	const history = useHistory();
 
-	const [hola, setHola] = useState([])
+	const [hola, setHola] = useState([]);
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -66,7 +66,7 @@ function Register() {
 				history.push('/');
 			} catch (error) {
 				console.log(error.response.data.msg);
-			setHola(error.response.data.msg)
+				setHola(error.response.data.msg);
 			}
 		},
 	});
@@ -74,31 +74,29 @@ function Register() {
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
-			{hola.length > 0? <Error>{hola}</Error> : null}
+				{hola.length > 0 ? <Error>{hola}</Error> : null}
 				<form onSubmit={formik.handleSubmit}>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-5' id={styles.input}>
-			
 							<label>Email</label>
-						
+
 							<input
 								type='email'
-								class='form-control'
+								className='form-control'
 								id='email'
 								placeholder='Email'
 								name='email'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 							/>
-								{formik.touched.email && formik.errors.email ? (
+							{formik.touched.email && formik.errors.email ? (
 								<Div>{formik.errors.email}</Div>
 							) : null}
 						</div>
 
 						<div className='form-group col-md-5' id={styles.input}>
-					
 							<label>Password</label>
-						
+
 							<input
 								type='password'
 								name='password'

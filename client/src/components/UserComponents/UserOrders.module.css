@@ -1,0 +1,64 @@
+/* ----- GENERAL STYLES ----- */
+.userOptionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    min-width: 800px;
+    min-height: 600px;
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.selectedOptionTitle {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px;
+}
+
+
+/* ----- Orders Panel Styles ----- */
+
+.orderDetailContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-top: solid;
+    border-top-color: rgb(204, 204, 204);
+    border-width: 0.5px;
+}
+
+.SizeImagOrderDiv {
+    width: 10%;
+}
+
+.sizeImagOrder {
+    width: 50px;
+}
+
+.statusStyle {
+    color:darkgreen;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.descriptionOrderStyle {
+    width: 40%;
+}
+
+
+/* ----- User Account Styles ------ */
+
+.UserPersonalInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 30px;
+    text-align: left;
+}

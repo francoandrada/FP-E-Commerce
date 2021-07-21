@@ -68,7 +68,7 @@ export const COLUMNS = [
 					key={row.row.original.id}
 					to={`/admin/putproduct/${row.row.original.id}`}
 				>
-					<i class='fas fa-wrench'></i>
+					<i className='fas fa-wrench'></i>
 				</Link>
 			);
 		},

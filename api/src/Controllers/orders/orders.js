@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { Order } = require('../../db.js');
+const { Order, OrderDetail, Product } = require('../../db.js');
 
 //-------------------------  GETS ALL ORDERS  --------------------------------//
 
@@ -51,18 +51,36 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 //------------------  GETS ALL ORDERS BY USER ID - FOR USERS ACCOUNT  ----------------------//
 
 const findUserOrders = async function findUserOrders(req, res, next) {
-	const userId = parseInt(req.params.userid);
-
-	try {
-		const allUserOrders = await Order.findAll({
-			where: { userId: userId },
-			include: 'orderDetails',
-		});
-		res.status(200).json(allUserOrders);
-	} catch (error) {
-		next(error);
-	}
+    const userId = parseInt(req.params.userid);
+ 
+    try {
+        const allUserOrders = await Order.findAll({
+            where: { userId: userId },
+            attributes: ['userId', 'status'],
+            include: [ 
+            {
+                model: OrderDetail,
+                as: "orderDetails",
+                attributes: ['id', 'orderId'],
+                include: [
+                    {
+                        model: Product,
+                        
+                        attributes: [ 'id','name', 'price', 'image', 'priceSpecial', 'description', 'weight', 'stock' ]
+                    }
+                ]
+                
+            },
+        
+        ]
+        });
+        
+        res.status(200).json(allUserOrders);
+    } catch (error) {
+        next(error);
+    }
 };
+
 
 module.exports = {
 	getOrders,

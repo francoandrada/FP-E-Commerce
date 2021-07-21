@@ -44,10 +44,10 @@ function AdminBrands() {
 							</button>
 						</Link>
 					</div>
-					<table class='table'>
+					<table className='table'>
 						<thead>
 							<tr>
-								<th class='col-md-1'>#</th>
+								<th className='col-md-1'>#</th>
 								<th>Name</th>
 								<th>Actions</th>
 							</tr>
@@ -64,7 +64,7 @@ function AdminBrands() {
 										<td>{c.name}</td>
 										<td>
 											<div>
-												<Link key={c.id} to={`/admin/putbrands/${c.id}`}>
+												<Link /*key={c.id}*/ to={`/admin/putbrands/${c.id}`}>
 													<button className={styles.btnEdit}>
 														<MdModeEdit title='Edit' />
 													</button>
