@@ -7,12 +7,13 @@ const WebHook = () => {
 	const search = useLocation().search;
 	const id = new URLSearchParams(search).get('collection_id');
 	const status = new URLSearchParams(search).get('collection_status');
-	const userPay = useSelector((state) => state.cart.userPay);
-
+	const userData = useSelector((state) => state.user.userData);
+	const cart = useSelector((state) => state.cart.cart);
+console.log(cart)
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getPayInfo(id));
+		dispatch(getPayInfo({id, email: userData.email, items: cart} ));
 	}, []);
 
 	return (
@@ -24,12 +25,12 @@ const WebHook = () => {
 				<h5>Details of your purchase</h5>
 				<p>Id: {id}</p>
 				<p>Status: {status}</p>
-				{userPay ? (
+				{/* {userPay ? (
 					<>
 						<p>Products: {userPay.description}</p>
 						<p>Buyer: {userPay.pay.email}</p>
 					</>
-				) : null}
+				) : null} */}
 				<p className=' p-2 bg-secondary'>
 
 					An email has been sent with more info about your purchase

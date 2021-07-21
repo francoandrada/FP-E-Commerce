@@ -65,16 +65,14 @@ const createOrder = async function createOrder(req, res) {
 		// 	{ prodId: 1, price: 99999, qty: 2 },
 		// ];
 
-		const itemsCarrito = prodCarrito.map((i) => ({
-			title: i.name,
-			unit_price: i.price,
-			quantity: i.qty,
-			id: i.prodId,
-		}));
-
+	
 		let preference = {
-			items: itemsCarrito,
-
+			items: prodCarrito.map((i) => ({
+				title: i.name,
+				unit_price: i.price,
+				quantity: i.qty,
+				id: i.prodId,
+			})),
 			back_urls: {
 				success: 'http://localhost:3000/webhook',
 				failure: 'http://localhost:3001/mercadopago/pagos',

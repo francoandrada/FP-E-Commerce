@@ -89,16 +89,12 @@ exports.forgotPassword = async (req, res) => {
 				<head>
 				</head>
 				<body style="background-color: #424242;">
-				<h1>This is a heading</h1>
-				<p>This is a paragraph.</p>
-				 <div style="color:blue;>
-				 <h1 style="color:blue;">A Blue Heading</h1>
+			
 				 	<h2>Hello,</h2>
 				 	<p>We've received a request to reset the password for the HardwareStore account associated with ${email}.
 				 	<p>You can reset your passwordd by clicking the link below:</p>
 				 	<a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
 				 	<p>If you did not request a new password, please let us know inmediately by replying to this email.</p>
-				 </div>
 				</body>
 				</html>
 		
