@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { createdProduct, getProducts, getCategories, getBrands } from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css'
 import { MdArrowBack } from 'react-icons/md'
@@ -43,7 +43,7 @@ function AddProduct() {
 		console.log(data)
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return swal({
+				return Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -64,7 +64,7 @@ function AddProduct() {
 		) {
 			dispatch(createdProduct(data))
 			e.target.reset()
-			swal({
+			Swal({
 				title: "Product Created!!",
 				icon: "success",
 				button: "ok",
@@ -75,7 +75,7 @@ function AddProduct() {
 			reset({ data })
 
 		} else {
-			swal({
+			Swal({
 				title: "All fields are required",
 				icon: "error",
 				button: "ok",

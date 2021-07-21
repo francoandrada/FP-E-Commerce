@@ -213,12 +213,13 @@ export function logIn(dato) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
-			console.log(res);
+			console.log('login', res.data);
 			dispatch({
 				type: SUCCESS_LOGIN,
 				payload: res.data,
 			});
 		} catch (error) {
+			console.log(error.response)
 			dispatch({
 				type: ERROR,
 				payload: error.response.data.msg,

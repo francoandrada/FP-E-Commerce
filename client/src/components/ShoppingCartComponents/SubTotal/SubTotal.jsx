@@ -5,7 +5,7 @@ import style from './SubTotal.module.css';
 import { postCart } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
 
-function SubTotal({ qty, userLogged, userId }) {
+function SubTotal({ qty, userLogged,}) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
@@ -17,7 +17,7 @@ function SubTotal({ qty, userLogged, userId }) {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-
+console.log(user.userId)
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -55,11 +55,10 @@ function SubTotal({ qty, userLogged, userId }) {
 	let bodyObject
 if( user != null){
 	 bodyObject = {
-		userId: user.userId,
+		id: user.userId,
 		prodCarrito: array,
 		ammount: totalPrice,
 		status: status,
-		userId: userId
 	};
 }
 console.log(bodyObject)

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import {createdCategory, getCategories} from "../../../Redux/actions"
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import styles from '../../Register/Register.module.css'
 import { MdArrowBack } from 'react-icons/md'
 import { Link } from 'react-router-dom';
@@ -37,7 +37,7 @@ function AddCategory () {
         console.log(data)
         for(let i=0 ; i< nameCategory.length; i++){
             if(nameCategory[i].name.toLowerCase() === data.name.toLowerCase()){
-             return  swal({
+             return  Swal({
                     title: 'Existing name',
                     icon: 'warning',
                     button: 'ok',
@@ -48,7 +48,7 @@ function AddCategory () {
         if(data.name && data.name.length > 0 ){
             dispatch(createdCategory(data))
             e.target.reset()
-            swal({
+            Swal({
                 title:"Category Created!!",
                 icon: "success",
                 button: "ok",
@@ -59,7 +59,7 @@ function AddCategory () {
             reset({data})
 
         }else{
-            swal({
+            Swal({
                 title:"Require name Category",
                 icon: "error",
                 button: "ok",

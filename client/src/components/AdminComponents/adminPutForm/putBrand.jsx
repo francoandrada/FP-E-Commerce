@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { modifyBrand } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from '../../Register/Register.module.css';
 import { MdArrowBack } from 'react-icons/md';
@@ -54,7 +54,6 @@ function PutBrand(props) {
 				timer: '5000',
 			});
 			// .then(()=> dispatch(getProducts()))
-
 			reset({ data });
 		} else {
 			swal({
@@ -65,6 +64,31 @@ function PutBrand(props) {
 			});
 		}
 	};
+
+  /*  const submit=(data, e)=>{
+        data.id = id
+        console.log(data)
+        for(let i=0 ; i< brands.length; i++){
+            if(brands[i].name.toLowerCase() === data.name.toLowerCase()){
+             return  Swal({
+                    title: 'Existing name',
+                    icon: 'warning',
+                    button: 'ok',
+                    timer: '5000',
+                })
+            }
+        }
+        if(data.name && data.name.length >0){
+            dispatch(modifyBrand(data))
+            e.target.reset()
+            Swal({
+                title:"Brand Modified!!",
+                icon: "success",
+                button: "ok",
+                timer: "5000"
+            })
+            // .then(()=> dispatch(getProducts()))
+*/
 
 	return (
 		<div>
@@ -107,4 +131,6 @@ function PutBrand(props) {
 		</div>
 	);
 }
+
+
 export default PutBrand;
