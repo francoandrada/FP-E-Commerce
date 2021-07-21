@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const mercadopago = require('mercadopago');
 const { Order, OrderDetail, Product, User } = require('../db');
 
+
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, prodCarrito, userId } = req.body;
@@ -64,16 +65,14 @@ const createOrder = async function createOrder(req, res) {
 		// 	{ prodId: 1, price: 99999, qty: 2 },
 		// ];
 
-		const itemsCarrito = prodCarrito.map((i) => ({
-			title: i.name,
-			unit_price: i.price,
-			quantity: i.qty,
-			id: i.prodId,
-		}));
-
+	
 		let preference = {
-			items: itemsCarrito,
-
+			items: prodCarrito.map((i) => ({
+				title: i.name,
+				unit_price: i.price,
+				quantity: i.qty,
+				id: i.prodId,
+			})),
 			back_urls: {
 				success: 'http://localhost:3000/webhook',
 				failure: 'http://localhost:3001/mercadopago/pagos',
@@ -97,7 +96,6 @@ const createOrder = async function createOrder(req, res) {
 		res.status(400).json(error);
 	}
 };
-
 
 module.exports = {
 	createOrder,
