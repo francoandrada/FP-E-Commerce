@@ -2,12 +2,11 @@ const { Sequelize } = require('sequelize');
 const mercadopago = require('mercadopago');
 const { Order, OrderDetail, Product, User } = require('../db');
 
-
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
-	const { ammount, status, prodCarrito, userId } = req.body;
+	const { ammount, status, prodCarrito, id } = req.body;
 
-	console.log('userIddd', userId);
+	console.log('userIddd', id);
 
 	try {
 		var newOrder = await Order.create(
@@ -37,25 +36,25 @@ const createOrder = async function createOrder(req, res) {
 						});
 
 						if (productFind) {
-							// OrderDetail.belongsTo(Product);
 							await newDetail.setProduct(productFind.dataValues.id);
 						}
 						await order.addOrderDetail(newDetail.dataValues.id);
 
+						// User.hasMany(Order, { foreignKey: 'userId' });
+						// Order.belongsTo(User, { foreignKey: 'userId' });
 						var userFind = await User.findOne({
-							where: { userId: userId },
+							where: { userId: id },
 						});
-					
+						console.log(userFind)
+
 						if (userFind) {
-							// // Order.belongsTo(User, { foreignKey: 'userId' });
 							await order.setUser(userFind.dataValues.userId);
-						}else{
-							res.status(400).json({msg: 'Errorrrrr'})
+						} else {
+							res.status(400).json({ msg: 'Error' });
 						}
 					})();
 				});
 		});
-
 
 		// res.status(200).json('Order created successfully!', productFind);
 
@@ -65,7 +64,6 @@ const createOrder = async function createOrder(req, res) {
 		// 	{ prodId: 1, price: 99999, qty: 2 },
 		// ];
 
-	
 		let preference = {
 			items: prodCarrito.map((i) => ({
 				title: i.name,
@@ -78,8 +76,7 @@ const createOrder = async function createOrder(req, res) {
 				failure: 'http://localhost:3001/mercadopago/pagos',
 				pending: 'http://localhost:3001/mercadopago/pagos',
 			},
-			auto_return: "approved",
-
+			auto_return: 'approved',
 		};
 
 		mercadopago.preferences
