@@ -1,20 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
-import axios from 'axios';
-import {
-	authUser,
-	getSuggestions,
-	cleanSuggestions,
-} from '../../../Redux/actions';
+import { useState } from 'react';
+
 import { MdSearch } from 'react-icons/md';
 
 import styles from './SearchBox.module.css';
 
 const SearchBox = (props) => {
-	const [display, setDisplay] = useState('');
-	const [options, setOptions] = useState([]);
-	const [search, setSearch] = useState('');
+	// const [display, setDisplay] = useState('');
+	// const [options, setOptions] = useState([]);
+	// const [search, setSearch] = useState('');
 
 	const searchConfirm = (event) => {
 		event.preventDefault();
