@@ -1,6 +1,5 @@
 const { Product, Brand, Category, User } = require('../db');
 async function postProduct(req, res, next) {
-
 	try {
 		const {
 			name,
@@ -31,7 +30,7 @@ async function postProduct(req, res, next) {
 }
 
 async function putProduct(req, res, next) {
-	console.log(req.body)
+	console.log(req.body);
 	try {
 		const {
 			id,
@@ -50,14 +49,14 @@ async function putProduct(req, res, next) {
 				id: id,
 			},
 		});
-		product.id = id
-		product.name = name
-		product.price = price
-		product.description = description
-		product.weight = weight 
-		product.image = image
-		product.stock = stock
-		await product.save()
+		product.id = id;
+		product.name = name;
+		product.price = price;
+		product.description = description;
+		product.weight = weight;
+		product.image = image;
+		product.stock = stock;
+		await product.save();
 		await product.setBrand(brand);
 		await product.setCategories(parseInt(category));
 		res.send(product);
@@ -124,21 +123,20 @@ async function putCategoryProduct(req, res, next) {
 async function getProductCategory(req, res, next) {
 	try {
 		const name = req.params.name;
-		const resAll = await Category.findAll({ 
-            include: Product,
-            where:{
-                name: name
-            }
-         });
-     res.send(resAll)
+		const resAll = await Category.findAll({
+			include: Product,
+			where: {
+				name: name,
+			},
+		});
+		res.send(resAll);
 	} catch (error) {
 		next(error);
 	}
 }
 async function getProductAll(req, res, next) {
 	try {
-		
-		const resAll = await Product.findAll({})
+		const resAll = await Product.findAll({});
 		res.send(resAll);
 	} catch (error) {
 		next(error);
@@ -147,10 +145,10 @@ async function getProductAll(req, res, next) {
 
 async function deleteProduct(req, res, next) {
 	try {
-		const id = parseInt(req.params.id)
+		const id = parseInt(req.params.id);
 		console.log(id);
-		const produc = await Product.findOne({ where: { id:id} });
-		await produc.destroy()
+		const produc = await Product.findOne({ where: { id: id } });
+		await produc.destroy();
 		res.json(id);
 	} catch (error) {
 		next(error);
@@ -159,10 +157,19 @@ async function deleteProduct(req, res, next) {
 //http://localhost:3001/admin/deletebrand/1
 async function deleteBrand(req, res, next) {
 	try {
-		const id = parseInt(req.params.id)
-		console.log(id);
-		const brand = await Brand.findOne({ where: { id:id} });
-		await brand.destroy()
+		const id = parseInt(req.params.id);
+		// console.log(id);
+		// const brand = await Brand.findOne({ where: { id: id } });
+		// await brand.destroy();
+		await Brand.update(
+			{ isVisible: false },
+			{
+				where: {
+					id,
+				},
+			}
+		);
+
 		res.json(id);
 	} catch (error) {
 		next(error);
@@ -171,54 +178,65 @@ async function deleteBrand(req, res, next) {
 //http://localhost:3001/admin/deletecategory/9
 async function deleteCategory(req, res, next) {
 	try {
-		const id = parseInt(req.params.id)
-		console.log(id);
-		const category = await Category.findOne({ where: { id:id} });
-		await category.destroy()
+		const id = parseInt(req.params.id);
+		// console.log(id);
+		// const category = await Category.findOne({ where: { id:id} });
+		// await category.update()
+		await Category.update(
+			{ isVisible: false },
+			{
+				where: {
+					id,
+				},
+			}
+		);
+
 		res.json(id);
 	} catch (error) {
 		next(error);
 	}
 }
 ////////////////USER//////////
-async function getUsers (req, res) {
+async function getUsers(req, res) {
 	try {
 		const usersList = await User.findAll();
 		return res.status(200).json(usersList);
 	} catch (error) {
 		res.send(error);
 	}
+}
 
-};
-
-async function getUserToEdit (req, res) {
-	const userEmail= req.params.email
+async function getUserToEdit(req, res) {
+	const userEmail = req.params.email;
 	try {
 		const user = await User.findOne({ where: { email: userEmail } });
 		return res.status(200).json(user);
 	} catch (error) {
 		res.send(error);
 	}
-
-};
+}
 
 async function putUserInfo(req, res, next) {
-	console.log(req.body)
+	console.log(req.body);
 	try {
 		// console.log(req.body)
 		// res.send('ok')
 		const newUserInfo = req.body;
 		const user = await User.findOne({ where: { email: newUserInfo.email } });
-		user.name= newUserInfo.name,
-		user.surname= newUserInfo.surname,
-		user.email= newUserInfo.email,
-		user.password= newUserInfo.password, 
-		user.address= newUserInfo.address,
-		user.addressNumber= newUserInfo.addressNumber? parseInt(newUserInfo.addressNumber):null,
-		user.postalCode= newUserInfo.postalCode? parseInt(newUserInfo.postalCode): null,
-		user.phone= newUserInfo.phone,
-		user.admin= newUserInfo.admin
-		await user.save()
+		(user.name = newUserInfo.name),
+			(user.surname = newUserInfo.surname),
+			(user.email = newUserInfo.email),
+			(user.password = newUserInfo.password),
+			(user.address = newUserInfo.address),
+			(user.addressNumber = newUserInfo.addressNumber
+				? parseInt(newUserInfo.addressNumber)
+				: null),
+			(user.postalCode = newUserInfo.postalCode
+				? parseInt(newUserInfo.postalCode)
+				: null),
+			(user.phone = newUserInfo.phone),
+			(user.admin = newUserInfo.admin);
+		await user.save();
 		res.json(user);
 	} catch (error) {
 		next(error);
@@ -232,7 +250,7 @@ async function deleteUser(req, res, next) {
 		const userToDelete = req.body.email;
 		console.log(req.body.email);
 		const user = await User.findOne({ where: { email: userToDelete } });
-		await user.destroy()
+		await user.destroy();
 		res.json(userToDelete);
 	} catch (error) {
 		next(error);
@@ -254,5 +272,5 @@ module.exports = {
 	deleteUser,
 	deleteProduct,
 	deleteBrand,
-	deleteCategory
+	deleteCategory,
 };
