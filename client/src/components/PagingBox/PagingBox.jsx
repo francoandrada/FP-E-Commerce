@@ -16,7 +16,6 @@ export const PagingBox = (props) => {
 	let price = useSelector((state) => state.price.order);
 	let stock = useSelector((state) => state.stock.order);
 
-
 	useEffect(() => {
 		dispatch(selectPage(1));
 	}, [category]);
@@ -50,15 +49,23 @@ export const PagingBox = (props) => {
 
 	return (
 		<div id={styles.container}>
+			{actualPage === 1 ? (
+				<div></div>
+			) : (
+				<div className={styles.prevNext}>
+					<button className={styles.prevNext} onClick={() => pagePrev()}>
+						PREV
+					</button>
+				</div>
+			)}
 			<div className={styles.prevNext}>
-				<button 
-                 className={styles.prevNext}
-                 onClick={() => pagePrev()}>PREV</button>
-			</div>
-			<div className={styles.prevNext}>
-				<button 
-                 className={styles.prevNext}
-                 onClick={() => pagePost()}>NEXT</button>
+				{actualPage === maxPage ? (
+					<div></div>
+				) : (
+					<button className={styles.prevNext} onClick={() => pagePost()}>
+						NEXT
+					</button>
+				)}
 			</div>
 		</div>
 	);
