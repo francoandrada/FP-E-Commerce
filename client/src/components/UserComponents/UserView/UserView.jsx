@@ -18,6 +18,7 @@ function UserView() {
 	const userData = userInfo.userData && userInfo.userData;
 	const userId = useSelector((state) => state.user.userData.userId);
 	const dispatch = useDispatch();
+<<<<<<< HEAD
 	const [selectedOption, setSelectedOption] = useState('account');
 	/* 	const [selectedOption, setSelectedOption] = useState({
 		account: '',
@@ -26,15 +27,24 @@ function UserView() {
 		adresses: '',
 		signout: '',
 	}); */
+=======
+    const[selectedOption, setSelectedOption] = useState('account')
+>>>>>>> 073bdc317b21252f9d3e13bb519a0efb39c56bd5
 
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
 		dispatch(getProducts());
 	}, [dispatch]);
 
+<<<<<<< HEAD
 	function setOption(event) {
 		setSelectedOption(event.target.id);
 	}
+=======
+    function setOption (event) {
+        setSelectedOption(event.target.id)
+    }
+>>>>>>> 073bdc317b21252f9d3e13bb519a0efb39c56bd5
 
 	let currentPanel = null;
 
@@ -207,6 +217,60 @@ function UserView() {
 					</div>
 				</div>
 				<UserOrders /> */}
+=======
+
+            <div className={style.optionsPanelContainer}>
+                <div className={style.optionsContainer}>
+                    <p>Welcome {userData.name}!</p>
+
+                    <div className={style.optionsLayoutdiv}>
+                    <div className={style.subcontainerOptions}>
+                        <FiUser/>
+                        <p onClick={setOption} id='account' className={style.textOptionStyle}>Account</p>
+                    </div>
+                        <FiChevronRight/>
+                    </div>
+
+                    <div className={style.optionsLayoutdiv}>
+                    <div className={style.subcontainerOptions}>
+                        <FiBox/>
+                        <p onClick={setOption} id='orders' className={style.textOptionStyle}>My Orders</p>
+                    </div>
+                        <FiChevronRight/>
+                    </div>
+
+                    <div className={style.optionsLayoutdiv}>
+                    <div className={style.subcontainerOptions}>
+                        <FiHeart/>
+                        <p onClick={setOption} id='favorites' className={style.textOptionStyle}>Favorites</p>
+                    </div>
+                        <FiChevronRight/>
+                    </div>
+
+                    <div className={style.optionsLayoutdiv}>
+                    <div className={style.subcontainerOptions}>
+                        <FiHome/>
+                        <p onClick={setOption} id='adresses' className={style.textOptionStyle}>Adresses</p>
+                    </div>
+                        <FiChevronRight/>
+                    </div>
+
+                    <div className={style.optionsLayoutdiv}>
+                    <div className={style.subcontainerOptions}>
+                        <FiLogOut/>
+                        <p onClick={setOption} id='signout' className={style.textOptionStyle}>Sign Out</p>
+                    </div>
+                        <FiChevronRight/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className={style.userPanelSelectedContainer}>
+                {currentPanel}
+            </div>
+
+>>>>>>> 073bdc317b21252f9d3e13bb519a0efb39c56bd5
 			</div>
 		</div>
 	);
