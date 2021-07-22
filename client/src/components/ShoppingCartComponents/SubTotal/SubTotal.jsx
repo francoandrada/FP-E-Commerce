@@ -2,15 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
-import { postCart } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
+import Shipping from '../Shipping';
 
 function SubTotal() {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
 
-	const dispatch = useDispatch();
 	const mercadoPago = useSelector((state) => state.cart.link);
 
 	const token = useSelector((state) => state.user.token);
@@ -64,6 +63,11 @@ function SubTotal() {
 
 	return (
 		<div>
+			<div className='mb-4'>
+				<div className={style.subtotalContainerMain}>
+					<Shipping />
+				</div>
+			</div>
 			<div className={style.subtotalContainerMain}>
 				<h4>ORDER SUMMARY</h4>
 				<div className={style.subdivTotal}>
@@ -82,7 +86,7 @@ function SubTotal() {
 						className={style.paymentButton}
 						// onClick={() => dispatch(postCart(bodyObject))}
 						// onClick={() => {
-						
+
 						// }
 					>
 						Checkout

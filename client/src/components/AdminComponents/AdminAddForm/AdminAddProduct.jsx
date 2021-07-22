@@ -7,8 +7,8 @@ import {
 	getBrands,
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-// import Select from 'react-select';
-import swal from 'sweetalert';
+import Select from 'react-select';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
 import { MdArrowBack } from 'react-icons/md';
@@ -46,7 +46,7 @@ function AddProduct() {
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return swal({
+				return Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -327,12 +327,12 @@ function AddProduct() {
 						</select>
 
 						<label for='type'>Selected Categories</label>
-						{/* <Select
+						<Select
 							isMulti
 							name='category'
 							options={options}
 							onChange={changeChange}
-						/> */}
+						/>
 					</div>
 
 					<ButtonRed type='submit'> Add </ButtonRed>

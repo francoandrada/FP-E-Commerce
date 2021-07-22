@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import Div from '../StyledComponents/Validation';
-
+import Button from '../StyledComponents/ButtonRedOther';
 function Shipping() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	const [address, setAddress] = useState('');
 	const formik = useFormik({
 		initialValues: {
 			address: '',
@@ -26,22 +27,37 @@ function Shipping() {
 			console.log(values);
 		},
 	});
-	function test(value){
-		if(value === "home"){
-		
-		}
-		else if(value == "home"){
-		  
-		}
-	  }
+	console.log(address);
 	return (
-		<form handleSubmit={formik.handleSubmit}>
-			<div className='bg-white'>
-				<select name='location' onclick={() => test()}>
-					<option value='0'>How would you like to get your order?</option>
-					<option value='home'>Ship to your location</option>
-					<option value='gfe'>Pick up at the store</option>
-				</select>
+		<div className='bg-white'>
+			<form handleSubmit={formik.handleSubmit}>
+				<h4>How would you like to get your order?</h4>
+				<div className='text-center'>
+					<div>
+			
+				<input
+					type='radio'
+					name='ship'
+					value='ship'
+					onClick={() => setAddress('ship')}
+				/>
+					<label>Ship to your location</label>
+				</div>
+				<div>
+				
+				<input
+					type='radio'
+					name='ship'
+					value='pick'
+					onClick={() => setAddress('pick')}
+				/>
+				 <label>Pick up at the store</label>
+				</div>
+				</div>
+				{address === 'ship' ? 
+
+
+				<div>
 				{formik.touched.address && formik.errors.address ? (
 					<Div>{formik.errors.address}</Div>
 				) : null}
@@ -106,14 +122,16 @@ function Shipping() {
 						/>
 					</label>
 				</div>
-
 				<div className='d-flex justify-content-center'>
-					<button type='submit' className=' btn btn-primary'>
-						Sign in
-					</button>
+					<Button type='submit' className=' btn btn-primary'>
+						Submit
+					</Button>
 				</div>
-			</div>
-		</form>
+				</div> : null }
+			
+				
+			</form>
+		</div>
 	);
 }
 
