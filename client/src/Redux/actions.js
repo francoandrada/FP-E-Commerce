@@ -138,12 +138,13 @@ export function getListOfProductTable(page, object) {
 	};
 }
 
+// http://localhost:3001/admin/usersandhisorders?page=0 (post);
 export function getUserWithOrdersDetail(page, object) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
-				`http://localhost:3001/admin/tablepagination?page=${page}`,
+				`http://localhost:3001/admin/usersandhisorders?page=${page}`,
 				object
 			);
 			dispatch(fetchUserWithOrders(res.data));
