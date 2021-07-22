@@ -1,5 +1,6 @@
 .HighlightContainer {
 	display: flex;
+	justify-content: center;
 	background-color: rgb(48 48 48 / 85%);
 	margin-top: 50px;
 	padding: 5%;

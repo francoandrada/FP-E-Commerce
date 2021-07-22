@@ -201,7 +201,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			let allProduct1 = allProduct;
 			if (category) {
 				allProduct1 = allProduct.filter(
-					(product) => product.categories[0].name === category
+					(product) => product.categories[0].name === category || product.categories.length === 0
 				);
 			}
 			if (brand) {

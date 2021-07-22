@@ -11,11 +11,11 @@ const countCategories = async (req, res, next) => {
 	});
 
 	const productsWithCategory = products.filter(
-		({ categories }) => categories.length
+		({ categories }) => categories.length 
 	);
 
 	const productsWithoutCategory = products.filter(
-		({ categories }) => !categories.length
+		({ categories }) => !categories.length 
 	).length;
 
 	const counter = (array, categoryName) => {
