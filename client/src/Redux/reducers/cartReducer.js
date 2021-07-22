@@ -71,10 +71,13 @@ function cartReducer(state = initialState, action) {
 				userPay: action.payload,
 			};
 		case CREATE_CART_USER:
-			console.log('carritooo', action.payload);
-			return {
+		return {
 				...state,
-				cart: action.payload,
+				cart: action.payload.map(el => {
+					let qty = el.qty
+					let newObj = el.product
+					return {...newObj, qty}
+				})
 			};
 		default:
 			return state;
