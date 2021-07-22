@@ -201,6 +201,7 @@ function CartModal() {
 												image={product.image}
 												name={product.name}
 												price={formatPrice}
+                                                stock={product.stock}
 												qty={product.qty}
 											/>
 										</li>

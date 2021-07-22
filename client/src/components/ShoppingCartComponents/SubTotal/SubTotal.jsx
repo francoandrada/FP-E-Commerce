@@ -5,11 +5,10 @@ import style from './SubTotal.module.css';
 import { postCart } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
 
-function SubTotal({ qty, userLogged, userId }) {
+function SubTotal() {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
-
 
 	const dispatch = useDispatch();
 	const mercadoPago = useSelector((state) => state.cart.link);
@@ -17,7 +16,7 @@ function SubTotal({ qty, userLogged, userId }) {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-
+	console.log(user.userId);
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -35,12 +34,11 @@ function SubTotal({ qty, userLogged, userId }) {
 
 		setTotalItems(items);
 		setTotalPrice(price);
-
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
 	let status = 'created';
 	let array = [];
-	
+
 	for (let i = 0; i < cartProducts.length; i++) {
 		const element = {
 			prodId: cartProducts[i].id,
@@ -52,17 +50,16 @@ function SubTotal({ qty, userLogged, userId }) {
 		array.push(element);
 	}
 
-	let bodyObject
-if( user != null){
-	 bodyObject = {
-		userId: user.userId,
-		prodCarrito: array,
-		ammount: totalPrice,
-		status: status,
-		userId: userId
-	};
-}
-console.log(bodyObject)
+	let bodyObject;
+	if (user != null) {
+		bodyObject = {
+			id: user.userId,
+			prodCarrito: array,
+			ammount: totalPrice,
+			status: status,
+		};
+	}
+	console.log(bodyObject);
 	let totalFormat = formatNumber.new(totalPrice, '$');
 
 	return (
@@ -79,15 +76,14 @@ console.log(bodyObject)
 					</p>
 					<h3>{totalFormat}</h3>
 				</div>
-		
+
 				{token ? (
-	
-							<button
-							className={style.paymentButton}
-							onClick={() => dispatch(postCart(bodyObject))}
-						>
-							Checkout
-						</button>
+					<button
+						className={style.paymentButton}
+						onClick={() => dispatch(postCart(bodyObject))}
+					>
+						Checkout
+					</button>
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Checkout</button>

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { logIn, loginGmail } from '../../Redux/actions';
+import {
+	getCartUser,
+	logIn,
+	loginGmail,
+	postCartUser,
+} from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
@@ -10,11 +15,7 @@ import img from '../../images/12.png';
 import imge from '../../images/5.jpeg';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
-/* global google */
-/* global gapi */
 import { GoogleLogin } from 'react-google-login';
-
-import AuthenticationButton from '../AuthenticationButton/AuthenticationButton';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -55,8 +56,6 @@ const LogIn = () => {
 	const [userInfo, setUserInfo] = useState({});
 
 	const responseGoogle = (response) => {
-		console.log('responseGoogle');
-		console.log(response);
 		if (response.tokenId) {
 			setUserInfo({
 				email: response.profileObj.email,
@@ -79,10 +78,6 @@ const LogIn = () => {
 		}
 	});
 
-	// useEffect(() => {
-	// 	console.log(userInfo)
-	// }, [userInfo]);
-
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -90,11 +85,34 @@ const LogIn = () => {
 
 	const setError = useSelector((state) => state.user.setError);
 
+	const userId = useSelector((state) => state.user.userData.userId);
+
+	const prodId = useSelector((state) => state.cart.cart);
+
+	let array = [];
+
+	for (let i = 0; i < prodId.length; i++) {
+		const element = {
+			prodId: prodId[i].id,
+			qty: prodId[i].qty,
+		};
+
+		array.push(element);
+	}
+	let bodyObject = {
+		userId: userId,
+		prodId: array,
+	};
+console.log(bodyObject)
+
 	useEffect(() => {
 		if (authenticated) {
-			history.goBack();
+			 history.goBack();
+			dispatch(postCartUser(bodyObject));
+			
 		}
 	}, [authenticated]);
+
 
 	const formik = useFormik({
 		initialValues: {
@@ -110,21 +128,16 @@ const LogIn = () => {
 				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
-			 dispatch(logIn(values));
-			 history.goBack();
-			
-		
+			dispatch(logIn(values));
 		},
 	});
 
 	return (
 		<>
 			<GlobalStyle />
-			<div className='container d-flex justify-content-center mt-5 rounded'>
+			<div className='container d-flex justify-content-center mt-3 rounded'>
 				<div className=' row '>
 					<div className='col bg-white px-5 rounded '>
-						
-
 						<form onSubmit={formik.handleSubmit} className='px-5 py-4'>
 							<div className=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
@@ -132,7 +145,11 @@ const LogIn = () => {
 							{formik.touched.email && formik.errors.email ? (
 								<Div>{formik.errors.email}</Div>
 							) : null}
-								{setError !== null ? <Error>{setError}</Error> : <p className='p-1'></p>}
+							{setError !== null ? (
+								<Error>{setError}</Error>
+							) : (
+								<p className='p-1'></p>
+							)}
 							<div className='form-group d-flex justify-content-center'>
 								<input
 									type='email'
@@ -144,11 +161,9 @@ const LogIn = () => {
 									onBlur={formik.handleBlur}
 									value={formik.values.email}
 								/>
-								
-					
 							</div>
-						
-									{formik.touched.password && formik.errors.password ? (
+
+							{formik.touched.password && formik.errors.password ? (
 								<Div>{formik.errors.password}</Div>
 							) : null}
 							<div className='form-group d-flex justify-content-center'>
@@ -163,9 +178,8 @@ const LogIn = () => {
 									onBlur={formik.handleBlur}
 									value={formik.values.password}
 								/>
-									
 							</div>
-					
+
 							<div className='d-flex justify-content-center '>
 								<button
 									type='submit'

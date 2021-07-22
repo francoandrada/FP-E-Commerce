@@ -7,7 +7,7 @@ const {
 
 router.post('/', createCart);
 
-router.get('/', findCart);
+router.post('/userCart', findCart);
 
 
 module.exports = router;

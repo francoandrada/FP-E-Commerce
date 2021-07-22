@@ -1,7 +1,7 @@
 .highlightProdContainer {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: center;
 	background-color: white;
 	margin: 20px;
 	width: 250px;

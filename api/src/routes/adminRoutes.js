@@ -23,7 +23,11 @@ const routerHelper = require('../helpers/routerHelper');
 const tablePagination = require('../Controllers/admin/tablePagination.controller');
 const countOfCategories = require('../Controllers/admin/countCategories.controller');
 const countOfBrand = require('../Controllers/admin/countBrand.controller');
+const getProductOrder = require('../Controllers/admin/getOrders.controller');
+const getUserOrder = require('../Controllers/admin/userOrder.controller');
 // router.get('/', getAllProducts)
+router.post('/userorders', routerHelper(getUserOrder));
+router.post('/listorders', routerHelper(getProductOrder));
 router.get('/categoriescount', routerHelper(countOfCategories));
 router.get('/countofbrand', routerHelper(countOfBrand));
 router.post('/tablepagination', routerHelper(tablePagination));

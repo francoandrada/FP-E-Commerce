@@ -5,7 +5,6 @@ const initialState = {
 };
 
 function userAccountReducer(state = initialState, action) {
-	console.log(action.payload)
 	switch (action.type) {
 		case GET_USER_ORDERS:
 			return {

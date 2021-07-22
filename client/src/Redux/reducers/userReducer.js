@@ -53,6 +53,7 @@ function userReducer(state = initialState, action) {
 				alert: null,
 			};
 		case SUCCESS_LOGIN:
+			// localStorage.removeItem('cart')
 			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
