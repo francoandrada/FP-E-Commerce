@@ -103,16 +103,14 @@ const LogIn = () => {
 		userId: userId,
 		prodId: array,
 	};
-console.log(bodyObject)
+	console.log(bodyObject);
 
 	useEffect(() => {
 		if (authenticated) {
-			 history.goBack();
+			history.goBack();
 			dispatch(postCartUser(bodyObject));
-			
 		}
 	}, [authenticated]);
-
 
 	const formik = useFormik({
 		initialValues: {

@@ -80,7 +80,10 @@ function SubTotal() {
 				{token ? (
 					<button
 						className={style.paymentButton}
-						onClick={() => dispatch(postCart(bodyObject))}
+						// onClick={() => dispatch(postCart(bodyObject))}
+						// onClick={() => {
+						
+						// }
 					>
 						Checkout
 					</button>
