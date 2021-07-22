@@ -1,5 +1,7 @@
 const { User, Order } = require('../../db');
 
+// http://localhost:3001/admin/userorders?page=0 (post);
+
 const userOrder = async (req, res, next) => {
 	let userAndOrders = {};
 	const { limit } = req.body;
