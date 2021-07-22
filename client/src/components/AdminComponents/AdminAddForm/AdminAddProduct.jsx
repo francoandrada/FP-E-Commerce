@@ -8,12 +8,6 @@ import {
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
-
-// import Select from "react-multi-select-component";
-// import swal from 'sweetalert';
-
-// import { createdProduct, getProducts, getCategories, getBrands } from "../../../Redux/actions"
-// import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
@@ -25,7 +19,7 @@ function AddProduct() {
 	const products = useSelector((state) => state.product.allProducts);
 	const brand = useSelector((state) => state.brands.allBrands);
 	const categories = useSelector((state) => state.category.allCategories);
-	// console.log(categories)
+
 	var [cate, setCate] = useState([]);
 
 	const {
@@ -44,8 +38,7 @@ function AddProduct() {
 		setCate((cate = e));
 	}
 	const changeInput = (e) => {
-		//   const value= e.target.value
-		//   const name= e.target.name
+	
 	};
 
 	const submit = (data, e) => {
