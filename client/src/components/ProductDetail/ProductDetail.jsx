@@ -29,29 +29,38 @@ function DetailProduct(props) {
 							<span> Stock: {productDetail.stock} </span>
 							<div className='m-3 d-block'>
 								{productDetail.stock > 0 ? (
-									<div className='m-3'>
-										<ButtonRedOther
-											className='btn btn-outline-danger'
-											type='submit'
-											onClick={() => dispatch(addToCart(productDetail))}
-										>
-											Add to Cart
-										</ButtonRedOther>
-									</div>
+									<>
+										<div class='m-3'>
+											<ButtonRedOther
+												class='btn btn-outline-danger'
+												type='submit'
+												onClick={() => dispatch(addToCart(productDetail))}
+											>
+												Add to Cart
+											</ButtonRedOther>
+										</div>
+										<Link to='/shoppingcart'>
+											<div class='m-3'>
+												<ButtonGreyOther
+													className='btn btn-outline-danger'
+													type='submit'
+													onClick={() => dispatch(addToCart(productDetail))}
+												>
+													Checkout
+												</ButtonGreyOther>
+											</div>
+										</Link>
+									</>
 								) : (
-									<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
+									<>
+										<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
+										<input type='checkbox' />{' '}
+										<label className={styles.label}>
+											{' '}
+											I want to know when it is available
+										</label>
+									</>
 								)}
-								<div className='m-3'>
-								
-										<ButtonGreyOther
-												className='btn btn-outline-danger'
-											type='submit'
-											onClick={() => dispatch(addToCart(productDetail))}
-										>
-											Checkout
-										</ButtonGreyOther>
-								
-								</div>
 							</div>
 						</div>
 					</div>

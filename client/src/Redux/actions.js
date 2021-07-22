@@ -43,12 +43,11 @@ import {
 	GET_PAY,
 	SET_MANUAL_AUTHENTICATION,
 	CREATE_CART_USER,
-	PRODUCT_WITH_ORDER
-
+	PRODUCT_WITH_ORDER,
+	USER_WITH_ORDER,
 } from './actionsName';
 
 import axios from 'axios';
-
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -114,6 +113,11 @@ export const fetchCountOfCategories = (payload) => ({
 	payload,
 });
 
+export const fetchUserWithOrders = (payload) => ({
+	type: USER_WITH_ORDER,
+	payload,
+});
+
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined,
@@ -128,6 +132,21 @@ export function getListOfProductTable(page, object) {
 				object
 			);
 			dispatch(fetchListProducts(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getUserWithOrdersDetail(page, object) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.post(
+				`http://localhost:3001/admin/tablepagination?page=${page}`,
+				object
+			);
+			dispatch(fetchUserWithOrders(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -604,38 +623,36 @@ export function getUserOrders(userId) {
 	};
 }
 
-
-
 export function postCartUser(data) {
-	console.log(data)
+	console.log(data);
 	return async (dispatch) => {
-		try{
-			const res = axios.post('http://localhost:3001/shoppingcart', data)
-			console.log(res)
+		try {
+			const res = axios.post('http://localhost:3001/shoppingcart', data);
+			console.log(res);
 		} catch (error) {
-			console.log(error.response)
+			console.log(error.response);
 		}
-		
 	};
 }
 
 export function getCartUser(id) {
 	return async (dispatch) => {
-		console.log('iiiiidd',id)
+		console.log('iiiiidd', id);
 		try {
-			const res = await axios.post('http://localhost:3001/shoppingcart/userCart', {userId: id});
-			console.log('id',res.data)
+			const res = await axios.post(
+				'http://localhost:3001/shoppingcart/userCart',
+				{ userId: id }
+			);
+			console.log('id', res.data);
 			dispatch({
 				type: CREATE_CART_USER,
-				payload: res.data
-			})
-			
+				payload: res.data,
+			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
-
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
