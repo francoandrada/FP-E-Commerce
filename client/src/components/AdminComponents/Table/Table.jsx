@@ -125,6 +125,7 @@ const Table = () => {
 					>
 						<div className={styles.searchContainer}>
 							<input
+								className={styles.searchbar}
 								type='text'
 								value={searchFilter}
 								placeholder='Search...'

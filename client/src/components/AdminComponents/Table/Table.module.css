@@ -27,6 +27,11 @@
 	flex-direction: row-reverse;
 	margin: 2rem;
 }
+.searchbar{
+	padding: 4px;
+	border-radius: 8px;
+	border: 1px solid rgb(158, 158, 158)
+}
 .btnContainer button{
 	padding: 6px 10px;
 	border-radius: 10px;
