@@ -8,7 +8,7 @@ import { formatNumber } from '../../../helper/priceFormater';
 function CartList({ info, image, name, price, stock, qty }) {
 	const dispatch = useDispatch();
 	const [prodInfo, setProdInfo] = useState(info);
-
+	console.log(qty)
 	function handlePlus() {
 		let plusQuantity = qty
 		if (qty >= stock) {

@@ -20,18 +20,19 @@ const getOrders = async (req, res, next) => {
 	let products = {};
 	const { limit } = req.body;
 	const pageAsNumber = Number.parseInt(req.query.page);
+	const limitToNumber = Number.parseInt(limit);
 
 	let page = 0;
 	if (!Number.isNaN(pageAsNumber) && pageAsNumber >= 0) page = pageAsNumber;
 
 	products = await Product.findAndCountAll({
-		limit,
-		offset: page * limit,
+		limit: limitToNumber,
+		offset: page * limitToNumber,
 		include: { model: OrderDetail },
 	});
 
 	return res.json({
-		totalPages: Math.floor(products.count / limit),
+		totalPages: Math.floor(products.count / limitToNumber),
 		products: products.rows,
 	});
 };

@@ -75,13 +75,20 @@ const Image = styled.section`
     }
 `;
 
-function ProductCartModal({ info, image, name, price, qty }) {
+function ProductCartModal({ info, image, name, price, stock, qty }) {
 	const [productInfo, setProductInfo] = useState(info);
 	const dispatch = useDispatch();
 
+
 	function handlePlus() {
-		setProductInfo(info);
-		dispatch(addToCart(productInfo));
+		let plusQuantity = qty
+		if (qty >= stock) {
+			plusQuantity = stock;
+		} else {
+			plusQuantity = qty + 1;
+			dispatch(adjustQty(info.id, plusQuantity));
+		}
+		
 	}
 
 	function handleMinus() {
