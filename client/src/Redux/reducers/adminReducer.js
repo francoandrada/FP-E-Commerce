@@ -14,7 +14,7 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	FETCH_COUNT_OF_CATEGORIES,
 	PRODUCT_WITH_ORDER,
-	GET_USER_ORDERS,
+	USER_WITH_ORDER,
 } from '../actionsName';
 
 const initialState = {
