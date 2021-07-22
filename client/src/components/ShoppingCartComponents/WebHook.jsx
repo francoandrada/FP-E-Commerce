@@ -25,12 +25,7 @@ console.log(cart)
 				<h5>Details of your purchase</h5>
 				<p>Id: {id}</p>
 				<p>Status: {status}</p>
-				{/* {userPay ? (
-					<>
-						<p>Products: {userPay.description}</p>
-						<p>Buyer: {userPay.pay.email}</p>
-					</>
-				) : null} */}
+
 				<p className=' p-2 bg-secondary'>
 
 					An email has been sent with more info about your purchase

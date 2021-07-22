@@ -7,7 +7,7 @@ import {
 	getBrands,
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import Select from 'react-select';
+// import Select from 'react-select';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
@@ -327,12 +327,12 @@ function AddProduct() {
 						</select>
 
 						<label for='type'>Selected Categories</label>
-						<Select
+						{/* <Select
 							isMulti
 							name='category'
 							options={options}
 							onChange={changeChange}
-						/>
+						/> */}
 					</div>
 
 					<ButtonRed type='submit'> Add </ButtonRed>
