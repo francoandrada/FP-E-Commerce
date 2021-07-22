@@ -10,7 +10,7 @@ export const ButtonRedOther = styled.button`
     font-size: 18px;
     background-color: #FF3C4A;
     &:hover{
-        background-color: #cc242f;
+        background-color: #E1111F;
     } 
 `;
 

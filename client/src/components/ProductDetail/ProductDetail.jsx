@@ -42,15 +42,15 @@ function DetailProduct(props) {
 									<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
 								)}
 								<div className='m-3'>
-									<Link to='/shoppingcart'>
+								
 										<ButtonGreyOther
-											className='btn btn-secondary'
+												className='btn btn-outline-danger'
 											type='submit'
 											onClick={() => dispatch(addToCart(productDetail))}
 										>
 											Checkout
 										</ButtonGreyOther>
-									</Link>
+								
 								</div>
 							</div>
 						</div>
