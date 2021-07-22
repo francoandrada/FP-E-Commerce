@@ -40,8 +40,6 @@ const createOrder = async function createOrder(req, res) {
 						}
 						await order.addOrderDetail(newDetail.dataValues.id);
 
-						// User.hasMany(Order, { foreignKey: 'userId' });
-						// Order.belongsTo(User, { foreignKey: 'userId' });
 						var userFind = await User.findOne({
 							where: { userId: id },
 						});
@@ -56,13 +54,8 @@ const createOrder = async function createOrder(req, res) {
 				});
 		});
 
-		// res.status(200).json('Order created successfully!', productFind);
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
-		// [
-		// 	{ prodId: 5, price: 17399, qty: 3 },
-		// 	{ prodId: 1, price: 99999, qty: 2 },
-		// ];
 
 		let preference = {
 			items: prodCarrito.map((i) => ({
