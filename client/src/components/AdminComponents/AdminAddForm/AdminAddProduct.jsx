@@ -74,23 +74,25 @@ function AddProduct() {
 			data.brandId &&
 			data.brandId.length > 0
 		) {
-			dispatch(createdProduct(data));
-			e.target.reset();
-			swal({
-				title: 'Product Created!!',
-				icon: 'success',
-				button: 'ok',
-				timer: '5000',
-			}).then(() => dispatch(getProducts()));
 
+			dispatch(createdProduct(data))
+			e.target.reset()
+			swal({
+				title: "Product Created!!",
+				icon: "success",
+				button: "ok",
+				timer: "5000"
+			})
+				.then(() => dispatch(getProducts()))
 			reset({ data });
 		} else {
 			swal({
-				title: 'All fields are required',
-				icon: 'error',
-				button: 'ok',
-				timer: '5000',
-			});
+				title: "All fields are required",
+				icon: "error",
+				button: "ok",
+				timer: "5000"
+			})
+
 		}
 	};
 

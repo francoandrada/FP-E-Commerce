@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect /* useState */ } from 'react';
 import { modifyCateogry } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from '../../Register/Register.module.css';
 import { MdArrowBack } from 'react-icons/md';
@@ -36,7 +36,7 @@ function PutCategory(props) {
 		console.log(data);
 		for (let i = 0; i < nameCategory.length; i++) {
 			if (nameCategory[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return swal({
+				return Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -47,7 +47,7 @@ function PutCategory(props) {
 		if (data.name && data.name.length > 0) {
 			dispatch(modifyCateogry(data));
 			e.target.reset();
-			swal({
+			Swal({
 				title: 'Category modificada!!',
 				icon: 'success',
 				button: 'ok',
@@ -57,7 +57,7 @@ function PutCategory(props) {
 
 			reset({ data });
 		} else {
-			swal({
+			Swal({
 				title: 'Debe ingresar Category',
 				icon: 'error',
 				button: 'ok',

@@ -7,7 +7,7 @@ export const COLUMNS = [
 		Cell: (row) => {
 			return (
 				<div>
-					<img width={50} src={row.row.original.image} />
+					<img width={50} src={row.row.original.image} alt='' />
 				</div>
 			);
 		},

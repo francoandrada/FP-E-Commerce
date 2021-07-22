@@ -19,6 +19,13 @@
     padding: 10px;
 }
 
+.selectedOptionCabecera{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
 
 /* ----- Orders Panel Styles ----- */
 
