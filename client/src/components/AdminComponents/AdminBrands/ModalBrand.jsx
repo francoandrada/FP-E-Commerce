@@ -44,7 +44,7 @@ function ModalBrand() {
 		console.log(data);
 		for (let i = 0; i < allBrands.length; i++) {
 			if (allBrands[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return Swal({
+				return new Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -55,7 +55,7 @@ function ModalBrand() {
 		if (data.name && data.name.length > 0) {
 			dispatch(createdBrand(data));
 			e.target.reset();
-			Swal({
+			new Swal({
 				title: 'Brand Created!!',
 				icon: 'success',
 				button: 'ok',
@@ -64,7 +64,7 @@ function ModalBrand() {
 
 			reset({ data });
 		} else {
-			Swal({
+			new Swal({
 				title: 'Require Brand',
 				icon: 'error',
 				button: 'ok',
