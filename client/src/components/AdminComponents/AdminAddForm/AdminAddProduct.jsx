@@ -7,11 +7,8 @@ import {
 	getBrands,
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
-
 import Select from 'react-select';
-// import swal from 'sweetalert';
-import Swal from 'sweetalert2';
-
+import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
 import { MdArrowBack } from 'react-icons/md';
@@ -22,7 +19,7 @@ function AddProduct() {
 	const products = useSelector((state) => state.product.allProducts);
 	const brand = useSelector((state) => state.brands.allBrands);
 	const categories = useSelector((state) => state.category.allCategories);
-	// console.log(categories)
+
 	var [cate, setCate] = useState([]);
 
 	const {
@@ -41,8 +38,7 @@ function AddProduct() {
 		setCate((cate = e));
 	}
 	const changeInput = (e) => {
-		//   const value= e.target.value
-		//   const name= e.target.name
+	
 	};
 
 	const submit = (data, e) => {
@@ -50,7 +46,7 @@ function AddProduct() {
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return Swal({
+				return swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -81,7 +77,7 @@ function AddProduct() {
 
 			dispatch(createdProduct(data))
 			e.target.reset()
-			Swal({
+			swal({
 				title: "Product Created!!",
 				icon: "success",
 				button: "ok",
@@ -90,7 +86,7 @@ function AddProduct() {
 				.then(() => dispatch(getProducts()))
 			reset({ data });
 		} else {
-			Swal({
+			swal({
 				title: "All fields are required",
 				icon: "error",
 				button: "ok",
