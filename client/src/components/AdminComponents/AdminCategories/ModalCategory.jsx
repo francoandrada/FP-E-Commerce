@@ -87,44 +87,46 @@ function ModalCategory() {
                     Add Category
                 </ModalHeader>
 
-                <ModalBody>
-                    <FormGroup
-                        className=""
-                        onChange={(e) => changeInput(e)}
-                        onSubmit={handleSubmit(submit)}>
-                            
-                        <Label for='name'> Name: </Label>
-                        <Input className=""
-                            type="text"
-                            name="name"
-                            id='name'
-                            onChange={(e) => changeInput(e)}
-                            {...register("name", {
-                                // required:{
-                                //     value: true,
-                                //     massage: "debe ingresar un nombre"
-                                // },
-                                maxLength: {
-                                    value: 20,
-                                    massage: "menos de 20 caracteres"
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: "mas de 3 caracteres"
-                                },
-                                pattern: {
-                                    value: /^[a-zA-Z ]*$/,
-                                    message: "no debe ingresar numeros"
-                                }
-                            })}
-                        />
-                    </FormGroup>
-                </ModalBody>
+                <form className=""
+                    onChange={(e) => changeInput(e)}
+                    onSubmit={handleSubmit(submit)}>
+                    <ModalBody>
+                        <FormGroup>
 
-                <ModalFooter>
-                    <Button type='submit'> Add </Button>
-                    <Button onClick={openModal}> Close </Button>
-                </ModalFooter>
+
+                            <Label for='name'> Name: </Label>
+                            <Input className=""
+                                type="text"
+                                name="name"
+                                id='name'
+                                onChange={(e) => changeInput(e)}
+                                {...register("name", {
+                                    // required:{
+                                    //     value: true,
+                                    //     massage: "debe ingresar un nombre"
+                                    // },
+                                    maxLength: {
+                                        value: 20,
+                                        massage: "menos de 20 caracteres"
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: "mas de 3 caracteres"
+                                    },
+                                    pattern: {
+                                        value: /^[a-zA-Z ]*$/,
+                                        message: "no debe ingresar numeros"
+                                    }
+                                })}
+                            />
+                        </FormGroup>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button type='submit'> Add </Button>
+                        <Button onClick={openModal}> Close </Button>
+                    </ModalFooter>
+                </form>
             </Modal>
         </>
     )
