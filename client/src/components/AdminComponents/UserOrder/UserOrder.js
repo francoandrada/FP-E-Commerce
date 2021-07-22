@@ -1,4 +1,21 @@
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserWithOrdersDetail } from '../../../Redux/actions';
+
 const UserOrder = () => {
+	const dispatch = useDispatch();
+	const { userWithOrder } = useSelector((state) => state.admin);
+
+	React.useEffect(() => {
+		dispatch(getUserWithOrdersDetail(0, { limit: 5 }));
+	}, [dispatch]);
+
+	userWithOrder &&
+		console.info(
+			'🔥[FileName: UserOrder.js]🕹️[LineNumber: 13]❓[VariableName: userWithOrder]:',
+			userWithOrder
+		);
+
 	return <div>UserOrder</div>;
 };
 
