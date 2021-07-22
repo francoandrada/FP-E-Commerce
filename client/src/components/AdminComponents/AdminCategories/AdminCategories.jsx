@@ -8,6 +8,7 @@ import { IoMdAddCircle } from 'react-icons/io';
 
 import styles from './AdminCategories.module.css';
 import { Link } from 'react-router-dom';
+import ModalCategory from './ModalCategory';
 function AdminCategories() {
 	const allCategories = useSelector((state) => state.category.allCategories);
 	const dispatch = useDispatch();
@@ -36,12 +37,13 @@ function AdminCategories() {
 				</div>
 				<div className={styles.categoriesContainer}>
 					<div className={styles.btnContainer}>
-						<Link to='/admin/addcategory'>
+						<ModalCategory />
+						{/* <Link to='/admin/addcategory'>
 							<button>
 								{' '}
 								<IoMdAddCircle className={styles.btnAdd} /> Add Category{' '}
 							</button>
-						</Link>
+						</Link> */}
 					</div>
 					{/* <h1> Categories </h1> */}
 					<table className='table'>
