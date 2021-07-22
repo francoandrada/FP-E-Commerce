@@ -44,7 +44,7 @@ function ModalCategory() {
         console.log(data)
         for (let i = 0; i < nameCategory.length; i++) {
             if (nameCategory[i].name.toLowerCase() === data.name.toLowerCase()) {
-                return Swal({
+                return new Swal({
                     title: 'Existing name',
                     icon: 'warning',
                     button: 'ok',
@@ -55,7 +55,7 @@ function ModalCategory() {
         if (data.name && data.name.length > 0) {
             dispatch(createdCategory(data))
             e.target.reset()
-            Swal({
+            new Swal({
                 title: "Category Created!!",
                 icon: "success",
                 button: "ok",
@@ -66,7 +66,7 @@ function ModalCategory() {
             reset({ data })
 
         } else {
-            Swal({
+            new Swal({
                 title: "Require name Category",
                 icon: "error",
                 button: "ok",
