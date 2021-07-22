@@ -6,17 +6,25 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from '../../Register/Register.module.css';
 import { MdArrowBack } from 'react-icons/md';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap'
+import {MdModeEdit} from 'react-icons/md'
 
 function PutBrand(props) {
 	const dispatch = useDispatch();
 	const brands = useSelector((state) => state.brands.allBrands);
 	console.log(brands);
-	var id = props.match.params.id;
+	var id = props.brand;
 	useEffect(() => {
 		//  dispatch(getBrands())
 		//  dispatch(getCategories())
 		//  dispatch(getProducts())
 	}, [dispatch]);
+
+	const [Active, setActive] = useState(false)
+
+	const openModal = () => {
+		setActive(!Active);
+	}
 
 	const {
 		register,
@@ -92,12 +100,56 @@ function PutBrand(props) {
 
 	return (
 		<div>
-			<div className={styles.btnBackContainer}>
+			<Button onClick={openModal}> <MdModeEdit /></Button>
+			<Modal isOpen={Active}>
+				<ModalHeader>
+					Edit Brand
+				</ModalHeader>
+				<form className=''
+				onChange={(e) => changeInput(e)}
+				onSubmit={handleSubmit(submit)}>
+					<ModalBody>
+						<FormGroup>
+							<Label> New Name Brand </Label>
+							<Input className=''
+					type='text'
+					name='name'
+					autoComplete='off'
+					onChange={(e) => changeInput(e)}
+					{...register('name', {
+						// required:{
+						//     value: true,
+						//     massage: "debe ingresar un nombre"
+						// },
+						maxLength: {
+							value: 20,
+							massage: 'menos de 20 caracteres',
+						},
+						minLength: {
+							value: 3,
+							message: 'mas de 3 caracteres',
+						},
+						pattern: {
+							value: /^[a-zA-Z ]*$/,
+							message: 'no debe ingresar numeros',
+						},
+					})}/>
+						</FormGroup>
+
+					</ModalBody>
+
+					<ModalFooter>
+					<Button type='submit'> Confirm </Button>
+					<Button onClick={openModal}> Close </Button>
+					</ModalFooter>
+				</form>
+			</Modal>
+			{/* <div className={styles.btnBackContainer}>
 				<Link to='/admin/categories'>
 					<MdArrowBack />
 				</Link>
-			</div>
-			<form
+			</div> */}
+			{/* <form
 				className=''
 				onChange={(e) => changeInput(e)}
 				onSubmit={handleSubmit(submit)}
@@ -125,9 +177,9 @@ function PutBrand(props) {
 				></input>
 				<span>{errors?.name?.message}</span>
 
-				{/* <ButtonGrey type="submit">Modificar</ButtonGrey> */}
+				{/* <ButtonGrey type="submit">Modificar</ButtonGrey> 
 				<button type='submit'>Change</button>
-			</form>
+			</form> */}
 		</div>
 	);
 }

@@ -7,6 +7,8 @@ import styles from '../AdminCategories/AdminCategories.module.css';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoMdAddCircle } from 'react-icons/io';
+import ModalBrand from './ModalBrand';
+import PutBrand from '../adminPutForm/putBrand';
 // import { AiOutlineRetweet } from 'react-icons/ai';
 function AdminBrands() {
 	const dispatch = useDispatch();
@@ -38,11 +40,7 @@ function AdminBrands() {
 				</div>
 				<div className={styles.categoriesContainer}>
 					<div className={styles.btnContainer}>
-						<Link to='/admin/addcategory'>
-							<button>
-								<IoMdAddCircle className={styles.btnAdd} /> Add Brand{' '}
-							</button>
-						</Link>
+						<ModalBrand/>
 					</div>
 					<table className='table'>
 						<thead>
@@ -64,11 +62,7 @@ function AdminBrands() {
 										<td>{c.name}</td>
 										<td>
 											<div>
-												<Link /*key={c.id}*/ to={`/admin/putbrands/${c.id}`}>
-													<button className={styles.btnEdit}>
-														<MdModeEdit title='Edit' />
-													</button>
-												</Link>
+											<PutBrand brand={c.id}/>
 												<button
 													className={styles.btnDelete}
 													onClick={(e) => deleteBrandHandle(e, c.id)}
