@@ -44,7 +44,7 @@ function PutBrand(props) {
 		console.log(data);
 		for (let i = 0; i < brands.length; i++) {
 			if (brands[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return Swal({
+				return new Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -55,7 +55,7 @@ function PutBrand(props) {
 		if (data.name && data.name.length > 0) {
 			dispatch(modifyBrand(data));
 			e.target.reset();
-			Swal({
+			new Swal({
 				title: 'Brand Modified!!',
 				icon: 'success',
 				button: 'ok',
@@ -64,7 +64,7 @@ function PutBrand(props) {
 			// .then(()=> dispatch(getProducts()))
 			reset({ data });
 		} else {
-			Swal({
+			new Swal({
 				title: 'Require Brand',
 				icon: 'error',
 				button: 'ok',
