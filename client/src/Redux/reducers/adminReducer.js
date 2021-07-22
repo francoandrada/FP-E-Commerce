@@ -14,6 +14,7 @@ import {
 	FETCH_COUNT_OF_BRAND,
 	FETCH_COUNT_OF_CATEGORIES,
 	PRODUCT_WITH_ORDER,
+	USER_WITH_ORDER,
 } from '../actionsName';
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
 	brandCount: undefined,
 	categoriesCount: undefined,
 	productWithOrder: undefined,
+	userWithOrder: undefined,
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -115,6 +117,12 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				...state,
 				pending: false,
 				productWithOrder: payload,
+			};
+		case USER_WITH_ORDER:
+			return {
+				...state,
+				pending: false,
+				userWithOrder: payload,
 			};
 		default:
 			return state;

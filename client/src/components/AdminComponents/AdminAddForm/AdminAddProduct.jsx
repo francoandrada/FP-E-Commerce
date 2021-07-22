@@ -37,9 +37,7 @@ function AddProduct() {
 	function changeChange(e) {
 		setCate((cate = e));
 	}
-	const changeInput = (e) => {
-	
-	};
+	const changeInput = (e) => {};
 
 	const submit = (data, e) => {
 		data.category = cate.map((x) => x.value);
@@ -74,25 +72,22 @@ function AddProduct() {
 			data.brandId &&
 			data.brandId.length > 0
 		) {
-
-			dispatch(createdProduct(data))
-			e.target.reset()
+			dispatch(createdProduct(data));
+			e.target.reset();
 			Swal({
-				title: "Product Created!!",
-				icon: "success",
-				button: "ok",
-				timer: "5000"
-			})
-				.then(() => dispatch(getProducts()))
+				title: 'Product Created!!',
+				icon: 'success',
+				button: 'ok',
+				timer: '5000',
+			}).then(() => dispatch(getProducts()));
 			reset({ data });
 		} else {
 			Swal({
-				title: "All fields are required",
-				icon: "error",
-				button: "ok",
-				timer: "5000"
-			})
-
+				title: 'All fields are required',
+				icon: 'error',
+				button: 'ok',
+				timer: '5000',
+			});
 		}
 	};
 
