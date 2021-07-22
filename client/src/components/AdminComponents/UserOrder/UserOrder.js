@@ -10,10 +10,34 @@ const UserOrder = () => {
 		dispatch(getUserWithOrdersDetail(0, { limit: 5 }));
 	}, [dispatch]);
 
+	const mapData = (array) => {
+		const data =
+			array &&
+			array.map((u) => {
+				return {
+					id: u?.orders[0]?.userId,
+					name: u?.name,
+					surname: u?.surname,
+					email: u?.email,
+					orderId: u?.orders[0]?.orderId,
+					ammount: u?.orders[0]?.ammount,
+					date: u?.orders[0]?.createdAt,
+					status: u?.orders[0]?.status,
+				};
+			});
+		return data;
+	};
+
 	userWithOrder &&
 		console.info(
-			'🔥[FileName: UserOrder.js]🕹️[LineNumber: 13]❓[VariableName: userWithOrder]:',
+			'🔥[FileName: UserOrder.js]🕹️[LineNumber: 31]❓[VariableName: userWithOrder]:',
 			userWithOrder
+		);
+
+	userWithOrder &&
+		console.info(
+			'🔥[FileName: UserOrder.js]🕹️[LineNumber: 37]❓[VariableName: mapData(userWithOrder?.products)]:',
+			mapData(userWithOrder?.products)
 		);
 
 	return <div>UserOrder</div>;
