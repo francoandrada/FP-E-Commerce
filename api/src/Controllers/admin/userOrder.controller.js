@@ -20,12 +20,11 @@ const userOrder = async (req, res, next) => {
 				model: User,
 				where: {
 					name: {
-						[Op.ilike]: `%${search.toLowerCase()}%`,
+						[Op.iLike]: `%${search.toLowerCase()}%`,
 					},
 				},
 			},
 		});
-
 		return res.json({
 			message: 'here',
 			totalPages: Math.floor(userAndOrders.count / limitToNumber),
