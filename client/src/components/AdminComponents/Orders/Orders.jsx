@@ -16,15 +16,19 @@ const Orders = () => {
 	const mapData = (array) => {
 		const data =
 			array &&
-			array.map((p) => {
+			array.map((o) => {
 				return {
-					id: p?.id,
-					name: p?.name || 'No Name',
-					detailId: p?.orderDetails[0]?.id || '--',
-					price: p?.orderDetails[0]?.price || '--',
-					quantity: p?.orderDetails[0]?.quantity || '--',
-					orderId: p?.orderDetails[0]?.orderId || '--',
-					createdAt: p?.orderDetails[0]?.createdAt || '--',
+					id: o?.id || '--',
+					orderId: o?.orderId || '--',
+					price: o?.price || '--',
+					quantity: o?.quantity || '--',
+					createdAt: o?.createdAt || '--',
+					updatedAt: o?.updatedAt || '--',
+					productId: o?.product?.id || '--',
+					name: o?.product?.name || '--',
+					price: o?.product?.price || '--',
+					priceSpecial: o?.product?.priceSpecial || '--',
+					stock: o?.product?.stock || '--',
 				};
 			});
 		return data;
