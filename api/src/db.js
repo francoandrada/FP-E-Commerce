@@ -34,7 +34,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, Role, User, Category, Brand, Order, OrderDetail, Cart } =
+const { Product, Role, User, Category, Brand, Order, OrderDetail, Cart, Review } =
 	sequelize.models;
 
 Role.hasMany(User, { foreignKey: 'roleId' });
@@ -74,17 +74,30 @@ Category.belongsToMany(Product, {
 Brand.hasMany(Product, { foreignKey: 'brandId' });
 Product.belongsTo(Brand, { foreignKey: 'brandId' });
 
-Product.belongsToMany(User, {
-	through: 'review',
-	foreignKey: 'productId',
-});
-User.belongsToMany(Product, {
-	through: 'review',
-	foreignKey: 'userId',
-});
 
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
+
+
+// Product.belongsToMany(User, {
+// 	through: 'review',
+// 	foreignKey: 'productId',
+// });
+// User.belongsToMany(Product, {
+// 	through: 'review',
+// 	foreignKey: 'userId',
+// });
+
+
+// 1---------------> N
+// User -----------> Review
+User.hasMany(Review, {foreignKey: 'userId'});
+Review.belongsTo(Product, {foreignKey: 'userId'});
+// 1---------------> N
+// Product -----------> Review
+Product.hasMany(Review, {foreignKey: 'productId'});
+Review.belongsTo(Product, {foreignKey: 'productId'});
+
 
 module.exports = {
 	...sequelize.models,

@@ -15,7 +15,7 @@ const initialState = {
 	currentItem: null,
 	link: '',
 	userPay: null,
-	address: '',
+	address: null,
 	ammount: 0,
 };
 
@@ -63,6 +63,7 @@ function cartReducer(state = initialState, action) {
 				currentItem: action.payload,
 			};
 		case SET_CART:
+			
 			return {
 				...state,
 				link: action.payload,

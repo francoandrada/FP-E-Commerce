@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import Button from '../StyledComponents/ButtonRedOther';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { postCart, saveAddress, saveAmmount } from '../../Redux/actions';
+import { postCart, saveAddress } from '../../Redux/actions';
 
 const Text = styled.p`
 	font-size: 1.5rem;
@@ -47,47 +47,16 @@ const GmapCanvas = styled.div`
 	width:337px;
 `;
 const Shipping = () => {
-	const dispatch = useDispatch();
-
-	const [options, setOptions] = useState('');
-
-	const formik = useFormik({
-		initialValues: {
-			address: '',
-			city: '',
-			province: '',
-			zipCode: '',
-		},
-		validationSchema: Yup.object({
-			address: Yup.string().required(),
-			city: Yup.string().required(),
-			province: Yup.string().required(),
-			zipCode: Yup.string().required(),
-		}),
-		onSubmit: (values) => {
-			if (options === 'ship') {
-				console.log(values);
-				dispatch(saveAddress(values));
-			} else if (options === 'pick') {
-				dispatch(saveAddress(null));
-			}
-			dispatch(postCart(bodyObject))
-		},
-	});
-
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const address = useSelector((state) => state.cart.address);
 	const ammount = useSelector((state) => state.cart.ammount);
 	const mercadoPago = useSelector((state) => state.cart.link);
-	
+
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
 	}
 
-	console.log('AMOUNTTT', ammount)
 	const userId = useSelector((state) => state.user.userData.userId);
-
-
 
 	let array = [];
 
@@ -103,17 +72,49 @@ const Shipping = () => {
 	}
 
 	let bodyObject;
+
+	const dispatch = useDispatch();
+
+	const [options, setOptions] = useState('');
+
+
+	const formik = useFormik({
+		initialValues: {
+			address: '',
+			city: '',
+			province: '',
+			zipCode: '',
+		},
+		validationSchema: Yup.object({
+			address: Yup.string().required(),
+			city: Yup.string().required(),
+			province: Yup.string().required(),
+			zipCode: Yup.string().required(),
+		}),
+		onSubmit: (values) => {
+			if (options === 'pick') {
+				dispatch(saveAddress(null));
+			}
+			if (options === 'ship') {
+				dispatch(saveAddress(values));
+			}
+
+			setTimeout(() => {
+				dispatch(postCart(bodyObject))
+			}, 4000);
+		},
+	});
+
+
 	if (userId != null) {
 		bodyObject = {
 			id: userId,
 			prodCarrito: array,
 			status: 'created',
 			address: address,
-			ammount: ammount
+			ammount: ammount,
 		};
 	}
-	//ammount, status, address, prodCarrito, id
-	console.log(bodyObject);
 
 	return (
 		<div className=' d-flex justify-content-center rounded p-5 w-100 h-100'>
@@ -216,7 +217,10 @@ const Shipping = () => {
 								</div>
 							</div>
 							<div className='d-flex justify-content-center m-3'>
-								<Button className=' btn btn-primary' type='submit'>
+								<Button
+									className=' btn btn-primary'
+									type='submit'
+								>
 									Continue
 								</Button>
 							</div>

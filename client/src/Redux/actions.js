@@ -140,12 +140,13 @@ export function getListOfProductTable(page, object) {
 	};
 }
 
+// http://localhost:3001/admin/usersandhisorders?page=0 (post);
 export function getUserWithOrdersDetail(page, object) {
 	return async (dispatch) => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
-				`http://localhost:3001/admin/tablepagination?page=${page}`,
+				`http://localhost:3001/admin/usersandhisorders?page=${page}`,
 				object
 			);
 			dispatch(fetchUserWithOrders(res.data));
@@ -574,7 +575,7 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		console.log(data);
+		console.log('dataaa',data);
 
 		try {
 			const res = await axios.post(
@@ -582,7 +583,6 @@ export function postCart(data) {
 				data
 			);
 
-			console.log(res.data);
 
 			dispatch({
 				type: SET_CART,
@@ -657,6 +657,7 @@ export function getCartUser(id) {
 }
 
 export function saveAddress(address) {
+	console.log(address)
 	return async (dispatch) => {
 		dispatch({
 			type: SAVE_ADDRESS_ORDER,

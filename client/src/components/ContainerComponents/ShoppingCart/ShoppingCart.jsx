@@ -3,18 +3,7 @@ import { NavLink } from 'react-router-dom';
 import CartList from '../../ShoppingCartComponents/CartList/CartList';
 import SubTotal from '../../ShoppingCartComponents/SubTotal/SubTotal';
 import style from './ShoppingCart.module.css';
-import Shipping from '../../ShoppingCartComponents/Shipping';
-import Button from '../../StyledComponents/ButtonRedOther';
-import {
-	Modal,
-	ModalHeader,
-	ModalBody,
-	ModalFooter,
-	FormGroup,
-	Label,
-	Input,
-} from 'reactstrap';
-import { useState } from 'react';
+
 
 function ShoppingCart() {
 	const userInfo = useSelector((state) => state.user);

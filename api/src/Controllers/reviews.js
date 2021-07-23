@@ -4,26 +4,29 @@ const { Review, User, Product } = require('../db');
 const newReview = async function newReview(req, res) {
 	try {
 		const { userId, productId, description, stars } = req.body;
-
-		const userReview = await User.findOne({
-			where: {
-				userId,
-			},
-		});
-		if (userReview) {
-			var response = await userReview.addReview({
-				through: {
-					description,
+		console.log(req.body);
+	
+			var response = await Review.create(
+				{
+					description: description,
 					stars,
-					userId,
-					productId,
+				},
+				{
+					fields: ['description', 'stars', userId, productId],
+				}
+			)
+			const userReview = await User.findOne({
+				where: {
+					userId: userId,
 				},
 			});
-		}
+			if (userReview) {
+				await response.setUser(userReview.dataValues.userId);
+			}
 
 		res.status(200).json(response);
 	} catch (error) {
-		res.send(error);
+		console.log(error);
 	}
 };
 //-----------------------------------
@@ -55,8 +58,6 @@ const newReview = async function newReview(req, res) {
 // 		res.send(error);
 // 	}
 // };
-
-
 
 const getAllReviews = async function getAllReviews(req, res) {
 	try {

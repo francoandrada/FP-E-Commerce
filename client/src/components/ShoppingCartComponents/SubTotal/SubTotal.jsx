@@ -32,7 +32,10 @@ function SubTotal({address}) {
 
 		setTotalItems(items);
 		setTotalPrice(price);
+		
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
+
+
 
 	let totalFormat = formatNumber.new(totalPrice, '$');
 	dispatch(saveAmmount(totalPrice))

@@ -9,8 +9,14 @@ const WebHook = () => {
 	const status = new URLSearchParams(search).get('collection_status');
 	const userData = useSelector((state) => state.user.userData);
 	const cart = useSelector((state) => state.cart.cart);
-console.log(cart)
+
+	
 	const dispatch = useDispatch();
+
+	
+		localStorage.removeItem('cart');
+
+		
 
 	useEffect(() => {
 		dispatch(getPayInfo({id, email: userData.email, items: cart} ));

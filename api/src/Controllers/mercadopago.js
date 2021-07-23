@@ -6,7 +6,7 @@ const { Order, OrderDetail, Product, User } = require('../db');
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, address, prodCarrito, id } = req.body;
 
-	console.log('ADDRESSSS', JSON.stringify(address));
+	console.log('ADDRESSSS', req.body);
 
 	try {
 		await Order.create(
