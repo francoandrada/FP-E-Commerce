@@ -15,6 +15,8 @@ import {
 	FETCH_COUNT_OF_CATEGORIES,
 	PRODUCT_WITH_ORDER,
 	USER_WITH_ORDER,
+	TABLE_ORDER_PAGINATION_SIZE,
+	TABLE_USER_ORDER_PAGINATION_SIZE,
 } from '../actionsName';
 
 const initialState = {
@@ -34,6 +36,8 @@ const initialState = {
 	categoriesCount: undefined,
 	productWithOrder: undefined,
 	userWithOrder: undefined,
+	tableOrderPaginationSize: 5,
+	tableOrderUserPaginationSize: 5,
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -123,6 +127,16 @@ function adminReducer(state = initialState, { type, payload, error }) {
 				...state,
 				pending: false,
 				userWithOrder: payload,
+			};
+		case TABLE_ORDER_PAGINATION_SIZE:
+			return {
+				...state,
+				tableOrderPaginationSize: payload,
+			};
+		case TABLE_USER_ORDER_PAGINATION_SIZE:
+			return {
+				...state,
+				tableOrderUserPaginationSize: payload,
 			};
 		default:
 			return state;

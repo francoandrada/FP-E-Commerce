@@ -1,17 +1,23 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductWithOrderData } from '../../../Redux/actions';
+import {
+	getProductWithOrderData,
+	changeTableOrderPaginationSize,
+} from '../../../Redux/actions';
+import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
-import COLUMNS from './columns';
+import Select from '../../Select/Select';
 
 const Orders = () => {
 	const dispatch = useDispatch();
-	const { productWithOrder } = useSelector((state) => state.admin);
+	const { productWithOrder, tableOrderPaginationSize } = useSelector(
+		(state) => state.admin
+	);
 
 	React.useEffect(() => {
-		dispatch(getProductWithOrderData(0, { limit: 5 }));
-	}, [dispatch]);
+		dispatch(getProductWithOrderData(0, { limit: tableOrderPaginationSize }));
+	}, [dispatch, tableOrderPaginationSize]);
 
 	const mapData = (array) => {
 		const data =
@@ -36,8 +42,21 @@ const Orders = () => {
 
 	const dataToPrint = mapData(productWithOrder?.products);
 
+	const paginationSizeHandle = (event) => {
+		event.preventDefault();
+		dispatch(changeTableOrderPaginationSize(event.target.value));
+	};
+
 	return (
 		<div>
+			<div>
+				<Select
+					initialValue={tableOrderPaginationSize}
+					onChange={paginationSizeHandle}
+					values={[5, 10, 20, 50, 100]}
+				/>
+			</div>
+
 			{productWithOrder ? (
 				<Table dataToPrint={dataToPrint} formatColumn={COLUMNS} />
 			) : (
