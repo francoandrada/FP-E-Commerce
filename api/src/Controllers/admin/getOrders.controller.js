@@ -1,14 +1,5 @@
 const { OrderDetail, Product } = require('../../db');
 
-/*
-	Order attributes
-		+ orderId: integer
-		+ ammount: integer
-		+ status: emun
-			- defaultValue: processing
-			- [created, processing, cancelled, completed]
-*/
-
 // http://localhost:3001/admin/listorders?page=1
 /*
 	body {
@@ -25,10 +16,10 @@ const getOrders = async (req, res, next) => {
 	let page = 0;
 	if (!Number.isNaN(pageAsNumber) && pageAsNumber >= 0) page = pageAsNumber;
 
-	products = await Product.findAndCountAll({
+	products = await OrderDetail.findAndCountAll({
 		limit: limitToNumber,
 		offset: page * limitToNumber,
-		include: { model: OrderDetail },
+		include: { model: Product },
 	});
 
 	return res.json({
