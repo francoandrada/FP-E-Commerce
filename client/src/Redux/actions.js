@@ -45,12 +45,30 @@ import {
 	CREATE_CART_USER,
 	PRODUCT_WITH_ORDER,
 	USER_WITH_ORDER,
+	TABLE_ORDER_PAGINATION_SIZE,
+	TABLE_USER_ORDER_PAGINATION_SIZE,
+	FILTER_BY_ORDER_STATUS,
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const filterByStatus = (payload) => ({
+	type: FILTER_BY_ORDER_STATUS,
+	payload,
+});
+
+export const changeTableOrderPaginationSize = (payload) => ({
+	type: TABLE_ORDER_PAGINATION_SIZE,
+	payload,
+});
+
+export const changeTableOrderUserPaginationSize = (payload) => ({
+	type: TABLE_USER_ORDER_PAGINATION_SIZE,
 	payload,
 });
 

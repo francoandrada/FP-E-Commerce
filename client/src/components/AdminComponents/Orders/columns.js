@@ -4,11 +4,15 @@ const columns = [
 		columns: [
 			{
 				Header: 'Id',
-				accessor: 'id',
+				accessor: 'productId',
 			},
 			{
 				Header: 'Product Name',
 				accessor: 'name',
+			},
+			{
+				Header: 'Stock',
+				accessor: 'stock',
 			},
 		],
 	},
@@ -16,11 +20,15 @@ const columns = [
 		Header: 'Order Details',
 		columns: [
 			{
-				Header: 'Id',
-				accessor: 'detailId',
+				Header: 'Order Id',
+				accessor: 'orderId',
 			},
 			{
-				Header: 'Price',
+				Header: 'Id',
+				accessor: 'id',
+			},
+			{
+				Header: 'Price (U)',
 				accessor: 'price',
 			},
 			{
@@ -28,12 +36,12 @@ const columns = [
 				accessor: 'quantity',
 			},
 			{
-				Header: 'Order Id',
-				accessor: 'orderId',
+				Header: 'Created At',
+				accessor: 'createdAt',
 			},
 			{
-				Header: 'Date',
-				accessor: 'createdAt',
+				Header: 'Updated At',
+				accessor: 'updatedAt',
 			},
 		],
 	},
