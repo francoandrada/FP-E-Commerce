@@ -204,7 +204,7 @@ export function getCountOfBrand() {
 		}
 	};
 }
-////
+
 export function getOrderDetails(id) {
 	return async (dispatch) => {
 		try {
