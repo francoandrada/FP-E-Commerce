@@ -1,5 +1,10 @@
 const Coinpayments = require('coinpayments');
 const { response } = require('express');
+const { Sequelize } = require('sequelize');
+const { Order, OrderDetail, Product, User } = require('../db');
+const axios = require('axios');
+
+
 const { COINPAYMENT_API_PUBLIC, COINPAYMENT_API_SECRET, COINPAYMENT_MERCHAND_ID } = process.env;
 
 const CoinpaymentsCredentials = {
@@ -65,20 +70,79 @@ const getCoinRates = async (req, res) => {
 };
 
 //Get POS.
-// const createPos = async (req, res) => {
-//     const {amount} = req.body
+const createPos = async (req, res) => {
+    const {amount} = req.body
 
-//     const pos = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=${COINPAYMENT_MERCHAND_ID}&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${amount}`
-// 	const rates = await client.rates(CoinpaymentsRatesOpts);
-//     console.log(rates);
-// 	res.json(rates);
-// };
+    const pos = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=${COINPAYMENT_MERCHAND_ID}&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${amount}`
+	const rates = await client.rates(CoinpaymentsRatesOpts);
+    console.log(rates);
+	res.json(rates);
+};
 
+
+//---------------ACA CREAMOS LA ORDEN------------------
+const createOrderCrypto = async function createOrderCrypto(req, res) {
+	const { ammount, status, prodCarrito, id } = req.body;
+    console.log(req.body)
+
+	try {
+		var newOrder = await Order.create(
+			{
+				ammount,
+				status,
+			},
+			{
+				fields: ['ammount', 'status'],
+			}
+		).then((order) => {
+			prodCarrito &&
+				prodCarrito.forEach((prod) => {
+					(async function createOrderDetail() {
+						var newDetail = await OrderDetail.create(
+							{
+								price: prod.price,
+								quantity: prod.qty,
+							},
+							{
+								fields: ['price', 'quantity'],
+							}
+						);
+
+						var productFind = await Product.findOne({
+							where: { id: prod.prodId },
+						});
+
+						if (productFind) {
+							await newDetail.setProduct(productFind.dataValues.id);
+						}
+						await order.addOrderDetail(newDetail.dataValues.id);
+
+						var userFind = await User.findOne({
+							where: { userId: id },
+						});
+
+						if (userFind) {
+							await order.setUser(userFind.dataValues.userId);
+						} else {
+							res.status(400).json({ msg: 'Error' });
+						}
+					})();
+				});
+		})
+        const orders = await Order.findAll()
+        const order = orders[orders.length-1]
+        order.userId = id
+        res.status(200).json(order)
+	} catch (error) {
+		res.status(400).json(error);
+	}
+};
 
 
 module.exports = {
 	getBasicInfo,
 	createTransaction,
 	getTransactionInfo,
-    getCoinRates
+    getCoinRates,
+    createOrderCrypto
 };
