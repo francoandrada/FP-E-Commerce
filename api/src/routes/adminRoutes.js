@@ -25,7 +25,9 @@ const countOfCategories = require('../Controllers/admin/countCategories.controll
 const countOfBrand = require('../Controllers/admin/countBrand.controller');
 const getProductOrder = require('../Controllers/admin/getOrders.controller');
 const getUserOrder = require('../Controllers/admin/userOrder.controller');
+const getOrderDetails = require('../Controllers/admin/getAllDataAboutAnOrder.controller');
 // router.get('/', getAllProducts)
+router.get('/dataaboutorder/:id', routerHelper(getOrderDetails));
 router.post('/usersandhisorders', routerHelper(getUserOrder));
 router.post('/listorders', routerHelper(getProductOrder));
 router.get('/categoriescount', routerHelper(countOfCategories));
