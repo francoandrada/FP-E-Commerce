@@ -51,14 +51,14 @@ function CartList({ info, image, name, price, stock, qty }) {
 						<p>{name}</p>
 					</div>
 					<div className={style.subtot}>
-						<h3>{subtotFormat}</h3>
+						<h4>{subtotFormat}</h4>
 					</div>
 					<div className={style.cantAndPrice}>
 						<div className={style.modifyQtyButtons}>
 							<button onClick={handleMinus} className={style.plusMinusButtons}>
 								-
 							</button>
-							<h3>{qty}</h3>
+							<h4>{qty}</h4>
 							<button onClick={handlePlus} className={style.plusMinusButtons}>
 								+
 							</button>
@@ -72,6 +72,7 @@ function CartList({ info, image, name, price, stock, qty }) {
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	);
 }

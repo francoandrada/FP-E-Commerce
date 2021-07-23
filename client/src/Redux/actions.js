@@ -45,6 +45,8 @@ import {
 	CREATE_CART_USER,
 	PRODUCT_WITH_ORDER,
 	USER_WITH_ORDER,
+	SAVE_ADDRESS_ORDER,
+	SET_AMMOUNT,
 } from './actionsName';
 
 import axios from 'axios';
@@ -651,6 +653,23 @@ export function getCartUser(id) {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+}
+
+export function saveAddress(address) {
+	return async (dispatch) => {
+		dispatch({
+			type: SAVE_ADDRESS_ORDER,
+			payload: address,
+		});
+	};
+}
+export function saveAmmount(ammount) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_AMMOUNT,
+			payload: ammount
+		});
 	};
 }
 

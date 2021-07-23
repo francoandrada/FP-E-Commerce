@@ -48,6 +48,8 @@ export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 export const SET_CART = 'SET_CART';
 export const GET_PAY = 'GET_PAY';
 export const CREATE_CART_USER = 'CREATE_CART_USER';
+export const SAVE_ADDRESS_ORDER = 'SAVE_ADDRESS_ORDER';
+export const SET_AMMOUNT = 'SET_AMMOUNT';
 
 //deploy
 export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
