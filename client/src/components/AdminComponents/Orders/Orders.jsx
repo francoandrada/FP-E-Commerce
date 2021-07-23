@@ -1,55 +1,40 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-	getProductWithOrderData,
-	changeTableOrderPaginationSize,
-} from '../../../Redux/actions';
+import { getProductWithOrderData } from '../../../Redux/actions';
 import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
 import Select from '../../Select/Select';
+import OrdersLogic from './OrdersLogic';
 
 const Orders = () => {
 	const dispatch = useDispatch();
+	const { mapData, paginationSizeHandle } = OrdersLogic();
 	const { productWithOrder, tableOrderPaginationSize } = useSelector(
 		(state) => state.admin
 	);
 
+	const [searchValue, setSearchValue] = React.useState('');
+
 	React.useEffect(() => {
-		dispatch(getProductWithOrderData(0, { limit: tableOrderPaginationSize }));
-	}, [dispatch, tableOrderPaginationSize]);
+		dispatch(
+			getProductWithOrderData(0, {
+				limit: tableOrderPaginationSize,
+				search: searchValue,
+			})
+		);
+	}, [dispatch, tableOrderPaginationSize, searchValue]);
 
-	const mapData = (array) => {
-		const data =
-			array &&
-			array.map((o) => {
-				return {
-					id: o?.id || '--',
-					orderId: o?.orderId || '--',
-					price: o?.price || '--',
-					quantity: o?.quantity || '--',
-					createdAt: o?.createdAt || '--',
-					updatedAt: o?.updatedAt || '--',
-					productId: o?.product?.id || '--',
-					name: o?.product?.name || '--',
-					price: o?.product?.price || '--',
-					priceSpecial: o?.product?.priceSpecial || '--',
-					stock: o?.product?.stock || '--',
-				};
-			});
-		return data;
-	};
-
-	const dataToPrint = mapData(productWithOrder?.products);
-
-	const paginationSizeHandle = (event) => {
+	const searchHandle = (event) => {
 		event.preventDefault();
-		dispatch(changeTableOrderPaginationSize(event.target.value));
+		setSearchValue(event.target.value);
 	};
 
 	return (
 		<div>
 			<div>
+				<input type='text' value={searchValue} onChange={searchHandle} />
+
 				<Select
 					initialValue={tableOrderPaginationSize}
 					onChange={paginationSizeHandle}
@@ -58,7 +43,10 @@ const Orders = () => {
 			</div>
 
 			{productWithOrder ? (
-				<Table dataToPrint={dataToPrint} formatColumn={COLUMNS} />
+				<Table
+					dataToPrint={mapData(productWithOrder?.products)}
+					formatColumn={COLUMNS}
+				/>
 			) : (
 				<Loader />
 			)}
