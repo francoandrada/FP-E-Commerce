@@ -47,12 +47,18 @@ import {
 	USER_WITH_ORDER,
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
+	FILTER_BY_ORDER_STATUS,
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const filterByStatus = (payload) => ({
+	type: FILTER_BY_ORDER_STATUS,
 	payload,
 });
 
