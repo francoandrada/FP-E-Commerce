@@ -1,6 +1,6 @@
 const { User, Order } = require('../../db');
 
-// http://localhost:3001/admin/userorders?page=0 (post);
+// http://localhost:3001/admin/usersandhisorders?page=0 (post);
 
 const userOrder = async (req, res, next) => {
 	let userAndOrders = {};
@@ -11,15 +11,16 @@ const userOrder = async (req, res, next) => {
 	let page = 0;
 	if (!Number.isNaN(pageAsNumber) && pageAsNumber >= 0) page = pageAsNumber;
 
-	userAndOrders = await User.findAndCountAll({
+	userAndOrders = await Order.findAndCountAll({
 		limit: limitToNumber,
 		offset: page * limitToNumber,
 		include: {
-			model: Order,
+			model: User,
 		},
 	});
 
 	return res.json({
+		message: 'here',
 		totalPages: Math.floor(userAndOrders.count / limitToNumber),
 		products: userAndOrders.rows,
 	});
