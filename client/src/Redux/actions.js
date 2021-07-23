@@ -48,6 +48,7 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+	GET_ALL_DATA_ABOUT_AN_ORDER,
 } from './actionsName';
 
 import axios from 'axios';
@@ -118,6 +119,11 @@ export const fetchProductWithOrder = (payload) => ({
 
 export const fetchListProducts = (payload) => ({
 	type: LIST_PRODUCT_ON_TABLE,
+	payload,
+});
+
+export const fetchOrderDetails = (payload) => ({
+	type: GET_ALL_DATA_ABOUT_AN_ORDER,
 	payload,
 });
 
@@ -193,6 +199,20 @@ export function getCountOfBrand() {
 			dispatch(fetchPending());
 			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
 			dispatch(fetchCountOfBrand(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getOrderDetails(id) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(
+				`http://localhost:3001/admin/dataaboutorder/${id}`
+			);
+			dispatch(fetchOrderDetails(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
