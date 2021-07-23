@@ -632,7 +632,6 @@ export function getPayInfo(data) {
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
-	console.log('desde reducer', userId);
 	return async (dispatch) => {
 		axios
 			.get(`http://localhost:3001/orders/order/user/${userId}`)
@@ -680,5 +679,33 @@ export function setAuthentication(payload) {
 			type: SET_MANUAL_AUTHENTICATION,
 			payload,
 		});
+	};
+}
+
+/// COINPAYMENTS ACTIONS
+export function postCartCrypto(data) {
+	return async (dispatch) => {
+		console.log(data);
+
+		try {
+			const res = await axios.post(
+				'http://localhost:3001/coinpayment/createorder',
+				data
+			);
+
+			console.log(res.data);
+
+			dispatch({
+				type: SET_CART,
+				payload: res.data,
+			});
+
+			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
+			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`
+			window.open(url)
+
+		} catch (error) {
+			console.log(error);
+		}
 	};
 }
