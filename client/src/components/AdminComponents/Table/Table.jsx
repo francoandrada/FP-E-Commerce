@@ -85,10 +85,6 @@ const Table = () => {
 		productToDelete,
 	]);
 
-	/*
-		the size of the img can be changed on the "columns" file, also the "icons"
-		icons that I used https://fontawesome.com/v5.15/icons/wrench?style=solid
-	*/
 	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
 		tableInstance;
 
@@ -125,6 +121,7 @@ const Table = () => {
 					>
 						<div className={styles.searchContainer}>
 							<input
+								className={styles.searchbar}
 								type='text'
 								value={searchFilter}
 								placeholder='Search...'

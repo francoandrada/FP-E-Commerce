@@ -8,6 +8,7 @@ import {
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
 import { MdArrowBack } from 'react-icons/md';
@@ -37,16 +38,14 @@ function AddProduct() {
 	function changeChange(e) {
 		setCate((cate = e));
 	}
-	const changeInput = (e) => {
-	
-	};
+	const changeInput = (e) => {};
 
 	const submit = (data, e) => {
 		data.category = cate.map((x) => x.value);
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return new Swal({
+				return Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -74,25 +73,22 @@ function AddProduct() {
 			data.brandId &&
 			data.brandId.length > 0
 		) {
-
-			dispatch(createdProduct(data))
-			e.target.reset()
-			new Swal({
-				title: "Product Created!!",
-				icon: "success",
-				button: "ok",
-				timer: "5000"
-			})
-				.then(() => dispatch(getProducts()))
+			dispatch(createdProduct(data));
+			e.target.reset();
+			Swal({
+				title: 'Product Created!!',
+				icon: 'success',
+				button: 'ok',
+				timer: '5000',
+			}).then(() => dispatch(getProducts()));
 			reset({ data });
 		} else {
-			new Swal({
-				title: "All fields are required",
-				icon: "error",
-				button: "ok",
-				timer: "5000"
-			})
-
+			Swal({
+				title: 'All fields are required',
+				icon: 'error',
+				button: 'ok',
+				timer: '5000',
+			});
 		}
 	};
 	const options = categories.map((c) => ({ label: c.name, value: c.id }));

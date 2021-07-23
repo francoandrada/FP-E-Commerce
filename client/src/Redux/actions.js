@@ -43,15 +43,32 @@ import {
 	GET_PAY,
 	SET_MANUAL_AUTHENTICATION,
 	CREATE_CART_USER,
-	PRODUCT_WITH_ORDER
-
+	PRODUCT_WITH_ORDER,
+	USER_WITH_ORDER,
+	TABLE_ORDER_PAGINATION_SIZE,
+	TABLE_USER_ORDER_PAGINATION_SIZE,
+	FILTER_BY_ORDER_STATUS,
 } from './actionsName';
 
 import axios from 'axios';
 
-
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const filterByStatus = (payload) => ({
+	type: FILTER_BY_ORDER_STATUS,
+	payload,
+});
+
+export const changeTableOrderPaginationSize = (payload) => ({
+	type: TABLE_ORDER_PAGINATION_SIZE,
+	payload,
+});
+
+export const changeTableOrderUserPaginationSize = (payload) => ({
+	type: TABLE_USER_ORDER_PAGINATION_SIZE,
 	payload,
 });
 
@@ -114,6 +131,11 @@ export const fetchCountOfCategories = (payload) => ({
 	payload,
 });
 
+export const fetchUserWithOrders = (payload) => ({
+	type: USER_WITH_ORDER,
+	payload,
+});
+
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined,
@@ -128,6 +150,22 @@ export function getListOfProductTable(page, object) {
 				object
 			);
 			dispatch(fetchListProducts(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+// http://localhost:3001/admin/usersandhisorders?page=0 (post);
+export function getUserWithOrdersDetail(page, object) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.post(
+				`http://localhost:3001/admin/usersandhisorders?page=${page}`,
+				object
+			);
+			dispatch(fetchUserWithOrders(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -604,38 +642,36 @@ export function getUserOrders(userId) {
 	};
 }
 
-
-
 export function postCartUser(data) {
-	console.log(data)
+	console.log(data);
 	return async (dispatch) => {
-		try{
-			const res = axios.post('http://localhost:3001/shoppingcart', data)
-			console.log(res)
+		try {
+			const res = axios.post('http://localhost:3001/shoppingcart', data);
+			console.log(res);
 		} catch (error) {
-			console.log(error.response)
+			console.log(error.response);
 		}
-		
 	};
 }
 
 export function getCartUser(id) {
 	return async (dispatch) => {
-		console.log('iiiiidd',id)
+		console.log('iiiiidd', id);
 		try {
-			const res = await axios.post('http://localhost:3001/shoppingcart/userCart', {userId: id});
-			console.log('id',res.data)
+			const res = await axios.post(
+				'http://localhost:3001/shoppingcart/userCart',
+				{ userId: id }
+			);
+			console.log('id', res.data);
 			dispatch({
 				type: CREATE_CART_USER,
-				payload: res.data
-			})
-			
+				payload: res.data,
+			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 }
-
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {

@@ -10,6 +10,7 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 20px;
+	min-width: 1220px;
 	background-color: #808080d1;
 	margin-top: 5%;
 	border-radius: 5px;
