@@ -49,9 +49,11 @@ const createTransaction = async (req, res) => {
 //Get Transaction Info
 const getTransactionInfo = async (req, res) => {
 	const CoinpaymentsGetTxOpts = {
-		txid: 'CPFG3DREYPWLFQMBWYKNZKPTOK',
+		txid: 'CPFG7VWCDRSUQWVAVPCTHOHJN5',
 		full: 0,
 	};
+
+	
 
 	const status = await client.getTx(CoinpaymentsGetTxOpts);
 	console.log(status);
