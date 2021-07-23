@@ -1,5 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { changeTableOrderUserPaginationSize } from '../../../Redux/actions';
+import {
+	changeTableOrderUserPaginationSize,
+	filterByStatus,
+} from '../../../Redux/actions';
 const UserOrderLogic = () => {
 	const dispatch = useDispatch();
 	const mapData = (array) => {
@@ -21,12 +24,17 @@ const UserOrderLogic = () => {
 		return data;
 	};
 
+	const filterHandle = (event) => {
+		event.preventDefault();
+		dispatch(filterByStatus(event.target.value));
+	};
+
 	const changePaginationSizeHandle = (event) => {
 		event.preventDefault();
 		dispatch(changeTableOrderUserPaginationSize(event.target.value));
 	};
 
-	return { mapData, changePaginationSizeHandle };
+	return { mapData, changePaginationSizeHandle, filterHandle };
 };
 
 export default UserOrderLogic;

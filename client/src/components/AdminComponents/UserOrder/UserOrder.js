@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserWithOrdersDetail } from '../../../Redux/actions';
+import {
+	getUserWithOrdersDetail,
+	filterByStatus,
+} from '../../../Redux/actions';
 import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
@@ -10,19 +13,25 @@ import UserOrderLogic from './UserOrderLogic';
 const UserOrder = () => {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = React.useState('');
-	const { mapData, changePaginationSizeHandle } = UserOrderLogic();
-	const { userWithOrder, tableOrderUserPaginationSize } = useSelector(
-		(state) => state.admin
-	);
+	const { mapData, changePaginationSizeHandle, filterHandle } =
+		UserOrderLogic();
+	const { userWithOrder, tableOrderUserPaginationSize, filterByOrderStatus } =
+		useSelector((state) => state.admin);
 
 	React.useEffect(() => {
 		dispatch(
 			getUserWithOrdersDetail(0, {
 				limit: tableOrderUserPaginationSize,
 				search: searchValue,
+				filter: filterByOrderStatus,
 			})
 		);
-	}, [dispatch, tableOrderUserPaginationSize, searchValue]);
+	}, [
+		dispatch,
+		tableOrderUserPaginationSize,
+		searchValue,
+		filterByOrderStatus,
+	]);
 
 	const searchHandle = (event) => {
 		event.preventDefault();
@@ -38,6 +47,12 @@ const UserOrder = () => {
 					initialValue={tableOrderUserPaginationSize}
 					onChange={changePaginationSizeHandle}
 					values={[5, 10, 20, 50, 100]}
+				/>
+
+				<Select
+					initialValue={filterByOrderStatus}
+					onChange={filterHandle}
+					values={['all', 'created', 'processing', 'cancelled', 'completed']}
 				/>
 			</div>
 			{userWithOrder ? (
