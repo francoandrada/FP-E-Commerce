@@ -17,6 +17,7 @@ import {
 	USER_WITH_ORDER,
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
+	FILTER_BY_ORDER_STATUS,
 } from '../actionsName';
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
 	userWithOrder: undefined,
 	tableOrderPaginationSize: 5,
 	tableOrderUserPaginationSize: 5,
+	filterByOrderStatus: 'all',
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -137,6 +139,11 @@ function adminReducer(state = initialState, { type, payload, error }) {
 			return {
 				...state,
 				tableOrderUserPaginationSize: payload,
+			};
+		case FILTER_BY_ORDER_STATUS:
+			return {
+				...state,
+				filterByOrderStatus: payload,
 			};
 		default:
 			return state;
