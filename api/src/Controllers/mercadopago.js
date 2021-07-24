@@ -13,7 +13,7 @@ const createOrder = async function createOrder(req, res) {
 			{
 				ammount,
 				status,
-				address: JSON.stringify(address)
+				address: JSON.stringify(address),
 			},
 			{
 				fields: ['ammount', 'status', 'address'],
@@ -44,17 +44,19 @@ const createOrder = async function createOrder(req, res) {
 						var userFind = await User.findOne({
 							where: { userId: id },
 						});
-						console.log(userFind)
-
-						if (userFind) {
-							await order.setUser(userFind.dataValues.userId);
-						} else {
-							res.status(400).json({ msg: 'Error' });
+						console.log(userFind);
+						try {
+							if (userFind) {
+								await order.setUser(userFind.dataValues.userId);
+							} else {
+								res.status(400).json({ msg: 'Error' });
+							}
+						} catch (error) {
+							console.log(error);
 						}
 					})();
 				});
 		});
-
 
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
 

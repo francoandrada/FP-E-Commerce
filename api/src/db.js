@@ -91,8 +91,10 @@ User.belongsToMany(Product, { through: 'favorites' });
 
 // 1---------------> N
 // User -----------> Review
-User.hasMany(Review, {foreignKey: 'userId'});
-Review.belongsTo(Product, {foreignKey: 'userId'});
+User.hasMany(Review, {foreignKey: 'idUser'});
+Review.belongsTo(Product, {foreignKey: 'idUser'});
+
+
 // 1---------------> N
 // Product -----------> Review
 Product.hasMany(Review, {foreignKey: 'productId'});

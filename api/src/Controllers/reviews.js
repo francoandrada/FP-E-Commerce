@@ -5,26 +5,46 @@ const newReview = async function newReview(req, res) {
 	try {
 		const { userId, productId, description, stars } = req.body;
 		console.log(req.body);
-	
-			var response = await Review.create(
+		
+			var review = await Review.create(
 				{
-					description: description,
+					description,
 					stars,
 				},
 				{
-					fields: ['description', 'stars', userId, productId],
+					fields: ['description', 'stars'],
 				}
-			)
-			const userReview = await User.findOne({
-				where: {
-					userId: userId,
-				},
-			});
-			if (userReview) {
-				await response.setUser(userReview.dataValues.userId);
-			}
+				).then((review) => {
+					
+					(async function() {
+				
+						var userFind = await User.findOne({
+							where: { userId: userId },
+						});
+						console.log(userFind);
+						if(userFind){						
+								await review.setUser(userFind.dataValues.userId);
+						}
+						var productFind = await Product.findOne({
+							where: { id: productId },
+						});
 
-		res.status(200).json(response);
+						if (productFind) {
+							await review.setProduct(productFind.dataValues.id);
+						}
+					})();
+				// var userFind =  await User.findOne({
+				// 	where: { userId: userId },
+				// });
+				// console.log(userFind)
+
+				// try{
+				// 	await review.addUser(userFind.dataValues.userId);
+				// } catch(error){
+				// 	console.log(error);
+				// }
+				})
+		
 	} catch (error) {
 		console.log(error);
 	}
