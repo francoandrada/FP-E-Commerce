@@ -141,10 +141,36 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 };
 
 
+//////////////////// Coinpayment IPN
+
+const ipnUpdate = async (req, res, next) => {
+
+	console.log(req.body);
+	const id = parseInt(req.body.custom);
+	const newStatus = req.body.status_text;
+
+	try {
+		const orderById = await Order.findOne({
+			where: { orderId: id },
+		});
+		if(newStatus==='Complete'){
+			var updatedStatus = await orderById.update({
+				status: 'completed',
+			});
+		}
+		res.status(200).json(updatedStatus.dataValues.status);
+	} catch (error) {
+		next(error);
+	}
+};
+
+////////////////////
+
 module.exports = {
 	getBasicInfo,
 	createTransaction,
 	getTransactionInfo,
-    getCoinRates,
-    createOrderCrypto
+	getCoinRates,
+	createOrderCrypto,
+	ipnUpdate,
 };
