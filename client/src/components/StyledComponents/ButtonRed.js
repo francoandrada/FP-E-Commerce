@@ -16,6 +16,9 @@ export const ButtonRed = styled.button`
     @media only screen and (max-width: 1120px){
         font-size: 14px
     }
+    @media only screen and (max-width: 430px){
+        font-size: 12px
+    }
 `;
 
 export default ButtonRed;

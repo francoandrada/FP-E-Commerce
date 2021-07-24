@@ -10,6 +10,10 @@ line-height: 1.875rem;
 @media only screen and (max-width: 1120px) {
     font-size: 26px;
 }
+@media only screen and (max-width: 430px) {
+    font-size: 18px;
+    line-height: 1em;
+}
 `;
 
 export default TitleStyle;
