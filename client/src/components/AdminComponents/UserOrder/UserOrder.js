@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getUserWithOrdersDetail,
 	filterByStatus,
+	changePageOfUserOrderTable,
 } from '../../../Redux/actions';
 import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
 import Select from '../../Select/Select';
+import Pagination from '../TablePagination/TablePagination';
 import UserOrderLogic from './UserOrderLogic';
 
 const UserOrder = () => {
@@ -15,12 +17,16 @@ const UserOrder = () => {
 	const [searchValue, setSearchValue] = React.useState('');
 	const { mapData, changePaginationSizeHandle, filterHandle } =
 		UserOrderLogic();
-	const { userWithOrder, tableOrderUserPaginationSize, filterByOrderStatus } =
-		useSelector((state) => state.admin);
+	const {
+		userWithOrder,
+		tableOrderUserPaginationSize,
+		filterByOrderStatus,
+		currentPageOfUserOrderTable,
+	} = useSelector((state) => state.admin);
 
 	React.useEffect(() => {
 		dispatch(
-			getUserWithOrdersDetail(0, {
+			getUserWithOrdersDetail(currentPageOfUserOrderTable, {
 				limit: tableOrderUserPaginationSize,
 				search: searchValue,
 				filter: filterByOrderStatus,
@@ -31,6 +37,7 @@ const UserOrder = () => {
 		tableOrderUserPaginationSize,
 		searchValue,
 		filterByOrderStatus,
+		currentPageOfUserOrderTable,
 	]);
 
 	const searchHandle = (event) => {
@@ -38,6 +45,8 @@ const UserOrder = () => {
 		setSearchValue(event.target.value);
 	};
 
+	const paginate = (pageNumber) =>
+		dispatch(changePageOfUserOrderTable(pageNumber));
 	return (
 		<div>
 			<div>
@@ -67,6 +76,12 @@ const UserOrder = () => {
 				<h1 style={{ textAlign: 'center', padding: '20px' }}>
 					No data to Render
 				</h1>
+			)}
+			{userWithOrder && userWithOrder?.totalPages > 1 && (
+				<Pagination
+					totalPages={userWithOrder?.totalPages}
+					paginate={paginate}
+				/>
 			)}
 		</div>
 	);
