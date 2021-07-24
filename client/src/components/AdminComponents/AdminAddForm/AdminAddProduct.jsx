@@ -332,7 +332,7 @@ function AddProduct() {
 							onChange={changeChange}
 						/>
 					</div>
-
+					
 					<ButtonRed type='submit'> Add </ButtonRed>
 				</form>
 			</div>
