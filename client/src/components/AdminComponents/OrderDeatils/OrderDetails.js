@@ -4,11 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getOrderDetails } from '../../../Redux/actions';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
+import Select from '../../Select/Select';
 import COLUMNS from './columns';
+import axios from 'axios';
 
 const OrderDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const [orderStatus, setOrderStatus] = React.useState('');
 	const { orderDetails } = useSelector((state) => state.admin);
 
 	React.useEffect(() => {
@@ -31,9 +34,17 @@ const OrderDetails = () => {
 		return data;
 	};
 
-	orderDetails &&
-		console.log('orderDetails', mapData(orderDetails?.orderDetails));
-	// orderDetails && console.log('orderDetails', orderDetails.orderDetails);
+	React.useEffect(() => {
+		axios.put(`http://localhost:3001/orders/order/${id}`, {
+			status: orderStatus,
+		});
+	}, [orderStatus]);
+
+	const changeStatus = (event) => {
+		event.preventDefault();
+		setOrderStatus(event.target.value);
+		window.location.reload();
+	};
 
 	return (
 		<div>
@@ -91,6 +102,16 @@ const OrderDetails = () => {
 					/>
 				) : (
 					<Loader />
+				)}
+			</div>
+			<div>
+				<span>Change Status:</span>
+				{orderDetails && (
+					<Select
+						initialValue={orderDetails?.status}
+						values={['created', 'processing', 'cancelled', 'completed']}
+						onChange={changeStatus}
+					/>
 				)}
 			</div>
 		</div>
