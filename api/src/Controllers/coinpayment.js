@@ -49,9 +49,11 @@ const createTransaction = async (req, res) => {
 //Get Transaction Info
 const getTransactionInfo = async (req, res) => {
 	const CoinpaymentsGetTxOpts = {
-		txid: 'CPFG3DREYPWLFQMBWYKNZKPTOK',
+		txid: 'CPFG7VWCDRSUQWVAVPCTHOHJN5',
 		full: 0,
 	};
+
+	
 
 	const status = await client.getTx(CoinpaymentsGetTxOpts);
 	console.log(status);
@@ -139,10 +141,36 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 };
 
 
+//////////////////// Coinpayment IPN
+
+const ipnUpdate = async (req, res, next) => {
+
+	console.log(req.body);
+	const id = parseInt(req.body.custom);
+	const newStatus = req.body.status_text;
+
+	try {
+		const orderById = await Order.findOne({
+			where: { orderId: id },
+		});
+		if(newStatus==='Complete'){
+			var updatedStatus = await orderById.update({
+				status: 'completed',
+			});
+		}
+		res.status(200).json(updatedStatus.dataValues.status);
+	} catch (error) {
+		next(error);
+	}
+};
+
+////////////////////
+
 module.exports = {
 	getBasicInfo,
 	createTransaction,
 	getTransactionInfo,
-    getCoinRates,
-    createOrderCrypto
+	getCoinRates,
+	createOrderCrypto,
+	ipnUpdate,
 };
