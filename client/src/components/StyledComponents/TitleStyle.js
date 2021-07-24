@@ -11,7 +11,7 @@ line-height: 1.875rem;
     font-size: 26px;
 }
 @media only screen and (max-width: 430px) {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1em;
 }
 `;
