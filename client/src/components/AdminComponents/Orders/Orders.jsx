@@ -21,8 +21,6 @@ const Orders = () => {
 	} = useSelector((state) => state.admin);
 
 	const [searchValue, setSearchValue] = React.useState('');
-	//log
-	console.log(currentPageOfProductOrderTable);
 
 	React.useEffect(() => {
 		dispatch(
