@@ -79,7 +79,7 @@ const UserOrder = () => {
 			)}
 			{userWithOrder && userWithOrder?.totalPages > 1 && (
 				<Pagination
-					totalPages={userWithOrder?.totalPages}
+					totalPages={userWithOrder?.totalPages - 1}
 					paginate={paginate}
 				/>
 			)}
