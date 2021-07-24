@@ -11,7 +11,7 @@ router.get('/', getOrders);
 
 router.get('/orderid/:id', getOrderById);
 
-router.put('/order/:id/status', modifyOrderStatus);
+router.put('/order/:id', modifyOrderStatus);
 
 router.get('/order/user/:userid', findUserOrders);
 

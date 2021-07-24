@@ -4,7 +4,7 @@ const { User, Order } = require('../../db');
 // http://localhost:3001/admin/usersandhisorders?page=0 (post);
 
 const userOrder = async (req, res, next) => {
-	let userAndOrders = {};
+	let products = {};
 	const { limit, search, filter } = req.body;
 	const pageAsNumber = Number.parseInt(req.query.page);
 	const limitToNumber = Number.parseInt(limit);
@@ -13,7 +13,7 @@ const userOrder = async (req, res, next) => {
 	if (!Number.isNaN(pageAsNumber) && pageAsNumber >= 0) page = pageAsNumber;
 
 	if (filter && search && search.trim() && filter !== 'all') {
-		userAndOrders = await Order.findAndCountAll({
+		products = await Order.findAndCountAll({
 			limit: limitToNumber,
 			offset: page * limitToNumber,
 			include: { model: User },
@@ -23,13 +23,15 @@ const userOrder = async (req, res, next) => {
 		});
 		return res.json({
 			message: 'here',
-			totalPages: Math.floor(userAndOrders.count / limitToNumber),
-			products: userAndOrders.rows.filter(({ name }) => name.includes(search)),
+			totalPages: Math.ceil(products.count / limitToNumber),
+			products: products.rows.filter(({ user: { name } }) =>
+				name.includes(search)
+			),
 		});
 	}
 
 	if (filter && filter !== 'all') {
-		userAndOrders = await Order.findAndCountAll({
+		products = await Order.findAndCountAll({
 			limit: limitToNumber,
 			offset: page * limitToNumber,
 			include: { model: User },
@@ -39,13 +41,13 @@ const userOrder = async (req, res, next) => {
 		});
 		return res.json({
 			message: 'here',
-			totalPages: Math.floor(userAndOrders.count / limitToNumber),
-			products: userAndOrders.rows,
+			totalPages: Math.ceil(products.count / limitToNumber),
+			products: products.rows,
 		});
 	}
 
 	if (search && search.trim()) {
-		userAndOrders = await Order.findAndCountAll({
+		products = await Order.findAndCountAll({
 			limit: limitToNumber,
 			offset: page * limitToNumber,
 			include: {
@@ -59,12 +61,12 @@ const userOrder = async (req, res, next) => {
 		});
 		return res.json({
 			message: 'here',
-			totalPages: Math.floor(userAndOrders.count / limitToNumber),
-			products: userAndOrders.rows,
+			totalPages: Math.ceil(products.count / limitToNumber),
+			products: products.rows,
 		});
 	}
 
-	userAndOrders = await Order.findAndCountAll({
+	products = await Order.findAndCountAll({
 		limit: limitToNumber,
 		offset: page * limitToNumber,
 		include: {
@@ -74,8 +76,8 @@ const userOrder = async (req, res, next) => {
 
 	return res.json({
 		message: 'here',
-		totalPages: Math.floor(userAndOrders.count / limitToNumber),
-		products: userAndOrders.rows,
+		totalPages: Math.ceil(products.count / limitToNumber),
+		products: products.rows,
 	});
 };
 

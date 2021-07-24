@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const columns = [
 	{
 		Header: 'User Information',
@@ -9,6 +11,15 @@ const columns = [
 			{
 				Header: 'Name',
 				accessor: 'userName',
+				Cell: (row) => {
+					const orderId = row.row.original.orderId;
+					const userName = row.row.original.userName;
+					return (
+						<Link key={orderId} to={`/admin/orderdetails/${orderId}`}>
+							{userName}
+						</Link>
+					);
+				},
 			},
 			{
 				Header: 'Last name',
