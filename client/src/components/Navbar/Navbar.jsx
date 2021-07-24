@@ -121,7 +121,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<>
+		<div className={styles.mainContainer}>
 			<div className={styles.navbarEcommerce}>
 				<div className={styles.leftSideEcommerce}>
 					<div className={styles.storeNameEcommerce}>
@@ -222,7 +222,7 @@ const Navbar = () => {
 					<Link to='/catalog'>Catalog</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
