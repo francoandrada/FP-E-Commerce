@@ -35,14 +35,15 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 	const newStatus = req.body.status;
 
 	try {
-		const orderById = await Order.findOne({
-			where: { orderId: id },
-		});
-		const updatedStatus = await orderById.update({
-			status: newStatus,
-		});
-
-		res.status(200).json(updatedStatus.dataValues.status);
+		if (newStatus && newStatus.trim()) {
+			const orderById = await Order.findOne({
+				where: { orderId: id },
+			});
+			const updatedStatus = await orderById.update({
+				status: newStatus,
+			});
+			res.status(200).json(updatedStatus.dataValues.status);
+		}
 	} catch (error) {
 		next(error);
 	}
@@ -51,36 +52,42 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 //------------------  GETS ALL ORDERS BY USER ID - FOR USERS ACCOUNT  ----------------------//
 
 const findUserOrders = async function findUserOrders(req, res, next) {
-    const userId = parseInt(req.params.userid);
- 
-    try {
-        const allUserOrders = await Order.findAll({
-            where: { userId: userId },
-            attributes: ['userId', 'status'],
-            include: [ 
-            {
-                model: OrderDetail,
-                as: "orderDetails",
-                attributes: ['id', 'orderId'],
-                include: [
-                    {
-                        model: Product,
-                        
-                        attributes: [ 'id','name', 'price', 'image', 'priceSpecial', 'description', 'weight', 'stock' ]
-                    }
-                ]
-                
-            },
-        
-        ]
-        });
-        
-        res.status(200).json(allUserOrders);
-    } catch (error) {
-        next(error);
-    }
-};
+	const userId = parseInt(req.params.userid);
 
+	try {
+		const allUserOrders = await Order.findAll({
+			where: { userId: userId },
+			attributes: ['userId', 'status'],
+			include: [
+				{
+					model: OrderDetail,
+					as: 'orderDetails',
+					attributes: ['id', 'orderId'],
+					include: [
+						{
+							model: Product,
+
+							attributes: [
+								'id',
+								'name',
+								'price',
+								'image',
+								'priceSpecial',
+								'description',
+								'weight',
+								'stock',
+							],
+						},
+					],
+				},
+			],
+		});
+
+		res.status(200).json(allUserOrders);
+	} catch (error) {
+		next(error);
+	}
+};
 
 module.exports = {
 	getOrders,
