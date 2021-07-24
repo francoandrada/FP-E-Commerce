@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
-import { postCart } from '../../../Redux/actions';
+import { postCart, postCartCrypto } from '../../../Redux/actions';
 import { formatNumber } from '../../../helper/priceFormater';
 
 function SubTotal() {
@@ -16,7 +16,6 @@ function SubTotal() {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-	console.log(user.userId);
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -59,8 +58,11 @@ function SubTotal() {
 			status: status,
 		};
 	}
-	console.log(bodyObject);
 	let totalFormat = formatNumber.new(totalPrice, '$');
+
+	const handleClickCrypto = () => {
+		dispatch(postCartCrypto(bodyObject))
+	};
 
 	return (
 		<div>
@@ -78,12 +80,22 @@ function SubTotal() {
 				</div>
 
 				{token ? (
-					<button
-						className={style.paymentButton}
-						onClick={() => dispatch(postCart(bodyObject))}
-					>
-						Checkout
-					</button>
+					<div>
+						<button
+							className={style.paymentButton}
+							onClick={() => dispatch(postCart(bodyObject))}
+						>
+							Checkout with Mercado Pago
+						</button>
+						<NavLink to='/catalog'>
+							<input
+								type='image'
+								src='https://www.coinpayments.net/images/pub/checkout-blue.png'
+								alt='Checkout'
+								onClick={handleClickCrypto}
+							/>
+						</NavLink>
+					</div>
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Checkout</button>

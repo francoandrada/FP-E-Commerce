@@ -48,12 +48,25 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+	GET_ALL_DATA_ABOUT_AN_ORDER,
+	CURRENT_PAGE_ORDER_USER,
+	CURRENT_PAGE_ORDER_PRODUCT,
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const changePageOfProductOrderTable = (payload) => ({
+	type: CURRENT_PAGE_ORDER_PRODUCT,
+	payload,
+});
+
+export const changePageOfUserOrderTable = (payload) => ({
+	type: CURRENT_PAGE_ORDER_USER,
 	payload,
 });
 
@@ -118,6 +131,11 @@ export const fetchProductWithOrder = (payload) => ({
 
 export const fetchListProducts = (payload) => ({
 	type: LIST_PRODUCT_ON_TABLE,
+	payload,
+});
+
+export const fetchOrderDetails = (payload) => ({
+	type: GET_ALL_DATA_ABOUT_AN_ORDER,
 	payload,
 });
 
@@ -193,6 +211,20 @@ export function getCountOfBrand() {
 			dispatch(fetchPending());
 			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
 			dispatch(fetchCountOfBrand(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getOrderDetails(id) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(
+				`http://localhost:3001/admin/dataaboutorder/${id}`
+			);
+			dispatch(fetchOrderDetails(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -632,7 +664,6 @@ export function getPayInfo(data) {
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
-	console.log('desde reducer', userId);
 	return async (dispatch) => {
 		axios
 			.get(`http://localhost:3001/orders/order/user/${userId}`)
@@ -680,5 +711,32 @@ export function setAuthentication(payload) {
 			type: SET_MANUAL_AUTHENTICATION,
 			payload,
 		});
+	};
+}
+
+/// COINPAYMENTS ACTIONS
+export function postCartCrypto(data) {
+	return async (dispatch) => {
+		console.log(data);
+
+		try {
+			const res = await axios.post(
+				'http://localhost:3001/coinpayment/createorder',
+				data
+			);
+
+			console.log(res.data);
+
+			dispatch({
+				type: SET_CART,
+				payload: res.data,
+			});
+
+			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
+			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`;
+			window.open(url);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 }

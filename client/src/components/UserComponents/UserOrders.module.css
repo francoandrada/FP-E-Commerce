@@ -15,7 +15,7 @@
 .selectedOptionTitle {
     display: flex;
     justify-content: flex-start;
-    width: 100%;
+    width: 800px;
     padding: 10px;
 }
 
@@ -58,6 +58,60 @@
     width: 40%;
 }
 
+.orderDiv {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(248, 248, 248);
+    
+}
+
+.orderNumberDiv {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    padding: 10px;
+}
+
+.statusDiv {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    width: 20%;
+
+}
+
+.totalOrderDiv {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: 30%;
+    font-size: 20px;
+    color:rgb(63, 63, 63);
+    font-weight: bold;
+
+}
+
+.detailIdButton {
+    width: 40%;
+    background-color: #FF3C4A;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.detailIdButton:hover {
+    background-color: #d8303c;
+}
+
+.textGoDetail {
+    margin-bottom: 0px;
+    color: rgb(255, 255, 255);
+}
+
 
 /* ----- User Account Styles ------ */
 
@@ -68,4 +122,19 @@
     width: 100%;
     padding: 30px;
     text-align: left;
+}
+
+
+.nothingHere {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px;
+}
+
+.nothingHere2 {
+    width: 50%;
+    margin-top: 20px;
 }

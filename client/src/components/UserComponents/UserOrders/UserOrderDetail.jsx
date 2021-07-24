@@ -21,22 +21,18 @@ const ButtonRedSmall = styled.button`
 `;
 
 
-function UserOrderDetail({prodInfo, price, name, image, status}) {
-    const dispatch = useDispatch();
+function UserOrderDetail({image, name, price, prodInfo}) {
+	const dispatch = useDispatch();
 
 	return (
 		<div className={style.orderDetailContainer}>
-            
+       
            <div className={style.SizeImagOrderDiv}>
            <img
 				className={style.sizeImagOrder}
 				src={image}
 				alt='Product Image'
 			/>
-           </div>
-           <div>
-                <p>Status:</p>
-                <p className={style.statusStyle}>{status}</p> 
            </div>
             
             <div className={style.descriptionOrderStyle}>
@@ -45,7 +41,7 @@ function UserOrderDetail({prodInfo, price, name, image, status}) {
 
             <p>${price}</p>
     
-            {/* {p.stock>0? */}
+            
             <Link to={'/shoppingcart'}>
 				<ButtonRedSmall
 					type='submit'
@@ -53,7 +49,7 @@ function UserOrderDetail({prodInfo, price, name, image, status}) {
 				>
 				Buy Again
 				</ButtonRedSmall>
-            </Link>
+            </Link> 
 			
 		</div>
 	);
