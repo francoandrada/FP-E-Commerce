@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { getProductById } from '../../Redux/actions';
-import {AiOutlineStar} from 'react-icons/fa/ai';
+import {FaStar} from 'react-icons/fa';
 import { BsFillStarFill, IconName } from 'react-icons/bs';
 
 const UserReview = (props) => {
@@ -27,15 +27,17 @@ const UserReview = (props) => {
 					<div className='m-5'>
 						<ReactStars
 							count={5}
+                            char={FaStar}
 							onChange={ratingChanged}
 							size={40}
 							isHalf={true}
-							emptyIcon={AiOutlineStar}
-							halfIcon={<i className='fa fa-star-half-alt'></i>}
-							fullIcon={<i className='fa fa-star'></i>}
+							emptyIcon={FaStar}
+							halfIcon={FaStar}
+							fullIcon={FaStar}
+                            icon={{FaStar}}
 							activeColor='#ffd700'
 						/>
-						,
+<p>{FaStar}</p>
 					</div>
 				</div>
 			) : null}
