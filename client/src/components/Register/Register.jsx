@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
+import './index.css'
 function Register() {
 	const history = useHistory();
 
