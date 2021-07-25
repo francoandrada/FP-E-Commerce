@@ -2,10 +2,10 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: white;
-	margin: 20px;
-	width: 250px;
-	height: 320px;
+	background-color: rgb(255, 255, 255);
+	margin: 1.25em;
+	width: 15.625em;
+	height: 20em;
 	border-radius: 14px;
 }
 
@@ -16,7 +16,7 @@
 
 .ImageDiv {
 	display: flex;
-	height: 130px;
+	height: 8.125em;
 	justify-content: center;
 }
 .ImageDiv img {
@@ -27,11 +27,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 60px;
+	height: 3.75em;
 }
 
 .HighlightImagSize {
-	width: 150px;
+	width: 9.375em;
 }
 
 .HighlightTextContainer {
@@ -39,8 +39,8 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	text-align: center;
-	height: 120px;
-	padding: 10px;
+	height: 7.5em;
+	padding: 0.625em;
 	color: black;
 }
 
@@ -54,7 +54,42 @@
 }
 
 .nameProduct {
-	min-height: 70.4px;
+	/* min-height: 4.4em;
 	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.5em; */
+}
+.priceProduct {
+	font-family: 'Roboto', sans-serif;
+	font-size: 35px;
+}
+
+@media only screen and (max-width: 430px) {
+	.HighlightTextContainer {
+		font-size: 10px;
+	}
+	.highlightProdContainer {
+		flex-direction: row;
+
+		margin: 0.5em;
+		width: 100px;
+		height: 120px;
+		border-radius: 14px;
+	}
+	.ImageDiv {
+		height: 50px;
+	}
+
+	.HighlightImagSize {
+		width: 45px;
+	}
+	.priceProduct {
+		font-size: 8px;
+	}
+	.buyHighlightDiv{
+		display: none;
+	}
+	.highlightInfoContainer{
+		display: flex;
+		flex-direction: row;
+	}
 }

@@ -1,8 +1,8 @@
 .BannerContainer {
     background-color: rgba(255, 255, 255, 0.013);
-    margin-top: 50px;
+    margin-top: 3.125em;
     padding: 3% 5% 3% 5%;
-    margin-bottom: 10px;
+    margin-bottom: 0.625em;
     margin-left: 10%;
     margin-right: 10%;
     background-image: url('../../images/BannerNegro.jpg');
@@ -15,5 +15,9 @@
     color: white;
     text-align: left;
     font-size: 40px;
- 
+}
+@media only screen and (max-width: 430px) {
+    .BannerContainer{
+    margin: 3.5em 2%;
+    }
 }

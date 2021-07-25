@@ -31,7 +31,7 @@ function HighlightProd({ id, image, name, price }) {
 	return (
 		<div>
 			<div className='highlightProdContainer'>
-				<div>
+				<div className='highlightInfoContainer'>
 					<Link className='highlightLinks' to={`/catalog/${id}`}>
 						<div className='ImageDiv'>
 							<img className='HighlightImagSize' src={image} alt='Product' />
@@ -39,10 +39,9 @@ function HighlightProd({ id, image, name, price }) {
 
 						<div className='HighlightTextContainer'>
 							<SubtitleStyle className='nameProduct'>{name}</SubtitleStyle>
-							<TitleStyle>{formatPrice}</TitleStyle>
+							<span className='priceProduct'>{formatPrice}</span>
 						</div>
 					</Link>
-
 					<div className='buyHighlightDiv'>
 						<Link to={`/catalog/${id}`}>
 							<ButtonRed>More Info</ButtonRed>
