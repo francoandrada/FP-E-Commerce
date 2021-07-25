@@ -84,19 +84,24 @@ exports.forgotPassword = async (req, res) => {
 			subject: 'Reset your password',
 			html: `
 
-				<!DOCTYPE html>
-				<html>
-				<head>
-				</head>
-				<body style="background-color: #424242;">
-			
-				 	<h2>Hello,</h2>
-				 	<p>We've received a request to reset the password for the HardwareStore account associated with ${email}.
-				 	<p>You can reset your passwordd by clicking the link below:</p>
-				 	<a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
-				 	<p>If you did not request a new password, please let us know inmediately by replying to this email.</p>
-				</body>
-				</html>
+			<!DOCTYPE html>
+			<html>
+			<head>
+			</head>
+			<body style="background-color: #424242; margin: 1rem 3rem; font-family: 'Roboto', sans-serif; color: white">
+			<div style="background-color: #C6C6C6; padding: 10px ">
+							<h1 style="color: #FF3C4A; text-align: center;">Hardware Store</h1>
+									</div>
+									<div  style="background-color: #303030; padding: 30px">
+				 <h2>Hello,</h2>
+				 <p style=" margin: 30px;">We've received a request to reset the password for the HardwareStore account associated with ${email}.
+				 <p style=" margin: 30px;">You can reset your passwordd by clicking the link below:</p>
+				 <a style="background-color: #FF3C4A;  color: black;  padding: .5rem 1rem; margin: 30px; text-decoration: none"
+				href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
+				 <p style=" margin: 30px;">If you did not request a new password, please let us know inmediately by replying to this email.</p>
+				</div>
+			</body>
+			</html>
 		
 		 
 		 `,
@@ -171,6 +176,6 @@ exports.authUserGmail = async (req, res) => {
 
 		res.send({ token, user });
 	} catch (error) {
-		// console.log(error);
+		 console.log(error);
 	}
 };
