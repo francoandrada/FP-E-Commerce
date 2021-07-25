@@ -100,6 +100,7 @@ function Register() {
 							<input
 								type='password'
 								name='password'
+								placeholder='Password'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
@@ -115,6 +116,7 @@ function Register() {
 							<input
 								type='text'
 								name='name'
+								placeholder='Name'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
@@ -128,6 +130,7 @@ function Register() {
 							<input
 								type='text'
 								name='surname'
+								placeholder='Surname'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
@@ -141,6 +144,7 @@ function Register() {
 							<input
 								type='number'
 								name='phone'
+								placeholder='Phone'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								className='form-control'
@@ -157,6 +161,7 @@ function Register() {
 								<input
 									type='text'
 									name='address'
+									placeholder='Address Street'
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
@@ -170,6 +175,7 @@ function Register() {
 								<input
 									type='number'
 									name='addressNumber'
+									placeholder='Address Number'
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
@@ -183,6 +189,7 @@ function Register() {
 								<input
 									type='number'
 									name='postalCode'
+									placeholder='Postal Code'
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									className='form-control'
