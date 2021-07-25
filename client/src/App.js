@@ -13,6 +13,7 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
+import AboutView from './components/AboutSection/AboutView';
 import Error404View from './components/ErrorComponents/Error404View';
 
 import './App.css';
@@ -54,6 +55,7 @@ function App({ location }) {
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
 					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
+					<Route path='/about' exact component={AboutView} />
 					<Route path='/error' exact component={Error404View} />
 				</Switch>
 			</div>

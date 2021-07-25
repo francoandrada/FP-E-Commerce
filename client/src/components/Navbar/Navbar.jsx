@@ -121,7 +121,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<>
+		<div className={styles.mainContainer}>
 			<div className={styles.navbarEcommerce}>
 				<div className={styles.leftSideEcommerce}>
 					<div className={styles.storeNameEcommerce}>
@@ -220,9 +220,11 @@ const Navbar = () => {
 				<div className={styles.sections}>
 					<Link to='/'>Home</Link>
 					<Link to='/catalog'>Catalog</Link>
+					<Link to='/about'>About</Link>
+					<Link to='/about'>Contact</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

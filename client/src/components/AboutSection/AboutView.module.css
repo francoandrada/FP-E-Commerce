@@ -1,0 +1,28 @@
+.AboutViewContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(77, 77, 77);
+    color: white;
+    margin: 5%;
+    padding: 5%;
+}
+
+.photosAboutContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.photosDivAbout {
+    display: flex;
+    width: 150px;
+    margin: 10px;
+  
+    
+}
+
+.photosAbout {
+    width: 100%;
+}
