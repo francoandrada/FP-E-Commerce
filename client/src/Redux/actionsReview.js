@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DELETE, GET_AVERAGE } from './actionsName';
+import { DELETE, GET_AVERAGE, SAVE_DATA } from './actionsName';
 
 export function getAverage(productId) {
 	return async (dispatch) => {
@@ -18,15 +18,3 @@ export function getAverage(productId) {
 }
 
 
-export function deleteAverage() {
-	return async (dispatch) => {
-		try {
-			
-			 dispatch({
-			 	type: DELETE,
-			 })
-		} catch (error) {
-			console.log(error);
-		}
-	};
-}

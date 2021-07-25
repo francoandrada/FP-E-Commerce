@@ -1,7 +1,8 @@
-import { DELETE, GET_AVERAGE } from '../actionsName';
+import { DELETE, GET_AVERAGE, SAVE_DATA } from '../actionsName';
 
 const initialState = {
 	stars: [],
+	data: undefined
 };
 function reviewsReducer(state = initialState, action) {
 	switch (action.type) {
@@ -9,10 +10,7 @@ function reviewsReducer(state = initialState, action) {
 			return {
 				stars: action.payload,
     }
-		case DELETE:
-			return {
-				stars: [],
-			};
+
 		default:
 			return state;
 	}

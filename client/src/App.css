@@ -26,3 +26,8 @@
 	width: 100%;
 	padding: 2rem 0;
 }
+@media only screen and (max-width: 430px) {
+	.totalvh{
+		min-height: 0;
+	}
+}

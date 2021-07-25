@@ -41,30 +41,36 @@ function Highlights() {
 		<div>
 			<div>
 				<div className='divCarrousel'>
-					<div className='containerIcon'>
-						<BsCaretLeftFill
-							className='icon'
-							onClick={handlePrevPage}
-						></BsCaretLeftFill>
+					<div className='Carrousel'>
+						{highlights.length !== 0 &&
+							highlights
+								.slice(currentPage.first, currentPage.last)
+								.map((el) => {
+									return (
+										<div key={el.id}>
+											<HighlightProd
+												id={el.id}
+												image={el.image}
+												name={el.name}
+												price={el.price}
+											/>
+										</div>
+									);
+								})}
 					</div>
-					{highlights.length !== 0 &&
-						highlights.slice(currentPage.first, currentPage.last).map((el) => {
-							return (
-								<div key={el.id}>
-									<HighlightProd
-										id={el.id}
-										image={el.image}
-										name={el.name}
-										price={el.price}
-									/>
-								</div>
-							);
-						})}
-					<div className='containerIcon'>
-						<BsCaretRightFill
-							className='icon'
-							onClick={handleNextPage}
-						></BsCaretRightFill>
+					<div className='IconsContainer'>
+						<div className='containerIcon'>
+							<BsCaretLeftFill
+								className='icon'
+								onClick={handlePrevPage}
+							></BsCaretLeftFill>
+						</div>
+						<div className='containerIcon'>
+							<BsCaretRightFill
+								className='icon'
+								onClick={handleNextPage}
+							></BsCaretRightFill>
+						</div>
 					</div>
 				</div>
 			</div>

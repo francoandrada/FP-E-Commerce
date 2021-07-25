@@ -91,6 +91,8 @@ function UserOrdersList() {
 								name={od.name}
 								price={od.price}
 								prodInfo={od}
+								id={od.id}
+							
 									
 								/>
 						</div>

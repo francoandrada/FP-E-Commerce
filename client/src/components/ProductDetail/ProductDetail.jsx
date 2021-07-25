@@ -6,7 +6,7 @@ import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import { Link } from 'react-router-dom';
-import Review from '../Reviews/Review';
+import Review from '../Reviews/StarAverage';
 
 
 function DetailProduct(props) {

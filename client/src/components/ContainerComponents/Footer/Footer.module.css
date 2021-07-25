@@ -1,8 +1,10 @@
 .footerContainer {
 	background-color: #303030;
 	margin-top: 1rem;
-	height: 70px;
-	top: 100%;
+	padding: .5rem;
+	/* height: 70px;
+	bottom: 1%;
+	position:absolute; */
 }
 
 .footerInfo {
@@ -74,4 +76,35 @@
 
 a:link {
 	color: #ff3c4a;
+}
+@media only screen and (max-width: 430px) {
+    .logo {
+		font-size: 18px;
+	}
+	.footerContainer{
+		width: 100%;
+	}
+.contentContainer {
+		width: 40%;
+	font-size: 12px;
+
+}
+.contentContainer span {
+	margin: 1em;
+}
+.containerGit {
+	width: 1.5em;
+	height: 1.5em;
+}
+.contentContact {
+	width: 27%;
+	height: 100%;
+	float: right;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	padding-block-end: 2px;
+	flex-direction: row;
+	display: flex;
+}
 }

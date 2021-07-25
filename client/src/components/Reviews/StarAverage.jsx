@@ -13,11 +13,7 @@ const Review = () => {
 
 	const starAverage = useSelector((state) => state.reviews.stars);
 
-    console.log(starAverage)
-	// if (starAverage.length === 1) {
-	// 	console.log('SEGUNFO', starAverage);
-	// }
-
+    
 
 	return (
 		<div>

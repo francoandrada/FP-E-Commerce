@@ -15,6 +15,11 @@ const Icon = styled.div`
     justify-content: flex-end;
     margin: 0em 10% 0em 0em;
     cursor: pointer;
+
+    @media only screen and (max-width: 430px) {
+        font-size:20px;
+        margin-right: 0.5em
+    }
 `;
 
 const GlobalStyle = createGlobalStyle`

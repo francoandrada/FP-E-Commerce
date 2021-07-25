@@ -74,3 +74,4 @@ export const GET_USER_ORDERS = 'GET_USER_ORDERS';
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const GET_AVERAGE = 'GET_AVERAGE';
 export const DELETE = 'DELETE';
+export const SAVE_DATA = 'SAVE_DATA';

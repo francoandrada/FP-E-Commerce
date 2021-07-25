@@ -13,6 +13,7 @@ import ShoppingCart from './components/ContainerComponents/ShoppingCart/Shopping
 import Footer from './components/ContainerComponents/Footer/Footer';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
+import AboutView from './components/AboutSection/AboutView';
 import Error404View from './components/ErrorComponents/Error404View';
 
 import './App.css';
@@ -21,6 +22,7 @@ import './App.css';
 import CartModal from './components/CartModal/CartModal';
 import WebHook from './components/ShoppingCartComponents/WebHook';
 import Shipping from './components/ShoppingCartComponents/Shipping';
+import UserReview from './components/Reviews/UserReview';
 
 function App({ location }) {
 	/* ======================================================
@@ -56,7 +58,9 @@ function App({ location }) {
 					<Route path='/shoppingcart/shipping' exact component={Shipping} />
 					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
+					<Route path='/about' exact component={AboutView} />
 					<Route path='/error' exact component={Error404View} />
+					<Route path='/review/:id' exact component={UserReview} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}
