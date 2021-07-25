@@ -64,3 +64,8 @@ export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
 
 //user account
 export const GET_USER_ORDERS = 'GET_USER_ORDERS';
+
+//cryptos
+export const GET_RATES = 'GET_RATES';
+
+

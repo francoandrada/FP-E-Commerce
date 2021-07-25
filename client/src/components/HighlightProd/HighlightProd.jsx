@@ -1,11 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ButtonRed from '../StyledComponents/ButtonRed';
+import ButtonCrypto from '../StyledComponents/ButtonCrypto'
 import SubtitleStyle from '../StyledComponents/SubtitleStyle';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import './HighlightProd.css';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 function HighlightProd({ id, image, name, price }) {
+
+	const arsBtc = useSelector((state) => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+
+	const btcRate = parseFloat(arsBtc)
+
+	// console.log(parseFloat(arsBtc))
+	const date = new Date(rateUpdateTime * 1000);
+	// console.log(date)
+
+	console.log(price)
+
+
 	var formatNumber = {
 		separator: '.',
 		decimalSeparator: ',',
@@ -46,6 +62,7 @@ function HighlightProd({ id, image, name, price }) {
 						<Link to={`/catalog/${id}`}>
 							<ButtonRed>More Info</ButtonRed>
 						</Link>
+						<ButtonCrypto>₿ {(price*btcRate).toFixed(6)}</ButtonCrypto>
 					</div>
 				</div>
 			</div>

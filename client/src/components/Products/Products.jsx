@@ -11,8 +11,13 @@ import {
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
+import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 
 function Products() {
+	const arsBtc = useSelector((state) => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const btcRate = parseFloat(arsBtc);
+
 	const dispatch = useDispatch();
 	let allProducts = useSelector((state) => state.product.allProducts);
 
@@ -133,6 +138,11 @@ function Products() {
 						var formatPrice = formatNumber.new(p.price, '$');
 						return (
 							<div key={p.id} className={styles.card}>
+								<div className={styles.buttonCrypto}>
+									<ButtonCrypto>
+										₿ {(p.price * btcRate).toFixed(6)}
+									</ButtonCrypto>
+								</div>
 								<Link key={p.id} to={`/catalog/${p.id}`}>
 									<div className={styles.cardImage}>
 										<img className={styles.img} src={p.image} alt='product' />
@@ -153,7 +163,6 @@ function Products() {
 									<div className={styles.buttonBuy}>
 										{p.stock > 0 ? (
 											<button
-
 												id={styles.btnBuy}
 												type='submit'
 												onClick={() => dispatch(addToCart(p))}
