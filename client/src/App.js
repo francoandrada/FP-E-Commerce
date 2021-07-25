@@ -21,6 +21,7 @@ import './App.css';
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
 import WebHook from './components/ShoppingCartComponents/WebHook';
+import theChatBot from './components/ChatBotComponents/RenderChat';
 
 function App({ location }) {
 	/* ======================================================
@@ -57,6 +58,7 @@ function App({ location }) {
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/about' exact component={AboutView} />
 					<Route path='/error' exact component={Error404View} />
+					<Route path='/chatbot' exact component={theChatBot} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}

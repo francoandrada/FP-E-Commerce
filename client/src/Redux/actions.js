@@ -51,6 +51,12 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
+	INPUT_SUCCESS,
+	INPUT_FAIL,
+	SESSION_SUCCESS_CHAT,
+	SESSION_FAIL_CHAT,
+	MESSAGE_FAIL,
+	MESSAGE_SUCCESS
 } from './actionsName';
 
 import axios from 'axios';
@@ -740,3 +746,38 @@ export function postCartCrypto(data) {
 		}
 	};
 }
+
+///////////////////////////////// CHATBOT //////////////////////////
+export function userMessage( message){
+return async (dispatch)=> {
+try {
+	dispatch({type:INPUT_SUCCESS, payload: message})
+} catch (error) {
+	dispatch({type:INPUT_FAIL})
+}
+}
+}
+
+export function createSessionBot(){
+	return async (dispatch)=> {
+	try {
+		const res = await axios.get("/api/watson/session")
+		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
+	} catch (error) {
+		dispatch({type: SESSION_FAIL_CHAT})
+	}
+	}
+}
+ export function sendMessageBot(message){
+	 return async (dispatch)=> {
+		 try {
+			const body = {input: message}
+			const res= axios.post("api/watson/message", body)
+			console.log(res) 
+			dispatch({type:MESSAGE_SUCCESS, type: res.data.output.generic[0].text})
+		 } catch (error) {
+			 dispatch({type: MESSAGE_FAIL})
+		 }
+	 }
+ }
+ 

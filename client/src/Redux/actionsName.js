@@ -59,8 +59,14 @@ export const CREATE_CART_USER = 'CREATE_CART_USER';
 //deploy
 export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
 
-/////////////////ADMIN
-// export const CREATED_BRAND= 'CREATED_BRAND';
-
 //user account
 export const GET_USER_ORDERS = 'GET_USER_ORDERS';
+
+/////CHATBOT /// 
+export const INPUT_SUCCESS= 'INPUT_SUCCESS';
+export const INPUT_FAIL= 'INPUT_FAIL'
+export const SESSION_SUCCESS_CHAT = 'SESSION_SUCCESS_CHAT'
+export const SESSION_FAIL_CHAT = 'SESSION_FAIL_CHAT'
+export const MESSAGE_SUCCESS = 'MESSAGE_SUCCESS'
+export const MESSAGE_FAIL = 'MESSAGE_FAIL'
+
