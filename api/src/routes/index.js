@@ -15,9 +15,11 @@ const webHooks = require('./webHooks');
 const cartRoutes = require('./cartRoutes');
 const favoritesRoutes = require('./favoritesRoutes');
 const coinpaymentRoutes = require('./coinpaymentRoutes');
+const watsonRoutes = require('./watson');
 const router = Router();
 
 // router.use('/pagination', paginationRouter);
+router.use('/watson', watsonRoutes);
 router.use('/products', productsRoutes);
 router.use('/categories', categoriesRoutes);
 router.use('/users', usersRoutes);
