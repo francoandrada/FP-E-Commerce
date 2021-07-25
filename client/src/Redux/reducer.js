@@ -10,6 +10,9 @@ import stockReducer from './reducers/stockReducer';
 import userAccountReducer from './reducers/userAccountReducer';
 import chatBotReducer from './reducers/chatBotReducer';
 
+import reviewsReducer from './reducers/reviewsReducer';
+import cryptoReducer from './reducers/cryptoReducer';
+
 export default combineReducers({
 	user: userReducer,
 	product: productReducer,
@@ -20,5 +23,13 @@ export default combineReducers({
 	admin: adminReducer,
 	stock: stockReducer,
 	useraccount: userAccountReducer,
+<<<<<<< HEAD
 	chatbot: chatBotReducer,
+=======
+
+	reviews: reviewsReducer,
+
+	crypto: cryptoReducer
+
+>>>>>>> main
 });

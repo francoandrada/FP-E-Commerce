@@ -55,6 +55,8 @@ export const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM';
 export const SET_CART = 'SET_CART';
 export const GET_PAY = 'GET_PAY';
 export const CREATE_CART_USER = 'CREATE_CART_USER';
+export const SAVE_ADDRESS_ORDER = 'SAVE_ADDRESS_ORDER';
+export const SET_AMMOUNT = 'SET_AMMOUNT';
 
 //deploy
 export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
@@ -69,4 +71,11 @@ export const SESSION_SUCCESS_CHAT = 'SESSION_SUCCESS_CHAT'
 export const SESSION_FAIL_CHAT = 'SESSION_FAIL_CHAT'
 export const MESSAGE_SUCCESS = 'MESSAGE_SUCCESS'
 export const MESSAGE_FAIL = 'MESSAGE_FAIL'
+//reviews
+export const CREATE_REVIEW = 'CREATE_REVIEW';
+export const GET_AVERAGE = 'GET_AVERAGE';
+export const POST_REVIEW = 'POST_REVIEW';
+
+//cryptos
+export const GET_RATES = 'GET_RATES';
 

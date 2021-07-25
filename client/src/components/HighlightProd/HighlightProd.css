@@ -3,10 +3,23 @@
 	flex-direction: column;
 	justify-content: center;
 	background-color: rgb(255, 255, 255);
-	margin: 1.25em;
-	width: 15.625em;
-	height: 20em;
+	margin: 0.90em 1.70em;
+	width: 280px;
+	height: 22em;
 	border-radius: 14px;
+	padding: 0.625em;
+	position: relative;
+
+}
+
+.buttonCrypto{
+	display: flex;
+	position: absolute;
+	top: 1%;
+	right: 1%;
+	/* z-index: -1; */
+	justify-content:flex-end;
+	align-items: flex-end;
 }
 
 .highlightProdContainer:hover {
@@ -41,7 +54,7 @@
 	text-align: center;
 	height: 7.5em;
 	padding: 0.625em;
-	color: black;
+	color: rgb(84, 83, 83);
 }
 
 .highlightLinks {
@@ -66,30 +79,36 @@
 @media only screen and (max-width: 430px) {
 	.HighlightTextContainer {
 		font-size: 10px;
+		margin-top: auto;
 	}
 	.highlightProdContainer {
 		flex-direction: row;
 
 		margin: 0.5em;
 		width: 100px;
-		height: 120px;
+		height: 140px;
 		border-radius: 14px;
 	}
 	.ImageDiv {
 		height: 50px;
+		
 	}
-
+	.highlightInfoContainer hr{
+		padding: 0;
+		margin:0;
+	}
 	.HighlightImagSize {
 		width: 45px;
 	}
 	.priceProduct {
-		font-size: 8px;
+		font-size: 10px;
 	}
 	.buyHighlightDiv{
 		display: none;
 	}
 	.highlightInfoContainer{
 		display: flex;
-		flex-direction: row;
+		flex-direction: column-reverse;
 	}
+
 }
