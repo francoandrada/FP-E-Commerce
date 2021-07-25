@@ -1,6 +1,12 @@
 import './BannerContainer.css'
-import ButtonRed from '../StyledComponents/ButtonRed'
+import ButtonRedOther from '../StyledComponents/ButtonRed'
 import TitleStyle from '../StyledComponents/TitleStyle'
+import styled from 'styled-components';
+
+const ButtonRedHome = styled(ButtonRedOther)`
+    width: 300px;
+    font-weight: bold;
+`;
 
 function BannerContainer() {
 
@@ -8,7 +14,7 @@ function BannerContainer() {
         <div className='BannerContainer'>
             <div className='Bannerinfo'> 
                 <TitleStyle>50%<br></br>on all our best<br></br>products.</TitleStyle>
-                <ButtonRed>See Offers!</ButtonRed>
+                <ButtonRedHome>Pay with CRYPTO!</ButtonRedHome>
             </div>
         </div>
     )
