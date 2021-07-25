@@ -8,6 +8,8 @@ import cartReducer from './reducers/cartReducer';
 import adminReducer from './reducers/adminReducer';
 import stockReducer from './reducers/stockReducer';
 import userAccountReducer from './reducers/userAccountReducer';
+
+import reviewsReducer from './reducers/reviewsReducer';
 import cryptoReducer from './reducers/cryptoReducer';
 
 export default combineReducers({
@@ -20,5 +22,9 @@ export default combineReducers({
 	admin: adminReducer,
 	stock: stockReducer,
 	useraccount: userAccountReducer,
+
+	reviews: reviewsReducer,
+
 	crypto: cryptoReducer
+
 });

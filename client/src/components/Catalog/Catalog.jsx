@@ -22,9 +22,11 @@ function Catalog() {
 		dispatch(getProducts());
 	}, [dispatch]);
 
+
 	useEffect(() => {
 		dispatch(getRates());
 	}, [dispatch]);
+
 
 	return (
 		<div id={styles.catalogue}>

@@ -6,6 +6,9 @@ import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import { Link } from 'react-router-dom';
+import Review from '../Reviews/StarAverage';
+
+
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -39,27 +42,28 @@ function DetailProduct(props) {
 												Add to Cart
 											</ButtonRedOther>
 										</div>
-
-										<div class='m-3'>
-											<Link to='/shoppingcart'>
+										<Link to='/shoppingcart'>
+											<div class='m-3'>
 												<ButtonGreyOther
-													class='btn btn-secondary'
+													className='btn btn-outline-danger'
 													type='submit'
 													onClick={() => dispatch(addToCart(productDetail))}
 												>
 													Checkout
 												</ButtonGreyOther>
-											</Link>
-										</div>
+											</div>
+										</Link>
 									</>
-								)
-									: (
-										<>
+								) : (
+									<>
 										<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
-										
-										<input type='checkbox'/> <label className={styles.label}> I want to know when it is available</label>
-										</>
-									)}
+										<input type='checkbox' />{' '}
+										<label className={styles.label}>
+											{' '}
+											I want to know when it is available
+										</label>
+									</>
+								)}
 							</div>
 						</div>
 					</div>
@@ -102,6 +106,7 @@ function DetailProduct(props) {
 					</div>
 				</div>
 			</div>
+			<Review />
 		</div>
 	);
 }

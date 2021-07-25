@@ -45,13 +45,17 @@ import {
 	CREATE_CART_USER,
 	PRODUCT_WITH_ORDER,
 	USER_WITH_ORDER,
+	SAVE_ADDRESS_ORDER,
+	SET_AMMOUNT,
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
 	GET_RATES
+
 } from './actionsName';
 
 import axios from 'axios';
@@ -624,7 +628,7 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		console.log(data);
+		console.log('dataaa',data);
 
 		try {
 			const res = await axios.post(
@@ -632,7 +636,6 @@ export function postCart(data) {
 				data
 			);
 
-			console.log(res.data);
 
 			dispatch({
 				type: SET_CART,
@@ -702,6 +705,24 @@ export function getCartUser(id) {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+}
+
+export function saveAddress(address) {
+	console.log(address)
+	return async (dispatch) => {
+		dispatch({
+			type: SAVE_ADDRESS_ORDER,
+			payload: address,
+		});
+	};
+}
+export function saveAmmount(ammount) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_AMMOUNT,
+			payload: ammount
+		});
 	};
 }
 

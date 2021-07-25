@@ -21,6 +21,8 @@ import './App.css';
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
 import WebHook from './components/ShoppingCartComponents/WebHook';
+import Shipping from './components/ShoppingCartComponents/Shipping';
+import UserReview from './components/Reviews/UserReview';
 
 function App({ location }) {
 	/* ======================================================
@@ -53,10 +55,12 @@ function App({ location }) {
 					<Route path='/searchproduct' exact component={SearchProducts} />
 					<Route path='/cartTest' exact component={CartModal} />
 					<Route path='/shoppingcart' exact component={ShoppingCart} />
+					<Route path='/shoppingcart/shipping' exact component={Shipping} />
 					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/about' exact component={AboutView} />
 					<Route path='/error' exact component={Error404View} />
+					<Route path='/review/:id' exact component={UserReview} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}

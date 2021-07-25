@@ -9,8 +9,14 @@ const WebHook = () => {
 	const status = new URLSearchParams(search).get('collection_status');
 	const userData = useSelector((state) => state.user.userData);
 	const cart = useSelector((state) => state.cart.cart);
-console.log(cart)
+
+	
 	const dispatch = useDispatch();
+
+	
+		localStorage.removeItem('cart');
+
+		
 
 	useEffect(() => {
 		dispatch(getPayInfo({id, email: userData.email, items: cart} ));
@@ -25,12 +31,7 @@ console.log(cart)
 				<h5>Details of your purchase</h5>
 				<p>Id: {id}</p>
 				<p>Status: {status}</p>
-				{/* {userPay ? (
-					<>
-						<p>Products: {userPay.description}</p>
-						<p>Buyer: {userPay.pay.email}</p>
-					</>
-				) : null} */}
+
 				<p className=' p-2 bg-secondary'>
 
 					An email has been sent with more info about your purchase

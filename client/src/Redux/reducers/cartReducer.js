@@ -6,6 +6,8 @@ import {
 	SET_CART,
 	GET_PAY,
 	CREATE_CART_USER,
+	SAVE_ADDRESS_ORDER,
+	SET_AMMOUNT,
 } from '../actionsName';
 
 const initialState = {
@@ -13,6 +15,8 @@ const initialState = {
 	currentItem: null,
 	link: '',
 	userPay: null,
+	address: null,
+	ammount: 0,
 };
 
 function cartReducer(state = initialState, action) {
@@ -22,7 +26,6 @@ function cartReducer(state = initialState, action) {
 			const inCart = state.cart.find((elem) =>
 				elem.id === action.payload.id ? true : false
 			);
-			
 
 			return {
 				...state,
@@ -60,6 +63,7 @@ function cartReducer(state = initialState, action) {
 				currentItem: action.payload,
 			};
 		case SET_CART:
+			
 			return {
 				...state,
 				link: action.payload,
@@ -71,13 +75,23 @@ function cartReducer(state = initialState, action) {
 				userPay: action.payload,
 			};
 		case CREATE_CART_USER:
-		return {
+			return {
 				...state,
-				cart: action.payload.map(el => {
-					let qty = el.qty
-					let newObj = el.product
-					return {...newObj, qty}
-				})
+				cart: action.payload.map((el) => {
+					let qty = el.qty;
+					let newObj = el.product;
+					return { ...newObj, qty };
+				}),
+			};
+		case SAVE_ADDRESS_ORDER:
+			return {
+				...state,
+				address: action.payload,
+			};
+		case SET_AMMOUNT:
+			return {
+				...state,
+				ammount: action.payload,
 			};
 		default:
 			return state;

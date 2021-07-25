@@ -16,8 +16,6 @@ const ForgotPassword = () => {
 	const dispatch = useDispatch();
 	const setError = useSelector((state) => state.user.setError);
 
-	const alert = useSelector((state) => state.user.alert);
-
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -29,17 +27,17 @@ const ForgotPassword = () => {
 		}),
 		onSubmit: (values) => {
 			dispatch(forgotPassword(values.email));
+			setTimeout(() => {
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Check your inbox to reset the password!',
+					showConfirmButton: false,
+					timer: 4000,
+				});
+			}, 1000);
 		},
 	});
-	if (alert !== null) {
-		Swal.fire({
-			position: 'center',
-			icon: 'success',
-			title: 'Check your inbox to reset the password!',
-			showConfirmButton: false,
-			timer: 3000,
-		});
-	}
 
 	return (
 		<div className=' m-5 d-flex justify-content-center '>
