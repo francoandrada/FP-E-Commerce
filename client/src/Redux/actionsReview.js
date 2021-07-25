@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DELETE, GET_AVERAGE, SAVE_DATA } from './actionsName';
+import { DELETE, GET_AVERAGE, POST_REVIEW, SAVE_DATA } from './actionsName';
 
 export function getAverage(productId) {
 	return async (dispatch) => {
@@ -16,5 +16,19 @@ export function getAverage(productId) {
 		}
 	};
 }
+
+
+export function postReview(data) {
+	return async (dispatch) => {
+        console.log('ID PRODUCTO', data)
+		try {
+			const res = await axios.post('http://localhost:3001/reviews', data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
 
 

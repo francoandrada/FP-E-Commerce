@@ -118,7 +118,6 @@ const LogIn = () => {
 				.required('Enter an email'),
 			password: Yup.string()
 				.required('Enter a password')
-				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));

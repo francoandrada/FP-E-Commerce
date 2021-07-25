@@ -14,8 +14,6 @@ export const ButtonGreyOther = styled.button`
     } 
 
 `;
-    
-{/* <Link to='/shoppingcart'> */}
 
 
 export default ButtonGreyOther;

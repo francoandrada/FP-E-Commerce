@@ -12,9 +12,9 @@ const Review = () => {
 	}, [productId]);
 
 	const starAverage = useSelector((state) => state.reviews.stars);
-
-    
-
+	console.log((starAverage[0].rating))
+	var subTotalFormatted=parseFloat(starAverage[0].rating).toFixed(2);
+	console.log(subTotalFormatted)
 	return (
 		<div>
 			{starAverage.length > 0 && starAverage[0].rating  !== null? (
@@ -24,7 +24,8 @@ const Review = () => {
                      isHalf={true} 
                      edit={false} 
                      color='#000000' />
-		
+				
+		<p>{parseFloat(starAverage[0].rating).toFixed(2)}</p>
 				</div>
 			) : null
             }
