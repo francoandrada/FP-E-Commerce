@@ -8,6 +8,18 @@
 	height: 22em;
 	border-radius: 14px;
 	padding: 0.625em;
+	position: relative;
+
+}
+
+.buttonCrypto{
+	display: flex;
+	position: absolute;
+	top: 1%;
+	right: 1%;
+	/* z-index: -1; */
+	justify-content:flex-end;
+	align-items: flex-end;
 }
 
 .highlightProdContainer:hover {
