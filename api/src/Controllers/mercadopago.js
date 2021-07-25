@@ -45,14 +45,11 @@ const createOrder = async function createOrder(req, res) {
 							where: { userId: id },
 						});
 						console.log(userFind);
-						try {
-							if (userFind) {
-								await order.setUser(userFind.dataValues.userId);
-							} else {
-								res.status(400).json({ msg: 'Error' });
-							}
-						} catch (error) {
-							console.log(error);
+
+						if (userFind) {
+							await order.setUser(userFind.dataValues.userId);
+						} else {
+							res.status(400).json({ msg: 'Error' });
 						}
 					})();
 				});

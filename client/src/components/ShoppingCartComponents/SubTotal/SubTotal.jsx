@@ -2,10 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
-<<<<<<< HEAD
-=======
-import { postCart, postCartCrypto } from '../../../Redux/actions';
->>>>>>> main
+
+import { postCartCrypto } from '../../../Redux/actions';
+
 import { formatNumber } from '../../../helper/priceFormater';
 import { postCart, saveAmmount } from '../../../Redux/actions';
 
@@ -19,10 +18,8 @@ function SubTotal({address}) {
 
 	const token = useSelector((state) => state.user.token);
 
-<<<<<<< HEAD
-=======
 	const user = useSelector((state) => state.user.userData);
->>>>>>> main
+
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -43,13 +40,17 @@ function SubTotal({address}) {
 		
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
+	let status = 'created';
+	let array = [];
 
+	for (let i = 0; i < cartProducts.length; i++) {
+		const element = {
+			prodId: cartProducts[i].id,
+			name: cartProducts[i].name,
+			price: cartProducts[i].price,
+			qty: cartProducts[i].qty,
+		};
 
-<<<<<<< HEAD
-	let totalFormat = formatNumber.new(totalPrice, '$');
-	dispatch(saveAmmount(totalPrice))
-	
-=======
 		array.push(element);
 	}
 
@@ -62,13 +63,15 @@ function SubTotal({address}) {
 			status: status,
 		};
 	}
+
 	let totalFormat = formatNumber.new(totalPrice, '$');
+	dispatch(saveAmmount(totalPrice))
+	
 
 	const handleClickCrypto = () => {
 		dispatch(postCartCrypto(bodyObject))
 	};
 
->>>>>>> main
 	return (
 		<div>
 			<div className={style.subtotalContainerMain}>
@@ -86,12 +89,12 @@ function SubTotal({address}) {
 				</div>
 
 				{token ? (
-<<<<<<< HEAD
-					<NavLink to='/shoppingcart/shipping'>
-						<button className={style.paymentButton}
-						>Buy Now</button>
-					</NavLink>
-=======
+
+					// <NavLink to='/shoppingcart/shipping'>
+					// 	<button className={style.paymentButton}
+					// 	>Buy Now</button>
+					// </NavLink>
+
 					<div>
 						<button
 							className={style.paymentButton}
@@ -108,7 +111,7 @@ function SubTotal({address}) {
 							/>
 						</NavLink>
 					</div>
->>>>>>> main
+
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Buy Now</button>

@@ -6,6 +6,9 @@ import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import { Link } from 'react-router-dom';
+import Review from '../Reviews/Review';
+
+
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -103,6 +106,7 @@ function DetailProduct(props) {
 					</div>
 				</div>
 			</div>
+			<Review />
 		</div>
 	);
 }

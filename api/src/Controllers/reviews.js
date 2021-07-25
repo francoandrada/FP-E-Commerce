@@ -1,84 +1,61 @@
 const { Sequelize } = require('sequelize');
 const { Review, User, Product } = require('../db');
 
+//------------------------CREAR LA REVIEW------------------------
 const newReview = async function newReview(req, res) {
+	const { userId, productId, description, stars } = req.body;
+	console.log(req.body);
 	try {
-		const { userId, productId, description, stars } = req.body;
-		console.log(req.body);
-		
+		var userFind = await User.findOne({
+			where: { userId: userId },
+		});
+		if (userFind) {
 			var review = await Review.create(
 				{
 					description,
 					stars,
+					userId,
+					productId,
 				},
 				{
-					fields: ['description', 'stars'],
+					fields: ['description', 'stars', 'userId', 'productId'],
 				}
-				).then((review) => {
-					
-					(async function() {
-				
-						var userFind = await User.findOne({
-							where: { userId: userId },
-						});
-						console.log(userFind);
-						if(userFind){						
-								await review.setUser(userFind.dataValues.userId);
-						}
-						var productFind = await Product.findOne({
-							where: { id: productId },
-						});
-
-						if (productFind) {
-							await review.setProduct(productFind.dataValues.id);
-						}
-					})();
-				// var userFind =  await User.findOne({
-				// 	where: { userId: userId },
-				// });
-				// console.log(userFind)
-
-				// try{
-				// 	await review.addUser(userFind.dataValues.userId);
-				// } catch(error){
-				// 	console.log(error);
-				// }
-				})
-		
+			).then((review) => {
+				res.send(review);
+			});
+		} else {
+			res.status(404).send('THE USER DOESNT EXIST');
+		}
 	} catch (error) {
 		console.log(error);
 	}
 };
-//-----------------------------------
-// const newReview = async function newReview(req, res) {
-// 	try {
-// 		const { userId, productId, description, stars } = req.body;
 
-// 		const userReview = await User.findOne({
-// 			where: {
-// 				userId,
-// 			},
-// 		});
-// 		const review = await Review.create({
+//------------------------PROMEDIO DE ESTRELLAS------------------------
+const getAvergedStars = async (req, res) => {
+	const { productId } = req.body;
+	console.log('PRODUCT ID', productId);
+	try {
+		if (productId !== undefined) {
+			const prom = await Review.findAll({
+				where: {
+					productId: productId,
+				},
+				attributes: [[Sequelize.fn('avg', Sequelize.col('stars')), 'rating']],
+			});
 
-// 			attributes: ['description', 'stars'],
-// 			where: {
-// 				description,
-// 				stars,
+			res.send(prom);
+		}
+	} catch (error) {
+		res.send(error);
+	}
+};
 
-// 			}
+// SELECT AVG(stars)
+// FROM public.reviews
+// where "productId" = 2;
 
-// 		})
-// 		Promise.All([userReview, review]) {
-// 			var response = await userReview.addReview( review, 	});
-// 		}
-
-// 		res.status(200).json(response);
-// 	} catch (error) {
-// 		res.send(error);
-// 	}
-// };
-
+//------------------------TODAS LAS REVIEWS------------------------
 const getAllReviews = async function getAllReviews(req, res) {
 	try {
 		const allReviews = await Review.findAll();
@@ -90,5 +67,6 @@ const getAllReviews = async function getAllReviews(req, res) {
 
 module.exports = {
 	getAllReviews,
+	getAvergedStars,
 	newReview,
 };
