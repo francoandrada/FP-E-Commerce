@@ -3,7 +3,7 @@ const { productsDb } = require('./src/Controllers/products.js');
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
-conn.sync({ force: false })
+conn.sync({ force: false})
 	.then(() => {
 		console.log('-----successful database connection-----');
 		server.listen(3001, () => {
