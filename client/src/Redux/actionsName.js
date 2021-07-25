@@ -67,10 +67,11 @@ export const SET_MANUAL_AUTHENTICATION = 'SET_MANUAL_AUTHENTICATION';
 //user account
 export const GET_USER_ORDERS = 'GET_USER_ORDERS';
 
-
-
-
 //reviews
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const GET_AVERAGE = 'GET_AVERAGE';
 export const POST_REVIEW = 'POST_REVIEW';
+
+//cryptos
+export const GET_RATES = 'GET_RATES';
+

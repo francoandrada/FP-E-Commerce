@@ -121,7 +121,6 @@
 .flexColumnEcommerce {
 	flex-direction: row;
 	display: flex;
-	margin-left: -7em;
 }
 
 .modalSearchContainerEcommerce {
@@ -168,7 +167,8 @@
 	justify-content: center;
 	width: 70%;
 	color: white;
-	padding-left: 10%;
+	margin: 0 auto;
+	/* padding-left: 10%; */
 }
 
 .sections a {
@@ -230,8 +230,11 @@
 }
 @media only screen and (max-width: 430px) {
 	.inputEcommerce {
-		width: 9.375rem;
+		width: 10rem;
 		font-size: 12px;
+	}
+	.flexColumnEcommerce{
+		margin-left: -10rem;
 	}
 	.searchBtnEcommerce {
 		top: 2.375em;

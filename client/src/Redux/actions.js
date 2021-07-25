@@ -54,7 +54,7 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
-
+	GET_RATES
 
 } from './actionsName';
 
@@ -763,21 +763,19 @@ export function postCartCrypto(data) {
 	};
 }
 
-
-
-//------------------------------REVIEWS------------------------------
-export function createReview(data) {
+/// COINPAYMENTS ACTIONS
+export function getRates() {
 	return async (dispatch) => {
-		console.log(data);
 
 		try {
-			const res = await axios.post('http://localhost:3001/reviews',data);
-
+			const res = await axios.get('http://localhost:3001/coinpayment/rate');
+			dispatch({
+				type: GET_RATES,
+				payload: res.data,
+			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
-
-
 

@@ -3,7 +3,7 @@ import FilterCategories from '../FilterCategories/FilterCategories';
 // import OrderByPrice from '../OrderBox/OrderByPrice'
 import { useDispatch /*useSelector*/ } from 'react-redux';
 import { useEffect } from 'react';
-import { getCategories, getBrands, getProducts } from '../../Redux/actions';
+import { getCategories, getBrands, getProducts, getRates } from '../../Redux/actions';
 import styles from './Catalog.module.css';
 // import FilterBrands from '../FilterBrand/FilterBrands';
 
@@ -20,6 +20,11 @@ function Catalog() {
 
 	useEffect(() => {
 		dispatch(getProducts());
+	}, [dispatch]);
+
+
+	useEffect(() => {
+		dispatch(getRates());
 	}, [dispatch]);
 
 

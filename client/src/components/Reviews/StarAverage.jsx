@@ -12,9 +12,7 @@ const Review = () => {
 	}, [productId]);
 
 	const starAverage = useSelector((state) => state.reviews.stars);
-	console.log((starAverage[0].rating))
-	var subTotalFormatted=parseFloat(starAverage[0].rating).toFixed(2);
-	console.log(subTotalFormatted)
+
 	return (
 		<div>
 			{starAverage.length > 0 && starAverage[0].rating  !== null? (
