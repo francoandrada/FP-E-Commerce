@@ -23,11 +23,11 @@
 
 .data {
 	display: flex;
-	padding: 0.5rem;
-	flex-direction: column;
+	padding-left: 20px;
+	padding-right: 20px;
 	color: #6c757d;
 	min-height: 54.4px;
-	text-align: center;
+	text-align: left;
 }
 
 .lineProd {
@@ -98,22 +98,22 @@
 	.card {
 		background-color: white;
 		width: min-content;
-		margin: 1rem 1.5rem;
+		margin: 1rem 0.5rem;
 		border-radius: 8px;
 		height: 368px;
 	}
 	.cardImage {
-		padding: 1rem;
+		padding: 20px;
 	}
 	.img {
-		width: 200px;
-		height: 200px;
+		width: 150px;
+		height: 150px;
 	}
 
 	.productName {
 		font-size: 13px;
 		font-weight: 500;
-		text-align: center;
+		text-align: left;
 	}
 }
 
@@ -129,13 +129,13 @@
 		padding: 1rem;
 	}
 	.img {
-		width: 250px;
-		height: 250px;
+		width: 230px;
+		height: 230px;
 	}
 	.productName {
 		font-size: 15px;
 		font-weight: 500;
-		text-align: center;
+		text-align: left;
 	}
 	.productPrice {
 		float: left;
@@ -149,4 +149,12 @@
 	.buttonBuy button {
 		width: 113px;
 	}
+}
+
+/* ------------ FAVORITE BUTTON STYLE ------------- */
+
+.heartDiv {
+	display: flex;
+	justify-content: flex-end;
+	padding: 5px;
 }

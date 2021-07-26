@@ -8,6 +8,7 @@ import {
 	addToCart,
 	removeFromCart,
 } from '../../Redux/actions';
+import FavoriteButton from '../FavoriteComponent/FavoriteButton'
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
@@ -129,6 +130,7 @@ function Products() {
 	};
 	return (
 		<div className={styles.cardsContainer}>
+			
 			{productsToRender
 				? productsToRender.map((p) => {
 						if (p.name.length > 55) {
@@ -151,8 +153,12 @@ function Products() {
 								<div>
 									<hr id={styles.line} />
 								</div>
+								
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
+									<div className={styles.heartDiv}>
+									<FavoriteButton prod={p}/>
+									</div>
 								</div>
 								{/* <div className={styles.footerCard}> */}
 								<div className='d-flex justify-content-center'>
