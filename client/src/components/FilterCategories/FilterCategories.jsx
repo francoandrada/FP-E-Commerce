@@ -47,7 +47,7 @@ function FilterCategories() {
 			<hr></hr>
 			{categoriesName ? (
 				categoriesName.map((item, index) => (
-					<div key={index} className='form-check'>
+					<div key={index} className={styles.categoriesContainer}>
 						<input
 							className={`${'form-check-input'} ${'orderC'}`}
 							type='checkbox'

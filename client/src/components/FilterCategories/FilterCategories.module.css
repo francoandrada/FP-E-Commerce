@@ -8,3 +8,13 @@
 .title {
 	width: 100%;
 }
+@media only screen and (max-width: 430px){
+	.divCelena h6{
+		font-size: 14px;
+	}
+	
+	.categoriesContainer{
+		font-size: 12px;
+	}
+}
+

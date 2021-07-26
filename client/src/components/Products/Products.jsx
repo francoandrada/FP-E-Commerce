@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
-
+import './index.css'
 function Products() {
 	const arsBtc = useSelector((state) => state.crypto.arsBtc);
 	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
@@ -154,8 +154,8 @@ function Products() {
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
 								</div>
-								{/* <div className={styles.footerCard}> */}
-								<div className='d-flex justify-content-center'>
+								<div className={styles.footerCard}>
+								<div className='footerCard d-flex justify-content-center'>
 									<div className={styles.productPrice}>
 										<span>{formatPrice}</span>
 									</div>
@@ -174,7 +174,7 @@ function Products() {
 										)}
 									</div>
 								</div>
-								{/* </div> */}
+								</div>
 								<div id={styles.paginado}></div>
 							</div>
 						);
