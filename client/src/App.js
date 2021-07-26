@@ -21,7 +21,7 @@ import './App.css';
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
 import WebHook from './components/ShoppingCartComponents/WebHook';
-import TheChatBot from './components/ChatBotComponents/RenderChat';
+import WatsonChat from './components/ChatBotComponents/WatsonChat';
 import Shipping from './components/ShoppingCartComponents/Shipping';
 import UserReview from './components/Reviews/UserReview';
 
@@ -32,7 +32,6 @@ function App({ location }) {
 
 	return (
 		<div className='App'>
-			<div></div>
 			{!location.pathname.includes('/admin') && <Navbar />}
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
@@ -61,7 +60,7 @@ function App({ location }) {
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/about' exact component={AboutView} />
 					<Route path='/error' exact component={Error404View} />
-					<Route path='/chatbot' exact component={TheChatBot} />
+					<Route path='/chatbot' exact component={WatsonChat} />
 					<Route path='/review/:id' exact component={UserReview} />
 				</Switch>
 			</div>
