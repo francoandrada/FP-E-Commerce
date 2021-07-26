@@ -7,14 +7,26 @@
 
 .title {
 	width: 100%;
+	margin-top: 1em;
+}
+.categoriesContainer{
+	padding-left: 1.3rem;
 }
 @media only screen and (max-width: 430px){
 	.divCelena h6{
 		font-size: 14px;
 	}
-	
+	.divCelena{
+		width: 35%;
+		padding-left: 1em;
+		margin-bottom: -5em;
+	}
 	.categoriesContainer{
 		font-size: 12px;
+		padding-left: 1.9em;
+	}
+	.filterContainer{
+		margin-left: 1em;
 	}
 }
 

@@ -2,7 +2,6 @@ import { /* useSelector,*/ useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { filterStock } from '../../Redux/actions';
 import styles from '../FilterCategories/FilterCategories.module.css';
-
 function FilterStock() {
 	const dispatch = useDispatch();
 
@@ -27,7 +26,7 @@ function FilterStock() {
 
 	// console.log(categories.products)
 	return (
-		<div className={styles.divCelena}>
+		<div >
 			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderS'}`}

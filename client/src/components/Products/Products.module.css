@@ -165,8 +165,9 @@
 		align-items: center;
 	}
 	.card {
-		width: 150px;
-		height: 15.3125em;
+		width: 170px;
+		height: 16.3125em;
+		padding: 0.5em;
 	}
 	.productName {
 		font-size: 12px;
@@ -180,7 +181,7 @@
 		font-size: 8px;
 	}
 	.productPrice {
-		font-size: 16px;
+		font-size: 14px;
 		margin: 0
 		/* padding-left: 50px;*/
 	}
@@ -193,11 +194,21 @@
 		flex-basis: 100%;
 		font-size: 12px;
 		margin-right: 50%;
+		margin-top: 5%;
 	}
 	#btnBuy {
 		font-size: 12px;
 		
 	}
+	#line{
+		margin:0.5em 5%
+	}
+	.cardsContainer {
+	display: flex;
+	width: 65%;
+	justify-content: space-evenly;
+	margin: 0;
+}
 }
 
 /* ------------ FAVORITE BUTTON STYLE ------------- */
@@ -205,5 +216,5 @@
 .heartDiv {
 	display: flex;
 	justify-content: flex-end;
-	padding: 5px;
+	padding: 0.125em;
 }

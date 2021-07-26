@@ -5,3 +5,9 @@ color: rgb(250, 250, 250);
 .title{
     width: 100%;
 }
+
+@media only screen and (max-width: 430px){
+    .title{
+        font-size: 14px;
+    }
+}
