@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useRef } from "react"
 import { sendMessageBot, userMessage } from "../../Redux/actions"
 import {useDispatch, useSelector} from 'react-redux';
+import styles from "./chatbot.module.css"
 
 const Chat = () => {
  const chat = useSelector((state)=> state.chatbot.messages)
@@ -19,7 +20,7 @@ const Chat = () => {
       const code = e.keyCode || e.which;
   
       if (code === 13) {
-        
+        console.log("xxxxxxxxxxx", message)
         dispatch(userMessage(message));
         dispatch(sendMessageBot(message));
         setMessage("");
@@ -27,17 +28,18 @@ const Chat = () => {
     };
  
     return (
-      <div className="chat">
-        <h1>Chatty the Chatbot</h1>
+      <div className={styles.chat}>
+        <h1>Hello! @Usuario</h1>
       
-        <div class="historyContainer">
+        <div class={styles.historyContainer}>
           {chat.length === 0
             ? ""
-            : chat.map((msg, index) => <div key={index} className={msg.type}>{msg.message}</div>)}
+            : chat.map((msg, index) => <div key={index} className={ msg.type === 'user' ? styles.user : styles.bot}>{msg.message}</div>)}
           <div ref={endOfMessages}></div>
         </div>
        
         <input
+          className={styles.inputChat}
           id="chatBox"
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={handleClick}

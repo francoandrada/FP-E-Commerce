@@ -784,6 +784,7 @@ export function createSessionBot(){
 	return async (dispatch)=> {
 	try {
 		const res = await axios.get("http://localhost:3001/watson/session")
+		console.log(res.data)
 		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
 	} catch (error) {
 		dispatch({type: SESSION_FAIL_CHAT})
@@ -796,7 +797,7 @@ export function createSessionBot(){
 		 try {
 			const body = {input: message.toLowerCase()}
 			const res= await axios.post("http://localhost:3001/watson/message", body)
-			
+			console.log(res.data.output.generic[0].text)
 			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
 		 } catch (error) {
 			 dispatch({type: MESSAGE_FAIL})
