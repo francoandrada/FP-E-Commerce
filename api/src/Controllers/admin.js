@@ -1,4 +1,6 @@
-const { Product, Brand, Category, User } = require('../db');
+const { Product, Brand, Category, User, Image } = require('../db');
+const { upload } = require('./uploadController');
+
 async function postProduct(req, res, next) {
 	try {
 		const {
@@ -30,7 +32,6 @@ async function postProduct(req, res, next) {
 }
 
 async function putProduct(req, res, next) {
-	console.log(req.body);
 	try {
 		const {
 			id,
@@ -43,6 +44,7 @@ async function putProduct(req, res, next) {
 			stock,
 			brand,
 			category,
+			images,
 		} = req.body;
 		let variable = {};
 		const product = await Product.findOne({
@@ -51,16 +53,36 @@ async function putProduct(req, res, next) {
 			},
 		});
 
-		product.id = id
-		product.name = name
-		product.price = price
-		product.priceSpecial = priceSpecial
-		product.description = description
-		product.weight = weight 
-		product.image = image
-		product.stock = stock
-		await product.save()
+		var promis = images.map((i) => {
+			return upload(i);
+		});
+
+		const result = await Promise.all(promis);
+
+		var createImagesDb = result.map((imgDb) => {
+			return Image.findOrCreate({
+				where: {
+					imageUrl: imgDb,
+				},
+			});
+		});
+
+		var imagesResult = await Promise.all(createImagesDb);
+		var filteredImages = imagesResult
+			.flat()
+			.filter((e) => typeof e !== 'boolean');
+
+		product.id = id;
+		product.name = name;
+		product.price = price;
+		product.priceSpecial = priceSpecial;
+		product.description = description;
+		product.weight = weight;
+		product.image = image;
+		product.stock = stock;
+		await product.save();
 		await product.setBrand(brand);
+		await product.addImages(filteredImages);
 		await product.setCategories(parseInt(category));
 		res.send(product);
 	} catch (error) {
