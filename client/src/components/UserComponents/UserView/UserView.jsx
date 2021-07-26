@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getUserOrders, getProducts } from '../../../Redux/actions';
+import { getUserOrders, getProducts, getUserFavorites } from '../../../Redux/actions';
 import UserOrdersList from '../UserOrders/UserOrdersList';
 import EditAccount from '../UserAccount/EditAccount';
 import UserAccount from '../UserAccount/UserAccount';
+import UserFavorite from '../UserFavorites/UserFavorites'
 import style from './UserView.module.css';
 import {
 	FiUser,
@@ -24,22 +25,35 @@ function UserView() {
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
 		dispatch(getProducts());
+		dispatch(getUserFavorites(userId));
 	}, [dispatch]);
 
 	function setOption(event) {
-		console.log('id', event.target.id);
-		setSelectedOption(event.target.id);
+//		console.log('id', event.target.id);
+//		setSelectedOption(event.target.id);
+		setSelectedOption(prevOp => prevOp = event.target.id);
 	}
 
 	let currentPanel = null;
 
-	if (selectedOption === 'orders') {
+
+/*	if (selectedOption === 'orders') {
 		currentPanel = <UserOrdersList />;
 	} else if (selectedOption === 'account') {
 		currentPanel = <UserAccount setOption={setOption} />;
 	} else if (selectedOption === 'edit') {
 		currentPanel = <EditAccount setOption={setOption} />;
-	}
+	} */
+  
+    if (selectedOption === 'orders') {
+        currentPanel = <UserOrdersList /> 
+    } else if (selectedOption === 'account') {
+        currentPanel = <UserAccount setOption={setOption}/>
+    } else if (selectedOption === 'edit') {
+        currentPanel = <EditAccount setOption={setOption}/>
+    } else if (selectedOption === 'favorites') {
+        currentPanel = <UserFavorite/>
+    }
 
 	return (
 		<div>
