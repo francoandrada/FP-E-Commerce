@@ -1,10 +1,9 @@
-const { Sequelize } = require('sequelize');
+const { uploader } = require('../config/cloudinaryConfig');
 
-const upload = async function upload(req, res) {
-	// console.log('req.body :', req.body);
-	console.log('req.file : ', req.file);
-};
-
-module.exports = {
-	upload,
+exports.upload = async (file) => {
+	if (file) {
+		return await uploader.upload(file).then((result) => {
+			return result.url;
+		});
+	}
 };
