@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import {addToFavorites, removeFavorites } from '../../Redux/actions'
 import {FaRegHeart, FaHeart} from 'react-icons/fa'
 import styles from './FavouriteButton.module.css'
