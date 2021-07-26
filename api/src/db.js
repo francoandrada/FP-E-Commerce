@@ -109,6 +109,17 @@ Image.belongsTo(Product, { foreignKey: 'productId' });
 // 	foreignKey: 'userId',
 // });
 
+// 1---------------> N
+// User -----------> Review
+User.hasMany(Review, {foreignKey: 'userId'});
+Review.belongsTo(Product, {foreignKey: 'userId'});
+
+
+// 1---------------> N
+// Product -----------> Review
+Product.hasMany(Review, {foreignKey: 'productId'});
+Review.belongsTo(Product, {foreignKey: 'productId'});
+
 module.exports = {
 	...sequelize.models,
 	conn: sequelize,
