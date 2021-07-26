@@ -74,14 +74,14 @@ Category.belongsToMany(Product, {
 Brand.hasMany(Product, { foreignKey: 'brandId' });
 Product.belongsTo(Brand, { foreignKey: 'brandId' });
 
-Product.belongsToMany(User, {
-	through: 'review',
-	foreignKey: 'productId',
-});
-User.belongsToMany(Product, {
-	through: 'review',
-	foreignKey: 'userId',
-});
+// Product.belongsToMany(User, {
+// 	through: 'review',
+// 	foreignKey: 'productId',
+// });
+// User.belongsToMany(Product, {
+// 	through: 'review',
+// 	foreignKey: 'userId',
+// });
 
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });

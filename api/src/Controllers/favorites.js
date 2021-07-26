@@ -1,24 +1,33 @@
 const { Sequelize } = require('sequelize');
-// const { Product, Favorite } = require('../../db.js');
+const { Product, User } = require('../db.js');
 
 //-------------------------  CREATES FAVORITES IN DATA BASE  --------------------------------//
-const createFavorites = async function createFavorites(req, res) {
+const addFavorites = async function addFavorites(req, res) {
 	const { userId, prodId } = req.body;
+	
+	try {
+		const userFound = await User.findOne({
+				where: {
+					userId: userId,
+				},
+			})
 
-	// if (prodId != undefined) {
-	// 	for (let i = 0; i < prodId.length; i++) {
-	// 		try {
-	// 			const newFavorites = Favorite.findOrCreate({
-	// 				where: {
-	// 					userId: userId,
-	// 					productId: prodId[i].prodId,
-	// 				},
-	// 			});
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	}
-	// }
+		
+			for (let i=0; i<prodId.length; i++){
+						
+				let prod = await Product.findOne({
+					where:{id: prodId[i].id}
+					})
+					console.log(prodId[i])
+					await userFound.addProduct(prod)
+							
+				}
+	
+	} catch (error) {
+		console.log(error);
+	}
+
+		
 };
 
 
@@ -40,30 +49,27 @@ const getAllFavorites = async function getAllFavorites(req, res, next) {
 //----------------------  GETS ONE ORDER BY ID  ---------------------------//
 
 const getUserfavorites = async function getUserfavorites(req, res) {
-	const { userId } = req.body;
+	const { id } = req.params;
 
-	// try {
-	// 	const userFavorites = await Favorite.findAll({
-	// 		where: {
-	// 			userId: userId
-	// 		},
-	// 		include: [
-	// 			{
-	// 				model: Product,
-	// 			}
-	// 		]
-	// 	});
-	// 	res.json(userFavorites);
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	try {
+		const userFavorites = await User.findOne({
+			where: {
+				userId: id
+			},
+		});
+		const allFavorites = await userFavorites.getProducts()
+
+		res.json(allFavorites);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 
 
 
 module.exports = {
-	createFavorites,
+	addFavorites,
     getAllFavorites,
     getUserfavorites,
 	

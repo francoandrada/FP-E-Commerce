@@ -70,7 +70,8 @@ function userReducer(state = initialState, action) {
 		case LOG_OUT:
 			localStorage.removeItem('token');
 			localStorage.removeItem('userData');
-			localStorage.removeItem('cart')
+			localStorage.removeItem('cart');
+			localStorage.removeItem('userFavorites');
 			return {
 				...state,
 				user: null,

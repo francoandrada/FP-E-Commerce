@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const router = Router();
 const {
-	createFavorites,
+	addFavorites,
     getAllFavorites,
     getUserfavorites,
 } = require('../Controllers/favorites');
 
-router.post('/', createFavorites);
+router.post('/', addFavorites);
 
 router.get('/', getAllFavorites);
 

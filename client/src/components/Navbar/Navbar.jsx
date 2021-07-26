@@ -12,6 +12,8 @@ import {
 	cleanSuggestions,
 	getCartUser,
 	postCartUser,
+	postUserFavorites,
+	getUserFavorites,
 } from '../../Redux/actions';
 
 import LogoStyle from '../StyledComponents/LogoStyle';
@@ -67,6 +69,25 @@ const Navbar = () => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart, cartCount]);
 
+
+	//FAVORITES
+	const favorites = useSelector((state) => state.useraccount.userFavorites);
+
+	useEffect(() => {
+		localStorage.setItem('userFavorites', JSON.stringify(favorites));
+	}, [favorites]);
+
+	useEffect(() => {
+		if (authenticated) {
+			setTimeout(() => {
+				dispatch(postUserFavorites(userId, favorites));
+			}, 1000);
+			localStorage.removeItem('userFavorites', JSON.stringify(favorites))
+			setTimeout(() => {
+				dispatch(getUserFavorites(userId));
+			}, 2000);
+		}
+	}, [authenticated]);
 
 
 	useEffect(() => {

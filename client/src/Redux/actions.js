@@ -48,6 +48,8 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+	ADD_TO_FAVORITES,
+	REMOVE_FROM_FAVORITES
 } from './actionsName';
 
 import axios from 'axios';
@@ -655,7 +657,7 @@ export function postCartUser(data) {
 
 export function getCartUser(id) {
 	return async (dispatch) => {
-		console.log('iiiiidd', id);
+		
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/shoppingcart/userCart',
@@ -671,6 +673,56 @@ export function getCartUser(id) {
 		}
 	};
 }
+
+export const addToFavorites = (prod) => {
+	return {
+		type: ADD_TO_FAVORITES,
+		payload: prod,
+	};
+};
+
+export const removeFavorites = (prod) => {
+	return {
+		type: REMOVE_FROM_FAVORITES,
+		payload: prod,
+	};
+};
+
+export const postUserFavorites = (userId, favorites) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(
+				`http://localhost:3001/favorites`,
+				{ userId: userId, prodId: favorites }
+			);
+			dispatch({
+				type: ADD_TO_FAVORITES,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const getUserFavorites = (userId) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get(
+				`http://localhost:3001/favorites/user/${userId}`
+	
+			);
+			console.log('FAVORITES FORM REDUCER', res.data);
+			dispatch({
+				type: ADD_TO_FAVORITES,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
