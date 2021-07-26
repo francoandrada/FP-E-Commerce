@@ -50,6 +50,24 @@ const getAvergedStars = async (req, res) => {
 		res.send(error);
 	}
 };
+//------------------------CUADRO DE ESTRELLAS------------------------
+//SELECT "stars" , count(*) as NUM FROM public.reviews GROUP BY stars
+const getAllStars = async (req, res) => {
+	try {
+		const prom = await Review.findAll({
+			attributes: [
+				'stars',
+				[Sequelize.fn('COUNT', Sequelize.col('stars')), 'PostCount'],
+			],
+
+			group: ['stars'],
+		});
+
+		res.send(prom);
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 // SELECT AVG(stars)
 // FROM public.reviews
@@ -57,16 +75,36 @@ const getAvergedStars = async (req, res) => {
 
 //------------------------TODAS LAS REVIEWS------------------------
 const getAllReviews = async function getAllReviews(req, res) {
+	const { productId } = req.body;
+	console.log(productId);
 	try {
-		const allReviews = await Review.findAll();
-		return res.status(200).json(allReviews);
+		const allReviews = await Review.findAll({
+			where: {
+				productId: productId,
+			},
+			attributes: ['stars', 'description'],
+			include: {
+				model: User,
+				attributes: ['name', 'surname', 'email'],
+			},
+		});
+
+		console.log(allReviews);
+		res.send(allReviews);
 	} catch (error) {
-		res.send(error);
+		console.log(error);
 	}
 };
 
+// var userFind = await User.findOne({
+// 	where: { userId: userId },
+// });
+// console.log(userFind)
+// if (userFind) {
+
 module.exports = {
 	getAllReviews,
+	getAllStars,
 	getAvergedStars,
 	newReview,
 };

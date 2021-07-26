@@ -6,10 +6,16 @@ import { BsFillStarFill } from 'react-icons/bs';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import style from './Review.module.css';
 import { postReview } from '../../Redux/actionsReview';
+import Swal from 'sweetalert2'
+import { useHistory } from 'react-router-dom';
+
 
 const UserReview = (props) => {
 	const productInfo = useSelector((state) => state.product.detailProducts);
 	const userId = useSelector((state) => state.user.userData.userId);
+
+
+	
 	console.log(userId);
 	const [descrip, setDescrip] = useState({
 		description: '',
@@ -24,8 +30,8 @@ const UserReview = (props) => {
 			[e.target.name]: e.target.value,
 		});
 	};
-	console.log(descrip);
 
+	const history = useHistory();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 	};
@@ -46,6 +52,14 @@ const UserReview = (props) => {
 		stars: star.newRating,
 		description: descrip.description,
 		userId: userId,
+	};
+	const click = () => {
+		dispatch(postReview(obj));
+			Swal.fire( {
+			title: 'Thanks for your feedback!',
+			icon:'success'
+		});
+		history.push('/myaccount')
 	};
 
 	return (
@@ -92,10 +106,11 @@ const UserReview = (props) => {
 												onChange={handleChange}
 												value={description}
 											></textarea>
+										
 											<div className='d-flex justify-content-center m-3 '>
 												<ButtonRedOther
 													type='submit'
-													onClick={() => dispatch(postReview(obj))}
+													onClick={() => click()}
 												>
 													Submit
 												</ButtonRedOther>

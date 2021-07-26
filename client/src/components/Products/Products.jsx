@@ -61,12 +61,6 @@ function Products() {
 		};
 	}, []);
 
-	// useEffect(() =>
-	// {dispatch(getFilteredProducts(query));
-	// 	return () => {
-	// 		console.log('unmount')
-	// 	  }
-	// }, []);
 
 	useEffect(() => {
 		setQuery({
