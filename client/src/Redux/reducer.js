@@ -8,6 +8,7 @@ import cartReducer from './reducers/cartReducer';
 import adminReducer from './reducers/adminReducer';
 import stockReducer from './reducers/stockReducer';
 import userAccountReducer from './reducers/userAccountReducer';
+import chatBotReducer from './reducers/chatBotReducer';
 
 import reviewsReducer from './reducers/reviewsReducer';
 import cryptoReducer from './reducers/cryptoReducer';
@@ -22,9 +23,8 @@ export default combineReducers({
 	admin: adminReducer,
 	stock: stockReducer,
 	useraccount: userAccountReducer,
-
+	chatbot: chatBotReducer,
 	reviews: reviewsReducer,
-
 	crypto: cryptoReducer
 
 });

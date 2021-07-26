@@ -18,6 +18,12 @@ const TableLogic = () => {
 
 	function mapData(array) {
 		const data = array.map((e) => {
+			const categories = (array) => {
+				return array
+					.filter(({ isVisible }) => isVisible)
+					.map(({ name }) => name)
+					.join('\n');
+			};
 			return {
 				id: e?.id,
 				image: e?.image,
@@ -26,9 +32,11 @@ const TableLogic = () => {
 				price: e?.price,
 				priceSpecial: e?.priceSpecial,
 				stock: e?.stock,
-				isVisible: `${e?.isVisible}`,
+				isVisible: e?.isVisible,
 				weight: e?.weight,
-				category: e?.categories[0]?.name || 'No Category',
+				category: categories(e?.categories).length
+					? categories(e?.categories)
+					: 'No Categories',
 				brand: e?.brand?.name || 'No Brand',
 				delete: (event) => {
 					event.preventDefault();

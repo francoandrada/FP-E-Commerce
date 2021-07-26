@@ -50,10 +50,18 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+	ADD_TO_FAVORITES,
+	REMOVE_FROM_FAVORITES,
 
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
+	INPUT_SUCCESS,
+	INPUT_FAIL,
+	SESSION_SUCCESS_CHAT,
+	SESSION_FAIL_CHAT,
+	MESSAGE_FAIL,
+	MESSAGE_SUCCESS,
 	GET_RATES
 
 } from './actionsName';
@@ -691,7 +699,7 @@ export function postCartUser(data) {
 
 export function getCartUser(id) {
 	return async (dispatch) => {
-		console.log('iiiiidd', id);
+		
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/shoppingcart/userCart',
@@ -707,6 +715,55 @@ export function getCartUser(id) {
 		}
 	};
 }
+
+export const addToFavorites = (prod) => {
+	return {
+		type: ADD_TO_FAVORITES,
+		payload: prod,
+	};
+};
+
+export const removeFavorites = (prod) => {
+	return {
+		type: REMOVE_FROM_FAVORITES,
+		payload: prod,
+	};
+};
+
+export const postUserFavorites = (userId, favorites) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(
+				`http://localhost:3001/favorites`,
+				{ userId: userId, prodId: favorites }
+			);
+			dispatch({
+				type: ADD_TO_FAVORITES,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const getUserFavorites = (userId) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get(
+				`http://localhost:3001/favorites/user/${userId}`
+	
+			);
+			console.log('FAVORITES FORM REDUCER', res.data);
+			dispatch({
+				type: ADD_TO_FAVORITES,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
 
 export function saveAddress(address) {
 	console.log(address)
@@ -763,6 +820,41 @@ export function postCartCrypto(data) {
 	};
 }
 
+///////////////////////////////// CHATBOT //////////////////////////
+export function userMessage( message){
+return async (dispatch)=> {
+try {
+	dispatch({type:INPUT_SUCCESS, payload: message})
+} catch (error) {
+	dispatch({type:INPUT_FAIL})
+}
+}
+}
+
+export function createSessionBot(){
+	return async (dispatch)=> {
+	try {
+		const res = await axios.get("http://localhost:3001/watson/session")
+		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
+	} catch (error) {
+		dispatch({type: SESSION_FAIL_CHAT})
+	}
+	}
+}
+
+ export function sendMessageBot(message){
+	 return async (dispatch)=> {
+		 try {
+			const body = {input: message.toLowerCase()}
+			const res= await axios.post("http://localhost:3001/watson/message", body)
+			
+			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
+		 } catch (error) {
+			 dispatch({type: MESSAGE_FAIL})
+		 }
+	 }
+ }
+ 
 /// COINPAYMENTS ACTIONS
 export function getRates() {
 	return async (dispatch) => {
