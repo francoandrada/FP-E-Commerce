@@ -18,6 +18,9 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
+	GET_ALL_DATA_ABOUT_AN_ORDER,
+	CURRENT_PAGE_ORDER_USER,
+	CURRENT_PAGE_ORDER_PRODUCT,
 } from '../actionsName';
 
 const initialState = {
@@ -40,6 +43,9 @@ const initialState = {
 	tableOrderPaginationSize: 5,
 	tableOrderUserPaginationSize: 5,
 	filterByOrderStatus: 'all',
+	orderDetails: undefined,
+	currentPageOfUserOrderTable: 0,
+	currentPageOfProductOrderTable: 0,
 };
 
 function adminReducer(state = initialState, { type, payload, error }) {
@@ -144,6 +150,22 @@ function adminReducer(state = initialState, { type, payload, error }) {
 			return {
 				...state,
 				filterByOrderStatus: payload,
+			};
+		case GET_ALL_DATA_ABOUT_AN_ORDER:
+			return {
+				...state,
+				pending: false,
+				orderDetails: payload,
+			};
+		case CURRENT_PAGE_ORDER_USER:
+			return {
+				...state,
+				currentPageOfUserOrderTable: payload,
+			};
+		case CURRENT_PAGE_ORDER_PRODUCT:
+			return {
+				...state,
+				currentPageOfProductOrderTable: payload,
 			};
 		default:
 			return state;

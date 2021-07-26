@@ -4,18 +4,19 @@ const { Order, OrderDetail, Product, User } = require('../db');
 
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
-	const { ammount, status, prodCarrito, id } = req.body;
+	const { ammount, status, address, prodCarrito, id } = req.body;
 
-	console.log('userIddd', id);
+	console.log('ADDRESSSS', req.body);
 
 	try {
-		var newOrder = await Order.create(
+		await Order.create(
 			{
 				ammount,
 				status,
+				address: JSON.stringify(address),
 			},
 			{
-				fields: ['ammount', 'status'],
+				fields: ['ammount', 'status', 'address'],
 			}
 		).then((order) => {
 			prodCarrito &&
@@ -40,12 +41,10 @@ const createOrder = async function createOrder(req, res) {
 						}
 						await order.addOrderDetail(newDetail.dataValues.id);
 
-						// User.hasMany(Order, { foreignKey: 'userId' });
-						// Order.belongsTo(User, { foreignKey: 'userId' });
 						var userFind = await User.findOne({
 							where: { userId: id },
 						});
-						console.log(userFind)
+						console.log(userFind);
 
 						if (userFind) {
 							await order.setUser(userFind.dataValues.userId);
@@ -56,13 +55,7 @@ const createOrder = async function createOrder(req, res) {
 				});
 		});
 
-		// res.status(200).json('Order created successfully!', productFind);
-
 		//--------------ACA SE CREA LA PREFERENCIA PARA MANDAR A MERCADO PAGO-----------------
-		// [
-		// 	{ prodId: 5, price: 17399, qty: 3 },
-		// 	{ prodId: 1, price: 99999, qty: 2 },
-		// ];
 
 		let preference = {
 			items: prodCarrito.map((i) => ({

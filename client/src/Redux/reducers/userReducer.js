@@ -17,7 +17,6 @@ const initialState = {
 	token: localStorage.getItem('token'),
 	setError: null,
 	errorToken: null,
-	alert: null,
 	authenticated: false,
 	userData: JSON.parse(localStorage.getItem('userData') || '[]'),
 	products: [],
@@ -43,7 +42,6 @@ function userReducer(state = initialState, action) {
 		case FORGOT_PASSWORD: {
 			return {
 				...state,
-				alert: action.payload.hola,
 			};
 		}
 		case HIDE_ALERT:
@@ -53,7 +51,6 @@ function userReducer(state = initialState, action) {
 				alert: null,
 			};
 		case SUCCESS_LOGIN:
-			// localStorage.removeItem('cart')
 			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,

@@ -8,18 +8,17 @@ import { formatNumber } from '../../../helper/priceFormater';
 function CartList({ info, image, name, price, stock, qty }) {
 	const dispatch = useDispatch();
 	const [prodInfo, setProdInfo] = useState(info);
-	console.log(qty)
+	console.log(qty);
+
 	function handlePlus() {
-		let plusQuantity = qty
+		let plusQuantity = qty;
 		if (qty >= stock) {
 			plusQuantity = stock;
 		} else {
 			plusQuantity = qty + 1;
 			dispatch(adjustQty(info.id, plusQuantity));
 		}
-		
 	}
-
 
 	function handleMinus() {
 		let newQuantity = qty;
@@ -55,13 +54,30 @@ function CartList({ info, image, name, price, stock, qty }) {
 					</div>
 					<div className={style.cantAndPrice}>
 						<div className={style.modifyQtyButtons}>
-							<button onClick={handleMinus} className={style.plusMinusButtons}>
-								-
-							</button>
-							<h3>{qty}</h3>
-							<button onClick={handlePlus} className={style.plusMinusButtons}>
-								+
-							</button>
+							{qty < 2 ? (
+								<>
+								<h3>{qty}</h3>
+								<button onClick={handlePlus} className={style.plusMinusButtons}>
+									+
+								</button>
+								</>
+							) : (
+								<>
+									<button
+										onClick={handleMinus}
+										className={style.plusMinusButtons}
+									>
+										-
+									</button>
+									<h3>{qty}</h3>
+									<button
+										onClick={handlePlus}
+										className={style.plusMinusButtons}
+									>
+										+
+									</button>
+								</>
+							)}
 						</div>
 						<button
 							onClick={handleDeleteProd}

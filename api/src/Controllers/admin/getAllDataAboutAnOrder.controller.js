@@ -1,4 +1,4 @@
-const { Order, Product, User, OrderDetail } = require('../../db');
+const { Order, Product, User, OrderDetail, Brand } = require('../../db');
 
 const getAllDataAboutAnOrder = async (req, res, next) => {
 	const id = req.params.id;
@@ -16,7 +16,7 @@ const getAllDataAboutAnOrder = async (req, res, next) => {
 			{
 				model: OrderDetail,
 				required: true,
-				include: { model: Product },
+				include: { model: Product, include: { model: Brand } },
 				where: {
 					orderId: idAsNumber,
 				},

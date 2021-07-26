@@ -45,17 +45,41 @@ import {
 	CREATE_CART_USER,
 	PRODUCT_WITH_ORDER,
 	USER_WITH_ORDER,
+	SAVE_ADDRESS_ORDER,
+	SET_AMMOUNT,
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
 	ADD_TO_FAVORITES,
-	REMOVE_FROM_FAVORITES
+	REMOVE_FROM_FAVORITES,
+
+	GET_ALL_DATA_ABOUT_AN_ORDER,
+	CURRENT_PAGE_ORDER_USER,
+	CURRENT_PAGE_ORDER_PRODUCT,
+	INPUT_SUCCESS,
+	INPUT_FAIL,
+	SESSION_SUCCESS_CHAT,
+	SESSION_FAIL_CHAT,
+	MESSAGE_FAIL,
+	MESSAGE_SUCCESS,
+	GET_RATES
+
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
+	payload,
+});
+
+export const changePageOfProductOrderTable = (payload) => ({
+	type: CURRENT_PAGE_ORDER_PRODUCT,
+	payload,
+});
+
+export const changePageOfUserOrderTable = (payload) => ({
+	type: CURRENT_PAGE_ORDER_USER,
 	payload,
 });
 
@@ -120,6 +144,11 @@ export const fetchProductWithOrder = (payload) => ({
 
 export const fetchListProducts = (payload) => ({
 	type: LIST_PRODUCT_ON_TABLE,
+	payload,
+});
+
+export const fetchOrderDetails = (payload) => ({
+	type: GET_ALL_DATA_ABOUT_AN_ORDER,
 	payload,
 });
 
@@ -195,6 +224,20 @@ export function getCountOfBrand() {
 			dispatch(fetchPending());
 			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
 			dispatch(fetchCountOfBrand(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getOrderDetails(id) {
+	return async (dispatch) => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(
+				`http://localhost:3001/admin/dataaboutorder/${id}`
+			);
+			dispatch(fetchOrderDetails(res.data));
 		} catch (error) {
 			dispatch(fetchError(error));
 		}
@@ -593,7 +636,7 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		console.log(data);
+		console.log('dataaa',data);
 
 		try {
 			const res = await axios.post(
@@ -601,7 +644,6 @@ export function postCart(data) {
 				data
 			);
 
-			console.log(res.data);
 
 			dispatch({
 				type: SET_CART,
@@ -723,6 +765,23 @@ export const getUserFavorites = (userId) => {
 	};
 };
 
+export function saveAddress(address) {
+	console.log(address)
+	return async (dispatch) => {
+		dispatch({
+			type: SAVE_ADDRESS_ORDER,
+			payload: address,
+		});
+	};
+}
+export function saveAmmount(ammount) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_AMMOUNT,
+			payload: ammount
+		});
+	};
+}
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
@@ -753,11 +812,62 @@ export function postCartCrypto(data) {
 			});
 
 			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
-			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`
-			window.open(url)
-
+			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`;
+			window.open(url);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
+
+///////////////////////////////// CHATBOT //////////////////////////
+export function userMessage( message){
+return async (dispatch)=> {
+try {
+	dispatch({type:INPUT_SUCCESS, payload: message})
+} catch (error) {
+	dispatch({type:INPUT_FAIL})
+}
+}
+}
+
+export function createSessionBot(){
+	return async (dispatch)=> {
+	try {
+		const res = await axios.get("http://localhost:3001/watson/session")
+		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
+	} catch (error) {
+		dispatch({type: SESSION_FAIL_CHAT})
+	}
+	}
+}
+
+ export function sendMessageBot(message){
+	 return async (dispatch)=> {
+		 try {
+			const body = {input: message.toLowerCase()}
+			const res= await axios.post("http://localhost:3001/watson/message", body)
+			
+			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
+		 } catch (error) {
+			 dispatch({type: MESSAGE_FAIL})
+		 }
+	 }
+ }
+ 
+/// COINPAYMENTS ACTIONS
+export function getRates() {
+	return async (dispatch) => {
+
+		try {
+			const res = await axios.get('http://localhost:3001/coinpayment/rate');
+			dispatch({
+				type: GET_RATES,
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+

@@ -1,9 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-// <<<<<<< HEAD
-// const { newUser, prueba } = require('../Controllers/users');
-// =======
 const { newUser, getUsers } = require('../Controllers/users');
 
 const router = Router();

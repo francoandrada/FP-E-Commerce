@@ -10,6 +10,7 @@ function stockReducer(state = initialState, action) {
 			return {
 				...state,
 				order: action.payload,
+				
 			};
 		case CLEAN_FILTERS:
 			return {

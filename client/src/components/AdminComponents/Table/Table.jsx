@@ -191,9 +191,7 @@ const Table = () => {
 								return (
 									<tr
 										{...row.getRowProps()}
-										className={`${
-											row.original.isVisible === 'false' && 'table-danger'
-										}`}
+										className={`${!row.original.isVisible && 'table-danger'}`}
 									>
 										{row.cells.map((cell) => {
 											return (

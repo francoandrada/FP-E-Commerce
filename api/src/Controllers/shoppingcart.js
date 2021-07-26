@@ -1,11 +1,11 @@
 const { Sequelize } = require('sequelize');
-const { User, Cart, Product} = require('../db');
+const { Cart, Product} = require('../db');
 
 //-------------- ACA CREAMOS UN CARRITO ------------------
 
 const createCart = async function createCart(req, res) {
 	const { userId, prodId } = req.body;
-	console.log('bodyyyy', req.body, 'CHHSHSHSH');
+	
 	if (prodId != undefined) {
 		for (let i = 0; i < prodId.length; i++) {
 			try {
@@ -16,7 +16,6 @@ const createCart = async function createCart(req, res) {
 						qty: prodId[i].qty,
 					},
 				});
-				console.log('FINNNNNN');
 			} catch (error) {
 				console.log(error);
 			}

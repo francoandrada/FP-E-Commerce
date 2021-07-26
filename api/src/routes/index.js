@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { multerUploads } = require('../middlewares/multer');
 
 const productsRoutes = require('./productsRoutes');
 const usersRoutes = require('./usersRoutes');
@@ -14,10 +15,13 @@ const orderRoutes = require('./orderRoutes');
 const webHooks = require('./webHooks');
 const cartRoutes = require('./cartRoutes');
 const favoritesRoutes = require('./favoritesRoutes');
+const uploadRoutes = require('./uploadRoutes');
 const coinpaymentRoutes = require('./coinpaymentRoutes');
+const watsonRoutes = require('./watson');
 const router = Router();
 
 // router.use('/pagination', paginationRouter);
+router.use('/watson', watsonRoutes);
 router.use('/products', productsRoutes);
 router.use('/categories', categoriesRoutes);
 router.use('/users', usersRoutes);
@@ -32,5 +36,6 @@ router.use('/orders', orderRoutes);
 router.use('/webhooks', webHooks);
 router.use('/shoppingcart', cartRoutes);
 router.use('/favorites', favoritesRoutes);
+router.use('/upload', multerUploads, uploadRoutes);
 router.use('/coinpayment', coinpaymentRoutes);
 module.exports = router;
