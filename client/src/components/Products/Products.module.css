@@ -1,10 +1,10 @@
-.buttonCrypto{
+.buttonCrypto {
 	display: flex;
 	position: absolute;
 	top: 1%;
 	right: 1%;
 	/* z-index: -1; */
-	justify-content:flex-end;
+	justify-content: flex-end;
 	align-items: flex-end;
 }
 
@@ -23,10 +23,10 @@
 
 .data {
 	display: flex;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 1.25em;
+	padding-right: 1.25em;
 	color: #6c757d;
-	min-height: 54.4px;
+	min-height: 3.4em;
 	text-align: left;
 }
 
@@ -56,6 +56,7 @@
 	font-weight: 500;
 	display: flex;
 	justify-content: center;
+	margin-left: 1em;
 	/* padding-left: 13px; */
 }
 
@@ -66,8 +67,8 @@
 
 .buttonBuy button {
 	font-family: 'Roboto', sans-serif;
-	width: 88px;
-	height: 30px;
+	width: 5.5em;
+	height: 1.875em;
 	border-style: none;
 	border-radius: 8px;
 	color: white;
@@ -88,11 +89,9 @@
 	width: min-content;
 	margin: 1rem 1.5rem;
 	border-radius: 8px;
-	height: 368px;
+	height: 23em;
 	position: relative;
 }
-
-
 
 @media only screen and (max-width: 1300px) and (min-width: 600px) {
 	.card {
@@ -100,14 +99,14 @@
 		width: min-content;
 		margin: 1rem 0.5rem;
 		border-radius: 8px;
-		height: 368px;
+		height: 23em;
 	}
 	.cardImage {
 		padding: 20px;
 	}
 	.img {
-		width: 150px;
-		height: 150px;
+		width: 9.375em;
+		height: 9.375em;
 	}
 
 	.productName {
@@ -123,14 +122,14 @@
 		width: min-content;
 		margin: 1rem 0.7rem;
 		border-radius: 8px;
-		height: 421px;
+		height: 26.3125em;
 	}
 	.cardImage {
 		padding: 1rem;
 	}
 	.img {
-		width: 230px;
-		height: 230px;
+		width: 14.375em;
+		height: 14.375em;
 	}
 	.productName {
 		font-size: 15px;
@@ -143,12 +142,73 @@
 		color: black;
 		font-size: 22px;
 		font-weight: 500;
-		/* padding-left: 50px; */
+		/* padding-left: 50px;*/
 	}
+}
 
-	.buttonBuy button {
-		width: 113px;
+.buttonBuy button {
+	width: 7.0625em;
+}
+
+@media only screen and (max-width: 430px) {
+	.cardImage{
+		width: 70%;
+		margin: 0 auto;
 	}
+	.cardImage img {
+		width: 100%;
+		margin-top: 5%;
+	}
+	.footerCard{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.card {
+		width: 170px;
+		height: 16.3125em;
+		padding: 0.5em;
+	}
+	.productName {
+		font-size: 12px;
+		font-weight: 500;
+		text-align: center;
+		padding: 0;
+	}
+	.buttonCrypto {
+		margin-top: -8%;
+		margin-right: -6%;
+		font-size: 8px;
+	}
+	.productPrice {
+		font-size: 14px;
+		margin: 0
+		/* padding-left: 50px;*/
+	}
+	.data {
+		padding: 0;
+		min-height: 0;
+	}
+	.buttonBuy {
+		float: none;
+		flex-basis: 100%;
+		font-size: 12px;
+		margin-right: 50%;
+		margin-top: 5%;
+	}
+	#btnBuy {
+		font-size: 12px;
+		
+	}
+	#line{
+		margin:0.5em 5%
+	}
+	.cardsContainer {
+	display: flex;
+	width: 65%;
+	justify-content: space-evenly;
+	margin: 0;
+}
 }
 
 /* ------------ FAVORITE BUTTON STYLE ------------- */
@@ -156,5 +216,5 @@
 .heartDiv {
 	display: flex;
 	justify-content: flex-end;
-	padding: 5px;
+	padding: 0.125em;
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './FilterBrands.module.css';
 // import styles from '../FilterCategories/Filter.module.css';
 import { filterBrand } from '../../Redux/actions';
+import './index.css'
 
 function FilterBrands() {
 	const BrandName = useSelector((state) => state.brands.allBrands);
