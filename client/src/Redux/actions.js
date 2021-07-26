@@ -50,7 +50,6 @@ import {
 	TABLE_ORDER_PAGINATION_SIZE,
 	TABLE_USER_ORDER_PAGINATION_SIZE,
 	FILTER_BY_ORDER_STATUS,
-
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
@@ -60,8 +59,7 @@ import {
 	SESSION_FAIL_CHAT,
 	MESSAGE_FAIL,
 	MESSAGE_SUCCESS,
-	GET_RATES
-
+	GET_RATES,
 } from './actionsName';
 
 import axios from 'axios';
@@ -634,14 +632,13 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		console.log('dataaa',data);
+		console.log('dataaa', data);
 
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/mercadopago/createorder',
 				data
 			);
-
 
 			dispatch({
 				type: SET_CART,
@@ -715,7 +712,7 @@ export function getCartUser(id) {
 }
 
 export function saveAddress(address) {
-	console.log(address)
+	console.log(address);
 	return async (dispatch) => {
 		dispatch({
 			type: SAVE_ADDRESS_ORDER,
@@ -727,7 +724,7 @@ export function saveAmmount(ammount) {
 	return async (dispatch) => {
 		dispatch({
 			type: SET_AMMOUNT,
-			payload: ammount
+			payload: ammount,
 		});
 	};
 }
@@ -770,45 +767,49 @@ export function postCartCrypto(data) {
 }
 
 ///////////////////////////////// CHATBOT //////////////////////////
-export function userMessage( message){
-return async (dispatch)=> {
-try {
-	dispatch({type:INPUT_SUCCESS, payload: message})
-} catch (error) {
-	dispatch({type:INPUT_FAIL})
-}
-}
-}
-
-export function createSessionBot(){
-	return async (dispatch)=> {
-	try {
-		const res = await axios.get("http://localhost:3001/watson/session")
-		console.log(res.data)
-		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
-	} catch (error) {
-		dispatch({type: SESSION_FAIL_CHAT})
-	}
-	}
+export function userMessage(message) {
+	return async (dispatch) => {
+		try {
+			dispatch({ type: INPUT_SUCCESS, payload: message });
+		} catch (error) {
+			dispatch({ type: INPUT_FAIL });
+		}
+	};
 }
 
- export function sendMessageBot(message){
-	 return async (dispatch)=> {
-		 try {
-			const body = {input: message.toLowerCase()}
-			const res= await axios.post("http://localhost:3001/watson/message", body)
-			console.log(res.data.output.generic[0].text)
-			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
-		 } catch (error) {
-			 dispatch({type: MESSAGE_FAIL})
-		 }
-	 }
- }
- 
-/// COINPAYMENTS ACTIONS
+export function createSessionBot() {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get('http://localhost:3001/watson/session');
+			dispatch({ type: SESSION_SUCCESS_CHAT, payload: res.data });
+		} catch (error) {
+			dispatch({ type: SESSION_FAIL_CHAT });
+		}
+	};
+}
+
+export function sendMessageBot(message) {
+	return async (dispatch) => {
+		try {
+			const body = { input: message.toLowerCase() };
+			const res = await axios.post(
+				'http://localhost:3001/watson/message',
+				body
+			);
+
+			dispatch({
+				type: MESSAGE_SUCCESS,
+				payload: res.data.output.generic[0].text,
+			});
+		} catch (error) {
+			dispatch({ type: MESSAGE_FAIL });
+		}
+	};
+}
+
+/// COINPAYMENTS ACTIONS//////////////////////////////
 export function getRates() {
 	return async (dispatch) => {
-
 		try {
 			const res = await axios.get('http://localhost:3001/coinpayment/rate');
 			dispatch({
@@ -820,4 +821,3 @@ export function getRates() {
 		}
 	};
 }
-
