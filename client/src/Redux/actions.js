@@ -783,20 +783,21 @@ try {
 export function createSessionBot(){
 	return async (dispatch)=> {
 	try {
-		const res = await axios.get("/api/watson/session")
+		const res = await axios.get("http://localhost:3001/watson/session")
 		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
 	} catch (error) {
 		dispatch({type: SESSION_FAIL_CHAT})
 	}
 	}
 }
+
  export function sendMessageBot(message){
 	 return async (dispatch)=> {
 		 try {
-			const body = {input: message}
-			const res= axios.post("api/watson/message", body)
-			console.log(res) 
-			dispatch({type:MESSAGE_SUCCESS, type: res.data.output.generic[0].text})
+			const body = {input: message.toLowerCase()}
+			const res= await axios.post("http://localhost:3001/watson/message", body)
+			
+			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
 		 } catch (error) {
 			 dispatch({type: MESSAGE_FAIL})
 		 }

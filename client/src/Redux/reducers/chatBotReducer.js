@@ -1,4 +1,8 @@
-import { INPUT_FAIL, INPUT_SUCCESS, MESSAGE_FAIL, MESSAGE_SUCCESS, SESSION_FAIL_CHAT, SESSION_SUCCESS_CHAT } from "../actionsName";
+import { INPUT_FAIL, INPUT_SUCCESS,
+     MESSAGE_FAIL, 
+     MESSAGE_SUCCESS,
+      SESSION_FAIL_CHAT,
+       SESSION_SUCCESS_CHAT } from "../actionsName";
 
 const initialState ={
     messages: []

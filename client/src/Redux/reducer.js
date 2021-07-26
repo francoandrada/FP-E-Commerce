@@ -23,13 +23,8 @@ export default combineReducers({
 	admin: adminReducer,
 	stock: stockReducer,
 	useraccount: userAccountReducer,
-<<<<<<< HEAD
 	chatbot: chatBotReducer,
-=======
-
 	reviews: reviewsReducer,
-
 	crypto: cryptoReducer
 
->>>>>>> main
 });

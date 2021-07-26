@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import Chat from "./ChatBot";
 import axios from "axios";
 import { createSessionBot } from "../../Redux/actions";
-
-
+import { useDispatch } from "react-redux";
+import styles from "./chatbot.module.css"
 
 if(localStorage.session){
     delete axios.defaults.headers.common['session_id']
@@ -12,7 +12,8 @@ if(localStorage.session){
 else{
     delete axios.defaults.headers.common['session_id']
 }
-const theChatBot = () =>{
+const TheChatBot = () =>{
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if(!localStorage.session){
@@ -20,9 +21,9 @@ const theChatBot = () =>{
         }
 	}, [dispatch]);
     return(
-        <div>
+        <div className={styles.conteinerChatbot} >
             <Chat/>
         </div>
     )
 }
-export default theChatBot;
+export default TheChatBot;

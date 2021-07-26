@@ -1,38 +1,50 @@
-import React, { useState } from "react"
+import React, { useState, useEffect,useRef } from "react"
 import { sendMessageBot, userMessage } from "../../Redux/actions"
 import {useDispatch, useSelector} from 'react-redux';
 
-// const dispatch = useDispatch();
-const mess = useSelector((state)=> state.chatbot.messages)
 const Chat = () => {
-
-    const [message, setMessage] = useState("")
+ const chat = useSelector((state)=> state.chatbot.messages)
+ const dispatch = useDispatch()
     
-
-    const handleClick = async (e)=>{
-        const code= e.keyCode || e.wich;
-        if(code === 13){
-            console.log(message)
-        //    dispatch(userMessage(mess))
-        sendMessageBot(message)
-            setMessage("")
-        }
-    }
+    const [message, setMessage] = useState("");
+    const endOfMessages = useRef(null);
+  
+    const scrollToBottom = () => {
+      endOfMessages.current.scrollIntoView({ behavior: "smooth" });
+    };
+    useEffect(scrollToBottom, [chat]);
+  
+   
+    const handleClick = async (e) => {
+      const code = e.keyCode || e.which;
+  
+      if (code === 13) {
+        
+        dispatch(userMessage(message));
+        dispatch(sendMessageBot(message));
+        setMessage("");
+      }
+    };
+ 
     return (
-        <div>
-            <h1> Chatty the chatbot</h1>
-            <div> 
-            {
-                mess.length === 0 ? "" : mess.map((msg)=>(
-                    <div className= "">{msg.message}</div>
-                ))
-            }
-            </div>
-            <input id="chatBox"
-            onChange={(e)=>setMessage(e.target.value)}
-            onKeyPress={handleClick}
-            value={message} />
+      <div className="chat">
+        <h1>Chatty the Chatbot</h1>
+      
+        <div class="historyContainer">
+          {chat.length === 0
+            ? ""
+            : chat.map((msg, index) => <div key={index} className={msg.type}>{msg.message}</div>)}
+          <div ref={endOfMessages}></div>
         </div>
-    )
-}
+       
+        <input
+          id="chatBox"
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={handleClick}
+          value={message}
+        ></input>
+      </div>
+    );
+  };
+
 export default Chat
