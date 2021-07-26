@@ -1,18 +1,20 @@
 import {
-	INPUT_FAIL,
 	INPUT_SUCCESS,
-	MESSAGE_FAIL,
+	INPUT_FAIL,
+	SESSION_SUCCESS,
+	SESSION_FAIL,
 	MESSAGE_SUCCESS,
-	SESSION_FAIL_CHAT,
-	SESSION_SUCCESS_CHAT,
+	MESSAGE_FAIL,
 } from '../actionsName';
 
 const initialState = {
 	messages: [],
 };
-function chatBotReducer(state = initialState, action) {
+
+export default (state = initialState, action) => {
 	const { type, payload } = action;
 	let { messages } = state;
+
 	switch (type) {
 		case INPUT_SUCCESS:
 			messages = [...messages, { message: payload, type: 'user' }];
@@ -20,20 +22,20 @@ function chatBotReducer(state = initialState, action) {
 				...state,
 				messages,
 			};
-        	case INPUT_FAIL:
+		case INPUT_FAIL:
 			return {
 				...state,
 			};
-		case SESSION_SUCCESS_CHAT:
-			localStorage.setItem('session', payload['sessionId']);
+		case SESSION_SUCCESS:
+			localStorage.setItem('session', payload['session_id']);
 			return {
 				...state,
 			};
-		case SESSION_FAIL_CHAT:
+		case SESSION_FAIL:
 			return {
 				...state,
 			};
-        	case MESSAGE_SUCCESS:
+		case MESSAGE_SUCCESS:
 			messages = [...messages, { message: payload, type: 'bot' }];
 			return {
 				...state,
@@ -48,5 +50,4 @@ function chatBotReducer(state = initialState, action) {
 				...state,
 			};
 	}
-}
-export default chatBotReducer;
+};

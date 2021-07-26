@@ -1,0 +1,18 @@
+.btnHeart{
+    font-size: 24px;
+}
+.buttonContainer {
+	width: 1.875em;
+	height: 1.875em;
+}
+
+@media only screen and (max-width: 430px){
+	.btnHeart{
+        font-size: 16px;
+    }
+    .buttonContainer {
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+    }
+}

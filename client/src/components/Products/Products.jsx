@@ -8,11 +8,12 @@ import {
 	addToCart,
 	removeFromCart,
 } from '../../Redux/actions';
+import FavoriteButton from '../FavoriteComponent/FavoriteButton'
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
-
+import './index.css'
 function Products() {
 	const arsBtc = useSelector((state) => state.crypto.arsBtc);
 	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
@@ -61,12 +62,6 @@ function Products() {
 		};
 	}, []);
 
-	// useEffect(() =>
-	// {dispatch(getFilteredProducts(query));
-	// 	return () => {
-	// 		console.log('unmount')
-	// 	  }
-	// }, []);
 
 	useEffect(() => {
 		setQuery({
@@ -129,6 +124,7 @@ function Products() {
 	};
 	return (
 		<div className={styles.cardsContainer}>
+			
 			{productsToRender
 				? productsToRender.map((p) => {
 						if (p.name.length > 55) {
@@ -151,11 +147,15 @@ function Products() {
 								<div>
 									<hr id={styles.line} />
 								</div>
+								
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
+									<div className={styles.heartDiv}>
+									<FavoriteButton prod={p}/>
+									</div>
 								</div>
-								{/* <div className={styles.footerCard}> */}
-								<div className='d-flex justify-content-center'>
+								<div className={styles.footerCard}>
+								<div className='footerCard d-flex justify-content-center'>
 									<div className={styles.productPrice}>
 										<span>{formatPrice}</span>
 									</div>
@@ -174,7 +174,7 @@ function Products() {
 										)}
 									</div>
 								</div>
-								{/* </div> */}
+								</div>
 								<div id={styles.paginado}></div>
 							</div>
 						);

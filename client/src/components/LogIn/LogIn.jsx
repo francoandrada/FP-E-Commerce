@@ -11,6 +11,7 @@ import imge from '../../images/5.jpeg';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
 import { GoogleLogin } from 'react-google-login';
+import './index.css';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -25,8 +26,9 @@ const Img = styled.img`
     height: 100px;
 	margin-bottom: 1rem;
       @media  (max-width: 600px) {
-        width: 200px;
-        height: 150px;
+        margin-top: 1em;
+		width: 100px;
+        height: 100px;
     }
 `;
 const Imge = styled.img`
@@ -36,8 +38,8 @@ const Imge = styled.img`
 	background-size: cover;
 	margin: 0;
       @media  (max-width: 600px) {
-        width: 200px;
-        height: 150px;
+    display: none
+
     }
 `;
 
@@ -86,14 +88,17 @@ const LogIn = () => {
 
 	let array = [];
 
-	for (let i = 0; i < prodId.length; i++) {
-		const element = {
-			prodId: prodId[i].id,
-			qty: prodId[i].qty,
-		};
+	if (prodId !== null) {
+		for (let i = 0; i < prodId.length; i++) {
+			const element = {
+				prodId: prodId[i].id,
+				qty: prodId[i].qty,
+			};
 
-		array.push(element);
+			array.push(element);
+		}
 	}
+
 	let bodyObject = {
 		userId: userId,
 		prodId: array,
@@ -116,8 +121,7 @@ const LogIn = () => {
 			email: Yup.string()
 				.email('Invalid email address')
 				.required('Enter an email'),
-			password: Yup.string()
-				.required('Enter a password')
+			password: Yup.string().required('Enter a password'),
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));
@@ -130,7 +134,7 @@ const LogIn = () => {
 			<div className='container d-flex justify-content-center mt-3 rounded'>
 				<div className=' row '>
 					<div className='col bg-white px-5 rounded '>
-						<form onSubmit={formik.handleSubmit} className='px-5 py-4'>
+						<form onSubmit={formik.handleSubmit} className={window.screen.width > 430 ? 'px-5 py-4' : 'formContainer'}>
 							<div className=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
 							</div>
@@ -145,7 +149,7 @@ const LogIn = () => {
 							<div className='form-group d-flex justify-content-center'>
 								<input
 									type='email'
-									className='form-control'
+									className={ window.screen.width > 430 ? 'form-control' : 'LogInInput'}
 									id='email'
 									placeholder='Email'
 									name='email'
@@ -161,7 +165,7 @@ const LogIn = () => {
 							<div className='form-group d-flex justify-content-center'>
 								<input
 									type='password'
-									className='form-control'
+									className={ window.screen.width > 430 ? 'form-control' : 'LogInInput'}
 									id='password'
 									name='password'
 									type='password'
@@ -175,7 +179,7 @@ const LogIn = () => {
 							<div className='d-flex justify-content-center '>
 								<button
 									type='submit'
-									className='btn btn-primary btn-block  mb-2  shadow-sm'
+									className={window.screen.width  > 430 ? 'btn btn-primary btn-block  mb-2  shadow-sm' : 'btnSignIn'}
 								>
 									Sign in
 								</button>
@@ -186,7 +190,7 @@ const LogIn = () => {
 									<button
 										onClick={renderProps.onClick}
 										disabled={renderProps.disabled}
-										className='btn btn-primary btn-block'
+										className={window.screen.width  > 430 ? 'btn btn-primary btn-block' : 'btnSignIn'}
 									>
 										Sign-In with Google
 									</button>
@@ -213,9 +217,9 @@ const LogIn = () => {
 							</div>
 						</Link>
 
-						<div className=' d-flex justify-content-start bg-secondary p-5'>
+						<div className= {window.screen.width > 430 ? ' d-flex justify-content-start bg-secondary p-5': 'SignUpContainer'}>
 							<Link
-								className='dropdown-item bg-secondary rounded text-center p-4 '
+								className= {window.screen.width > 430 ? 'dropdown-item bg-secondary rounded text-center p-4' : 'notAccount' }
 								to={'/register'}
 							>
 								Don't have an account? Sign up

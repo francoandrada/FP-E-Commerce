@@ -17,6 +17,7 @@ import { MdArrowBack } from 'react-icons/md';
 function PutProduct() {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [imagesFiles, setImagesFiles] = useState([]);
 
 	const { id } = useParams();
 
@@ -71,22 +72,38 @@ function PutProduct() {
 	} = useForm();
 
 	const handleChange = (event) => {
-		console.log(event);
+		event.preventDefault();
+		if (event.target.file) {
+			convertToBase64();
+			console.log('/////////////HOLA////////////');
+		}
 		setProduct({
 			...product,
 			[event.target.name]: event.target.value,
 		});
 	};
 
-	// const imgUpload = (event)=>{
-	// 	console.log(event)
-	// }
+	const convertToBase64 = (files) => {
+		var arrayAux = [];
+		Array.from(files).forEach((file) => {
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function () {
+				let base64 = reader.result;
+				arrayAux.push(base64);
+			};
+		});
+		setImagesFiles(arrayAux);
+	};
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			await axios
-				.put('http://localhost:3001/admin/putproduct', product)
+				.put('http://localhost:3001/admin/putproduct', {
+					...product,
+					images: imagesFiles,
+				})
 				.then(() => {
 					Swal.fire({
 						position: 'center',
@@ -109,7 +126,12 @@ function PutProduct() {
 					<MdArrowBack />
 				</Link>
 			</div>
-			<form className='' onChange={(e) => handleChange(e)} onSubmit={onSubmit}>
+			<form
+				className=''
+				onChange={(e) => handleChange(e)}
+				onSubmit={onSubmit}
+				encType='multipart/form-data'
+			>
 				<h6>Product</h6>
 
 				<h6>Name</h6>
@@ -240,6 +262,11 @@ function PutProduct() {
 							message: 'no debe ingresar numeros',
 						},
 					})}
+				/>
+				<input
+					type='file'
+					multiple
+					onChange={(e) => convertToBase64(e.target.files)}
 				/>
 				<span>{errors?.image?.message}</span>
 

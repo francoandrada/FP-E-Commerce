@@ -81,8 +81,7 @@ a:link {
 	}
 	.footerContainer{
 		width: 100%;
-		position: absolute;
-		bottom: 1%;
+		margin-top: 4rem;
 	}
 .contentContainer {
 		width: 40%;

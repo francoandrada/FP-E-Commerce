@@ -41,5 +41,11 @@
     font-weight: bold;
     margin: 1rem;
 }
+@media only screen and (max-width: 430px){
+    .prevNext{
+        font-size: 14px;
+        margin: 0.5em;
+    }
+}
 
 

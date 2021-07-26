@@ -70,6 +70,7 @@ function cartReducer(state = initialState, action) {
 			};
 		case GET_PAY:
 			localStorage.removeItem('cart');
+			console.log(action.payload)
 			return {
 				...state,
 				userPay: action.payload,
