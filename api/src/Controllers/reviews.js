@@ -53,17 +53,24 @@ const getAvergedStars = async (req, res) => {
 //------------------------CUADRO DE ESTRELLAS------------------------
 //SELECT "stars" , count(*) as NUM FROM public.reviews GROUP BY stars
 const getAllStars = async (req, res) => {
+	const { productId } = req.body;
+	console.log('PRODUCT ID', productId);
 	try {
-		const prom = await Review.findAll({
-			attributes: [
-				'stars',
-				[Sequelize.fn('COUNT', Sequelize.col('stars')), 'PostCount'],
-			],
+		if (productId !== undefined) {
+			const prom = await Review.findAll({
+				where: {
+					productId: productId,
+				},
+				attributes: [
+					'stars',
+					[Sequelize.fn('COUNT', Sequelize.col('stars')), 'ammount'],
+				],
+				group: ['stars'],
+			});
 
-			group: ['stars'],
-		});
-
-		res.send(prom);
+			console.log(prom);
+			res.send(prom);
+		}
 	} catch (error) {
 		console.log(error);
 	}
@@ -88,19 +95,11 @@ const getAllReviews = async function getAllReviews(req, res) {
 				attributes: ['name', 'surname', 'email'],
 			},
 		});
-
-		console.log(allReviews);
 		res.send(allReviews);
 	} catch (error) {
 		console.log(error);
 	}
 };
-
-// var userFind = await User.findOne({
-// 	where: { userId: userId },
-// });
-// console.log(userFind)
-// if (userFind) {
 
 module.exports = {
 	getAllReviews,

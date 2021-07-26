@@ -5,11 +5,12 @@ import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
-
+import AllStars from '../Reviews/AllStars';
 import Review from '../Reviews/StarAverage';
 import AllReviews from '../Reviews/AllReviews';
 import { allReviews } from '../../Redux/actionsReview';
 import {Link} from 'react-scroll'
+
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -40,6 +41,7 @@ function DetailProduct(props) {
 							<Link  to="review" spy={true} smooth={true}>
 							<Review className={styles.hei} /> 	
 							</Link>
+							<AllStars />
 							<p className={styles.texto}>${productDetail.price} </p>
 
 							<span> Stock: {productDetail.stock} </span>

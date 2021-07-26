@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { ALL_REVIEWS, ALL_STARS, DELETE, GET_AVERAGE, POST_REVIEW, SAVE_DATA } from './actionsName';
+import { ALL_REVIEWS, ALL_STARS, GET_AVERAGE } from './actionsName';
 
 export function getAverage(productId) {
 	return async (dispatch) => {
-        console.log('ID PRODUCTO', productId)
 		try {
 			const res = await axios.post('http://localhost:3001/reviews/averaged', {productId});
 
@@ -34,7 +33,7 @@ export function allReviews(productId) {
 
 		try {
 			const res = await axios.post('http://localhost:3001/reviews/byproduct', {productId});
-			console.log(res.data)
+		
 			dispatch({
 				type: ALL_REVIEWS,
 				payload: res.data
@@ -49,11 +48,11 @@ export function allReviews(productId) {
 
 
 
-export function AllStars() {
+export function StarsAmmount(productId) {
 	return async (dispatch) => {
 
 		try {
-			const res = await axios.get('http://localhost:3001/reviews');
+			const res = await axios.post('http://localhost:3001/reviews/allStars', {productId});
 			dispatch({
 				type: ALL_STARS,
 				payload: res.data

@@ -9,6 +9,6 @@ router.post('/byproduct', getAllReviews);
 
 router.post('/averaged', getAvergedStars);
 
-router.get('/',getAllStars);
+router.post('/allStars',getAllStars);
 
 module.exports = router;

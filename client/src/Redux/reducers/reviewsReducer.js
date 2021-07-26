@@ -1,9 +1,9 @@
-import { ALL_REVIEWS, ALL_STARS, DELETE, GET_AVERAGE, SAVE_DATA } from '../actionsName';
+import { ALL_REVIEWS, ALL_STARS, GET_AVERAGE} from '../actionsName';
 
 const initialState = {
-	stars: [],
+	stars: undefined,
 	review: undefined,
-	allStars: null
+	allStars: undefined
 };
 function reviewsReducer(state = initialState, action) {
 	switch (action.type) {
@@ -18,7 +18,6 @@ function reviewsReducer(state = initialState, action) {
 				review: action.payload,
 			};
 		case ALL_STARS:
-			console.log(action.payload)
 			return{
 				...state,
 				allStars: action.payload

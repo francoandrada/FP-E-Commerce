@@ -76,11 +76,10 @@ const CartHeader = styled.div`
 `;
 
 const ProductsCart = styled.section`
-        max-height: 350px;
+    max-height: 350px;
     overflow-y: scroll;
     border-top: 2px solid rgb(128 128 128 / 35%);
     border-bottom: 2px solid rgb(128 128 128 / 35%);
-
     ul {
         list-style: none;
         padding: 0px;

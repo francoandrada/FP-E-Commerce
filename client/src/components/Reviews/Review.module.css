@@ -65,5 +65,8 @@ button {
 	font-family: 'Roboto', sans-serif;
 	text-decoration: underline;
 	cursor: pointer;
-
  }
+ .review:hover{
+	 color: #FF3C4A ;
+
+}
