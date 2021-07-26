@@ -21,27 +21,25 @@ function UserView() {
 	const dispatch = useDispatch();
 	const [selectedOption, setSelectedOption] = useState('account');
 
-
-
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
 		dispatch(getProducts());
 	}, [dispatch]);
 
 	function setOption(event) {
+		console.log('id', event.target.id);
 		setSelectedOption(event.target.id);
 	}
 
 	let currentPanel = null;
 
-    if (selectedOption === 'orders') {
-        currentPanel = <UserOrdersList /> 
-    } else if (selectedOption === 'account') {
-        currentPanel = <UserAccount setOption={setOption}/>
-    } else if (selectedOption === 'edit') {
-        currentPanel = <EditAccount setOption={setOption}/>
-    }
-
+	if (selectedOption === 'orders') {
+		currentPanel = <UserOrdersList />;
+	} else if (selectedOption === 'account') {
+		currentPanel = <UserAccount setOption={setOption} />;
+	} else if (selectedOption === 'edit') {
+		currentPanel = <EditAccount setOption={setOption} />;
+	}
 
 	return (
 		<div>
@@ -50,62 +48,62 @@ function UserView() {
 					<div className={style.optionsContainer}>
 						<p>Welcome {userData.name}!</p>
 
-						<div onClick={setOption}
-							 id='account' 
-							 className={style.optionsLayoutdiv}>
+						<div
+							onClick={setOption}
+							id='account'
+							className={style.optionsLayoutdiv}
+						>
 							<div className={style.subcontainerOptions}>
 								<FiUser />
-								<p className={style.textOptionStyle}>
-									Account
-								</p>
+								<p className={style.textOptionStyle}>Account</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div onClick={setOption}
-							 id='orders' 
-							 className={style.optionsLayoutdiv}>
+						<div
+							onClick={setOption}
+							id='orders'
+							className={style.optionsLayoutdiv}
+						>
 							<div className={style.subcontainerOptions}>
 								<FiBox />
-								<p className={style.textOptionStyle}>
-									My Orders
-								</p>
+								<p className={style.textOptionStyle}>My Orders</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div onClick={setOption}
-							 id='favorites' 
-							 className={style.optionsLayoutdiv}>
+						<div
+							onClick={setOption}
+							id='favorites'
+							className={style.optionsLayoutdiv}
+						>
 							<div className={style.subcontainerOptions}>
 								<FiHeart />
-								<p className={style.textOptionStyle}>
-									Favorites
-								</p>
+								<p className={style.textOptionStyle}>Favorites</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div onClick={setOption}
-							 id='addresses' 
-							 className={style.optionsLayoutdiv}>
+						<div
+							onClick={setOption}
+							id='addresses'
+							className={style.optionsLayoutdiv}
+						>
 							<div className={style.subcontainerOptions}>
 								<FiHome />
-								<p className={style.textOptionStyle}>
-									Addresses
-								</p>
+								<p className={style.textOptionStyle}>Addresses</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div onClick={setOption}
-							 id='signout'
-							 className={style.optionsLayoutdiv}>
+						<div
+							onClick={setOption}
+							id='signout'
+							className={style.optionsLayoutdiv}
+						>
 							<div className={style.subcontainerOptions}>
 								<FiLogOut />
-								<p className={style.textOptionStyle}>
-									Sign Out
-								</p>
+								<p className={style.textOptionStyle}>Sign Out</p>
 							</div>
 							<FiChevronRight />
 						</div>
@@ -113,7 +111,6 @@ function UserView() {
 				</div>
 
 				<div className={style.userPanelSelectedContainer}>{currentPanel}</div>
-
 			</div>
 		</div>
 	);
