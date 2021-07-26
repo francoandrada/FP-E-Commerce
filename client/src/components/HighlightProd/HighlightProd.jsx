@@ -59,7 +59,9 @@ function HighlightProd({ id, image, name, price }) {
 						<Link to={`/catalog/${id}`}>
 							<ButtonRed>More Info</ButtonRed>
 						</Link>
+						<div className='buttonCrypto'>
 						<ButtonCrypto>₿ {(price * btcRate).toFixed(6)}</ButtonCrypto>
+						</div>
 					</div>
 				</div>
 			</div>

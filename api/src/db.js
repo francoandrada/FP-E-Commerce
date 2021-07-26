@@ -34,8 +34,18 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, Role, User, Category, Brand, Order, OrderDetail, Cart, Review } =
-	sequelize.models;
+const {
+	Product,
+	Role,
+	User,
+	Category,
+	Brand,
+	Order,
+	OrderDetail,
+	Cart,
+	Image,
+	Review,
+} = sequelize.models;
 
 Role.hasMany(User, { foreignKey: 'roleId' });
 User.belongsTo(Role, { foreignKey: 'roleId' });
@@ -74,11 +84,21 @@ Category.belongsToMany(Product, {
 Brand.hasMany(Product, { foreignKey: 'brandId' });
 Product.belongsTo(Brand, { foreignKey: 'brandId' });
 
-
 Product.belongsToMany(User, { through: 'favorites' });
 User.belongsToMany(Product, { through: 'favorites' });
 
+// 1---------------> N
+// User -----------> Review
+User.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(Product, { foreignKey: 'userId' });
 
+// 1---------------> N
+// Product -----------> Review
+Product.hasMany(Review, { foreignKey: 'productId' });
+Review.belongsTo(Product, { foreignKey: 'productId' });
+
+Product.hasMany(Image, { foreignKey: 'productId' });
+Image.belongsTo(Product, { foreignKey: 'productId' });
 
 
 
@@ -92,7 +112,6 @@ Review.belongsTo(User, {foreignKey: 'userId'});
 // Product -----------> Review
 Product.hasMany(Review, {foreignKey: 'productId'});
 Review.belongsTo(Product, {foreignKey: 'productId'});
-
 
 module.exports = {
 	...sequelize.models,
