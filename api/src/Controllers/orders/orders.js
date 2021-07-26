@@ -62,7 +62,7 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 				{
 					model: OrderDetail,
 					as: 'orderDetails',
-					attributes: ['id', 'orderId'],
+					attributes: ['id', 'orderId', 'price'],
 					include: [
 						{
 							model: Product,
@@ -70,7 +70,6 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 							attributes: [
 								'id',
 								'name',
-								'price',
 								'image',
 								'priceSpecial',
 								'description',
