@@ -5,9 +5,11 @@ import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
-import { Link } from 'react-router-dom';
+import AllStars from '../Reviews/AllStars';
 import Review from '../Reviews/StarAverage';
-
+import AllReviews from '../Reviews/AllReviews';
+import { allReviews } from '../../Redux/actionsReview';
+import {Link} from 'react-scroll'
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
@@ -17,19 +19,33 @@ function DetailProduct(props) {
 		dispatch(getProductById(props.match.params.id));
 	}, []);
 
+	useEffect(() => {
+		dispatch(allReviews(props.match.params.id));
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			{productDetail ? (
 				<div>
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
-							<img src={productDetail.image} alt='product' />
+							<img
+								className={styles.imag}
+								src={productDetail.image}
+								alt='product'
+							/>
 						</div>
 
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
-							<p>${productDetail.price} </p>
+							<Link  to="review" spy={true} smooth={true}>
+							<Review className={styles.hei} /> 	
+							</Link>
+							<AllStars />
+							<p className={styles.texto}>${productDetail.price} </p>
+
 							<span> Stock: {productDetail.stock} </span>
+
 							<div className='m-3 d-block'>
 								{productDetail.stock > 0 ? (
 									<>
@@ -106,7 +122,12 @@ function DetailProduct(props) {
 					</div>
 				</div>
 			</div>
-			<Review />
+			
+			<div className='w-100 ' id="review">
+				<div className={styles.descriptionProduct}>
+				<AllReviews />
+				</div>
+			</div>
 		</div>
 	);
 }

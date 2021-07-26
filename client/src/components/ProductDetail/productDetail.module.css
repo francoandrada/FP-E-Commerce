@@ -5,19 +5,22 @@
      flex-wrap: wrap;
      margin: 4rem auto;
      border-radius: 10px;
-     justify-content: right;
+     justify-content: flex-start;
      padding: 2.5rem;
  }
  .imgContainer{
      display: flex;
      justify-content: center;
-     min-width: min-content;
+     align-items: center;
+     width: 50%;
+  
  }
  .descriptionProduct{
     border-top: 1px solid gray;
     padding: 1rem 10%;
      margin: auto;
  }
+
  .card{
      display: flex;
    
@@ -26,10 +29,9 @@
      text-align: center;
      font-size: 25px;
      display: flex;
+     justify-content: space-between;
      flex-direction: column;
-     padding: 1rem;
-     margin-left: 10rem;
-     min-width: 30%;
+     max-width: 50%;
      flex-grow: 1;
  }
  .productCard div{
@@ -55,4 +57,13 @@
  .productCard p {
      margin: 2.5rem auto;
      font-weight: 600;
+ }
+ .imag{
+    width: 400px;
+    height: 400px;
+ }
+
+ .texto{
+    padding: 1px;
+
  }

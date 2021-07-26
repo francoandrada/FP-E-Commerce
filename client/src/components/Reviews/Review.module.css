@@ -1,31 +1,72 @@
 
 button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
-  .on {
-    color: #000;
-  }
-  .off {
-    color: #ccc;
-  }
+	background-color: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.on {
+	color: #000;
+}
+.off {
+	color: #ccc;
+}
 
-  .title{
-    font-size: 1.7rem;
-    font-family: 'Roboto', sans-serif; 
+.title {
+	font-size: 1.7rem;
+	font-family: 'Roboto', sans-serif;
+}
+.comments {
+	font-size: 1.4rem;
+	font-family: 'Roboto', sans-serif;
+}
+.img {
+	width: 300px;
+	height: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.star {
+	display: flex;
+	justify-content: center;
+	height: 0px;
+	align-items: center;
+}
 
-  }
-  .comments{
-    font-size: 1.4rem;
-    font-family: 'Roboto', sans-serif; 
-  }
-  .img{
-    width: 300px;
-    height: 300px;
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
+.user{
+	font-size: 1rem;
+	text-align: end;
+	margin: 1rem .5rem;
+	font-weight: 700;
+}
+.container{
+	background-color: #F5F5F5;
+	padding: 1rem;
 
-  }
+
+}
+.tit{
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5rem;
+	font-weight: 400;
+	text-align: center;
+}
+.descriptionProduct{
+    border-top: 1px solid gray;
+    padding: 1rem 10%;
+     margin: auto;
+ }
+
+ .review{
+	 margin-top: 3.5rem;
+	 margin-left: .5rem;
+	font-size: 1rem;
+	font-family: 'Roboto', sans-serif;
+	text-decoration: underline;
+	cursor: pointer;
+ }
+ .review:hover{
+	 color: #FF3C4A ;
+
+}

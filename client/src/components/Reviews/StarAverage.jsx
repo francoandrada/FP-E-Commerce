@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAverage } from '../../Redux/actionsReview';
+import { BsFillStarFill } from 'react-icons/bs';
+import style from './Review.module.css';
 
 const Review = () => {
 	const dispatch = useDispatch();
@@ -14,21 +16,27 @@ const Review = () => {
 	const starAverage = useSelector((state) => state.reviews.stars);
 
 	return (
-		<div>
-			{starAverage.length > 0 && starAverage[0].rating  !== null? (
-				<div>
-					<ReactStars size={35}
-                     value={starAverage[0].rating} 
-                     isHalf={true} 
-                     edit={false} 
-                     color='#000000' />
+		<Fragment>
+		
+			{starAverage && starAverage.length > 0 && starAverage[0].rating !== null ? (
+				<div className={style.star}>
+			
+					<ReactStars
+						size={25}
+						value={starAverage[0].rating}
+						isHalf={true}
+						edit={false}
+						emptyIcon={BsFillStarFill}
+						halfIcon={BsFillStarFill}
+						filledIcon={BsFillStarFill}
+						color='#CFCECE'
+					/>
 				
-		<p>{parseFloat(starAverage[0].rating).toFixed(2)}</p>
+					<h6 className={style.review}>Reviews</h6>
+				
 				</div>
-			) : null
-            }
-      
-		</div>
+			) : null}
+		</Fragment>
 	);
 };
 

@@ -78,7 +78,8 @@ export const MESSAGE_FAIL = 'MESSAGE_FAIL'
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const GET_AVERAGE = 'GET_AVERAGE';
 export const POST_REVIEW = 'POST_REVIEW';
-
+export const ALL_REVIEWS = 'ALL_REVIEWS';
+export const ALL_STARS = 'ALL_STARS';
 //cryptos
 export const GET_RATES = 'GET_RATES';
 

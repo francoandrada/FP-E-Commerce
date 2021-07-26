@@ -17,7 +17,7 @@ const client = new Coinpayments(CoinpaymentsCredentials);
 const getBasicInfo = async (req, res) => {
 	console.log('entró a getInfo');
 	const info = await client.getBasicInfo();
-	console.log(info);
+
 	res.json(info);
 };
 
@@ -42,7 +42,7 @@ const createTransaction = async (req, res) => {
 	const order = await client.createTransaction(
 		CoinpaymentsCreateTransactionOpts
 	);
-	console.log(order);
+
 	res.json(order);
 };
 
@@ -67,7 +67,6 @@ const getCoinRates = async (req, res) => {
 		accepted: 2
 	};
 	const rates = await client.rates(CoinpaymentsRatesOpts);
-    console.log(rates);
 	res.json(rates);
 };
 
@@ -85,7 +84,7 @@ const createPos = async (req, res) => {
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrderCrypto = async function createOrderCrypto(req, res) {
 	const { ammount, status, prodCarrito, id } = req.body;
-    console.log(req.body)
+
 
 	try {
 		var newOrder = await Order.create(
@@ -145,7 +144,7 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 const ipnUpdate = async (req, res, next) => {
 
-	console.log(req.body);
+
 	const id = parseInt(req.body.custom);
 	const newStatus = req.body.status_text;
 
