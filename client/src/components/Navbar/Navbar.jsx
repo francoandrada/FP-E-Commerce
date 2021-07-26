@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import CartModal from '../CartModal/CartModal';
+import FavModal from '../FavoriteComponent/FavModal'
 import {
 	authUser,
 	getSuggestions,
@@ -16,8 +17,10 @@ import {
 	getUserFavorites,
 } from '../../Redux/actions';
 
+import {FaHeart} from 'react-icons/fa'
 import LogoStyle from '../StyledComponents/LogoStyle';
 import styles from './Navbar.module.css';
+
 
 const Navbar = () => {
 	const [display, setDisplay] = useState(false);
@@ -227,6 +230,11 @@ const Navbar = () => {
 							<Link to='/LogIn'>Login</Link>
 						</>
 					)}
+
+					<div className={styles.favHeartContainer}>
+						<FavModal/>
+					</div>
+
 					<div className={styles.cartLogoContainer}>
 						<CartModal />
 						{cartCount !== 0 ? (
