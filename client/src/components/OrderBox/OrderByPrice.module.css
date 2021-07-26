@@ -5,3 +5,8 @@
 .titlePrice {
 	width: 100%;
 }
+@media only screen and (max-width: 430px){
+	.divPrice{
+		margin-left: 0.2em;
+	}
+}

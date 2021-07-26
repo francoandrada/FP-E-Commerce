@@ -11,6 +11,7 @@ import imge from '../../images/5.jpeg';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
 import { GoogleLogin } from 'react-google-login';
+import './index.css'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -86,13 +87,13 @@ const LogIn = () => {
 
 	let array = [];
 
-	for (let i = 0; i < prodId.length; i++) {
-		const element = {
-			prodId: prodId[i].id,
-			qty: prodId[i].qty,
-		};
+ for (let i = 0; i < prodId.length; i++) {
+	const element = {
+		prodId: prodId[i].id,
+		qty: prodId[i].qty,
+	};
 
-		array.push(element);
+ 	array.push(element);
 	}
 	let bodyObject = {
 		userId: userId,

@@ -1,37 +1,37 @@
 .registerFormContainer {
-    display: flex;
-    background-color: #303030;
-    padding: 50px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 50px;
-    flex-direction: column;
+	display: flex;
+	background-color: #303030;
+	padding: 3.125em;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 3.125em;
+	flex-direction: column;
+    border-radius: 12px;
 }
-.btnBackContainer{
-    font-size: 40px;
-    margin-right: 70%;
+.btnBackContainer {
+	font-size: 40px;
+	margin-right: 70%;
 }
 #regForm {
-    color: white;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+	color: white;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
 }
 
-#row{
-    display:flex;
-    justify-content: center;
-    
+#row {
+	display: flex;
+	justify-content: center;
 }
 
-#input{
-    margin: 1%
+#input {
+	margin: 1%;
 }
 
 .registerButtonRow {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	margin-top: 2.5em;
 }
 
 /* #adminLabel{
@@ -40,11 +40,23 @@
     display: flex;
 } */
 
-#registerFormOne{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: cornsilk;
+#registerFormOne {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: cornsilk;
 }
 
-
+@media only screen and (max-width: 430px) {
+	#input {
+		font-size: 12px;
+        display: flex;
+        flex-direction: column;
+	}
+    .registerFormContainer {
+        padding: 8%;
+    }
+	.form-control {
+		font-size: 12px;
+	}
+}
