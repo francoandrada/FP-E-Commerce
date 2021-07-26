@@ -15,12 +15,9 @@ const orderRoutes = require('./orderRoutes');
 const webHooks = require('./webHooks');
 const cartRoutes = require('./cartRoutes');
 const favoritesRoutes = require('./favoritesRoutes');
-<<<<<<< HEAD
 const uploadRoutes = require('./uploadRoutes');
-=======
 const coinpaymentRoutes = require('./coinpaymentRoutes');
 const watsonRoutes = require('./watson');
->>>>>>> main
 const router = Router();
 
 // router.use('/pagination', paginationRouter);
@@ -39,9 +36,6 @@ router.use('/orders', orderRoutes);
 router.use('/webhooks', webHooks);
 router.use('/shoppingcart', cartRoutes);
 router.use('/favorites', favoritesRoutes);
-<<<<<<< HEAD
 router.use('/upload', multerUploads, uploadRoutes);
-=======
 router.use('/coinpayment', coinpaymentRoutes);
->>>>>>> main
 module.exports = router;
