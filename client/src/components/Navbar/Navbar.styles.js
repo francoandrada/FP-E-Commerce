@@ -16,7 +16,7 @@ function flex(justify, align, direction = 'row') {
 export const NavContainer = styled.div`
   background-color: ${color.background};
   width: 100%;
-  height: 80px;
+  height: 5em;
   font-family: "Arial";
   display: flex;
 
@@ -61,7 +61,7 @@ export const LeftSide = styled.div`
 
       a {
         margin: 10px;
-        font-size: 25px;
+        font-size: 15px;
       }
     }
   }

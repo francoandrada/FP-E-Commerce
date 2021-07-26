@@ -2,10 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './SubTotal.module.css';
-import { postCart } from '../../../Redux/actions';
-import { formatNumber } from '../../../helper/priceFormater';
 
-function SubTotal() {
+import { postCartCrypto } from '../../../Redux/actions';
+
+import { formatNumber } from '../../../helper/priceFormater';
+import { postCart, saveAmmount } from '../../../Redux/actions';
+
+function SubTotal({address}) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
@@ -16,7 +19,7 @@ function SubTotal() {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-	console.log(user.userId);
+
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -34,6 +37,7 @@ function SubTotal() {
 
 		setTotalItems(items);
 		setTotalPrice(price);
+		
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
 	let status = 'created';
@@ -59,8 +63,14 @@ function SubTotal() {
 			status: status,
 		};
 	}
-	console.log(bodyObject);
+
 	let totalFormat = formatNumber.new(totalPrice, '$');
+	dispatch(saveAmmount(totalPrice))
+	
+
+	const handleClickCrypto = () => {
+		dispatch(postCartCrypto(bodyObject))
+	};
 
 	return (
 		<div>
@@ -70,6 +80,7 @@ function SubTotal() {
 					<p>Items in Cart:</p>
 					<p>{totalItems}</p>
 				</div>
+
 				<div className={style.subdivTotal}>
 					<p>
 						TOTAL:<br></br>(without shipping)
@@ -78,15 +89,32 @@ function SubTotal() {
 				</div>
 
 				{token ? (
-					<button
-						className={style.paymentButton}
-						onClick={() => dispatch(postCart(bodyObject))}
-					>
-						Checkout
-					</button>
+
+					// <NavLink to='/shoppingcart/shipping'>
+					// 	<button className={style.paymentButton}
+					// 	>Buy Now</button>
+					// </NavLink>
+
+					<div>
+						<button
+							className={style.paymentButton}
+							onClick={() => dispatch(postCart(bodyObject))}
+						>
+							Checkout with Mercado Pago
+						</button>
+						<NavLink to='/catalog'>
+							<input
+								type='image'
+								src='https://www.coinpayments.net/images/pub/checkout-blue.png'
+								alt='Checkout'
+								onClick={handleClickCrypto}
+							/>
+						</NavLink>
+					</div>
+
 				) : (
 					<NavLink to='/login'>
-						<button className={style.paymentButton}>Checkout</button>
+						<button className={style.paymentButton}>Buy Now</button>
 					</NavLink>
 				)}
 			</div>

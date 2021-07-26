@@ -15,6 +15,7 @@ import Table from '../AdminComponents/Table/Table';
 import Charts from '../AdminComponents/Charts/Charts';
 import Orders from '../AdminComponents/Orders/Orders';
 import UserOrder from '../AdminComponents/UserOrder/UserOrder';
+import OrderDetails from '../AdminComponents/OrderDeatils/OrderDetails';
 
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
@@ -41,6 +42,7 @@ const AdminRoutes = ({ location }) => {
 				<Route path='/admin/users/:email' exact component={UserPanel} />
 				<Route path='/admin/products' exact component={Table} />
 				<Route path='/admin/userorders' exact component={UserOrder} />
+				<Route path='/admin/orderdetails/:id' exact component={OrderDetails} />
 			</Switch>
 			{location.pathname === '/admin' && <Charts />}
 		</>

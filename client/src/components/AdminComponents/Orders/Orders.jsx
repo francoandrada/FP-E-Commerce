@@ -1,43 +1,73 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductWithOrderData } from '../../../Redux/actions';
+import {
+	getProductWithOrderData,
+	changePageOfProductOrderTable,
+} from '../../../Redux/actions';
+import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
 import Table from '../TableComponent/TableComponent';
-import COLUMNS from './columns';
+import Select from '../../Select/Select';
+import OrdersLogic from './OrdersLogic';
+import Pagination from '../TablePagination/TablePagination';
 
 const Orders = () => {
 	const dispatch = useDispatch();
-	const { productWithOrder } = useSelector((state) => state.admin);
+	const { mapData, paginationSizeHandle } = OrdersLogic();
+	const {
+		productWithOrder,
+		tableOrderPaginationSize,
+		currentPageOfProductOrderTable,
+	} = useSelector((state) => state.admin);
+
+	const [searchValue, setSearchValue] = React.useState('');
 
 	React.useEffect(() => {
-		dispatch(getProductWithOrderData(0, { limit: 5 }));
-	}, [dispatch]);
+		dispatch(
+			getProductWithOrderData(currentPageOfProductOrderTable, {
+				limit: tableOrderPaginationSize,
+				search: searchValue,
+			})
+		);
+	}, [
+		dispatch,
+		tableOrderPaginationSize,
+		searchValue,
+		currentPageOfProductOrderTable,
+	]);
 
-	const mapData = (array) => {
-		const data =
-			array &&
-			array.map((p) => {
-				return {
-					id: p?.id,
-					name: p?.name || 'No Name',
-					detailId: p?.orderDetails[0]?.id || '--',
-					price: p?.orderDetails[0]?.price || '--',
-					quantity: p?.orderDetails[0]?.quantity || '--',
-					orderId: p?.orderDetails[0]?.orderId || '--',
-					createdAt: p?.orderDetails[0]?.createdAt || '--',
-				};
-			});
-		return data;
+	const searchHandle = (event) => {
+		event.preventDefault();
+		setSearchValue(event.target.value);
 	};
 
-	const dataToPrint = mapData(productWithOrder?.products);
-
+	const paginate = (pageNumber) =>
+		dispatch(changePageOfProductOrderTable(pageNumber));
 	return (
 		<div>
+			<div>
+				<input type='text' value={searchValue} onChange={searchHandle} />
+
+				<Select
+					initialValue={tableOrderPaginationSize}
+					onChange={paginationSizeHandle}
+					values={[5, 10, 20, 50, 100]}
+				/>
+			</div>
+
 			{productWithOrder ? (
-				<Table dataToPrint={dataToPrint} formatColumn={COLUMNS} />
+				<Table
+					dataToPrint={mapData(productWithOrder?.products)}
+					formatColumn={COLUMNS}
+				/>
 			) : (
 				<Loader />
+			)}
+			{productWithOrder && productWithOrder?.totalPages > 1 && (
+				<Pagination
+					paginate={paginate}
+					totalPages={productWithOrder?.totalPages}
+				/>
 			)}
 		</div>
 	);

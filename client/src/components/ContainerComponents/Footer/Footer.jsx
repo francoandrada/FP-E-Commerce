@@ -12,12 +12,12 @@ function Footer() {
 					</Link>
 				</div>
 				<div className={styles.contentContainer}>
-					<Link to='/'>
-						<span>Home</span>
+					<Link to='/about'>
+						<span>About us</span>
 					</Link>
 					&nbsp;
-					<Link to='/catalog'>
-						<span>Catalog</span>
+					<Link to='#'>
+						<span>Contact</span>
 					</Link>
 				</div>
 				<div className={styles.contentContact}>

@@ -25,9 +25,14 @@ const countOfCategories = require('../Controllers/admin/countCategories.controll
 const countOfBrand = require('../Controllers/admin/countBrand.controller');
 const getProductOrder = require('../Controllers/admin/getOrders.controller');
 const getUserOrder = require('../Controllers/admin/userOrder.controller');
+<<<<<<< HEAD
 const { multerUploads } = require('../middlewares/multer');
+=======
+const getOrderDetails = require('../Controllers/admin/getAllDataAboutAnOrder.controller');
+>>>>>>> main
 // router.get('/', getAllProducts)
-router.post('/userorders', routerHelper(getUserOrder));
+router.get('/dataaboutorder/:id', routerHelper(getOrderDetails));
+router.post('/usersandhisorders', routerHelper(getUserOrder));
 router.post('/listorders', routerHelper(getProductOrder));
 router.get('/categoriescount', routerHelper(countOfCategories));
 router.get('/countofbrand', routerHelper(countOfBrand));

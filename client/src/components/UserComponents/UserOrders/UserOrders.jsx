@@ -1,37 +1,42 @@
-import { useSelector } from 'react-redux';
-import UserOrderDetail from './UserOrderDetail'
+import React from 'react';
 import style from '../../UserComponents/UserOrders.module.css';
+import styled from 'styled-components';
+
+const ButtonRedSmall = styled.button`
+    font-family: 'Roboto', sans-serif; 
+    width: 80px;
+    height: 30px;
+    border-style: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    background-color: #FF3C4A;
+    &:hover{
+        background-color: #cc242f;
+    } 
+`;
 
 
-function UserOrders() {
-    const userId = useSelector((state) => state.user.userData.userId);
-    const userOrders = useSelector((state) => state.useraccount.userOrdersList);
 
+
+function UserOrders({orderId, status}) {
 
 	return (
-		<div>
-			<div className={style.userOptionContainer}>
+		<div className={style.orderDiv}>
             
-			<div className={style.selectedOptionTitle} >
-            <h3>My Orders</h3>
-            </div>
+                <div className={style.orderNumberDiv}>
+                    <p>Order Number: {orderId}</p>
+                </div>
 
-			{userOrders && userOrders.map((order) => {
-				return (
-					
-					<UserOrderDetail
-						prodInfo={order.orderDetails[0].product}
-						price={order.orderDetails[0].product.price}
-						name={order.orderDetails[0].product.name}
-						image={order.orderDetails[0].product.image}
-						status={order.status}
-					/>
-					
-					)
-				}
-			)}
-
-			</div>
+                <div className={style.statusDiv}>
+                    <p>Status:</p>
+                    <p className={style.statusStyle}>{status}</p> 
+                </div>
+                <div className={style.totalOrderDiv}>
+                    <p>TOTAL: $ 234223</p>
+                </div>
+                
+			
 		</div>
 	);
 }

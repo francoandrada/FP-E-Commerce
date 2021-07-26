@@ -3,6 +3,7 @@ import CartProducts from '../CartProducts/CartProducts';
 
 function CartList() {
 	const cartProducts = useSelector((state) => state.cart.cart);
+	
 
 	return (
 		<div>

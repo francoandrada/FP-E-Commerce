@@ -1,0 +1,31 @@
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .on {
+    color: #000;
+  }
+  .off {
+    color: #ccc;
+  }
+
+  .title{
+    font-size: 1.7rem;
+    font-family: 'Roboto', sans-serif; 
+
+  }
+  .comments{
+    font-size: 1.4rem;
+    font-family: 'Roboto', sans-serif; 
+  }
+  .img{
+    width: 300px;
+    height: 300px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  }

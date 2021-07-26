@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import {
-	getCartUser,
-	logIn,
-	loginGmail,
-	postCartUser,
-} from '../../Redux/actions';
+import { logIn, loginGmail, postCartUser } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
@@ -103,16 +98,14 @@ const LogIn = () => {
 		userId: userId,
 		prodId: array,
 	};
-console.log(bodyObject)
+	console.log(bodyObject);
 
 	useEffect(() => {
 		if (authenticated) {
-			 history.goBack();
+			history.goBack();
 			dispatch(postCartUser(bodyObject));
-			
 		}
 	}, [authenticated]);
-
 
 	const formik = useFormik({
 		initialValues: {
@@ -125,7 +118,6 @@ console.log(bodyObject)
 				.required('Enter an email'),
 			password: Yup.string()
 				.required('Enter a password')
-				.min(6, 'The password must be at least 6 characters'),
 		}),
 		onSubmit: (values) => {
 			dispatch(logIn(values));

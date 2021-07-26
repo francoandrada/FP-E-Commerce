@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-	addToCart,
-} from '../../../Redux/actions';
+import { addToCart } from '../../../Redux/actions';
 import style from '../../UserComponents/UserOrders.module.css';
 import styled from 'styled-components';
+import UserReview from '../../Reviews/UserReview';
+import { saveData } from '../../../Redux/actionsReview';
+import { compose } from 'redux';
 
 const ButtonRedSmall = styled.button`
     font-family: 'Roboto', sans-serif; 
@@ -20,41 +21,40 @@ const ButtonRedSmall = styled.button`
     } 
 `;
 
+function UserOrderDetail({ image, name, price, prodInfo, id }) {
+	const dispatch = useDispatch();
+	const userOrders = useSelector((state) => state.useraccount.userOrdersList);
 
-function UserOrderDetail({prodInfo, price, name, image, status}) {
-    const dispatch = useDispatch();
 
 	return (
 		<div className={style.orderDetailContainer}>
-            
-           <div className={style.SizeImagOrderDiv}>
-           <img
-				className={style.sizeImagOrder}
-				src={image}
-				alt='Product Image'
-			/>
-           </div>
-           <div>
-                <p>Status:</p>
-                <p className={style.statusStyle}>{status}</p> 
-           </div>
-            
-            <div className={style.descriptionOrderStyle}>
-            <p>{name}</p>   
-            </div>
+			<div className={style.SizeImagOrderDiv}>
+				<img className={style.sizeImagOrder} src={image} alt='Product Image' />
+			</div>
 
-            <p>${price}</p>
-    
-            {/* {p.stock>0? */}
-            <Link to={'/shoppingcart'}>
-				<ButtonRedSmall
-					type='submit'
-					onClick={() => dispatch(addToCart(prodInfo))}
-				>
-				Buy Again
-				</ButtonRedSmall>
-            </Link>
+			<div className={style.descriptionOrderStyle}>
+				<p>{name}</p>
+			</div>
+
+			<p>${price}</p>
+
+			<div>
+				<Link to={'/shoppingcart'}>
+					<ButtonRedSmall
+						type='submit'
+						onClick={() => dispatch(addToCart(prodInfo))}
+					>
+						Buy Again
+					</ButtonRedSmall>
+				</Link>
 			
+
+				<Link to={`/review/${id}`}>
+				<button onClick={() => <p>hola</p>}>Leave feedback</button>
+				</Link>
+				
+				
+			</div>
 		</div>
 	);
 }

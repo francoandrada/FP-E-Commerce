@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getUserOrders, getProducts } from '../../../Redux/actions';
-import UserOrders from '../UserOrders/UserOrders';
+import UserOrdersList from '../UserOrders/UserOrdersList';
 import EditAccount from '../UserAccount/EditAccount';
 import UserAccount from '../UserAccount/UserAccount';
 import style from './UserView.module.css';
@@ -20,15 +20,8 @@ function UserView() {
 	const userId = useSelector((state) => state.user.userData.userId);
 	const dispatch = useDispatch();
 	const [selectedOption, setSelectedOption] = useState('account');
-	/* 	const [selectedOption, setSelectedOption] = useState({
-		account: '',
-		orders: '',
-		favorites: '',
-		adresses: '',
-		signout: '',
-	}); */
 
-    console.log('hola')
+
 
 	useEffect(() => {
 		dispatch(getUserOrders(userId));
@@ -42,7 +35,7 @@ function UserView() {
 	let currentPanel = null;
 
     if (selectedOption === 'orders') {
-        currentPanel = <UserOrders/> 
+        currentPanel = <UserOrdersList /> 
     } else if (selectedOption === 'account') {
         currentPanel = <UserAccount setOption={setOption}/>
     } else if (selectedOption === 'edit') {
@@ -57,70 +50,60 @@ function UserView() {
 					<div className={style.optionsContainer}>
 						<p>Welcome {userData.name}!</p>
 
-						<div className={style.optionsLayoutdiv}>
+						<div onClick={setOption}
+							 id='account' 
+							 className={style.optionsLayoutdiv}>
 							<div className={style.subcontainerOptions}>
 								<FiUser />
-								<p
-									onClick={setOption}
-									id='account'
-									className={style.textOptionStyle}
-								>
+								<p className={style.textOptionStyle}>
 									Account
 								</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div className={style.optionsLayoutdiv}>
+						<div onClick={setOption}
+							 id='orders' 
+							 className={style.optionsLayoutdiv}>
 							<div className={style.subcontainerOptions}>
 								<FiBox />
-								<p
-									onClick={setOption}
-									id='orders'
-									className={style.textOptionStyle}
-								>
+								<p className={style.textOptionStyle}>
 									My Orders
 								</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div className={style.optionsLayoutdiv}>
+						<div onClick={setOption}
+							 id='favorites' 
+							 className={style.optionsLayoutdiv}>
 							<div className={style.subcontainerOptions}>
 								<FiHeart />
-								<p
-									onClick={setOption}
-									id='favorites'
-									className={style.textOptionStyle}
-								>
+								<p className={style.textOptionStyle}>
 									Favorites
 								</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div className={style.optionsLayoutdiv}>
+						<div onClick={setOption}
+							 id='addresses' 
+							 className={style.optionsLayoutdiv}>
 							<div className={style.subcontainerOptions}>
 								<FiHome />
-								<p
-									onClick={setOption}
-									id='adresses'
-									className={style.textOptionStyle}
-								>
-									Adresses
+								<p className={style.textOptionStyle}>
+									Addresses
 								</p>
 							</div>
 							<FiChevronRight />
 						</div>
 
-						<div className={style.optionsLayoutdiv}>
+						<div onClick={setOption}
+							 id='signout'
+							 className={style.optionsLayoutdiv}>
 							<div className={style.subcontainerOptions}>
 								<FiLogOut />
-								<p
-									onClick={setOption}
-									id='signout'
-									className={style.textOptionStyle}
-								>
+								<p className={style.textOptionStyle}>
 									Sign Out
 								</p>
 							</div>

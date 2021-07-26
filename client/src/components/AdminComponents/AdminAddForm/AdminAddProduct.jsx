@@ -8,11 +8,11 @@ import {
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
-import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import ButtonRed from '../../StyledComponents/ButtonRed';
+import Swal from 'sweetalert2'
 
 function AddProduct() {
 	const dispatch = useDispatch();
@@ -44,7 +44,7 @@ function AddProduct() {
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
-				return Swal({
+				return new Swal({
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
@@ -74,7 +74,7 @@ function AddProduct() {
 		) {
 			dispatch(createdProduct(data));
 			e.target.reset();
-			Swal({
+			new Swal({
 				title: 'Product Created!!',
 				icon: 'success',
 				button: 'ok',
@@ -82,7 +82,7 @@ function AddProduct() {
 			}).then(() => dispatch(getProducts()));
 			reset({ data });
 		} else {
-			Swal({
+			new Swal({
 				title: 'All fields are required',
 				icon: 'error',
 				button: 'ok',
@@ -90,7 +90,6 @@ function AddProduct() {
 			});
 		}
 	};
-
 	const options = categories.map((c) => ({ label: c.name, value: c.id }));
 	return (
 		<div className={styles.background}>
@@ -107,10 +106,12 @@ function AddProduct() {
 				>
 					<div className={styles.box1}>
 						<label> Name Product: </label>
-						<input
+
+						 <input
 							className={styles.input}
 							type='text'
 							name='name'
+							autoComplete= 'off'
 							onChange={(e) => changeInput(e)}
 							{...register('name', {
 								// required:{
@@ -119,18 +120,18 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 20,
-									massage: 'menos de 20 caracteres',
+									massage: 'less than 20 characters required',
 								},
 								minLength: {
 									value: 3,
-									message: 'mas de 3 caracteres',
+									message: 'requires more than 3 characters',
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message: 'no debe ingresar numeros',
+									message: 'does not require numbers, does not accept symbols "! # $% & / () =.; - *"',
 								},
 							})}
-						></input>
+						></input> 
 						<span>{errors?.name?.message}</span>
 
 						<label>Price:</label>
@@ -146,12 +147,12 @@ function AddProduct() {
 								//     massage: "debe ingresar un nombre"
 								// },
 								maxLength: {
-									value: 8,
-									massage: 'menos de 8 caracteres',
+									value: 7,
+									massage: 'less than 7 characters required',
 								},
 								minLength: {
 									value: 3,
-									message: 'mas de 3 caracteres',
+									message: 'requires more than 3 characters',
 								},
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
@@ -175,12 +176,12 @@ function AddProduct() {
 								//     massage: "debe ingresar un nombre"
 								// },
 								maxLength: {
-									value: 8,
-									massage: 'menos de 8 caracteres',
+									value: 7,
+									massage: 'less than 7 characters required',
 								},
 								minLength: {
 									value: 3,
-									message: 'mas de 3 caracteres',
+									message: 'requires more than 3 characters',
 								},
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
@@ -203,15 +204,15 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 200,
-									massage: 'menos de 200 caracteres',
+									massage: 'less than 200 characters required',
 								},
 								minLength: {
 									value: 10,
-									message: 'mas de 10 caracteres',
+									message: 'requires more than 10 characters',
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message: 'no debe ingresar numeros',
+									message: 'does not require numbers, does not accept symbols "! # $% & / () =.; - *"',
 								},
 							})}
 						/>
@@ -224,6 +225,7 @@ function AddProduct() {
 							type='number'
 							name='weight'
 							min='0'
+							maxLength='4'
 							onChange={(e) => changeInput(e)}
 							{...register('weight', {
 								// required:{
@@ -232,11 +234,11 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 4,
-									massage: 'menos de 4 caracteres',
+									massage: 'less than 4 characters required',
 								},
 								minLength: {
 									value: 1,
-									message: 'mas de 1 caracteres',
+									message: 'requires more than 1 characters',
 								},
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
@@ -262,16 +264,16 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 20,
-									massage: 'menos de 20 caracteres',
+									massage: 'less than 20 characters required',
 								},
 								minLength: {
 									value: 3,
-									message: 'mas de 3 caracteres',
+									message: 'requires more than 3 characters',
 								},
-								pattern: {
-									value: /^[a-zA-Z]*$/,
-									message: 'no debe ingresar numeros',
-								},
+								// pattern: {
+								// 	value: /^[a-zA-Z]*$/,
+								// 	message: 'no debe ingresar numeros',
+								// },
 							})}
 						/>
 						<span>{errors?.image?.message}</span>
@@ -291,12 +293,12 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 4,
-									massage: 'menos de 4 caracteres',
+									massage: 'less than 4 characters required',
 								},
-								// minLength:{
-								//     value: 1,
-								//     message:"mas de 3 caracteres"
-								// },
+								minLength:{
+								    value: 1,
+								    message:"requires more than 1 characters"
+								},
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
 								//     message:"no debe ingresar numeros"
@@ -329,7 +331,7 @@ function AddProduct() {
 							onChange={changeChange}
 						/>
 					</div>
-
+					
 					<ButtonRed type='submit'> Add </ButtonRed>
 				</form>
 			</div>
