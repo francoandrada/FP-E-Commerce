@@ -54,6 +54,12 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
+	INPUT_SUCCESS,
+	INPUT_FAIL,
+	SESSION_SUCCESS_CHAT,
+	SESSION_FAIL_CHAT,
+	MESSAGE_FAIL,
+	MESSAGE_SUCCESS,
 	GET_RATES
 
 } from './actionsName';
@@ -763,6 +769,41 @@ export function postCartCrypto(data) {
 	};
 }
 
+///////////////////////////////// CHATBOT //////////////////////////
+export function userMessage( message){
+return async (dispatch)=> {
+try {
+	dispatch({type:INPUT_SUCCESS, payload: message})
+} catch (error) {
+	dispatch({type:INPUT_FAIL})
+}
+}
+}
+
+export function createSessionBot(){
+	return async (dispatch)=> {
+	try {
+		const res = await axios.get("http://localhost:3001/watson/session")
+		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
+	} catch (error) {
+		dispatch({type: SESSION_FAIL_CHAT})
+	}
+	}
+}
+
+ export function sendMessageBot(message){
+	 return async (dispatch)=> {
+		 try {
+			const body = {input: message.toLowerCase()}
+			const res= await axios.post("http://localhost:3001/watson/message", body)
+			
+			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
+		 } catch (error) {
+			 dispatch({type: MESSAGE_FAIL})
+		 }
+	 }
+ }
+ 
 /// COINPAYMENTS ACTIONS
 export function getRates() {
 	return async (dispatch) => {
