@@ -1,6 +1,63 @@
 @media only screen and (max-width: 430px) {
-    .container{
+	.row {
+		width: 270px;
+	}
+	.formContainer {
+		font-size: 14px;
+	}
+	.LogInInput {
+		font-size: 14px;
+		display: block;
+		width: 100%;
+		height: calc(1.5em + 0.75rem + 2px);
+		padding: 0.375rem 1rem;
+		font-weight: 500;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	}
+    .SignUpContainer {
+        padding-top: 5%;
+    }
+    .notAccount{
+        font-size: 14px;
+        text-align: center !important;
+        padding: 1.5em 2.75em !important;
+        border-radius: 0.25em !important;
+        background-color: #aaa !important;
+        color: rgb(36, 36, 36);
         
     }
-    
+    .btnSignIn{
+            color: #fff;
+            background-color: #e74742;
+            border-color: #e53c37;
+            color: #222;
+            text-decoration: none;
+            font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em !important;
+            box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.075) !important;
+            display: block;
+            width: 100%;
+            color: #fff;
+            background-color: #EB6864;
+            border-color: #EB6864;
+            text-align: center;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375em 1em;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 0.25em;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .dropdown-item{
+        font-size: 14px;
+        width: max-content !important;
+    }
 }
