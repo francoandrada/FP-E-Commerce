@@ -6,14 +6,19 @@ import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import AllStars from '../Reviews/AllStars';
-import Review from '../Reviews/StarAverage';
+import Review from '../Reviews/StarModal';
 import AllReviews from '../Reviews/AllReviews';
-import { allReviews } from '../../Redux/actionsReview';
+import { allReviews, getAverage } from '../../Redux/actionsReview';
 import {Link} from 'react-scroll'
+import { useHistory } from 'react-router-dom';
+
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
+	const productId = useSelector((state) => state.product.detailProducts.id);
+
+	const history = useHistory();
 
 	useEffect(() => {
 		dispatch(getProductById(props.match.params.id));
@@ -23,8 +28,17 @@ function DetailProduct(props) {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
 
+	useEffect(() => {
+		dispatch(getAverage(productId));
+	}, [productId]);
+
+	const handelClick = () =>{
+		dispatch(addToCart(productDetail));
+		history.push('/shoppingcart')
+	}
 	return (
 		<div className={styles.container}>
+		
 			{productDetail ? (
 				<div>
 					<div className={styles.card}>
@@ -35,13 +49,18 @@ function DetailProduct(props) {
 								alt='product'
 							/>
 						</div>
-
+						
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
+							<div className='d-flex justify-content-center align-items-start'>
 							<Link  to="review" spy={true} smooth={true}>
-							<Review className={styles.hei} /> 	
+								
+							<Review 
+							productInfo={productDetail}
+							/> 	
 							</Link>
-							<AllStars />
+							</div>
+					
 							<p className={styles.texto}>${productDetail.price} </p>
 
 							<span> Stock: {productDetail.stock} </span>
@@ -63,7 +82,7 @@ function DetailProduct(props) {
 												<ButtonGreyOther
 													className='btn btn-outline-danger'
 													type='submit'
-													onClick={() => dispatch(addToCart(productDetail))}
+													onClick={() =>handelClick()}
 												>
 													Checkout
 												</ButtonGreyOther>
@@ -128,6 +147,7 @@ function DetailProduct(props) {
 				<AllReviews />
 				</div>
 			</div>
+
 		</div>
 	);
 }

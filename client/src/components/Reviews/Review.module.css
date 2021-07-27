@@ -15,6 +15,7 @@ button {
 .title {
 	font-size: 1.7rem;
 	font-family: 'Roboto', sans-serif;
+	text-align: center;
 }
 .comments {
 	font-size: 1.4rem;
@@ -26,12 +27,6 @@ button {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
-.star {
-	display: flex;
-	justify-content: center;
-	height: 0px;
-	align-items: center;
 }
 
 .user{
@@ -46,12 +41,7 @@ button {
 
 
 }
-.tit{
-	font-family: 'Roboto', sans-serif;
-	font-size: 1.5rem;
-	font-weight: 400;
-	text-align: center;
-}
+
 .descriptionProduct{
     border-top: 1px solid gray;
     padding: 1rem 10%;
@@ -59,14 +49,12 @@ button {
  }
 
  .review{
-	 margin-top: 3.5rem;
-	 margin-left: .5rem;
+	 margin-top: 1rem;
+	 margin-left: .7rem;
 	font-size: 1rem;
 	font-family: 'Roboto', sans-serif;
 	text-decoration: underline;
 	cursor: pointer;
  }
- .review:hover{
-	 color: #FF3C4A ;
 
-}
+

@@ -36,8 +36,6 @@
  }
  .productCard div{
      display: flex;
-     margin-top: auto;
-     margin-bottom: 4rem;
  }
  .productCard button{
      display: flex;

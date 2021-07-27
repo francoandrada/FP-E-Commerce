@@ -1,98 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { StarsAmmount } from '../../Redux/actionsReview';
-import { BsFillStarFill } from 'react-icons/bs';
-import ReactStars from 'react-rating-stars-component';
-import styled from 'styled-components';
+// import React from 'react';
+// const AllStars = () => {
+	
+// const CartContainer = styled.div`
+// position: absolute;
+//   top: 56%;
+//   left: 56%;
+//   background-color: #F5F5F5;
+//   border: 1px solid #D2D2D2;
+//   padding: 1rem;
+//   display: block;
 
-const CartContainer = styled.div`
-      display: flex;
-    justify-content: flex-end;
-    margin: 0% 10% 0% 0%;
-    background-color: #f8f9fa;
-    position: absolute;
-    z-index: 1000;
-    top: 157px;
-    right: 5%;
-    border-radius: 5px;
-    width: 440px;
-    color: #495057;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 72%);
-`;
+// `;
+
+// let completed = 20;
+	
+
+// 	const FillerStyles = styled.div`
+// 	height: 100%;
+// 	width: ${completed}%;
+// 	background-color: #ef6c00;
+// 	border-radius: inherit;
+// 	text-align: right;
+
+// 	`;
+// const Title = styled.div`
+//   font-size: 1rem;
+// margin-left: .5rem;
+//   text-align: start;
+//   margin-top: 0;
+// `;
+
+// const LabelStyles = styled.div`
+// 	color: white;
+// 	font-size: 20px;
+	
+// 	`;
+
+// const ContainerStyles = styled.div`
+//     height: 20px;
+//     width: 300px;
+//     background-color: #e0e0de;
+//     border-radius: 5px;
+// 	margin: 1rem;
+
+// 	`;
 
 
-const AllStars = () => {
-	const [active, setActive] = useState(false);
-	const dispatch = useDispatch();
+	
+// 	  const fillerStyles = {
+// 		height: '100%',
+// 		width: `${10}%`,
+// 		backgroundColor: "#ef6c00",
+// 		borderRadius: 'inherit',
+// 		textAlign: 'right'
+// 	  }
+	
+// 	  const labelStyles = {
+// 		padding: 5,
+// 		color: 'white',
+// 		fontWeight: 'bold'
+// 	  }
 
-	const toggle = () => {
-		setActive(!active);
-	};
-	const productId = useSelector((state) => state.product.detailProducts.id);
 
-	const stars = useSelector((state) => state.reviews.allStars);
-	const average = useSelector((state) => state.reviews.stars);
-	console.log(average);
-	useEffect(() => {
-		dispatch(StarsAmmount(productId));
-	}, [productId]);
+// 	  return (
+	
 
-	const starAverage = useSelector((state) => state.reviews.stars);
+// 		<div style={fillerStyles}>
+// 		<span style={labelStyles}>{`${60}%`}</span>
 
-	return (
-		<div>
-			<button onMouseEnter={toggle} onMouseLeave={() => setActive(false)}>
-				hola
-			</button>
+// 	</div>
+// 	  );
+// };
 
-			{active && (
-				<div active={active} toggle={toggle}>
-					<div>
-						<div>
-							{starAverage &&
-							starAverage.length > 0 &&
-							starAverage[0].rating !== null ? (
-								<div>
-									<ReactStars
-										size={15}
-										value={starAverage[0].rating}
-										isHalf={true}
-										edit={false}
-										emptyIcon={BsFillStarFill}
-										halfIcon={BsFillStarFill}
-										filledIcon={BsFillStarFill}
-										color='#CFCECE'
-									/>
-									<p>{parseFloat(starAverage[0].rating).toFixed(1)} out of 5</p>
-								</div>
-							) : null}
-
-							{stars === undefined
-								? null
-								: stars &&
-								  stars.map((arg) => {
-										return (
-											<div>
-											{/* /<ReactStars */}
-											{/* // 		size={15}
-											// 		value={arg.rating}
-											// 		isHalf={true}
-											// 		edit={false}
-											// 		emptyIcon={BsFillStarFill}
-											// 		halfIcon={BsFillStarFill}
-											// 		filledIcon={BsFillStarFill}
-											// 		color='#CFCECE'
-											// 	/>
-											// 	<h1>{arg.stars}</h1> */}
-											 </div>
-										);
-								  })}
-						</div>
-					</div>
-				</div>
-			)}
-		</div>
-	);
-};
-
-export default AllStars;
+// export default AllStars;

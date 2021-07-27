@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { getProductById } from '../../Redux/actions';
-import { BsFillStarFill } from 'react-icons/bs';
+import { BsStarFill, BsStarHalf } from 'react-icons/bs';
+
+
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import style from './Review.module.css';
 import { postReview } from '../../Redux/actionsReview';
@@ -16,14 +18,13 @@ const UserReview = (props) => {
 
 
 	
-	console.log(userId);
 	const [descrip, setDescrip] = useState({
 		description: '',
 	});
 
 	const [star, setStar] = useState('0');
 	const { description } = descrip;
-
+console.log(star)
 	const handleChange = (e) => {
 		setDescrip({
 			...descrip,
@@ -85,11 +86,13 @@ const UserReview = (props) => {
 										<ReactStars
 											size={30}
 											count={5}
+											a11y={true}
+											isHalf={true}
 											color='#CFCECE'
 											activeColor='#ffd700'
-											emptyIcon={BsFillStarFill}
-											halfIcon={BsFillStarFill}
-											filledIcon={BsFillStarFill}
+										    emptyIcon={BsStarFill}
+											halfIcon={BsStarHalf}
+											filledIcon={BsStarFill} 
 											onChange={ratingChanged}
 										/>
 									</div>
