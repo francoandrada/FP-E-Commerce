@@ -49,12 +49,9 @@ const createTransaction = async (req, res) => {
 //Get Transaction Info
 const getTransactionInfo = async (req, res) => {
 	const CoinpaymentsGetTxOpts = {
-		txid: 'CPFG7VWCDRSUQWVAVPCTHOHJN5',
+		txid: 'CPFG3YE1SO2MXUAI1EU4LUYYYP',
 		full: 0,
 	};
-
-	
-
 	const status = await client.getTx(CoinpaymentsGetTxOpts);
 	console.log(status);
 	res.json(status);
@@ -163,6 +160,20 @@ const ipnUpdate = async (req, res, next) => {
 	}
 };
 
+//Get Transactions List
+const getTransactionList = async (req, res) => {
+	const CoinpaymentsGetTxListOpts = {
+		limit: 100,
+		start: 0,
+		newer: 0,
+		all: 0
+	  }
+
+	const transactionList = await client.getTxList(CoinpaymentsGetTxListOpts);
+	console.log(transactionList);
+	res.json(transactionList);
+};
+
 ////////////////////
 
 module.exports = {
@@ -172,4 +183,5 @@ module.exports = {
 	getCoinRates,
 	createOrderCrypto,
 	ipnUpdate,
+	getTransactionList
 };
