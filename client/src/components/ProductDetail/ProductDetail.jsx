@@ -11,19 +11,12 @@ import Review from '../Reviews/StarAverage';
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
-	console.log(productDetail);
+
 	let [currentImage, setCurrentImage] = useState();
-	console.log(currentImage);
+
 	useEffect(() => {
 		dispatch(getProductById(props.match.params.id));
 	}, []);
-
-	// let aux = document.getElementById('3');
-	// console.log(aux, 'hola');
-
-	// useEffect(() => {
-	// 	setCurrentImage({ imageOn: productDetail.image });
-	// }, [currentImage]);
 
 	function handleClick(event, index) {
 		event.preventDefault();
