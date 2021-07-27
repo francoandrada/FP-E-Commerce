@@ -86,8 +86,6 @@ console.log(star)
 										<ReactStars
 											size={30}
 											count={5}
-											a11y={true}
-											isHalf={true}
 											color='#CFCECE'
 											activeColor='#ffd700'
 										    emptyIcon={BsStarFill}

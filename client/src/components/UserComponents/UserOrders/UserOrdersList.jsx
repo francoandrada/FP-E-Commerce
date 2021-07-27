@@ -89,7 +89,7 @@ function UserOrdersList() {
 							<UserOrderDetail 
 								image={od.image}
 								name={od.name}
-								price={od.price}
+								oldprice={od.oldprice}
 								prodInfo={od}
 								id={od.id}
 							

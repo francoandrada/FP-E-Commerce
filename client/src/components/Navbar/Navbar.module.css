@@ -264,6 +264,21 @@
 	
 	}
 }
+
+/* --------- FAVORITES BUTTON NAV BAR STYLE ------------ */
+.favHeartContainer {
+	display: flex;
+	justify-content: center;
+	width: 50px;
+}
+
+.NavBarbtnHeart {
+	color: white;
+	font-size: 2rem;
+}
+
+
+
 /* 
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {
 	max-height: 80px;

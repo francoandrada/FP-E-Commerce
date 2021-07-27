@@ -7,7 +7,7 @@ import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import style from './Review.module.css';
 import styled from 'styled-components';
 
-import { Bar, HorizontalBar } from 'react-chartjs-2';
+import { Bar} from 'react-chartjs-2';
 
 const CartContainer = styled.div`
  position: absolute;
@@ -37,37 +37,37 @@ const Review = ({ productInfo }) => {
 	const starAverage = useSelector((state) => state.reviews.stars);
 	const rating = useSelector((state) => state.reviews.allStars);
 
-	console.log(rating);
-
 	var num = [0, 0, 0, 0, 0];
-
 	function insertAt(array, index, ...num) {
 		array.splice(index, 1, ...num);
 		return num.flat();
 	}
 
 	if (rating !== undefined) {
-			for (let i = 0; i < rating.length; i++) {
-				insertAt(num, rating[i].stars - 1, parseInt(rating[i].ammount));
-				console.log(num)
-			}
+		for (let i = 0; i < rating.length; i++) {
+			insertAt(num, rating[i].stars - 1, parseInt(rating[i].ammount));
 		}
-	
+	}
+	const res = num.reduce((p, c) => p + c);
 
-	console.log('UFJDJFDJFD', num);
-	let hola = num
-	console.log('HOLA',hola)
+	if (res !== 0) {
+		for (let i = 0; i < num.length; i++) {
+			num[i] = (num[i] * 100) / res;
+		}
+	}
+
 	const [active, setActive] = useState(false);
 
 	const toggle = () => {
 		setActive(!active);
 	};
+
 	const data = {
-		labels: ['5 star', '4 star', '3 star', '2 star', '1 star'],
+		labels: ['star 5', 'star 4', 'star 3', 'star 2', 'star 1'],
 		datasets: [
 			{
-				label: '# of Votes',
-				data: hola,
+				data: num.reverse(),
+				fill: false,
 				backgroundColor: ['rgb(255, 215, 0)'],
 				borderColor: ['rgb(255, 215, 0)'],
 				borderWidth: 1,
@@ -77,18 +77,11 @@ const Review = ({ productInfo }) => {
 
 	const options = {
 		indexAxis: 'y',
-		// Elements options apply to all of the options unless overridden in a dataset
-		// In this case, we are setting the border of each horizontal bar to be 2px wide
-		elements: {
-			bar: {
-				borderWidth: 2,
-			},
-		},
 		scales: {
 			x: {
-				ticks: {
-					display: false,
-				},
+				suggestedMin: 50,
+				suggestedMax: 100,
+				display: false
 			},
 		},
 		responsive: true,
@@ -123,7 +116,7 @@ const Review = ({ productInfo }) => {
 							edit={false}
 							emptyIcon={BsStarFill}
 							halfIcon={BsStarHalf}
-							filledIcon={BsStarFill} 
+							filledIcon={BsStarFill}
 							color='#CFCECE'
 						/>
 					</div>
@@ -137,7 +130,7 @@ const Review = ({ productInfo }) => {
 						{starAverage &&
 						starAverage.length > 0 &&
 						starAverage[0].rating !== null ? (
-							<div>
+							<div className='d-flex'>
 								<ReactStars
 									size={15}
 									value={starAverage[0].rating}
@@ -145,7 +138,7 @@ const Review = ({ productInfo }) => {
 									edit={false}
 									emptyIcon={BsStarFill}
 									halfIcon={BsStarHalf}
-									filledIcon={BsStarFill} 
+									filledIcon={BsStarFill}
 									color='#CFCECE'
 								/>
 								<Title>
@@ -154,19 +147,10 @@ const Review = ({ productInfo }) => {
 							</div>
 						) : null}
 
-						{stars === undefined
-							? null
-							: stars &&
-							  stars.map((arg) => {
-									return (
-										<div>
-											<Bar data={data} options={options} />
-										</div>
-									);
-							  })}
+						{stars === undefined ? null : <Bar data={data} options={options} />}
 					</div>
 				</CartContainer>
-			)}
+			 )}
 		</Fragment>
 	);
 };
