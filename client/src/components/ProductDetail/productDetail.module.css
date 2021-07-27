@@ -61,11 +61,15 @@
 	height: 25em;
 }
 
-.imagesNav {
+.imagesNav img{
 	width: 64px;
 	height: 64px;
 	margin: 2px 10px 2px 0px;
 	cursor: pointer;
+}
+
+.imagesNav img:hover{
+	padding: 2px;
 }
 
 .texto {
