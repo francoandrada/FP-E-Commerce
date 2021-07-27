@@ -14,12 +14,13 @@ const WebHook = () => {
 	const dispatch = useDispatch();
 
 	
-		localStorage.removeItem('cart');
+	localStorage.removeItem('cart');
 
 		
 
 	useEffect(() => {
 		dispatch(getPayInfo({id, email: userData.email, items: cart} ));
+		localStorage.removeItem('cart');
 	}, []);
 
 	return (

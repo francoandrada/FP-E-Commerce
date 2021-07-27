@@ -1,12 +1,13 @@
-// import styles from './CartModal.module.css';
 import { FaShoppingCart } from 'react-icons/fa';
 import { /*useDispatch,*/ useSelector } from 'react-redux';
 
 import styled, { createGlobalStyle } from 'styled-components';
-import ProductCartModal from './ProductCartModal';
+import FavModalDetail from './FavModalDetail'
 import { useState, useEffect } from 'react';
+import {FaRegHeart, FaHeart} from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { formatNumber } from '../../helper/priceFormater';
+import styles from './FavouriteButton.module.css'
 
 const Icon = styled.div`
   color: #ff3c4a;
@@ -114,110 +115,62 @@ const ButtonClose = styled.section`
     }
 `;
 
-const ButtonPay = styled.section`
-        width: 120px;
-    border: 1px solid;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background-color: #ff3c4a;
-    color: white;
-    font-size: 20px;
-    font-weight: 400;
-    cursor: pointer;
 
-    &:hover {
-        background-color: #d4202d;
-        transition: 200ms;
-    }
-`;
 
-// const SubtotalContainer = styled.div`
-// /*
-//     display: flex;
-//     justify-content: center;
-//     align-items: flex-end;
-//     flex-direction: column; */
 
-// `;
-//
-// max-height: 350px;
-// overflow-y: scroll;
-// border-top: 2px solid var(--gray-06);
-// border-bottom: 2px solid var(--gray-06);
-// color='#ff3c4a'
-function CartModal() {
+function FavModal() {
 	const [active, setActive] = useState(false);
-	const cartProducts = useSelector((state) => state.cart.cart);
+	const userFavorites = useSelector((state) => state.useraccount.userFavorites);
 
 	const toggle = () => {
-		if (cartProducts && cartProducts.length !== 0) {
+		if (userFavorites && userFavorites.length !== 0) {
 			setActive(!active);
 		}
 	};
 
 	useEffect(() => {
-		if (cartProducts && cartProducts.length === 0) {
+		if (userFavorites && userFavorites.length === 0) {
 			setActive(false);
 		}
-	}, [active, cartProducts]);
+	}, [active, userFavorites]);
 
-	let subtotal = function () {
-		let subTotal = 0;
-		cartProducts &&
-			cartProducts.map((product) => {
-				subTotal += product.price * product.qty;
-			});
-		return subTotal;
-	};
-
-	let subtot = subtotal();
-	let formatsubtotal = formatNumber.new(subtot, '$');
 
 	return (
 		<>
 			<GlobalStyle />
 			<Icon onClick={toggle}>
-				<FaShoppingCart />
+                <FaHeart className={styles.btnHeart}/>
 			</Icon>
 			{active && (
 				<CartContainer active={active} toggle={toggle}>
 					<CartHeader>
-						<h2>CART</h2>
+						<h2>FAVORITES</h2>
 						&nbsp;
-						<FaShoppingCart />
-						<div>
-							<p>Subtotal</p>
-							{subtotal() ? <span>{formatsubtotal}</span> : <span>0</span>}
-						</div>
+						<FaHeart className={styles.btnHeart}/>
 					</CartHeader>
 					<ProductsCart>
 						<ul>
-							{cartProducts &&
-								cartProducts.map((product) => {
-									let formatPrice = formatNumber.new(product.price, '$');
+							{userFavorites &&
+								userFavorites.map((fav) => {
+									let formatPrice = formatNumber.new(fav.price, '$');
 									return (
-										<li key={product.id}>
-											<ProductCartModal
-												info={product}
-												image={product.image}
-												name={product.name}
+										<li key={fav.id}>
+											<FavModalDetail
+												info={fav}
+												image={fav.image}
+												name={fav.name}
 												price={formatPrice}
-                                                stock={product.stock}
-												qty={product.qty}
+                                                stock={fav.stock}
 											/>
 										</li>
 									);
 								})}
 						</ul>
 					</ProductsCart>
+
 					<CartPay>
 						<ButtonClose onClick={toggle}>Close</ButtonClose>
-						<Link to='/shoppingcart'>
-							<ButtonPay onClick={toggle}>Checkout</ButtonPay>
-						</Link>
+                                
 					</CartPay>
 				</CartContainer>
 			)}
@@ -225,4 +178,4 @@ function CartModal() {
 	);
 }
 
-export default CartModal;
+export default FavModal;

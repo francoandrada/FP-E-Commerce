@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import style from './SubTotal.module.css';
+
+
+import Swal from 'sweetalert2';
+
 
 import { postCartCrypto } from '../../../Redux/actions';
 
@@ -68,8 +72,18 @@ function SubTotal({address}) {
 	dispatch(saveAmmount(totalPrice))
 	
 
-	const handleClickCrypto = () => {
-		dispatch(postCartCrypto(bodyObject))
+	const history = useHistory();
+
+	const handleClickCrypto = async () => {
+			await Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: `You'll redirected to Coinpayments to finish your payment!`,
+				showConfirmButton: true,
+				timer: 3000,
+			});
+			history.push('/catalog');
+			dispatch(postCartCrypto(bodyObject))
 	};
 
 	return (
@@ -103,12 +117,12 @@ function SubTotal({address}) {
 							Checkout with Mercado Pago
 						</button>
 						<NavLink to='/catalog'>
-							<input
-								type='image'
-								src='https://www.coinpayments.net/images/pub/checkout-blue.png'
-								alt='Checkout'
+							<button
 								onClick={handleClickCrypto}
-							/>
+								className={style.paymentCrypto}
+							>
+								Checkout with CoinPayments
+							</button>
 						</NavLink>
 					</div>
 

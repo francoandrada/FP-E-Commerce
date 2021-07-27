@@ -33,7 +33,7 @@ function cartReducer(state = initialState, action) {
 				cart: inCart
 					? state.cart.map((item) =>
 							item.id === action.payload.id
-								? { ...item, qty: item.qty + 1 }
+								? { ...item, qty: item.qty < item.stock ? item.qty + 1 : item.qty }
 								: item
 					  )
 					: [...state.cart, { ...action.payload, qty: 1 }],
@@ -70,6 +70,7 @@ function cartReducer(state = initialState, action) {
 			};
 		case GET_PAY:
 			localStorage.removeItem('cart');
+			console.log(action.payload)
 			return {
 				...state,
 				userPay: action.payload,

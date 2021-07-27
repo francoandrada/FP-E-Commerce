@@ -100,19 +100,12 @@ Review.belongsTo(Product, { foreignKey: 'productId' });
 Product.hasMany(Image, { foreignKey: 'productId' });
 Image.belongsTo(Product, { foreignKey: 'productId' });
 
-// Product.belongsToMany(User, {
-// 	through: 'review',
-// 	foreignKey: 'productId',
-// });
-// User.belongsToMany(Product, {
-// 	through: 'review',
-// 	foreignKey: 'userId',
-// });
+
 
 // 1---------------> N
 // User -----------> Review
 User.hasMany(Review, {foreignKey: 'userId'});
-Review.belongsTo(Product, {foreignKey: 'userId'});
+Review.belongsTo(User, {foreignKey: 'userId'});
 
 
 // 1---------------> N

@@ -5,8 +5,13 @@ import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
-import { Link } from 'react-router-dom';
+import AllStars from '../Reviews/AllStars';
 import Review from '../Reviews/StarAverage';
+import AllReviews from '../Reviews/AllReviews';
+import { allReviews } from '../../Redux/actionsReview';
+import { Link } from 'react-scroll';
+import './index.css';
+import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
@@ -22,6 +27,14 @@ function DetailProduct(props) {
 		event.preventDefault();
 		setCurrentImage(productDetail.images[index]);
 	}
+	useEffect(() => {
+		dispatch(allReviews(props.match.params.id));
+	}, []);
+
+	///Crypto
+	const arsBtc = useSelector((state) => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const btcRate = parseFloat(arsBtc);
 
 	return (
 		<div className={styles.container}>
@@ -38,24 +51,49 @@ function DetailProduct(props) {
 
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
-							<p>${productDetail.price} </p>
+							<Link to='review' spy={true} smooth={true}>
+								<Review className={styles.hei} />
+							</Link>
+							<AllStars />
+							<p className={styles.texto}>${productDetail.price} </p>
+							<div className={styles.buttonCrypto}>
+								<ButtonCrypto>
+									₿ {(productDetail.price * btcRate).toFixed(6)}
+								</ButtonCrypto>
+							</div>
+
 							<span> Stock: {productDetail.stock} </span>
-							<div className='m-3 d-block'>
+
+							<div
+								className={
+									window.screen.width > 430 ? 'm-3 d-block' : 'buttons'
+								}
+							>
 								{productDetail.stock > 0 ? (
 									<>
-										<div class='m-3'>
-											<ButtonRedOther
-												class='btn btn-outline-danger'
+										<div
+											className={window.screen.width > 430 ? 'm-3' : 'button'}
+										>
+											<button
+												className={
+													window.screen.width > 430
+														? 'btn btn-outline-danger'
+														: 'btnCart'
+												}
 												type='submit'
 												onClick={() => dispatch(addToCart(productDetail))}
 											>
 												Add to Cart
-											</ButtonRedOther>
+											</button>
 										</div>
 										<Link to='/shoppingcart'>
 											<div class='m-3'>
 												<ButtonGreyOther
-													className='btn btn-outline-danger'
+													className={
+														window.screen.width > 430
+															? 'btn btn-outline-danger'
+															: 'btnCheckout'
+													}
 													type='submit'
 													onClick={() => dispatch(addToCart(productDetail))}
 												>
@@ -92,42 +130,47 @@ function DetailProduct(props) {
 			) : null}
 
 			<div className={styles.descriptionProduct}>
-				<div className='container'>
-					<div className='row'>
-						<div className='col col-lg-2 '>
-							<p>Description</p>
+				<div className=''>
+					<div className={styles.containerDescription}>
+						<div className={styles.Tittle}>
+							<h6>Description</h6>
 						</div>
-
-						<div className='col'>
+						<hr className={styles.line} />
+						<div className={styles.description}>
 							<p>{productDetail.description} </p>
 						</div>
-						<div className='w-100 d-none d-md-block'></div>
-
-						{productDetail.brand ? (
-							<Fragment>
-								<div className='col col-lg-2 '>
-									<p>Brand</p>
-								</div>
-								<div className='col '>
-									<p>{productDetail.brand.name} </p>
-								</div>
-							</Fragment>
-						) : null}
-						<div className='w-100 d-none d-md-block'></div>
-						{productDetail.weigth ? (
-							<Fragment>
-								<div className='col-6 col-sm-4'>
-									<p>{productDetail.brand.name} </p>
-								</div>
-								<div className='col-6 col-sm-4'>
-									<p>Weigth</p>
-								</div>
-							</Fragment>
-						) : null}
 					</div>
+					{productDetail.brand ? (
+						<Fragment>
+							<div className={styles.containerBrand}>
+								<div className={styles.Tittle}>
+									<h6>Brand</h6>
+								</div>
+								<div className={styles.brand}>
+									<span>{productDetail.brand.name} </span>
+								</div>
+							</div>
+						</Fragment>
+					) : null}
+					{productDetail.weigth ? (
+						<Fragment>
+							<div className={styles.containerWeigth}>
+								<div className={styles.Tittle}>
+									<h6>Weigth</h6>
+								</div>
+								<div className={styles.weigth}>
+									<span>{productDetail.brand.name} </span>
+								</div>
+							</div>
+						</Fragment>
+					) : null}
 				</div>
 			</div>
-			<Review />
+			<div className='w-100 ' id='review'>
+				<div className={styles.descriptionProduct}>
+					<AllReviews />
+				</div>
+			</div>
 		</div>
 	);
 }

@@ -15,6 +15,8 @@ import PagingBox from '../PagingBox/PagingBox';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 import './index.css';
 function Products() {
+
+	/// Crypto
 	const arsBtc = useSelector((state) => state.crypto.arsBtc);
 	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
 	const btcRate = parseFloat(arsBtc);
@@ -62,12 +64,6 @@ function Products() {
 		};
 	}, []);
 
-	// useEffect(() =>
-	// {dispatch(getFilteredProducts(query));
-	// 	return () => {
-	// 		console.log('unmount')
-	// 	  }
-	// }, []);
 
 	useEffect(() => {
 		setQuery({

@@ -52,21 +52,52 @@ import {
 	FILTER_BY_ORDER_STATUS,
 	ADD_TO_FAVORITES,
 	REMOVE_FROM_FAVORITES,
-
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
+	GET_RATES,
 	INPUT_SUCCESS,
 	INPUT_FAIL,
-	SESSION_SUCCESS_CHAT,
-	SESSION_FAIL_CHAT,
-	MESSAGE_FAIL,
+	SESSION_SUCCESS,
+	SESSION_FAIL,
 	MESSAGE_SUCCESS,
-	GET_RATES
-
+	MESSAGE_FAIL,
 } from './actionsName';
 
 import axios from 'axios';
+
+
+///////////////////////////////// CHATBOT //////////////////////////
+export const userMessage = (message) => async (dispatch) => {
+	try {
+		dispatch({ type: INPUT_SUCCESS, payload: message });
+	} catch (err) {
+		dispatch({ type: INPUT_FAIL });
+	}
+};
+
+export const createSession = () => async (dispatch) => {
+	try {
+		const res = await axios.get('http://localhost:3001/watson/session');
+		dispatch({ type: SESSION_SUCCESS, payload: res.data });
+	} catch (err) {
+		dispatch({ type: SESSION_FAIL });
+	}
+};
+
+export const sendMessage = (message) => async (dispatch) => {
+	try {
+		const body = { input: message };
+		const res = await axios.post('http://localhost:3001/watson/message', body);
+		console.log('data from api:', res.data.output.generic[0].text);
+		dispatch({
+			type: MESSAGE_SUCCESS,
+			payload: res.data.output.generic[0].text,
+		});
+	} catch (err) {
+		dispatch({ type: MESSAGE_FAIL });
+	}
+};
 
 export const changePaginationSize = (payload) => ({
 	type: SIZE_PAGINATION,
@@ -636,14 +667,13 @@ export function getUserToEdit(email) {
 
 export function postCart(data) {
 	return async (dispatch) => {
-		console.log('dataaa',data);
+		console.log('dataaa', data);
 
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/mercadopago/createorder',
 				data
 			);
-
 
 			dispatch({
 				type: SET_CART,
@@ -699,7 +729,6 @@ export function postCartUser(data) {
 
 export function getCartUser(id) {
 	return async (dispatch) => {
-		
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/shoppingcart/userCart',
@@ -733,10 +762,10 @@ export const removeFavorites = (prod) => {
 export const postUserFavorites = (userId, favorites) => {
 	return async (dispatch) => {
 		try {
-			const res = await axios.post(
-				`http://localhost:3001/favorites`,
-				{ userId: userId, prodId: favorites }
-			);
+			const res = await axios.post(`http://localhost:3001/favorites`, {
+				userId: userId,
+				prodId: favorites,
+			});
 			dispatch({
 				type: ADD_TO_FAVORITES,
 				payload: res.data,
@@ -752,7 +781,6 @@ export const getUserFavorites = (userId) => {
 		try {
 			const res = await axios.get(
 				`http://localhost:3001/favorites/user/${userId}`
-	
 			);
 			console.log('FAVORITES FORM REDUCER', res.data);
 			dispatch({
@@ -766,7 +794,7 @@ export const getUserFavorites = (userId) => {
 };
 
 export function saveAddress(address) {
-	console.log(address)
+	console.log(address);
 	return async (dispatch) => {
 		dispatch({
 			type: SAVE_ADDRESS_ORDER,
@@ -778,7 +806,7 @@ export function saveAmmount(ammount) {
 	return async (dispatch) => {
 		dispatch({
 			type: SET_AMMOUNT,
-			payload: ammount
+			payload: ammount,
 		});
 	};
 }
@@ -812,7 +840,7 @@ export function postCartCrypto(data) {
 			});
 
 			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
-			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`;
+			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=0&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}&allow_amount=0`;
 			window.open(url);
 		} catch (error) {
 			console.log(error);
@@ -820,42 +848,8 @@ export function postCartCrypto(data) {
 	};
 }
 
-///////////////////////////////// CHATBOT //////////////////////////
-export function userMessage( message){
-return async (dispatch)=> {
-try {
-	dispatch({type:INPUT_SUCCESS, payload: message})
-} catch (error) {
-	dispatch({type:INPUT_FAIL})
-}
-}
-}
 
-export function createSessionBot(){
-	return async (dispatch)=> {
-	try {
-		const res = await axios.get("http://localhost:3001/watson/session")
-		dispatch({type: SESSION_SUCCESS_CHAT, payload: res.data})
-	} catch (error) {
-		dispatch({type: SESSION_FAIL_CHAT})
-	}
-	}
-}
-
- export function sendMessageBot(message){
-	 return async (dispatch)=> {
-		 try {
-			const body = {input: message.toLowerCase()}
-			const res= await axios.post("http://localhost:3001/watson/message", body)
-			
-			dispatch({type:MESSAGE_SUCCESS, payload: res.data.output.generic[0].text})
-		 } catch (error) {
-			 dispatch({type: MESSAGE_FAIL})
-		 }
-	 }
- }
- 
-/// COINPAYMENTS ACTIONS
+/// COINPAYMENTS ACTIONS//////////////////////////////
 export function getRates() {
 	return async (dispatch) => {
 

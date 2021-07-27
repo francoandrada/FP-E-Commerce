@@ -1,11 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart } from '../../../Redux/actions';
+import { addToCart, removeFavorites } from '../../../Redux/actions';
 import style from '../../UserComponents/UserOrders.module.css';
 import styled from 'styled-components';
-import UserReview from '../../Reviews/UserReview';
-import { saveData } from '../../../Redux/actionsReview';
-import { compose } from 'redux';
 
 const ButtonRedSmall = styled.button`
     font-family: 'Roboto', sans-serif; 
@@ -21,9 +18,9 @@ const ButtonRedSmall = styled.button`
     } 
 `;
 
-function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
+function UserFavoritesDetail({ image, name, price, prodInfo, id }) {
 	const dispatch = useDispatch();
-	const userOrders = useSelector((state) => state.useraccount.userOrdersList);
+	const userOrders = useSelector((state) => state.useraccount.userFavorites);
 
 
 	return (
@@ -36,7 +33,7 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 				<p>{name}</p>
 			</div>
 
-			<p>${oldprice}</p>
+			<p>${price}</p>
 
 			<div>
 				<Link to={'/shoppingcart'}>
@@ -44,19 +41,20 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 						type='submit'
 						onClick={() => dispatch(addToCart(prodInfo))}
 					>
-						Buy Again
+						Buy
 					</ButtonRedSmall>
 				</Link>
-			
-
-				<Link to={`/review/${id}`}>
-				<button onClick={() => <p>hola</p>}>Leave feedback</button>
-				</Link>
-				
-				
 			</div>
+
+				<ButtonRedSmall
+					type='submit'
+					onClick={() => dispatch(removeFavorites(prodInfo))}
+				>
+					Remove
+				</ButtonRedSmall>
+
 		</div>
 	);
 }
 
-export default UserOrderDetail;
+export default UserFavoritesDetail;

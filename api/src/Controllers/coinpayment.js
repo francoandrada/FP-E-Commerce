@@ -17,7 +17,7 @@ const client = new Coinpayments(CoinpaymentsCredentials);
 const getBasicInfo = async (req, res) => {
 	console.log('entró a getInfo');
 	const info = await client.getBasicInfo();
-	console.log(info);
+
 	res.json(info);
 };
 
@@ -42,19 +42,16 @@ const createTransaction = async (req, res) => {
 	const order = await client.createTransaction(
 		CoinpaymentsCreateTransactionOpts
 	);
-	console.log(order);
+
 	res.json(order);
 };
 
 //Get Transaction Info
 const getTransactionInfo = async (req, res) => {
 	const CoinpaymentsGetTxOpts = {
-		txid: 'CPFG7VWCDRSUQWVAVPCTHOHJN5',
+		txid: 'CPFG3YE1SO2MXUAI1EU4LUYYYP',
 		full: 0,
 	};
-
-	
-
 	const status = await client.getTx(CoinpaymentsGetTxOpts);
 	console.log(status);
 	res.json(status);
@@ -67,7 +64,6 @@ const getCoinRates = async (req, res) => {
 		accepted: 2
 	};
 	const rates = await client.rates(CoinpaymentsRatesOpts);
-    console.log(rates);
 	res.json(rates);
 };
 
@@ -85,7 +81,7 @@ const createPos = async (req, res) => {
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrderCrypto = async function createOrderCrypto(req, res) {
 	const { ammount, status, prodCarrito, id } = req.body;
-    console.log(req.body)
+
 
 	try {
 		var newOrder = await Order.create(
@@ -145,7 +141,7 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 const ipnUpdate = async (req, res, next) => {
 
-	console.log(req.body);
+
 	const id = parseInt(req.body.custom);
 	const newStatus = req.body.status_text;
 
@@ -164,6 +160,20 @@ const ipnUpdate = async (req, res, next) => {
 	}
 };
 
+//Get Transactions List
+const getTransactionList = async (req, res) => {
+	const CoinpaymentsGetTxListOpts = {
+		limit: 100,
+		start: 0,
+		newer: 0,
+		all: 0
+	  }
+
+	const transactionList = await client.getTxList(CoinpaymentsGetTxListOpts);
+	console.log(transactionList);
+	res.json(transactionList);
+};
+
 ////////////////////
 
 module.exports = {
@@ -173,4 +183,5 @@ module.exports = {
 	getCoinRates,
 	createOrderCrypto,
 	ipnUpdate,
+	getTransactionList
 };
