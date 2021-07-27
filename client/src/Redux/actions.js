@@ -66,6 +66,8 @@ import {
 
 import axios from 'axios';
 
+
+///////////////////////////////// CHATBOT //////////////////////////
 export const userMessage = (message) => async (dispatch) => {
 	try {
 		dispatch({ type: INPUT_SUCCESS, payload: message });
@@ -846,9 +848,13 @@ export function postCartCrypto(data) {
 	};
 }
 
-/// COINPAYMENTS ACTIONS
+
+/// COINPAYMENTS ACTIONS//////////////////////////////
 export function getRates() {
 	return async (dispatch) => {
+// /// COINPAYMENTS ACTIONS
+// export function getRates() {
+// 	return async (dispatch) => {
 		try {
 			const res = await axios.get('http://localhost:3001/coinpayment/rate');
 			dispatch({
