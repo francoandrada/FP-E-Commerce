@@ -27,7 +27,7 @@ router.use('/categories', categoriesRoutes);
 router.use('/users', usersRoutes);
 router.use('/auth', authRoutes);
 router.use('/authGmail', authGmailRoutes);
-router.use('/admin', adminRoutes);
+router.use('/admin', multerUploads, adminRoutes);
 router.use('/brands', brandRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/catalog', catalogRoutes);

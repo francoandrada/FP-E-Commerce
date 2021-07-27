@@ -1,4 +1,7 @@
 import { Route, Switch, withRouter } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getHighlightProd, getRates } from './Redux/actions';
 
 import LogIn from './components/LogIn/LogIn';
 import Register from './components/Register/Register';
@@ -27,10 +30,21 @@ import Shipping from './components/ShoppingCartComponents/Shipping';
 import UserReview from './components/Reviews/UserReview';
 
 function App({ location }) {
+	//The next function allows the store to update the ars/btc rates every X time
+	const dispatch = useDispatch();
+	let updateInterval = 60000 * 5 //60000 miliseconds = 1 minuto
+	let [timer, setTimer] = useState(0)
+	useEffect(() => {
+		dispatch(getRates());
+	}, [timer]);
+	setTimeout(()=>{
+		console.log(timer)
+		setTimer(timer+1)
+	}, updateInterval);
+	
 	/* ======================================================
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
-
 	return (
 		<div className='App'>
 			{!location.pathname.includes('/admin') && <Navbar />}
