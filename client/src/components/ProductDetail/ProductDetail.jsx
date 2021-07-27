@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { addToCart, getProductById } from '../../Redux/actions';
 import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
@@ -8,14 +8,27 @@ import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import { Link } from 'react-router-dom';
 import Review from '../Reviews/StarAverage';
 
-
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
-
+	console.log(productDetail);
+	let [currentImage, setCurrentImage] = useState();
+	console.log(currentImage);
 	useEffect(() => {
 		dispatch(getProductById(props.match.params.id));
 	}, []);
+
+	// let aux = document.getElementById('3');
+	// console.log(aux, 'hola');
+
+	// useEffect(() => {
+	// 	setCurrentImage({ imageOn: productDetail.image });
+	// }, [currentImage]);
+
+	function handleClick(event, index) {
+		event.preventDefault();
+		setCurrentImage(productDetail.images[index]);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -23,7 +36,11 @@ function DetailProduct(props) {
 				<div>
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
-							<img src={productDetail.image} alt='product' />
+							{currentImage ? (
+								<img src={currentImage.imageUrl} alt='product' />
+							) : (
+								<img src={productDetail.image}></img>
+							)}
 						</div>
 
 						<div className={styles.productCard}>
@@ -66,6 +83,17 @@ function DetailProduct(props) {
 								)}
 							</div>
 						</div>
+					</div>
+					<div className={styles.imagesNav}>
+						{productDetail.images
+							? productDetail.images.map((img, index) => (
+									<img
+										src={img.imageUrl}
+										alt='product'
+										onClick={(e) => handleClick(e, index)}
+									/>
+							  ))
+							: null}
 					</div>
 				</div>
 			) : null}
