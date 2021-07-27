@@ -41,7 +41,7 @@ function UserOrdersList() {
 		<div>
 			<div className={style.userOptionContainer}>
             {selOrderId === 0 ?
-				<div>
+				<div className={style.containerOrder}>
 					<div className={style.selectedOptionTitle} >
 					<h3>My Orders</h3>
 					</div>
@@ -60,7 +60,7 @@ function UserOrdersList() {
 					
 					: userOrders && userOrders.map((order) => {
 						return (
-							<div>
+							<div style={{borderTop: '1px solid rgba(211, 211, 211, 0.611)', marginBottom: '0.5em'}}>
 							<UserOrders
 								prodInfo={order.orderProducts}
 								status={order.status}
@@ -98,7 +98,7 @@ function UserOrdersList() {
 						</div>
 					)
 				})}
-				<div>
+				<div style= {{padding: '10px'}}>
 				<ButtonRedLarge 
 					id={0} onClick={setOption}>
 					Go back to Orders

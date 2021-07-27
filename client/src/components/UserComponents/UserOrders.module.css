@@ -1,140 +1,249 @@
 /* ----- GENERAL STYLES ----- */
 .userOptionContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    width: 100%;
-    min-width: 800px;
-    min-height: 600px;
-    margin-left: 20px;
-    padding: 20px;
-    border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+	width: 100%;
+	margin-left: 10px;
+	padding: 20px;
+	border-radius: 10px;
 }
 
 .selectedOptionTitle {
-    display: flex;
-    justify-content: flex-start;
-    width: 800px;
-    padding: 10px;
+	display: flex;
+	justify-content: flex-start;
+	width: max-content;
+	padding: 10px;
 }
 
-.selectedOptionCabecera{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
+.selectedOptionCabecera {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
-
 
 /* ----- Orders Panel Styles ----- */
 
 .orderDetailContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    border-top: solid;
-    border-top-color: rgb(204, 204, 204);
-    border-width: 0.5px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	border-top: solid;
+	border-top-color: rgb(204, 204, 204);
+	border-width: 0.5px;
 }
 
 .SizeImagOrderDiv {
-    width: 10%;
+	width: 10%;
 }
 
 .sizeImagOrder {
-    width: 50px;
+	width: 50px;
 }
 
 .statusStyle {
-    color:darkgreen;
-    margin-top: 0px;
-    margin-bottom: 0px;
+	color: darkgreen;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .descriptionOrderStyle {
-    width: 40%;
+	width: 40%;
 }
 
 .orderDiv {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: rgb(248, 248, 248);
-    
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: rgb(248, 248, 248);
 }
 
 .orderNumberDiv {
-    display: flex;
-    justify-content: center;
-    width: 30%;
-    padding: 10px;
+	display: flex;
+	justify-content: center;
+	width: 30%;
+	padding: 10px;
 }
 
 .statusDiv {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
-    width: 20%;
-
+	display: flex;
+	justify-content: space-evenly;
+	padding: 10px;
+	width: 20%;
 }
 
 .totalOrderDiv {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    width: 30%;
-    font-size: 20px;
-    color:rgb(63, 63, 63);
-    font-weight: bold;
-
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+	width: 30%;
+	font-size: 20px;
+	color: rgb(63, 63, 63);
+	font-weight: bold;
 }
 
 .detailIdButton {
-    width: 40%;
-    background-color: #FF3C4A;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+	width: 40%;
+	background-color: #ff3c4a;
+	border-radius: 5px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .detailIdButton:hover {
-    background-color: #d8303c;
+	background-color: #d8303c;
 }
 
 .textGoDetail {
-    margin-bottom: 0px;
-    color: rgb(255, 255, 255);
+	margin-bottom: 0px;
+	color: rgb(255, 255, 255);
 }
-
 
 /* ----- User Account Styles ------ */
 
 .UserPersonalInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 30px;
-    text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 30px;
+	text-align: left;
 }
 
-
 .nothingHere {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 40px;
 }
 
 .nothingHere2 {
-    width: 50%;
-    margin-top: 20px;
+	width: 50%;
+	margin-top: 20px;
+}
+
+@media only screen and (max-width: 430px) {
+	/* ----- GENERAL STYLES ----- */
+
+	.userOptionContainer {
+        max-width: 192px;
+		min-height: 400px;
+		margin-left: 15px;
+		padding: 15px;
+		align-items: center;
+        justify-content: flex-start;
+        /* margin-right: 18px; */
+	}
+
+	/* ----- User Account Styles ------ */
+
+	.UserPersonalInfo {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		width: 100%;
+		padding: 10px;
+		text-align: left;
+        line-height: 1.5em;
+	}
+    .Tittle{
+        font-size: 20px;
+        margin-right: 0.5em;
+    }
+    .nothingHere {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        /* padding: 40px; */
+        padding: 20px;
+        margin-top: 4em;
+    }
+    .nothingHere h1{
+        font-size: 16px;
+    }
+    .selectedOptionTitle{
+        width: max-content;
+    }
+    .selectedOptionTitle h3{
+        font-size: 24px;
+    }
+    .nothingHere2 {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .containerOrder{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .orderDiv {
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        width: 100%;
+        background-color: rgb(248, 248, 248);
+        margin-top: 0.5em;
+    }
+    .orderNumberDiv {
+        width: 100%;
+        padding: 10px;
+    }
+    .orderNumberDiv p {
+        margin: 0;
+    }
+    .statusDiv {
+        padding: 10px;
+        height: max-content;
+        width: 100%;
+    }
+    .statusDiv p{
+        height: 100%;
+        margin: 0;
+    }
+    .totalOrderDiv{
+        width: 100%;
+        height: 100%p;
+    }
+    .totalOrderDiv p{
+        margin: 0;
+    }
+    .detailIdButton{
+        margin: 5px 0;
+        width: 100%;
+    }
+    .orderDetailContainer{
+		flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px;
+        border-top: solid;
+        border-top-color: rgb(204, 204, 204);
+        border-width: 0.5px;
+	}
+    .descriptionOrderStyle{
+        width: 100%;
+        background-color: rgb(243, 242, 242);
+    }
+    .sizeImagOrder{
+        width: 100px;
+    }
+    .divData{
+        background-color: rgb(243, 242, 242);
+        padding: 8px;
+        border-radius: 12px;
+        margin-bottom: 1em;
+    }
+    .divData p{
+        margin: 0
+    }
 }

@@ -46,6 +46,7 @@
 
 .linksNavEcommerce a {
 	color: white;
+	margin-left: -3em;
 }
 
 .linksNavEcommerce a:hover {
@@ -193,6 +194,10 @@
 	position: absolute;
 	margin-bottom: 2.0625rem;
 	margin-left: 1.1875rem;
+}
+.IconsContainer{
+	display: flex;
+	margin-right: 1em;
 }
 
 @media only screen and (max-width: 1120px) {
