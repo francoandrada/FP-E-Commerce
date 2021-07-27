@@ -251,7 +251,9 @@
 	}
 	.flexColumnEcommerce{
 		/* margin-left: -5rem; */
-		/* margin-right: 1em; */
+
+		margin-right: 1em;
+
 	}
 	.searchBtnEcommerce {
 		top: 2.375em;
@@ -302,6 +304,12 @@
 		display: flex;
 		margin-left: 1em;
 	}
+}
+@media only screen and (max-width: 370px){
+	.flexColumnEcommerce{
+		margin-right: 0em;
+	}
+	
 }
 
 
