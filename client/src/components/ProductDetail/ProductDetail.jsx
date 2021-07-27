@@ -11,6 +11,11 @@ import AllReviews from '../Reviews/AllReviews';
 import { allReviews } from '../../Redux/actionsReview';
 import { Link } from 'react-scroll';
 import './index.css';
+import ButtonCrypto from '../StyledComponents/ButtonCrypto';
+
+
+
+
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -22,6 +27,11 @@ function DetailProduct(props) {
 	useEffect(() => {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
+
+	///Crypto
+	const arsBtc = useSelector((state) => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const btcRate = parseFloat(arsBtc);
 
 	return (
 		<div className={styles.container}>
@@ -43,6 +53,9 @@ function DetailProduct(props) {
 							</Link>
 							<AllStars />
 							<p className={styles.texto}>${productDetail.price} </p>
+							<div className={styles.buttonCrypto}>
+								<ButtonCrypto>₿ {(productDetail.price * btcRate).toFixed(6)}</ButtonCrypto>
+							</div>
 
 							<span> Stock: {productDetail.stock} </span>
 

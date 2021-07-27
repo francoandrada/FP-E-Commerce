@@ -2,6 +2,8 @@ import './BannerContainer.css'
 import ButtonRedOther from '../StyledComponents/ButtonRed'
 import TitleStyle from '../StyledComponents/TitleStyle'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 const ButtonRedHome = styled(ButtonRedOther)`
     width: 300px;
@@ -14,7 +16,9 @@ function BannerContainer() {
         <div className='BannerContainer'>
             <div className='Bannerinfo'> 
                 <TitleStyle>50%<br></br>on all our best<br></br>products.</TitleStyle>
-                <ButtonRedHome>Pay with CRYPTO!</ButtonRedHome>
+                <Link to={`/cryptopayments`}>
+                    <ButtonRedHome>Pay with CRYPTO!</ButtonRedHome>
+                </Link>
             </div>
         </div>
     )

@@ -15,6 +15,7 @@ import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import AboutView from './components/AboutSection/AboutView';
 import Error404View from './components/ErrorComponents/Error404View';
+import CryptoSection from './components/CryptoSection/CryptoSection';
 
 import './App.css';
 
@@ -59,6 +60,7 @@ function App({ location }) {
 					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/about' exact component={AboutView} />
+					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/chatbot' exact component={WatsonChat} />
 					<Route path='/review/:id' exact component={UserReview} />
