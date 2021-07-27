@@ -20,6 +20,7 @@
 	/* z-index: -1; */
 	justify-content:flex-end;
 	align-items: flex-end;
+	width: 20%;
 }
 
 .highlightProdContainer:hover {
