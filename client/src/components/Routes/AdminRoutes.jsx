@@ -17,13 +17,18 @@ import Orders from '../AdminComponents/Orders/Orders';
 import UserOrder from '../AdminComponents/UserOrder/UserOrder';
 import OrderDetails from '../AdminComponents/OrderDeatils/OrderDetails';
 
+import { useSelector } from 'react-redux';
+
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
 			ALL NEW PATH NEED TO GO INSIDE TO THE Switch COMPONENT
 	==========================================================================*/
+	let isAdmin = useSelector((state) => state.user.userData.admin);
 
 	return (
 		<>
+		{isAdmin && isAdmin ? 
+			<>
 			<Switch>
 				<Route path='/admin' exact component={Admin} />
 				{/* <Route path='/admin/orders' exact component={Admin} /> */}
@@ -45,6 +50,14 @@ const AdminRoutes = ({ location }) => {
 				<Route path='/admin/orderdetails/:id' exact component={OrderDetails} />
 			</Switch>
 			{location.pathname === '/admin' && <Charts />}
+			</>
+			: 
+			<div>
+				<h1>FAILED ACCESS</h1>
+				<h2>Unauthorise User</h2>
+			</div>
+		
+		}
 		</>
 	);
 };
