@@ -21,7 +21,7 @@ const ButtonRedSmall = styled.button`
     } 
 `;
 
-function UserOrderDetail({ image, name, price, prodInfo, id }) {
+function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 	const dispatch = useDispatch();
 	const userOrders = useSelector((state) => state.useraccount.userOrdersList);
 
@@ -36,7 +36,7 @@ function UserOrderDetail({ image, name, price, prodInfo, id }) {
 				<p>{name}</p>
 			</div>
 
-			<p>${price}</p>
+			<p>${oldprice}</p>
 
 			<div>
 				<Link to={'/shoppingcart'}>

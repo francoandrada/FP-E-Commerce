@@ -8,6 +8,7 @@ const initialState = {
 function cryptoReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_RATES:
+			console.log(action.payload)
 			return {
 				...state,
 				arsBtc: action.payload.ARS.rate_btc,
