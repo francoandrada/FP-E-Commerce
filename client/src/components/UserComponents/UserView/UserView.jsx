@@ -60,7 +60,7 @@ function UserView() {
 			<div className={style.userViewContainer}>
 				<div className={style.optionsPanelContainer}>
 					<div className={style.optionsContainer}>
-						<p>Welcome {userData.name}!</p>
+						<span>Welcome {userData.name}!</span>
 
 						<div
 							onClick={setOption}

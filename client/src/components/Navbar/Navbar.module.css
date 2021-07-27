@@ -46,6 +46,7 @@
 
 .linksNavEcommerce a {
 	color: white;
+	margin-left: -3em;
 }
 
 .linksNavEcommerce a:hover {
@@ -194,6 +195,10 @@
 	margin-bottom: 2.0625rem;
 	margin-left: 1.1875rem;
 }
+.IconsContainer{
+	display: flex;
+	margin-right: 1em;
+}
 
 @media only screen and (max-width: 1120px) {
 	.searchBtnEcommerce {
@@ -228,43 +233,6 @@
 		font-size: 16px;
 	}
 }
-@media only screen and (max-width: 430px) {
-	.inputEcommerce {
-		width: 10rem;
-		font-size: 12px;
-	}
-	.flexColumnEcommerce{
-		margin-left: -10rem;
-	}
-	.searchBtnEcommerce {
-		top: 2.375em;
-	}
-
-	.autoContainerEcommerce {
-		right: -0.9375em;
-		top: 88%;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
-		width: 13.75em;
-	}
-
-	.optionEcommerce {
-		width: 12.1875em;
-	}
-	.linksNavEcommerce {
-		font-size: 14px;
-	}
-
-	.sections a {
-		font-size: 12px;
-	}
-	.navbarEcommerce .rightSideEcommerce {
-		flex: none;
-	
-	}
-}
-
 /* --------- FAVORITES BUTTON NAV BAR STYLE ------------ */
 .favHeartContainer {
 	display: flex;
@@ -276,7 +244,65 @@
 	color: white;
 	font-size: 2rem;
 }
+@media only screen and (max-width: 430px) {
+	.inputEcommerce {
+		width: 7rem;
+		font-size: 12px;
+	}
+	.flexColumnEcommerce{
+		/* margin-left: -5rem; */
+		/* margin-right: 1em; */
+	}
+	.searchBtnEcommerce {
+		top: 2.375em;
+	}
 
+	.autoContainerEcommerce {
+		right: 0;
+		top: 75%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space:normal;
+		width: max-content;
+		padding: 0.5em;
+		height: 200px;
+	}
+
+	.optionEcommerce {
+		width: 12.1875em;
+	}
+	.linksNavEcommerce {
+		font-size: 14px;
+		margin-right: 0.7em;
+	}
+	.linksNavEcommerce a{
+		margin: 0.5em;
+	}
+	.sections a {
+		font-size: 12px;
+	}
+	.navbarEcommerce .rightSideEcommerce {
+		flex: none;
+	
+	}
+	.but{
+		font-size: 14px;
+		/* margin-right: -2em;
+		margin-bottom: 1em; */
+	}
+	.countCart{
+		padding: 3.5px 6px;
+		border-radius: 100%;
+		width: max-content;
+	}
+	.countCart p{
+		font-size: 10px;
+	}
+	.IconsContainer{
+		display: flex;
+		margin-left: 1em;
+	}
+}
 
 
 /* 
