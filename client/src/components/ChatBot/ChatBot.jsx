@@ -1,5 +1,7 @@
 import ChatBot from 'react-simple-chatbot';
 import { useHistory } from "react-router-dom";
+
+
 export function ComponentCatalog(){
     const history = useHistory();
    function handleClick() {
