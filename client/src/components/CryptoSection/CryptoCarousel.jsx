@@ -3,6 +3,8 @@ import slide2 from '../../images/cryptophotos/slide2.jpg'
 import slide3 from '../../images/cryptophotos/slide3.jpg'
 import slide4 from '../../images/cryptophotos/slide4.jpg'
 import slide5 from '../../images/cryptophotos/slide5.jpg'
+import slide6 from '../../images/cryptophotos/slide6.jpg'
+
 
 import {Carousel} from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -19,7 +21,7 @@ function CryptoCarousel (){
                 </div>
                 <div>
                     <img src={slide2} alt='slide2'/>
-                    <p className="legend">Into Checkout, click "Checkout using Coinpayments"</p>
+                    <p className="legend">Click "Checkout using Coinpayments"</p>
                 </div>
                 <div>
                     <img src={slide3} alt='slide3'/>
@@ -32,6 +34,10 @@ function CryptoCarousel (){
                 <div>
                     <img src={slide5} alt='slide5' />
                     <p className="legend">Into this page you see the address and the amount of crypto to make your payment. </p>
+                </div>
+                <div>
+                    <img src={slide6} alt='slide6' />
+                    <p className="legend">Once you finish the payment, you'll receive an email confirming it and also you can check it into Account Panel.</p>
                 </div>
             </Carousel>
         );
