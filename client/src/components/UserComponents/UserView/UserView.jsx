@@ -67,11 +67,11 @@ function UserView() {
 							id='account'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions}>
-								<FiUser />
-								<p className={style.textOptionStyle}>Account</p>
+							<div className={style.subcontainerOptions} onClick={setOption} id='account'>
+								<FiUser onClick={setOption} id='account'/>
+								<p className={style.textOptionStyle} onClick={setOption} id='account'>Account</p>
 							</div>
-							<FiChevronRight />
+							<FiChevronRight onClick={setOption} id='account'/>
 						</div>
 
 						<div
@@ -79,11 +79,11 @@ function UserView() {
 							id='orders'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions}>
+							<div className={style.subcontainerOptions} onClick={setOption} id='orders'>
 								<FiBox />
-								<p className={style.textOptionStyle}>My Orders</p>
+								<p className={style.textOptionStyle} onClick={setOption} id='orders'>My Orders</p>
 							</div>
-							<FiChevronRight />
+							<FiChevronRight onClick={setOption} id='orders'/>
 						</div>
 
 						<div
@@ -91,11 +91,11 @@ function UserView() {
 							id='favorites'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions}>
-								<FiHeart />
-								<p className={style.textOptionStyle}>Favorites</p>
+							<div className={style.subcontainerOptions} onClick={setOption} id='favorites'>
+								<FiHeart onClick={setOption} id='favorites'/>
+								<p className={style.textOptionStyle} onClick={setOption} id='favorites'>Favorites</p>
 							</div>
-							<FiChevronRight />
+							<FiChevronRight onClick={setOption} id='favorites'/>
 						</div>
 
 						<div
@@ -103,11 +103,11 @@ function UserView() {
 							id='addresses'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions}>
-								<FiHome />
-								<p className={style.textOptionStyle}>Addresses</p>
+							<div className={style.subcontainerOptions} onClick={setOption} id='addresses'>
+								<FiHome onClick={setOption} id='addresses'/>
+								<p className={style.textOptionStyle} onClick={setOption} id='addresses'>Addresses</p>
 							</div>
-							<FiChevronRight />
+							<FiChevronRight onClick={setOption} id='addresses'/>
 						</div>
 
 						<div
@@ -115,11 +115,11 @@ function UserView() {
 							id='signout'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions}>
-								<FiLogOut />
-								<p className={style.textOptionStyle}>Sign Out</p>
+							<div className={style.subcontainerOptions} onClick={setOption} id='signout'>
+								<FiLogOut onClick={setOption} id='signout'/>
+								<p className={style.textOptionStyle} onClick={setOption} id='signout'>Sign Out</p>
 							</div>
-							<FiChevronRight />
+							<FiChevronRight onClick={setOption} id='signout'/>
 						</div>
 					</div>
 				</div>
