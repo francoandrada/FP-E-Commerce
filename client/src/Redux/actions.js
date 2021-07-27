@@ -852,9 +852,7 @@ export function postCartCrypto(data) {
 /// COINPAYMENTS ACTIONS//////////////////////////////
 export function getRates() {
 	return async (dispatch) => {
-// /// COINPAYMENTS ACTIONS
-// export function getRates() {
-// 	return async (dispatch) => {
+
 		try {
 			const res = await axios.get('http://localhost:3001/coinpayment/rate');
 			dispatch({
