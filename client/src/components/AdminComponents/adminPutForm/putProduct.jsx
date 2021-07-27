@@ -264,6 +264,7 @@ function PutProduct() {
 					})}
 				/>
 				<input
+					name='images'
 					type='file'
 					multiple
 					onChange={(e) => convertToBase64(e.target.files)}

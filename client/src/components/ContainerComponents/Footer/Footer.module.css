@@ -1,7 +1,7 @@
 .footerContainer {
 	background-color: #303030;
 	margin-top: 1rem;
-	height: 70px;
+	height: 100px;
 	width: 100%;
 }
 
@@ -76,34 +76,33 @@ a:link {
 	color: #ff3c4a;
 }
 @media only screen and (max-width: 430px) {
-    .logo {
+	.logo {
 		font-size: 18px;
 	}
-	.footerContainer{
+	.footerContainer {
 		width: 100%;
 		margin-top: 4rem;
 	}
-.contentContainer {
+	.contentContainer {
 		width: 40%;
-	font-size: 12px;
-
-}
-.contentContainer span {
-	margin: 1em;
-}
-.containerGit {
-	width: 1.5em;
-	height: 1.5em;
-}
-.contentContact {
-	width: 27%;
-	height: 100%;
-	float: right;
-	justify-content: center;
-	align-items: center;
-	font-size: 24px;
-	padding-block-end: 2px;
-	flex-direction: row;
-	display: flex;
-}
+		font-size: 12px;
+	}
+	.contentContainer span {
+		margin: 1em;
+	}
+	.containerGit {
+		width: 1.5em;
+		height: 1.5em;
+	}
+	.contentContact {
+		width: 27%;
+		height: 100%;
+		float: right;
+		justify-content: center;
+		align-items: center;
+		font-size: 24px;
+		padding-block-end: 2px;
+		flex-direction: row;
+		display: flex;
+	}
 }

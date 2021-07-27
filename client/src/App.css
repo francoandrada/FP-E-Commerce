@@ -1,5 +1,5 @@
 .totalvh {
-	/* min-height: 100vh; */
+	min-height: 90vh;
 }
 * {
 	box-sizing: border-box;
@@ -27,7 +27,7 @@
 	padding: 2rem 0;
 }
 @media only screen and (max-width: 430px) {
-	.totalvh{
+	.totalvh {
 		min-height: 0;
 	}
 }
