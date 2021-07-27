@@ -251,7 +251,9 @@
 	}
 	.flexColumnEcommerce{
 		/* margin-left: -5rem; */
+
 		margin-right: 1em;
+
 	}
 	.searchBtnEcommerce {
 		top: 2.375em;
@@ -309,6 +311,7 @@
 	}
 	
 }
+
 
 /* 
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {
