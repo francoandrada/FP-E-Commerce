@@ -4,7 +4,7 @@
 	flex-direction: column;
 	align-items: center;
 	background-color: white;
-	width: 100%;
+	width: max-content;
 	margin-left: 10px;
 	padding: 20px;
 	border-radius: 10px;
@@ -29,7 +29,7 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	width: 100%;
+	width: 650px;
 	padding: 10px;
 	border-top: solid;
 	border-top-color: rgb(204, 204, 204);
@@ -51,7 +51,9 @@
 }
 
 .descriptionOrderStyle {
+    display: flex;
 	width: 40%;
+    align-items: center;
 }
 
 .orderDiv {
@@ -59,32 +61,36 @@
 	align-items: center;
 	width: 100%;
 	background-color: rgb(248, 248, 248);
+    justify-content: space-between;
 }
 
 .orderNumberDiv {
 	display: flex;
 	justify-content: center;
-	width: 30%;
+	width: 100%;
 	padding: 10px;
+    font-size: 16px;
 }
 
 .statusDiv {
 	display: flex;
 	justify-content: space-evenly;
 	padding: 10px;
-	width: 20%;
+	width: 50%;
 }
 
 .totalOrderDiv {
 	display: flex;
 	justify-content: center;
 	padding: 10px;
-	width: 30%;
-	font-size: 20px;
+	width: 100%;
+	font-size: 18px;
 	color: rgb(63, 63, 63);
 	font-weight: bold;
 }
-
+.totalOrderDiv p{
+    width: max-content;
+}
 .detailIdButton {
 	width: 40%;
 	background-color: #ff3c4a;
@@ -95,7 +101,13 @@
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
-
+.buttons{
+    display: flex;
+}
+.button{
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
 .detailIdButton:hover {
 	background-color: #d8303c;
 }
@@ -104,6 +116,7 @@
 	margin-bottom: 0px;
 	color: rgb(255, 255, 255);
 }
+
 
 /* ----- User Account Styles ------ */
 
@@ -231,8 +244,13 @@
         border-width: 0.5px;
 	}
     .descriptionOrderStyle{
-        width: 100%;
+        width: 90%;
         background-color: rgb(243, 242, 242);
+        margin: 0.5em auto;
+        padding: 10px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
     }
     .sizeImagOrder{
         width: 100px;
@@ -245,5 +263,12 @@
     }
     .divData p{
         margin: 0
+    }
+    .SizeImagOrderDiv{
+        width: 100%;
+        margin-left: 2.5em;
+    }
+    .SizeImagOrderDiv img{
+        margin: 0 auto;
     }
 }
