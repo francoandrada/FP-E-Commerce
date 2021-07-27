@@ -49,13 +49,16 @@ const Chat = () => {
 	<BsChatDots /> Personal Assistant{' '}
 </Button>
 
-<Modal isOpen={Active}>
-	<Button variant= "denger" onClick={openModal}> Close </Button>
-	<ModalHeader>Hello User!</ModalHeader>
-	<ModalBody>
-		<FormGroup>
+<Modal isOpen={Active} className={styles.divxxx}>
+	<ModalHeader>Hello User!
+	<Button className={styles.botonCloseChat} onClick={openModal}> Close </Button>
+
+	</ModalHeader>
+	<ModalBody className={styles.chat} >
+
+		<FormGroup className={styles.containerChating}>
 			{/* <Label for='name'> Name: </Label> */}
-			<div  className={styles.chat} >
+			<div  className={styles.historyContainer} >
 				{chat.length === 0
 					? ''
 					: chat.map((msg, key) => (
@@ -66,6 +69,7 @@ const Chat = () => {
 				<div ref={endOfMessages}></div>
 			</div>
 			<Input
+				className={styles.inputChat}
 				id='chatBox'
 				onChange={(e) => setMessage(e.target.value)}
 				onKeyPress={handleClick}
@@ -73,11 +77,11 @@ const Chat = () => {
 			/>
 		</FormGroup>
 	</ModalBody>
-
+{/* 
 	<ModalFooter>
 		<Button variant= "outline-info" type='submit'> Send</Button>
 		
-	</ModalFooter>
+	</ModalFooter> */}
 </Modal>
 </>);
 };

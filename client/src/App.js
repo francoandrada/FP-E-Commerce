@@ -24,6 +24,7 @@ import WebHook from './components/ShoppingCartComponents/WebHook';
 import WatsonChat from './components/ChatBotComponents/WatsonChat';
 import Shipping from './components/ShoppingCartComponents/Shipping';
 import UserReview from './components/Reviews/UserReview';
+import Bot from './components/ChatBot/ChatBot';
 
 function App({ location }) {
 	/* ======================================================
@@ -62,6 +63,7 @@ function App({ location }) {
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/chatbot' exact component={WatsonChat} />
 					<Route path='/review/:id' exact component={UserReview} />
+					<Route path='/bot' exact component={Bot} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}

@@ -1,20 +1,25 @@
-.watsonContainer {
+/* .watsonContainer {
 	height: 100vh;
 	width: 100%;
 	background-color: beige;
+} */
+.divxxx{
+  background-color: springgreen;
+  width: 400px;
+ 
 }
-/* .container{
+.container{
   text-align: center;
 }
-input{
+.inputChat{
   border: 0;
   border-bottom: 1px solid black;   
-  height: 20px;
-  width: 400px;
+  height: 44px;
+  max-width: 100%;
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 .bot{
   background-color: rgb(152, 85, 212);
@@ -43,11 +48,23 @@ input{
 .chat{
   display: inline-block;
   max-width: 400px;
+border-radius: 30px;
+  background-color: royalblue;
 }
 .historyContainer{
-  height:600px;
+  height:444px;
   overflow: scroll;
+  background-color: salmon;
+ 
 }
 h1{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-} */
+}
+.botonCloseChat{
+
+background-color: red;
+
+}
+.containerChating{
+background-color: black;
+}
