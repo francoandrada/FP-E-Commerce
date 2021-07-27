@@ -8,12 +8,12 @@ import {
 	addToCart,
 	removeFromCart,
 } from '../../Redux/actions';
-import FavoriteButton from '../FavoriteComponent/FavoriteButton'
+import FavoriteButton from '../FavoriteComponent/FavoriteButton';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
-import './index.css'
+import './index.css';
 function Products() {
 	const arsBtc = useSelector((state) => state.crypto.arsBtc);
 	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
@@ -130,7 +130,6 @@ function Products() {
 	};
 	return (
 		<div className={styles.cardsContainer}>
-			
 			{productsToRender
 				? productsToRender.map((p) => {
 						if (p.name.length > 55) {
@@ -153,33 +152,33 @@ function Products() {
 								<div>
 									<hr id={styles.line} />
 								</div>
-								
+
 								<div className={styles.data}>
 									<span className={styles.productName}>{p.name}</span>
 									<div className={styles.heartDiv}>
-									<FavoriteButton prod={p}/>
+										<FavoriteButton prod={p} />
 									</div>
 								</div>
 								<div className={styles.footerCard}>
-								<div className='footerCard d-flex justify-content-center'>
-									<div className={styles.productPrice}>
-										<span>{formatPrice}</span>
-									</div>
+									<div className='footerCard d-flex justify-content-center'>
+										<div className={styles.productPrice}>
+											<span>{formatPrice}</span>
+										</div>
 
-									<div className={styles.buttonBuy}>
-										{p.stock > 0 ? (
-											<button
-												id={styles.btnBuy}
-												type='submit'
-												onClick={() => dispatch(addToCart(p))}
-											>
-												Add to Cart
-											</button>
-										) : (
-											<button type='submit'>Sin Stock</button>
-										)}
+										<div className={styles.buttonBuy}>
+											{p.stock > 0 ? (
+												<button
+													id={styles.btnBuy}
+													type='submit'
+													onClick={() => dispatch(addToCart(p))}
+												>
+													Add to Cart
+												</button>
+											) : (
+												<button type='submit'>Sin Stock</button>
+											)}
+										</div>
 									</div>
-								</div>
 								</div>
 								<div id={styles.paginado}></div>
 							</div>
