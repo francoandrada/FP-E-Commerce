@@ -1,0 +1,13 @@
+@media only screen and (max-width: 430px){
+    .HiUser{
+        font-size: 10px;
+        color: white;
+        margin: 0.5em 0;
+        width: max-content;
+    }
+    .LogOutContainer{
+        margin-right: -1em;
+        margin-top: 2em;
+    }
+    
+}
