@@ -12,7 +12,7 @@ import { Bar} from 'react-chartjs-2';
 const CartContainer = styled.div`
  position: absolute;
    top: 56%;
-   left: 56%;
+   left: 47%;
    background-color: #F5F5F5;
    border: 1px solid #D2D2D2;
    padding: 1rem;
@@ -103,7 +103,7 @@ const Review = ({ productInfo }) => {
 			{starAverage &&
 			starAverage.length > 0 &&
 			starAverage[0].rating !== null ? (
-				<div>
+				<div className='d-flex'>
 					<div
 						onMouseEnter={() => setActive(!active)}
 						onMouseLeave={() => setActive(false)}

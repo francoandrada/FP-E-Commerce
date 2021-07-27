@@ -76,7 +76,7 @@ function DetailProduct(props) {
 										<div
 											className={window.screen.width > 430 ? 'm-3' : 'button'}
 										>
-											<ButtonRedOther
+										<button
 												className={
 													window.screen.width > 430
 														? 'btn btn-outline-danger'
@@ -86,7 +86,7 @@ function DetailProduct(props) {
 												onClick={() => dispatch(addToCart(productDetail))}
 											>
 												Add to Cart
-											</ButtonRedOther>
+											</button>
 										</div>
 										<Link to='/shoppingcart'>
 											<div class='m-3'>
