@@ -103,12 +103,12 @@ function SubTotal({address}) {
 							Checkout with Mercado Pago
 						</button>
 						<NavLink to='/catalog'>
-							<input
-								type='image'
-								src='https://www.coinpayments.net/images/pub/checkout-blue.png'
-								alt='Checkout'
+							<button
 								onClick={handleClickCrypto}
-							/>
+								className={style.paymentCrypto}
+							>
+								Checkout with CoinPayments
+							</button>
 						</NavLink>
 					</div>
 
