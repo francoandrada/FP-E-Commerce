@@ -52,11 +52,13 @@ function App({ location }) {
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
 					<div className='adminn'>
-						{/* <AdminRoutes /> */}
-						<Route path='/admin' component={AdminRoutes} />
+						<AdminRoutes />
+						  <Route path='/admin' component={AdminRoutes} />
 					</div>
-				)}
+				)}  
+				
 				<Switch>
+			
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />
@@ -82,7 +84,7 @@ function App({ location }) {
 					<Route path='/contact' exact component={ContactForm} />
 				</Switch>
 			</div>
-			{!location.pathname.includes('/admin') && <Footer />}
+			{!location.pathname.includes('/admin') && <Footer />} 
 		</div>
 	);
 }

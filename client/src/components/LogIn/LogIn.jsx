@@ -131,13 +131,16 @@ const LogIn = () => {
 		},
 	});
 
+
 	return (
 		<>
 			<GlobalStyle />
 			<div className='container d-flex justify-content-center mt-3 rounded'>
 				<div className=' row '>
 					<div className='col bg-white px-5 rounded '>
-						<form onSubmit={formik.handleSubmit} className={window.screen.width > 430 ? 'px-5 py-4' : 'formContainer'}>
+						<form onSubmit={formik.handleSubmit} 
+						className={window.screen.width > 430 ? 'px-5 py-4' : 'formContainer'}>
+
 							<div className=' d-flex justify-content-center'>
 								<Img src={`${img}`} />
 							</div>
@@ -165,6 +168,8 @@ const LogIn = () => {
 							{formik.touched.password && formik.errors.password ? (
 								<Div>{formik.errors.password}</Div>
 							) : null}
+
+
 							<div className='form-group d-flex justify-content-center'>
 								<input
 									type='password'
