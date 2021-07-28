@@ -39,6 +39,11 @@
 	color: white;
 	font-weight: 700;
 }
+
+#btnAddProduct {
+	outline: none;
+}
+
 .tableEcommerce td,
 .tableEcommerce th {
 	border-bottom: 0.5px solid rgba(128, 128, 128, 0.213);
