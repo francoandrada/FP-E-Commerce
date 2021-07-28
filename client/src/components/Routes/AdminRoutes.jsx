@@ -18,6 +18,7 @@ import UserOrder from '../AdminComponents/UserOrder/UserOrder';
 import OrderDetails from '../AdminComponents/OrderDeatils/OrderDetails';
 
 import { useSelector } from 'react-redux';
+import Address from '../AdminComponents/AdminAddress/AdminAddress';
 
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
@@ -51,6 +52,9 @@ const AdminRoutes = ({ location }) => {
 						<Route path='/admin/users/:email' exact component={UserPanel} />
 						<Route path='/admin/products' exact component={Table} />
 						<Route path='/admin/userorders' exact component={UserOrder} />
+
+
+						<Route path='/admin/address' exact component={Address} />
 						<Route
 							path='/admin/orderdetails/:id'
 							exact

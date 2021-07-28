@@ -17,59 +17,57 @@ const Input = styled.input`
 	display: none;
 `;
 const Div = styled.div`
-	background-color: #F0F0F0;
+	background-color: #f0f0f0;
 	padding: 2rem;
 	border-radius: 10px;
 	border: 1px solid white;
-
 `;
 
 const Label = styled.label`
-  border-style: none;
-    border-radius: 5px;
-    font-size: 18px;
-    padding: .5rem;
-    &:hover{
-        background-color: black;
-       color: white;
-    } 
+	border-style: none;
+	border-radius: 5px;
+	font-size: 18px;
+	padding: 0.5rem;
+	&:hover {
+		background-color: black;
+		color: white;
+	}
 `;
 
 const Mapouter = styled.div`
-	text-align:right;
-	height:457px;
-	width:477px;
-
+	text-align: right;
+	height: 457px;
+	width: 477px;
 `;
 
 const GmapCanvas = styled.div`
-	overflow:hidden;
-	background:none!important;
+	overflow: hidden;
+	background: none !important;
 	display: flex;
 	margin: auto;
 	justify-content: center;
-	height:300px;
-	width:300px;
+	height: 300px;
+	width: 300px;
 `;
 const Shipping = () => {
-	const cartProducts = useSelector((state) => state.cart.cart);
+	const cartProducts = useSelector(state => state.cart.cart);
 
-	const ammount = useSelector((state) => state.cart.ammount);
-	const mercadoPago = useSelector((state) => state.cart.link);
+	const ammount = useSelector(state => state.cart.ammount);
+	const mercadoPago = useSelector(state => state.cart.link);
 	const history = useHistory();
 	const [addr, setAddr] = useState({
 		address: '',
 		city: '',
 		province: '',
-		zipCode: '',
+		zipCode: ''
 	});
 
 	const { address, city, province, zipCode } = addr;
 
-	const handleChange = (e) => {
+	const handleChange = e => {
 		setAddr({
 			...addr,
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		});
 	};
 
@@ -77,7 +75,7 @@ const Shipping = () => {
 		window.location.href = mercadoPago;
 	}
 
-	const userId = useSelector((state) => state.user.userData.userId);
+	const userId = useSelector(state => state.user.userData.userId);
 
 	let array = [];
 
@@ -86,7 +84,7 @@ const Shipping = () => {
 			prodId: cartProducts[i].id,
 			name: cartProducts[i].name,
 			price: cartProducts[i].price,
-			qty: cartProducts[i].qty,
+			qty: cartProducts[i].qty
 		};
 		array.push(element);
 	}
@@ -103,10 +101,10 @@ const Shipping = () => {
 			prodCarrito: array,
 			status: 'created',
 			address: addr,
-			ammount: ammount,
+			ammount: ammount
 		};
 	}
-	const handleClickMP =async (e) => {
+	const handleClickMP = async e => {
 		e.preventDefault();
 		if (options === 'ship') {
 			setAddr(addr);
@@ -114,21 +112,24 @@ const Shipping = () => {
 		if (options === 'pick') {
 			setAddr('');
 		}
-
-		console.log('ANTES DE ENVIAR', bodyObject);
 		dispatch(postCart(bodyObject));
 		await Swal.fire({
 			position: 'center',
 			icon: 'success',
 			title: `You'll redirected to Mercado Pago to finish your payment!`,
 			showConfirmButton: true,
-			timer: 3000,
+			timer: 3000
 		});
 	};
 
-	const handleClickCrypto = async (e) => {
+	const handleClickCrypto = async e => {
 		e.preventDefault();
-		
+		if (options === 'ship') {
+			setAddr(addr);
+		}
+		if (options === 'pick') {
+			setAddr('');
+		}
 		await Swal.fire({
 			position: 'center',
 			icon: 'success',
@@ -137,10 +138,7 @@ const Shipping = () => {
 			timer: 3000,
 		});
 		history.push('/catalog');
-		console.log('DESDE CRIPTOP',bodyObject);
 		dispatch(postCartCrypto(bodyObject));
-		
-	
 	};
 
 	return (
@@ -175,7 +173,7 @@ const Shipping = () => {
 					</div>
 				</div>
 				{options === 'ship' ? (
-					<form >
+					<form>
 						<div>
 							<div class='form-row'>
 								<div class='col m-2'>
@@ -224,15 +222,11 @@ const Shipping = () => {
 								</div>
 							</div>
 							<div className='d-flex justify-content-center m-3'>
-								
-								<button 
-								onClick={handleClickMP}
-								className={style.paymentButton}>
+								<button onClick={handleClickMP} className={style.paymentButton}>
 									Checkout with Mercado Pago
 								</button>
 
 								<button
-								
 									onClick={handleClickCrypto}
 									className={style.paymentCrypto}
 								>
@@ -245,37 +239,40 @@ const Shipping = () => {
 					<div className='d-flex justify-content-center'>
 						<Mapouter>
 							<div>
-							<GmapCanvas>
-								<iframe
-									width='600'
-									height='500'
-									id='gmap_canvas'
-									src='https://maps.google.com/maps?q=300%20Post%20St,%20San%20Francisco,%20CA%2094108,%20United%20States&t=&z=13&ie=UTF8&iwloc=&output=embed'
-									frameborder='0'
-									scrolling='no'
-									marginheight='0'
-									marginwidth='0'
-									title='hola'
-								></iframe>
-								<a href='https://fmovies-online.net'> </a>
-							</GmapCanvas>
+								<GmapCanvas>
+					
+									<iframe
+										width='600'
+										height='500'
+										id='gmap_canvas'
+										src="https://www.google.com/maps/d/embed?mid=1yREbT8xqpNESK0iWhBhaEchTVC7zXYyD"
+										frameborder='0'
+										scrolling='no'
+										marginheight='0'
+										marginwidth='0'
+										title='hola'
+									></iframe>
+									<a href='https://fmovies-online.net'> </a>
+								</GmapCanvas>
 							</div>
 							<div>
-							<form >
-								<div className='d-flex justify-content-center m-2'>
-									<button className={style.paymentButton}>
-										Checkout with Mercado Pago
-									</button>
+								<form>
+									<div className='d-flex justify-content-center m-2'>
+										<button
+											onClick={handleClickMP}
+											className={style.paymentButton}
+										>
+											Checkout with Mercado Pago
+										</button>
 
-									<button
-									
-										onClick={handleClickCrypto}
-										className={style.paymentCrypto}
-									>
-										Checkout with CoinPayments
-									</button>
-								</div>
-							</form>
+										<button
+											onClick={handleClickCrypto}
+											className={style.paymentCrypto}
+										>
+											Checkout with CoinPayments
+										</button>
+									</div>
+								</form>
 							</div>
 						</Mapouter>
 					</div>
