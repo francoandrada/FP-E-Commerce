@@ -44,9 +44,9 @@ const AdminRoutes = ({ location }) => {
 					<Route path='/admin/putbrands/:id' exact component={PutBrand} />
 					<Route path='/admin/users' exact component={AdminUsers} />
 					<Route path='/admin/user/:email' exact component={UserPanel} />
-					<Route path='/admin/users/:email' exact component={UserPanel} />
+					{/* <Route path='/admin/users/:email' exact component={UserPanel} /> */}
 					<Route path='/admin/products' exact component={Table} />
-					<Route path='/admin/userorders' exact component={Orders} />
+					{/* <Route path='/admin/userorders' exact component={Orders} /> */}
 					<Route
 						path='/admin/orderdetails/:id'
 						exact
