@@ -98,9 +98,12 @@ const getAllReviews = async function getAllReviews(req, res) {
 	}
 };
 
+
+
 module.exports = {
 	getAllReviews,
 	getAllStars,
+
 	getAvergedStars,
 	newReview,
 };

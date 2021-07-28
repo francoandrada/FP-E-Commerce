@@ -9,56 +9,60 @@ import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
 import './index.css';
+import emailjs from 'emailjs-com';
+
+
+
+
+const initialState = {
+	name: '',
+	email: '',
+	message: '',
+  }
 function ContactForm() {
 	const history = useHistory();
+	const [{ name, email, message }, setState] = useState(initialState)
+	
+	
+	
+	const handleChange = (e) => {
+		const { name, value } = e.target
+		setState((prevState) => ({ ...prevState, [name]: value }))
+	  }
+	  const clearState = () => setState({ ...initialState })
+	
+	  const handleSubmit = (e) => {
+		e.preventDefault()
+			emailjs
+				.sendForm(
+					'service_fhf2dbo',
+					'contactForm',
+					e.target,
+					'user_rcFhA7nZhQYelsTTkzQtF'
+				)
+				.then(
+					result => {
+						console.log(result.text);
+					},
+					error => {
+						console.log(error.text);
+					}
+				);
+			Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: 'Your message was sent! Thanks!',
+				showConfirmButton: false,
+				timer: 1500
+			});
 
-	const [hola, setHola] = useState([]);
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			email: '',
-			subject: '',
-			message: '',
-		},
-		validationSchema: Yup.object({
-            name: Yup.string().required('Enter a name'),
-			email: Yup.string()
-				.email('Invalid email address')
-				.required('Enter an email where you can be contacted.'),
-			subject: Yup.string().required('Enter a subject'),
-			message: Yup.string().required('Enter your message'),
-		}),
-
-		onSubmit: async values => {
-			console.log(values);
-			try {
-				await axios.post('http://localhost:3001/users', {
-					name: values.name,
-					email: values.email,
-					subject: values.subject,
-					message: values.message,
-				});
-
-				Swal.fire({
-					position: 'center',
-					icon: 'success',
-					title: 'Your message was sent! Thanks!',
-					showConfirmButton: false,
-					timer: 1500
-				});
-				history.push('/');
-			} catch (error) {
-				console.log(error.response.data.msg);
-				setHola(error.response.data.msg);
-			}
 		}
-	});
 
 	return (
 		<div className={styles.registerFormContainer}>
 			<div id={styles.regForm}>
-				{hola.length > 0 ? <Error>{hola}</Error> : null}
-				<form onSubmit={formik.handleSubmit} id='contact-form'>
+				{/* {hola.length > 0 ? <Error>{hola}</Error> : null} */}
+				<form onSubmit={handleSubmit} id='contact-form'>
 					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-5' id={styles.input}>
 							<label>Name </label>
@@ -66,13 +70,10 @@ function ContactForm() {
 								type='text'
 								name='name'
 								placeholder='Name'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								onChange={handleChange}
 								className='form-control'
 							/>
-							{formik.touched.name && formik.errors.name ? (
-								<Div>{formik.errors.name}</Div>
-							) : null}
+						
 						</div>
 						<div className='form-group col-md-5' id={styles.input}>
 							<label>Email</label>
@@ -83,49 +84,37 @@ function ContactForm() {
 								id='email'
 								placeholder='Email'
 								name='email'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								onChange={handleChange}
 							/>
-							{formik.touched.email && formik.errors.email ? (
-								<Div>{formik.errors.email}</Div>
-							) : null}
+						
 						</div>
-
 					</div>
-                    <div className='form-row' id={styles.row}>
+					<div className='form-row' id={styles.row}>
 						<div className='form-group col-md-10' id={styles.input}>
 							<label>Subject </label>
 							<input
 								type='text'
 								name='subject'
 								placeholder='Subject'
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								onChange={handleChange}
 								className='form-control'
 							/>
-							{formik.touched.subject && formik.errors.subject ? (
-								<Div>{formik.errors.name}</Div>
-							) : null}
+							
 						</div>
-
-
 					</div>
 					<div>
 						<div className='form-row' id={styles.row}>
 							<div className='form-group col-md-10 ' id={styles.input}>
 								<label>Message</label>
 								<textarea
-                                    rows='8' 
+									rows='8'
 									type='text'
 									name='message'
 									placeholder='Message'
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									onChange={handleChange}
 									className='form-control'
 								/>
-								{formik.touched.address && formik.errors.address ? (
-									<Div>{formik.errors.address}</Div>
-								) : null}
+								
 							</div>
 						</div>
 						<div className={styles.registerButtonRow}>
@@ -139,3 +128,22 @@ function ContactForm() {
 	);
 }
 export default ContactForm;
+
+// onSubmit: async values => {
+// 	console.log(values);
+// 	try {
+// 		axios.post(`http://localhost:3001/webhooks/contactForm`, {values});
+
+// 		Swal.fire({
+// 			position: 'center',
+// 			icon: 'success',
+// 			title: 'Your message was sent! Thanks!',
+// 			showConfirmButton: false,
+// 			timer: 1500
+// 		});
+// 		history.push('/');
+// 	} catch (error) {
+// 		console.log(error.response.data.msg);
+// 		setHola(error.response.data.msg);
+// 	}
+// }
