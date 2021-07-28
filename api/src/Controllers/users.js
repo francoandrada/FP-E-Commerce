@@ -1,7 +1,7 @@
 const { User } = require('../db');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
-require('dotenv').config({ path: '.env' })
+require('dotenv').config({ path: '.env' });
 
 exports.newUser = async (req, res) => {
 	const errors = validationResult(req);
@@ -27,26 +27,25 @@ exports.newUser = async (req, res) => {
 			},
 		});
 		if (user) {
-			res.status(400).send({msg:'The user is alredy singed up'});
-		}else{
-		//bcrypt libreria
-		const salt = await bcrypt.genSalt(10);
-		const pass = await bcrypt.hash(password, salt);
+			res.status(400).send({ msg: 'The user is alredy singed up' });
+		} else {
+			//bcrypt libreria
+			const salt = await bcrypt.genSalt(10);
+			const pass = await bcrypt.hash(password, salt);
 
-		const newuser = await User.create({
-			name: name,
-			surname: surname,
-			email: email,
-			password: password, 
-			password: pass,
-			address: address,
-			addressNumber: addressNumber,
-			postalCode: postalCode,
-			phone: phone,
-		});
-		res.send(newuser);
-	}
-		
+			const newuser = await User.create({
+				name: name,
+				surname: surname,
+				email: email,
+				password: password,
+				password: pass,
+				address: address,
+				addressNumber: addressNumber,
+				postalCode: postalCode,
+				phone: phone,
+			});
+			res.send(newuser);
+		}
 	} catch (error) {
 		console.log(error);
 	}
@@ -61,25 +60,26 @@ exports.getUsers = async (req, res) => {
 	} catch (error) {
 		res.send(error);
 	}
-
 };
 
 //-------- INITIAL ADMIN USER PRELOAD --------------
-exports.adminUserPreload = async ()=>{
-		let user = await User.findOrCreate({
-			where: { name: 'admin' },
-			defaults: {
-				surname: 'admin',
-				email: 'hardwarecommerce@gmail.com',
-				password: 'Admin123456', 
-				address: 'su casa',
-				addressNumber: 9999,
-				postalCode: 9999,
-				phone: 99999999,
-				admin: true
-			}
-		  });
-}
+exports.adminUserPreload = async () => {
+	const salt = await bcrypt.genSalt(10);
+	const pass = await bcrypt.hash('Admin123456', salt);
+	let user = await User.findOrCreate({
+		where: { name: 'admin' },
+		defaults: {
+			surname: 'admin',
+			email: 'hardwarecommerce@gmail.com',
+			password: pass,
+			address: 'su casa',
+			addressNumber: 9999,
+			postalCode: 9999,
+			phone: 99999999,
+			admin: true,
+		},
+	});
+};
 
 // module.exports = {
 // 	adminUserPreload

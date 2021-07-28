@@ -16,6 +16,7 @@ const {
 	deleteProduct,
 	deleteBrand,
 	deleteCategory,
+	deleteImageProduct,
 } = require('../Controllers/admin');
 
 const router = Router();
@@ -49,5 +50,6 @@ router.put('/user/delete', deleteUser);
 router.delete('/deleteproduct/:id', deleteProduct);
 router.delete('/deletebrand/:id', deleteBrand);
 router.delete('/deletecategory/:id', deleteCategory);
+router.delete('/deleteImageProduct/:id', deleteImageProduct);
 
 module.exports = router;
