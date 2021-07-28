@@ -58,9 +58,9 @@ function DetailProduct(props) {
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
 							{currentImage ? (
-								<img src={currentImage.imageUrl} alt='product' />
+								<img className={styles.imag} src={currentImage.imageUrl} alt='product' />
 							) : (
-								<img src={productDetail.image}></img>
+								<img className={styles.imag} src={productDetail.image}></img>
 							)}
 						</div>
 						

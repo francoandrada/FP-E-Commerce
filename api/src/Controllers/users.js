@@ -71,7 +71,7 @@ exports.adminUserPreload = async ()=>{
 			defaults: {
 				surname: 'admin',
 				email: 'hardwarecommerce@gmail.com',
-				password: 'admin123', 
+				password: 'Admin123', 
 				address: 'su casa',
 				addressNumber: 9999,
 				postalCode: 9999,

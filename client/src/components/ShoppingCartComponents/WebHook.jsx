@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPayInfo } from '../../Redux/actions';
+import { deleteCart, getPayInfo } from '../../Redux/actions';
 import { useLocation } from 'react-router-dom';
 
 const WebHook = () => {
@@ -8,7 +8,7 @@ const WebHook = () => {
 	const id = new URLSearchParams(search).get('collection_id');
 	const status = new URLSearchParams(search).get('collection_status');
 	const userData = useSelector((state) => state.user.userData);
-	const cart = useSelector((state) => state.cart.cart);
+	const userPay = useSelector((state) => state.cart.userPay);
 
 	console.log(userData.email)
 	const dispatch = useDispatch();
@@ -20,11 +20,10 @@ const WebHook = () => {
 
 	useEffect(() => {
 		dispatch(getPayInfo({id: id, email: userData.email}));
-	}, []);
+		
+	}, [dispatch]);
 
-	useEffect(() => {
-		localStorage.removeItem('cart');
-	}, []);
+	dispatch(deleteCart())
 	return (
 
 		<div class=' d-sm-flex justify-content-center m-5 text-center'>
