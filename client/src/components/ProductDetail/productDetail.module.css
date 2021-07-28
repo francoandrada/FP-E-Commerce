@@ -5,7 +5,9 @@
 	flex-wrap: wrap;
 	margin: 4em auto;
 	border-radius: 10px;
-	justify-content: flex-start;
+
+	justify-content: space-evenly;
+
 	padding: 2.5em;
 }
 .imgContainer {
@@ -13,6 +15,7 @@
 	justify-content: center;
 	width: 50%;
 	height: 418px;
+	margin-right: 70px;
 }
 
 .imgContainer img {
@@ -31,7 +34,6 @@
 	margin: auto;
 }
 
-
 .card {
 	display: flex;
 }
@@ -44,7 +46,6 @@
 	/* max-width: 50%; */
 	flex-grow: 1;
 }
-
 
 .label {
 	font-size: 14px;
@@ -88,6 +89,7 @@
 		align-items: center;
 		/* width: max-content; */
 		height: max-content;
+		margin-right: 0px;
 	}
 	.productCard span {
 		font-size: 14px;
