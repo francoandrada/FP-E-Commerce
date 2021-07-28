@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import style from './SubTotal.module.css';
+
+import Swal from 'sweetalert2';
 
 import { postCartCrypto } from '../../../Redux/actions';
 
 import { formatNumber } from '../../../helper/priceFormater';
 import { postCart, saveAmmount } from '../../../Redux/actions';
 
-function SubTotal({address}) {
+function SubTotal({ address }) {
 	const cartProducts = useSelector((state) => state.cart.cart);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
@@ -19,7 +21,6 @@ function SubTotal({address}) {
 	const token = useSelector((state) => state.user.token);
 
 	const user = useSelector((state) => state.user.userData);
-
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -37,7 +38,6 @@ function SubTotal({address}) {
 
 		setTotalItems(items);
 		setTotalPrice(price);
-		
 	}, [cartProducts, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
 	let status = 'created';
@@ -64,12 +64,26 @@ function SubTotal({address}) {
 		};
 	}
 
-	let totalFormat = formatNumber.new(totalPrice, '$');
-	dispatch(saveAmmount(totalPrice))
-	
+	useEffect(() => {
+		localStorage.setItem('ammount', totalPrice);
+	}, [totalPrice]);
 
-	const handleClickCrypto = () => {
-		dispatch(postCartCrypto(bodyObject))
+	let totalFormat = formatNumber.new(totalPrice, '$');
+	// dispatch(saveAmmount(totalPrice))
+
+	const history = useHistory();
+
+	const handleClickCrypto = async () => {
+		await Swal.fire({
+			position: 'center',
+			icon: 'success',
+			title: `You'll redirected to Coinpayments to finish your payment!`,
+			showConfirmButton: true,
+			timer: 3000,
+		});
+		history.push('/catalog');
+		console.log(bodyObject);
+		// dispatch(postCartCrypto(bodyObject));
 	};
 
 	return (
@@ -89,29 +103,33 @@ function SubTotal({address}) {
 				</div>
 
 				{token ? (
-
-					// <NavLink to='/shoppingcart/shipping'>
-					// 	<button className={style.paymentButton}
-					// 	>Buy Now</button>
-					// </NavLink>
-
 					<div>
+						<NavLink to='/shoppingcart/shipping'>
+							<button className={style.paymentButton}>Buy Now</button>
+						</NavLink>
+						{/* <NavLink to='/shoppingcart/shipping'>
+							<button className={style.paymentButton}>
+								Checkout with Mercado Pago
+							</button>
+						</NavLink>
+
+						{/* 				
 						<button
 							className={style.paymentButton}
 							onClick={() => dispatch(postCart(bodyObject))}
 						>
 							Checkout with Mercado Pago
-						</button>
-						<NavLink to='/catalog'>
-							<input
-								type='image'
-								src='https://www.coinpayments.net/images/pub/checkout-blue.png'
-								alt='Checkout'
+						</button> */}
+						{/* <NavLink to='/catalog'>
+							<button
 								onClick={handleClickCrypto}
-							/>
-						</NavLink>
+								className={style.paymentCrypto}
+							>
+								Checkout with CoinPayments
+							</button>
+						</NavLink>{' '}
+						*/} 
 					</div>
-
 				) : (
 					<NavLink to='/login'>
 						<button className={style.paymentButton}>Buy Now</button>

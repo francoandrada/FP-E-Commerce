@@ -690,12 +690,11 @@ export function getPayInfo(data) {
 		console.log(data);
 
 		try {
-			const res = await axios.post('http://localhost:3001/webhooks', { data });
+			// const res = await axios.post('http://localhost:3001/webhooks', { data });
 
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch({
 				type: GET_PAY,
-				payload: res.data,
 			});
 		} catch (error) {
 			console.log(error);
@@ -734,7 +733,7 @@ export function getCartUser(id) {
 				'http://localhost:3001/shoppingcart/userCart',
 				{ userId: id }
 			);
-			console.log('id', res.data);
+			
 			dispatch({
 				type: CREATE_CART_USER,
 				payload: res.data,
@@ -793,23 +792,23 @@ export const getUserFavorites = (userId) => {
 	};
 };
 
-export function saveAddress(address) {
-	console.log(address);
-	return async (dispatch) => {
-		dispatch({
-			type: SAVE_ADDRESS_ORDER,
-			payload: address,
-		});
-	};
-}
-export function saveAmmount(ammount) {
-	return async (dispatch) => {
-		dispatch({
-			type: SET_AMMOUNT,
-			payload: ammount,
-		});
-	};
-}
+// export function saveAddress(address) {
+// 	console.log(address);
+// 	return async (dispatch) => {
+// 		dispatch({
+// 			type: SAVE_ADDRESS_ORDER,
+// 			payload: address,
+// 		});
+// 	};
+// }
+// export function saveAmmount(ammount) {
+// 	return async (dispatch) => {
+// 		dispatch({
+// 			type: SET_AMMOUNT,
+// 			payload: ammount,
+// 		});
+// 	};
+// }
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
@@ -840,7 +839,7 @@ export function postCartCrypto(data) {
 			});
 
 			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
-			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}`;
+			const url = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=1fb271382cd01613f4cc50e28653dff4&item_name=Order+Payment&currency=ARS&allow_currency=0&amountf=${res.data.ammount}&item_number=${res.data.userId}&custom=${res.data.orderId}&allow_amount=0`;
 			window.open(url);
 		} catch (error) {
 			console.log(error);
@@ -864,5 +863,16 @@ export function getRates() {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+}
+
+
+
+export function changeOrder(payload) {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_MANUAL_AUTHENTICATION,
+			payload,
+		});
 	};
 }

@@ -22,6 +22,7 @@
 .paymentButton {
 	width: 100%;
 	margin-top: 20px;
+	margin: 1rem;
 	padding: 10px;
 	background-color: #ff3c4a;
 	color: white;
@@ -35,4 +36,23 @@
 }
 .paymentButton:active {
 	background-color: #bd2d36;
+}
+
+.paymentCrypto {
+	width: 100%;
+	margin-top: 20px;
+	padding: 10px;
+	margin: 1rem;
+	background-color: #ffbc3c;
+	color: black;
+	font-weight: bold;
+	border-style: hidden;
+	border-radius: 10px;
+}
+.paymentCrypto:hover {
+	background-color: #ffa83c;
+	transition: 200ms;
+}
+.paymentCrypto:active {
+	background-color: #ffa83c;
 }

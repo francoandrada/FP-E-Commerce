@@ -7,10 +7,14 @@ import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import Review from '../Reviews/StarModal';
 import AllReviews from '../Reviews/AllReviews';
-
 import { allReviews, getAverage } from '../../Redux/actionsReview';
 import {Link} from 'react-scroll'
 import { useHistory } from 'react-router-dom';
+import './index.css';
+import ButtonCrypto from '../StyledComponents/ButtonCrypto';
+
+
+
 
 
 function DetailProduct(props) {
@@ -28,6 +32,7 @@ function DetailProduct(props) {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
 
+
 	useEffect(() => {
 		dispatch(getAverage(productId));
 	}, [productId]);
@@ -36,6 +41,12 @@ function DetailProduct(props) {
 		dispatch(addToCart(productDetail));
 		history.push('/shoppingcart')
 	}
+
+	///Crypto
+	const arsBtc = useSelector((state) => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const btcRate = parseFloat(arsBtc);
+
 	return (
 		<div className={styles.container}>
 		
@@ -63,6 +74,9 @@ function DetailProduct(props) {
 							</div>
 					
 							<p className={styles.texto}>${productDetail.price} </p>
+							<div className={styles.buttonCrypto}>
+								<ButtonCrypto>₿ {(productDetail.price * btcRate).toFixed(6)}</ButtonCrypto>
+							</div>
 
 							<span> Stock: {productDetail.stock} </span>
 
@@ -76,7 +90,7 @@ function DetailProduct(props) {
 										<div
 											className={window.screen.width > 430 ? 'm-3' : 'button'}
 										>
-										<button
+										<ButtonRedOther
 												className={
 													window.screen.width > 430
 														? 'btn btn-outline-danger'
@@ -86,7 +100,7 @@ function DetailProduct(props) {
 												onClick={() => dispatch(addToCart(productDetail))}
 											>
 												Add to Cart
-											</button>
+											</ButtonRedOther>
 										</div>
 										<Link to='/shoppingcart'>
 											<div class='m-3'>

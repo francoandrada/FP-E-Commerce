@@ -27,7 +27,7 @@ const AdminRoutes = ({ location }) => {
 
 	return (
 		<>
-		{isAdmin && isAdmin ? 
+		{/* {isAdmin && isAdmin ?  */}
 			<>
 			<Switch>
 				<Route path='/admin' exact component={Admin} />
@@ -51,13 +51,13 @@ const AdminRoutes = ({ location }) => {
 			</Switch>
 			{location.pathname === '/admin' && <Charts />}
 			</>
-			: 
+			{/* : 
 			<div>
 				<h1>FAILED ACCESS</h1>
 				<h2>Unauthorise User</h2>
 			</div>
 		
-		}
+		} */}
 		</>
 	);
 };

@@ -15,6 +15,7 @@ import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import AboutView from './components/AboutSection/AboutView';
 import Error404View from './components/ErrorComponents/Error404View';
+import CryptoSection from './components/CryptoSection/CryptoSection';
 
 import './App.css';
 
@@ -36,11 +37,13 @@ function App({ location }) {
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
 					<div className='adminn'>
-						{/* <AdminRoutes /> */}
-						<Route path='/admin' component={AdminRoutes} />
+						<AdminRoutes />
+						  <Route path='/admin' component={AdminRoutes} />
 					</div>
-				)}
+				)}  
+				
 				<Switch>
+			
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />
@@ -59,12 +62,13 @@ function App({ location }) {
 					<Route path='/webhook' exact component={WebHook} />
 					<Route path='/myaccount' exact component={UserView} />
 					<Route path='/about' exact component={AboutView} />
+					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/chatbot' exact component={WatsonChat} />
 					<Route path='/review/:id' exact component={UserReview} />
 				</Switch>
 			</div>
-			{!location.pathname.includes('/admin') && <Footer />}
+			{!location.pathname.includes('/admin') && <Footer />} 
 		</div>
 	);
 }
