@@ -17,6 +17,7 @@ import Footer from './components/ContainerComponents/Footer/Footer';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import AboutView from './components/AboutSection/AboutView';
+import ContactForm from './components/ContactForm/ContactForm';
 import Error404View from './components/ErrorComponents/Error404View';
 import CryptoSection from './components/CryptoSection/CryptoSection';
 
@@ -32,16 +33,16 @@ import Bot from './components/ChatBot/ChatBot';
 function App({ location }) {
 	//The next function allows the store to update the ars/btc rates every X time
 	const dispatch = useDispatch();
-	let updateInterval = 60000 * 5 //60000 miliseconds = 1 minuto
-	let [timer, setTimer] = useState(0)
+	let updateInterval = 60000 * 5; //60000 miliseconds = 1 minuto
+	let [timer, setTimer] = useState(0);
 	useEffect(() => {
 		dispatch(getRates());
 	}, [timer]);
-	setTimeout(()=>{
-		console.log(timer)
-		setTimer(timer+1)
+	setTimeout(() => {
+		console.log(timer);
+		setTimer(timer + 1);
 	}, updateInterval);
-	
+
 	/* ======================================================
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
@@ -52,10 +53,11 @@ function App({ location }) {
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
 					<div className='adminn'>
-						{/* <AdminRoutes /> */}
-						<Route path='/admin' component={AdminRoutes} />
+						<AdminRoutes />
+						{/* <Route path='/admin' component={AdminRoutes} /> */}
 					</div>
 				)}
+
 				<Switch>
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
@@ -78,7 +80,9 @@ function App({ location }) {
 					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/review/:id' exact component={UserReview} />
-					{/* <Route path='/'  component={Bot} /> */}
+
+					<Route path='/contact' exact component={ContactForm} />
+
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}

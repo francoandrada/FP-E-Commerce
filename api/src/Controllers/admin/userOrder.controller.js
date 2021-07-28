@@ -75,7 +75,6 @@ const userOrder = async (req, res, next) => {
 	});
 
 	return res.json({
-		message: 'here',
 		totalPages: Math.ceil(products.count / limitToNumber),
 		products: products.rows,
 	});

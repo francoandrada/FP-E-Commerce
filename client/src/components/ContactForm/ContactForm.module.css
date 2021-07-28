@@ -6,53 +6,12 @@
 	margin-right: 10%;
 	margin-top: 3.125em;
 	flex-direction: column;
-	border-radius: 12px;
+    border-radius: 12px;
 }
 .btnBackContainer {
 	font-size: 40px;
 	margin-right: 70%;
 }
-
-.imagesNav img {
-	width: 100px;
-	height: 100px;
-	border-radius: 2px;
-	margin: 2px 10px 2px 0px;
-}
-
-.imagesNav {
-	height: 130px;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-}
-
-#btnDelete {
-	display: flex;
-	width: 25px;
-	height: 25px;
-	background-color: #ff3c4a;
-	justify-content: center;
-	align-items: center;
-	top: 2px;
-	position: relative;
-	right: 35px;
-	color: white;
-	padding-bottom: 4px;
-	outline: none;
-	border: none;
-}
-
-#btnDelete:hover {
-	background-color: #cd113b;
-}
-
-.btnDeleteImageContainer {
-	width: min-content;
-	display: flex;
-	float: left;
-}
-
 #regForm {
 	color: white;
 	width: 100%;
@@ -91,12 +50,12 @@
 @media only screen and (max-width: 430px) {
 	#input {
 		font-size: 12px;
-		display: flex;
-		flex-direction: column;
+        display: flex;
+        flex-direction: column;
 	}
-	.registerFormContainer {
-		padding: 8%;
-	}
+    .registerFormContainer {
+        padding: 8%;
+    }
 	.form-control {
 		font-size: 12px;
 	}

@@ -14,9 +14,10 @@ const initialState = {
 	cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 	currentItem: null,
 	link: '',
-	userPay: null,
+	userPay: false,
 	address: null,
-	ammount: 0,
+	ammount: localStorage.getItem('ammount')
+
 };
 
 function cartReducer(state = initialState, action) {
@@ -63,17 +64,15 @@ function cartReducer(state = initialState, action) {
 				currentItem: action.payload,
 			};
 		case SET_CART:
-			
 			return {
 				...state,
 				link: action.payload,
 			};
 		case GET_PAY:
 			localStorage.removeItem('cart');
-			console.log(action.payload)
 			return {
-				...state,
-				userPay: action.payload,
+				cart: [],
+				userPay: true
 			};
 		case CREATE_CART_USER:
 			return {
@@ -83,11 +82,6 @@ function cartReducer(state = initialState, action) {
 					let newObj = el.product;
 					return { ...newObj, qty };
 				}),
-			};
-		case SAVE_ADDRESS_ORDER:
-			return {
-				...state,
-				address: action.payload,
 			};
 		case SET_AMMOUNT:
 			return {

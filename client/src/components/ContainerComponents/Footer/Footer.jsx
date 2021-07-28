@@ -16,7 +16,7 @@ function Footer() {
 						<span>About us</span>
 					</Link>
 					&nbsp;
-					<Link to='#'>
+					<Link to='/contact'>
 						<span>Contact</span>
 					</Link>
 				</div>

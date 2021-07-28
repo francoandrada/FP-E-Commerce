@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import Swal from 'sweetalert2';
 import Button from '../StyledComponents/ButtonRedOther';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { postCart, saveAddress } from '../../Redux/actions';
+import { postCart, postCartCrypto, saveAddress } from '../../Redux/actions';
+import style from './SubTotal/SubTotal.module.css';
+import { useHistory } from 'react-router-dom';
 
 const Text = styled.p`
 	font-size: 1.5rem;
@@ -17,7 +18,7 @@ const Input = styled.input`
 `;
 const Div = styled.div`
 	background-color: #F0F0F0;
-	padding: 3rem;
+	padding: 2rem;
 	border-radius: 10px;
 	border: 1px solid white;
 
@@ -36,21 +37,41 @@ const Label = styled.label`
 
 const Mapouter = styled.div`
 	text-align:right;
-	height:357px;
-	width:337px;
+	height:457px;
+	width:477px;
+
 `;
 
 const GmapCanvas = styled.div`
 	overflow:hidden;
 	background:none!important;
-	height:337px;
-	width:337px;
+	display: flex;
+	margin: auto;
+	justify-content: center;
+	height:300px;
+	width:300px;
 `;
 const Shipping = () => {
 	const cartProducts = useSelector((state) => state.cart.cart);
-	const address = useSelector((state) => state.cart.address);
+
 	const ammount = useSelector((state) => state.cart.ammount);
 	const mercadoPago = useSelector((state) => state.cart.link);
+	const history = useHistory();
+	const [addr, setAddr] = useState({
+		address: '',
+		city: '',
+		province: '',
+		zipCode: '',
+	});
+
+	const { address, city, province, zipCode } = addr;
+
+	const handleChange = (e) => {
+		setAddr({
+			...addr,
+			[e.target.name]: e.target.value,
+		});
+	};
 
 	if (mercadoPago !== '') {
 		window.location.href = mercadoPago;
@@ -66,7 +87,6 @@ const Shipping = () => {
 			name: cartProducts[i].name,
 			price: cartProducts[i].price,
 			qty: cartProducts[i].qty,
-			address: address,
 		};
 		array.push(element);
 	}
@@ -77,53 +97,60 @@ const Shipping = () => {
 
 	const [options, setOptions] = useState('');
 
-
-	const formik = useFormik({
-		initialValues: {
-			address: '',
-			city: '',
-			province: '',
-			zipCode: '',
-		},
-		validationSchema: Yup.object({
-			address: Yup.string().required(),
-			city: Yup.string().required(),
-			province: Yup.string().required(),
-			zipCode: Yup.string().required(),
-		}),
-		onSubmit: (values) => {
-			if (options === 'pick') {
-				dispatch(saveAddress(null));
-			}
-			if (options === 'ship') {
-				dispatch(saveAddress(values));
-			}
-
-			setTimeout(() => {
-				dispatch(postCart(bodyObject))
-			}, 4000);
-		},
-	});
-
-
 	if (userId != null) {
 		bodyObject = {
 			id: userId,
 			prodCarrito: array,
 			status: 'created',
-			address: address,
+			address: addr,
 			ammount: ammount,
 		};
 	}
+	const handleClickMP =async (e) => {
+		e.preventDefault();
+		if (options === 'ship') {
+			setAddr(addr);
+		}
+		if (options === 'pick') {
+			setAddr('');
+		}
+
+		console.log('ANTES DE ENVIAR', bodyObject);
+		dispatch(postCart(bodyObject));
+		await Swal.fire({
+			position: 'center',
+			icon: 'success',
+			title: `You'll redirected to Mercado Pago to finish your payment!`,
+			showConfirmButton: true,
+			timer: 3000,
+		});
+	};
+
+	const handleClickCrypto = async (e) => {
+		e.preventDefault();
+		
+		await Swal.fire({
+			position: 'center',
+			icon: 'success',
+			title: `You'll redirected to Coinpayments to finish your payment!`,
+			showConfirmButton: true,
+			timer: 3000,
+		});
+		history.push('/catalog');
+		console.log('DESDE CRIPTOP',bodyObject);
+		dispatch(postCartCrypto(bodyObject));
+		
+	
+	};
 
 	return (
-		<div className=' d-flex justify-content-center rounded p-5 w-100 h-100'>
+		<div className=' d-flex justify-content-center rounded p-5 '>
 			<Div>
 				<div className='rounded'>
 					<Text>How would you like to get your order?</Text>
 
 					<div className='text-center d-flex justify-content-center'>
-						<div className='m-2'>
+						<div className=''>
 							<Label>
 								<Input
 									type='radio'
@@ -134,7 +161,7 @@ const Shipping = () => {
 								Ship to your location
 							</Label>
 						</div>
-						<div className='m-2 h-100'>
+						<div className=''>
 							<Label>
 								<Input
 									type='radio'
@@ -148,87 +175,76 @@ const Shipping = () => {
 					</div>
 				</div>
 				{options === 'ship' ? (
-					<form onSubmit={formik.handleSubmit}>
+					<form >
 						<div>
 							<div class='form-row'>
 								<div class='col m-2'>
-									{formik.touched.address && formik.errors.address ? (
-										<div>{formik.errors.address}</div>
-									) : null}
-
 									<input
 										type='text'
 										placeholder='Address'
 										className='form-control'
 										name='address'
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										value={formik.values.address}
+										onChange={handleChange}
+										value={address}
 									/>
 								</div>
 
 								<div class='col m-2'>
-									{formik.touched.city && formik.errors.city ? (
-										<div>{formik.errors.city}</div>
-									) : null}
-
 									<input
 										type='text'
 										placeholder='City'
 										className='form-control'
 										name='city'
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										value={formik.values.city}
+										onChange={handleChange}
+										value={city}
 									/>
 								</div>
 							</div>
 							<div class='form-row'>
 								<div class='col m-2'>
-									{formik.touched.province && formik.errors.province ? (
-										<div>{formik.errors.province}</div>
-									) : null}
-
 									<input
 										type='text'
 										placeholder='Province'
 										className='form-control'
 										name='province'
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										value={formik.values.province}
+										onChange={handleChange}
+										value={province}
 									/>
 								</div>
 
 								<div class='col m-2'>
-									{formik.touched.zipCode && formik.errors.zipCode ? (
-										<div>{formik.errors.zipCode}</div>
-									) : null}
-
 									<input
 										type='number'
 										placeholder='ZIP Code'
 										className='form-control'
 										name='zipCode'
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										value={formik.values.zipCode}
+										onChange={handleChange}
+										value={zipCode}
 									/>
 								</div>
 							</div>
 							<div className='d-flex justify-content-center m-3'>
-								<Button
-									className=' btn btn-primary'
-									type='submit'
+								
+								<button 
+								onClick={handleClickMP}
+								className={style.paymentButton}>
+									Checkout with Mercado Pago
+								</button>
+
+								<button
+								
+									onClick={handleClickCrypto}
+									className={style.paymentCrypto}
 								>
-									Continue
-								</Button>
+									Checkout with CoinPayments
+								</button>
 							</div>
 						</div>
 					</form>
 				) : options === 'pick' ? (
 					<div className='d-flex justify-content-center'>
 						<Mapouter>
+							<div>
 							<GmapCanvas>
 								<iframe
 									width='600'
@@ -239,16 +255,28 @@ const Shipping = () => {
 									scrolling='no'
 									marginheight='0'
 									marginwidth='0'
+									title='hola'
 								></iframe>
-								<a href='https://fmovies-online.net'></a>
+								<a href='https://fmovies-online.net'> </a>
 							</GmapCanvas>
-							<form onSubmit={formik.handleSubmit}>
-								<div className='d-flex justify-content-center m-3'>
-									<Button type='submit' className=' btn btn-primary'>
-										Continue
-									</Button>
+							</div>
+							<div>
+							<form >
+								<div className='d-flex justify-content-center m-2'>
+									<button className={style.paymentButton}>
+										Checkout with Mercado Pago
+									</button>
+
+									<button
+									
+										onClick={handleClickCrypto}
+										className={style.paymentCrypto}
+									>
+										Checkout with CoinPayments
+									</button>
 								</div>
 							</form>
+							</div>
 						</Mapouter>
 					</div>
 				) : null}
@@ -258,3 +286,5 @@ const Shipping = () => {
 };
 
 export default Shipping;
+
+// onClick={() => setAdd(null)}

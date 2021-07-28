@@ -221,6 +221,22 @@ async function deleteCategory(req, res, next) {
 		next(error);
 	}
 }
+
+// ----------------     GET ID PRODUCT -----------------
+const deleteImageProduct = async function deleteImageProduct(req, res, next) {
+	try {
+		const id = parseInt(req.params.id);
+		const image = await Image.findOne({
+			where: {
+				id: id,
+			},
+		});
+		await image.destroy();
+		res.status(200).json(image);
+	} catch (error) {
+		next(error);
+	}
+};
 ////////////////USER//////////
 async function getUsers(req, res) {
 	try {
@@ -298,4 +314,5 @@ module.exports = {
 	deleteProduct,
 	deleteBrand,
 	deleteCategory,
+	deleteImageProduct,
 };

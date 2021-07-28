@@ -9,17 +9,17 @@ const webhooks = async function webhooks(req, res) {
 
 		console.log('HOLA DESDE WEBHOOKS');
 
-		console.log('imprimiendo id',data);
+		console.log('imprimiendo id', data);
 		const config = {
 			headers: { Authorization: `Bearer ${process.env.PROD_ACCESS_TOKEN}` },
 		};
 
 		try {
 			const api = await axios.get(
-				 `https://api.mercadopago.com/v1/payments/${data.id}`,
+				`https://api.mercadopago.com/v1/payments/${data.id}`,
 				config
 			);
-		console.log(api)
+			console.log(api);
 			let transporter = nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
@@ -31,7 +31,6 @@ const webhooks = async function webhooks(req, res) {
 					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 				},
 			});
-	
 
 			var mailOptions = {
 				from: 'hardwarecommerce@gmail.com',
@@ -93,7 +92,7 @@ const webhooks = async function webhooks(req, res) {
 			 
 			 `,
 			};
-	
+
 			transporter.sendMail(mailOptions, function (err, data) {
 				if (err) {
 					console.log('Error ' + err);
@@ -109,11 +108,49 @@ const webhooks = async function webhooks(req, res) {
 	}
 };
 
+const contactForm = async function contactForm(req, res) {
+	try {
+		const { values } = req.body;
 
+		console.log(values)
+		let transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				type: 'OAuth2',
+				user: process.env.MAIL_USERNAME,
+				pass: process.env.MAIL_PASSWORD,
+				clientId: process.env.OAUTH_CLIENTID,
+				clientSecret: process.env.OAUTH_CLIENT_SECRET,
+				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+			},
+		});
 
+		var mailOptions = {
+			from: `${values.email}`,
+			to: 'hardwarecommerce@gmail.com',
+			subject: `${values.subject}`,
+			html: `
+			<h1>Name: ${values.name} </h1>
+			<h1>Email: ${values.email} </h1>
+
+			<h1>Message: ${values.message} </h1>
+
+			 `,
+		};
+
+		transporter.sendMail(mailOptions, function (err, data) {
+			if (err) {
+				console.log('Error ' + err);
+			} else {
+				console.log('Email sent successfully');
+			}
+		});
+	} catch (error) {
+		res.send(error);
+	}
+};
 
 module.exports = {
 	webhooks,
-	
+	contactForm,
 };
-

@@ -25,20 +25,18 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 	const dispatch = useDispatch();
 	const userOrders = useSelector((state) => state.useraccount.userOrdersList);
 
-
 	return (
 		<div className={style.orderDetailContainer}>
 			<div className={style.SizeImagOrderDiv}>
 				<img className={style.sizeImagOrder} src={image} alt='Product Image' />
 			</div>
-
-			<div className={style.descriptionOrderStyle}>
-				<p>{name}</p>
-			</div>
-
-			<p>${oldprice}</p>
-
 			<div>
+				<div className={style.divData}>
+					<div className={style.descriptionOrderStyle}>
+						<p>{name}</p>
+					</div>
+					<p> <b>Price:</b> ${oldprice}</p>
+				</div>
 				<Link to={'/shoppingcart'}>
 					<ButtonRedSmall
 						type='submit'
@@ -47,13 +45,10 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 						Buy Again
 					</ButtonRedSmall>
 				</Link>
-			
 
 				<Link to={`/review/${id}`}>
-				<button onClick={() => <p>hola</p>}>Leave feedback</button>
+					<button onClick={() => <p>hola</p>}>Leave feedback</button>
 				</Link>
-				
-				
 			</div>
 		</div>
 	);
