@@ -77,6 +77,7 @@
 
 .texto {
 	padding: 1px;
+	
 }
 @media only screen and (max-width: 430px) {
 	.imag {
@@ -194,5 +195,8 @@
 	.weigth {
 		height: max-content;
 		margin-top: 0.2em;
+	}
+	#line2{
+		color: black;
 	}
 }

@@ -55,12 +55,12 @@ function HighlightProd({ id, image, name, price }) {
 					</Link>
 					<div className='buyHighlightDiv'>
 						<Link to={`/catalog/${id}`}>
-							<ButtonRed>More Info</ButtonRed>
+							<ButtonRed >More Info</ButtonRed>
 						</Link>
 						<div className='buttonCrypto'>
-						{/* <ButtonCrypto>₿ {(price * btcRate).toFixed(6)}</ButtonCrypto> */}
+						<ButtonCrypto>₿ {(price * btcRate).toFixed(6)}</ButtonCrypto>
 
-						<ButtonCrypto>₿</ButtonCrypto>
+						{/* <ButtonCrypto>₿</ButtonCrypto> */}
 						</div>
 					</div>
 				</div>

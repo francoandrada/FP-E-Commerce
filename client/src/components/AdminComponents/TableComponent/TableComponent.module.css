@@ -34,9 +34,9 @@
 	color: #ffffff;
 }
 
-.tableComponentEcommerce tbody tr:nth-child(even) {
+/* .tableComponentEcommerce tbody tr:nth-child(even) {
 	background-color: #f1ecc3;
-}
+} */
 
 .tableComponentEcommerce tr:hover {
 	background-color: #faebe0;

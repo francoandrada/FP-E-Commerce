@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postCart, postCartCrypto, saveAddress } from '../../Redux/actions';
 import style from './SubTotal/SubTotal.module.css';
 import { useHistory } from 'react-router-dom';
+import './Shipping.css'
 
 const Text = styled.p`
 	font-size: 1.5rem;
@@ -21,6 +22,10 @@ const Div = styled.div`
 	padding: 2rem;
 	border-radius: 10px;
 	border: 1px solid white;
+
+	@media only screen and (max-width: 430px){
+		width:21.25em
+	}
 `;
 
 const Label = styled.label`
@@ -142,7 +147,7 @@ const Shipping = () => {
 	};
 
 	return (
-		<div className=' d-flex justify-content-center rounded p-5 '>
+		<div className= { window.screen.width> 430 ?' d-flex justify-content-center rounded p-5 ' : 'containerMain'}>
 			<Div>
 				<div className='rounded'>
 					<Text>How would you like to get your order?</Text>
@@ -221,8 +226,13 @@ const Shipping = () => {
 									/>
 								</div>
 							</div>
-							<div className='d-flex justify-content-center m-3'>
-								<button onClick={handleClickMP} className={style.paymentButton}>
+
+							<div className={window.screen.width > 430 ? 'd-flex justify-content-center m-3' : 'buttonsContain'}>
+								
+								<button 
+								onClick={handleClickMP}
+								className={style.paymentButton}>
+
 									Checkout with Mercado Pago
 								</button>
 

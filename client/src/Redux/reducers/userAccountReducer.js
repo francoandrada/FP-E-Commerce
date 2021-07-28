@@ -20,13 +20,14 @@ function userAccountReducer(state = initialState, action) {
 				userOrdersList: action.payload.map(el => {
 					let status = el.status
 					let ammount = el.ammount
+					let address = JSON.parse(el.address)
 					let orderId = el.orderDetails[0].orderId
 					let orderProducts = el.orderDetails.map(prod => {
 						let oldprice = prod.price
 						let prodinfo = prod.product
 						return {...prodinfo, oldprice}
 					})
-					return {orderId, status, ammount, orderProducts}
+					return {orderId, status, ammount, address, orderProducts}
 				})
 			};
 
