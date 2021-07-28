@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonRedOther = styled.button`
     font-family: 'Roboto', sans-serif; 
-    width: 60%;
+    width: 35%;
     border-style: none;
     border-radius: 5px;
     padding: .5rem;

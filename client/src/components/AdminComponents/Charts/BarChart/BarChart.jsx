@@ -8,7 +8,7 @@ const BarChart = () => {
 	const [colors, setColors] = useState([]);
 	const dispatch = useDispatch();
 	const { categoriesCount } = useSelector((state) => state.admin);
-
+	console.log(categoriesCount)
 	useEffect(() => {
 		dispatch(getCountOfCategories());
 	}, [dispatch]);
@@ -22,6 +22,7 @@ const BarChart = () => {
 		const a = categoriesCount
 			? categoriesCount.map((b) => Object.values(b))
 			: [];
+			console.log(a)
 		return a.flat();
 	};
 

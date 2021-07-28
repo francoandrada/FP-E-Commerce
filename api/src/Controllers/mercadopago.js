@@ -5,9 +5,7 @@ const { Order, OrderDetail, Product, User } = require('../db');
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrder = async function createOrder(req, res) {
 	const { ammount, status, address, prodCarrito, id } = req.body;
-
-	console.log('ADDRESSSS', req.body);
-
+	console.log(req.body)
 	try {
 		await Order.create(
 			{
@@ -44,7 +42,7 @@ const createOrder = async function createOrder(req, res) {
 						var userFind = await User.findOne({
 							where: { userId: id },
 						});
-						console.log(userFind);
+			
 
 						if (userFind) {
 							await order.setUser(userFind.dataValues.userId);

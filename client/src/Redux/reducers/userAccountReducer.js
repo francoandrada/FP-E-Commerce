@@ -19,13 +19,14 @@ function userAccountReducer(state = initialState, action) {
 				...state,
 				userOrdersList: action.payload.map(el => {
 					let status = el.status
+					let ammount = el.ammount
 					let orderId = el.orderDetails[0].orderId
 					let orderProducts = el.orderDetails.map(prod => {
 						let oldprice = prod.price
 						let prodinfo = prod.product
 						return {...prodinfo, oldprice}
 					})
-					return {orderId, status, orderProducts}
+					return {orderId, status, ammount, orderProducts}
 				})
 			};
 
@@ -36,12 +37,7 @@ function userAccountReducer(state = initialState, action) {
 				
 		};
 
-		// case ADD_DATABASE_FAVORITES:
-		// 	return {
-		// 		...state,
-		// 		userFavorites: action.payload
-				
-		// };
+	
 
 		case REMOVE_FROM_FAVORITES:
 			return {

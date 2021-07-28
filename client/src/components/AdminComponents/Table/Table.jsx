@@ -4,7 +4,7 @@ import {
 	getCategories,
 	getBrands,
 	getListOfProductTable,
-	changeTablePage,
+	changeTablePage
 } from '../../../Redux/actions';
 import { useTable } from 'react-table';
 import { COLUMNS } from './columns';
@@ -26,7 +26,7 @@ const Table = () => {
 		filterByCategoryHandle,
 		sortTableHandle,
 		filterByBrandHandle,
-		productToDelete,
+		productToDelete
 	} = TableLogic();
 
 	const {
@@ -36,11 +36,11 @@ const Table = () => {
 		orderTable,
 		sortTable,
 		gotoTablePage,
-		tableByBrand,
-	} = useSelector((state) => state.admin);
+		tableByBrand
+	} = useSelector(state => state.admin);
 
-	const { allCategories } = useSelector((state) => state.category);
-	const { allBrands } = useSelector((state) => state.brands);
+	const { allCategories } = useSelector(state => state.category);
+	const { allBrands } = useSelector(state => state.brands);
 
 	// react-table
 	const dataToPrint = listProductsOnTable
@@ -50,7 +50,7 @@ const Table = () => {
 	const data = useMemo(() => dataToPrint, [dataToPrint]);
 	const tableInstance = useTable({
 		columns,
-		data: data,
+		data: data
 	});
 
 	useEffect(() => {
@@ -70,7 +70,7 @@ const Table = () => {
 				limit: sizePagination,
 				brand: tableByBrand,
 				search: searchFilter,
-				deleteProduct: productToDelete,
+				deleteProduct: productToDelete
 			})
 		);
 	}, [
@@ -82,19 +82,24 @@ const Table = () => {
 		gotoTablePage,
 		tableByBrand,
 		searchFilter,
-		productToDelete,
+		productToDelete
 	]);
 
-	const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
-		tableInstance;
+	const {
+		getTableProps,
+		getTableBodyProps,
+		headerGroups,
+		prepareRow,
+		rows
+	} = tableInstance;
 
-	const searchFilterHandle = (event) => {
+	const searchFilterHandle = event => {
 		event.preventDefault();
 		const inputText = event.target.value;
 		setSearchFilter(inputText);
 	};
 
-	const paginate = (pageNumber) => dispatch(changeTablePage(pageNumber));
+	const paginate = pageNumber => dispatch(changeTablePage(pageNumber));
 	return (
 		<div className={styles.background}>
 			<div className={styles.Container}>
@@ -116,7 +121,7 @@ const Table = () => {
 							marginLeft: '20%',
 							borderRadius: '10px 10px 0 0',
 							flexDirection: 'column',
-							boxShadow: '0 0px 30px rgb(172, 171, 171)',
+							boxShadow: '0 0px 30px rgb(172, 171, 171)'
 						}}
 					>
 						<div className={styles.searchContainer}>
@@ -144,7 +149,7 @@ const Table = () => {
 									'price',
 									'priceSpecial',
 									'weight',
-									'stock',
+									'stock'
 								]}
 							/>
 
@@ -175,9 +180,9 @@ const Table = () => {
 				{listProductsOnTable ? (
 					<table {...getTableProps()} className={styles.tableEcommerce}>
 						<thead>
-							{headerGroups.map((headerGroup) => (
+							{headerGroups.map(headerGroup => (
 								<tr {...headerGroup.getHeaderGroupProps()}>
-									{headerGroup.headers.map((column) => (
+									{headerGroup.headers.map(column => (
 										<th {...column.getHeaderProps()}>
 											{column.render('Header')}
 										</th>
@@ -186,14 +191,14 @@ const Table = () => {
 							))}
 						</thead>
 						<tbody {...getTableBodyProps()}>
-							{rows.map((row) => {
+							{rows.map(row => {
 								prepareRow(row);
 								return (
 									<tr
 										{...row.getRowProps()}
 										className={`${!row.original.isVisible && 'table-danger'}`}
 									>
-										{row.cells.map((cell) => {
+										{row.cells.map(cell => {
 											return (
 												<td {...cell.getCellProps()}>{cell.render('Cell')}</td>
 											);

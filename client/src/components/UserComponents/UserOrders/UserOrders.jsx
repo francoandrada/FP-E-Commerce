@@ -19,7 +19,7 @@ const ButtonRedSmall = styled.button`
 
 
 
-function UserOrders({orderId, status}) {
+function UserOrders({orderId, status, ammount}) {
 
 	return (
 		<div className={style.orderDiv}>
@@ -33,7 +33,7 @@ function UserOrders({orderId, status}) {
                     <p className={style.statusStyle}>{status}</p> 
                 </div>
                 <div className={style.totalOrderDiv}>
-                    <p>TOTAL: $ 234223</p>
+                    <p>TOTAL: $ {ammount}</p>
                 </div>
                 
 			

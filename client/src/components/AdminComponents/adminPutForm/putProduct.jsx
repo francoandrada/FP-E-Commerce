@@ -18,7 +18,7 @@ function PutProduct() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [imagesFiles, setImagesFiles] = useState([]);
-
+	const [oldImages, setOldImages] = useState();
 	const { id } = useParams();
 
 	const brand = useSelector((state) => state.brands.allBrands);
@@ -61,9 +61,11 @@ function PutProduct() {
 				// pictures:''
 			});
 		}
+		if (productToEdit?.images) {
+			setOldImages(productToEdit.images);
+		}
 	}, [productToEdit]);
 
-	console.log(product);
 	const {
 		register,
 		/*handleSubmit, */
@@ -75,7 +77,6 @@ function PutProduct() {
 		event.preventDefault();
 		if (event.target.file) {
 			convertToBase64();
-			console.log('/////////////HOLA////////////');
 		}
 		setProduct({
 			...product,
@@ -94,6 +95,18 @@ function PutProduct() {
 			};
 		});
 		setImagesFiles(arrayAux);
+	};
+
+	const handleDeleteImage = async (event, id) => {
+		event.preventDefault();
+		try {
+			setOldImages(oldImages.filter((oi) => oi.id !== id));
+			await axios.delete(
+				`http://localhost:3001/admin/deleteImageProduct/${id}`
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const onSubmit = async (event) => {
@@ -269,6 +282,22 @@ function PutProduct() {
 					multiple
 					onChange={(e) => convertToBase64(e.target.files)}
 				/>
+				<div className={styles.imagesNav}>
+					{oldImages
+						? oldImages.map((img, index) => (
+								<div className={styles.btnDeleteImageContainer}>
+									<img src={img.imageUrl} alt='product' />
+									<button
+										id={styles.btnDelete}
+										onClick={(e) => handleDeleteImage(e, img.id)}
+										className={styles.btnDeleteImage}
+									>
+										x
+									</button>
+								</div>
+						  ))
+						: null}
+				</div>
 				<span>{errors?.image?.message}</span>
 
 				{/* <h6>Ingresa tus imagenes</h6>

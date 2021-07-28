@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Admin from '../Admin/Admin';
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../../../Redux/actions';
-import { MdModeEdit, MdDelete } from 'react-icons/md';
+import { MdModeEdit} from 'react-icons/md';
 import styles from './AdminUser.module.css';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
