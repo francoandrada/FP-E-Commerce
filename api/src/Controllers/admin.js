@@ -3,6 +3,7 @@ const { upload } = require('./uploadController');
 
 async function postProduct(req, res, next) {
 	try {
+		// console.log('Holaaaaaaa', req.body[1]);
 		const {
 			name,
 			price,
@@ -13,7 +14,8 @@ async function postProduct(req, res, next) {
 			brandId,
 			priceSpecial,
 			category,
-		} = req.body;
+		} = req.body[0];
+		const { images } = req.body[1];
 		const producto = await Product.create({
 			name,
 			price,
@@ -24,6 +26,26 @@ async function postProduct(req, res, next) {
 			stock,
 			brandId,
 		});
+
+		var promis = images.map((i) => {
+			return upload(i);
+		});
+
+		const result = await Promise.all(promis);
+
+		var createImagesDb = result.map((imgDb) => {
+			return Image.findOrCreate({
+				where: {
+					imageUrl: imgDb,
+				},
+			});
+		});
+
+		var imagesResult = await Promise.all(createImagesDb);
+		var filteredImages = imagesResult
+			.flat()
+			.filter((e) => typeof e !== 'boolean');
+		await producto.addImages(filteredImages);
 		const newProductComplete = await producto.addCategories(category);
 		res.send(newProductComplete);
 	} catch (error) {
