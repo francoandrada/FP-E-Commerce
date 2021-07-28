@@ -73,9 +73,9 @@ function UserView() {
 							</div>
 							<FiChevronRight onClick={setOption} id='account'/>
 						</div>
-
+					
 						<div
-							onClick={setOption}
+					onClick={setOption}
 							id='orders'
 							className={style.optionsLayoutdiv}
 						>
@@ -87,7 +87,7 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+						onClick={setOption}
 							id='favorites'
 							className={style.optionsLayoutdiv}
 						>
@@ -99,7 +99,7 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+					onClick={setOption}
 							id='addresses'
 							className={style.optionsLayoutdiv}
 						>
@@ -111,7 +111,7 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+					onClick={setOption}
 							id='signout'
 							className={style.optionsLayoutdiv}
 						>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ButtonGreyOther = styled.button`
   font-family: 'Roboto', sans-serif; 
   border-style: none;
+  width: 35%;
     border-radius: 5px;
     color: white;
     font-size: 18px;
@@ -14,6 +15,5 @@ export const ButtonGreyOther = styled.button`
     } 
 
 `;
-
 
 export default ButtonGreyOther;

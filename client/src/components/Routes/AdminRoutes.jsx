@@ -65,6 +65,7 @@ const AdminRoutes = ({ location }) => {
 					<h2>Unauthorise User</h2>
 				</div>
 			)}
+
 		</>
 	);
 };

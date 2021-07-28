@@ -17,8 +17,6 @@ function HighlightProd({ id, image, name, price }) {
 	const date = new Date(rateUpdateTime * 1000);
 	// console.log(date)
 
-	console.log(price);
-
 	var formatNumber = {
 		separator: '.',
 		decimalSeparator: ',',
