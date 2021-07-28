@@ -28,6 +28,10 @@ flex-direction: column;
 margin-left: 0.5em;
 font-size: 18px;
     font-weight: 700;
+
+		@media only screen and (max-width: 430px) {
+			font-weight: 500;
+    }
 `;
 
 const Icon = styled.section`
@@ -56,6 +60,10 @@ button {
 span {
     margin-right: 0.5em;
     margin-left: 0.5em;
+
+		@media only screen and (max-width: 430px) {
+        font-size: 20px;
+    }
 }
 }
 `;
@@ -79,16 +87,14 @@ function ProductCartModal({ info, image, name, price, stock, qty }) {
 	const [productInfo, setProductInfo] = useState(info);
 	const dispatch = useDispatch();
 
-
 	function handlePlus() {
-		let plusQuantity = qty
+		let plusQuantity = qty;
 		if (qty >= stock) {
 			plusQuantity = stock;
 		} else {
 			plusQuantity = qty + 1;
 			dispatch(adjustQty(info.id, plusQuantity));
 		}
-		
 	}
 
 	function handleMinus() {
