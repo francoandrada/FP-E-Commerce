@@ -23,7 +23,7 @@ const AdminRoutes = ({ location }) => {
 	/* =======================================================================
 			ALL NEW PATH NEED TO GO INSIDE TO THE Switch COMPONENT
 	==========================================================================*/
-	let isAdmin = useSelector((state) => state.user.userData.admin);
+	let isAdmin = useSelector(state => state.user.userData.admin);
 
 	return (
 		<>
@@ -65,7 +65,6 @@ const AdminRoutes = ({ location }) => {
 					<h2>Unauthorise User</h2>
 				</div>
 			)}
-
 		</>
 	);
 };

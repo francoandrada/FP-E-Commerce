@@ -9,7 +9,6 @@ const {
 	getIdProduct,
 	getCategoryProduct,
 	getFilteredProducts,
-	filterByRating,
 } = require('../Controllers/products');
 const router = Router();
 
@@ -23,7 +22,6 @@ router.get('/', getAllProducts);
 
 router.get('/allproducts/:id', getIdProduct);
 
-router.post('/filterByReviews', filterByRating);
 
 // router.get('/productsbrand/:brand', getBrandProduct)
 

@@ -8,16 +8,15 @@ import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
 import Review from '../Reviews/StarModal';
 import AllReviews from '../Reviews/AllReviews';
 import { allReviews, getAverage } from '../../Redux/actionsReview';
-import {Link} from 'react-scroll'
+import { Link } from 'react-scroll';
 import { useHistory } from 'react-router-dom';
 import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 
-
 function DetailProduct(props) {
 	const dispatch = useDispatch();
-	const productDetail = useSelector((state) => state.product.detailProducts);
-	const productId = useSelector((state) => state.product.detailProducts.id);
+	const productDetail = useSelector(state => state.product.detailProducts);
+	const productId = useSelector(state => state.product.detailProducts.id);
 
 	const history = useHistory();
 
@@ -35,24 +34,22 @@ function DetailProduct(props) {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
 
-
 	useEffect(() => {
 		dispatch(getAverage(productId));
 	}, [productId]);
 
-	const handelClick = () =>{
+	const handelClick = () => {
 		dispatch(addToCart(productDetail));
-		history.push('/shoppingcart')
-	}
+		history.push('/shoppingcart');
+	};
 
 	///Crypto
-	const arsBtc = useSelector((state) => state.crypto.arsBtc);
-	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const arsBtc = useSelector(state => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector(state => state.crypto.updateTime);
 	const btcRate = parseFloat(arsBtc);
 
 	return (
 		<div className={styles.container}>
-		
 			{productDetail ? (
 				<div>
 					<div className={styles.card}>
@@ -63,19 +60,16 @@ function DetailProduct(props) {
 								<img className={styles.imag} src={productDetail.image}></img>
 							)}
 						</div>
-						
+
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
 
 							<div className='d-flex justify-content-center align-items-start'>
-							<Link  to="review" spy={true} smooth={true}>
-								
-							<Review 
-							productInfo={productDetail}
-							/> 	
-							</Link>
+								<Link to='review' spy={true} smooth={true}>
+									<Review productInfo={productDetail} />
+								</Link>
 							</div>
-					
+
 							<p className={styles.texto}>${productDetail.price} </p>
 							<div className={styles.buttonCrypto}>
 								<ButtonCrypto>
@@ -95,7 +89,7 @@ function DetailProduct(props) {
 										<div
 											className={window.screen.width > 430 ? 'm-3' : 'button'}
 										>
-										<ButtonRedOther
+											<ButtonRedOther
 												className={
 													window.screen.width > 430
 														? 'btn btn-outline-danger'
@@ -116,7 +110,7 @@ function DetailProduct(props) {
 															: 'btnCheckout'
 													}
 													type='submit'
-													onClick={() =>handelClick()}
+													onClick={() => handelClick()}
 												>
 													Checkout
 												</ButtonGreyOther>
@@ -142,7 +136,7 @@ function DetailProduct(props) {
 									<img
 										src={img.imageUrl}
 										alt='product'
-										onClick={(e) => handleClick(e, index)}
+										onClick={e => handleClick(e, index)}
 									/>
 							  ))
 							: null}
@@ -192,7 +186,6 @@ function DetailProduct(props) {
 					<AllReviews />
 				</div>
 			</div>
-
 		</div>
 	);
 }

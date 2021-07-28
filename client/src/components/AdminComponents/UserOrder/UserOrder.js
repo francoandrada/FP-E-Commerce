@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	getUserWithOrdersDetail,
 	filterByStatus,
-	changePageOfUserOrderTable,
+	changePageOfUserOrderTable
 } from '../../../Redux/actions';
 import COLUMNS from './columns';
 import Loader from '../../Loader/Loader';
@@ -12,24 +12,29 @@ import Select from '../../Select/Select';
 import Pagination from '../TablePagination/TablePagination';
 import UserOrderLogic from './UserOrderLogic';
 
+import styles from './UserOrder.module.css';
+
 const UserOrder = () => {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = React.useState('');
-	const { mapData, changePaginationSizeHandle, filterHandle } =
-		UserOrderLogic();
+	const {
+		mapData,
+		changePaginationSizeHandle,
+		filterHandle
+	} = UserOrderLogic();
 	const {
 		userWithOrder,
 		tableOrderUserPaginationSize,
 		filterByOrderStatus,
-		currentPageOfUserOrderTable,
-	} = useSelector((state) => state.admin);
+		currentPageOfUserOrderTable
+	} = useSelector(state => state.admin);
 
 	React.useEffect(() => {
 		dispatch(
 			getUserWithOrdersDetail(currentPageOfUserOrderTable, {
 				limit: tableOrderUserPaginationSize,
 				search: searchValue,
-				filter: filterByOrderStatus,
+				filter: filterByOrderStatus
 			})
 		);
 	}, [
@@ -37,32 +42,40 @@ const UserOrder = () => {
 		tableOrderUserPaginationSize,
 		searchValue,
 		filterByOrderStatus,
-		currentPageOfUserOrderTable,
+		currentPageOfUserOrderTable
 	]);
 
-	const searchHandle = (event) => {
+	const searchHandle = event => {
 		event.preventDefault();
 		setSearchValue(event.target.value);
 	};
 
-	const paginate = (pageNumber) =>
+	const paginate = pageNumber =>
 		dispatch(changePageOfUserOrderTable(pageNumber));
 	return (
-		<div>
-			<div>
-				<input type='text' value={searchValue} onChange={searchHandle} />
+		<div className={styles.orderUserContainer}>
+			<div className={styles.orderUserPanel}>
+				<div className={styles.orderUserFeatures}>
+					<input
+						className={styles.orderUserInput}
+						placeholder='Search...'
+						type='text'
+						value={searchValue}
+						onChange={searchHandle}
+					/>
 
-				<Select
-					initialValue={tableOrderUserPaginationSize}
-					onChange={changePaginationSizeHandle}
-					values={[5, 10, 20, 50, 100]}
-				/>
+					<Select
+						initialValue={tableOrderUserPaginationSize}
+						onChange={changePaginationSizeHandle}
+						values={[5, 10, 20, 50, 100]}
+					/>
 
-				<Select
-					initialValue={filterByOrderStatus}
-					onChange={filterHandle}
-					values={['all', 'created', 'processing', 'cancelled', 'completed']}
-				/>
+					<Select
+						initialValue={filterByOrderStatus}
+						onChange={filterHandle}
+						values={['all', 'created', 'processing', 'cancelled', 'completed']}
+					/>
+				</div>
 			</div>
 			{userWithOrder ? (
 				<Table
@@ -73,9 +86,7 @@ const UserOrder = () => {
 				<Loader />
 			)}
 			{userWithOrder && userWithOrder?.products.length === 0 && (
-				<h1 style={{ textAlign: 'center', padding: '20px' }}>
-					No data to Render
-				</h1>
+				<h3 className={styles.orderUserNoResults}>No data to Render</h3>
 			)}
 			{userWithOrder && userWithOrder?.totalPages > 1 && (
 				<Pagination

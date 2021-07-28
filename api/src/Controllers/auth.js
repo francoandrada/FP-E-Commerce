@@ -460,30 +460,37 @@ exports.resetPassword = async (req, res) => {
 };
 
 exports.authUserGmail = async (req, res) => {
+	console.log(req.body)
 	try {
 		const emailBody = req.body.email;
 		const passwordBody = req.body.password;
-
-		let user = await User.findOrCreate({
+		const nameBody = req.body.name;
+		const surnameBody = req.body.surname;
+		
+		let userGmail = await User.findOrCreate({
 			where: {
 				email: emailBody,
 			},
 			defaults: {
 				email: emailBody,
 				password: passwordBody,
+				name: nameBody,
+				surname: surnameBody
 			},
 		});
 		
 		const token = jwt.sign(
 			{
-				id: user.userId,
-				email: user.email,
+				id: userGmail.userId,
+				email: userGmail.email,
 			},
 			process.env.SECRET,
 			{
 				expiresIn: '8h',
 			}
 		);
+
+		let user = userGmail[0]
 
 		res.send({ token, user });
 	} catch (error) {
