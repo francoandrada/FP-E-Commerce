@@ -17,6 +17,7 @@ import Footer from './components/ContainerComponents/Footer/Footer';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import AboutView from './components/AboutSection/AboutView';
+import ContactForm from './components/ContactForm/ContactForm';
 import Error404View from './components/ErrorComponents/Error404View';
 import CryptoSection from './components/CryptoSection/CryptoSection';
 
@@ -78,6 +79,7 @@ function App({ location }) {
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/review/:id' exact component={UserReview} />
 					<Route path='/bot' exact component={Bot} />
+					<Route path='/contact' exact component={ContactForm} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}
