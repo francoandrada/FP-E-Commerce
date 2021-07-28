@@ -3,36 +3,35 @@
 	border-collapse: collapse;
 	color: black;
 	background-color: rgb(255, 255, 255);
-	margin-left:20%;
+	margin-left: 20%;
 	border-radius: 0px 0px 20px 20px;
 	box-shadow: 0 10px 30px rgb(172, 171, 171);
 }
-.background{
+.background {
 	background-color: #eee;
 	background-attachment: fixed;
 	width: 100%;
-
 }
-.Container{
+.Container {
 	margin-right: 10%;
 	margin-left: 10%;
 }
 
-.filterContainer{
+.filterContainer {
 	display: flex;
 	justify-content: center;
 }
-.btnContainer{
+.btnContainer {
 	display: flex;
 	flex-direction: row-reverse;
 	margin: 2rem;
 }
-.searchbar{
+.searchbar {
 	padding: 4px;
 	border-radius: 8px;
-	border: 1px solid rgb(158, 158, 158)
+	border: 1px solid rgb(158, 158, 158);
 }
-.btnContainer button{
+.btnContainer button {
 	padding: 6px 10px;
 	border-radius: 10px;
 	border: 0;
@@ -40,9 +39,14 @@
 	color: white;
 	font-weight: 700;
 }
+
+#btnAddProduct {
+	outline: none;
+}
+
 .tableEcommerce td,
 .tableEcommerce th {
-	border-bottom:0.5px solid rgba(128, 128, 128, 0.213);
+	border-bottom: 0.5px solid rgba(128, 128, 128, 0.213);
 	padding: 8px;
 }
 
@@ -51,7 +55,7 @@
 }
 
 .tableEcommerce tr:hover {
-	background-color:rgb(228, 50, 50);
+	background-color: rgb(228, 50, 50);
 }
 
 .tableEcommerce th {
@@ -61,11 +65,11 @@
 	background-color: rgb(228, 50, 50);
 	color: white;
 }
-i{
+i {
 	color: rgb(70, 70, 70);
-	width:20px
+	width: 20px;
 }
-button{
+button {
 	background-color: transparent;
 	border: 0;
 }
