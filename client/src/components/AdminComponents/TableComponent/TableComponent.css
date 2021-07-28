@@ -1,27 +1,66 @@
-.georgeTable {
-	font-family: 'Arial';
-	border-collapse: collapse;
+/* body{
+	margin:0;
+	padding:20px;
+	font-family: sans-serif;
+}
+
+*{
+	box-sizing: border-box;
+} */
+
+.tableComponentEcommerce {
 	width: 100%;
+	border-collapse: collapse;
 }
 
-.georgeTable td,
-.georgeTable th {
+.tableComponentEcommerce td,
+.tableComponentEcommerce th {
+	padding: 12px 15px;
 	border: 1px solid #ddd;
-	padding: 8px;
+	text-align: center;
+	font-size: 16px;
 }
 
-.georgeTable tr:nth-child(even) {
-	background-color: greenyellow;
+.tableComponentEcommerce th {
+	background-color: darkblue;
+	color: #ffffff;
 }
 
-.georgeTable tr:hover {
-	background-color: indianred;
+.tableComponentEcommerce tbody tr:nth-child(even) {
+	background-color: #f5f5f5;
 }
 
-.georgeTable th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: indigo;
-	color: white;
+/*responsive*/
+
+@media (max-width: 500px) {
+	.tableComponentEcommerce thead {
+		display: none;
+	}
+
+	.tableComponentEcommerce,
+	.tableComponentEcommerce tbody,
+	.tableComponentEcommerce tr,
+	.tableComponentEcommerce td {
+		display: block;
+		width: 100%;
+	}
+	.tableComponentEcommerce tr {
+		margin-bottom: 15px;
+	}
+	.tableComponentEcommerce td {
+		text-align: right;
+		padding-left: 50%;
+		text-align: right;
+		position: relative;
+	}
+	.tableComponentEcommerce td::before {
+		content: attr(data-label);
+		position: absolute;
+		left: 0;
+		width: 50%;
+		padding-left: 15px;
+		font-size: 15px;
+		font-weight: bold;
+		text-align: left;
+	}
 }

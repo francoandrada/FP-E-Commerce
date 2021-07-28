@@ -16,7 +16,7 @@ const TableComponent = ({ dataToPrint, formatColumn }) => {
 
 	return (
 		<div>
-			<table {...getTableProps()} className='georgeTable'>
+			<table {...getTableProps()} className={'tableComponentEcommerce'}>
 				<thead>
 					{headerGroups.map((headerGroup) => (
 						<tr {...headerGroup.getHeaderGroupProps()}>
