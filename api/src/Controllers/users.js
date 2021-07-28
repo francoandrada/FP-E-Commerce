@@ -63,3 +63,24 @@ exports.getUsers = async (req, res) => {
 	}
 
 };
+
+//-------- INITIAL ADMIN USER PRELOAD --------------
+exports.adminUserPreload = async ()=>{
+		let user = await User.findOrCreate({
+			where: { name: 'admin' },
+			defaults: {
+				surname: 'admin',
+				email: 'hardwarecommerce@gmail.com',
+				password: 'admin123', 
+				address: 'su casa',
+				addressNumber: 9999,
+				postalCode: 9999,
+				phone: 99999999,
+				admin: true
+			}
+		  });
+}
+
+// module.exports = {
+// 	adminUserPreload
+// };

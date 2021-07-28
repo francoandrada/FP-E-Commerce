@@ -1,5 +1,6 @@
 const server = require('./src/app.js');
 const { productsDb } = require('./src/Controllers/products.js');
+const { adminUserPreload } = require('./src/Controllers/users.js');
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
@@ -10,4 +11,5 @@ conn.sync({ force: false})
 			console.log('%s listening at 3001');
 		});
 	})
-	.then(() => productsDb());
+	.then(() => productsDb())
+	.then(()=>adminUserPreload());

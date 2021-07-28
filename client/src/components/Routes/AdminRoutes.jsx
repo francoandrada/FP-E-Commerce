@@ -27,7 +27,7 @@ const AdminRoutes = ({ location }) => {
 
 	return (
 		<>
-		{isAdmin && isAdmin ? 
+		{/* {isAdmin && isAdmin ?  */}
 			<>
 			<Switch>
 				<Route path='/admin' exact component={Admin} />
