@@ -17,6 +17,7 @@ import Footer from './components/ContainerComponents/Footer/Footer';
 import AdminRoutes from './components/Routes/AdminRoutes';
 import UserView from './components/UserComponents/UserView/UserView';
 import AboutView from './components/AboutSection/AboutView';
+import ContactForm from './components/ContactForm/ContactForm';
 import Error404View from './components/ErrorComponents/Error404View';
 import CryptoSection from './components/CryptoSection/CryptoSection';
 
@@ -25,9 +26,9 @@ import './App.css';
 // import ProductCartModal from './components/CartModal/ProductCartModal';
 import CartModal from './components/CartModal/CartModal';
 import WebHook from './components/ShoppingCartComponents/WebHook';
-import WatsonChat from './components/ChatBotComponents/WatsonChat';
 import Shipping from './components/ShoppingCartComponents/Shipping';
 import UserReview from './components/Reviews/UserReview';
+import Bot from './components/ChatBot/ChatBot';
 
 function App({ location }) {
 	//The next function allows the store to update the ars/btc rates every X time
@@ -76,8 +77,9 @@ function App({ location }) {
 					<Route path='/about' exact component={AboutView} />
 					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
-					<Route path='/chatbot' exact component={WatsonChat} />
 					<Route path='/review/:id' exact component={UserReview} />
+					<Route path='/bot' exact component={Bot} />
+					<Route path='/contact' exact component={ContactForm} />
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}
