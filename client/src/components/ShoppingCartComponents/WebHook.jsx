@@ -10,7 +10,7 @@ const WebHook = () => {
 	const userData = useSelector((state) => state.user.userData);
 	const cart = useSelector((state) => state.cart.cart);
 
-	
+	console.log(userData.email)
 	const dispatch = useDispatch();
 
 	console.log(id)
@@ -19,7 +19,7 @@ const WebHook = () => {
 		
 
 	useEffect(() => {
-		dispatch(getPayInfo());
+		dispatch(getPayInfo({id: id, email: userData.email}));
 	}, []);
 
 	useEffect(() => {

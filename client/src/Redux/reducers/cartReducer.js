@@ -69,10 +69,11 @@ function cartReducer(state = initialState, action) {
 				link: action.payload,
 			};
 		case GET_PAY:
-			console.log('holaaaaaaaa')
+		console.log(action.payload)
 			localStorage.removeItem('cart');
 			return {
 				cart: JSON.parse(localStorage.getItem('cart') || '[]'),
+				userPay: action.payload
 			};
 		case CREATE_CART_USER:
 			return {
@@ -83,11 +84,6 @@ function cartReducer(state = initialState, action) {
 					return { ...newObj, qty };
 				}),
 			};
-		// case SAVE_ADDRESS_ORDER:
-		// 	return {
-		// 		...state,
-		// 		address: action.payload,
-		// 	};
 		case SET_AMMOUNT:
 			return {
 				...state,

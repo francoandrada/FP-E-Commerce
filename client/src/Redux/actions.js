@@ -62,6 +62,7 @@ import {
 	SESSION_FAIL,
 	MESSAGE_SUCCESS,
 	MESSAGE_FAIL,
+	ORDER_DISPATCHED,
 } from './actionsName';
 
 import axios from 'axios';
@@ -690,11 +691,12 @@ export function getPayInfo(data) {
 		console.log(data);
 
 		try {
-			// const res = await axios.post('http://localhost:3001/webhooks', { data });
+			const res = await axios.post('http://localhost:3001/webhooks', { data });
 
-			// console.log(res.data);
+			console.log(res.data);
 			dispatch({
 				type: GET_PAY,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -792,23 +794,6 @@ export const getUserFavorites = (userId) => {
 	};
 };
 
-// export function saveAddress(address) {
-// 	console.log(address);
-// 	return async (dispatch) => {
-// 		dispatch({
-// 			type: SAVE_ADDRESS_ORDER,
-// 			payload: address,
-// 		});
-// 	};
-// }
-// export function saveAmmount(ammount) {
-// 	return async (dispatch) => {
-// 		dispatch({
-// 			type: SET_AMMOUNT,
-// 			payload: ammount,
-// 		});
-// 	};
-// }
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
@@ -876,3 +861,5 @@ export function changeOrder(payload) {
 		});
 	};
 }
+
+

@@ -14,6 +14,8 @@ const OrderDetails = () => {
 	const [orderStatus, setOrderStatus] = React.useState('');
 	const { orderDetails } = useSelector((state) => state.admin);
 
+	const email = useSelector((state) => state.user.userData.email);
+	console.log(email)
 	React.useEffect(() => {
 		dispatch(getOrderDetails(id));
 	}, [dispatch, id]);
@@ -35,8 +37,10 @@ const OrderDetails = () => {
 	};
 
 	React.useEffect(() => {
+		console.log('IMPRIMIENDO',id)
 		axios.put(`http://localhost:3001/orders/order/${id}`, {
 			status: orderStatus,
+			email: email
 		});
 	}, [orderStatus]);
 
@@ -109,7 +113,7 @@ const OrderDetails = () => {
 				{orderDetails && (
 					<Select
 						initialValue={orderDetails?.status}
-						values={['created', 'processing', 'cancelled', 'completed']}
+						values={['created', 'cancelled','completed', 'dispatched']}
 						onChange={changeStatus}
 					/>
 				)}
