@@ -1,0 +1,16 @@
+@media only screen and (max-width: 430px) {
+	.containerMain {
+		display: flex;
+		align-items: center;
+		width: 100%;
+        justify-content: center;
+	}
+	.buttonsContain {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1em;
+	}
+}
