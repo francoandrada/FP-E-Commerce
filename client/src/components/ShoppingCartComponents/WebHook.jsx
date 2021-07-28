@@ -13,10 +13,7 @@ const WebHook = () => {
 	console.log(userData.email)
 	const dispatch = useDispatch();
 
-	// console.log(id)
-	// console.log(status)
 
-		
 
 	useEffect(() => {
 		dispatch(getPayInfo({id: id, email: userData.email}));

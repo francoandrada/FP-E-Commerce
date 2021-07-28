@@ -701,12 +701,12 @@ export function getPayInfo(data) {
 
 export function deleteCart(data) {
 	return async (dispatch) => {
-	
 			dispatch({
 				type: GET_PAY,
 			});
 	};
 }
+
 
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
