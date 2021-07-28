@@ -1,6 +1,7 @@
+
 body {
 	margin: 0;
-	 font-family: 'Roboto', sans-serif; 
+	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: rgb(231, 231, 231);
@@ -10,7 +11,6 @@ body {
 
 /* code {
 	/* font-family: 'Roboto', sans-serif !important; */
-
 
 a:link {
 	text-decoration: none !important;

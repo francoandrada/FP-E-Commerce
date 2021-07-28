@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { addToCart, getProductById } from '../../Redux/actions';
 import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
@@ -14,9 +14,6 @@ import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 
 
-
-
-
 function DetailProduct(props) {
 	const dispatch = useDispatch();
 	const productDetail = useSelector((state) => state.product.detailProducts);
@@ -24,10 +21,16 @@ function DetailProduct(props) {
 
 	const history = useHistory();
 
+	let [currentImage, setCurrentImage] = useState();
+
 	useEffect(() => {
 		dispatch(getProductById(props.match.params.id));
 	}, []);
 
+	function handleClick(event, index) {
+		event.preventDefault();
+		setCurrentImage(productDetail.images[index]);
+	}
 	useEffect(() => {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
@@ -54,11 +57,11 @@ function DetailProduct(props) {
 				<div>
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
-							<img
-								className={styles.imag}
-								src={productDetail.image}
-								alt='product'
-							/>
+							{currentImage ? (
+								<img src={currentImage.imageUrl} alt='product' />
+							) : (
+								<img src={productDetail.image}></img>
+							)}
 						</div>
 						
 						<div className={styles.productCard}>
@@ -75,7 +78,9 @@ function DetailProduct(props) {
 					
 							<p className={styles.texto}>${productDetail.price} </p>
 							<div className={styles.buttonCrypto}>
-								<ButtonCrypto>₿ {(productDetail.price * btcRate).toFixed(6)}</ButtonCrypto>
+								<ButtonCrypto>
+									₿ {(productDetail.price * btcRate).toFixed(6)}
+								</ButtonCrypto>
 							</div>
 
 							<span> Stock: {productDetail.stock} </span>
@@ -130,6 +135,17 @@ function DetailProduct(props) {
 								)}
 							</div>
 						</div>
+					</div>
+					<div className={styles.imagesNav}>
+						{productDetail.images
+							? productDetail.images.map((img, index) => (
+									<img
+										src={img.imageUrl}
+										alt='product'
+										onClick={(e) => handleClick(e, index)}
+									/>
+							  ))
+							: null}
 					</div>
 				</div>
 			) : null}

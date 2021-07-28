@@ -14,8 +14,14 @@ const assistant = new AssistantV2({
 
 const watsonSession = async (req, res, next) => {
 	const session = await assistant.createSession({
-		assistantId: process.env.WATSON_ASSISTANT_ID,
-	});
+		assistantId: process.env.WATSON_ASSISTANT_ID || '{assistant_id}',
+	}, function (error, response) {
+		if (error) {
+		  return res.send(error);
+		} else {
+		  return res.send(response);
+		}
+	  });
 	return res.json(session['result']);
 };
 

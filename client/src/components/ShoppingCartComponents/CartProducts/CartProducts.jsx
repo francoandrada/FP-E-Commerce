@@ -49,42 +49,47 @@ function CartList({ info, image, name, price, stock, qty }) {
 					<div className={style.prodName}>
 						<p>{name}</p>
 					</div>
-					<div className={style.subtot}>
-						<h3>{subtotFormat}</h3>
-					</div>
-					<div className={style.cantAndPrice}>
-						<div className={style.modifyQtyButtons}>
-							{qty < 2 ? (
-								<>
-								<h3>{qty}</h3>
-								<button onClick={handlePlus} className={style.plusMinusButtons}>
-									+
-								</button>
-								</>
-							) : (
-								<>
-									<button
-										onClick={handleMinus}
-										className={style.plusMinusButtons}
-									>
-										-
-									</button>
-									<h3>{qty}</h3>
-									<button
-										onClick={handlePlus}
-										className={style.plusMinusButtons}
-									>
-										+
-									</button>
-								</>
-							)}
+					<div className={style.sectionRight}>
+						<div className={style.subtot}>
+							<h3>{subtotFormat}</h3>
 						</div>
-						<button
-							onClick={handleDeleteProd}
-							className={style.trashButtonCart}
-						>
-							<BsTrash />
-						</button>
+						<div className={style.cantAndPrice}>
+							<div className={style.modifyQtyButtons}>
+								{qty < 2 ? (
+									<>
+										<h3>{qty}</h3>
+										<button
+											onClick={handlePlus}
+											className={style.plusMinusButtons}
+										>
+											+
+										</button>
+									</>
+								) : (
+									<>
+										<button
+											onClick={handleMinus}
+											className={style.plusMinusButtons}
+										>
+											-
+										</button>
+										<h3>{qty}</h3>
+										<button
+											onClick={handlePlus}
+											className={style.plusMinusButtons}
+										>
+											+
+										</button>
+									</>
+								)}
+							</div>
+							<button
+								onClick={handleDeleteProd}
+								className={style.trashButtonCart}
+							>
+								<BsTrash />
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

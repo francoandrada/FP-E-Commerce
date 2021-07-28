@@ -49,12 +49,9 @@ const createTransaction = async (req, res) => {
 //Get Transaction Info
 const getTransactionInfo = async (req, res) => {
 	const CoinpaymentsGetTxOpts = {
-		txid: 'CPFG7VWCDRSUQWVAVPCTHOHJN5',
+		txid: 'CPFG3YE1SO2MXUAI1EU4LUYYYP',
 		full: 0,
 	};
-
-	
-
 	const status = await client.getTx(CoinpaymentsGetTxOpts);
 	console.log(status);
 	res.json(status);
@@ -144,23 +141,48 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 const ipnUpdate = async (req, res, next) => {
 
+	// item_number=userId
+	// custom=orderId
+	console.log(req.body)
 
 	const id = parseInt(req.body.custom);
-	const newStatus = req.body.status_text;
+	const newStatus = parseInt(req.body.status);
 
 	try {
 		const orderById = await Order.findOne({
 			where: { orderId: id },
 		});
-		if(newStatus==='Complete'){
+		if(newStatus===100){
 			var updatedStatus = await orderById.update({
 				status: 'completed',
+			});
+		} else if (newStatus<0){
+			var updatedStatus = await orderById.update({
+				status: 'cancelled',
+			});
+		} else if (newStatus>=0 && newStatus<100){
+			var updatedStatus = await orderById.update({
+				status: 'processing',
 			});
 		}
 		res.status(200).json(updatedStatus.dataValues.status);
 	} catch (error) {
 		next(error);
 	}
+};
+
+//Get Transactions List
+const getTransactionList = async (req, res) => {
+	const CoinpaymentsGetTxListOpts = {
+		limit: 100,
+		start: 0,
+		newer: 0,
+		all: 0
+	  }
+
+	const transactionList = await client.getTxList(CoinpaymentsGetTxListOpts);
+	console.log(transactionList);
+	res.json(transactionList);
 };
 
 ////////////////////
@@ -172,4 +194,5 @@ module.exports = {
 	getCoinRates,
 	createOrderCrypto,
 	ipnUpdate,
+	getTransactionList
 };

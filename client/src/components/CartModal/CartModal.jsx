@@ -42,6 +42,16 @@ const CartContainer = styled.div`
     width: 440px;
     color: #495057;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 72%);
+
+    @media only screen and (max-width: 430px) {
+        width:100%;
+        margin: 0 auto;
+        left: 0px;
+        right: 0px;    
+        top: 0px;
+        bottom:10%;
+        height: 100%;
+    }
 `;
 
 const CartHeader = styled.div`
@@ -84,13 +94,18 @@ const ProductsCart = styled.section`
         list-style: none;
         padding: 0px;
     }
+
+    @media only screen and (max-width: 430px) {
+        max-height:70%;
+        height: 70%
+    }
 `;
 
 const CartPay = styled.section`
     display: flex;
     justify-content: space-around;
     padding: 22px 20px;
-
+    align-items: center;
 `;
 
 const ButtonClose = styled.section`

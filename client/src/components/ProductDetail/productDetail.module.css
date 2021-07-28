@@ -11,9 +11,20 @@
 .imgContainer {
 	display: flex;
 	justify-content: center;
+	/* min-width: min-content; */
+	height: 418px;
+}
+
+.imgContainer img {
 	align-items: center;
 	width: 50%;
 }
+.descriptionProduct {
+	border-top: 1px solid gray;
+	padding: 1rem 10%;
+	margin: auto;
+}
+
 .descriptionProduct {
 	border-top: 1px solid gray;
 	padding: 1em 10%;
@@ -52,6 +63,17 @@
 	height: 25em;
 }
 
+.imagesNav img{
+	width: 64px;
+	height: 64px;
+	margin: 2px 10px 2px 0px;
+	cursor: pointer;
+}
+
+.imagesNav img:hover{
+	padding: 2px;
+}
+
 .texto {
 	padding: 1px;
 }
@@ -85,7 +107,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		
 	}
 	/* .productCard button {
 	display: flex;
@@ -115,17 +136,17 @@
 		margin-top: auto;
 		margin-bottom: 0;
 	}
-    .productCard h1{
-        font-size: 16px;
-    }
-    .productCard{
-        max-width: max-content;
-    }
+	.productCard h1 {
+		font-size: 16px;
+	}
+	.productCard {
+		max-width: max-content;
+	}
 	.descriptionProduct {
 		padding: 0;
 		margin: auto;
 	}
-	.containerDescription{
+	.containerDescription {
 		background-color: rgba(236, 232, 232, 0.753);
 		width: 100%;
 		padding: 0.5em;
@@ -133,14 +154,14 @@
 		border-radius: 12px;
 		font-size: 12px;
 	}
-	.Tittle{
+	.Tittle {
 		justify-content: center;
 		text-align: center;
 		font-size: 14px;
 		font-weight: 600;
 		margin-top: 0.5em;
 	}
-	.containerBrand{
+	.containerBrand {
 		display: flex;
 		justify-content: space-evenly;
 		background-color: rgba(236, 232, 232, 0.753);
@@ -149,14 +170,14 @@
 		margin: 0.5em 0;
 		border-radius: 12px;
 	}
-	.containerBrand span{
+	.containerBrand span {
 		font-size: 12px;
 	}
-	.brand{
+	.brand {
 		height: max-content;
 		margin-top: 0.2em;
 	}
-	.containerWeigth{
+	.containerWeigth {
 		display: flex;
 		justify-content: space-evenly;
 		background-color: rgba(236, 232, 232, 0.753);
@@ -165,10 +186,10 @@
 		margin: 0.5em 0;
 		border-radius: 12px;
 	}
-	.containerWeigth span{
+	.containerWeigth span {
 		font-size: 12px;
 	}
-	.weigth{
+	.weigth {
 		height: max-content;
 		margin-top: 0.2em;
 	}

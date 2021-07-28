@@ -56,3 +56,17 @@
 .paymentCrypto:active {
 	background-color: #ffa83c;
 }
+@media only screen and (max-width: 430px){
+	.subtotalContainerMain{
+		width: 18.75em;
+	}
+	.subtotalContainerMain h4{
+		font-size: 1.3rem;
+	}
+	.subdivTotal{
+		font-size: 14px;
+	}
+	.subdivTotal h3{
+		font-size: 1.3rem;
+	}
+}

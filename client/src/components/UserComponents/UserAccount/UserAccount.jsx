@@ -45,7 +45,7 @@ function UserAccount({ setOption }) {
 		<div className={style.userOptionContainer}>
 			<div className={style.selectedOptionCabecera}>
 				<div>
-					<h3>My Account</h3>
+					<h3 className={style.Tittle}>My Account</h3>
 				</div>
 				<div>
 					<Link id='edit'>

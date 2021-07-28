@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { Product, Brand, Category } = require('../db');
+const { Product, Brand, Category, Image } = require('../db');
 const { jsonProducts } = require('../../jsonProducts');
 
 // ----------------  Products to Db -----------------
@@ -24,7 +24,7 @@ const productsDb = async function setProductsToDb() {
 						image: img,
 						description: description,
 						weight: weight,
-						stock: 1,
+						stock: 3,
 					},
 				}).then((product) => {
 					(async function createBrandProd() {
@@ -38,6 +38,12 @@ const productsDb = async function setProductsToDb() {
 							where: { name: category },
 						});
 						await product[0].addCategories(categoryDb[0]);
+					})();
+					(async function createImageProd() {
+						var imageDb = await Image.findOrCreate({
+							where: { imageUrl: img },
+						});
+						await product[0].addImage(imageDb[0]);
 					})();
 				});
 			})();
@@ -96,7 +102,7 @@ const getIdProduct = async function getIdProduct(req, res, next) {
 	try {
 		const id = parseInt(req.params.id);
 		const IdProduct = await Product.findOne({
-			include: [{ model: Brand }, { model: Category }],
+			include: [{ model: Brand }, { model: Category }, { model: Image }],
 			where: {
 				id: id,
 			},
@@ -201,7 +207,9 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			let allProduct1 = allProduct;
 			if (category) {
 				allProduct1 = allProduct.filter(
-					(product) => product.categories[0].name === category || product.categories.length === 0
+					(product) =>
+						product.categories[0].name === category ||
+						product.categories.length === 0
 				);
 			}
 			if (brand) {

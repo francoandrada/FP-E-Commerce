@@ -3,6 +3,7 @@ import ButtonRedOther from '../StyledComponents/ButtonRed'
 import TitleStyle from '../StyledComponents/TitleStyle'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Bot from '../ChatBot/ChatBot';
 
 
 const ButtonRedHome = styled(ButtonRedOther)`
