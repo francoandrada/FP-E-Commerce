@@ -14,39 +14,38 @@ const OrderDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const [orderStatus, setOrderStatus] = React.useState('');
-	const { orderDetails } = useSelector((state) => state.admin);
+	const { orderDetails } = useSelector(state => state.admin);
 
-	const email = useSelector((state) => state.user.userData.email);
+	const email = useSelector(state => state.user.userData.email);
 
 	React.useEffect(() => {
 		dispatch(getOrderDetails(id));
 	}, [dispatch, id]);
 
-	const mapData = (array) => {
+	const mapData = array => {
 		const data =
 			array &&
-			array.map((o) => {
+			array.map(o => {
 				return {
 					id: o?.id || '--',
 					price: o?.price || '--',
 					quantity: o?.quantity || '--',
 					productName: o?.product?.name || '--',
 					image: o?.product?.image || '--',
-					brand: o?.product?.brand?.name || '--',
+					brand: o?.product?.brand?.name || '--'
 				};
 			});
 		return data;
 	};
 
 	React.useEffect(() => {
-
 		axios.put(`http://localhost:3001/orders/order/${id}`, {
 			status: orderStatus,
 			email: email
 		});
 	}, [orderStatus]);
 
-	const changeStatus = (event) => {
+	const changeStatus = event => {
 		event.preventDefault();
 		setOrderStatus(event.target.value);
 		window.location.reload();
@@ -59,19 +58,18 @@ const OrderDetails = () => {
 					<h2>HardwareStore</h2>
 				</div>
 				{orderDetails ? (
-					[orderDetails].map((o) => (
+					[orderDetails].map(o => (
 						<div key={o?.orderId} className={styles.orderDetailsHeader}>
 							<div className={styles.orderDetailsNumber}>
 								<div className={styles.orderDetails}>
-									<p>
+									<p className={styles.orderAndAmount}>
 										<span className={styles.orderDetailsReference}>
 											Order N°: {o?.orderId || '--'}
 										</span>
 										<span className={styles.orderDetailsReference}>
-											Ammount: {o?.ammount || '--'}
+											Amount: $ {o?.ammount || '--'}
 										</span>
 									</p>
-
 									<p className={styles.orderDetailsDate}>
 										<span className={styles.orderDetailsReference}>
 											Created At: {o?.createdAt || '--'}
@@ -83,64 +81,73 @@ const OrderDetails = () => {
 								</div>
 							</div>
 							<div>
-								<div>
-									<span className={styles.orderDetailsReference}>
-										Customer:
-									</span>
-									<h2>{`${o?.user?.name || '--'} ${
-										o?.user?.surname || '--'
-									}`}</h2>
+								<div className={styles.customerDetails}>
+									<div>
+										<span className={styles.orderDetailsReference}>
+											Customer:
+										</span>
+										<span>
+											{`${' '}`}
+											{`${o?.user?.name || '--'} ${o?.user?.surname || '--'}`}
+										</span>
+									</div>
+									<div>
+										<span className={styles.orderDetailsReference}>
+											Phone:{' '}
+										</span>
+										<span>{o?.user.phone || '--'}</span>
+									</div>
+									<div>
+										<span className={styles.orderDetailsReference}>
+											E-mail:{' '}
+										</span>
+										<span>{o?.user.email || '--'}</span>
+									</div>
 								</div>
-								<div>
-									<span className={styles.orderDetailsReference}>E-mail: </span>
-									<span>{o?.user.email || '--'}</span>
-								</div>
-								<div>
-									<span className={styles.orderDetailsReference}>Phone: </span>
-									<span>{o?.user.phone || '--'}</span>
-								</div>
-								<div>
-									<span className={styles.orderDetailsReference}>Address:</span>
-									<span>{`${o?.user?.address || '--'} N°: ${
-										o?.user?.addressNumber || '--'
-									}`}</span>
-								</div>
-								<div>
-									<span className={styles.orderDetailsReference}>
-										Postal Code:{' '}
-									</span>
-									<span>{o?.user?.postalCode}</span>
+								<div className={styles.addressDetail}>
+									<div>
+										<span className={styles.orderDetailsReference}>
+											Address:
+										</span>
+										<span>{`${o?.user?.address || '--'} N°: ${o?.user
+											?.addressNumber || '--'}`}</span>
+									</div>
+									<div>
+										<span className={styles.orderDetailsReference}>
+											Postal Code:{' '}
+										</span>
+										<span>{o?.user?.postalCode}</span>
+									</div>
 								</div>
 							</div>
 						</div>
 					))
 				) : (
 					<Loader />
+				)}
+				<div className={styles.orderTableDetails}>
+					{orderDetails ? (
+						<Table
+							dataToPrint={mapData(orderDetails?.orderDetails)}
+							formatColumn={COLUMNS}
+						/>
+					) : (
+						<Loader />
 					)}
-					<div>
-						{orderDetails ? (
-							<Table
-								dataToPrint={mapData(orderDetails?.orderDetails)}
-								formatColumn={COLUMNS}
-							/>
-						) : (
-							<Loader />
-						)}
-					</div>
-					<div>
-						<span>Change Status:</span>
-						{orderDetails && (
-							<Select
-								initialValue={orderDetails?.status}
-								values={['created', 'cancelled','completed', 'dispatched']}
-								onChange={changeStatus}
-							/>
-						)}
-					</div>
+				</div>
+				<div className={styles.changeStatusOrder}>
+					<span className={styles.selectTitle}>Change Status:</span>
+					{orderDetails && (
+						<Select
+							initialValue={orderDetails?.status}
+							values={['created', 'cancelled', 'completed', 'dispatched']}
+							onChange={changeStatus}
+						/>
+					)}
 				</div>
 			</div>
-		);
-	};
+		</div>
+	);
+};
 
 export default OrderDetails;
-
