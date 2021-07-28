@@ -99,7 +99,7 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 	try {
 		const allUserOrders = await Order.findAll({
 			where: { userId: userId },
-			attributes: ['userId', 'status'],
+			attributes: ['userId', 'ammount', 'status', 'address'],
 			include: [
 				{
 					model: OrderDetail,
@@ -130,63 +130,12 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 	}
 };
 
-const orderDispatched = async function orderDispatched(req, res) {
-	try {
-		const { id, email } = req.body;
-		// console.log(req.body);
 
-		// // var userFind = await User.findOne({
-		// // 	where: { email: email },
-		// // });
-		// // if (!userFind) {
-		// // 	res.send('that email doesnt exist');
-		// // } else {
-		// 	const Orders = await Order.findAll({
-		// 		where: { orderId: id, status: 'dispatched' },
-		// 		attributes: ['userId', 'status'],
-		// 	});
-		// 	console.log(Orders)
-		// 	if (Orders) {
-		// 		let transporter = nodemailer.createTransport({
-		// 			service: 'gmail',
-		// 			auth: {
-		// 				type: 'OAuth2',
-		// 				user: process.env.MAIL_USERNAME,
-		// 				pass: process.env.MAIL_PASSWORD,
-		// 				clientId: process.env.OAUTH_CLIENTID,
-		// 				clientSecret: process.env.OAUTH_CLIENT_SECRET,
-		// 				refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-		// 			},
-		// 		});
-		// 		var mailOptions = {
-		// 			from: 'hardwarecommerce@gmail.com',
-		// 			to: email,
-		// 			subject: 'Order Confirmation',
-		// 			html: `
-		// 	<h1>ORDEN DESPACHADAAAAAAAAAAAA</H1>
-
-		//  `,
-		// 		};
-
-		// 		transporter.sendMail(mailOptions, function (err, data) {
-		// 			if (err) {
-		// 				console.log('Error ' + err);
-		// 			} else {
-		// 				console.log('Email sent successfully');
-		// 			}
-		// 		});
-		// 	}else{
-		// 		res.send('the order is not dispatched')
-		// 	}
-	} catch (error) {
-		console.log(error);
-	}
-};
 
 module.exports = {
 	getOrders,
 	getOrderById,
 	modifyOrderStatus,
-	orderDispatched,
+	
 	findUserOrders,
 };

@@ -22,7 +22,6 @@
 .paymentButton {
 	width: 100%;
 	margin-top: 20px;
-	margin: 1rem;
 	padding: 10px;
 	background-color: #ff3c4a;
 	color: white;
@@ -68,5 +67,8 @@
 	}
 	.subdivTotal h3{
 		font-size: 1.3rem;
+	}
+	.paymentButton{
+		margin: 0;
 	}
 }

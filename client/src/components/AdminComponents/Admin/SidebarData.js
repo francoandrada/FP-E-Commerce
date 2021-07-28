@@ -10,6 +10,7 @@ export const SidebarData =[
         icon: <AiIcons.AiFillHome/>,
         cName: 'nav-text'
     },
+   
     {
         title: 'Products',
         path:'/admin/products',
@@ -40,6 +41,13 @@ export const SidebarData =[
         icon: <IoIcons.IoMdListBox/>,
         cName: 'nav-text'
     },
+    {
+        title: 'Address',
+        path:'/admin/address',
+        icon: <FaIcons.FaClipboardList/>,
+        cName: 'nav-text'
+    },
+   
     {
         title: 'Go Back',
         path:'/',

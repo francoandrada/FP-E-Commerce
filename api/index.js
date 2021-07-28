@@ -5,7 +5,7 @@ const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
 conn
-	.sync({ force: false})
+	.sync({ force: false })
 	.then(() => {
 		console.log('-----successful database connection-----');
 		server.listen(3001, () => {
@@ -13,4 +13,4 @@ conn
 		});
 	})
 	.then(() => productsDb())
-	.then(()=>adminUserPreload());
+	.then(() => adminUserPreload());

@@ -660,16 +660,20 @@ export function getPayInfo(data) {
 		try {
 			const res = await axios.post('http://localhost:3001/webhooks', { data });
 
-			console.log(res.data);
-			dispatch({
-				type: GET_PAY,
-				payload: res.data
-			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
+
+export function deleteCart(data) {
+	return async (dispatch) => {
+			dispatch({
+				type: GET_PAY,
+			});
+	};
+}
+
 
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 

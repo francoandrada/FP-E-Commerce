@@ -33,32 +33,32 @@ import Bot from './components/ChatBot/ChatBot';
 function App({ location }) {
 	//The next function allows the store to update the ars/btc rates every X time
 	const dispatch = useDispatch();
-	let updateInterval = 60000 * 5 //60000 miliseconds = 1 minuto
-	let [timer, setTimer] = useState(0)
+	let updateInterval = 60000 * 5; //60000 miliseconds = 1 minuto
+	let [timer, setTimer] = useState(0);
 	useEffect(() => {
 		dispatch(getRates());
 	}, [timer]);
-	setTimeout(()=>{
-		console.log(timer)
-		setTimer(timer+1)
+	setTimeout(() => {
+		console.log(timer);
+		setTimer(timer + 1);
 	}, updateInterval);
-	
+
 	/* ======================================================
 		ALL THE PATH NEED TO GO IN THE Switch COMPONENTS
 	=======================================================*/
 	return (
 		<div className='App'>
-			{!location.pathname.includes('/admin') && <Navbar />}
+			{!location.pathname.includes('/admin') && <Navbar /> }
+			{!location.pathname.includes('/admin') && <Bot /> }
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
 					<div className='adminn'>
 						<AdminRoutes />
-						  <Route path='/admin' component={AdminRoutes} />
+						{/* <Route path='/admin' component={AdminRoutes} /> */}
 					</div>
-				)}  
-				
+				)}
+
 				<Switch>
-			
 					<Route path='/' exact component={Home} />
 					<Route path='/LogIn' exact component={LogIn} />
 					<Route path='/register' exact component={Register} />
@@ -80,11 +80,12 @@ function App({ location }) {
 					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/review/:id' exact component={UserReview} />
-					<Route path='/bot' exact component={Bot} />
+
 					<Route path='/contact' exact component={ContactForm} />
+
 				</Switch>
 			</div>
-			{!location.pathname.includes('/admin') && <Footer />} 
+			{!location.pathname.includes('/admin') && <Footer />}
 		</div>
 	);
 }

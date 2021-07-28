@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useTable } from 'react-table';
 
-import './TableComponent.css';
+// import './TableComponent.css';
+import styles from './TableComponent.module.css';
 
 const TableComponent = ({ dataToPrint, formatColumn }) => {
 	const columns = useMemo(() => formatColumn, []);
@@ -20,8 +21,8 @@ const TableComponent = ({ dataToPrint, formatColumn }) => {
 	} = tableInstance;
 
 	return (
-		<div>
-			<table {...getTableProps()} className={'tableComponentEcommerce'}>
+		<div className={styles.tableWrapper}>
+			<table {...getTableProps()} className={styles.tableComponentEcommerce}>
 				<thead>
 					{headerGroups.map(headerGroup => (
 						<tr {...headerGroup.getHeaderGroupProps()}>

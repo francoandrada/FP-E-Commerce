@@ -12,6 +12,7 @@ import { Link } from 'react-scroll';
 import { useHistory } from 'react-router-dom';
 import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
+import Loader from '../Loader/Loader';
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
@@ -55,12 +56,16 @@ function DetailProduct(props) {
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
 							{currentImage ? (
-								<img src={currentImage.imageUrl} alt='product' />
+								<img
+									className={styles.imag}
+									src={currentImage.imageUrl}
+									alt='product'
+								/>
 							) : (
-								<img src={productDetail.image}></img>
+								<img className={styles.imag} src={productDetail.image}></img>
 							)}
 						</div>
-
+						<hr id={styles.line2} />
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
 
@@ -138,11 +143,13 @@ function DetailProduct(props) {
 										alt='product'
 										onClick={e => handleClick(e, index)}
 									/>
-							  ))
+						))
 							: null}
 					</div>
 				</div>
-			) : null}
+			) : (
+				<Loader />
+			)}
 
 			<div className={styles.descriptionProduct}>
 				<div className=''>

@@ -63,6 +63,7 @@ exports.getUsers = async (req, res) => {
 };
 
 //-------- INITIAL ADMIN USER PRELOAD --------------
+
 exports.adminUserPreload = async () => {
 	const salt = await bcrypt.genSalt(10);
 	const pass = await bcrypt.hash('Admin123456', salt);

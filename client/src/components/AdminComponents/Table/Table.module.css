@@ -50,9 +50,9 @@
 	padding: 8px;
 }
 
-.tableEcommerce tr:nth-child(even) {
-	/* background-color: #f2f2f2; */
-}
+/* .tableEcommerce tr:nth-child(even) {
+	background-color: #f2f2f2;
+} */
 
 .tableEcommerce tr:hover {
 	background-color: rgb(228, 50, 50);
@@ -65,10 +65,12 @@
 	background-color: rgb(228, 50, 50);
 	color: white;
 }
+
 i {
 	color: rgb(70, 70, 70);
 	width: 20px;
 }
+
 button {
 	background-color: transparent;
 	border: 0;
