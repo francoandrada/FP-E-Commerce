@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
-const { Product, Brand, Category, Image } = require('../db');
+const { Product, Brand, Category, Image,Review } = require('../db');
 const { jsonProducts } = require('../../jsonProducts');
+const {getAvergedStars} = require ('../Controllers/reviews')
 
 // ----------------  Products to Db -----------------
 const productsDb = async function setProductsToDb() {
@@ -190,9 +191,11 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 		const pageNumber = page || 1;
 
 		let allProduct = await Product.findAll({
-			include: [{ model: Category }, { model: Brand }],
+			include: [{ model: Category }, { model: Brand }, {model: Review, attributes: ['stars']}],
 		});
 
+		console.log(allProduct)
+		
 		let result = [];
 
 		// if(category){
