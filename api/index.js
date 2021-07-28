@@ -4,7 +4,8 @@ const { adminUserPreload } = require('./src/Controllers/users.js');
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
-conn.sync({ force: false})
+conn
+	.sync({ force: true })
 	.then(() => {
 		console.log('-----successful database connection-----');
 		server.listen(3001, () => {
