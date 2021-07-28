@@ -16,6 +16,6 @@ router.put('/order/:id', modifyOrderStatus);
 
 router.get('/order/user/:userid', findUserOrders);
 
-router.post('/orderDispatched', orderDispatched);
+
 
 module.exports = router;

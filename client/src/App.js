@@ -48,7 +48,8 @@ function App({ location }) {
 	=======================================================*/
 	return (
 		<div className='App'>
-			{!location.pathname.includes('/admin') && <Navbar />}
+			{!location.pathname.includes('/admin') && <Navbar /> }
+			{!location.pathname.includes('/admin') && <Bot /> }
 			<div className='totalvh'>
 				{location.pathname.includes('/admin') && (
 					<div className='adminn'>
@@ -79,8 +80,9 @@ function App({ location }) {
 					<Route path='/cryptopayments' exact component={CryptoSection} />
 					<Route path='/error' exact component={Error404View} />
 					<Route path='/review/:id' exact component={UserReview} />
-					<Route path='/bot' exact component={Bot} />
+
 					<Route path='/contact' exact component={ContactForm} />
+
 				</Switch>
 			</div>
 			{!location.pathname.includes('/admin') && <Footer />}

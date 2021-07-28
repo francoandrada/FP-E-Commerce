@@ -22,6 +22,7 @@ router.get('/', getAllProducts);
 
 router.get('/allproducts/:id', getIdProduct);
 
+
 // router.get('/productsbrand/:brand', getBrandProduct)
 
 // router.get('/productscategory/:category', getCategoryProduct)
