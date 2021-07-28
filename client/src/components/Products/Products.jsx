@@ -6,27 +6,25 @@ import {
 	selectPage,
 	cleanFilters,
 	addToCart,
-	removeFromCart,
+	removeFromCart
 } from '../../Redux/actions';
 import FavoriteButton from '../FavoriteComponent/FavoriteButton';
 import { Link } from 'react-router-dom';
 import styles from './Products.module.css';
 import PagingBox from '../PagingBox/PagingBox';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
+import Loader from '../Loader/Loader';
 import './index.css';
 function Products() {
-
 	/// Crypto
-	const arsBtc = useSelector((state) => state.crypto.arsBtc);
-	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const arsBtc = useSelector(state => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector(state => state.crypto.updateTime);
 	const btcRate = parseFloat(arsBtc);
 
 	const dispatch = useDispatch();
-	let allProducts = useSelector((state) => state.product.allProducts);
+	let allProducts = useSelector(state => state.product.allProducts);
 
-	let filteredProducts = useSelector(
-		(state) => state.product.filterByCategories
-	);
+	let filteredProducts = useSelector(state => state.product.filterByCategories);
 
 	let productsToRender = allProducts;
 
@@ -34,11 +32,11 @@ function Products() {
 		productsToRender = filteredProducts;
 	}
 
-	let stockS = useSelector((state) => state.stock.order);
-	let categoryS = useSelector((state) => state.category.selectedCategory);
-	let brandS = useSelector((state) => state.brands.selectedBrand);
-	let priceS = useSelector((state) => state.price.order);
-	let actualPage = useSelector((state) => state.product.page);
+	let stockS = useSelector(state => state.stock.order);
+	let categoryS = useSelector(state => state.category.selectedCategory);
+	let brandS = useSelector(state => state.brands.selectedBrand);
+	let priceS = useSelector(state => state.price.order);
+	let actualPage = useSelector(state => state.product.page);
 	let productsPerPage = 9;
 
 	let [query, setQuery] = useState({
@@ -47,7 +45,7 @@ function Products() {
 		price: priceS,
 		page: actualPage,
 		qty: productsPerPage,
-		stock: stockS,
+		stock: stockS
 	});
 
 	useEffect(() => {
@@ -57,46 +55,45 @@ function Products() {
 			price: priceS,
 			page: actualPage,
 			qty: productsPerPage,
-			stock: stockS,
+			stock: stockS
 		});
 		return () => {
 			dispatch(cleanFilters());
 		};
 	}, []);
 
-
 	useEffect(() => {
 		setQuery({
 			...query,
-			category: categoryS,
+			category: categoryS
 		});
 	}, [categoryS]);
 
 	useEffect(() => {
 		setQuery({
 			...query,
-			brand: brandS,
+			brand: brandS
 		});
 	}, [brandS]);
 
 	useEffect(() => {
 		setQuery({
 			...query,
-			price: priceS,
+			price: priceS
 		});
 	}, [priceS]);
 
 	useEffect(() => {
 		setQuery({
 			...query,
-			stock: stockS,
+			stock: stockS
 		});
 	}, [stockS]);
 
 	useEffect(() => {
 		setQuery({
 			...query,
-			page: actualPage,
+			page: actualPage
 		});
 	}, [actualPage]);
 
@@ -107,7 +104,7 @@ function Products() {
 	var formatNumber = {
 		separator: '.',
 		decimalSeparator: ',',
-		formatear: function (num) {
+		formatear: function(num) {
 			num += '';
 			var splitStr = num.split('.');
 			var splitLeft = splitStr[0];
@@ -119,68 +116,66 @@ function Products() {
 			}
 			return this.simbol + splitLeft + splitRight;
 		},
-		new: function (num, simbol) {
+		new: function(num, simbol) {
 			this.simbol = simbol || '';
 			return this.formatear(num);
-		},
+		}
 	};
 	return (
 		<div className={styles.cardsContainer}>
-			{productsToRender
-				? productsToRender.map((p) => {
-						if (p.name.length > 55) {
-							var aux = p.name.slice(0, 55).concat('...');
-							p.name = aux;
-						}
-						var formatPrice = formatNumber.new(p.price, '$');
-						return (
-							<div key={p.id} className={styles.card}>
-								<div className={styles.buttonCrypto}>
-									<ButtonCrypto>
-										₿ {(p.price * btcRate).toFixed(6)}
-									</ButtonCrypto>
-								</div>
-								<Link key={p.id} to={`/catalog/${p.id}`}>
-									<div className={styles.cardImage}>
-										<img className={styles.img} src={p.image} alt='product' />
-									</div>
-								</Link>
-								<div>
-									<hr id={styles.line} />
-								</div>
-
-								<div className={styles.data}>
-									<span className={styles.productName}>{p.name}</span>
-									<div className={styles.heartDiv}>
-										<FavoriteButton prod={p} />
-									</div>
-								</div>
-								<div className={styles.footerCard}>
-									<div className='footerCard d-flex justify-content-center'>
-										<div className={styles.productPrice}>
-											<span>{formatPrice}</span>
-										</div>
-
-										<div className={styles.buttonBuy}>
-											{p.stock > 0 ? (
-												<button
-													id={styles.btnBuy}
-													type='submit'
-													onClick={() => dispatch(addToCart(p))}
-												>
-													Add to Cart
-												</button>
-											) : (
-												<button type='submit'>Sin Stock</button>
-											)}
-										</div>
-									</div>
-								</div>
-								<div id={styles.paginado}></div>
+			{productsToRender ? (
+				productsToRender.map(p => {
+					if (p.name.length > 55) {
+						var aux = p.name.slice(0, 55).concat('...');
+						p.name = aux;
+					}
+					var formatPrice = formatNumber.new(p.price, '$');
+					return (
+						<div key={p.id} className={styles.card}>
+							<div className={styles.buttonCrypto}>
+								<ButtonCrypto>₿ {(p.price * btcRate).toFixed(6)}</ButtonCrypto>
 							</div>
-						);
-				  })
-				: null}
+							<Link key={p.id} to={`/catalog/${p.id}`}>
+								<div className={styles.cardImage}>
+									<img className={styles.img} src={p.image} alt='product' />
+								</div>
+							</Link>
+							<div>
+								<hr id={styles.line} />
+							</div>
+
+							<div className={styles.data}>
+								<span className={styles.productName}>{p.name}</span>
+								<div className={styles.heartDiv}>
+									<FavoriteButton prod={p} />
+								</div>
+							</div>
+							<div className={styles.footerCard}>
+								<div className='footerCard d-flex justify-content-center'>
+									<div className={styles.productPrice}>
+										<span>{formatPrice}</span>
+									</div>
+
+									<div className={styles.buttonBuy}>
+										{p.stock > 0 ? (
+											<button
+												id={styles.btnBuy}
+												type='submit'
+												onClick={() => dispatch(addToCart(p))}
+											>
+												Add to Cart
+											</button>
+										) : (
+											<button type='submit'>Sin Stock</button>
+										)}
+									</div>
+								</div>
+							</div>
+							<div id={styles.paginado}></div>
+						</div>
+					);
+				})
+			) : null}
 			<PagingBox productsPerPage={productsPerPage} />
 		</div>
 	);
