@@ -3,6 +3,8 @@ const { response } = require('express');
 const { Sequelize } = require('sequelize');
 const { Order, OrderDetail, Product, User } = require('../db');
 const axios = require('axios');
+require('dotenv').config({ path: '.env' });
+var nodemailer = require('nodemailer');
 
 
 const { COINPAYMENT_API_PUBLIC, COINPAYMENT_API_SECRET, COINPAYMENT_MERCHAND_ID } = process.env;
@@ -141,6 +143,31 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 const ipnUpdate = async (req, res, next) => {
 
+
+	let transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			type: 'OAuth2',
+			user: process.env.MAIL_USERNAME,
+			pass: process.env.MAIL_PASSWORD,
+			clientId: process.env.OAUTH_CLIENTID,
+			clientSecret: process.env.OAUTH_CLIENT_SECRET,
+			refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+		},
+	});
+
+	var mailOptions = {
+		from: 'hardwarecommerce@gmail.com',
+		to: data.email,
+		subject: 'Order Confirmation',
+		html: `
+		<h1>ORDEN DESPACHADAAAAAAAAAAAA</H1>
+	 
+	 `,
+	};
+
+
+
 	// item_number=userId
 	// custom=orderId
 	console.log(req.body)
@@ -156,6 +183,15 @@ const ipnUpdate = async (req, res, next) => {
 			var updatedStatus = await orderById.update({
 				status: 'completed',
 			});
+			transporter.sendMail(mailOptions, function (err, data) {
+				if (err) {
+					console.log('Error ' + err);
+				} else {
+					console.log('Email sent successfully');
+				}
+			});
+
+
 		} else if (newStatus<0){
 			var updatedStatus = await orderById.update({
 				status: 'cancelled',
