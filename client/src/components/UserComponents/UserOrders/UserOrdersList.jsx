@@ -64,6 +64,7 @@ function UserOrdersList() {
 							<UserOrders
 								prodInfo={order.orderProducts}
 								status={order.status}
+								ammount={order.ammount}
 								orderId={order.orderId}
 			
 							/>
