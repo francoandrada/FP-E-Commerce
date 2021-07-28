@@ -55,156 +55,117 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
-	GET_RATES,
-	INPUT_SUCCESS,
-	INPUT_FAIL,
-	SESSION_SUCCESS,
-	SESSION_FAIL,
-	MESSAGE_SUCCESS,
-	MESSAGE_FAIL,
+	GET_RATES
 } from './actionsName';
 
 import axios from 'axios';
 
-
-///////////////////////////////// CHATBOT //////////////////////////
-export const userMessage = (message) => async (dispatch) => {
-	try {
-		dispatch({ type: INPUT_SUCCESS, payload: message });
-	} catch (err) {
-		dispatch({ type: INPUT_FAIL });
-	}
-};
-
-export const createSession = () => async (dispatch) => {
-	try {
-		const res = await axios.get('http://localhost:3001/watson/session');
-		dispatch({ type: SESSION_SUCCESS, payload: res.data });
-	} catch (err) {
-		dispatch({ type: SESSION_FAIL });
-	}
-};
-
-export const sendMessage = (message) => async (dispatch) => {
-	try {
-		const body = { input: message };
-		const res = await axios.post('http://localhost:3001/watson/message', body);
-		console.log('data from api:', res.data.output.generic[0].text);
-		dispatch({
-			type: MESSAGE_SUCCESS,
-			payload: res.data.output.generic[0].text,
-		});
-	} catch (err) {
-		dispatch({ type: MESSAGE_FAIL });
-	}
-};
-
-export const changePaginationSize = (payload) => ({
+export const changePaginationSize = payload => ({
 	type: SIZE_PAGINATION,
-	payload,
+	payload
 });
 
-export const changePageOfProductOrderTable = (payload) => ({
+export const changePageOfProductOrderTable = payload => ({
 	type: CURRENT_PAGE_ORDER_PRODUCT,
-	payload,
+	payload
 });
 
-export const changePageOfUserOrderTable = (payload) => ({
+export const changePageOfUserOrderTable = payload => ({
 	type: CURRENT_PAGE_ORDER_USER,
-	payload,
+	payload
 });
 
-export const filterByStatus = (payload) => ({
+export const filterByStatus = payload => ({
 	type: FILTER_BY_ORDER_STATUS,
-	payload,
+	payload
 });
 
-export const changeTableOrderPaginationSize = (payload) => ({
+export const changeTableOrderPaginationSize = payload => ({
 	type: TABLE_ORDER_PAGINATION_SIZE,
-	payload,
+	payload
 });
 
-export const changeTableOrderUserPaginationSize = (payload) => ({
+export const changeTableOrderUserPaginationSize = payload => ({
 	type: TABLE_USER_ORDER_PAGINATION_SIZE,
-	payload,
+	payload
 });
 
-export const tableFilterByBrand = (payload) => ({
+export const tableFilterByBrand = payload => ({
 	type: TABLE_FILTER_BRAND,
-	payload,
+	payload
 });
 
-export const changeTablePage = (payload) => ({
+export const changeTablePage = payload => ({
 	type: GOTO_TABLE_PAGE,
-	payload,
+	payload
 });
 
-export const sortTableAction = (payload) => ({
+export const sortTableAction = payload => ({
 	type: SORT_TABLE_BY,
-	payload,
+	payload
 });
 
-export const tableFilterByCategory = (payload) => ({
+export const tableFilterByCategory = payload => ({
 	type: TABLE_FILTER_BY_CATEGORY,
-	payload,
+	payload
 });
 
-export const changeOrderTable = (payload) => ({
+export const changeOrderTable = payload => ({
 	type: ORDER_TABLE,
-	payload,
+	payload
 });
 
 export const fetchPending = () => ({
-	type: FETCH_PENDING,
+	type: FETCH_PENDING
 });
 
-export const fetchError = (error) => ({
+export const fetchError = error => ({
 	type: FETCH_ERROR,
-	error,
+	error
 });
 
-export const fetchSuggestions = (payload) => ({
+export const fetchSuggestions = payload => ({
 	type: SUGGESTIONS,
-	payload,
+	payload
 });
 
-export const fetchProductWithOrder = (payload) => ({
+export const fetchProductWithOrder = payload => ({
 	type: PRODUCT_WITH_ORDER,
-	payload,
+	payload
 });
 
-export const fetchListProducts = (payload) => ({
+export const fetchListProducts = payload => ({
 	type: LIST_PRODUCT_ON_TABLE,
-	payload,
+	payload
 });
 
-export const fetchOrderDetails = (payload) => ({
+export const fetchOrderDetails = payload => ({
 	type: GET_ALL_DATA_ABOUT_AN_ORDER,
-	payload,
+	payload
 });
 
-export const fetchCountOfBrand = (payload) => ({
+export const fetchCountOfBrand = payload => ({
 	type: FETCH_COUNT_OF_BRAND,
-	payload,
+	payload
 });
 
-export const fetchCountOfCategories = (payload) => ({
+export const fetchCountOfCategories = payload => ({
 	type: FETCH_COUNT_OF_CATEGORIES,
-	payload,
+	payload
 });
 
-export const fetchUserWithOrders = (payload) => ({
+export const fetchUserWithOrders = payload => ({
 	type: USER_WITH_ORDER,
-	payload,
+	payload
 });
 
 export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
-	payload: undefined,
+	payload: undefined
 });
 
 export function getListOfProductTable(page, object) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
@@ -220,7 +181,7 @@ export function getListOfProductTable(page, object) {
 
 // http://localhost:3001/admin/usersandhisorders?page=0 (post);
 export function getUserWithOrdersDetail(page, object) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
@@ -235,7 +196,7 @@ export function getUserWithOrdersDetail(page, object) {
 }
 
 export function getProductWithOrderData(page, object) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.post(
@@ -250,7 +211,7 @@ export function getProductWithOrderData(page, object) {
 }
 
 export function getCountOfBrand() {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get(`http://localhost:3001/admin/countofbrand`);
@@ -262,7 +223,7 @@ export function getCountOfBrand() {
 }
 
 export function getOrderDetails(id) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get(
@@ -276,7 +237,7 @@ export function getOrderDetails(id) {
 }
 
 export function getCountOfCategories() {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get(
@@ -290,7 +251,7 @@ export function getCountOfCategories() {
 }
 
 export function getSuggestions(name) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			dispatch(fetchPending());
 			const res = await axios.get('http://localhost:3001/products/');
@@ -302,66 +263,66 @@ export function getSuggestions(name) {
 }
 
 export function getProducts() {
-	return async (dispatch) => {
-		axios.get('http://localhost:3001/products/').then((response) => {
+	return async dispatch => {
+		axios.get('http://localhost:3001/products/').then(response => {
 			dispatch({ type: GET_PRODUCTS, payload: response.data });
 		});
 	};
 }
 
 export function getCategories() {
-	return async (dispatch) => {
-		axios.get('http://localhost:3001/categories/').then((response) => {
+	return async dispatch => {
+		axios.get('http://localhost:3001/categories/').then(response => {
 			dispatch({ type: GET_CATEGORIES, payload: response.data });
 		});
 	};
 }
 
 export function getBrands() {
-	return async (dispatch) => {
-		axios.get('http://localhost:3001/brands/').then((response) => {
+	return async dispatch => {
+		axios.get('http://localhost:3001/brands/').then(response => {
 			dispatch({ type: GET_BRANDS, payload: response.data });
 		});
 	};
 }
 
 export function getProductById(id) {
-	return async (dispatch) => {
+	return async dispatch => {
 		axios
 			.get('http://localhost:3001/products/allproducts/' + id)
-			.then((response) => {
+			.then(response => {
 				dispatch({ type: PRODUCT_DETAIL, payload: response.data });
 			});
 	};
 }
 
 export function getHighlightProd() {
-	return async (dispatch) => {
-		axios.get('http://localhost:3001/products').then((response) => {
+	return async dispatch => {
+		axios.get('http://localhost:3001/products').then(response => {
 			dispatch({ type: GET_HIGHLIGHTS, payload: response.data });
 		});
 	};
 }
 //----------------------------- USER ACTIONS -------------------------------//
 export function logIn(dato) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = await axios.post('http://localhost:3001/auth', dato);
 			console.log('login', res.data);
 			dispatch({
 				type: SUCCESS_LOGIN,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error.response);
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.msg,
+				payload: error.response.data.msg
 			});
 		}
 		setTimeout(() => {
 			dispatch({
-				type: HIDE_ALERT,
+				type: HIDE_ALERT
 			});
 		}, 3000);
 	};
@@ -369,11 +330,11 @@ export function logIn(dato) {
 
 // Retorne el Usuario autenticado en base al JWT
 export function authUser(data) {
-	return async (dispatch) => {
+	return async dispatch => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			const tokenAuth = (token) => {
+			const tokenAuth = token => {
 				if (token) {
 					axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 				} else {
@@ -389,12 +350,12 @@ export function authUser(data) {
 			if (res.data.user) {
 				dispatch({
 					type: AUTH_USER,
-					payload: res.data,
+					payload: res.data
 				});
 			} else {
 				dispatch({
 					type: ERRORTOKEN,
-					payload: res.data.msg.message,
+					payload: res.data.msg.message
 				});
 			}
 		} catch (error) {
@@ -404,15 +365,15 @@ export function authUser(data) {
 }
 
 export function logOut() {
-	return async (dispatch) => {
+	return async dispatch => {
 		dispatch({
-			type: LOG_OUT,
+			type: LOG_OUT
 		});
 	};
 }
 
 export function forgotPassword(email) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = await axios.put(
 				'http://localhost:3001/auth/forgot-password',
@@ -423,59 +384,59 @@ export function forgotPassword(email) {
 				type: FORGOT_PASSWORD,
 				payload: {
 					email,
-					hola,
-				},
+					hola
+				}
 			});
 		} catch (error) {
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.msg,
+				payload: error.response.data.msg
 			});
 		}
 		setTimeout(() => {
 			dispatch({
-				type: HIDE_ALERT,
+				type: HIDE_ALERT
 			});
 		}, 3000);
 	};
 }
 
 export function resetPassword(resetLink, newPass) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			await axios.put('http://localhost:3001/auth/reset-password', {
 				resetLink,
-				newPass,
+				newPass
 			});
 			dispatch({
 				type: RESET_PASSWORD,
 				payload: {
 					resetLink,
-					newPass,
-				},
+					newPass
+				}
 			});
 		} catch (error) {
 			dispatch({
 				type: ERROR,
-				payload: error.response.data.msg,
+				payload: error.response.data.msg
 			});
 		}
 		setTimeout(() => {
 			dispatch({
-				type: HIDE_ALERT,
+				type: HIDE_ALERT
 			});
 		}, 3000);
 	};
 }
 
 export function loginGmail(data) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = await axios.post('http://localhost:3001/authGmail', data);
 			console.log(res);
 			dispatch({
 				type: SUCCESS_LOGIN,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -483,30 +444,30 @@ export function loginGmail(data) {
 	};
 }
 //----------------------------- FILTER ACTIONS -------------------------------//
-export const filterCategory = (name) => {
+export const filterCategory = name => {
 	return { type: FILTER_CATEGORIES, payload: name };
 };
 
-export const filterStock = (name) => {
+export const filterStock = name => {
 	return { type: FILTER_STOCK, payload: name };
 };
 
-export const filterPrice = (name) => {
+export const filterPrice = name => {
 	return { type: FILTER_PRICE, payload: name };
 };
-export const filterBrand = (name) => {
+export const filterBrand = name => {
 	return { type: FILTER_BRANDS, payload: name };
 };
 
 export function getFilteredProducts(query) {
 	const { category, brand, price, page, qty, stock } = query;
 
-	return async (dispatch) => {
+	return async dispatch => {
 		axios
 			.get(
 				`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}&stock=${stock}`
 			)
-			.then((response) => {
+			.then(response => {
 				dispatch({ type: FILTERED_PRODUCTS, payload: response.data });
 			});
 	};
@@ -516,23 +477,23 @@ export const cleanFilters = () => {
 	return { type: CLEAN_FILTERS };
 };
 
-export const selectPage = (page) => {
+export const selectPage = page => {
 	return { type: SELECTED_PAGE, payload: page };
 };
 //----------------------------- SHOPPING CART ACTIONS -------------------------------//
-export const addToCart = (itemId) => {
+export const addToCart = itemId => {
 	return {
 		type: ADD_TO_CART,
-		payload: itemId,
+		payload: itemId
 	};
 };
 
-export const removeFromCart = (itemId) => {
+export const removeFromCart = itemId => {
 	return {
 		type: REMOVE_FROM_CART,
 		payload: {
-			id: itemId,
-		},
+			id: itemId
+		}
 	};
 };
 //ajustar cantidas
@@ -541,18 +502,18 @@ export const adjustQty = (itemId, value) => {
 		type: ADJUST_ITEM_QTY,
 		payload: {
 			id: itemId,
-			qty: value,
-		},
+			qty: value
+		}
 	};
 };
 
 //recibo el item entero con toda su data
-export const loadCurrentItem = (itemId) => {
+export const loadCurrentItem = itemId => {
 	return {
 		type: LOAD_CURRENT_ITEM,
 		payload: {
-			id: itemId,
-		},
+			id: itemId
+		}
 	};
 };
 
@@ -649,16 +610,16 @@ export function deleCategory(id) {
 }
 
 export function getUsers() {
-	return async (dispatch) => {
-		axios.get('http://localhost:3001/admin/users').then((response) => {
+	return async dispatch => {
+		axios.get('http://localhost:3001/admin/users').then(response => {
 			dispatch({ type: GET_USERS, payload: response.data });
 		});
 	};
 }
 
 export function getUserToEdit(email) {
-	return async (dispatch) => {
-		axios.get(`http://localhost:3001/admin/user/${email}`).then((response) => {
+	return async dispatch => {
+		axios.get(`http://localhost:3001/admin/user/${email}`).then(response => {
 			dispatch({ type: GET_USER_TO_EDIT, payload: response.data });
 		});
 	};
@@ -666,7 +627,7 @@ export function getUserToEdit(email) {
 //////////////////////////   MERCADO PAGO   ////////////////////////////////
 
 export function postCart(data) {
-	return async (dispatch) => {
+	return async dispatch => {
 		console.log('dataaa', data);
 
 		try {
@@ -677,7 +638,7 @@ export function postCart(data) {
 
 			dispatch({
 				type: SET_CART,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -686,7 +647,7 @@ export function postCart(data) {
 }
 
 export function getPayInfo(data) {
-	return async (dispatch) => {
+	return async dispatch => {
 		console.log(data);
 
 		try {
@@ -695,7 +656,7 @@ export function getPayInfo(data) {
 			console.log(res.data);
 			dispatch({
 				type: GET_PAY,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -706,10 +667,10 @@ export function getPayInfo(data) {
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
 export function getUserOrders(userId) {
-	return async (dispatch) => {
+	return async dispatch => {
 		axios
 			.get(`http://localhost:3001/orders/order/user/${userId}`)
-			.then((response) => {
+			.then(response => {
 				dispatch({ type: GET_USER_ORDERS, payload: response.data });
 			});
 	};
@@ -717,7 +678,7 @@ export function getUserOrders(userId) {
 
 export function postCartUser(data) {
 	console.log(data);
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = axios.post('http://localhost:3001/shoppingcart', data);
 			console.log(res);
@@ -728,7 +689,7 @@ export function postCartUser(data) {
 }
 
 export function getCartUser(id) {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = await axios.post(
 				'http://localhost:3001/shoppingcart/userCart',
@@ -737,7 +698,7 @@ export function getCartUser(id) {
 			console.log('id', res.data);
 			dispatch({
 				type: CREATE_CART_USER,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -745,30 +706,30 @@ export function getCartUser(id) {
 	};
 }
 
-export const addToFavorites = (prod) => {
+export const addToFavorites = prod => {
 	return {
 		type: ADD_TO_FAVORITES,
-		payload: prod,
+		payload: prod
 	};
 };
 
-export const removeFavorites = (prod) => {
+export const removeFavorites = prod => {
 	return {
 		type: REMOVE_FROM_FAVORITES,
-		payload: prod,
+		payload: prod
 	};
 };
 
 export const postUserFavorites = (userId, favorites) => {
-	return async (dispatch) => {
+	return async dispatch => {
 		try {
 			const res = await axios.post(`http://localhost:3001/favorites`, {
 				userId: userId,
-				prodId: favorites,
+				prodId: favorites
 			});
 			dispatch({
 				type: ADD_TO_FAVORITES,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -776,8 +737,8 @@ export const postUserFavorites = (userId, favorites) => {
 	};
 };
 
-export const getUserFavorites = (userId) => {
-	return async (dispatch) => {
+export const getUserFavorites = userId => {
+	return async dispatch => {
 		try {
 			const res = await axios.get(
 				`http://localhost:3001/favorites/user/${userId}`
@@ -785,7 +746,7 @@ export const getUserFavorites = (userId) => {
 			console.log('FAVORITES FORM REDUCER', res.data);
 			dispatch({
 				type: ADD_TO_FAVORITES,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
@@ -795,35 +756,35 @@ export const getUserFavorites = (userId) => {
 
 export function saveAddress(address) {
 	console.log(address);
-	return async (dispatch) => {
+	return async dispatch => {
 		dispatch({
 			type: SAVE_ADDRESS_ORDER,
-			payload: address,
+			payload: address
 		});
 	};
 }
 export function saveAmmount(ammount) {
-	return async (dispatch) => {
+	return async dispatch => {
 		dispatch({
 			type: SET_AMMOUNT,
-			payload: ammount,
+			payload: ammount
 		});
 	};
 }
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
-	return async (dispatch) => {
+	return async dispatch => {
 		dispatch({
 			type: SET_MANUAL_AUTHENTICATION,
-			payload,
+			payload
 		});
 	};
 }
 
 /// COINPAYMENTS ACTIONS
 export function postCartCrypto(data) {
-	return async (dispatch) => {
+	return async dispatch => {
 		console.log(data);
 
 		try {
@@ -836,7 +797,7 @@ export function postCartCrypto(data) {
 
 			dispatch({
 				type: SET_CART,
-				payload: res.data,
+				payload: res.data
 			});
 
 			// <a href='https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=606a89bb575311badf510a4a8b79a45e&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=1000' target='_blank' rel="noopener noreferrer">
@@ -848,20 +809,17 @@ export function postCartCrypto(data) {
 	};
 }
 
-
 /// COINPAYMENTS ACTIONS//////////////////////////////
 export function getRates() {
-	return async (dispatch) => {
-
+	return async dispatch => {
 		try {
 			const res = await axios.get('http://localhost:3001/coinpayment/rate');
 			dispatch({
 				type: GET_RATES,
-				payload: res.data,
+				payload: res.data
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
-
