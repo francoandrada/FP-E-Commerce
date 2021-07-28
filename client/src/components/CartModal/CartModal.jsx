@@ -36,8 +36,8 @@ const CartContainer = styled.div`
     background-color: #f8f9fa;
     position: absolute;
     z-index: 1000;
-    top: 157px;
-    right: 5%;
+    top: 100px;
+    right: 2%;
     border-radius: 5px;
     width: 440px;
     color: #495057;
