@@ -32,7 +32,7 @@ const AdminRoutes = ({ location }) => {
 				<Switch>
 					<Route path='/admin' exact component={Admin} />
 					{/* <Route path='/admin/orders' exact component={Admin} /> */}
-					<Route path='/admin/orders' exact component={Orders} />
+					<Route path='/admin/orders' exact component={UserOrder} />
 					<Route path='/admin/stock' exact component={Admin} />
 					<Route path='/admin/addbrands/' exact component={AddBrand} />
 					<Route path='/admin/addcategory/' exact component={AddCategory} />
@@ -46,7 +46,7 @@ const AdminRoutes = ({ location }) => {
 					<Route path='/admin/user/:email' exact component={UserPanel} />
 					<Route path='/admin/users/:email' exact component={UserPanel} />
 					<Route path='/admin/products' exact component={Table} />
-					<Route path='/admin/userorders' exact component={UserOrder} />
+					<Route path='/admin/userorders' exact component={Orders} />
 					<Route
 						path='/admin/orderdetails/:id'
 						exact
@@ -55,14 +55,12 @@ const AdminRoutes = ({ location }) => {
 				</Switch>
 				{location.pathname === '/admin' && <Charts />}
 			</>
-				) : (
-				<div>
-					<h1>FAILED ACCESS</h1>
-					<h2>Unauthorise User</h2>
-				</div>
-			)}
-
-
+			{/* ) : (
+			<div>
+				<h1>FAILED ACCESS</h1>
+				<h2>Unauthorise User</h2>
+			</div>
+			) */}
 		</>
 	);
 };
