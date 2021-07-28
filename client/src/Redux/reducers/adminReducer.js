@@ -21,6 +21,7 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
+	ORDER_DISPATCHED,
 } from '../actionsName';
 
 const initialState = {

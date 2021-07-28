@@ -16,6 +16,8 @@ const OrderDetails = () => {
 	const [orderStatus, setOrderStatus] = React.useState('');
 	const { orderDetails } = useSelector((state) => state.admin);
 
+	const email = useSelector((state) => state.user.userData.email);
+
 	React.useEffect(() => {
 		dispatch(getOrderDetails(id));
 	}, [dispatch, id]);
@@ -37,8 +39,10 @@ const OrderDetails = () => {
 	};
 
 	React.useEffect(() => {
+
 		axios.put(`http://localhost:3001/orders/order/${id}`, {
 			status: orderStatus,
+			email: email
 		});
 	}, [orderStatus]);
 
@@ -112,30 +116,31 @@ const OrderDetails = () => {
 					))
 				) : (
 					<Loader />
-				)}
-				<div>
-					{orderDetails ? (
-						<Table
-							dataToPrint={mapData(orderDetails?.orderDetails)}
-							formatColumn={COLUMNS}
-						/>
-					) : (
-						<Loader />
 					)}
-				</div>
-				<div>
-					<span>Change Status:</span>
-					{orderDetails && (
-						<Select
-							initialValue={orderDetails?.status}
-							values={['created', 'processing', 'cancelled', 'completed']}
-							onChange={changeStatus}
-						/>
-					)}
+					<div>
+						{orderDetails ? (
+							<Table
+								dataToPrint={mapData(orderDetails?.orderDetails)}
+								formatColumn={COLUMNS}
+							/>
+						) : (
+							<Loader />
+						)}
+					</div>
+					<div>
+						<span>Change Status:</span>
+						{orderDetails && (
+							<Select
+								initialValue={orderDetails?.status}
+								values={['created', 'cancelled','completed', 'dispatched']}
+								onChange={changeStatus}
+							/>
+						)}
+					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	};
 
 export default OrderDetails;
+

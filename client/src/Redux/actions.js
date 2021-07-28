@@ -55,7 +55,14 @@ import {
 	GET_ALL_DATA_ABOUT_AN_ORDER,
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
-	GET_RATES
+	GET_RATES,
+	INPUT_SUCCESS,
+	INPUT_FAIL,
+	SESSION_SUCCESS,
+	SESSION_FAIL,
+	MESSAGE_SUCCESS,
+	MESSAGE_FAIL,
+	ORDER_DISPATCHED,
 } from './actionsName';
 
 import axios from 'axios';
@@ -695,7 +702,7 @@ export function getCartUser(id) {
 				'http://localhost:3001/shoppingcart/userCart',
 				{ userId: id }
 			);
-			console.log('id', res.data);
+			
 			dispatch({
 				type: CREATE_CART_USER,
 				payload: res.data
@@ -771,6 +778,7 @@ export function saveAmmount(ammount) {
 		});
 	};
 }
+
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {

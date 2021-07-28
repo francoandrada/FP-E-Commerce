@@ -22,6 +22,7 @@
 .paymentButton {
 	width: 100%;
 	margin-top: 20px;
+	margin: 1rem;
 	padding: 10px;
 	background-color: #ff3c4a;
 	color: white;
@@ -41,6 +42,7 @@
 	width: 100%;
 	margin-top: 20px;
 	padding: 10px;
+	margin: 1rem;
 	background-color: #ffbc3c;
 	color: black;
 	font-weight: bold;

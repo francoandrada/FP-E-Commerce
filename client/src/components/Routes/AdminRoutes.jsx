@@ -55,12 +55,14 @@ const AdminRoutes = ({ location }) => {
 				</Switch>
 				{location.pathname === '/admin' && <Charts />}
 			</>
-			{/*	) : (
+				) : (
 				<div>
 					<h1>FAILED ACCESS</h1>
 					<h2>Unauthorise User</h2>
 				</div>
-			)} */}
+			)}
+
+
 		</>
 	);
 };

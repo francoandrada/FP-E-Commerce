@@ -10,19 +10,21 @@ const WebHook = () => {
 	const userData = useSelector((state) => state.user.userData);
 	const cart = useSelector((state) => state.cart.cart);
 
-	
+	console.log(userData.email)
 	const dispatch = useDispatch();
 
-	
-	localStorage.removeItem('cart');
+	// console.log(id)
+	// console.log(status)
 
 		
 
 	useEffect(() => {
-		dispatch(getPayInfo({id, email: userData.email, items: cart} ));
-		localStorage.removeItem('cart');
+		dispatch(getPayInfo({id: id, email: userData.email}));
 	}, []);
 
+	useEffect(() => {
+		localStorage.removeItem('cart');
+	}, []);
 	return (
 
 		<div class=' d-sm-flex justify-content-center m-5 text-center'>

@@ -12,7 +12,7 @@ const AllReviews = () => {
 
 	return (
 		<div className={style.container}>
-			<h4 className={style.tit}>Customer Reviews</h4>
+			<h4 className={style.title}>Customer Reviews</h4>
 			{review === undefined ? (
 				<p>There are not reviews yet</p>
 			) : (

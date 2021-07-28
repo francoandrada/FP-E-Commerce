@@ -4,7 +4,7 @@ const { Review, User, Product } = require('../db');
 //------------------------CREAR LA REVIEW------------------------
 const newReview = async function newReview(req, res) {
 	const { userId, productId, description, stars } = req.body;
-	console.log(req.body);
+
 	try {
 		var userFind = await User.findOne({
 			where: { userId: userId },
@@ -34,7 +34,6 @@ const newReview = async function newReview(req, res) {
 //------------------------PROMEDIO DE ESTRELLAS------------------------
 const getAvergedStars = async (req, res) => {
 	const { productId } = req.body;
-	console.log('PRODUCT ID', productId);
 	try {
 		if (productId !== undefined) {
 			const prom = await Review.findAll({
@@ -54,7 +53,6 @@ const getAvergedStars = async (req, res) => {
 //SELECT "stars" , count(*) as NUM FROM public.reviews GROUP BY stars
 const getAllStars = async (req, res) => {
 	const { productId } = req.body;
-	console.log('PRODUCT ID', productId);
 	try {
 		if (productId !== undefined) {
 			const prom = await Review.findAll({
@@ -68,7 +66,6 @@ const getAllStars = async (req, res) => {
 				group: ['stars'],
 			});
 
-			console.log(prom);
 			res.send(prom);
 		}
 	} catch (error) {
@@ -83,7 +80,7 @@ const getAllStars = async (req, res) => {
 //------------------------TODAS LAS REVIEWS------------------------
 const getAllReviews = async function getAllReviews(req, res) {
 	const { productId } = req.body;
-	console.log(productId);
+
 	try {
 		const allReviews = await Review.findAll({
 			where: {
