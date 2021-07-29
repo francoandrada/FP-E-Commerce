@@ -34,8 +34,7 @@ const getOrderById = async function getOrderById(req, res, next) {
 const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 	const id = parseInt(req.params.id);
 	const newStatus = req.body.status;
-	const email  = req.body.email;
-	console.log(email)
+	const email = req.body.email;
 
 	try {
 		if (newStatus && newStatus.trim()) {
@@ -45,45 +44,44 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 		const updatedStatus = await orderById.update({
 					status: newStatus,
 				})
-				.then( async() => {
-			
-						const Orders = await Order.findAll({
-							where: { orderId: id, status: 'dispatched' },
-							attributes: ['userId', 'status'],
-						});
-						if (Orders) {
-							let transporter = nodemailer.createTransport({
-								service: 'gmail',
-								auth: {
-									type: 'OAuth2',
-									user: process.env.MAIL_USERNAME,
-									pass: process.env.MAIL_PASSWORD,
-									clientId: process.env.OAUTH_CLIENTID,
-									clientSecret: process.env.OAUTH_CLIENT_SECRET,
-									refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-								},
-							});
-							var mailOptions = {
-								from: 'hardwarecommerce@gmail.com',
-								to: email,
-								subject: 'Order Confirmation',
-								html: `
-					<h1>ORDEN DESPACHADAAAAAAAAAAAA</H1>
-				 
-				 `,
-							};
-
-							transporter.sendMail(mailOptions, function (err, data) {
-								if (err) {
-									console.log('Error ' + err);
-								} else {
-									console.log('Email sent successfully');
-								}
-							});
-						}
+				.then(async () => {
+					const Orders = await Order.findAll({
+						where: { orderId: id, status: 'dispatched' },
+						attributes: ['userId', 'status'],
 					});
-					// res.status(200).json(updatedStatus.dataValues.status);
-				//  });
+					if (Orders) {
+						let transporter = nodemailer.createTransport({
+							service: 'gmail',
+							auth: {
+								type: 'OAuth2',
+								user: process.env.MAIL_USERNAME,
+								pass: process.env.MAIL_PASSWORD,
+								clientId: process.env.OAUTH_CLIENTID,
+								clientSecret: process.env.OAUTH_CLIENT_SECRET,
+								refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+							},
+						});
+						var mailOptions = {
+							from: 'hardwarecommerce@gmail.com',
+							to: email,
+							subject: 'Order Confirmation',
+							html: `
+					<h1>ORDEN DESPACHADAAAAAAAAAAAA</H1>
+
+				 `,
+						};
+
+						transporter.sendMail(mailOptions, function (err, data) {
+							if (err) {
+								console.log('Error ' + err);
+							} else {
+								console.log('Email sent successfully');
+							}
+						});
+					}
+				});
+			// res.status(200).json(updatedStatus.dataValues.status);
+			//  });
 		}
 	} catch (error) {
 		next(error);
@@ -129,12 +127,10 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 	}
 };
 
-
-
 module.exports = {
 	getOrders,
 	getOrderById,
 	modifyOrderStatus,
-	
+
 	findUserOrders,
 };

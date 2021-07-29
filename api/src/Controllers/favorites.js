@@ -22,7 +22,7 @@ const addFavorites = async function addFavorites(req, res) {
 					await userFound.addProduct(prod)
 							
 				}
-		res.status(200).send('cart created')
+
 	
 	} catch (error) {
 		console.log(error);
@@ -66,6 +66,38 @@ const getUserfavorites = async function getUserfavorites(req, res) {
 	}
 };
 
+//----------------------  UPDATES FAVORITES  ---------------------------//
+
+const updateFavorites = async function updateFavorites(req, res) {
+	const { userId, favorites } = req.body;
+	
+	try {
+		const userFound = await User.findOne({
+				where: {
+					userId: userId,
+				},
+			})
+		const productToRemove = await userFound.getProducts();
+		const removed = await userFound.removeProducts(productToRemove)
+
+		for (let i=0; i<favorites.length; i++){
+						
+			let prod = await Product.findOne({
+				where:{id: favorites[i].id}
+				})
+
+				await userFound.addProduct(prod)
+						
+			}
+			
+		res.status(200).send('favorites updated');
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+
+
 
 
 
@@ -73,5 +105,6 @@ module.exports = {
 	addFavorites,
     getAllFavorites,
     getUserfavorites,
+	updateFavorites,
 	
 };

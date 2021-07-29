@@ -1,6 +1,6 @@
-const { DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
-const { INTEGER,  TEXT, ENUM } = DataTypes;
+const { INTEGER, TEXT, ENUM } = DataTypes;
 module.exports = (sequilize) => {
 	sequilize.define('order', {
 		orderId: {
@@ -13,14 +13,20 @@ module.exports = (sequilize) => {
 			allowNull: false,
 		},
 		status: {
-			type: ENUM('created', 'processing', 'cancelled', 'completed', 'dispatched'),
+			type: ENUM(
+				'created',
+				'processing',
+				'cancelled',
+				'completed',
+				'dispatched'
+			),
 			allowNull: true,
 			defaultValue: 'created',
 		},
 		address: {
 			type: TEXT,
 			allowNull: false,
-			defaultValue: 'pick up at the store'
+			defaultValue: 'pick up at the store',
 		},
 	});
 };
