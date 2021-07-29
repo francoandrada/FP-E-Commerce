@@ -13,7 +13,8 @@ export const PagingBox = (props) => {
 
 	let category = useSelector((state) => state.category.selectedCategory);
 	let brand = useSelector((state) => state.brands.selectBrand);
-	let price = useSelector((state) => state.price.order);
+	let order_type = useSelector((state) => state.order.order_type);
+	let order_dir= useSelector((state) => state.order.order_dir);
 	let stock = useSelector((state) => state.stock.order);
 
 	useEffect(() => {
@@ -26,7 +27,11 @@ export const PagingBox = (props) => {
 
 	useEffect(() => {
 		dispatch(selectPage(1));
-	}, [price]);
+	}, [order_type]);
+
+	useEffect(() => {
+		dispatch(selectPage(1));
+	}, [order_dir]);
 
 	useEffect(() => {
 		dispatch(selectPage(1));

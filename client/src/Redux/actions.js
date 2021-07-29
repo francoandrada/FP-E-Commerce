@@ -17,7 +17,7 @@ import {
 	FILTER_CATEGORIES,
 	FILTER_BRANDS,
 	CLEAN_SUGGESTIONS,
-	FILTER_PRICE,
+	ORDER_PRODUCTS,
 	FILTERED_PRODUCTS,
 	SELECTED_PAGE,
 	CLEAN_FILTERS,
@@ -63,6 +63,7 @@ import {
 	MESSAGE_SUCCESS,
 	MESSAGE_FAIL,
 	ORDER_DISPATCHED,
+	FILTER_RATING
 } from './actionsName';
 
 import axios from 'axios';
@@ -459,20 +460,22 @@ export const filterStock = name => {
 	return { type: FILTER_STOCK, payload: name };
 };
 
-export const filterPrice = name => {
-	return { type: FILTER_PRICE, payload: name };
+export const orderProducts = name => {
+	return { type: ORDER_PRODUCTS, payload: name };
 };
+
 export const filterBrand = name => {
 	return { type: FILTER_BRANDS, payload: name };
 };
 
 export function getFilteredProducts(query) {
-	const { category, brand, price, page, qty, stock } = query;
+	console.log(query)
+	const { category, brand, order_type, order_dir, page, qty, stock } = query;
 
 	return async dispatch => {
 		axios
 			.get(
-				`http://localhost:3001/catalog?category=${category}&brand=${brand}&price=${price}&page=${page}&qty=${qty}&stock=${stock}`
+				`http://localhost:3001/catalog?category=${category}&brand=${brand}&order_type=${order_type}&order_dir=${order_dir}&page=${page}&qty=${qty}&stock=${stock}`
 			)
 			.then(response => {
 				dispatch({ type: FILTERED_PRODUCTS, payload: response.data });

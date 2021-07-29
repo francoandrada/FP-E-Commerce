@@ -37,14 +37,16 @@ function Products() {
 	let stockS = useSelector((state) => state.stock.order);
 	let categoryS = useSelector((state) => state.category.selectedCategory);
 	let brandS = useSelector((state) => state.brands.selectedBrand);
-	let priceS = useSelector((state) => state.price.order);
+	let order_typeS = useSelector((state) => state.order.order_type);
+	let order_dirS = useSelector((state) => state.order.order_dir);
 	let actualPage = useSelector((state) => state.product.page);
 	let productsPerPage = 9;
 
 	let [query, setQuery] = useState({
 		category: categoryS,
 		brand: brandS,
-		price: priceS,
+		order_type: order_typeS,
+		order_dir: order_dirS,
 		page: actualPage,
 		qty: productsPerPage,
 		stock: stockS,
@@ -54,7 +56,8 @@ function Products() {
 		setQuery({
 			category: categoryS,
 			brand: brandS,
-			price: priceS,
+			order_type: order_typeS,
+			order_dir: order_dirS,
 			page: actualPage,
 			qty: productsPerPage,
 			stock: stockS,
@@ -82,9 +85,16 @@ function Products() {
 	useEffect(() => {
 		setQuery({
 			...query,
-			price: priceS,
+			order_type: order_typeS,
 		});
-	}, [priceS]);
+	}, [order_typeS]);
+
+	useEffect(() => {
+		setQuery({
+			...query,
+			order_dir: order_dirS,
+		});
+	}, [order_dirS]);
 
 	useEffect(() => {
 		setQuery({

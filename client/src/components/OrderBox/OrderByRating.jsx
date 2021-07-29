@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { orderProducts } from '../../Redux/actions';
-import styles from './OrderByPrice.module.css';
+import styles from './OrderByRating.module.css';
 
-function OrderByPrice() {
-
-	const dispatch = useDispatch();
-
-	//cada vez que user clickea en categoría, el orden se resetea
+function OrderByRating() {
+	
+    const dispatch = useDispatch();
+	
+    //cada vez que user clickea en categoría, el orden se resetea
 	let category = useSelector(state => state.category.selectedCategory);
 	useEffect(() => unCheck(''), [category]);
 
@@ -15,18 +15,17 @@ function OrderByPrice() {
 	let brand = useSelector(state => state.brands.selectedBrand);
 	useEffect(() => unCheck(''), [brand]);
 
-
-	const [priceChecked, setPriceChecked] = useState({
+	const [ratingChecked, setRatingChecked] = useState({
 		order_type: '',
 		order_dir: ''
 	});
 
-	useEffect(() => unCheck(priceChecked.order_dir), [priceChecked]);
+	useEffect(() => unCheck(ratingChecked.order_dir), [ratingChecked]);
 
-	useEffect(() => dispatch(orderProducts(priceChecked)), [priceChecked]);
+	useEffect(() => dispatch(orderProducts(ratingChecked)), [ratingChecked]);
 
 	const unCheck = category => {
-		let boxes = document.getElementsByClassName('orderE');
+		let boxes = document.getElementsByClassName('orderR');
 		for (let i = 0; i < boxes.length; i++) {
 			boxes[i].id === category
 				? (boxes[i].checked = true)
@@ -35,13 +34,13 @@ function OrderByPrice() {
 	};
 
 	const onClickedBox = event => {
-		console.log(event)
+        console.log(event)
 		event.target.checked
-			? setPriceChecked({
+			? setRatingChecked({
 					order_type: event.target.name,
 					order_dir: event.target.id
 			  })
-			: setPriceChecked({
+			: setRatingChecked({
 					order_type: '',
 					order_dir: ''
 			  });
@@ -49,14 +48,14 @@ function OrderByPrice() {
 
 	// console.log(categories.products)
 	return (
-		<div className={styles.divPrice}>
-			<h6 className={styles.titlePrice}>Order by Price</h6>
+		<div className={styles.divrating}>
+			<h6 className={styles.titlerating}>Order by rating</h6>
 			<hr></hr>
 			<div className='form-check'>
 				<input
-					className={`${'form-check-input'} ${'orderE'}`}
+					className={`${'form-check-input'} ${'orderR'}`}
 					type='checkbox'
-					name='price'
+					name='rating'
 					id='descending'
 					// checked='true'
 					onClick={event => onClickedBox(event)}
@@ -68,9 +67,9 @@ function OrderByPrice() {
 			</div>
 			<div className='form-check'>
 				<input
-					className={`${'form-check-input'} ${'orderE'}`}
+					className={`${'form-check-input'} ${'orderR'}`}
 					type='checkbox'
-					name='price'
+					name='rating'
 					id='ascending'
 					// checked='true'
 					onClick={event => onClickedBox(event)}
@@ -84,4 +83,4 @@ function OrderByPrice() {
 	);
 }
 
-export default OrderByPrice;
+export default OrderByRating;

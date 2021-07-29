@@ -5,6 +5,7 @@ import styles from './FilterCategories.module.css';
 import OrderByPrice from '../OrderBox/OrderByPrice';
 import FilterStock from '../FilterStock/FilterStock';
 import FilterBrands from '../FilterBrand/FilterBrands';
+import OrderByRating from '../OrderBox/OrderByRating';
 
 function FilterCategories() {
 	const categoriesName = useSelector((state) => state.category.allCategories);
@@ -68,7 +69,7 @@ function FilterCategories() {
 			<hr></hr>
 			<OrderByPrice id={styles.filterContainer} />
 			<hr></hr>
-			<h6 className={styles.title}>Order by rating</h6>
+			<OrderByRating id={styles.filterContainer} />
 			<hr></hr>
 			<h6 className={styles.title}>Filter by stock</h6>
 			<FilterStock id={styles.filterContainer} />

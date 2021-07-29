@@ -3,7 +3,7 @@ import userReducer from './reducers/userReducer';
 import productReducer from './reducers/productReducer';
 import categoryReducer from './reducers/categoryReducer';
 import brandsReducer from './reducers/brandReducer';
-import priceReducer from './reducers/priceReducer';
+import orderReducer from './reducers/orderReducer';
 import cartReducer from './reducers/cartReducer';
 import adminReducer from './reducers/adminReducer';
 import stockReducer from './reducers/stockReducer';
@@ -16,7 +16,7 @@ export default combineReducers({
 	product: productReducer,
 	category: categoryReducer,
 	brands: brandsReducer,
-	price: priceReducer,
+	order: orderReducer,
 	cart: cartReducer,
 	admin: adminReducer,
 	stock: stockReducer,

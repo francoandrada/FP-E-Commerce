@@ -186,7 +186,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 	//req.query = { category: 'pc', brand: 'asus', price: 'descending', page: '1' }
 
 	try {
-		const { category, brand, price, page, qty, stock, rating } = req.query;
+		const { category, brand, order_type, order_dir, page, qty, stock } = req.query;
 
 		//esto llegará por query
 		const pageNumber = page || 1;
@@ -195,7 +195,6 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			include: [{ model: Category }, { model: Brand }, {model: Review, attributes: ['stars']}],
 		});
 
-		console.log(allProduct)
 		
 		let result = [];
 
@@ -220,7 +219,8 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			if (stock === 'false') {
 				allProduct1 = allProduct1.filter((product) => product.stock <= 0);
 			}
-			if (price === 'ascending') {
+
+			if (order_type === 'price' && order_dir === 'ascending') {
 				allProduct1.sort(function (a, b) {
 					if (a.price > b.price) {
 						return 1;
@@ -233,7 +233,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				});
 			}
 
-			if (price === 'descending') {
+			if (order_type === 'price' && order_dir === 'descending') {
 				allProduct1.sort(function (b, a) {
 					if (b.price > a.price) {
 						return -1;
@@ -254,7 +254,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				return 0
 			}
 
-			if (rating === 'ascending') {
+			if (order_type === 'rating' && order_dir === 'ascending') {
 				allProduct1.sort(function (a, b) {
 					if (starsAvg(a.reviews) > starsAvg(b.reviews)) {
 						return 1;
@@ -267,7 +267,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				});
 			}
 
-			if (rating === 'descending') {
+			if (order_type === 'rating' && order_dir === 'descending') {
 				allProduct1.sort(function (b, a) {
 					if (starsAvg(b.reviews) > starsAvg(a.reviews)) {
 						return -1;
