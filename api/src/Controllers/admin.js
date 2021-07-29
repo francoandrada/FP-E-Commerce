@@ -107,6 +107,7 @@ async function putProduct(req, res, next) {
 		await product.setBrand(brand);
 		await product.addImages(filteredImages);
 		await product.setCategories(category);
+		console.log(product)
 		res.send(product);
 		
 	} catch (error) {
