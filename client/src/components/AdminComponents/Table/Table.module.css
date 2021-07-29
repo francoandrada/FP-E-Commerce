@@ -1,3 +1,15 @@
+.background {
+	background-color: #eee;
+	background-attachment: fixed;
+	width: 100%;
+}
+
+.Container {
+	width: 863px;
+	margin-right: 10%;
+	margin-left: 10%;
+}
+
 .tableEcommerce {
 	font-family: 'Arial';
 	border-collapse: collapse;
@@ -6,31 +18,45 @@
 	margin-left: 20%;
 	border-radius: 0px 0px 20px 20px;
 	box-shadow: 0 10px 30px rgb(172, 171, 171);
-}
-.background {
-	background-color: #eee;
-	background-attachment: fixed;
 	width: 100%;
 }
-.Container {
-	margin-right: 10%;
-	margin-left: 10%;
+
+.productsPanel {
+	height: 100px;
+	background: white;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	/* width: 863px; */
+	width: 100%;
+	margin-left: 20%;
+	border-radius: 10px 10px 0 0;
+	flex-direction: column;
+	box-shadow: 0 0px 30px rgb(172, 171, 171);
 }
 
 .filterContainer {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	width: 100%;
+	padding: 10px;
 }
+
 .btnContainer {
 	display: flex;
 	flex-direction: row-reverse;
-	margin: 2rem;
+	/* margin: 2rem; */
+	margin-bottom: 16px;
+	width: 100%;
+	margin-left: 20%;
 }
+
 .searchbar {
 	padding: 4px;
 	border-radius: 8px;
 	border: 1px solid rgb(158, 158, 158);
 }
+
 .btnContainer button {
 	padding: 6px 10px;
 	border-radius: 10px;
@@ -39,6 +65,7 @@
 	color: white;
 	font-weight: 700;
 }
+
 .tableEcommerce td,
 .tableEcommerce th {
 	border-bottom: 0.5px solid rgba(128, 128, 128, 0.213);

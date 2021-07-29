@@ -7,8 +7,8 @@
 .orderUserContainer {
 	background-color: var(--orderUserTableBackGround);
 	padding: 20px;
-	margin-left: 200px;
-	margin-right: 150px;
+	margin-left: 250px;
+	margin-right: 100px;
 	border-radius: 10px 10px 4px 4px;
 }
 
