@@ -4,7 +4,7 @@ import { /*useDispatch,*/ useSelector } from 'react-redux';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import ProductCartModal from './ProductCartModal';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { formatNumber } from '../../helper/priceFormater';
 
@@ -15,7 +15,6 @@ const Icon = styled.div`
     justify-content: flex-end;
     margin: 0em 10% 0em 0em;
     cursor: pointer;
-
     @media only screen and (max-width: 430px) {
         font-size:20px;
         margin-right: 0.5em
@@ -30,9 +29,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const CartContainer = styled.div`
-      /* display: flex;
-    justify-content: flex-end;
-    margin: 0% 10% 0% 0%; */
     background-color: #f8f9fa;
     position: absolute;
     z-index: 1000;
@@ -42,7 +38,6 @@ const CartContainer = styled.div`
     width: 440px;
     color: #495057;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 72%);
-
     @media only screen and (max-width: 430px) {
         width:100%;
         margin: 0 auto;
@@ -58,26 +53,22 @@ const CartHeader = styled.div`
     padding: .5em 1em;
     align-items: center;
     display: flex;
-
     h3 {
         width: 50%;
         text-align: center;
     }
-
     div {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     flex-direction: column;
     width: 80%;
-
     span {
         font-size: 25px;
         display: block;
     font-weight: 700;
     color: #ff3c4a;
     }
-
     p {
         margin-right: .5em;
     font-weight: 700;
@@ -94,7 +85,6 @@ const ProductsCart = styled.section`
         list-style: none;
         padding: 0px;
     }
-
     @media only screen and (max-width: 430px) {
         max-height:70%;
         height: 70%
@@ -121,7 +111,6 @@ const ButtonClose = styled.section`
     cursor: pointer;
     border: 1px solid;
     border-radius: 5px;
-
     &:hover {
         background-color:#919090;
         color: white;
@@ -130,7 +119,7 @@ const ButtonClose = styled.section`
 `;
 
 const ButtonPay = styled.section`
-        width: 120px;
+    width: 120px;
     border: 1px solid;
     height: 40px;
     display: flex;
@@ -142,16 +131,18 @@ const ButtonPay = styled.section`
     font-size: 20px;
     font-weight: 400;
     cursor: pointer;
-
     &:hover {
         background-color: #d4202d;
         transition: 200ms;
     }
 `;
 
+
 function CartModal() {
 	const [active, setActive] = useState(false);
 	const cartProducts = useSelector((state) => state.cart.cart);
+    const ref = useRef()
+
 
 	const toggle = () => {
 		if (cartProducts && cartProducts.length !== 0) {
@@ -166,6 +157,21 @@ function CartModal() {
 	}, [active, cartProducts]);
 
 
+    useEffect(() => {
+        const checkIfClickedOutside = e => {
+          if (active && ref.current && !ref.current.contains(e.target)) {
+            setActive(false)
+          }
+        }
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+          // Cleanup the event listener
+          document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+      }, [active])
+    
+   
+
 	let subtotal = function () {
 		let subTotal = 0;
 		cartProducts &&
@@ -179,11 +185,8 @@ function CartModal() {
 	let formatsubtotal = formatNumber.new(subtot, '$');
 
 	return (
-		<div
-			ref={(node) => {
-				node = node;
-			}}
-		>
+        <div ref={ref}>
+            <div>
 			<GlobalStyle />
 			<Icon onClick={toggle}>
 				<FaShoppingCart />
@@ -227,6 +230,7 @@ function CartModal() {
 					</CartPay>
 				</CartContainer>
 			)}
+            </div>
 		</div>
 	);
 }
