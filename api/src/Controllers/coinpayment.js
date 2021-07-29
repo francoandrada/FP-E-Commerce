@@ -112,6 +112,11 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 						if (productFind) {
 							await newDetail.setProduct(productFind.dataValues.id);
+							let count = productFind.dataValues.stock - prod.qty
+					
+							await productFind.update({
+							stock: 	count
+							})
 						}
 						await order.addOrderDetail(newDetail.dataValues.id);
 
@@ -152,14 +157,153 @@ const ipnUpdate = async (req, res, next) => {
 		const orderById = await Order.findOne({
 			where: { orderId: id },
 		});
+		res.send(id)
 		if(newStatus===100){
 			var updatedStatus = await orderById.update({
 				status: 'completed',
+			});
+
+			let transporter = nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+					type: 'OAuth2',
+					user: process.env.MAIL_USERNAME,
+					pass: process.env.MAIL_PASSWORD,
+					clientId: process.env.OAUTH_CLIENTID,
+					clientSecret: process.env.OAUTH_CLIENT_SECRET,
+					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+				},
+			});
+		
+			var mailOptions = {
+				from: 'hardwarecommerce@gmail.com',
+				to: email,
+				subject: 'Order Confirmation',
+				html: `
+				<!DOCTYPE html>
+				<html>
+				<head>
+				<style>
+				table {
+				  font-family: arial, sans-serif;
+				  border-collapse: collapse;
+				  width: 100%;
+				}
+		
+				td, th {
+				  border: 1px solid #dddddd;
+				  text-align: left;
+				  padding: 8px;
+				}
+		
+				tr:nth-child(even) {
+				  background-color: #dddddd;
+				}
+				</style>
+				</head>
+								<body style="background-color: #424242; font-family: 'Roboto', sans-serif; ">
+				<div style="background-color: #C6C6C6; padding: 10px ">
+								<h1 style="color: #FF3C4A; text-align: center;">Hardware Store</h1>
+										</div>
+		
+				<div style="background-color: white; padding: 10px; margin: 10px 0; ">
+				 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">Thank you for your purchase!</p>
+				<h3>ORDER CONFIRMATION </h3>
+		
+						  <h3>ORDER SUMMARY </h3>
+						  </div>
+		
+				<div style="background-color: #424242; color: white; padding: 10px;">
+		
+				</div>
+		
+										</div>
+								</body>
+								</html>
+		
+			 `,
+			};
+		
+			transporter.sendMail(mailOptions, function (err, data) {
+				if (err) {
+					console.log('Error ' + err);
+				} else {
+					res.send(console.log(api));
+				}
 			});
 		} else if (newStatus<0){
 			var updatedStatus = await orderById.update({
 				status: 'cancelled',
 			});
+
+
+			let transporter = nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+					type: 'OAuth2',
+					user: process.env.MAIL_USERNAME,
+					pass: process.env.MAIL_PASSWORD,
+					clientId: process.env.OAUTH_CLIENTID,
+					clientSecret: process.env.OAUTH_CLIENT_SECRET,
+					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+				},
+			});
+		
+			var mailOptions = {
+				from: 'hardwarecommerce@gmail.com',
+				to: email,
+				subject: 'Order Confirmation',
+				html: `
+				<!DOCTYPE html>
+				<html>
+				<head>
+				<style>
+				table {
+				  font-family: arial, sans-serif;
+				  border-collapse: collapse;
+				  width: 100%;
+				}
+		
+				td, th {
+				  border: 1px solid #dddddd;
+				  text-align: left;
+				  padding: 8px;
+				}
+		
+				tr:nth-child(even) {
+				  background-color: #dddddd;
+				}
+				</style>
+				</head>
+								<body style="background-color: #424242; font-family: 'Roboto', sans-serif; ">
+				<div style="background-color: #C6C6C6; padding: 10px ">
+								<h1 style="color: #FF3C4A; text-align: center;">Hardware Store</h1>
+										</div>
+		
+				<div style="background-color: white; padding: 10px; margin: 10px 0; ">
+				 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">Thank you for your purchase!</p>
+				<h3>ORDER CONFIRMATION </h3>
+		
+						  <h3>ORDER SUMMARY </h3>
+						  </div>
+	
+				</div>
+		
+										</div>
+								</body>
+								</html>
+		
+			 `,
+			};
+		
+			transporter.sendMail(mailOptions, function (err, data) {
+				if (err) {
+					console.log('Error ' + err);
+				} else {
+					res.send(console.log(api));
+				}
+			});
+		
 		} else if (newStatus>=0 && newStatus<100){
 			var updatedStatus = await orderById.update({
 				status: 'processing',

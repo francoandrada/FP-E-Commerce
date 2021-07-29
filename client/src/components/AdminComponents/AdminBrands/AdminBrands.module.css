@@ -27,3 +27,8 @@
 .btnDelete {
 	font-size: 18px;
 }
+
+.paginationCenter {
+	width: 100%;
+	background-color: blue;
+}

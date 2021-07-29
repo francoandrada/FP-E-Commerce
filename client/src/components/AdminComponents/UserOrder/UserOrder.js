@@ -11,10 +11,10 @@ import Table from '../TableComponent/TableComponent';
 import Select from '../../Select/Select';
 import Pagination from '../TablePagination/TablePagination';
 import UserOrderLogic from './UserOrderLogic';
-import Admin from '../Admin/Admin'
+import Admin from '../Admin/Admin';
 import styles from './UserOrder.module.css';
 import { Link } from 'react-router-dom';
-import { MdArrowBack } from 'react-icons/md'
+import { MdArrowBack } from 'react-icons/md';
 const UserOrder = () => {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = React.useState('');
@@ -60,7 +60,7 @@ const UserOrder = () => {
 					<MdArrowBack />
 				</Link>
 			</div> */}
-				{/* <div>
+			{/* <div>
 				<Admin />
 			</div> */}
 			<div className={styles.orderUserContainer}>
@@ -83,27 +83,34 @@ const UserOrder = () => {
 						<Select
 							initialValue={filterByOrderStatus}
 							onChange={filterHandle}
-							values={['all', 'created', 'processing', 'cancelled', 'completed']}
+							values={[
+								'all',
+								'created',
+								'processing',
+								'cancelled',
+								'completed',
+								'dispatched'
+							]}
 						/>
 					</div>
+					{userWithOrder ? (
+						<Table
+							dataToPrint={mapData(userWithOrder?.products)}
+							formatColumn={COLUMNS}
+						/>
+					) : (
+						<Loader />
+					)}
+					{userWithOrder && userWithOrder?.products.length === 0 && (
+						<h3 className={styles.orderUserNoResults}>No data to Render</h3>
+					)}
+					{userWithOrder && userWithOrder?.totalPages > 1 && (
+						<Pagination
+							totalPages={userWithOrder?.totalPages - 1}
+							paginate={paginate}
+						/>
+					)}
 				</div>
-				{userWithOrder ? (
-					<Table
-						dataToPrint={mapData(userWithOrder?.products)}
-						formatColumn={COLUMNS}
-					/>
-				) : (
-					<Loader />
-				)}
-				{userWithOrder && userWithOrder?.products.length === 0 && (
-					<h3 className={styles.orderUserNoResults}>No data to Render</h3>
-				)}
-				{userWithOrder && userWithOrder?.totalPages > 1 && (
-					<Pagination
-						totalPages={userWithOrder?.totalPages - 1}
-						paginate={paginate}
-					/>
-				)}
 			</div>
 		</>
 	);
