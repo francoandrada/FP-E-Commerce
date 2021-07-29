@@ -106,7 +106,6 @@ const LogIn = () => {
 		userId: userId,
 		prodId: array,
 	};
-	console.log(bodyObject);
 
 	useEffect(() => {
 		if (authenticated) {
@@ -127,6 +126,7 @@ const LogIn = () => {
 			password: Yup.string().required('Enter a password'),
 		}),
 		onSubmit: (values) => {
+			console.log('LOGINNNNN',values);
 			dispatch(logIn(values));
 		},
 	});
