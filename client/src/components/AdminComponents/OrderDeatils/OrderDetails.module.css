@@ -2,7 +2,11 @@
 	--orderDetailTitle: #e43232;
 	--orderDetailBC: white;
 }
-
+.btnBackContainer {
+	font-size: 40px;
+	margin-left: -20em;
+	margin-bottom: 1em;
+}
 .orderDetailsContainer {
 	box-sizing: border-box;
 	display: flex;

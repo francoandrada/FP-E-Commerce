@@ -11,9 +11,10 @@ import Table from '../TableComponent/TableComponent';
 import Select from '../../Select/Select';
 import Pagination from '../TablePagination/TablePagination';
 import UserOrderLogic from './UserOrderLogic';
-
+import Admin from '../Admin/Admin'
 import styles from './UserOrder.module.css';
-
+import { Link } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md'
 const UserOrder = () => {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = React.useState('');
@@ -53,48 +54,58 @@ const UserOrder = () => {
 	const paginate = pageNumber =>
 		dispatch(changePageOfUserOrderTable(pageNumber));
 	return (
-		<div className={styles.orderUserContainer}>
-			<div className={styles.orderUserPanel}>
-				<div className={styles.orderUserFeatures}>
-					<input
-						className={styles.orderUserInput}
-						placeholder='Search...'
-						type='text'
-						value={searchValue}
-						onChange={searchHandle}
-					/>
+		<>
+			{/* <div className={styles.btnBackContainer}>
+				<Link to='/admin/categories'>
+					<MdArrowBack />
+				</Link>
+			</div> */}
+				{/* <div>
+				<Admin />
+			</div> */}
+			<div className={styles.orderUserContainer}>
+				<div className={styles.orderUserPanel}>
+					<div className={styles.orderUserFeatures}>
+						<input
+							className={styles.orderUserInput}
+							placeholder='Search...'
+							type='text'
+							value={searchValue}
+							onChange={searchHandle}
+						/>
 
-					<Select
-						initialValue={tableOrderUserPaginationSize}
-						onChange={changePaginationSizeHandle}
-						values={[5, 10, 20, 50, 100]}
-					/>
+						<Select
+							initialValue={tableOrderUserPaginationSize}
+							onChange={changePaginationSizeHandle}
+							values={[5, 10, 20, 50, 100]}
+						/>
 
-					<Select
-						initialValue={filterByOrderStatus}
-						onChange={filterHandle}
-						values={['all', 'created', 'processing', 'cancelled', 'completed']}
-					/>
+						<Select
+							initialValue={filterByOrderStatus}
+							onChange={filterHandle}
+							values={['all', 'created', 'processing', 'cancelled', 'completed']}
+						/>
+					</div>
 				</div>
+				{userWithOrder ? (
+					<Table
+						dataToPrint={mapData(userWithOrder?.products)}
+						formatColumn={COLUMNS}
+					/>
+				) : (
+					<Loader />
+				)}
+				{userWithOrder && userWithOrder?.products.length === 0 && (
+					<h3 className={styles.orderUserNoResults}>No data to Render</h3>
+				)}
+				{userWithOrder && userWithOrder?.totalPages > 1 && (
+					<Pagination
+						totalPages={userWithOrder?.totalPages - 1}
+						paginate={paginate}
+					/>
+				)}
 			</div>
-			{userWithOrder ? (
-				<Table
-					dataToPrint={mapData(userWithOrder?.products)}
-					formatColumn={COLUMNS}
-				/>
-			) : (
-				<Loader />
-			)}
-			{userWithOrder && userWithOrder?.products.length === 0 && (
-				<h3 className={styles.orderUserNoResults}>No data to Render</h3>
-			)}
-			{userWithOrder && userWithOrder?.totalPages > 1 && (
-				<Pagination
-					totalPages={userWithOrder?.totalPages - 1}
-					paginate={paginate}
-				/>
-			)}
-		</div>
+		</>
 	);
 };
 
