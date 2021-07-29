@@ -469,7 +469,6 @@ export const filterBrand = name => {
 };
 
 export function getFilteredProducts(query) {
-	console.log(query)
 	const { category, brand, order_type, order_dir, page, qty, stock } = query;
 
 	return async dispatch => {

@@ -111,6 +111,7 @@ function Products() {
 	}, [actualPage]);
 
 	useEffect(() => {
+		console.log(query)
 		dispatch(getFilteredProducts(query));
 	}, [query]);
 
