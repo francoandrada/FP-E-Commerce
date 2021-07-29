@@ -17,22 +17,22 @@ import Select from 'react-select';
 
 const customStyles = {
 	option: (provided, state) => ({
-	  ...provided,
-	  borderBottom: '1px dotted pink',
-	  color: state.isSelected ? 'red' : 'blue',
-	  padding: 20,
+		...provided,
+		borderBottom: '1px dotted pink',
+		color: state.isSelected ? 'red' : 'blue',
+		padding: 20
 	}),
 	control: () => ({
-	  // none of react-select's styles are passed to <Control />
-	  width: 200,
+		// none of react-select's styles are passed to <Control />
+		width: 200
 	}),
 	singleValue: (provided, state) => {
-	  const opacity = state.isDisabled ? 0.5 : 1;
-	  const transition = 'opacity 300ms';
-  
-	  return { ...provided, opacity, transition };
+		const opacity = state.isDisabled ? 0.5 : 1;
+		const transition = 'opacity 300ms';
+
+		return { ...provided, opacity, transition };
 	}
-  }
+};
 
 function PutProduct() {
 	const dispatch = useDispatch();
@@ -41,9 +41,9 @@ function PutProduct() {
 	const [oldImages, setOldImages] = useState();
 	const { id } = useParams();
 
-	const brand = useSelector((state) => state.brands.allBrands);
-	const categories = useSelector((state) => state.category.allCategories);
-	const productToEdit = useSelector((state) => state.admin.productToEdit);
+	const brand = useSelector(state => state.brands.allBrands);
+	const categories = useSelector(state => state.category.allCategories);
+	const productToEdit = useSelector(state => state.admin.productToEdit);
 	var [cate, setCate] = useState([]);
 
 	useEffect(() => {
@@ -85,7 +85,7 @@ function PutProduct() {
 		if (productToEdit?.images) {
 			setOldImages(productToEdit.images);
 		}
-		console.log(product)
+		console.log(product);
 	}, [productToEdit]);
 
 	const {
@@ -97,10 +97,10 @@ function PutProduct() {
 	function changeChange(e) {
 		setCate((cate = e));
 	}
-	
-	product.category = cate.map((c)=>c.value)
-	
-	const handleChange = (event) => {
+
+	product.category = cate.map(c => c.value);
+
+	const handleChange = event => {
 		event.preventDefault();
 		if (event.target.file) {
 			convertToBase64();
@@ -146,6 +146,11 @@ function PutProduct() {
 
 	const onSubmit = async event => {
 		event.preventDefault();
+
+		console.log('Products', product);
+		console.log('=================================================');
+		console.log('Images', imagesFiles);
+
 		try {
 			await axios
 				.put('http://localhost:3001/admin/putproduct', {
@@ -166,7 +171,7 @@ function PutProduct() {
 			console.log(error.response.data.msg);
 		}
 	};
-	const options = categories.map((c) => ({ label: c.name, value: c.id }));
+	const options = categories.map(c => ({ label: c.name, value: c.id }));
 	return (
 		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
 			<div className={styles.btnBackContainer}>
@@ -199,7 +204,8 @@ function PutProduct() {
 						},
 						pattern: {
 							value: /^[a-zA-Z ]*$/,
-							message: 'Does not require numbers, does not accept symbols(( "! # $% & / () =.; - *"))'
+							message:
+								'Does not require numbers, does not accept symbols(( "! # $% & / () =.; - *"))'
 						}
 					})}
 				/>
@@ -215,7 +221,8 @@ function PutProduct() {
 					{...register('price', {
 						maxLength: {
 							value: 8,
-							massage: 'No more than seven characters of numeric type are required.'
+							massage:
+								'No more than seven characters of numeric type are required.'
 						},
 						minLength: {
 							value: 3,
@@ -235,7 +242,8 @@ function PutProduct() {
 					{...register('priceSpecial', {
 						maxLength: {
 							value: 7,
-							massage: 'No more than seven characters of numeric type are required.'
+							massage:
+								'No more than seven characters of numeric type are required.'
 						},
 						minLength: {
 							value: 3,
@@ -263,7 +271,8 @@ function PutProduct() {
 						},
 						pattern: {
 							value: /^[a-zA-Z ]*$/,
-							message: 'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
+							message:
+								'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
 						}
 					})}
 				/>
@@ -296,8 +305,7 @@ function PutProduct() {
 					name='image'
 					value={product.image}
 					onChange={e => handleChange(e)}
-					{...register('image', {
-					})}
+					{...register('image', {})}
 				/>
 				<input
 					name='images'
@@ -364,14 +372,14 @@ function PutProduct() {
 				</select>
 				<span>{errors?.brandId?.message}</span>
 				<h6>Categories</h6>
-						<Select
-							styles={customStyles}
-							menuColor='red'
-							isMulti
-							name='category'
-							options={options}
-							onChange={changeChange}
-						/>
+				<Select
+					styles={customStyles}
+					menuColor='red'
+					isMulti
+					name='category'
+					options={options}
+					onChange={changeChange}
+				/>
 
 				{/* <h6>Category</h6> */}
 				{/* <select

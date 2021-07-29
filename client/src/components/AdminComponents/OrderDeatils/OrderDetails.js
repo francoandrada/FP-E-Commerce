@@ -16,6 +16,8 @@ const OrderDetails = () => {
 	const [orderStatus, setOrderStatus] = React.useState('');
 	const { orderDetails } = useSelector(state => state.admin);
 
+	orderDetails && console.log('orderDetails', orderDetails);
+
 	const email = useSelector(state => state.user.userData.email);
 
 	React.useEffect(() => {
@@ -57,7 +59,7 @@ const OrderDetails = () => {
 	}, [orderStatus]);
 
 	const changeStatus = event => {
-		event.preventDefault();
+		console.log('new status', event.target.value);
 		setOrderStatus(event.target.value);
 		window.location.reload();
 	};
@@ -153,7 +155,7 @@ const OrderDetails = () => {
 							initialValue={orderDetails?.status}
 							values={[
 								'created',
-								'proccesing',
+								'processing',
 								'cancelled',
 								'completed',
 								'dispatched'

@@ -56,19 +56,26 @@ import {
 	CURRENT_PAGE_ORDER_USER,
 	CURRENT_PAGE_ORDER_PRODUCT,
 	GET_RATES,
+	FETCH_ALL_THE_BRANDS,
 	INPUT_SUCCESS,
 	INPUT_FAIL,
 	SESSION_SUCCESS,
 	SESSION_FAIL,
 	MESSAGE_SUCCESS,
 	MESSAGE_FAIL,
-	ORDER_DISPATCHED
+	ORDER_DISPATCHED,
+	CURRENT_PAGE_OF_THE_BRANDS
 } from './actionsName';
 
 import axios from 'axios';
 
 export const changePaginationSize = payload => ({
 	type: SIZE_PAGINATION,
+	payload
+});
+
+export const changePageOfBrandsAdmin = payload => ({
+	type: CURRENT_PAGE_OF_THE_BRANDS,
 	payload
 });
 
@@ -170,6 +177,33 @@ export const cleanSuggestions = () => ({
 	type: CLEAN_SUGGESTIONS,
 	payload: undefined
 });
+
+export const fetchAllTheBrands = payload => ({
+	type: FETCH_ALL_THE_BRANDS,
+	payload
+});
+
+export function pikiPikiAllBrands(page) {
+	return async dispatch => {
+		try {
+			dispatch(fetchPending());
+			const res = await axios.get(
+				`http://localhost:3001/admin/brandswithpagination?page=${page}`
+			);
+			dispatch(fetchAllTheBrands(res.data));
+		} catch (error) {
+			dispatch(fetchError(error));
+		}
+	};
+}
+
+export function getBrands() {
+	return async dispatch => {
+		axios.get('http://localhost:3001/brands/').then(response => {
+			dispatch({ type: GET_BRANDS, payload: response.data });
+		});
+	};
+}
 
 export function getListOfProductTable(page, object) {
 	return async dispatch => {
@@ -281,14 +315,6 @@ export function getCategories() {
 	return async dispatch => {
 		axios.get('http://localhost:3001/categories/').then(response => {
 			dispatch({ type: GET_CATEGORIES, payload: response.data });
-		});
-	};
-}
-
-export function getBrands() {
-	return async dispatch => {
-		axios.get('http://localhost:3001/brands/').then(response => {
-			dispatch({ type: GET_BRANDS, payload: response.data });
 		});
 	};
 }
@@ -655,7 +681,7 @@ export function postCart(data) {
 
 // export function getPayInfo(data) {
 // 	return async dispatch => {
-	
+
 // 	};
 // }
 
@@ -774,7 +800,6 @@ export const getUserFavorites = userId => {
 // 		});
 // 	};
 // }
-
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {

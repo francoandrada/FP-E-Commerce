@@ -73,7 +73,14 @@ const UserOrder = () => {
 					<Select
 						initialValue={filterByOrderStatus}
 						onChange={filterHandle}
-						values={['all', 'created', 'processing', 'cancelled', 'completed']}
+						values={[
+							'all',
+							'created',
+							'processing',
+							'cancelled',
+							'completed',
+							'dispatched'
+						]}
 					/>
 				</div>
 			</div>
