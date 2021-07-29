@@ -14,6 +14,29 @@ import { MdArrowBack } from 'react-icons/md';
 import ButtonRed from '../../StyledComponents/ButtonRed';
 import Swal from 'sweetalert2'
 
+const customStyles = {
+	menu: (provided, state) => ({
+	  ...provided,
+	  width: state.selectProps.width,
+	  borderBottom: '1px dotted pink',
+	  color: state.selectProps.menuColor,
+	  padding: 20,
+	}),
+  
+	control: (_, { selectProps: { width }}) => ({
+	  width: width
+	}),
+  
+	singleValue: (provided, state) => {
+	  const opacity = state.isDisabled ? 0.5 : 1;
+	  const transition = 'opacity 300ms';
+  
+	  return { ...provided, opacity, transition };
+	}
+  }
+  
+
+
 function AddProduct() {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.product.allProducts);
@@ -105,7 +128,7 @@ function AddProduct() {
 					onSubmit={handleSubmit(submit)}
 				>
 					<div className={styles.box1}>
-						<label> Name Product: </label>
+						<label className={styles.titles}> Name Product: </label>
 
 						 <input
 							className={styles.input}
@@ -132,9 +155,12 @@ function AddProduct() {
 								},
 							})}
 						></input> 
-						<span>{errors?.name?.message}</span>
 
-						<label>Price:</label>
+				
+						<span className={styles.err}>{errors?.name?.message}</span>
+					
+
+						<label className={styles.titles}>Price:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -160,10 +186,10 @@ function AddProduct() {
 								// }
 							})}
 						/>
-						<span>{errors?.price?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Special Price:</label>
+						<span className={styles.err}>{errors?.price?.message}</span>
+					{/* </div> */}
+					{/* <div className={styles.box1}> */}
+						<label className={styles.titles}>Special Price:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -189,9 +215,9 @@ function AddProduct() {
 								// }
 							})}
 						/>
-						<span>{errors?.priceSpecial?.message}</span>
+						<span className={styles.err}>{errors?.priceSpecial?.message}</span>
 
-						<label>Description:</label>
+						<label className={styles.titles}>Description:</label>
 						<input
 							className={styles.input}
 							type='text'
@@ -216,10 +242,10 @@ function AddProduct() {
 								},
 							})}
 						/>
-						<span>{errors?.description?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Weight:</label>
+						<span className={styles.err}>{errors?.description?.message}</span>
+					{/* </div> */}
+					{/* <div className={styles.box1}> */}
+						<label className={styles.titles}>Weight:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -248,7 +274,7 @@ function AddProduct() {
 						/>
 						<span>{errors?.weight?.message}</span>
 
-						<label>Image:</label>
+						<label className={styles.titles}>Image:</label>
 						<input
 							className={styles.input}
 							type='text'
@@ -276,10 +302,10 @@ function AddProduct() {
 								// },
 							})}
 						/>
-						<span>{errors?.image?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Stock:</label>
+						<span className={styles.err}>{errors?.image?.message}</span>
+					{/* </div> */}
+					{/* <div className={styles.box1}> */}
+						<label className={styles.titles}>Stock:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -305,11 +331,11 @@ function AddProduct() {
 								// }
 							})}
 						/>
-						<span>{errors?.stock?.message}</span>
+						<span className={styles.err}>{errors?.stock?.message}</span>
 
-						<label>Brand:</label>
+						<label className={styles.titles}>Brand:</label>
 						<select
-							className=''
+							className={styles.input}
 							type='text'
 							name='brandId'
 							onChange={(e) => changeInput(e)}
@@ -323,8 +349,12 @@ function AddProduct() {
 							))}
 						</select>
 
-						<label for='type'>Selected Categories</label>
+						<label className={styles.titles} for='type'>Selected Categories</label>
 						<Select
+						className={styles.input1}
+							// styles={customStyles}
+							// menuColor='red'
+							width='20px'
 							isMulti
 							name='category'
 							options={options}
@@ -332,7 +362,7 @@ function AddProduct() {
 						/>
 					</div>
 					
-					<ButtonRed type='submit'> Add </ButtonRed>
+					<ButtonRed className={styles.btn} type='submit'> Add </ButtonRed>
 				</form>
 			</div>
 		</div>

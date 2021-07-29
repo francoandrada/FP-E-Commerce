@@ -25,6 +25,8 @@ async function postProduct(req, res, next) {
 			brandId,
 		});
 		const newProductComplete = await producto.addCategories(category);
+		console.log("POSTTTTT")
+		console.log(newProductComplete)
 		res.send(newProductComplete);
 	} catch (error) {
 		next(error);
@@ -72,6 +74,8 @@ async function putProduct(req, res, next) {
 			.flat()
 			.filter((e) => typeof e !== 'boolean');
 
+		
+
 		product.id = id;
 		product.name = name;
 		product.price = price;
@@ -83,8 +87,9 @@ async function putProduct(req, res, next) {
 		await product.save();
 		await product.setBrand(brand);
 		await product.addImages(filteredImages);
-		await product.setCategories(parseInt(category));
+		await product.setCategories(category);
 		res.send(product);
+		
 	} catch (error) {
 		next(error);
 	}
@@ -125,6 +130,7 @@ async function postCategoryProduct(req, res, next) {
 				name: name,
 			},
 		});
+		
 		res.send(categoryCreated);
 	} catch (error) {
 		next(error);

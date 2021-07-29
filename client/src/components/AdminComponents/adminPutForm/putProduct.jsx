@@ -13,6 +13,26 @@ import styles from '../../Register/Register.module.css';
 import axios from 'axios';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { MdArrowBack } from 'react-icons/md';
+import Select from 'react-select';
+
+const customStyles = {
+	option: (provided, state) => ({
+	  ...provided,
+	  borderBottom: '1px dotted pink',
+	  color: state.isSelected ? 'red' : 'blue',
+	  padding: 20,
+	}),
+	control: () => ({
+	  // none of react-select's styles are passed to <Control />
+	  width: 200,
+	}),
+	singleValue: (provided, state) => {
+	  const opacity = state.isDisabled ? 0.5 : 1;
+	  const transition = 'opacity 300ms';
+  
+	  return { ...provided, opacity, transition };
+	}
+  }
 
 function PutProduct() {
 	const dispatch = useDispatch();
@@ -24,6 +44,7 @@ function PutProduct() {
 	const brand = useSelector((state) => state.brands.allBrands);
 	const categories = useSelector((state) => state.category.allCategories);
 	const productToEdit = useSelector((state) => state.admin.productToEdit);
+	var [cate, setCate] = useState([]);
 
 	useEffect(() => {
 		dispatch(getBrands());
@@ -57,7 +78,7 @@ function PutProduct() {
 				image: productToEdit.image,
 				stock: productToEdit.stock,
 				brand: productToEdit.brand.id,
-				category: productToEdit.categories[0].id,
+				category: productToEdit.categories[0].id
 				// pictures:''
 			});
 		}
@@ -70,7 +91,12 @@ function PutProduct() {
 		formState: { errors },
 		/*reset, */
 	} = useForm();
-
+	function changeChange(e) {
+		setCate((cate = e));
+	}
+	
+	product.category = cate.map((c)=>c.value)
+	
 	const handleChange = (event) => {
 		event.preventDefault();
 		if (event.target.file) {
@@ -118,7 +144,7 @@ function PutProduct() {
 			console.log(error.response.data.msg);
 		}
 	};
-
+	const options = categories.map((c) => ({ label: c.name, value: c.id }));
 	return (
 		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
 			<div className={styles.btnBackContainer}>
@@ -311,9 +337,18 @@ function PutProduct() {
 					))}
 				</select>
 				<span>{errors?.brandId?.message}</span>
+				<h6>Categories</h6>
+						<Select
+							styles={customStyles}
+							menuColor='red'
+							isMulti
+							name='category'
+							options={options}
+							onChange={changeChange}
+						/>
 
-				<h6>Category</h6>
-				<select
+				{/* <h6>Category</h6> */}
+				{/* <select
 					className='form-group col-md-12'
 					type='text'
 					name='category'
@@ -329,8 +364,8 @@ function PutProduct() {
 							{x.name}
 						</option>
 					))}
-				</select>
-				<span>{errors?.category?.message}</span>
+				</select> */}
+				{/* <span>{errors?.category?.message}</span> */}
 				<div className={styles.registerButtonRow}>
 					<ButtonRed type='submit'>Confirm</ButtonRed>
 				</div>
