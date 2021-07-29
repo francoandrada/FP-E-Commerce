@@ -23,13 +23,24 @@ const OrderDetails = () => {
 		dispatch(getOrderDetails(id));
 	}, [dispatch, id]);
 
+	const dateFormat = string => {
+		const formated = string.split('T');
+		return string ? `${formated[0]}\n ${formated[1].split('.')[0]}` : '--';
+	};
+
+	const formatNumber = num => {
+		return num
+			? num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+			: '--';
+	};
+
 	const mapData = array => {
 		const data =
 			array &&
 			array.map(o => {
 				return {
 					id: o?.id || '--',
-					price: o?.price || '--',
+					price: formatNumber(o?.price),
 					quantity: o?.quantity || '--',
 					productName: o?.product?.name || '--',
 					image: o?.product?.image || '--',
@@ -73,12 +84,12 @@ const OrderDetails = () => {
 											Order N°: {o?.orderId || '--'}
 										</span>
 										<span className={styles.orderDetailsReference}>
-											Amount: $ {o?.ammount || '--'}
+											Amount: $ {formatNumber(o?.ammount)}
 										</span>
 									</p>
 									<p className={styles.orderDetailsDate}>
 										<span className={styles.orderDetailsReference}>
-											Created At: {o?.createdAt || '--'}
+											Created At: {dateFormat(o?.createdAt)}
 										</span>
 										<span className={styles.orderDetailsReference}>
 											Status: {o?.status || '--'}
@@ -146,7 +157,13 @@ const OrderDetails = () => {
 					{orderDetails && (
 						<Select
 							initialValue={orderDetails?.status}
-							values={['created', 'proccesing', 'cancelled', 'completed', 'dispatched']}
+							values={[
+								'created',
+								'proccesing',
+								'cancelled',
+								'completed',
+								'dispatched'
+							]}
 							onChange={changeStatus}
 						/>
 					)}

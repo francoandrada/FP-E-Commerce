@@ -8,17 +8,22 @@ import {
 	changeOrderTable,
 	tableFilterByCategory,
 	sortTableAction,
-	tableFilterByBrand,
+	tableFilterByBrand
 } from '../../../Redux/actions';
 
 const TableLogic = () => {
 	const dispatch = useDispatch();
-	// const history =useHistory()
 	const [productToDelete, setProductToDelete] = useState(0);
 
+	const formatNumber = num => {
+		return num
+			? num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+			: '--';
+	};
+
 	function mapData(array) {
-		const data = array.map((e) => {
-			const categories = (array) => {
+		const data = array.map(e => {
+			const categories = array => {
 				return array
 					.filter(({ isVisible }) => isVisible)
 					.map(({ name }) => name)
@@ -29,8 +34,8 @@ const TableLogic = () => {
 				image: e?.image,
 				name: e?.name,
 				description: e?.description || 'No Description',
-				price: e?.price,
-				priceSpecial: e?.priceSpecial,
+				price: formatNumber(e?.price),
+				priceSpecial: formatNumber(e?.priceSpecial),
 				stock: e?.stock,
 				isVisible: e?.isVisible,
 				weight: e?.weight,
@@ -38,7 +43,7 @@ const TableLogic = () => {
 					? categories(e?.categories)
 					: 'No Categories',
 				brand: e?.brand?.name || 'No Brand',
-				delete: (event) => {
+				delete: event => {
 					event.preventDefault();
 					const response = window.confirm(
 						`You wanna delete the Product: ${e?.name}?`
@@ -49,35 +54,35 @@ const TableLogic = () => {
 						setProductToDelete(0);
 					}
 				},
-				update: (event) => {
+				update: event => {
 					event.preventDefault();
-				},
+				}
 			};
 		});
 		return data;
 	}
 
-	const filterByBrandHandle = (event) => {
+	const filterByBrandHandle = event => {
 		event.preventDefault();
 		dispatch(tableFilterByBrand(event.target.value));
 	};
 
-	const filterByCategoryHandle = (event) => {
+	const filterByCategoryHandle = event => {
 		event.preventDefault();
 		dispatch(tableFilterByCategory(event.target.value));
 	};
 
-	const paginationSizeHandle = (event) => {
+	const paginationSizeHandle = event => {
 		event.preventDefault();
 		dispatch(changePaginationSize(event.target.value));
 	};
 
-	const orderTableHandle = (event) => {
+	const orderTableHandle = event => {
 		event.preventDefault();
 		dispatch(changeOrderTable(event.target.value));
 	};
 
-	const sortTableHandle = (event) => {
+	const sortTableHandle = event => {
 		event.preventDefault();
 		dispatch(sortTableAction(event.target.value));
 	};
@@ -91,7 +96,7 @@ const TableLogic = () => {
 		filterByCategoryHandle,
 		sortTableHandle,
 		filterByBrandHandle,
-		productToDelete,
+		productToDelete
 	};
 };
 
