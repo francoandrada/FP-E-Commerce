@@ -42,8 +42,7 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 			const orderById = await Order.findOne({
 				where: { orderId: id },
 			});
-			const updatedStatus = await orderById
-				.update({
+		const updatedStatus = await orderById.update({
 					status: newStatus,
 				})
 				.then( async() => {
