@@ -38,6 +38,14 @@ function userAccountReducer(state = initialState, action) {
 				
 		};
 
+		case ADD_DATABASE_FAVORITES:
+			
+			return {
+				userFavorites: action.payload	
+		
+			
+	};
+
 	
 
 		case REMOVE_FROM_FAVORITES:
