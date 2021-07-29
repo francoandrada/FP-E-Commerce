@@ -136,7 +136,12 @@ const Navbar = () => {
 		}
 	};
 	const handleClick = () => {
-			// dispatch(postUserFavorites(userId, favorites));
+			axios.put('http://localhost:3001/favorites/user/favoritesupdate', {userId, favorites})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((error) => console.log(error));
+
 			axios.put('http://localhost:3001/shoppingcart/userCart/update', {userId, cart})
 			.then((res) => {
 				console.log(res);
