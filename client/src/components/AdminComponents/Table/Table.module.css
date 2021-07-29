@@ -5,7 +5,8 @@
 }
 
 .Container {
-	width: 863px;
+	/* width: 863px; */
+	width: 950px;
 	margin-right: 10%;
 	margin-left: 10%;
 }
