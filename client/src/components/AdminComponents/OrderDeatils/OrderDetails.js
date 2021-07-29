@@ -7,7 +7,8 @@ import Table from '../TableComponent/TableComponent';
 import Select from '../../Select/Select';
 import COLUMNS from './columns';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom'
+import { MdArrowBack } from 'react-icons/md'
 import styles from './OrderDetails.module.css';
 
 const OrderDetails = () => {
@@ -64,6 +65,11 @@ const OrderDetails = () => {
 
 	return (
 		<div className={styles.orderDetailsContainer}>
+			<div className={styles.btnBackContainer}>
+				<Link to='/admin/orders'>
+					<MdArrowBack />
+				</Link>
+			</div> 
 			<div className={styles.orderDetailsData}>
 				<div className={styles.orderDetailsTitle}>
 					<h2>HardwareStore</h2>

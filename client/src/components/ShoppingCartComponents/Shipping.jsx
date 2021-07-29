@@ -268,7 +268,7 @@ const Shipping = () => {
 							</div>
 							<div>
 								<form>
-									<div className='d-flex justify-content-center m-2'>
+									<div className={window.screen.width > 430 ? 'd-flex justify-content-center m-3' : 'buttonsContain'}>
 										<button
 											onClick={handleClickMP}
 											className={style.paymentButton}
