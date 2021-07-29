@@ -64,7 +64,8 @@ import {
 	MESSAGE_SUCCESS,
 	MESSAGE_FAIL,
 	ORDER_DISPATCHED,
-	CURRENT_PAGE_OF_THE_BRANDS
+	CURRENT_PAGE_OF_THE_BRANDS,
+	ADD_DATABASE_FAVORITES,
 } from './actionsName';
 
 import axios from 'axios';
@@ -735,6 +736,19 @@ export function getCartUser(id) {
 	};
 }
 
+
+// export function updateCartUser(userId, cart) {
+// 	console.log(data);
+// 	return async dispatch => {
+// 		try {
+// 			const res = axios.post('http://localhost:3001/shoppingcart/userCart/update', {userId, cart});
+// 		} catch (error) {
+// 			console.log(error.response);
+// 		}
+// 	};
+// }
+
+
 export const addToFavorites = prod => {
 	return {
 		type: ADD_TO_FAVORITES,
@@ -772,9 +786,8 @@ export const getUserFavorites = userId => {
 			const res = await axios.get(
 				`http://localhost:3001/favorites/user/${userId}`
 			);
-			console.log('FAVORITES FORM REDUCER', res.data);
 			dispatch({
-				type: ADD_TO_FAVORITES,
+				type: ADD_DATABASE_FAVORITES,
 				payload: res.data
 			});
 		} catch (error) {

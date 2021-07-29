@@ -83,10 +83,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		if (authenticated) {
-			setTimeout(() => {
-				dispatch(postUserFavorites(userId, favorites));
-			}, 1000);
-			localStorage.removeItem('userFavorites', JSON.stringify(favorites));
+			// localStorage.removeItem('userFavorites', JSON.stringify(favorites));
 			setTimeout(() => {
 				dispatch(getUserFavorites(userId));
 			}, 2000);
@@ -139,9 +136,24 @@ const Navbar = () => {
 		}
 	};
 	const handleClick = () => {
-		dispatch(logOut());
-		history.push('/');
-		window.location.reload();
+			axios.put('http://localhost:3001/favorites/user/favoritesupdate', {userId, favorites})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((error) => console.log(error));
+
+			axios.put('http://localhost:3001/shoppingcart/userCart/update', {userId, cart})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((error) => console.log(error));
+
+			setTimeout(() => {
+				dispatch(logOut());
+				history.push('/');
+				window.location.reload();
+			}, 1500);
+		
 	};
 
 	return (
