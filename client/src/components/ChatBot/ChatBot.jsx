@@ -11,7 +11,7 @@ export function ComponentSession() {
 	}
 	return (
 		<button type='button' onClick={handleClick}>
-			Click.. Sign up..
+			Click.. Log In..
 		</button>
 	);
 }
