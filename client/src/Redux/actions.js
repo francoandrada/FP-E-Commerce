@@ -576,10 +576,10 @@ export function createdCategory(elem) {
 	};
 }
 
-export function createdProduct(elem) {
+export function createdProduct(elem, aux) {
 	return async () => {
 		try {
-			await axios.post('http://localhost:3001/admin/addproduct', elem);
+			await axios.post('http://localhost:3001/admin/addproduct', [elem, aux]);
 		} catch (error) {
 			console.log(error);
 		}
@@ -774,6 +774,7 @@ export const getUserFavorites = userId => {
 // 		});
 // 	};
 // }
+
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
