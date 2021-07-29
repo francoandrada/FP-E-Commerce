@@ -47,8 +47,7 @@ async function postProduct(req, res, next) {
 			.filter((e) => typeof e !== 'boolean');
 		await producto.addImages(filteredImages);
 		const newProductComplete = await producto.addCategories(category);
-		console.log("POSTTTTT")
-		console.log(newProductComplete)
+		
 		res.send(newProductComplete);
 	} catch (error) {
 		next(error);
@@ -95,8 +94,6 @@ async function putProduct(req, res, next) {
 		var filteredImages = imagesResult
 			.flat()
 			.filter((e) => typeof e !== 'boolean');
-
-		
 
 		product.id = id;
 		product.name = name;

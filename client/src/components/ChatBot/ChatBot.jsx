@@ -39,7 +39,7 @@ export function ComponentCatalog() {
 
 const theme = {
 	background: '#000000',
-	fontFamily: 'Helvetica Neue',
+	fontFamily: 'Roboto',
 	headerBgColor: '#FF3C4A',
 	headerFontColor: '#fff',
 	headerFontSize: '15px',
@@ -59,7 +59,7 @@ function Bot() {
 				steps={[
 					{
 						id: '1',
-						message: 'Hello welcome to Hadware Store ',
+						message: '¡Welcome to Hardware Store! ',
 						trigger: '2'
 					},
 					{

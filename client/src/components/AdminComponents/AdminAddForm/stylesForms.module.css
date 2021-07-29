@@ -1,65 +1,77 @@
-/* .btnBackContainer{
+.background{
+    text-align: center;
+    display: flex;
+}
+
+.btnBackContainer{
     font-size: 40px;
-    display: flex; */
-    /* margin-top: 20px; */
-    /* margin-left: 3rem; */
-/* } */
-/* .formContainer{
-    background-color: white;
-    width: 65%;
-    min-height: 500px;
-    text-align: center; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* columns: 2; */
-    /* grid-template-columns: 40% 40%; */
-    /* grid-column-gap:5%; */
-    /* grid-row-gap: 5%; */
-    /* margin:0 auto; */
-    /* justify-content:space-evenly; */
-    /* align-items: center; */
-    /* border-radius: 12px;
+    display: flex; 
+    margin-top: 20px; 
+    margin-left:20%;
+}
+.formContainer{
+    background-color: #303030;
+    width: 45%;
+    text-align: center;
+    margin:0 auto;
+     border-radius: 12px;
     box-shadow: 2px 5px 25px rgb(170, 169, 169);
     padding: 2rem;
     font-family: 'Roboto', sans-serif;
-} */
-/* .background{
+    color: seashell;
+} 
+.background{
 	background-color: #eee;
 	background-attachment: fixed;
 	width: 100%;
-    height: 100vh; */
-/* } */
-/* .box1{ */
-    /* background-color: red; */
-    /* margin:2rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; */
-    /* columns: 3;
-     grid-template-columns: 10% 10% 10%; 
-    grid-column-gap:5%;
-    grid-row-gap: 5%; 
-    margin:0 auto; */
-    /* justify-content:space-evenly; */
-    /* align-items: center; */
-    
-/* } */
-/* .input{ */
-    /* background-color: ; */
-
-    /* outline: none;
+    height: 100vh; 
+}
+.box1{
+    width: 50%;
+    margin:0 auto;
+}
+.input{
+    outline: none;
     margin: auto;
-    margin-left: 1%;
+    height: 30px;
     margin-bottom: 5px;
     border:0;
-    border-bottom: 1px solid gray; */
-    /* margin-left: 12px; */
+  border-bottom: 1px solid gray; 
+    display: flex;
+    width: 100%;
    
-/* } */
-/* .input:focus{ */
- /* border-bottom:3px solid #e22620; */
-/* } */
-.btnBackContainer {
+}
+.input:focus{
+ border-bottom:3px solid #e22620;
+}
+
+.err{
+    color: red;
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.titles{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    }
+.btn{
+        margin-top: 60px;
+    }
+.input1{
+        width: 100%;
+        height: 38px;
+        color: black;
+    
+    } 
+
+    .selectBrand {
+        width: 100%;
+    }
+
+
+
+/* .btnBackContainer {
 	font-size: 40px;
 	margin-left: 3rem;
 }
@@ -110,21 +122,4 @@
 
 #selectCategories {
 	min-width: 150px;
-}
-.err{
-color: red;
-display: flex;
-margin: auto;
-margin-bottom: 10px;
-}
-.titles{
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-display: flex;
-}
-.btn{
-    margin-top: 60px;
-}
-.input1{
-    width: 300px;
-    /* position: absolute; */
-}
+}*/
