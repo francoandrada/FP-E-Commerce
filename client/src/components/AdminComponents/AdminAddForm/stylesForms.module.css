@@ -1,4 +1,77 @@
-.btnBackContainer {
+.background{
+    text-align: center;
+    display: flex;
+}
+
+.btnBackContainer{
+    font-size: 40px;
+    display: flex; 
+    margin-top: 20px; 
+    margin-left:20%;
+}
+.formContainer{
+    background-color: #303030;
+    width: 45%;
+    text-align: center;
+    margin:0 auto;
+     border-radius: 12px;
+    box-shadow: 2px 5px 25px rgb(170, 169, 169);
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+    color: seashell;
+} 
+.background{
+	background-color: #eee;
+	background-attachment: fixed;
+	width: 100%;
+    height: 100vh; 
+}
+.box1{
+    width: 50%;
+    margin:0 auto;
+}
+.input{
+    outline: none;
+    margin: auto;
+    height: 30px;
+    margin-bottom: 5px;
+    border:0;
+  border-bottom: 1px solid gray; 
+    display: flex;
+    width: 100%;
+   
+}
+.input:focus{
+ border-bottom:3px solid #e22620;
+}
+
+.err{
+    color: red;
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.titles{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    }
+.btn{
+        margin-top: 60px;
+    }
+.input1{
+        width: 100%;
+        height: 38px;
+        color: black;
+    
+    } 
+
+    .selectBrand {
+        width: 100%;
+    }
+
+
+
+/* .btnBackContainer {
 	font-size: 40px;
 	margin-left: 3rem;
 }
@@ -49,4 +122,4 @@
 
 #selectCategories {
 	min-width: 150px;
-}
+}*/

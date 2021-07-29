@@ -45,6 +45,7 @@ function AddProduct() {
 	};
 
 	const submit = (data, e) => {
+	
 		data.category = cate.map(x => x.value);
 
 		for (let i = 0; i < products.length; i++) {
@@ -123,7 +124,7 @@ function AddProduct() {
 					onSubmit={handleSubmit(submit)}
 				>
 					<div className={styles.box1}>
-						<label> Name Product: </label>
+						<label className={styles.titles}> Name Product: </label>
 
 						<input
 							className={styles.input}
@@ -132,13 +133,9 @@ function AddProduct() {
 							autoComplete='off'
 							onChange={e => changeInput(e)}
 							{...register('name', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
 								maxLength: {
 									value: 20,
-									massage: 'less than 20 characters required'
+									message: 'Less than 20 letter characters required'
 								},
 								minLength: {
 									value: 3,
@@ -147,13 +144,15 @@ function AddProduct() {
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
 									message:
-										'does not require numbers, does not accept symbols "! # $% & / () =.; - *"'
+										'Does not require numbers, does not accept symbols(( "! # $% & / () =.; - *"))'
 								}
 							})}
+						
 						></input>
-						<span>{errors?.name?.message}</span>
+						<span className={styles.err}>{errors?.name?.message}</span>
+					
 
-						<label>Price:</label>
+						<label className={styles.titles}>Price:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -161,28 +160,19 @@ function AddProduct() {
 							min='0'
 							onChange={e => changeInput(e)}
 							{...register('price', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
 								maxLength: {
 									value: 7,
-									massage: 'less than 7 characters required'
+									message: 'No more than seven characters of numeric type are required'
 								},
 								minLength: {
 									value: 3,
 									message: 'requires more than 3 characters'
 								}
-								// pattern:{
-								//     value: /^[a-zA-Z]*$/,
-								//     message:"no debe ingresar numeros"
-								// }
 							})}
 						/>
-						<span>{errors?.price?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Special Price:</label>
+						<span className={styles.err}>{errors?.price?.message}</span>
+					
+						<label className={styles.titles}>Special Price:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -190,56 +180,43 @@ function AddProduct() {
 							min='0'
 							onChange={e => changeInput(e)}
 							{...register('priceSpecial', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
 								maxLength: {
 									value: 7,
-									massage: 'less than 7 characters required'
+									message: 'No more than seven characters of numeric type are required.'
 								},
 								minLength: {
 									value: 3,
-									message: 'requires more than 3 characters'
+									message: 'Requires more than 3 characters'
 								}
-								// pattern:{
-								//     value: /^[a-zA-Z]*$/,
-								//     message:"no debe ingresar numeros"
-								// }
 							})}
 						/>
-						<span>{errors?.priceSpecial?.message}</span>
+						<span className={styles.err}>{errors?.priceSpecial?.message}</span>
 
-						<label>Description:</label>
+						<label className={styles.titles}>Description:</label>
 						<input
 							className={styles.input}
 							type='text'
 							name='description'
 							onChange={e => changeInput(e)}
 							{...register('description', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
+
 								maxLength: {
 									value: 200,
-									massage: 'less than 200 characters required'
+									message: 'Less than 200 characters type letters required'
 								},
 								minLength: {
 									value: 10,
-									message: 'requires more than 10 characters'
+									message: 'Requires more than 10 characters'
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message:
-										'does not require numbers, does not accept symbols "! # $% & / () =.; - *"'
+									message: 'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
 								}
 							})}
 						/>
-						<span>{errors?.description?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Weight:</label>
+						<span className={styles.err}>{errors?.description?.message}</span>
+					
+						<label className={styles.titles}>Weight:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -248,64 +225,45 @@ function AddProduct() {
 							maxLength='4'
 							onChange={e => changeInput(e)}
 							{...register('weight', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
 								maxLength: {
 									value: 4,
-									massage: 'less than 4 characters required'
+									message: 'No more than four characters of numeric type are required.'
 								},
 								minLength: {
 									value: 1,
 									message: 'requires more than 1 characters'
 								}
-								// pattern:{
-								//     value: /^[a-zA-Z]*$/,
-								//     message:"no debe ingresar numeros"
-								// }
 							})}
 						/>
 						<span>{errors?.weight?.message}</span>
 
-						<label className={styles.labelSelect}>Image:</label>
-						{/* <input
-							className={styles.input}
-							type='text'
-							name='image'
-							// name="images[]"
-							// id="fileInput"
-							// multiple
-							onChange={e => changeInput(e)}
-							{...register('image', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
-								// maxLength: {
-								// 	value: 20,
-								// 	massage: 'less than 20 characters required'
-								// },
-								// minLength: {
-								// 	value: 3,
-								// 	message: 'requires more than 3 characters'
-								// }
-								// pattern: {
-								// 	value: /^[a-zA-Z]*$/,
-								// 	message: 'no debe ingresar numeros',
-								// },
-							})}
-						/> */}
+						<label className={styles.titles}>Image:</label>
+						<input
+					className={styles.input}
+					type='text'
+					name='image'
+					onChange={e => changeInput(e)}
+					{...register('image', {
+						// maxLength: {
+						// 	value: 20,
+						// 	massage: 'menos de 20 caracteres'
+						// },
+						// minLength: {
+						// 	value: 3,
+						// 	message: 'mas de 3 caracteres'
+						// }
+					})}
+				/>
 						<input
 							name='images'
 							type='file'
 							multiple
 							onChange={e => convertToBase64(e.target.files)}
 						/>
-						<span>{errors?.image?.message}</span>
-					</div>
-					<div className={styles.box1}>
-						<label>Stock:</label>
+						<span className={styles.err}>{errors?.image?.message}</span>
+					
+
+						<label className={styles.titles}>Stock:</label>
 						<input
 							className={styles.input}
 							type='number'
@@ -313,29 +271,21 @@ function AddProduct() {
 							min='0'
 							onChange={e => changeInput(e)}
 							{...register('stock', {
-								// required:{
-								//     value: true,
-								//     massage: "debe ingresar un nombre"
-								// },
 								maxLength: {
 									value: 4,
-									massage: 'less than 4 characters required'
+									message: 'No more than four characters of numeric type are required.'
 								},
 								minLength: {
 									value: 1,
 									message: 'requires more than 1 characters'
 								}
-								// pattern:{
-								//     value: /^[a-zA-Z]*$/,
-								//     message:"no debe ingresar numeros"
-								// }
 							})}
 						/>
-						<span>{errors?.stock?.message}</span>
+						<span className={styles.err}>{errors?.stock?.message}</span>
 
-						<label className={styles.labelSelect}>Brand:</label>
+						<label className={styles.titles}>Brand:</label>
 						<select
-							className={styles.selectBrand}
+							 className={styles.input1}
 							type='text'
 							name='brandId'
 							onChange={e => changeInput(e)}
@@ -349,19 +299,19 @@ function AddProduct() {
 							))}
 						</select>
 
-						<label for='type' className={styles.labelSelect}>
-							Selected Categories
-						</label>
+						<label className={styles.titles} for='type'>Selected Categories</label>
 						<Select
+						className={styles.input1}
+							width='20px'
 							isMulti
 							name='category'
 							options={options}
 							onChange={changeChange}
-							id={styles.selectCategories}
 						/>
 					</div>
+					
+					<ButtonRed className={styles.btn} type='submit'> Add </ButtonRed>
 
-					<ButtonRed type='submit'> Add </ButtonRed>
 				</form>
 			</div>
 		</div>

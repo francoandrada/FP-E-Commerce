@@ -13,6 +13,26 @@ import styles from '../../Register/Register.module.css';
 import axios from 'axios';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { MdArrowBack } from 'react-icons/md';
+import Select from 'react-select';
+
+const customStyles = {
+	option: (provided, state) => ({
+	  ...provided,
+	  borderBottom: '1px dotted pink',
+	  color: state.isSelected ? 'red' : 'blue',
+	  padding: 20,
+	}),
+	control: () => ({
+	  // none of react-select's styles are passed to <Control />
+	  width: 200,
+	}),
+	singleValue: (provided, state) => {
+	  const opacity = state.isDisabled ? 0.5 : 1;
+	  const transition = 'opacity 300ms';
+  
+	  return { ...provided, opacity, transition };
+	}
+  }
 
 function PutProduct() {
 	const dispatch = useDispatch();
@@ -21,9 +41,10 @@ function PutProduct() {
 	const [oldImages, setOldImages] = useState();
 	const { id } = useParams();
 
-	const brand = useSelector(state => state.brands.allBrands);
-	const categories = useSelector(state => state.category.allCategories);
-	const productToEdit = useSelector(state => state.admin.productToEdit);
+	const brand = useSelector((state) => state.brands.allBrands);
+	const categories = useSelector((state) => state.category.allCategories);
+	const productToEdit = useSelector((state) => state.admin.productToEdit);
+	var [cate, setCate] = useState([]);
 
 	useEffect(() => {
 		dispatch(getBrands());
@@ -57,13 +78,14 @@ function PutProduct() {
 				image: productToEdit.image,
 				stock: productToEdit.stock,
 				brand: productToEdit.brand.id,
-				category: productToEdit.categories[0].id
+				category: productToEdit.categories[0]
 				// pictures:''
 			});
 		}
 		if (productToEdit?.images) {
 			setOldImages(productToEdit.images);
 		}
+		console.log(product)
 	}, [productToEdit]);
 
 	const {
@@ -72,8 +94,13 @@ function PutProduct() {
 		formState: { errors }
 		/*reset, */
 	} = useForm();
-
-	const handleChange = event => {
+	function changeChange(e) {
+		setCate((cate = e));
+	}
+	
+	product.category = cate.map((c)=>c.value)
+	
+	const handleChange = (event) => {
 		event.preventDefault();
 		if (event.target.file) {
 			convertToBase64();
@@ -139,7 +166,7 @@ function PutProduct() {
 			console.log(error.response.data.msg);
 		}
 	};
-
+	const options = categories.map((c) => ({ label: c.name, value: c.id }));
 	return (
 		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
 			<div className={styles.btnBackContainer}>
@@ -164,15 +191,15 @@ function PutProduct() {
 					{...register('name', {
 						maxLength: {
 							value: 20,
-							massage: 'menos de 20 caracteres'
+							massage: 'Less than 20 letter characters required'
 						},
 						minLength: {
 							value: 3,
-							message: 'mas de 3 caracteres'
+							message: 'requires more than 3 characters'
 						},
 						pattern: {
 							value: /^[a-zA-Z ]*$/,
-							message: 'no debe ingresar numeros'
+							message: 'Does not require numbers, does not accept symbols(( "! # $% & / () =.; - *"))'
 						}
 					})}
 				/>
@@ -188,11 +215,11 @@ function PutProduct() {
 					{...register('price', {
 						maxLength: {
 							value: 8,
-							massage: 'menos de 8 caracteres'
+							massage: 'No more than seven characters of numeric type are required.'
 						},
 						minLength: {
 							value: 3,
-							message: 'mas de 3 caracteres'
+							message: 'Requires more than 3 characters'
 						}
 					})}
 				/>
@@ -207,12 +234,12 @@ function PutProduct() {
 					onChange={e => handleChange(e)}
 					{...register('priceSpecial', {
 						maxLength: {
-							value: 8,
-							massage: 'menos de 8 caracteres'
+							value: 7,
+							massage: 'No more than seven characters of numeric type are required.'
 						},
 						minLength: {
 							value: 3,
-							message: 'mas de 3 caracteres'
+							message: 'Requires more than 3 characters'
 						}
 					})}
 				/>
@@ -228,15 +255,15 @@ function PutProduct() {
 					{...register('description', {
 						maxLength: {
 							value: 200,
-							massage: 'menos de 200 caracteres'
+							massage: 'Less than 200 characters type letters required'
 						},
 						minLength: {
 							value: 10,
-							message: 'mas de 10 caracteres'
+							message: 'Requires more than 10 characters'
 						},
 						pattern: {
 							value: /^[a-zA-Z ]*$/,
-							message: 'no debe ingresar numeros'
+							message: 'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
 						}
 					})}
 				/>
@@ -252,11 +279,11 @@ function PutProduct() {
 					{...register('weight', {
 						maxLength: {
 							value: 4,
-							massage: 'menos de 4 caracteres'
+							massage: 'No more than 4 characters of numeric type are required'
 						},
 						minLength: {
 							value: 1,
-							message: 'mas de 1 caracteres'
+							message: 'requires more than one characters type numbers'
 						}
 					})}
 				/>
@@ -270,18 +297,6 @@ function PutProduct() {
 					value={product.image}
 					onChange={e => handleChange(e)}
 					{...register('image', {
-						maxLength: {
-							value: 20,
-							massage: 'menos de 20 caracteres'
-						},
-						minLength: {
-							value: 3,
-							message: 'mas de 3 caracteres'
-						},
-						pattern: {
-							value: /^[a-zA-Z]*$/,
-							message: 'no debe ingresar numeros'
-						}
 					})}
 				/>
 				<input
@@ -323,7 +338,7 @@ function PutProduct() {
 					{...register('stock', {
 						maxLength: {
 							value: 4,
-							massage: 'menos de 4 caracteres'
+							message: 'No more than 4 characters of numeric type are required'
 						}
 					})}
 				/>
@@ -348,9 +363,18 @@ function PutProduct() {
 					))}
 				</select>
 				<span>{errors?.brandId?.message}</span>
+				<h6>Categories</h6>
+						<Select
+							styles={customStyles}
+							menuColor='red'
+							isMulti
+							name='category'
+							options={options}
+							onChange={changeChange}
+						/>
 
-				<h6>Category</h6>
-				<select
+				{/* <h6>Category</h6> */}
+				{/* <select
 					className='form-group col-md-12'
 					type='text'
 					name='category'
@@ -366,8 +390,8 @@ function PutProduct() {
 							{x.name}
 						</option>
 					))}
-				</select>
-				<span>{errors?.category?.message}</span>
+				</select> */}
+				{/* <span>{errors?.category?.message}</span> */}
 				<div className={styles.registerButtonRow}>
 					<ButtonRed type='submit'>Confirm</ButtonRed>
 				</div>
