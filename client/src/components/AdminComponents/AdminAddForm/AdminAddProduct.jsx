@@ -47,7 +47,8 @@ function AddProduct() {
 	const submit = (data, e) => {
 	
 		data.category = cate.map(x => x.value);
-
+		// data.image= imagesFiles[0] Aqui Es para setear lo de imagen si no sirve Sacar
+		console.log(data)
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
 				return new Swal({
@@ -70,7 +71,6 @@ function AddProduct() {
 			data.weight &&
 			data.weight.length > 0 &&
 			data.image &&
-			data.image.length > 0 &&
 			data.stock &&
 			data.stock.length > 0 &&
 			data.category &&
@@ -238,22 +238,6 @@ function AddProduct() {
 						<span>{errors?.weight?.message}</span>
 
 						<label className={styles.titles}>Image:</label>
-						<input
-					className={styles.input}
-					type='text'
-					name='image'
-					onChange={e => changeInput(e)}
-					{...register('image', {
-						// maxLength: {
-						// 	value: 20,
-						// 	massage: 'menos de 20 caracteres'
-						// },
-						// minLength: {
-						// 	value: 3,
-						// 	message: 'mas de 3 caracteres'
-						// }
-					})}
-				/>
 						<input
 							name='images'
 							type='file'
