@@ -33,6 +33,7 @@ function Address() {
 					<h1>Store addresses</h1>
 				</div>
 				<div className={styles.categoriesContainer}>
+				<div>
 					<Mapouter>
 						<GmapCanvas>
 							<iframe
@@ -50,6 +51,7 @@ function Address() {
 						</GmapCanvas>
 					</Mapouter>
 				</div>
+			</div>
 			</div>
 		</>
 	);

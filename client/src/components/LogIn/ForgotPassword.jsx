@@ -27,18 +27,20 @@ const ForgotPassword = () => {
 		}),
 		onSubmit: (values) => {
 			dispatch(forgotPassword(values.email));
-			setTimeout(() => {
-				Swal.fire({
-					position: 'center',
-					icon: 'success',
-					title: 'Check your inbox to reset the password!',
-					showConfirmButton: false,
-					timer: 4000,
-				});
-			}, 1000);
-		},
-	});
-
+			 if(setError === null){
+			// 	Swal.fire({
+			// 		position: 'center',
+			// 		icon: 'success',
+			// 		title: 'Check your inbox to reset the password!',
+			// 		showConfirmButton: false,
+			// 		timer: 4000,
+			// 	});
+			// }
+			console.log(setError)
+		}
+	}
+})
+	console.log(setError)
 	return (
 		<div className=' m-5 d-flex justify-content-center '>
 			<div className='justify-content-center bg-secondary  rounded p-5'>
