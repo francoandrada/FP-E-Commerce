@@ -13,7 +13,7 @@ module.exports = (sequilize) => {
 			allowNull: false,
 		},
 		status: {
-			type: ENUM('created', 'cancelled', 'completed', 'dispatched'),
+			type: ENUM('created', 'processing', 'cancelled', 'completed', 'dispatched'),
 			allowNull: true,
 			defaultValue: 'created',
 		},
