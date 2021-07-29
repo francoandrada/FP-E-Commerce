@@ -56,7 +56,7 @@
 	font-weight: 600;
 }
 .productCard p {
-	margin: 2.5em auto;
+	/* margin: 0; */
 	font-weight: 600;
 }
 .imag {
@@ -77,6 +77,9 @@
 
 .texto {
 	padding: 1px;
+}
+.buttons{
+	margin-top: 1em;
 }
 @media only screen and (max-width: 430px) {
 	.imag {
@@ -194,5 +197,8 @@
 	.weigth {
 		height: max-content;
 		margin-top: 0.2em;
+	}
+	#line2{
+		color: black;
 	}
 }

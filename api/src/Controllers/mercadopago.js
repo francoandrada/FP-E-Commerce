@@ -85,6 +85,42 @@ const createOrder = async function createOrder(req, res) {
 	}
 };
 
+
+
+
+const ipnMPUpdate = async (req, res, next) => {
+
+	// item_number=userId
+	// custom=orderId
+	console.log('tigjdfsijfjid')
+
+	// const id = parseInt(req.body.custom);
+	// const newStatus = parseInt(req.body.status);
+
+	// try {
+	// 	const orderById = await Order.findOne({
+	// 		where: { orderId: id },
+	// 	});
+	// 	if(newStatus===100){
+	// 		var updatedStatus = await orderById.update({
+	// 			status: 'completed',
+	// 		});
+	// 	} else if (newStatus<0){
+	// 		var updatedStatus = await orderById.update({
+	// 			status: 'cancelled',
+	// 		});
+	// 	} else if (newStatus>=0 && newStatus<100){
+	// 		var updatedStatus = await orderById.update({
+	// 			status: 'processing',
+	// 		});
+	// 	}
+	// 	res.status(200).json(updatedStatus.dataValues.status);
+	// } catch (error) {
+	// 	next(error);
+	// }
+};
+
 module.exports = {
 	createOrder,
+	ipnMPUpdate
 };

@@ -106,24 +106,11 @@ const Table = () => {
 				<Admin />
 				<div className={styles.btnContainer}>
 					<Link to='/admin/addproduct'>
-						<button> Add Product </button>
+						<button id={styles.btnAddProduct}> Add Product </button>
 					</Link>
 				</div>
 				<div className={styles.tableContainer}>
-					<div
-						style={{
-							height: '100px',
-							background: 'white',
-							display: 'flex',
-							justifyContent: 'space-around',
-							alignItems: 'center',
-							width: '918px',
-							marginLeft: '20%',
-							borderRadius: '10px 10px 0 0',
-							flexDirection: 'column',
-							boxShadow: '0 0px 30px rgb(172, 171, 171)'
-						}}
-					>
+					<div className={styles.productsPanel}>
 						<div className={styles.searchContainer}>
 							<input
 								className={styles.searchbar}

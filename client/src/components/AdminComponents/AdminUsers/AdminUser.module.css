@@ -86,3 +86,16 @@
 .headerTable {
 	overflow: hidden;
 }
+
+#btnEdit {
+	outline: none;
+}
+#btnDelete {
+	outline: none;
+}
+#btnReset {
+	outline: none;
+}
+#btnAdd {
+	outline: none;
+}
