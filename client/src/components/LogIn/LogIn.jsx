@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { logIn, loginGmail, postCartUser } from '../../Redux/actions';
+import { logIn, loginGmail, postCartUser, postUserFavorites } from '../../Redux/actions';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
@@ -89,6 +89,8 @@ const LogIn = () => {
 
 	const prodId = useSelector((state) => state.cart.cart);
 
+	const favorites = useSelector((state) => state.useraccount.userFavorites);
+
 	let array = [];
 
 	if (prodId !== null) {
@@ -111,6 +113,7 @@ const LogIn = () => {
 		if (authenticated) {
 			history.goBack();
 			dispatch(postCartUser(bodyObject));
+			dispatch(postUserFavorites(userId, favorites));
 		}
 	}, [authenticated]);
 

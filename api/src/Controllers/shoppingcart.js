@@ -5,14 +5,14 @@ const { Cart, Product} = require('../db');
 
 const createCart = async function createCart(req, res) {
 	const { userId, prodId } = req.body;
-	
+	console.log(req.body)
 	if (prodId != undefined) {
 		for (let i = 0; i < prodId.length; i++) {
 			try {
 				const newCart = Cart.findOrCreate({
 					where: {
 						userId: userId,
-						productId: prodId[i].id,
+						productId: prodId[i].prodId,
 						qty: prodId[i].qty,
 					},
 				});
@@ -49,7 +49,91 @@ const findCart = async function findCart(req, res) {
 	}
 };
 
+//----------- ELIMINATE SHOPPING CART -----------
+
+const deleteCart = async function deleteCart(req, res) {
+	const { userId } = req.body;
+	try {
+		
+		let cartDestroy = await Cart.destroy({
+				where: {
+					userId: userId,
+
+				},
+				attributes: ['createdAt', 'updatedAt', "id", "qty", "productId"]
+		
+				});
+			
+		res.status(200).send('cart deleted');
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+
+// const deleteCart = async function deleteCart(req, res) {
+// 	const { userId, cartToDelete } = req.body;
+// 	try {
+		
+// 		cartToDelete.forEach((item) => {
+// 			(async function deleteinstCart(){
+// 				let itemDestroy = await Cart.destroy({
+// 					where: {
+// 						userId: userId,
+// 						productId: item.id
+// 					},
+// 					attributes: ['createdAt', 'updatedAt', "id", "qty"]
+		
+// 					});
+	
+// 				})();
+
+// 			})
+			
+// 		res.status(200).send('cart deleted');
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+
+
+//----------- UPDATE SHOPPING CART -----------
+
+const updateCart = async function updateCart(req, res) {
+	const { userId, cart } = req.body;
+	
+	try {
+		
+		let cartDestroy = await Cart.destroy({
+				where: {
+					userId: userId,
+
+				},
+				attributes: ['createdAt', 'updatedAt', "id", "qty", "productId"]
+		
+				}).then((destroyed) => {
+					if (cart != undefined) {
+						for (let i = 0; i < cart.length; i++) {
+								const newCart = Cart.findOrCreate({
+									where: {
+										userId: userId,
+										productId: cart[i].id,
+										qty: cart[i].qty,
+									},
+								});
+							}
+					}
+				})
+			
+		res.status(200).send('cart updated');
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 module.exports = {
 	createCart,
 	findCart,
+	deleteCart,
+	updateCart
 };

@@ -45,10 +45,9 @@ function AddProduct() {
 	};
 
 	const submit = (data, e) => {
-	
 		data.category = cate.map(x => x.value);
 		// data.image= imagesFiles[0] Aqui Es para setear lo de imagen si no sirve Sacar
-		console.log(data)
+		console.log(data);
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
 				return new Swal({
@@ -70,7 +69,8 @@ function AddProduct() {
 			data.description.length > 0 &&
 			data.weight &&
 			data.weight.length > 0 &&
-			data.image &&
+			// data.image &&
+			// data.image.length > 0 &&
 			data.stock &&
 			data.stock.length > 0 &&
 			data.category &&
@@ -147,10 +147,8 @@ function AddProduct() {
 										'Does not require numbers, does not accept symbols(( "! # $% & / () =.; - *"))'
 								}
 							})}
-						
 						></input>
 						<span className={styles.err}>{errors?.name?.message}</span>
-					
 
 						<label className={styles.titles}>Price:</label>
 						<input
@@ -162,7 +160,8 @@ function AddProduct() {
 							{...register('price', {
 								maxLength: {
 									value: 7,
-									message: 'No more than seven characters of numeric type are required'
+									message:
+										'No more than seven characters of numeric type are required'
 								},
 								minLength: {
 									value: 3,
@@ -171,7 +170,7 @@ function AddProduct() {
 							})}
 						/>
 						<span className={styles.err}>{errors?.price?.message}</span>
-					
+
 						<label className={styles.titles}>Special Price:</label>
 						<input
 							className={styles.input}
@@ -182,7 +181,8 @@ function AddProduct() {
 							{...register('priceSpecial', {
 								maxLength: {
 									value: 7,
-									message: 'No more than seven characters of numeric type are required.'
+									message:
+										'No more than seven characters of numeric type are required.'
 								},
 								minLength: {
 									value: 3,
@@ -199,7 +199,6 @@ function AddProduct() {
 							name='description'
 							onChange={e => changeInput(e)}
 							{...register('description', {
-
 								maxLength: {
 									value: 200,
 									message: 'Less than 200 characters type letters required'
@@ -210,12 +209,13 @@ function AddProduct() {
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message: 'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
+									message:
+										'Does not require numbers, does not accept symbols (("! # $% & / () =.; - *"))'
 								}
 							})}
 						/>
 						<span className={styles.err}>{errors?.description?.message}</span>
-					
+
 						<label className={styles.titles}>Weight:</label>
 						<input
 							className={styles.input}
@@ -227,7 +227,8 @@ function AddProduct() {
 							{...register('weight', {
 								maxLength: {
 									value: 4,
-									message: 'No more than four characters of numeric type are required.'
+									message:
+										'No more than four characters of numeric type are required.'
 								},
 								minLength: {
 									value: 1,
@@ -238,6 +239,22 @@ function AddProduct() {
 						<span>{errors?.weight?.message}</span>
 
 						<label className={styles.titles}>Image:</label>
+						{/* <input
+					className={styles.input}
+					type='text'
+					name='image'
+					onChange={e => changeInput(e)}
+					{...register('image', {
+						// maxLength: {
+						// 	value: 20,
+						// 	massage: 'menos de 20 caracteres'
+						// },
+						// minLength: {
+						// 	value: 3,
+						// 	message: 'mas de 3 caracteres'
+						// }
+					})}
+				/> */}
 						<input
 							name='images'
 							type='file'
@@ -245,7 +262,6 @@ function AddProduct() {
 							onChange={e => convertToBase64(e.target.files)}
 						/>
 						<span className={styles.err}>{errors?.image?.message}</span>
-					
 
 						<label className={styles.titles}>Stock:</label>
 						<input
@@ -257,7 +273,8 @@ function AddProduct() {
 							{...register('stock', {
 								maxLength: {
 									value: 4,
-									message: 'No more than four characters of numeric type are required.'
+									message:
+										'No more than four characters of numeric type are required.'
 								},
 								minLength: {
 									value: 1,
@@ -269,7 +286,7 @@ function AddProduct() {
 
 						<label className={styles.titles}>Brand:</label>
 						<select
-							 className={styles.input1}
+							className={styles.input1}
 							type='text'
 							name='brandId'
 							onChange={e => changeInput(e)}
@@ -283,9 +300,11 @@ function AddProduct() {
 							))}
 						</select>
 
-						<label className={styles.titles} for='type'>Selected Categories</label>
+						<label className={styles.titles} for='type'>
+							Selected Categories
+						</label>
 						<Select
-						className={styles.input1}
+							className={styles.input1}
 							width='20px'
 							isMulti
 							name='category'
@@ -293,9 +312,11 @@ function AddProduct() {
 							onChange={changeChange}
 						/>
 					</div>
-					
-					<ButtonRed className={styles.btn} type='submit'> Add </ButtonRed>
 
+					<ButtonRed className={styles.btn} type='submit'>
+						{' '}
+						Add{' '}
+					</ButtonRed>
 				</form>
 			</div>
 		</div>
