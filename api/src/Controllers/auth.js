@@ -12,6 +12,7 @@ exports.authUser = async (req, res) => {
 	}
 	try {
 		const { email, password } = req.body;
+		console.log(req.body)
 
 		let user = await User.findOne({
 			where: {

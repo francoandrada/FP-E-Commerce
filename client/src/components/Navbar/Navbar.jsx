@@ -15,6 +15,7 @@ import {
 	postCartUser,
 	postUserFavorites,
 	getUserFavorites,
+	deleteCart
 } from '../../Redux/actions';
 
 import { FaHeart } from 'react-icons/fa';
@@ -30,28 +31,29 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const token = useSelector((state) => state.user.token);
-	const userData = useSelector((state) => state.user.userData);
-	const userName = useSelector((state) => state.user.userData);
+	const token = useSelector(state => state.user.token);
+	const userData = useSelector(state => state.user.userData);
+	const userName = useSelector(state => state.user.userData);
 
-	const errorToken = useSelector((state) => state.user.errorToken);
-	const userId = useSelector((state) => state.user.userData.userId);
+	const errorToken = useSelector(state => state.user.errorToken);
+	const userId = useSelector(state => state.user.userData.userId);
 
 	useEffect(() => {
 		if (errorToken) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
-				text: 'Your session has expired, please login again',
+				text: 'Your session has expired, please login again'
 			});
 			dispatch(logOut());
+			dispatch(deleteCart());
 		}
 	}, [errorToken]);
 
 	//CARRITO
 	const [cartCount, SetCartCount] = useState(0);
-	const authenticated = useSelector((state) => state.user.authenticated);
-	const cart = useSelector((state) => state.cart.cart);
+	const authenticated = useSelector(state => state.user.authenticated);
+	const cart = useSelector(state => state.cart.cart);
 
 	useEffect(() => {
 		if (authenticated) {
@@ -64,7 +66,7 @@ const Navbar = () => {
 	useEffect(() => {
 		let count = 0;
 		if (cart !== null) {
-			cart.forEach((item) => {
+			cart.forEach(item => {
 				count = count + item.qty;
 			});
 		}
@@ -73,7 +75,7 @@ const Navbar = () => {
 	}, [cart, cartCount]);
 
 	//FAVORITES
-	const favorites = useSelector((state) => state.useraccount.userFavorites);
+	const favorites = useSelector(state => state.useraccount.userFavorites);
 
 	useEffect(() => {
 		localStorage.setItem('userFavorites', JSON.stringify(favorites));
@@ -98,11 +100,11 @@ const Navbar = () => {
 	useEffect(() => {
 		axios
 			.get('http://localhost:3001/products')
-			.then((res) => {
+			.then(res => {
 				const suggestions = res.data.map(({ name }) => name);
 				setOptions(suggestions);
 			})
-			.catch((error) => console.log(error));
+			.catch(error => console.log(error));
 	}, []);
 
 	useEffect(() => {
@@ -113,19 +115,19 @@ const Navbar = () => {
 		};
 	}, []);
 
-	const handleClickOutside = (event) => {
+	const handleClickOutside = event => {
 		const { current: wrap } = wrapperRef;
 		if (wrap && !wrap.contains(event.target)) {
 			setDisplay(false);
 		}
 	};
 
-	const searchHandle = (product) => {
+	const searchHandle = product => {
 		setSearch(product);
 		setDisplay(false);
 	};
 
-	const searchProduct = (event) => {
+	const searchProduct = event => {
 		event.preventDefault();
 		if (search.trim()) {
 			dispatch(cleanSuggestions());
@@ -163,13 +165,13 @@ const Navbar = () => {
 								className={styles.inputEcommerce}
 								value={search}
 								onClick={() => setDisplay(!display)}
-								onChange={(event) => setSearch(event.target.value)}
+								onChange={event => setSearch(event.target.value)}
 								placeholder='Search...'
 							/>
 							{display && (
 								<div className={styles.autoContainerEcommerce}>
 									{options
-										.filter((product) =>
+										.filter(product =>
 											product.toLowerCase().includes(search.toLowerCase())
 										)
 										.slice(0, 7)
@@ -207,7 +209,11 @@ const Navbar = () => {
 						</div>
 					) : null}
 					{token ? (
-						<div className={window.screen.width > 430 ? 'd-block mt-4' : 'LogOutContainer'}>
+						<div
+							className={
+								window.screen.width > 430 ? 'd-block mt-4' : 'LogOutContainer'
+							}
+						>
 							<button
 								type='submit'
 								className={styles.but}

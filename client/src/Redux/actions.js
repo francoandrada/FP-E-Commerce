@@ -62,7 +62,7 @@ import {
 	SESSION_FAIL,
 	MESSAGE_SUCCESS,
 	MESSAGE_FAIL,
-	ORDER_DISPATCHED,
+	ORDER_DISPATCHED
 } from './actionsName';
 
 import axios from 'axios';
@@ -653,27 +653,19 @@ export function postCart(data) {
 	};
 }
 
-export function getPayInfo(data) {
-	return async dispatch => {
-		console.log(data);
-
-		try {
-			const res = await axios.post('http://localhost:3001/webhooks', { data });
-
-		} catch (error) {
-			console.log(error);
-		}
-	};
-}
+// export function getPayInfo(data) {
+// 	return async dispatch => {
+	
+// 	};
+// }
 
 export function deleteCart(data) {
-	return async (dispatch) => {
-			dispatch({
-				type: GET_PAY,
-			});
+	return async dispatch => {
+		dispatch({
+			type: GET_PAY
+		});
 	};
 }
-
 
 ////////////////////// USER ACCOUNT ACTIONS  ////////////////////
 
@@ -706,7 +698,7 @@ export function getCartUser(id) {
 				'http://localhost:3001/shoppingcart/userCart',
 				{ userId: id }
 			);
-			
+
 			dispatch({
 				type: CREATE_CART_USER,
 				payload: res.data
@@ -765,24 +757,23 @@ export const getUserFavorites = userId => {
 	};
 };
 
-export function saveAddress(address) {
-	console.log(address);
-	return async dispatch => {
-		dispatch({
-			type: SAVE_ADDRESS_ORDER,
-			payload: address
-		});
-	};
-}
-export function saveAmmount(ammount) {
-	return async dispatch => {
-		dispatch({
-			type: SET_AMMOUNT,
-			payload: ammount
-		});
-	};
-}
-
+// export function saveAddress(address) {
+// 	console.log(address);
+// 	return async dispatch => {
+// 		dispatch({
+// 			type: SAVE_ADDRESS_ORDER,
+// 			payload: address
+// 		});
+// 	};
+// }
+// export function saveAmmount(ammount) {
+// 	return async dispatch => {
+// 		dispatch({
+// 			type: SET_AMMOUNT,
+// 			payload: ammount
+// 		});
+// 	};
+// }
 
 ////////////////////////// Solo se usa en proyecto deployeado
 export function setAuthentication(payload) {
