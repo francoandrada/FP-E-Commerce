@@ -279,6 +279,7 @@
 	}
 	.linksNavEcommerce a{
 		margin: 0.5em;
+		display: flex;
 	}
 	.sections a {
 		font-size: 12px;
