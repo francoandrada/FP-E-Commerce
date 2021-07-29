@@ -106,7 +106,7 @@ const Table = () => {
 				<Admin />
 				<div className={styles.btnContainer}>
 					<Link to='/admin/addproduct'>
-						<button> Add Product </button>
+						<button id={styles.btnAddProduct}> Add Product </button>
 					</Link>
 				</div>
 				<div className={styles.tableContainer}>

@@ -55,6 +55,7 @@ function ContactForm() {
 				showConfirmButton: false,
 				timer: 1500
 			});
+			history.push('/')
 
 		}
 
@@ -129,21 +130,3 @@ function ContactForm() {
 }
 export default ContactForm;
 
-// onSubmit: async values => {
-// 	console.log(values);
-// 	try {
-// 		axios.post(`http://localhost:3001/webhooks/contactForm`, {values});
-
-// 		Swal.fire({
-// 			position: 'center',
-// 			icon: 'success',
-// 			title: 'Your message was sent! Thanks!',
-// 			showConfirmButton: false,
-// 			timer: 1500
-// 		});
-// 		history.push('/');
-// 	} catch (error) {
-// 		console.log(error.response.data.msg);
-// 		setHola(error.response.data.msg);
-// 	}
-// }

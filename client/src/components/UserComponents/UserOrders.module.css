@@ -5,7 +5,7 @@
 	align-items: center;
 	background-color: white;
 
-	width: max-content;
+	min-width: 600px;
 
 	margin-left: 10px;
 	padding: 20px;
@@ -14,8 +14,8 @@
 
 .selectedOptionTitle {
 	display: flex;
-	justify-content: flex-start;
-	width: max-content;
+	justify-content: center;
+	width: 100%;
 	padding: 10px;
 }
 
@@ -144,6 +144,14 @@
 	text-align: left;
 }
 
+.buttonEditUserinfo {
+    padding: 10px;
+    outline: none;
+    margin-left: 20px;
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
 .nothingHere {
 	display: flex;
 	flex-direction: column;
@@ -156,6 +164,24 @@
 .nothingHere2 {
 	width: 50%;
 	margin-top: 20px;
+}
+
+.orderAddressContainer {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    border-radius: 10px;
+    border-color: rgb(199, 199, 199);
+    border-style: solid;
+    border-width: 0.5px;
+    padding: 20px;
+    margin: 20px;
+
+}
+
+.orderAddressInnerContainer {
+    display: flex;
+    width: 80%;
 }
 
 @media only screen and (max-width: 430px) {

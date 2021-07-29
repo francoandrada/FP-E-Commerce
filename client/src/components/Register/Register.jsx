@@ -9,9 +9,11 @@ import { useFormik } from 'formik';
 import Error from '../StyledComponents/ErrorMessages';
 import Div from '../StyledComponents/Validation';
 import './index.css'
+import { logIn } from '../../Redux/actions';
+import { useDispatch } from 'react-redux';
 function Register() {
 	const history = useHistory();
-
+	const dispatch = useDispatch();
 	const [hola, setHola] = useState([]);
 	const formik = useFormik({
 		initialValues: {
@@ -64,7 +66,10 @@ function Register() {
 					showConfirmButton: false,
 					timer: 1500,
 				});
+				console.log({email: values.email, password: values.password});
+				dispatch(logIn(values));
 				history.push('/');
+
 			} catch (error) {
 				console.log(error.response.data.msg);
 				setHola(error.response.data.msg);

@@ -99,7 +99,7 @@ const findUserOrders = async function findUserOrders(req, res, next) {
 	try {
 		const allUserOrders = await Order.findAll({
 			where: { userId: userId },
-			attributes: ['userId', 'ammount', 'status'],
+			attributes: ['userId', 'ammount', 'status', 'address'],
 			include: [
 				{
 					model: OrderDetail,

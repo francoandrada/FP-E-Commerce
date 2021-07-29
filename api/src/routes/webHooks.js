@@ -7,7 +7,7 @@ const { webhooks, contactForm } = require('../Controllers/webHooks');
 
 router.post('/', webhooks);
 
-router.post('/contactForm', contactForm);
+
 
 
 

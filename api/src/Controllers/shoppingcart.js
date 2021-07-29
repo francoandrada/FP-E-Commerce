@@ -12,7 +12,7 @@ const createCart = async function createCart(req, res) {
 				const newCart = Cart.findOrCreate({
 					where: {
 						userId: userId,
-						productId: prodId[i].prodId,
+						productId: prodId[i].id,
 						qty: prodId[i].qty,
 					},
 				});

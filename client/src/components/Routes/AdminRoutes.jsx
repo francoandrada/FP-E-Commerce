@@ -18,6 +18,7 @@ import UserOrder from '../AdminComponents/UserOrder/UserOrder';
 import OrderDetails from '../AdminComponents/OrderDeatils/OrderDetails';
 
 import { useSelector } from 'react-redux';
+import Address from '../AdminComponents/AdminAddress/AdminAddress';
 
 const AdminRoutes = ({ location }) => {
 	/* =======================================================================
@@ -27,7 +28,7 @@ const AdminRoutes = ({ location }) => {
 
 	return (
 		<>
-			{/* {isAdmin && isAdmin ? ( */}
+		    {isAdmin && isAdmin ? (
 			<>
 				<Admin />
 				<Switch>
@@ -56,12 +57,12 @@ const AdminRoutes = ({ location }) => {
 				</Switch>
 				{location.pathname === '/admin' && <Charts />}
 			</>
-			{/* ) : (
+			 ) : (
 				<div>
 					<h1>FAILED ACCESS</h1>
 					<h2>Unauthorise User</h2>
 				</div>
-			)} */}
+			)}
 		</>
 	);
 };

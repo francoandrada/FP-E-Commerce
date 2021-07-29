@@ -140,7 +140,7 @@ const OrderDetails = () => {
 					{orderDetails && (
 						<Select
 							initialValue={orderDetails?.status}
-							values={['created', 'cancelled', 'completed', 'dispatched']}
+							values={['created', 'proccesing', 'cancelled', 'completed', 'dispatched']}
 							onChange={changeStatus}
 						/>
 					)}
