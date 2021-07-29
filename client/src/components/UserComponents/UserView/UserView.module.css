@@ -1,65 +1,104 @@
 /* Main Container Div */
 
 .userViewContainer {
-    display: flex;
-    justify-items: center;
-    width: 100%;
-    padding: 20px;
-    margin: 20px;
+	display: flex;
+	justify-items: center;
+	width: 100%;
+	padding: 20px;
     
+    /* margin: 13.5% 0; */
+	/* margin: 20px; */
 }
 
 /* User Account Options Menu Div */
 
 .optionsPanelContainer {
-    display: flex;
-    width: 30%;
- 
+	display: flex;
+	width: 30%;
 }
 
 .optionsContainer {
 	display: flex;
 	flex-direction: column;
-    justify-content:space-evenly;
-    width: 100%;
-    min-width: 210px;
-    height: 400px;
+	justify-content: space-evenly;
+	width: 100%;
+	min-width: 210px;
+	height: 400px;
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
-    
-	
 }
-
 
 .optionsLayoutdiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
 }
 .optionsLayoutdiv:hover {
-    background-color: rgb(209, 209, 209);
+	background-color: rgb(209, 209, 209);
 }
 
 .subcontainerOptions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
- 
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .textOptionStyle {
-    text-align: left;
-    margin-bottom: 0;
-    margin-left: 20px;
-   
+	text-align: left;
+	margin-bottom: 0;
+	margin-left: 20px;
 }
 
 /* Panel Container Div */
 
 .userPanelSelectedContainer {
-    display: flex;
-    padding-left: 30px;
-    width: 70%;
+	display: flex;
+	padding-left: 30px;
+	width: 70%;
+}
+
+@media only screen and (max-width: 430px) {
+	/* Main Container Div */
+	.userViewContainer {
+		display: flex;
+		justify-items: center;
+		width: 100%;
+		padding: 0;
+		margin: 4.8em 10px;
+	}
+	.userViewContainer p {
+		font-size: 14px;
+	}
+
+	/* User Account Options Menu Div */
+	.optionsLayoutdiv {
+		justify-content: space-between;
+	}
+	.optionsContainer {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		width: 150px;
+		min-width: 150px;
+		height: 400px;
+		padding: 2px;
+		background-color: rgb(243, 242, 242);
+		border-radius: 10px;
+	}
+	.optionsContainer p {
+		margin: 0 auto;
+		font-size: 14px;
+	}
+	.optionsContainer span {
+		margin: 0 auto;
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	.subcontainerOptions svg {
+        margin-right: 0.5em;
+	}
+
 }

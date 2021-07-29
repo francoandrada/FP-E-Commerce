@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { Product, Brand, Category, Image } = require('../db');
+const { Product, Brand, Category, Image, Review } = require('../db');
 const { jsonProducts } = require('../../jsonProducts');
 
 // ----------------  Products to Db -----------------
@@ -280,6 +280,35 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 	}
 };
 
+
+
+
+
+
+const filterByRating = async function filterByRating(req, res, next) {
+	try {
+			
+			let allProduct = await Product.findAll({
+	
+				include: {
+					model: Review ,
+					where: {stars : 3},
+					attributes:['stars']
+				},
+				attributes: {
+					exclude: ['createdAt', 'updatedAt']
+				},
+			});
+			res.send(allProduct)
+	
+		} catch (error) {
+			console.log(error);
+		}
+};
+
+
+
+
 module.exports = {
 	postNewProduct,
 	getProductName,
@@ -290,5 +319,6 @@ module.exports = {
 	getAllCategories,
 	productsDb,
 	getFilteredProducts,
+	filterByRating
 	// getCategoryProduct,
 };

@@ -45,12 +45,12 @@ function UserAccount({ setOption }) {
 		<div className={style.userOptionContainer}>
 			<div className={style.selectedOptionCabecera}>
 				<div>
-					<h3>My Account</h3>
+					<h3 className={style.Tittle}>My Account</h3>
 				</div>
-				<div>
+				<div id='edit' onClick={(event) => setOption(event)}>
 					<Link id='edit'>
-						<button>
-							<MdModeEdit id='edit' onClick={(event) => setOption(event)} />
+						<button className={style.buttonEditUserinfo} id='edit' onClick={(event) => setOption(event)} >
+							Edit <MdModeEdit id='edit' onClick={(event) => setOption(event)} />
 						</button>
 					</Link>
 				</div>

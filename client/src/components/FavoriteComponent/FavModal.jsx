@@ -37,12 +37,16 @@ const CartContainer = styled.div`
     background-color: #f8f9fa;
     position: absolute;
     z-index: 1000;
-    top: 157px;
-    right: 5%;
+    top: 100px;
+    right: 7%;
     border-radius: 5px;
     width: 440px;
     color: #495057;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 72%);
+
+    @media only screen and (max-width: 430px){
+	width: 330px;
+    }
 `;
 
 const CartHeader = styled.div`
@@ -54,7 +58,9 @@ const CartHeader = styled.div`
         width: 50%;
         text-align: center;
     }
-
+    h2 {
+    font-size: 22px
+    }
     div {
     display: flex;
     justify-content: center;
@@ -112,6 +118,11 @@ const ButtonClose = styled.section`
         background-color:#919090;
         color: white;
         transition: 200ms;
+    }
+
+    @media only screen and (max-width: 430px){
+        width: 7.5em;
+        font-size:18px
     }
 `;
 

@@ -1,24 +1,24 @@
-@media only screen and (max-width: 430px){
-    
-.btnCart {
-    width: 80%;
-    font-family: 'Roboto', sans-serif;
-    border-style: none;
-    border-radius: 5px;
-    padding: 0.5em;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    background-color: #ff3c4a;
-}
-.btnCheckout{
-    font-family: 'Roboto',sans-serif;
-border-style: none;
-border-radius: 5px;
-color: white;
-font-size: 14px;
-background-color: #424242;
-padding: .5rem;
-font-weight: 600;
-}
+@media only screen and (max-width: 430px) {
+	.btnCart {
+		width: 100% !important;
+		font-family: 'Roboto', sans-serif;
+		border-style: none;
+		border-radius: 5px;
+		padding: 0.5em;
+		color: white;
+		font-size: 16px !important;
+		font-weight: 700;
+		background-color: #ff3c4a;
+	}
+	.btnCheckout {
+		font-family: 'Roboto', sans-serif;
+		border-style: none;
+		border-radius: 5px;
+		color: white;
+		font-size: 16px !important;
+		background-color: #424242;
+		padding: 0.5rem;
+		font-weight: 600;
+		width: 100% !important;
+	}
 }

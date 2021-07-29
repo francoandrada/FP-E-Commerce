@@ -4,18 +4,12 @@
     height: 80%;
     flex-grow: 1;
 }
-
+.loader{
+    margin: 0 auto;
+}
 #filterContainer{
     flex-basis: 15%;
 }
 #productsContainer{
     flex-basis: 85%;
 }
-/* @media only screen and (max-width: 430px){
-    #filterContainer{
-        width: 50%;
-    }
-    #productsContainer{
-        flex
-    }
-} */

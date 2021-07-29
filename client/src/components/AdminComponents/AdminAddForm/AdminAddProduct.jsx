@@ -4,7 +4,7 @@ import {
 	createdProduct,
 	getProducts,
 	getCategories,
-	getBrands,
+	getBrands
 } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import styles from './stylesForms.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import ButtonRed from '../../StyledComponents/ButtonRed';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const customStyles = {
 	menu: (provided, state) => ({
@@ -39,17 +39,17 @@ const customStyles = {
 
 function AddProduct() {
 	const dispatch = useDispatch();
-	const products = useSelector((state) => state.product.allProducts);
-	const brand = useSelector((state) => state.brands.allBrands);
-	const categories = useSelector((state) => state.category.allCategories);
-
+	const products = useSelector(state => state.product.allProducts);
+	const brand = useSelector(state => state.brands.allBrands);
+	const categories = useSelector(state => state.category.allCategories);
+	const [imagesFiles, setImagesFiles] = useState([]);
 	var [cate, setCate] = useState([]);
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
+		reset
 	} = useForm();
 
 	useEffect(() => {
@@ -60,10 +60,15 @@ function AddProduct() {
 	function changeChange(e) {
 		setCate((cate = e));
 	}
-	const changeInput = (e) => {};
+	const changeInput = e => {
+		e.preventDefault();
+		if (e.target.file) {
+			convertToBase64();
+		}
+	};
 
 	const submit = (data, e) => {
-		data.category = cate.map((x) => x.value);
+		data.category = cate.map(x => x.value);
 
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].name.toLowerCase() === data.name.toLowerCase()) {
@@ -71,7 +76,7 @@ function AddProduct() {
 					title: 'Existing name',
 					icon: 'warning',
 					button: 'ok',
-					timer: '5000',
+					timer: '5000'
 				});
 			}
 		}
@@ -95,13 +100,13 @@ function AddProduct() {
 			data.brandId &&
 			data.brandId.length > 0
 		) {
-			dispatch(createdProduct(data));
+			dispatch(createdProduct(data, { images: imagesFiles }));
 			e.target.reset();
 			new Swal({
 				title: 'Product Created!!',
 				icon: 'success',
 				button: 'ok',
-				timer: '5000',
+				timer: '5000'
 			}).then(() => dispatch(getProducts()));
 			reset({ data });
 		} else {
@@ -109,11 +114,24 @@ function AddProduct() {
 				title: 'All fields are required',
 				icon: 'error',
 				button: 'ok',
-				timer: '5000',
+				timer: '5000'
 			});
 		}
 	};
-	const options = categories.map((c) => ({ label: c.name, value: c.id }));
+
+	const convertToBase64 = files => {
+		var arrayAux = [];
+		Array.from(files).forEach(file => {
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function() {
+				let base64 = reader.result;
+				arrayAux.push(base64);
+			};
+		});
+		setImagesFiles(arrayAux);
+	};
+	const options = categories.map(c => ({ label: c.name, value: c.id }));
 	return (
 		<div className={styles.background}>
 			<div className={styles.btnBackContainer}>
@@ -124,18 +142,18 @@ function AddProduct() {
 			<div className={styles.formContainer}>
 				<form
 					className=''
-					onChange={(e) => changeInput(e)}
+					onChange={e => changeInput(e)}
 					onSubmit={handleSubmit(submit)}
 				>
 					<div className={styles.box1}>
 						<label className={styles.titles}> Name Product: </label>
 
-						 <input
+						<input
 							className={styles.input}
 							type='text'
 							name='name'
-							autoComplete= 'off'
-							onChange={(e) => changeInput(e)}
+							autoComplete='off'
+							onChange={e => changeInput(e)}
 							{...register('name', {
 								// required:{
 								//     value: true,
@@ -143,18 +161,21 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 20,
-									massage: 'less than 20 characters required',
+									massage: 'less than 20 characters required'
 								},
 								minLength: {
 									value: 3,
-									message: 'requires more than 3 characters',
+									message: 'requires more than 3 characters'
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message: 'does not require numbers, does not accept symbols "! # $% & / () =.; - *"',
-								},
+									message:
+										'does not require numbers, does not accept symbols "! # $% & / () =.; - *"'
+								}
 							})}
-						></input> 
+						// ></input> 
+						></input>
+						<span>{errors?.name?.message}</span>
 
 				
 						<span className={styles.err}>{errors?.name?.message}</span>
@@ -166,7 +187,7 @@ function AddProduct() {
 							type='number'
 							name='price'
 							min='0'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('price', {
 								// required:{
 								//     value: true,
@@ -174,12 +195,12 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 7,
-									massage: 'less than 7 characters required',
+									massage: 'less than 7 characters required'
 								},
 								minLength: {
 									value: 3,
-									message: 'requires more than 3 characters',
-								},
+									message: 'requires more than 3 characters'
+								}
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
 								//     message:"no debe ingresar numeros"
@@ -195,7 +216,7 @@ function AddProduct() {
 							type='number'
 							name='priceSpecial'
 							min='0'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('priceSpecial', {
 								// required:{
 								//     value: true,
@@ -203,12 +224,12 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 7,
-									massage: 'less than 7 characters required',
+									massage: 'less than 7 characters required'
 								},
 								minLength: {
 									value: 3,
-									message: 'requires more than 3 characters',
-								},
+									message: 'requires more than 3 characters'
+								}
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
 								//     message:"no debe ingresar numeros"
@@ -222,7 +243,7 @@ function AddProduct() {
 							className={styles.input}
 							type='text'
 							name='description'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('description', {
 								// required:{
 								//     value: true,
@@ -230,16 +251,17 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 200,
-									massage: 'less than 200 characters required',
+									massage: 'less than 200 characters required'
 								},
 								minLength: {
 									value: 10,
-									message: 'requires more than 10 characters',
+									message: 'requires more than 10 characters'
 								},
 								pattern: {
 									value: /^[a-zA-Z ]*$/,
-									message: 'does not require numbers, does not accept symbols "! # $% & / () =.; - *"',
-								},
+									message:
+										'does not require numbers, does not accept symbols "! # $% & / () =.; - *"'
+								}
 							})}
 						/>
 						<span className={styles.err}>{errors?.description?.message}</span>
@@ -252,7 +274,7 @@ function AddProduct() {
 							name='weight'
 							min='0'
 							maxLength='4'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('weight', {
 								// required:{
 								//     value: true,
@@ -260,12 +282,12 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 4,
-									massage: 'less than 4 characters required',
+									massage: 'less than 4 characters required'
 								},
 								minLength: {
 									value: 1,
-									message: 'requires more than 1 characters',
-								},
+									message: 'requires more than 1 characters'
+								}
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
 								//     message:"no debe ingresar numeros"
@@ -275,32 +297,40 @@ function AddProduct() {
 						<span>{errors?.weight?.message}</span>
 
 						<label className={styles.titles}>Image:</label>
-						<input
+						{/* <input
+						<label className={styles.labelSelect}>Image:</label> */}
+						{/* <input
 							className={styles.input}
 							type='text'
 							name='image'
 							// name="images[]"
 							// id="fileInput"
 							// multiple
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('image', {
 								// required:{
 								//     value: true,
 								//     massage: "debe ingresar un nombre"
 								// },
-								maxLength: {
-									value: 20,
-									massage: 'less than 20 characters required',
-								},
-								minLength: {
-									value: 3,
-									message: 'requires more than 3 characters',
-								},
+								// maxLength: {
+								// 	value: 20,
+								// 	massage: 'less than 20 characters required'
+								// },
+								// minLength: {
+								// 	value: 3,
+								// 	message: 'requires more than 3 characters'
+								// }
 								// pattern: {
 								// 	value: /^[a-zA-Z]*$/,
 								// 	message: 'no debe ingresar numeros',
 								// },
 							})}
+						/> */}
+						<input
+							name='images'
+							type='file'
+							multiple
+							onChange={e => convertToBase64(e.target.files)}
 						/>
 						<span className={styles.err}>{errors?.image?.message}</span>
 					{/* </div> */}
@@ -311,7 +341,7 @@ function AddProduct() {
 							type='number'
 							name='stock'
 							min='0'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('stock', {
 								// required:{
 								//     value: true,
@@ -319,12 +349,12 @@ function AddProduct() {
 								// },
 								maxLength: {
 									value: 4,
-									massage: 'less than 4 characters required',
+									massage: 'less than 4 characters required'
 								},
-								minLength:{
-								    value: 1,
-								    message:"requires more than 1 characters"
-								},
+								minLength: {
+									value: 1,
+									message: 'requires more than 1 characters'
+								}
 								// pattern:{
 								//     value: /^[a-zA-Z]*$/,
 								//     message:"no debe ingresar numeros"
@@ -334,11 +364,14 @@ function AddProduct() {
 						<span className={styles.err}>{errors?.stock?.message}</span>
 
 						<label className={styles.titles}>Brand:</label>
-						<select
+						{/* <select
 							className={styles.input}
+						<label className={styles.labelSelect}>Brand:</label> */}
+						<select
+							className={styles.selectBrand}
 							type='text'
 							name='brandId'
-							onChange={(e) => changeInput(e)}
+							onChange={e => changeInput(e)}
 							{...register('brandId', {})}
 						>
 							<option></option>
@@ -350,6 +383,9 @@ function AddProduct() {
 						</select>
 
 						<label className={styles.titles} for='type'>Selected Categories</label>
+						{/* <label for='type' className={styles.labelSelect}> */}
+							{/* Selected Categories */}
+						{/* </label> */}
 						<Select
 						className={styles.input1}
 							// styles={customStyles}
@@ -359,10 +395,13 @@ function AddProduct() {
 							name='category'
 							options={options}
 							onChange={changeChange}
+							id={styles.selectCategories}
 						/>
 					</div>
 					
 					<ButtonRed className={styles.btn} type='submit'> Add </ButtonRed>
+
+					{/* <ButtonRed type='submit'> Add </ButtonRed> */}
 				</form>
 			</div>
 		</div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Admin from '../Admin/Admin';
 import { useHistory } from 'react-router-dom';
 import { getUsers } from '../../../Redux/actions';
-import { MdModeEdit, MdDelete } from 'react-icons/md';
+import { MdModeEdit } from 'react-icons/md';
 import styles from './AdminUser.module.css';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
@@ -18,8 +18,8 @@ import { forgotPassword } from '../../../Redux/actions';
 function AdminUsers() {
 	const history = useHistory();
 
-	const activeUser = useSelector((state) => state.user.userData);
-	let allUsers = useSelector((state) => state.admin.usersFromDB);
+	const activeUser = useSelector(state => state.user.userData);
+	let allUsers = useSelector(state => state.admin.usersFromDB);
 	const [filter, setFilter] = useState('');
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -36,7 +36,7 @@ function AdminUsers() {
 						icon: 'success',
 						title: 'The user was succesfully deleted',
 						showConfirmButton: false,
-						timer: 1500,
+						timer: 1500
 					});
 				})
 				.then(() => history.push('/admin/users'));
@@ -50,7 +50,7 @@ function AdminUsers() {
 		return (acu += 1);
 	};
 
-	const onDeleteClick = (email) => {
+	const onDeleteClick = email => {
 		if (email === activeUser.email) {
 			console.log(email);
 			console.log(activeUser.email);
@@ -59,8 +59,8 @@ function AdminUsers() {
 				showDenyButton: false,
 				confirmButtonText: `OK`,
 				customClass: {
-					confirmButton: 'order-2',
-				},
+					confirmButton: 'order-2'
+				}
 			});
 		} else {
 			Swal.fire({
@@ -70,9 +70,9 @@ function AdminUsers() {
 				denyButtonText: `No`,
 				customClass: {
 					confirmButton: 'order-2',
-					denyButton: 'order-3',
-				},
-			}).then((result) => {
+					denyButton: 'order-3'
+				}
+			}).then(result => {
 				if (result.isConfirmed) {
 					handleDelete(email);
 					Swal.fire('Saved!', '', 'success');
@@ -83,7 +83,7 @@ function AdminUsers() {
 		}
 	};
 
-	const onResetClick = (email) => {
+	const onResetClick = email => {
 		Swal.fire({
 			title: `Do you want to reset the user's password?`,
 			showDenyButton: true,
@@ -91,9 +91,9 @@ function AdminUsers() {
 			denyButtonText: `No`,
 			customClass: {
 				confirmButton: 'order-2',
-				denyButton: 'order-3',
-			},
-		}).then((result) => {
+				denyButton: 'order-3'
+			}
+		}).then(result => {
 			if (result.isConfirmed) {
 				dispatch(forgotPassword(email));
 				Swal.fire('Saved!', '', 'success');
@@ -104,7 +104,7 @@ function AdminUsers() {
 	};
 
 	let users = filter
-		? allUsers.filter((user) => user.email.includes(filter))
+		? allUsers.filter(user => user.email.includes(filter))
 		: allUsers;
 
 	return (
@@ -121,7 +121,7 @@ function AdminUsers() {
 					<div className={styles.headerTable}>
 						<div className={styles.btnContainer}>
 							<Link to='/register'>
-								<button>
+								<button id={styles.btnAdd}>
 									<IoMdAddCircle className={styles.btnAdd} /> Add User
 								</button>
 							</Link>
@@ -140,7 +140,7 @@ function AdminUsers() {
 						</thead>
 
 						<tbody>
-							{users?.map((c) => {
+							{users?.map(c => {
 								return (
 									<tr>
 										<th>{sum()}</th>
@@ -148,17 +148,22 @@ function AdminUsers() {
 										<td>
 											<div>
 												<Link key={c.id} to={`/admin/user/${c.email}`}>
-													<button className={styles.btnEdit}>
+													<button
+														className={styles.btnEdit}
+														id={styles.btnEdit}
+													>
 														<MdModeEdit title='Edit' />
 													</button>
 												</Link>
 												<button
+													id={styles.btnDelete}
 													className={styles.btnEdit}
 													onClick={() => onDeleteClick(c.email)}
 												>
 													<FaTrashAlt title='Remove' />
 												</button>
 												<button
+													id={styles.btnReset}
 													className={styles.btnEdit}
 													onClick={() => onResetClick(c.email)}
 												>

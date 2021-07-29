@@ -1,0 +1,106 @@
+:root {
+	--orderDetailTitle: #e43232;
+	--orderDetailBC: white;
+}
+
+.orderDetailsContainer {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.orderDetailsData {
+	background-color: white;
+	width: 900px;
+	padding: 20px;
+	border-radius: 8px;
+}
+
+.orderDetailsTitle {
+	width: 100%;
+	text-align: center;
+}
+
+.orderDetailsTitle h2 {
+	background-color: var(--orderDetailTitle);
+	font-family: Arial;
+	font-size: 50px;
+	padding: 10px;
+	margin: 0px;
+	border-bottom: none;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.orderDetailsHeader {
+	padding: 20px;
+	background-color: var(--orderDetailBC);
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+}
+
+/* .orderDetailsNumber {
+} */
+
+.orderDetailsReference {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.orderDetails {
+	display: flex;
+	padding: 5px;
+	flex-direction: column-reverse;
+}
+
+.orderDetailsDate {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.orderAndAmount {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+}
+
+.customerDetails {
+	display: flex;
+	padding: 5px;
+	justify-content: space-between;
+}
+
+.addressDetail {
+	display: flex;
+	padding: 5px;
+	justify-content: space-between;
+}
+
+.orderTableDetails {
+	padding: 20px;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+}
+
+.changeStatusOrder {
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.selectTitle {
+	font-size: 25px;
+	text-align: center;
+	font-weight: 500;
+}

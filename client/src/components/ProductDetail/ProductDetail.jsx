@@ -5,17 +5,21 @@ import styles from './productDetail.module.css';
 import TitleStyle from '../StyledComponents/TitleStyle';
 import ButtonRedOther from '../StyledComponents/ButtonRedOther';
 import ButtonGreyOther from '../StyledComponents/ButtonGreyOther';
-import AllStars from '../Reviews/AllStars';
-import Review from '../Reviews/StarAverage';
+import Review from '../Reviews/StarModal';
 import AllReviews from '../Reviews/AllReviews';
-import { allReviews } from '../../Redux/actionsReview';
+import { allReviews, getAverage } from '../../Redux/actionsReview';
 import { Link } from 'react-scroll';
+import { useHistory } from 'react-router-dom';
 import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
+import Loader from '../Loader/Loader';
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
-	const productDetail = useSelector((state) => state.product.detailProducts);
+	const productDetail = useSelector(state => state.product.detailProducts);
+	const productId = useSelector(state => state.product.detailProducts.id);
+
+	const history = useHistory();
 
 	let [currentImage, setCurrentImage] = useState();
 
@@ -31,9 +35,18 @@ function DetailProduct(props) {
 		dispatch(allReviews(props.match.params.id));
 	}, []);
 
+	useEffect(() => {
+		dispatch(getAverage(productId));
+	}, [productId]);
+
+	const handelClick = () => {
+		dispatch(addToCart(productDetail));
+		history.push('/shoppingcart');
+	};
+
 	///Crypto
-	const arsBtc = useSelector((state) => state.crypto.arsBtc);
-	const rateUpdateTime = useSelector((state) => state.crypto.updateTime);
+	const arsBtc = useSelector(state => state.crypto.arsBtc);
+	const rateUpdateTime = useSelector(state => state.crypto.updateTime);
 	const btcRate = parseFloat(arsBtc);
 
 	return (
@@ -43,18 +56,25 @@ function DetailProduct(props) {
 					<div className={styles.card}>
 						<div className={styles.imgContainer}>
 							{currentImage ? (
-								<img src={currentImage.imageUrl} alt='product' />
+								<img
+									className={styles.imag}
+									src={currentImage.imageUrl}
+									alt='product'
+								/>
 							) : (
-								<img src={productDetail.image}></img>
+								<img className={styles.imag} src={productDetail.image}></img>
 							)}
 						</div>
-
+						<hr id={styles.line2} />
 						<div className={styles.productCard}>
 							<TitleStyle>{productDetail.name}</TitleStyle>
-							<Link to='review' spy={true} smooth={true}>
-								<Review className={styles.hei} />
-							</Link>
-							<AllStars />
+
+							<div className='d-flex justify-content-center align-items-start'>
+								<Link to='review' spy={true} smooth={true}>
+									<Review productInfo={productDetail} />
+								</Link>
+							</div>
+
 							<p className={styles.texto}>${productDetail.price} </p>
 							<div className={styles.buttonCrypto}>
 								<ButtonCrypto>
@@ -74,7 +94,7 @@ function DetailProduct(props) {
 										<div
 											className={window.screen.width > 430 ? 'm-3' : 'button'}
 										>
-											<button
+											<ButtonRedOther
 												className={
 													window.screen.width > 430
 														? 'btn btn-outline-danger'
@@ -84,7 +104,7 @@ function DetailProduct(props) {
 												onClick={() => dispatch(addToCart(productDetail))}
 											>
 												Add to Cart
-											</button>
+											</ButtonRedOther>
 										</div>
 										<Link to='/shoppingcart'>
 											<div class='m-3'>
@@ -95,7 +115,7 @@ function DetailProduct(props) {
 															: 'btnCheckout'
 													}
 													type='submit'
-													onClick={() => dispatch(addToCart(productDetail))}
+													onClick={() => handelClick()}
 												>
 													Checkout
 												</ButtonGreyOther>
@@ -121,13 +141,15 @@ function DetailProduct(props) {
 									<img
 										src={img.imageUrl}
 										alt='product'
-										onClick={(e) => handleClick(e, index)}
+										onClick={e => handleClick(e, index)}
 									/>
-							  ))
+						))
 							: null}
 					</div>
 				</div>
-			) : null}
+			) : (
+				<Loader />
+			)}
 
 			<div className={styles.descriptionProduct}>
 				<div className=''>

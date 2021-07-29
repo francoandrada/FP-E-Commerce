@@ -22,7 +22,6 @@ function UserFavoritesDetail({ image, name, price, prodInfo, id }) {
 	const dispatch = useDispatch();
 	const userOrders = useSelector((state) => state.useraccount.userFavorites);
 
-
 	return (
 		<div className={style.orderDetailContainer}>
 			<div className={style.SizeImagOrderDiv}>
@@ -30,29 +29,33 @@ function UserFavoritesDetail({ image, name, price, prodInfo, id }) {
 			</div>
 
 			<div className={style.descriptionOrderStyle}>
-				<p>{name}</p>
+				<div>
+					<p>{name}</p>
+				</div>
+				<div>
+					<p> <b> ${price} </b></p>
+				</div>
 			</div>
-
-			<p>${price}</p>
-
-			<div>
-				<Link to={'/shoppingcart'}>
+			<div className={style.buttons}>
+				<div className={style.button}>
+					<Link to={'/shoppingcart'}>
+						<ButtonRedSmall
+							type='submit'
+							onClick={() => dispatch(addToCart(prodInfo))}
+						>
+							Buy
+						</ButtonRedSmall>
+					</Link>
+				</div>
+				<div className={style.button}>
 					<ButtonRedSmall
 						type='submit'
-						onClick={() => dispatch(addToCart(prodInfo))}
+						onClick={() => dispatch(removeFavorites(prodInfo))}
 					>
-						Buy
+						Remove
 					</ButtonRedSmall>
-				</Link>
+				</div>
 			</div>
-
-				<ButtonRedSmall
-					type='submit'
-					onClick={() => dispatch(removeFavorites(prodInfo))}
-				>
-					Remove
-				</ButtonRedSmall>
-
 		</div>
 	);
 }

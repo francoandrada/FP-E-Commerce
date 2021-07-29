@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getUserOrders, getProducts, getUserFavorites } from '../../../Redux/actions';
+import { useHistory } from 'react-router';
+import { getUserOrders, getProducts, getUserFavorites, logOut } from '../../../Redux/actions';
 import UserOrdersList from '../UserOrders/UserOrdersList';
 import EditAccount from '../UserAccount/EditAccount';
 import UserAccount from '../UserAccount/UserAccount';
-import UserFavorite from '../UserFavorites/UserFavorites'
+import UserFavorite from '../UserFavorites/UserFavorites';
+import UserAddresses from '../UserAddresses/UserAddresses'
 import style from './UserView.module.css';
 import {
 	FiUser,
@@ -20,6 +22,7 @@ function UserView() {
 	const userData = userInfo.userData && userInfo.userData;
 	const userId = useSelector((state) => state.user.userData.userId);
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [selectedOption, setSelectedOption] = useState('account');
 
 	useEffect(() => {
@@ -53,14 +56,22 @@ function UserView() {
         currentPanel = <EditAccount setOption={setOption}/>
     } else if (selectedOption === 'favorites') {
         currentPanel = <UserFavorite/>
-    }
+    } else if (selectedOption === 'addresses') {
+		currentPanel = <UserAddresses/>
+	}
+
+	const handleLogOut = () => {
+		dispatch(logOut());
+		history.push('/');
+		window.location.reload();
+	};
 
 	return (
 		<div>
 			<div className={style.userViewContainer}>
 				<div className={style.optionsPanelContainer}>
 					<div className={style.optionsContainer}>
-						<p>Welcome {userData.name}!</p>
+						<span>Welcome {userData.name}!</span>
 
 						<div
 							onClick={setOption}
@@ -73,9 +84,9 @@ function UserView() {
 							</div>
 							<FiChevronRight onClick={setOption} id='account'/>
 						</div>
-
+					
 						<div
-							onClick={setOption}
+					onClick={setOption}
 							id='orders'
 							className={style.optionsLayoutdiv}
 						>
@@ -87,7 +98,7 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+						onClick={setOption}
 							id='favorites'
 							className={style.optionsLayoutdiv}
 						>
@@ -99,7 +110,7 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+						onClick={setOption}
 							id='addresses'
 							className={style.optionsLayoutdiv}
 						>
@@ -111,15 +122,15 @@ function UserView() {
 						</div>
 
 						<div
-							onClick={setOption}
+						onClick={handleLogOut}
 							id='signout'
 							className={style.optionsLayoutdiv}
 						>
-							<div className={style.subcontainerOptions} onClick={setOption} id='signout'>
-								<FiLogOut onClick={setOption} id='signout'/>
-								<p className={style.textOptionStyle} onClick={setOption} id='signout'>Sign Out</p>
+							<div className={style.subcontainerOptions} onClick={handleLogOut} id='signout'>
+								<FiLogOut onClick={handleLogOut} id='signout'/>
+								<p className={style.textOptionStyle} onClick={handleLogOut} id='signout'>Log Out</p>
 							</div>
-							<FiChevronRight onClick={setOption} id='signout'/>
+							<FiChevronRight onClick={handleLogOut} id='signout'/>
 						</div>
 					</div>
 				</div>

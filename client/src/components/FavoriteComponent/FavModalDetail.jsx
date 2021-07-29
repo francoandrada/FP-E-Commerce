@@ -26,6 +26,10 @@ flex-direction: column;
 margin-left: 0.5em;
 font-size: 18px;
     font-weight: 700;
+
+    @media only screen and (max-width: 430px){
+	font-size: 16px
+    }
 `;
 
 const Icon = styled.section`
@@ -52,6 +56,9 @@ const Price = styled.section`
     font-size: 20px;
     color: #ff3c4a;
     margin-top: 18px;
+    @media only screen and (max-width: 430px){
+        font-size:18px
+    }
 `;
 const Image = styled.section`
     grid-area: img;
@@ -80,6 +87,11 @@ const ButtonRemove = styled.section`
     &:hover {
         background-color: #d4202d;
         transition: 200ms;
+    }
+
+    @media only screen and (max-width: 430px){
+	width: 10rem;
+    font-size: 14px
     }
 `;
 

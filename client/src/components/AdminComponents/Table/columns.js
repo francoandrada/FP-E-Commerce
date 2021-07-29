@@ -4,61 +4,61 @@ export const COLUMNS = [
 	{
 		Header: 'Image',
 		accessor: 'image',
-		Cell: (row) => {
+		Cell: row => {
 			return (
 				<div>
 					<img width={50} src={row.row.original.image} alt='' />
 				</div>
 			);
-		},
+		}
 	},
 	{
 		Header: 'Id',
-		accessor: 'id',
+		accessor: 'id'
 	},
 	{
 		Header: 'Name',
-		accessor: 'name',
+		accessor: 'name'
 	},
 	{
 		Header: 'Price',
-		accessor: 'price',
+		accessor: 'price'
 	},
 	{
 		Header: 'PriceSpecial',
-		accessor: 'priceSpecial',
+		accessor: 'priceSpecial'
 	},
 	{
 		Header: 'Weight',
-		accessor: 'weight',
+		accessor: 'weight'
 	},
 	{
 		Header: 'Stock',
-		accessor: 'stock',
+		accessor: 'stock'
 	},
 	{
 		Header: 'Category',
-		accessor: 'category',
+		accessor: 'category'
 	},
 	{
 		Header: 'Brand',
-		accessor: 'brand',
+		accessor: 'brand'
 	},
 	{
 		Header: 'Delete',
 		accesor: 'delete',
-		Cell: (row) => {
+		Cell: row => {
 			return (
 				<button onClick={row.row.original.delete}>
 					<i className='fas fa-trash-alt'></i>
 				</button>
 			);
-		},
+		}
 	},
 	{
 		Header: 'Update',
 		accesor: 'update',
-		Cell: (row) => {
+		Cell: row => {
 			return (
 				<Link
 					key={row.row.original.id}
@@ -67,6 +67,6 @@ export const COLUMNS = [
 					<i className='fas fa-wrench'></i>
 				</Link>
 			);
-		},
-	},
+		}
+	}
 ];

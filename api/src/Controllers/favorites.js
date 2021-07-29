@@ -22,6 +22,7 @@ const addFavorites = async function addFavorites(req, res) {
 					await userFound.addProduct(prod)
 							
 				}
+		res.status(200).send('cart created')
 	
 	} catch (error) {
 		console.log(error);
