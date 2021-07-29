@@ -186,8 +186,9 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 	//req.query = { category: 'pc', brand: 'asus', price: 'descending', page: '1' }
 
 	try {
-		const { category, brand, price, page, qty, stock } = req.query;
+		const { category, brand, price, page, qty, stock, rating } = req.query;
 
+		//esto llegará por query
 		const pageNumber = page || 1;
 
 		let allProduct = await Product.findAll({
@@ -198,13 +199,6 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 		
 		let result = [];
 
-		// if(category){
-		// 	allProduct.forEach(product=>{
-		// 		if(product.categories[0].name===category){
-		// 			result.push(product)
-		// 		}
-		// 	})
-		// }
 
 		function filter() {
 			let allProduct1 = allProduct;
@@ -252,12 +246,33 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				});
 			}
 
-			if (price === 'descending') {
-				allProduct1.sort(function (b, a) {
-					if (b.price > a.price) {
+			// const result = reviews.reduce((a, b) => ( a.stars + b.stars ))
+			const reducerRating = (a, b) => ( a.stars + b.stars )
+			const starsAvg = (reviews)=>{
+				if(reviews.length>0){
+				return reviews.reduce(reducerRating)/reviews.length}
+				return 0
+			}
+
+			if (rating === 'ascending') {
+				allProduct1.sort(function (a, b) {
+					if (starsAvg(a.reviews) > starsAvg(b.reviews)) {
+						return 1;
+					}
+					if (starsAvg(a.reviews) < starsAvg(b.reviews)) {
 						return -1;
 					}
-					if (b.price < a.price) {
+					// a must be equal to b
+					return 0;
+				});
+			}
+
+			if (rating === 'descending') {
+				allProduct1.sort(function (b, a) {
+					if (starsAvg(b.reviews) > starsAvg(a.reviews)) {
+						return -1;
+					}
+					if (starsAvg(b.reviews) < starsAvg(a.reviews)) {
 						return 1;
 					}
 					// a must be equal to b
