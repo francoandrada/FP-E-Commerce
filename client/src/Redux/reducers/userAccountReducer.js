@@ -19,12 +19,13 @@ function userAccountReducer(state = initialState, action) {
 
 		// 	};
 		case GET_USER_ORDERS:
+			console.log(action.payload)
 			return {
 				...state,
 				userOrdersList: action.payload.map(el => {
 					let status = el.status;
 					let ammount = el.ammount;
-					let address = JSON.parse(el.address);
+					let address = el.address;
 					let orderId = el.orderDetails[0].orderId;
 					let orderProducts = el.orderDetails.map(prod => {
 						let oldprice = prod.price;

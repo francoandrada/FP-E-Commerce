@@ -35,12 +35,11 @@ function OrderByPrice() {
 	return (
 		<div className={styles.divPrice}>
 			<h6 className={styles.titlePrice}>Order by Price</h6>
-			<hr></hr>
 			<div className='form-check'>
 				<input
 					className={`${'form-check-input'} ${'orderE'}`}
 					type='checkbox'
-					id='descending'
+					id='priceDes'
 					// checked='true'
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
@@ -53,7 +52,36 @@ function OrderByPrice() {
 				<input
 					className={`${'form-check-input'} ${'orderE'}`}
 					type='checkbox'
-					id='ascending'
+					id='priceAsc'
+					// checked='true'
+					onClick={(event) => onClickedBox(event)}
+					// onClick={() => console.log(prueba.checked)}
+				/>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
+					Ascending
+				</label>
+			</div>
+			
+			<hr></hr>
+			<h6 className={styles.titlePrice}>Order by Rating</h6>
+			<div className='form-check'>
+				<input
+					className={`${'form-check-input'} ${'orderE'}`}
+					type='checkbox'
+					id='ratingDes'
+					// checked='true'
+					onClick={(event) => onClickedBox(event)}
+					// onClick={() => console.log(prueba.checked)}
+				/>
+				<label className='form-check-label' htmlFor='defaultCheck1'>
+					Descending
+				</label>
+			</div>
+			<div className='form-check'>
+				<input
+					className={`${'form-check-input'} ${'orderE'}`}
+					type='checkbox'
+					id='ratingAsc'
 					// checked='true'
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}

@@ -190,9 +190,8 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 		const pageNumber = page || 1;
 
 		let allProduct = await Product.findAll({
-			include: [{ model: Category }, { model: Brand }],
+			include: [{ model: Category }, { model: Brand }, {model: Review, attributes: ['stars']}],
 		});
-
 		let result = [];
 
 		// if(category){
@@ -223,7 +222,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 			if (stock === 'false') {
 				allProduct1 = allProduct1.filter((product) => product.stock <= 0);
 			}
-			if (price === 'ascending') {
+			if (price === 'priceAsc') {
 				allProduct1.sort(function (a, b) {
 					if (a.price > b.price) {
 						return 1;
@@ -236,7 +235,7 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				});
 			}
 
-			if (price === 'descending') {
+			if (price === 'priceDes') {
 				allProduct1.sort(function (b, a) {
 					if (b.price > a.price) {
 						return -1;
@@ -249,12 +248,33 @@ const getFilteredProducts = async function getFilteredProducts(req, res, next) {
 				});
 			}
 
-			if (price === 'descending') {
-				allProduct1.sort(function (b, a) {
-					if (b.price > a.price) {
+			// const result = reviews.reduce((a, b) => ( a.stars + b.stars ))
+			const reducerRating = (a, b) => ( a.stars + b.stars )
+			const starsAvg = (reviews)=>{
+				if(reviews.length>0){
+				return reviews.reduce(reducerRating)/reviews.length}
+				return 0
+			}
+
+			if (price === 'ratingAsc') {
+				allProduct1.sort(function (a, b) {
+					if (starsAvg(a.reviews) > starsAvg(b.reviews)) {
+						return 1;
+					}
+					if (starsAvg(a.reviews) < starsAvg(b.reviews)) {
 						return -1;
 					}
-					if (b.price < a.price) {
+					// a must be equal to b
+					return 0;
+				});
+			}
+
+			if (price === 'ratingDes') {
+				allProduct1.sort(function (b, a) {
+					if (starsAvg(b.reviews) > starsAvg(a.reviews)) {
+						return -1;
+					}
+					if (starsAvg(b.reviews) < starsAvg(a.reviews)) {
 						return 1;
 					}
 					// a must be equal to b
