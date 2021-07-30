@@ -120,6 +120,7 @@ function Products() {
 			return this.formatear(num);
 		}
 	};
+	console.log(productsToRender)
 	return (
 		<div className={styles.cardsContainer}>
 			{productsToRender
@@ -129,7 +130,7 @@ function Products() {
 							p.name = aux;
 						}
 						var formatPrice = formatNumber.new(p.price, '$');
-						return (
+						return p.isVisible === true ? (
 							<div key={p.id} className={styles.card}>
 								<div className={styles.buttonCrypto}>
 									<ButtonCrypto>
@@ -174,8 +175,8 @@ function Products() {
 								</div>
 								<div id={styles.paginado}></div>
 							</div>
-						);
-				  })
+						): null
+				  	})
 				: null}
 			<PagingBox productsPerPage={productsPerPage} />
 		</div>
