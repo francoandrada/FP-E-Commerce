@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const TitleStyle = styled.h1`
 font-family: 'Roboto', sans-serif; 
-font-size: 35px;
+font-size: 25px;
 line-height: 1.875rem;
 
 
