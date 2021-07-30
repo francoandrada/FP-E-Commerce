@@ -95,7 +95,8 @@
 		align-items: center;
 		/* width: max-content; */
 		height: max-content;
-		margin: 15rem;
+		/* margin: 15rem; */
+		margin: 0;
 	}
 	.productCard span {
 		font-size: 14px;
