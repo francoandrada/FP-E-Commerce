@@ -39,7 +39,7 @@ function OrderByPrice() {
 				<input
 					className={`${'form-check-input'} ${'orderE'}`}
 					type='checkbox'
-					id='priceDesc'
+					id='priceDes'
 					// checked='true'
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
@@ -68,7 +68,7 @@ function OrderByPrice() {
 				<input
 					className={`${'form-check-input'} ${'orderE'}`}
 					type='checkbox'
-					id='ratingDesc'
+					id='ratingDes'
 					// checked='true'
 					onClick={(event) => onClickedBox(event)}
 					// onClick={() => console.log(prueba.checked)}
