@@ -57,7 +57,7 @@ function CartList({ info, image, name, price, stock, qty }) {
 							<div className={style.modifyQtyButtons}>
 								{qty < 2 ? (
 									<>
-										<h3>{qty}</h3>
+										<h3 className={style.count}>{qty}</h3>
 										<button
 											onClick={handlePlus}
 											className={style.plusMinusButtons}
@@ -73,7 +73,7 @@ function CartList({ info, image, name, price, stock, qty }) {
 										>
 											-
 										</button>
-										<h3>{qty}</h3>
+										<h3 className={style.count}>{qty}</h3>
 										<button
 											onClick={handlePlus}
 											className={style.plusMinusButtons}

@@ -16,7 +16,7 @@ function BannerContainer() {
     return(
         <div className='BannerContainer'>
             <div className='Bannerinfo'> 
-                <TitleStyle>50%<br></br>on all our best<br></br>products.</TitleStyle>
+                <TitleStyle>First e-commerce<br></br>to implement <br></br> payments with cryptos.</TitleStyle>
                 <Link to={`/cryptopayments`}>
                     <ButtonRedHome>Pay with CRYPTO!</ButtonRedHome>
                 </Link>
