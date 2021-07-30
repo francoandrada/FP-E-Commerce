@@ -10,7 +10,7 @@ import { compose } from 'redux';
 const ButtonRedSmall = styled.button`
     font-family: 'Roboto', sans-serif; 
     width: 80px;
-    height: 30px;
+    height: 50px;
     border-style: none;
     border-radius: 8px;
     color: white;
@@ -45,13 +45,14 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 			<div className={style.SizeImagOrderDiv}>
 				<img className={style.sizeImagOrder} src={image} alt='Product Image' />
 			</div>
-			<div>
-				<div className={style.divData}>
+			<div className='d-flex justify-content-center'>
+				<div className='d-flex justify-content-center align-items-center'>
 					<div className={style.descriptionOrderStyle}>
 						<p>{name}</p>
 					</div>
 					<p> <b>Price:</b> ${oldprice}</p>
 				</div>
+				<div className='d-flex justify-content-center align-items-center'>
 				<Link to={'/shoppingcart'}>
 					<ButtonRedSmall
 						type='submit'
@@ -62,8 +63,9 @@ function UserOrderDetail({ image, name, oldprice, prodInfo, id }) {
 				</Link>
 
 				<Link to={`/review/${id}`}>
-					<ButtonGreySmall onClick={() => <p>hola</p>}>Leave feedback</ButtonGreySmall>
+					<ButtonGreySmall>Leave feedback</ButtonGreySmall>
 				</Link>
+				</div>
 			</div>
 		</div>
 	);

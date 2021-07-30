@@ -60,8 +60,11 @@
 	font-weight: 600;
 }
 .imag {
-	width: 25em;
-	height: 25em;
+	width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 .imagesNav img {
@@ -92,7 +95,7 @@
 		align-items: center;
 		/* width: max-content; */
 		height: max-content;
-		margin-right: 0px;
+		margin: 15rem;
 	}
 	.productCard span {
 		font-size: 14px;

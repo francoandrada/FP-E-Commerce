@@ -277,6 +277,7 @@
     .orderDetailContainer{
 		flex-direction: column;
         display: flex;
+        justify-content: center;
         align-items: flex-start;
         width: 100%;
         padding: 10px;
@@ -303,6 +304,8 @@
         padding: 8px;
         border-radius: 12px;
         margin-bottom: 1em;
+        display: flex;
+        justify-content: center;
     }
     .divData p{
         margin: 0
