@@ -53,17 +53,29 @@ const OrderDetails = () => {
 	};
 
 	React.useEffect(() => {
+		if (orderDetails) setOrderStatus(orderDetails?.status);
+	}, [orderDetails]);
+
+	const handleSubmit = event => {
+		event.preventDefault();
 		axios.put(`http://localhost:3001/orders/order/${id}`, {
 			status: orderStatus,
 			email: email
 		});
-	}, [orderStatus]);
-
-	const changeStatus = event => {
-		console.log('new status', event.target.value);
-		setOrderStatus(event.target.value);
 		window.location.reload();
 	};
+	// React.useEffect(() => {
+	// 	axios.put(`http://localhost:3001/orders/order/${id}`, {
+	// 		status: orderStatus,
+	// 		email: email
+	// 	});
+	// }, [orderStatus]);
+
+	// const changeStatus = event => {
+	// 	console.log('new status', event.target.value);
+	// 	setOrderStatus(event.target.value);
+	// 	window.location.reload();
+	// };
 
 	return (
 		<div className={styles.orderDetailsContainer}>
@@ -155,7 +167,23 @@ const OrderDetails = () => {
 					)}
 				</div>
 				<div className={styles.changeStatusOrder}>
-					<span className={styles.selectTitle}>Change Status:</span>
+				<form onSubmit={handleSubmit}>
+						{orderDetails && (
+							<Select
+								initialValue={orderStatus}
+								values={[
+									'created',
+									'processing',
+									'cancelled',
+									'completed',
+									'dispatched'
+								]}
+								onChange={e => setOrderStatus(e.target.value)}
+							/>
+						)}
+						<button className={styles.theBtnConfirm}>Confirm</button>
+					</form>
+					{/* <span className={styles.selectTitle}>Change Status:</span>
 					{orderDetails && (
 						<Select
 							initialValue={orderDetails?.status}
@@ -168,7 +196,7 @@ const OrderDetails = () => {
 							]}
 							onChange={changeStatus}
 						/>
-					)}
+					)} */}
 				</div>
 			</div>
 		</div>
