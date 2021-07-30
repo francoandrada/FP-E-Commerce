@@ -4,7 +4,7 @@ const { Product, User } = require('../db.js');
 //-------------------------  CREATES FAVORITES IN DATA BASE  --------------------------------//
 const addFavorites = async function addFavorites(req, res) {
 	const { userId, prodId } = req.body;
-	
+	console.log(userId)
 	try {
 		const userFound = await User.findOne({
 				where: {

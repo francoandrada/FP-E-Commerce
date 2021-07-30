@@ -9,13 +9,13 @@
 	padding: 20px;
 	margin-left: 250px;
 	margin-right: 50px;
-	border-radius: 10px 10px 4px 4px;
+	border-radius: 10px 10px 10px 10px;
 }
 
 .orderUserPanel {
 	display: flex;
-	padding-bottom: 20px;
 	justify-content: flex-end;
+	flex-direction: column;
 }
 .orderUserFeatures {
 	width: 50%;

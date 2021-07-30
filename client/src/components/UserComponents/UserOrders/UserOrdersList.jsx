@@ -26,6 +26,7 @@ function UserOrdersList() {
 	
 	const [selOrderId, setOrderId] = useState(0);
 
+	console.log(userOrders)
 	let orderDetailInfo = userOrders.filter(el => {
 		if(el.orderId === selOrderId) {
 			return el.orderProducts

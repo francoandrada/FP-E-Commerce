@@ -58,16 +58,18 @@
 	border-radius: 12px;
 }
 .btnEdit {
-	background-color: transparent;
-	border: 0;
+	background-color: transparent !important;
+	color: black !important;
+	border: 0 !important;
+	padding: 0 !important;
 	border-radius: 10px;
 	outline: none;
-	margin: 0 1rem;
-	font-size: 20px;
+	/* margin: 0 1rem; */
+	font-size: 20px !important;
 }
 
 .btnEdit:hover {
-	color: #cd113b;
+	color: #cd113b !important;
 }
 
 .btnDelete:hover {
@@ -80,4 +82,8 @@
 
 .btnAdd {
 	font-size: 30px;
+}
+.buttons{
+	display: flex;
+	justify-content: space-evenly;
 }

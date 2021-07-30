@@ -17,7 +17,7 @@ import PutBrand from '../adminPutForm/putBrand';
 import Loader from '../../Loader/Loader';
 // import { AiOutlineRetweet } from 'react-icons/ai';
 import Pagination from '../TablePagination/TablePagination';
-
+import '../AdminCategories/index.css'
 function AdminBrands() {
 	const dispatch = useDispatch();
 	const { allTheBrands, currentPageForBrand } = useSelector(
@@ -73,7 +73,7 @@ function AdminBrands() {
 											<th>{sum()}</th>
 											<td>{c.name}</td>
 											<td>
-												<div>
+												<div className={styles.buttons}>
 													<PutBrand brand={c.id} />
 													<button
 														className={styles.btnDelete}

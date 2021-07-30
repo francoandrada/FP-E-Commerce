@@ -41,7 +41,8 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 			const orderById = await Order.findOne({
 				where: { orderId: id },
 			});
-		const updatedStatus = await orderById.update({
+			const updatedStatus = await orderById
+				.update({
 					status: newStatus,
 				})
 				.then(async () => {
@@ -66,8 +67,43 @@ const modifyOrderStatus = async function modifyOrderStatus(req, res, next) {
 							to: email,
 							subject: 'Order Confirmation',
 							html: `
-					<h1>ORDEN DESPACHADAAAAAAAAAAAA</H1>
-
+							<!DOCTYPE html>
+							<html>
+							<head>
+							<style>
+							table {
+							  font-family: arial, sans-serif;
+							  border-collapse: collapse;
+							  width: 100%;
+							}
+					
+							td, th {
+							  border: 1px solid #dddddd;
+							  text-align: left;
+							  padding: 8px;
+							}
+					
+							tr:nth-child(even) {
+							  background-color: #dddddd;
+							}
+							</style>
+							</head>
+											<body style="background-color: #424242; font-family: 'Roboto', sans-serif; ">
+							<div style="background-color: #C6C6C6; padding: 10px ">
+											<h1 style="color: #FF3C4A; text-align: center;">Hardware Store</h1>
+													</div>
+					
+							<div style="background-color: white; padding: 10px; margin: 10px 0; ">
+							 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">Thank you for your purchase!</p>
+							<h3>ORDER CONFIRMATION </h3>
+					
+											<p>Your Orden have been successfully dispatched to your location</p>
+							
+					
+													</div>
+											</body>
+											</html>
+					
 				 `,
 						};
 

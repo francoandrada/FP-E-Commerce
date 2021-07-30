@@ -4,7 +4,7 @@ import { modifyBrand } from '../../../Redux/actions';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import styles from '../../Register/Register.module.css';
+import styles from '../AdminCategories/AdminCategories.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap'
 import {MdModeEdit} from 'react-icons/md'
@@ -100,7 +100,7 @@ function PutBrand(props) {
 
 	return (
 		<div>
-			<Button onClick={openModal}> <MdModeEdit /></Button>
+			<Button className={styles.btnEdit} onClick={openModal}> <MdModeEdit /></Button>
 			<Modal isOpen={Active}>
 				<ModalHeader>
 					Edit Brand

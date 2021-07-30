@@ -66,7 +66,7 @@ function AdminCategories() {
 										<th>{sum()}</th>
 										<td>{c.name}</td>
 										<td>
-											<div>
+											<div className={styles.buttons}>
 												<PutCategory category={c.id}/>
 												<button
 													className={styles.btnDelete}

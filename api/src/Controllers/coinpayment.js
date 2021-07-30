@@ -4,8 +4,11 @@ const { Sequelize } = require('sequelize');
 const { Order, OrderDetail, Product, User } = require('../db');
 const axios = require('axios');
 
-
-const { COINPAYMENT_API_PUBLIC, COINPAYMENT_API_SECRET, COINPAYMENT_MERCHAND_ID } = process.env;
+const {
+	COINPAYMENT_API_PUBLIC,
+	COINPAYMENT_API_SECRET,
+	COINPAYMENT_MERCHAND_ID,
+} = process.env;
 
 const CoinpaymentsCredentials = {
 	key: '736e355aacd8db0db04f226da8d268fe22b3b87733de4ebec978c9c78893fe75',
@@ -61,7 +64,7 @@ const getTransactionInfo = async (req, res) => {
 const getCoinRates = async (req, res) => {
 	const CoinpaymentsRatesOpts = {
 		short: 1,
-		accepted: 2
+		accepted: 2,
 	};
 	const rates = await client.rates(CoinpaymentsRatesOpts);
 	res.json(rates);
@@ -69,19 +72,17 @@ const getCoinRates = async (req, res) => {
 
 //Get POS.
 const createPos = async (req, res) => {
-    const {amount} = req.body
+	const { amount } = req.body;
 
-    const pos = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=${COINPAYMENT_MERCHAND_ID}&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${amount}`
+	const pos = `https://www.coinpayments.net/index.php?cmd=_pos&reset=1&merchant=${COINPAYMENT_MERCHAND_ID}&item_name=Order+Payment&currency=ARS&allow_currency=1&amountf=${amount}`;
 	const rates = await client.rates(CoinpaymentsRatesOpts);
-    console.log(rates);
+	console.log(rates);
 	res.json(rates);
 };
-
 
 //---------------ACA CREAMOS LA ORDEN------------------
 const createOrderCrypto = async function createOrderCrypto(req, res) {
 	const { ammount, status, prodCarrito, id } = req.body;
-
 
 	try {
 		var newOrder = await Order.create(
@@ -112,11 +113,11 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 
 						if (productFind) {
 							await newDetail.setProduct(productFind.dataValues.id);
-							let count = productFind.dataValues.stock - prod.qty
-					
+							let count = productFind.dataValues.stock - prod.qty;
+
 							await productFind.update({
-							stock: 	count
-							})
+								stock: count,
+							});
 						}
 						await order.addOrderDetail(newDetail.dataValues.id);
 
@@ -131,24 +132,22 @@ const createOrderCrypto = async function createOrderCrypto(req, res) {
 						}
 					})();
 				});
-		})
-        const orders = await Order.findAll()
-        const order = orders[orders.length-1]
-        order.userId = id
-        res.status(200).json(order)
+		});
+		const orders = await Order.findAll();
+		const order = orders[orders.length - 1];
+		order.userId = id;
+		res.status(200).json(order);
 	} catch (error) {
 		res.status(400).json(error);
 	}
 };
 
-
 //////////////////// Coinpayment IPN
 
 const ipnUpdate = async (req, res, next) => {
-
 	// item_number=userId
 	// custom=orderId
-	console.log(req.body)
+	console.log(req.body);
 
 	const id = parseInt(req.body.custom);
 	const newStatus = parseInt(req.body.status);
@@ -157,8 +156,8 @@ const ipnUpdate = async (req, res, next) => {
 		const orderById = await Order.findOne({
 			where: { orderId: id },
 		});
-		res.send(id)
-		if(newStatus===100){
+		res.send(id);
+		if (newStatus === 100) {
 			var updatedStatus = await orderById.update({
 				status: 'completed',
 			});
@@ -174,7 +173,7 @@ const ipnUpdate = async (req, res, next) => {
 					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 				},
 			});
-		
+
 			var mailOptions = {
 				from: 'hardwarecommerce@gmail.com',
 				to: email,
@@ -208,9 +207,11 @@ const ipnUpdate = async (req, res, next) => {
 		
 				<div style="background-color: white; padding: 10px; margin: 10px 0; ">
 				 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">Thank you for your purchase!</p>
-				<h3>ORDER CONFIRMATION </h3>
+				<h3 style="text-align: center;" >ORDER CONFIRMATION </h3>
+				<p style="text-align: center;" >Your purchase has been approved!</p>
+				 <p style="text-align: center;" >Check on coinPayments to get the rest of the info</p>
+				
 		
-						  <h3>ORDER SUMMARY </h3>
 						  </div>
 		
 				<div style="background-color: #424242; color: white; padding: 10px;">
@@ -223,7 +224,7 @@ const ipnUpdate = async (req, res, next) => {
 		
 			 `,
 			};
-		
+
 			transporter.sendMail(mailOptions, function (err, data) {
 				if (err) {
 					console.log('Error ' + err);
@@ -231,11 +232,10 @@ const ipnUpdate = async (req, res, next) => {
 					res.send(console.log(api));
 				}
 			});
-		} else if (newStatus<0){
+		} else if (newStatus < 0) {
 			var updatedStatus = await orderById.update({
 				status: 'cancelled',
 			});
-
 
 			let transporter = nodemailer.createTransport({
 				service: 'gmail',
@@ -248,7 +248,7 @@ const ipnUpdate = async (req, res, next) => {
 					refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 				},
 			});
-		
+
 			var mailOptions = {
 				from: 'hardwarecommerce@gmail.com',
 				to: email,
@@ -281,12 +281,16 @@ const ipnUpdate = async (req, res, next) => {
 										</div>
 		
 				<div style="background-color: white; padding: 10px; margin: 10px 0; ">
-				 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">Thank you for your purchase!</p>
-				<h3>ORDER CONFIRMATION </h3>
+				 <p style="text-align: center; color: white;font-weight: 900; background-color: #FF3C4A; padding: 10px;">We really sorry!</p>
+				<h3 style="text-align: center;" >ORDER CONFIRMATION </h3>
+				<p style="text-align: center;" >Your purchase has not been approved!</p>
+				 <p style="text-align: center;" >Check on coinPayments to get the rest of the info</p>
+				
 		
-						  <h3>ORDER SUMMARY </h3>
 						  </div>
-	
+		
+				<div style="background-color: #424242; color: white; padding: 10px;">
+		
 				</div>
 		
 										</div>
@@ -295,7 +299,7 @@ const ipnUpdate = async (req, res, next) => {
 		
 			 `,
 			};
-		
+
 			transporter.sendMail(mailOptions, function (err, data) {
 				if (err) {
 					console.log('Error ' + err);
@@ -303,8 +307,7 @@ const ipnUpdate = async (req, res, next) => {
 					res.send(console.log(api));
 				}
 			});
-		
-		} else if (newStatus>=0 && newStatus<100){
+		} else if (newStatus >= 0 && newStatus < 100) {
 			var updatedStatus = await orderById.update({
 				status: 'processing',
 			});
@@ -321,8 +324,8 @@ const getTransactionList = async (req, res) => {
 		limit: 100,
 		start: 0,
 		newer: 0,
-		all: 0
-	  }
+		all: 0,
+	};
 
 	const transactionList = await client.getTxList(CoinpaymentsGetTxListOpts);
 	console.log(transactionList);
@@ -338,5 +341,5 @@ module.exports = {
 	getCoinRates,
 	createOrderCrypto,
 	ipnUpdate,
-	getTransactionList
+	getTransactionList,
 };

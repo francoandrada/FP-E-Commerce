@@ -1,6 +1,8 @@
 .background{
-    text-align: center;
-    display: flex;
+	background-color: #eee;
+	background-attachment: fixed;
+	width: 100%;
+	height: 100%;
 }
 
 .btnBackContainer{
@@ -19,13 +21,8 @@
     padding: 2rem;
     font-family: 'Roboto', sans-serif;
     color: seashell;
+    height: max-content;
 } 
-.background{
-	background-color: #eee;
-	background-attachment: fixed;
-	width: 100%;
-    height: 100vh; 
-}
 .box1{
     width: 50%;
     margin:0 auto;

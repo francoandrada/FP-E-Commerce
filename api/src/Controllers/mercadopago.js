@@ -106,7 +106,6 @@ const ipnMPUpdate = async (req, res, next) => {
 
 	// item_number=userId
 	// custom=orderId
-	console.log('tigjdfsijfjid')
 
 	// const id = parseInt(req.body.custom);
 	// const newStatus = parseInt(req.body.status);

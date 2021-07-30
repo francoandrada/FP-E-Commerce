@@ -14,7 +14,8 @@ export const PaginationBox = styled.div`
   ${flex('center', 'center')};
   color: white;
   // width: 80%;
-  margin-left: 20%
+  margin-left: 40%;
+  // margin: 0 20rem
 
   span {
     padding: 4px;
