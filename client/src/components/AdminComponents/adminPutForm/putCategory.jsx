@@ -80,7 +80,7 @@ function PutCategory(props) {
 					<MdArrowBack />
 				</Link>
 			</div> */}
-			<Button onClick={openModal}> <MdModeEdit /></Button>
+			<Button className={styles.btnEdit} onClick={openModal}> <MdModeEdit /></Button>
 			<Modal isOpen={Active}>
 				<ModalHeader>
 					Edit Category

@@ -173,7 +173,7 @@ function PutProduct() {
 	};
 	const options = categories.map(c => ({ label: c.name, value: c.id }));
 	return (
-		<div className={styles.registerFormContainer} id={styles.registerFormOne}>
+		<div className={styles.editFormContainer} id={styles.registerFormOne}>
 			<div className={styles.btnBackContainer}>
 				<Link to='/admin/products'>
 					<MdArrowBack />
