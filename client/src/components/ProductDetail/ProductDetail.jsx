@@ -125,11 +125,7 @@ function DetailProduct(props) {
 								) : (
 									<>
 										<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
-										<input type='checkbox' />{' '}
-										<label className={styles.label}>
-											{' '}
-											I want to know when it is available
-										</label>
+			
 									</>
 								)}
 							</div>
