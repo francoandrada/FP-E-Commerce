@@ -15,7 +15,7 @@
 	justify-content: center;
 	width: 50%;
 	height: 418px;
-	margin-right: 70px;
+	margin-right: 214px;
 }
 
 .imgContainer img {
@@ -91,6 +91,13 @@
 .buttons {
 	margin-top: 1em;
 }
+
+@media only screen and (max-width: 1500px) {
+	.imgContainer {
+		margin-right: 35px;
+	}
+}
+
 @media only screen and (max-width: 430px) {
 	.imag {
 		width: 11.25em;
@@ -212,4 +219,13 @@
 	#line2 {
 		color: black;
 	}
+}
+
+.favContainer {
+	top: 13px;
+	display: flex;
+	position: relative;
+	margin: 0px 3px;
+	height: 26px;
+	top: -5px;
 }
