@@ -14,6 +14,7 @@ import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 import Loader from '../Loader/Loader';
 import { formatNumber } from '../../helper/priceFormater';
+import FavoriteButton from '../FavoriteComponent/FavoriteButton';
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
@@ -129,6 +130,9 @@ function DetailProduct(props) {
 									</>
 								)}
 							</div>
+						</div>
+						<div className={styles.favContainer}>
+							<FavoriteButton prod={productDetail} />
 						</div>
 					</div>
 					<div className={styles.imagesNav}>
