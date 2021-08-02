@@ -194,6 +194,21 @@
 	margin-bottom: 2.0625rem;
 	margin-left: 1.1875rem;
 }
+
+.countFav {
+	background-color: white;
+	border-radius: 100%;
+	width: 1.5625rem;
+	height: 1.3125rem;
+	display: flex;
+	justify-content: center;
+	font-size: 15px;
+	color: red;
+	font-weight: 700;
+	position: absolute;
+	margin-top: -0.7rem;
+	margin-left: 1.1875rem;
+}
 .IconsContainer {
 	display: flex;
 	margin-right: 1em;
