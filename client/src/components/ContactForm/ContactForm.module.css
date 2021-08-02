@@ -6,7 +6,7 @@
 	margin-right: 10%;
 	margin-top: 3.125em;
 	flex-direction: column;
-    border-radius: 12px;
+	border-radius: 12px;
 }
 .btnBackContainer {
 	font-size: 40px;
@@ -23,10 +23,10 @@
 	display: flex;
 	justify-content: center;
 }
-
+/* 
 #input {
 	margin: 1%;
-}
+} */
 
 .registerButtonRow {
 	display: flex;
@@ -50,12 +50,12 @@
 @media only screen and (max-width: 430px) {
 	#input {
 		font-size: 12px;
-        display: flex;
-        flex-direction: column;
+		display: flex;
+		flex-direction: column;
 	}
-    .registerFormContainer {
-        padding: 8%;
-    }
+	.registerFormContainer {
+		padding: 8%;
+	}
 	.form-control {
 		font-size: 12px;
 	}

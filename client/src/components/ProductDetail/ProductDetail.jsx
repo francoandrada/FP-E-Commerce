@@ -13,6 +13,8 @@ import { useHistory } from 'react-router-dom';
 import './index.css';
 import ButtonCrypto from '../StyledComponents/ButtonCrypto';
 import Loader from '../Loader/Loader';
+import { formatNumber } from '../../helper/priceFormater';
+import FavoriteButton from '../FavoriteComponent/FavoriteButton';
 
 function DetailProduct(props) {
 	const dispatch = useDispatch();
@@ -48,7 +50,7 @@ function DetailProduct(props) {
 	const arsBtc = useSelector(state => state.crypto.arsBtc);
 	const rateUpdateTime = useSelector(state => state.crypto.updateTime);
 	const btcRate = parseFloat(arsBtc);
-
+	var formatPrice = formatNumber.new(productDetail.price, '$');
 	return (
 		<div className={styles.container}>
 			{productDetail ? (
@@ -75,7 +77,7 @@ function DetailProduct(props) {
 								</Link>
 							</div>
 
-							<p className={styles.texto}>${productDetail.price} </p>
+							<p className={styles.texto}>{formatPrice} </p>
 							<div className={styles.buttonCrypto}>
 								<ButtonCrypto>
 									₿ {(productDetail.price * btcRate).toFixed(6)}
@@ -125,10 +127,12 @@ function DetailProduct(props) {
 								) : (
 									<>
 										<ButtonRedOther type='submit'>Sin Stock</ButtonRedOther>
-			
 									</>
 								)}
 							</div>
+						</div>
+						<div className={styles.favContainer}>
+							<FavoriteButton prod={productDetail} />
 						</div>
 					</div>
 					<div className={styles.imagesNav}>
@@ -139,7 +143,7 @@ function DetailProduct(props) {
 										alt='product'
 										onClick={e => handleClick(e, index)}
 									/>
-						))
+							  ))
 							: null}
 					</div>
 				</div>

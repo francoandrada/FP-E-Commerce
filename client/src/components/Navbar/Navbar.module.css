@@ -27,7 +27,6 @@
 	flex: 30%;
 	display: flex;
 	align-items: center;
-
 }
 
 .storeNameEcommerce {
@@ -97,6 +96,7 @@
 	right: 38%;
 	top: 88%;
 	width: 13.75em;
+	z-index: 1;
 }
 
 .optionEcommerce {
@@ -163,7 +163,6 @@
 }
 
 .sections {
-
 	display: flex;
 	justify-content: center;
 	width: 70%;
@@ -195,7 +194,22 @@
 	margin-bottom: 2.0625rem;
 	margin-left: 1.1875rem;
 }
-.IconsContainer{
+
+.countFav {
+	background-color: white;
+	border-radius: 100%;
+	width: 1.5625rem;
+	height: 1.3125rem;
+	display: flex;
+	justify-content: center;
+	font-size: 15px;
+	color: red;
+	font-weight: 700;
+	position: absolute;
+	margin-top: -0.7rem;
+	margin-left: 1.1875rem;
+}
+.IconsContainer {
 	display: flex;
 	margin-right: 1em;
 }
@@ -249,11 +263,10 @@
 		width: 7rem;
 		font-size: 12px;
 	}
-	.flexColumnEcommerce{
+	.flexColumnEcommerce {
 		/* margin-left: -5rem; */
 
 		margin-right: 1em;
-
 	}
 	.searchBtnEcommerce {
 		top: 2.375em;
@@ -264,7 +277,7 @@
 		top: 75%;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		white-space:normal;
+		white-space: normal;
 		width: max-content;
 		padding: 0.5em;
 		height: 200px;
@@ -277,7 +290,7 @@
 		font-size: 14px;
 		margin-right: 0.7em;
 	}
-	.linksNavEcommerce a{
+	.linksNavEcommerce a {
 		margin: 0.5em;
 		display: flex;
 	}
@@ -286,33 +299,30 @@
 	}
 	.navbarEcommerce .rightSideEcommerce {
 		flex: none;
-	
 	}
-	.but{
+	.but {
 		font-size: 14px;
 		/* margin-right: -2em;
 		margin-bottom: 1em; */
 	}
-	.countCart{
+	.countCart {
 		padding: 3.5px 6px;
 		border-radius: 100%;
 		width: max-content;
 	}
-	.countCart p{
+	.countCart p {
 		font-size: 10px;
 	}
-	.IconsContainer{
+	.IconsContainer {
 		display: flex;
 		margin-left: 1em;
 	}
 }
-@media only screen and (max-width: 370px){
-	.flexColumnEcommerce{
+@media only screen and (max-width: 370px) {
+	.flexColumnEcommerce {
 		margin-right: 0em;
 	}
-	
 }
-
 
 /* 
 .navbarEcommerce .leftSideEcommerce .linksEcommerce {
