@@ -131,27 +131,9 @@
 		justify-content: center;
 		align-items: center;
 	}
-	/* .productCard button {
-	display: flex;
-	justify-content: center;
-	font-size: 18px;
-	width: 98%;
-    height: max-content;
-} */
 	.button {
 		width: max-content;
 	}
-	/* .button button {
-		width: 100%;
-		font-family: 'Roboto', sans-serif;
-		border-style: none;
-		border-radius: 5px;
-		padding: 0.5rem;
-		color: white;
-		font-size: 18px;
-		font-weight: 700;
-		background-color: #ff3c4a;
-	} */
 	.buttons {
 		font-size: 14px;
 		width: 31.25em;
@@ -228,4 +210,13 @@
 	margin: 0px 3px;
 	height: 26px;
 	top: -5px;
+}
+@media only screen and (min-width: 430px) and (max-width: 800px){
+	.card{
+		flex-direction: column;
+		align-items: center;
+	}
+	.imgContainer{
+		margin-right: 0;
+	}
 }
