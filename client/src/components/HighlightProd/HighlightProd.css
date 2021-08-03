@@ -124,3 +124,15 @@
 
 	}
 }
+@media only screen and (min-width: 430px) and (max-width: 650px){
+	.highlightProdContainer{
+		margin: 1em;
+		width: min-content;
+	}
+	.HighlightImagSize{
+		width: 8.375em;
+	}
+	.priceProduct{
+		font-size: 22px
+	}
+}

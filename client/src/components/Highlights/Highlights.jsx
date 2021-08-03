@@ -5,7 +5,7 @@ import HighlightProd from '../HighlightProd/HighlightProd';
 import './Highlights.css';
 import { BsChevronRight } from 'react-icons/bs';
 import { BsCaretLeftFill, BsCaretRightFill } from 'react-icons/bs';
-
+import Loader from '../Loader/Loader'
 function Highlights() {
 	const dispatch = useDispatch();
 	const highlights = useSelector((state) => state.product.highlights);
@@ -42,7 +42,7 @@ function Highlights() {
 			<div>
 				<div className='divCarrousel'>
 					<div className='Carrousel'>
-						{highlights.length !== 0 &&
+						{highlights.length !== 0 ?
 							highlights
 								.slice(currentPage.first, currentPage.last)
 								.map((el) => {
@@ -56,7 +56,8 @@ function Highlights() {
 											/>
 										</div>
 									);
-								})}
+								}) : <Loader />
+							}
 					</div>
 					<div className='IconsContainer'>
 						<div className='containerIcon'>

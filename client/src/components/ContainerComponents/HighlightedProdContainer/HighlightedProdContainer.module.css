@@ -18,3 +18,9 @@
 		border-radius: 14px;
 	}
 }
+@media only screen and (min-width: 430px) and (max-width: 650px){
+	.HighlightContainer{
+		margin-left: 2%;
+		margin-right: 2%;
+	}
+}

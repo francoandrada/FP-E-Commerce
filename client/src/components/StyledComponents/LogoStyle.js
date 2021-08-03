@@ -12,6 +12,9 @@ text-align:left;
 @media only screen and (max-width: 430px) {
     display:none
 }
+@media only screen and (max-width: 650px){
+    font-size:22px
+}
 `;
 
 export default LogoStyle;

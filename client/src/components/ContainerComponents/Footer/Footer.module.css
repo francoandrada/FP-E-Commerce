@@ -29,7 +29,7 @@
 	width: 33%;
 	height: 100%;
 	float: left;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	color: white;
 	font-size: 24px;
@@ -40,7 +40,7 @@
 
 .contentContainer span {
 	/* margin-block-end: 3px; */
-	margin-inline-end: 30px;
+	/* margin-inline-end: 30px; */
 	color: white;
 }
 
@@ -105,5 +105,16 @@ a:link {
 		padding-block-end: 2px;
 		flex-direction: row;
 		display: flex;
+	}
+}
+@media only screen and (min-width: 430px) and (max-width: 650px){
+	.logo{
+		font-size: 22px;
+	}
+	.contentContainer{
+		font-size: 18px;
+	}
+	.containerGit{
+		width: 2.5rem;
 	}
 }

@@ -9,6 +9,10 @@ import Bot from '../ChatBot/ChatBot'
 const ButtonRedHome = styled(ButtonRedOther)`
     width: 300px;
     font-weight: bold;
+    @media only screen and (min-width: 430px) and (max-width: 650px){
+        width:180px;
+        font-size: 14px
+    }
 `;
 
 function BannerContainer() {
