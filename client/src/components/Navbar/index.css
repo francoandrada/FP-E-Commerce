@@ -11,3 +11,9 @@
     }
     
 }
+@media only screen and (max-width: 570px) {
+    .HiUser{
+        font-size: 12px;
+        margin-top: 10px;
+    }
+}

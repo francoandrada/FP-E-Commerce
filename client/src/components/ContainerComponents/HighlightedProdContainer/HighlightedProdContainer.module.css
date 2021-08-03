@@ -24,3 +24,15 @@
 		margin-right: 2%;
 	}
 }
+@media only screen and (min-width: 650px) and (max-width: 1024px){
+	.HighlightContainer{
+		margin-left: 2%;
+		margin-right: 2%;
+	}
+}
+@media only screen and (max-width: 1260px){
+	.HighlightContainer{
+		margin-left: 2%;
+		margin-right: 2%;
+	}
+}

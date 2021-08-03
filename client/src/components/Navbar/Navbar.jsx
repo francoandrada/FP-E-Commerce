@@ -251,7 +251,7 @@ const Navbar = () => {
 							{Array.isArray(userName) ? (
 								<p
 									className={
-										window.screen.width > 430 ? 'text-white h6' : 'HiUser'
+										window.screen.width > 570 ? 'text-white h6' : 'HiUser'
 									}
 								>
 									Hi, {userName.email}!
