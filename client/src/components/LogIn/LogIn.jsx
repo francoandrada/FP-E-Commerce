@@ -37,7 +37,7 @@ const Imge = styled.img`
 	border-radius: 10px;
 	background-size: cover;
 	margin: 0;
-      @media  (max-width: 600px) {
+      @media  (max-width: 766px) {
     display: none
 
     }
@@ -228,9 +228,9 @@ const LogIn = () => {
 							</div>
 						</Link>
 
-						<div className= {window.screen.width > 430 ? ' d-flex justify-content-start bg-secondary p-5': 'SignUpContainer'}>
+						<div className= {window.screen.width > 766 ? ' d-flex justify-content-start bg-secondary p-5': 'SignUpContainer'}>
 							<Link
-								className= {window.screen.width > 430 ? 'dropdown-item bg-secondary rounded text-center p-4' : 'notAccount' }
+								className= {window.screen.width > 766 ? 'dropdown-item bg-secondary rounded text-center p-4' : 'notAccount' }
 								to={'/register'}
 							>
 								Don't have an account? Sign up
