@@ -26,4 +26,7 @@
 	.btnHeart{
 		font-size: 20px;
 	}
+	.buttonContainer{
+		width: auto;
+	}
 }

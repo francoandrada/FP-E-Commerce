@@ -56,7 +56,7 @@
 	font-weight: 500;
 	display: flex;
 	justify-content: center;
-	margin-left: 1em;
+	/* margin-left: 1em; */
 	/* padding-left: 13px; */
 }
 
@@ -96,13 +96,15 @@
 @media only screen and (max-width: 1300px) and (min-width: 600px) {
 	.card {
 		background-color: white;
-		width: min-content;
+		width: 15em;
 		margin: 1rem 0.5rem;
 		border-radius: 8px;
 		height: 23em;
 	}
 	.cardImage {
 		padding: 20px;
+		display: flex;
+		justify-content: center;
 	}
 	.img {
 		width: 9.375em;
@@ -110,9 +112,11 @@
 	}
 
 	.productName {
-		font-size: 13px;
 		font-weight: 500;
 		text-align: left;
+	}
+	.footerCard{
+		justify-content: center;
 	}
 }
 
@@ -138,7 +142,7 @@
 	}
 	.productPrice {
 		float: left;
-		width: 50%;
+		/* width: 50%; */
 		color: black;
 		font-size: 22px;
 		font-weight: 500;
@@ -168,6 +172,9 @@
 		width: 170px;
 		height: 16.3125em;
 		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 	.productName {
 		font-size: 12px;
@@ -192,12 +199,16 @@
 	.buttonBuy {
 		float: none;
 		flex-basis: 100%;
-		font-size: 12px;
-		margin-right: 50%;
-		margin-top: 5%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: auto;
+		/* font-size: 1px; */
+		/* margin-right: 50%;
+		margin-top: 5%; */
 	}
 	#btnBuy {
-		font-size: 12px;
+		font-size: 14px;
 		
 	}
 	#line{
@@ -209,6 +220,39 @@
 	justify-content: space-evenly;
 	margin: 0;
 }
+}
+@media only screen and (min-width:430px) and (max-width: 754px){
+	.cardImage{
+		width: 70%;
+		margin: 0 auto;
+		padding: 0;
+	}
+	.cardImage img {
+		width: 100%;
+		margin-top: 5%;
+	}
+	.cardsContainer{
+		margin: 0;
+		width: 65%;
+	}
+	.card{
+		width: 15em;
+	}
+	.footerCard{
+		justify-content: center;
+	}
+	.data{
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+}
+@media only screen and (min-width:754px) and (max-width: 1300px){
+	.buttonBuy button{
+		width: 6em;
+	}
+	.productPrice{
+		margin-left: 0;
+	}
 }
 
 /* ------------ FAVORITE BUTTON STYLE ------------- */
