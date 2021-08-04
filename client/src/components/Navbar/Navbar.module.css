@@ -234,7 +234,7 @@
 		width: 12.1875em;
 	}
 	.linksNavEcommerce {
-		font-size: 20px;
+		font-size: 18px;
 	}
 
 	.sections a {
@@ -242,6 +242,9 @@
 	}
 	.searchBtnEcommerce i {
 		font-size: 16px;
+	}
+	.but{
+		font-size: 18px;
 	}
 }
 /* --------- FAVORITES BUTTON NAV BAR STYLE ------------ */
@@ -356,15 +359,15 @@
 }
 @media only screen and (min-width: 650px) and (max-width: 800px){
 	.linksNavEcommerce{
-		font-size: 18px;
+		font-size: 16px;
 		flex: 40%;
 		justify-content: space-between;
 	}
 	.but{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.linksNavEcommerce a{
-		width: min-content;
+		width: max-content;
 	}
 	.autoContainerEcommerce {
 		right: 1.5em;
