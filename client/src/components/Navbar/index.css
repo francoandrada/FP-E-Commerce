@@ -11,3 +11,11 @@
     }
     
 }
+@media only screen and (max-width: 570px) {
+    .HiUser{
+        font-size: 12px;
+        color: white;
+        margin: 0.5em 0;
+        width: max-content;
+    }
+}

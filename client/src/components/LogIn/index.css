@@ -61,3 +61,19 @@
         width: max-content !important;
     }
 }
+
+@media only screen and (min-width:430px) and (max-width: 766px){
+    .row{
+        flex-direction: column;
+    }
+    .notAccount{
+        font-size: 14px;
+        text-align: center !important;
+        padding: 1.5em 2.75em !important;
+        border-radius: 0.25em !important;
+        background-color: #aaa !important;
+        color: rgb(36, 36, 36);
+        display: block;
+        width: 100%;
+    }
+}

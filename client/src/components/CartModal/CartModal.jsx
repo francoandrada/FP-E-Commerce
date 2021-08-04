@@ -19,7 +19,10 @@ const Icon = styled.div`
         font-size:20px;
         margin-right: 0.5em
     }
-`;
+    @media only screen and (min-width:430px) and (max-width: 650px) {
+        font-size: 24px
+    }
+    `;
 
 const GlobalStyle = createGlobalStyle`
     body {
