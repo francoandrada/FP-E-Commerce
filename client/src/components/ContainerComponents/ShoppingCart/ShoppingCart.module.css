@@ -57,3 +57,15 @@
 		width: 100%;
 	}
 }
+@media only screen and (min-width: 430px) and (max-width:1300px){
+	.shoppingCartMain{
+		min-width: 0;
+		flex-direction: column;
+	}
+	.cartDiv{
+		width: 100%;
+	}
+	.subtotalDiv{
+		justify-content: center;
+	}
+}

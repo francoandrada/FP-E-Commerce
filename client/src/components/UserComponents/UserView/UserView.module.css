@@ -4,8 +4,8 @@
 	display: flex;
 	justify-items: center;
 	width: 100%;
-	padding: 20px;
-    
+	padding: 10px;
+    justify-content: space-between;
     /* margin: 13.5% 0; */
 	/* margin: 20px; */
 }
@@ -14,19 +14,20 @@
 
 .optionsPanelContainer {
 	display: flex;
-	width: 30%;
+	width: 45%;
 }
 
 .optionsContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	width: 100%;
-	min-width: 210px;
+	/* width: 100%; */
+	/* min-width: 210px; */
 	height: 400px;
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
+	width: 100%;
 }
 
 .optionsLayoutdiv {
@@ -55,8 +56,8 @@
 
 .userPanelSelectedContainer {
 	display: flex;
-	padding-left: 30px;
-	width: 70%;
+	/* padding-left: 30px; */
+	width: 50%;
 }
 
 @media only screen and (max-width: 430px) {
@@ -67,6 +68,7 @@
 		width: 100%;
 		padding: 0;
 		margin: 4.8em 10px;
+		justify-content: normal;
 	}
 	.userViewContainer p {
 		font-size: 14px;
@@ -101,4 +103,18 @@
         margin-right: 0.5em;
 	}
 
+}
+@media only screen and (min-width: 800px){
+	.optionsPanelContainer {
+		display: flex;
+		width: 30%;
+	}
+	.userPanelSelectedContainer {
+		display: flex;
+		/* padding-left: 30px; */
+		width: 50%;
+	}
+	.userViewContainer{
+		justify-content: space-around;
+	}
 }
