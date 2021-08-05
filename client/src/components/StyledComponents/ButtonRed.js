@@ -18,7 +18,8 @@ export const ButtonRed = styled.button`
     }
     @media only screen and (max-width: 430px){
         font-size: 12px;
-        width: 7.375em;
+        width: auto;
+        padding: 0 10px
     }
     // @media only screen and (max-width: 570px){
     //     font-size: 12px;

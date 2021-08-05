@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { forgotPassword } from '../../../Redux/actions';
 
 import styled from 'styled-components';
+import ButtonRed from '../../StyledComponents/ButtonRed';
 
 const Form = styled.span`
 	font-weight: 700;
@@ -57,7 +58,7 @@ function UserAccount({ setOption }) {
 							id='edit'
 							onClick={event => setOption(event)}
 						>
-							Edit <MdModeEdit id='edit' onClick={event => setOption(event)} />
+						<MdModeEdit id='edit' onClick={event => setOption(event)} />
 						</button>
 					</Link>
 				</div>
@@ -86,9 +87,9 @@ function UserAccount({ setOption }) {
 						<Form>Email:</Form> {user.email}
 					</p>
 					<p>
-						<button onClick={() => onResetClick(user.email)}>
-							<Form>Reset Password</Form>
-						</button>
+						<ButtonRed onClick={() => onResetClick(user.email)}>
+							Reset Password
+						</ButtonRed>
 					</p>
 				</div>
 			) : (

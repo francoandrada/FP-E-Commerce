@@ -107,6 +107,7 @@
 	}
 	.registerFormContainer {
 		padding: 8%;
+		margin-top: 0;
 	}
 	.form-control {
 		font-size: 12px;

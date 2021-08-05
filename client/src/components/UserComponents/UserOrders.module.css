@@ -5,11 +5,12 @@
 	align-items: center;
 	background-color: white;
 
-	min-width: 600px;
+	/* min-width: 600px; */
 
-	margin-left: 10px;
+	/* margin-left: 10px; */
 	padding: 20px;
 	border-radius: 10px;
+    width: 100%;
 }
 
 .selectedOptionTitle {
@@ -140,16 +141,17 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	width: 100%;
-	padding: 30px;
+	/* padding: 30px; */
 	text-align: left;
 }
 
 .buttonEditUserinfo {
-    padding: 10px;
+    /* padding: 10px; */
     outline: none;
     margin-left: 20px;
-    background-color: darkgrey;
+    background-color: transparent;
     border-radius: 10px;
+    font-size: 20px;
 }
 
 .nothingHere {
@@ -183,30 +185,28 @@
     display: flex;
     width: 80%;
 }
-
+.containerOrder{
+    width: 100%;
+}
 @media only screen and (max-width: 430px) {
 	/* ----- GENERAL STYLES ----- */
 
 	.userOptionContainer {
-        max-width: 192px;
+        max-width: 190px;
 		min-height: 400px;
-		margin-left: 15px;
+		/* margin-left: 15px; */
 		padding: 15px;
 		align-items: center;
         justify-content: flex-start;
         /* margin-right: 18px; */
+        min-width: auto;
 	}
 
 	/* ----- User Account Styles ------ */
 
 	.UserPersonalInfo {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		width: 100%;
-		padding: 10px;
-		text-align: left;
-        line-height: 1.5em;
+        width: 100%;
+        padding: 0;
 	}
     .Tittle{
         font-size: 20px;
@@ -318,5 +318,25 @@
     .SizeImagOrderDiv img{
         margin: 0 auto;
     }
-
+    .buttonEditUserinfo{
+        font-size: 20px;
+        background-color: transparent;
+        padding: 0;
+    }
+    .orderAddressContainer{
+        width: 150px;
+        padding: 8px;
+        margin: 15px 8px;
+    }
+    .orderAddressInnerContainer{
+        flex-direction: column;
+    }
+}
+@media only screen and (min-width: 430px) and (max-width:900px){
+	.orderDiv{
+        flex-direction: column;
+    }
+    .detailIdButton{
+        width: 100%;
+    }
 }

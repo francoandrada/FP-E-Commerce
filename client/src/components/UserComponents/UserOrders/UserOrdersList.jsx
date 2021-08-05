@@ -39,7 +39,6 @@ function UserOrdersList() {
 	console.log('esto es lista prod', orderDetailInfo)
 	
 	return (
-		<div>
 			<div className={style.userOptionContainer}>
             {selOrderId === 0 ?
 				<div className={style.containerOrder}>
@@ -110,7 +109,6 @@ function UserOrdersList() {
 		
 		}	
 			</div>
-		</div>
 	);
 }
 

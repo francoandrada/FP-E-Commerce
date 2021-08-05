@@ -300,6 +300,9 @@
 	.navbarEcommerce .rightSideEcommerce {
 		flex: none;
 	}
+	.navbarEcommerce .leftSideEcommerce{
+		flex: 0;
+	}
 	.but {
 		font-size: 14px;
 		/* margin-right: -2em;
