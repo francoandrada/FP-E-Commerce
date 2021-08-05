@@ -222,16 +222,16 @@
 	}
 
 	.autoContainerEcommerce {
-		right: -0.9375em;
+		right: 2em;
 		top: 88%;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		white-space: nowrap;
+		white-space: normal;
 		width: 13.75em;
 	}
 
 	.optionEcommerce {
-		width: 12.1875em;
+		width: auto;
 	}
 	.linksNavEcommerce {
 		font-size: 18px;
@@ -353,10 +353,10 @@
 		font-size: 16px;
 	}
 	.autoContainerEcommerce {
-		right: 1.2em;
+		right: -1em;
 		top: 88%;
 		white-space: normal;
-		width: max-content;
+		/* width: max-content; */
 		height: 14em;
 	}
 }
